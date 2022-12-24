@@ -1,0 +1,59 @@
+---
+# for VM in $VM_LIST
+# do
+#   qm clone $GOLD $VM --full true --storage local-lvm --name k3s-$VM
+#   qm resize $VM scsi0 +5G
+#   qm set $VM --ipconfig0 gw=192.168.1.1,ip=192.168.1.3$i/24
+#   let i=$i+1
+# done
+- name: Delete VMs
+  hosts: nuc11
+  become: true
+  tasks:
+  - name: Delete ks3-1
+    community.general.proxmox_kvm:
+      api_user: tf@pam
+      api_token_id: "terraform_token"
+      api_token_secret: "ff81891e-6a47-4439-a1f4-f5b37773a21b"
+      api_host: nuc11
+      name: k3s-1
+      state: absent
+      timeout: 300
+  - name: Delete ks3-2
+    community.general.proxmox_kvm:
+      api_user: tf@pam
+      api_token_id: "terraform_token"
+      api_token_secret: "ff81891e-6a47-4439-a1f4-f5b37773a21b"
+      api_host: nuc11
+      name: k3s-2
+      state: absent
+      timeout: 300
+  - name: Delete ks3-3
+    community.general.proxmox_kvm:
+      api_user: tf@pam
+      api_token_id: "terraform_token"
+      api_token_secret: "ff81891e-6a47-4439-a1f4-f5b37773a21b"
+      api_host: nuc11
+      name: k3s-3
+      state: absent
+      timeout: 300
+  - name: Delete ks3-4
+    community.general.proxmox_kvm:
+      api_user: tf@pam
+      api_token_id: "terraform_token"
+      api_token_secret: "ff81891e-6a47-4439-a1f4-f5b37773a21b"
+      api_host: nuc11
+      name: k3s-4
+      state: absent
+      timeout: 300
+  - name: Delete ks3-5
+    community.general.proxmox_kvm:
+      api_user: tf@pam
+      api_token_id: "terraform_token"
+      api_token_secret: "ff81891e-6a47-4439-a1f4-f5b37773a21b"
+      api_host: nuc11
+      name: k3s-5
+      state: absent
+      timeout: 300
+
+...

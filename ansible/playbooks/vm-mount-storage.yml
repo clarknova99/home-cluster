@@ -1,0 +1,34 @@
+# https://kubernetes.io/blog/2019/03/15/kubernetes-setup-using-ansible-and-vagrant/
+# https://github.com/virtualelephant/vsphere-kubernetes/blob/master/ansible/cilium-install.yml#L57
+---
+- hosts: all
+  become: true
+  remote_user: ubuntu
+  vars:
+    mynfs: "192.168.1.2:/volume1/network-storage"
+    mountpoint: "/network-storage"
+    permission: '0777'
+    myopts: 'rw,sync'
+  tasks:
+    - name: utility present debian-like
+      ansible.builtin.apt:
+        name:
+          - nfs-common
+          - nfs4-acl-tools
+        state: present
+      when: ansible_os_family == 'Debian'
+    - name: check mountpoint exist
+      ansible.builtin.file:
+        path: "{{ mountpoint }}"
+        state: directory
+        mode: "{{ permission }}"
+        owner: root
+        group: root
+    - name: mount network share
+      ansible.posix.mount:
+        src: "{{ mynfs }}"
+        path: "{{ mountpoint }}"
+        fstype: nfs
+        opts: "{{ myopts }}"
+        state: mounted
+...
