@@ -1,7 +1,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: &app nfs-provisioner
+  name: nfs-provisioner
   namespace: nfs-system
 spec:
   interval: 15m
@@ -27,7 +27,7 @@ spec:
       repository: k8s.gcr.io/sig-storage/nfs-subdir-external-provisioner
       tag: v4.0.2
     nfs:
-      server: ${CONFIG_NFS_SERVER_IP_ADDRESS}
+      server: ${CONFIG_NFS_SERVER_IP_ADDR}
       path: ${CONFIG_NFS_SERVER_PATH}
     storageClass:
       provisionerName: nfs-provisioner
