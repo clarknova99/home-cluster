@@ -5,7 +5,7 @@ set -o errexit
 
 current_ipv4="$(curl -s https://icanhazip.com/)"
 zone_id=$(curl -s -X GET \
-    "https://api.cloudflare.com/client/v4/zones?name=${CLOUDFLARE_RECORD_NAME#*.}&status=active" \
+    "https://api.cloudflare.com/client/v4/zones?name=${CLOUDFLARE_RECORD_NAME}&status=active" \
     -H "X-Auth-Email: ${CLOUDFLARE_EMAIL}" \
     -H "X-Auth-Key: ${CLOUDFLARE_APIKEY}" \
     -H "Content-Type: application/json" \
