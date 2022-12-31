@@ -29,12 +29,12 @@ spec:
   values:
     controller:
       replicaCount: 2
-    # service:
-    #   enabled: true
-    #   type: LoadBalancer
-    #   spec:
-    #     loadBalancerIP: "${TRAEFIK_SERVICE_ADDR}"
-    #     externalTrafficPolicy: Local
+    service:
+      enabled: true
+      type: LoadBalancer
+      spec:
+        loadBalancerIP: "${TRAEFIK_SERVICE_ADDR}"
+        externalTrafficPolicy: Local
     ports:
       traefik:
         port: 8080
@@ -89,7 +89,7 @@ spec:
       - --accesslog.fields.headers.defaultmode=keep
     additionalArguments:
       - --providers.kubernetescrd
-      - "--providers.kubernetesingress.ingressendpoint.ip=192.168.1.95"
+      - "--providers.kubernetesingress.ingressendpoint.ip=${TRAEFIK_SERVICE_ADDR}"
     tlsOptions:
       default:
         minVersion: VersionTLS12
