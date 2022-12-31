@@ -14,6 +14,13 @@ spec:
         kind: HelmRepository
         name: bjw-s
         namespace: flux-system
+  selector:
+    matchLabels:
+      task: echo-server
+  template:
+    metadata:
+      labels:
+        task: echo-server
   install:
     createNamespace: true
     remediation:
@@ -29,6 +36,8 @@ spec:
       repository: docker.io/jmalloc/echo-server
       tag: 0.3.4
     service:
+      selector:
+        task: echo-server
       main:
         ports:
           http:
