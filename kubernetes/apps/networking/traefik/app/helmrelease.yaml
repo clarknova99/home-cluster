@@ -74,7 +74,6 @@ spec:
     globalArguments:
       - "--entryPoints.web.address=:80/tcp"
       - "--entryPoints.websecure.address=:443/tcp"
-      - "--entryPoints.traefik.address=:8080/tcp"
       - "--api=true"
       - "--ping=true"
       - "--providers.kubernetescrd"
@@ -85,8 +84,6 @@ spec:
       - --providers.kubernetesingress.ingressclass=traefik
       - --metrics.prometheus=true
       - --metrics.prometheus.entryPoint=metrics
-      - --entrypoints.web.address=:80/tcp
-      - --entrypoints.websecure.address=:443/tcp
       - --accessLog=true
       - --accesslog.fields.defaultmode=keep
       - --accesslog.fields.headers.defaultmode=keep
