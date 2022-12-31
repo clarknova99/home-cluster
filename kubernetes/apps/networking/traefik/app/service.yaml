@@ -17,7 +17,7 @@ spec:
   externalTrafficPolicy: Local
   ports:
     - port: 8080
-      targetPort: 4181
+      targetPort: 8080
 # ---
 #
 # Auth Service
