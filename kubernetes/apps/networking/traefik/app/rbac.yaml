@@ -52,7 +52,7 @@ kind: ServiceAccount
 apiVersion: v1
 metadata:
   name: traefik-ingress-controller
-  namespace: traefik
+  namespace: networking
 
 ---
 kind: ClusterRoleBinding
