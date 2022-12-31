@@ -1,0 +1,18 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: whoami
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`whoami.bigwang.org`)
+      services:
+        - kind: Service
+          name: whoami
+          port: 80
+  # tls:
+  #   certResolver: myresolver
