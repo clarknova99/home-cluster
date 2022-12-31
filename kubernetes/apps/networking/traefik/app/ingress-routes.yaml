@@ -38,8 +38,8 @@ spec:
       middlewares:
         # - name: traefik-middleware-chains-oauth
         - name: traefik-middleware-redirect-https
-  tls:
-    secretName: "${SECRET_DOMAIN}-prod-tls"
+  # tls:
+  #   secretName: "${SECRET_DOMAIN}-prod-tls"
 # ---
 # apiVersion: traefik.containo.us/v1alpha1
 # kind: IngressRoute

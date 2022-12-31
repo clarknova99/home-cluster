@@ -7,5 +7,5 @@ resources:
   # - ./helmrelease-forward-auth.yaml
   - ./ingress-routes.yaml
   - ./middleware.yaml
-  - ./service.yaml
+ # - ./service.yaml
   - ./rbac.yaml
