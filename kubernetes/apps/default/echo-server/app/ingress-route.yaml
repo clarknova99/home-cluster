@@ -14,5 +14,5 @@ spec:
       services:
         - name: echo-server
           port: 8080
-  tls:
-    secretName: "echo.${SECRET_DOMAIN}-prod-cert"
+  # tls:
+  #   secretName: "echo.${SECRET_DOMAIN}-prod-cert"
