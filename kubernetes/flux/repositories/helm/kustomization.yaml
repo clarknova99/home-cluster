@@ -16,3 +16,4 @@ resources:
   - ./nfs.yaml
   - ./grafana.yaml
   - ./traefik.yaml
+  - ./k8s-at-home.yaml
