@@ -10,4 +10,4 @@ resources:
   - ./k8s-gateway/ks.yaml
   - ./metallb/ks.yaml
   - ./traefik-forward-auth/ks.yaml
-  - whoami
+  - ./whoami/ks.yaml
