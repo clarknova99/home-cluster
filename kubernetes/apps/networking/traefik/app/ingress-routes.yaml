@@ -58,6 +58,7 @@ spec:
           namespace: networking
           port: 4181
       middlewares:
-        - name: traefik-middleware-oauth
+        - name: traefik-middleware-redirect-https
+        # - name: traefik-middleware-oauth
   tls:
     secretName: "${SECRET_DOMAIN}-prod-cert"
