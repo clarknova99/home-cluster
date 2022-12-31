@@ -142,6 +142,7 @@ metadata:
 spec:
   chain:
     middlewares:
+      - name: traefik-middleware-redirect-https
       - name: traefik-middleware-local-ips
       - name: traefik-middleware-cloudflare-ips
       - name: traefik-middleware-rate-limit

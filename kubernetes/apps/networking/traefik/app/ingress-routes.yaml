@@ -37,7 +37,7 @@ spec:
           name: api@internal
       middlewares:
         # - name: traefik-middleware-chains-oauth
-        - name: traefik-middleware-redirect-https
+        - name: traefik-middleware-chains-default
   # tls:
   #   secretName: "${SECRET_DOMAIN}-prod-tls"
 # ---
