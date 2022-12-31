@@ -1,0 +1,57 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: web
+  namespace: networking
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: HostRegexp(`{any:.+}`)
+      kind: Rule
+      priority: 10
+      services:
+        - kind: TraefikService
+          name: noop@internal
+      middlewares:
+        - name: traefik-middleware-redirect-https
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: websecure
+  namespace: networking
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`traefik.${SECRET_DOMAIN}`) && (PathPrefix(`/dashboard`) || PathPrefix(`/api`))
+      services:
+        - kind: TraefikService
+          name: api@internal
+      middlewares:
+        - name: traefik-middleware-chains-oauth
+  tls:
+    secretName: cluster-secrets
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: traefik-forward-auth
+  namespace: networking
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`auth.${SECRET_DOMAIN}`)
+      services:
+        - name: traefik-forward-auth
+          namespace: networking
+          port: 4181
+      middlewares:
+        - name: traefik-middleware-oauth
+  tls:
+    secretName: cluster-secrets

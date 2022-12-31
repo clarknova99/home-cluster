@@ -8,8 +8,14 @@
         "**/kubernetes/**/*.sops.toml": "plaintext"
     },
     "yaml.schemas": {
-        "ansible": "ansible/*.yml",
-        "Kubernetes": "kubernetes/*.yaml"
+      "file:///Users/mfeldbly/.vscode/extensions/atlassian.atlascode-2.10.12/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml",
+      "ansible": "ansible/*.yml",
+      "Kubernetes": "kubernetes/*.yaml",
+      "https://json.schemastore.org/yamllint.json": [
+        "file:///Users/mfeldbly/code/home-cluster/kubernetes/flux/config/traefik.yaml",
+        "file:///Users/mfeldbly/code/home-cluster/kubernetes/flux/repositories/helm/traefik.yaml",
+        "file:///Users/mfeldbly/code/home-cluster/kubernetes/apps/networking/traefik/app/ingress-routes.yaml"
+      ]
     },
     "editor.bracketPairColorization.enabled": true,
     "editor.guides.bracketPairs": true,
