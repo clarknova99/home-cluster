@@ -10,11 +10,6 @@ metadata:
     app.kubernetes.io/instance: traefik
     app.kubernetes.io/name: traefik
 spec:
-  selector:
-    app.kubernetes.io/instance: traefik
-    app.kubernetes.io/name: traefik
-  type: LoadBalancer
-  externalTrafficPolicy: Local
   ports:
     - port: 8080
       targetPort: 8080
