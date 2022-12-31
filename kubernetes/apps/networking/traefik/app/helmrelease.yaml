@@ -78,6 +78,9 @@ spec:
       - --metrics.prometheus.entryPoint=metrics
       - --entrypoints.web.address=:80/tcp
       - --entrypoints.websecure.address=:443/tcp
+      - --accessLog=true
+      - --accesslog.fields.defaultmode=keep
+      - --accesslog.fields.headers.defaultmode=keep
     additionalArguments:
       - --providers.kubernetescrd
       - "--providers.kubernetesingress.ingressendpoint.ip=${SVC_TRAEFIK_ADDR}"
