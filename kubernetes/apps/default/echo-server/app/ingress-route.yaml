@@ -5,6 +5,7 @@ metadata:
   name: echo
   labels:
     app: echo-server
+  namespace: networking
 spec:
   entryPoints:
     - web
