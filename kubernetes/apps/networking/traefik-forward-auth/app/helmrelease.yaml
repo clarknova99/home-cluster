@@ -28,7 +28,7 @@ spec:
     middleware:
       enabled: true
       nameOverride: traefik-forward-auth
-
+    env:
       AUTH_HOST: "auth.${SECRET_DOMAIN}"
       LIFETIME: "6048002592000" #30 days
       COOKIE_DOMAIN: "${SECRET_DOMAIN}"
