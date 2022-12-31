@@ -5,6 +5,7 @@ metadata:
   name: whoamiv1
   labels:
     name: whoamiv1
+  namespace: networking
 spec:
   replicas: 1
   selector:
