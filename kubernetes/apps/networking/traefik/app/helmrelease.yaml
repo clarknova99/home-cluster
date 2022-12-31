@@ -87,6 +87,7 @@ spec:
       - --accessLog=true
       - --accesslog.fields.defaultmode=keep
       - --accesslog.fields.headers.defaultmode=keep
+      - --log.level=DEBUG
     additionalArguments:
       - --providers.kubernetescrd
       - "--providers.kubernetesingress.ingressendpoint.ip=${TRAEFIK_SERVICE_ADDR}"
