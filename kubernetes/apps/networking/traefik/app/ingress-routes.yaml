@@ -24,8 +24,6 @@ kind: IngressRoute
 metadata:
   name: traefik-dashboard
   namespace: networking
-  labels:
-    app: traefik
 spec:
   entryPoints:
     - websecure
@@ -38,8 +36,9 @@ spec:
       middlewares:
         # - name: traefik-middleware-chains-oauth
         - name: traefik-middleware-chains-default
-  # tls:
-  #   secretName: "${SECRET_DOMAIN}-prod-tls"
+  tls:
+    secretName: "${SECRET_DOMAIN/./-}-tls"
+
 # ---
 # apiVersion: traefik.containo.us/v1alpha1
 # kind: IngressRoute

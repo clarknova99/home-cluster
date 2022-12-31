@@ -22,20 +22,13 @@ spec:
     image:
       #fullnameOverride: traefik-forward-auth
       name: traefik-forward-auth
-      repository: thomseddon/traefik-forward-auth
-      tag: 2.2.0
+      repository: ghcr.io/kitos9112/traefik-forward-auth
+      tag: v2.6.6
       pullPolicy: IfNotPresent
-      ports:
-        - containerPort: 4181
-          protocol: TCP
-    # middleware:
-    #   enabled: true
-    # service:
-    #   main:
-    #     ports:
-    #       http:
-    #         port: 4181
-    env:
+    middleware:
+      enabled: true
+      nameOverride: traefik-forward-auth
+
       AUTH_HOST: "auth.${SECRET_DOMAIN}"
       LIFETIME: "6048002592000" #30 days
       COOKIE_DOMAIN: "${SECRET_DOMAIN}"
