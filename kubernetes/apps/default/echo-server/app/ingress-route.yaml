@@ -2,10 +2,10 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: echo
+  name: &app echo-server
   labels:
     app: echo-server
-  namespace: networking
+  namespace: default
 spec:
   entryPoints:
     - web
