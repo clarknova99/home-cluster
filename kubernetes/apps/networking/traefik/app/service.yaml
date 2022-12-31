@@ -7,21 +7,24 @@ kind: Service
 metadata:
   name: traefik
   labels:
-    app: traefik
+    app.kubernetes.io/instance: traefik
+    app.kubernetes.io/name: traefik
 spec:
-  # Use NodePort if required
+  selector:
+    app.kubernetes.io/instance: traefik
+    app.kubernetes.io/name: traefik
   type: LoadBalancer
   loadBalancerIP: "${TRAEFIK_SERVICE_ADDR}"
   externalTrafficPolicy: Local
-  selector:
-    app: traefik
   ports:
-    - name: web
-      port: 80
-      targetPort: 80
-    - name: websecure
-      port: 443
-      targetPort: 443
+    - port: 80
+      name: web
+      targetPort: web
+      protocol: TCP
+    - port: 443
+      name: websecure
+      targetPort: websecure
+      protocol: TCP
 ---
 #
 # Auth Service

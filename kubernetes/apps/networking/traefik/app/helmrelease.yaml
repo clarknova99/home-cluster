@@ -70,7 +70,16 @@ spec:
     # ingressRoute:
     #   dashboard:
     #     enabled: false
+    serviceAccountName: traefik-ingress-controller
     globalArguments:
+      - "--entryPoints.web.address=:80/tcp"
+      - "--entryPoints.websecure.address=:443/tcp"
+      - "--entryPoints.traefik.address=:8080/tcp"
+      - "--api=true"
+      - "--ping=true"
+      - "--providers.kubernetescrd"
+      - "--providers.kubernetescrd.allowCrossNamespace=true"
+      - "--api.dashboard=true"
       - --api.insecure=true
       - --serverstransport.insecureskipverify=true
       - --providers.kubernetesingress.ingressclass=traefik
@@ -81,9 +90,9 @@ spec:
       - --accessLog=true
       - --accesslog.fields.defaultmode=keep
       - --accesslog.fields.headers.defaultmode=keep
-    additionalArguments:
-      - --providers.kubernetescrd
-      - "--providers.kubernetesingress.ingressendpoint.ip=${SVC_TRAEFIK_ADDR}"
+    # additionalArguments:
+    #   - --providers.kubernetescrd
+    #   - "--providers.kubernetesingress.ingressendpoint.ip=${SVC_TRAEFIK_ADDR}"
     tlsOptions:
       default:
         minVersion: VersionTLS12

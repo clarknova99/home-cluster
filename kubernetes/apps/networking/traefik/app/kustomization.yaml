@@ -8,3 +8,4 @@ resources:
   - ./ingress-routes.yaml
   - ./middleware.yaml
   - ./service.yaml
+  - ./rbac.yaml
