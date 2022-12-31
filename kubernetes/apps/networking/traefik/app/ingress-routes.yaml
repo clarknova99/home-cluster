@@ -1,3 +1,21 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: web
+  namespace: networking
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: HostRegexp(`{any:.+}`)
+      kind: Rule
+      priority: 10
+      services:
+        - kind: TraefikService
+          name: noop@internal
+      middlewares:
+        - name: traefik-middleware-redirect-https
 #
 # Auth Ingress
 #
@@ -10,7 +28,7 @@ metadata:
     app: traefik
 spec:
   entryPoints:
-    - https
+    - web
   routes:
     - match: Host(`auth.${SECRET_DOMAIN}`)
       kind: Rule
@@ -32,7 +50,7 @@ metadata:
     app: traefik
 spec:
   entryPoints:
-    - https
+    - web
   routes:
     - match: Host(`traefik.${SECRET_DOMAIN}`)
       kind: Rule
