@@ -16,156 +16,88 @@ spec:
         name: traefik
         namespace: flux-system
       interval: 15m
-  # install:
-  #   createNamespace: true
-  #   remediation:
-  #     retries: 3
-  # upgrade:
-  #   remediation:
-  #     retries: 3
-  # dependsOn:
-  #   - name: cert-manager
-  #     namespace: cert-manager
-  # values:
-  #   controller:
-  #     replicaCount: 2
-  #   # service:
-  #   #   enabled: true
-  #   #   type: LoadBalancer
-  #   #   spec:
-  #   #     loadBalancerIP: "${TRAEFIK_SERVICE_ADDR}"
-  #   #     externalTrafficPolicy: Local
-  #   # ports:
-  #   #   traefik:
-  #   #     port: 8080
-  #   #     protocol: TCP
-  #   #   web:
-  #   #     exposedPort: 80
-  #   #     port: 80
-  #   #     protocol: TCP
-  #   #   websecure:
-  #   #     exposedPort: 443
-  #   #     port: 443
-  #   #     protocol: TCP
-  #   logs:
-  #     general:
-  #       level: DEBUG
-  #     access:
-  #       enabled: true
-  #       fields:
-  #         headers:
-  #           names:
-  #             X-Forwarded-User: keep
-  #   providers:
-  #     kubernetesCRD:
-  #       enabled: true
-  #       allowCrossNamespace: true
-  #       allowExternalNameServices: true
-  #     kubernetesIngress:
-  #       enabled: true
-  #   ingressClass:
-  #     enabled: true
-  #     isDefaultClass: true
-  #     fallbackApiVersion: v1
-  #   # ingressRoute:
-  #   #   dashboard:
-  #   #     enabled: false
-  #   globalArguments:
-  #     - --api.insecure=true
-  #     - --serverstransport.insecureskipverify=true
-  #     - --providers.kubernetesingress.ingressclass=traefik
-  #     - --metrics.prometheus=true
-  #     - --metrics.prometheus.entryPoint=metrics
-  #     - --entrypoints.web.address=:80/tcp
-  #     - --entrypoints.websecure.address=:443/tcp
-  #   additionalArguments:
-  #     - --providers.kubernetescrd
-  #     - "--providers.kubernetesingress.ingressendpoint.ip=${SVC_TRAEFIK_ADDR}"
-  #   tlsOptions:
-  #     default:
-  #       minVersion: VersionTLS12
-  #       maxVersion: VersionTLS13
-  #       sniStrict: false
-  #   pilot:
-  #     enabled: false
-  #   experimental:
-  #     plugins:
-  #       enabled: false
-  #   resources:
-  #     requests:
-  #       memory: 50Mi
-  #       cpu: 50m
-  #     limits:
-  #       memory: 150Mi
-  #   tlsStore:
-  #     default:
-  #       defaultCertificate:
-  #         secretName: ${SECRET_DOMAIN}-prod-tls
-  spec:
-    replicas: 1
-    selector:
-      matchLabels:
-        app: traefik
-    strategy:
-      type: Recreate
-    template:
-      metadata:
-        labels:
-          app: traefik
-      spec:
-        serviceAccountName: traefik-ingress-controller
-        terminationGracePeriodSeconds: 60
-        containers:
-          - image: traefik:latest
-            name: traefik
-            args:
-              - --api.dashboard
-              - --accesslog
-              - --entryPoints.web.address=:80
-              - --entryPoints.websecure.address=:443
-              # We're using "global authentication", so the middleware is defined here on the entrypoint
-              # When a kubernetescrd middleware is applied globally it should take the form <kubernetes-namespace>-<middleware>
-              # - --entrypoints.https.http.middlewares=default-traefik-forward-auth
-              - --providers.kubernetescrd
-              - --log.level=debug
-            ports:
-              - name: web
-                containerPort: 80
-                protocol: TCP
-              - name: websecure
-                containerPort: 443
-                protocol: TCP
-              - name: dash
-                containerPort: 8080
-                protocol: TCP
-
-    chart:
-      spec:
-        chart: traefik-forward-auth
-        version: 2.2.2
-        sourceRef:
-          kind: HelmRepository
-          name: k8s-at-home-charts
-          namespace: flux-system
-        interval: 5m
-      values:
-        image:
-          #fullnameOverride: traefik-forward-auth
-          name: traefik-forward-auth
-          repository: thomseddon/traefik-forward-auth
-          tag: 2.2.0
-          pullPolicy: IfNotPresent
-          ports:
-            - containerPort: 4181
-              protocol: TCP
-        env:
-          AUTH_HOST: "auth.${SECRET_DOMAIN}"
-          LIFETIME: "6048002592000" #30 days
-          COOKIE_DOMAIN: "${SECRET_DOMAIN}"
-          DEFAULT_PROVIDER: "google"
-          PROVIDERS_GOOGLE_CLIENT_ID: "${SECRET_GOOGLE_CLIENT_ID}"
-          PROVIDERS_GOOGLE_CLIENT_SECRET: "${SECRET_GOOGLE_CLIENT_SECRET}"
-          URL_PATH: "/_oauth"
-          LOG_LEVEL: "debug"
-          LOG_FORMAT: pretty
-          WHITELIST: "${SECRET_CLOUDFLARE_EMAIL}"
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+  dependsOn:
+    - name: cert-manager
+      namespace: cert-manager
+  values:
+    controller:
+      replicaCount: 2
+    # service:
+    #   enabled: true
+    #   type: LoadBalancer
+    #   spec:
+    #     loadBalancerIP: "${TRAEFIK_SERVICE_ADDR}"
+    #     externalTrafficPolicy: Local
+    ports:
+      traefik:
+        port: 8080
+        protocol: TCP
+      web:
+        exposedPort: 80
+        port: 80
+        protocol: TCP
+      websecure:
+        exposedPort: 443
+        port: 443
+        protocol: TCP
+    logs:
+      general:
+        level: DEBUG
+      access:
+        enabled: true
+        fields:
+          headers:
+            names:
+              X-Forwarded-User: keep
+    providers:
+      kubernetesCRD:
+        enabled: true
+        allowCrossNamespace: true
+        allowExternalNameServices: true
+      kubernetesIngress:
+        enabled: true
+    ingressClass:
+      enabled: true
+      isDefaultClass: true
+      fallbackApiVersion: v1
+    # ingressRoute:
+    #   dashboard:
+    #     enabled: false
+    globalArguments:
+      - --api.insecure=true
+      - --serverstransport.insecureskipverify=true
+      - --providers.kubernetesingress.ingressclass=traefik
+      - --metrics.prometheus=true
+      - --metrics.prometheus.entryPoint=metrics
+      - --entrypoints.web.address=:80/tcp
+      - --entrypoints.websecure.address=:443/tcp
+    additionalArguments:
+      - --providers.kubernetescrd
+      - "--providers.kubernetesingress.ingressendpoint.ip=${SVC_TRAEFIK_ADDR}"
+    tlsOptions:
+      default:
+        minVersion: VersionTLS12
+        maxVersion: VersionTLS13
+        sniStrict: false
+    pilot:
+      enabled: false
+    experimental:
+      plugins:
+        enabled: false
+    resources:
+      requests:
+        memory: 50Mi
+        cpu: 50m
+      limits:
+        memory: 150Mi
+    tlsStore:
+      default:
+        defaultCertificate:
+          secretName: ${SECRET_DOMAIN}-prod-tls

@@ -1,0 +1,48 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: traefik-forward-auth
+#  namespace: networking
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: traefik-forward-auth
+      version: 2.2.2
+      sourceRef:
+        kind: HelmRepository
+        name: k8s-at-home-charts
+        namespace: flux-system
+      interval: 5m
+  # dependsOn:
+  #   - name: traefik
+  #     namespace: networking
+  values:
+    image:
+      #fullnameOverride: traefik-forward-auth
+      name: traefik-forward-auth
+      repository: thomseddon/traefik-forward-auth
+      tag: 2.2.0
+      pullPolicy: IfNotPresent
+      ports:
+        - containerPort: 4181
+          protocol: TCP
+    # middleware:
+    #   enabled: true
+    # service:
+    #   main:
+    #     ports:
+    #       http:
+    #         port: 4181
+    env:
+      AUTH_HOST: "auth.${SECRET_DOMAIN}"
+      LIFETIME: "6048002592000" #30 days
+      COOKIE_DOMAIN: "${SECRET_DOMAIN}"
+      DEFAULT_PROVIDER: "google"
+      PROVIDERS_GOOGLE_CLIENT_ID: "${SECRET_GOOGLE_CLIENT_ID}"
+      PROVIDERS_GOOGLE_CLIENT_SECRET: "${SECRET_GOOGLE_CLIENT_SECRET}"
+      URL_PATH: "/_oauth"
+      LOG_LEVEL: "debug"
+      LOG_FORMAT: pretty
+      WHITELIST: "${SECRET_CLOUDFLARE_EMAIL}"
