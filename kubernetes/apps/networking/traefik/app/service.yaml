@@ -9,6 +9,9 @@ metadata:
   labels:
     app.kubernetes.io/instance: traefik
     app.kubernetes.io/name: traefik
+annotations:
+  metallb.universe.tf/loadBalancerIPs: |-
+    ${METALLB_INGRESS_ADDR}
 spec:
   selector:
     app.kubernetes.io/instance: traefik
@@ -25,21 +28,21 @@ spec:
       name: websecure
       targetPort: websecure
       protocol: TCP
----
+# ---
 #
 # Auth Service
 #
-apiVersion: v1
-kind: Service
-metadata:
-  name: traefik-forward-auth
-  labels:
-    app: traefik
-spec:
-  type: ClusterIP
-  selector:
-    app: traefik
-  ports:
-    - name: traefik-forward-auth
-      port: 4181
-      targetPort: 4181
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: traefik-forward-auth
+#   labels:
+#     app: traefik
+# spec:
+#   type: ClusterIP
+#   selector:
+#     app: traefik
+#   ports:
+#     - name: traefik-forward-auth
+#       port: 4181
+#       targetPort: 4181

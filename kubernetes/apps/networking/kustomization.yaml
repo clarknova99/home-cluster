@@ -9,5 +9,5 @@ resources:
   - ./traefik/ks.yaml
   - ./k8s-gateway/ks.yaml
   - ./metallb/ks.yaml
-  - ./traefik-forward-auth/ks.yaml
+  #- ./traefik-forward-auth/ks.yaml
   - ./whoami/ks.yaml
