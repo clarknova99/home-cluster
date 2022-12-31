@@ -6,7 +6,7 @@ env:
 
 vars:
   ANSIBLE_PLAYBOOK_DIR: "{{.ANSIBLE_DIR}}/playbooks"
-  ANSIBLE_INVENTORY_DIR: "{{.ANSIBLE_DIR}}/inventory"
+  ANSIBLE_INVENTORY_DIR: "{{.ANSIBLE_DIR}}/inventory/kube"
 
 tasks:
 
@@ -66,3 +66,9 @@ tasks:
     dir: "{{.ANSIBLE_DIR}}"
     cmds:
       - ansible kubernetes -i {{.ANSIBLE_INVENTORY_DIR}}/hosts.yml -a '/usr/bin/systemctl poweroff' --become
+
+  vm-start:
+    desc: start vms
+    dir: "{{.ANSIBLE_DIR}}"
+    cmds:
+      - ansible-playbook {{.ANSIBLE_PLAYBOOK_DIR}}/vm-start.yml

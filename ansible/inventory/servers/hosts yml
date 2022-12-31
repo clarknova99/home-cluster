@@ -1,0 +1,15 @@
+---
+all:
+  children:
+    proxmox:
+      hosts:
+        nuc:
+          ansible_host: 192.168.1.9
+        nuc11:
+          ansible_host: 192.168.1.7
+          ansible_python_interpreter: /root/.pyenv/versions/3.11.1/bin/python3          
+      vars:
+        ansible_user: root
+        
+
+    

@@ -28,7 +28,9 @@ ubuntu:
     - intel-gpu-tools
     - ipvsadm
     - lm-sensors
+    - mc
     - nano
+    - nfs-common
     - nvme-cli
     - socat
     - python3-kubernetes

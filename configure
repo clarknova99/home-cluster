@@ -7,6 +7,7 @@ set -o pipefail
 export PROJECT_DIR=$(git rev-parse --show-toplevel)
 
 # shellcheck disable=SC2155
+
 export SOPS_AGE_KEY_FILE=~/.config/sops/age/keys.txt
 
 # shellcheck disable=SC1091
@@ -71,7 +72,7 @@ main() {
 
         # generate ansible settings
         envsubst < "${PROJECT_DIR}/tmpl/ansible/kube-vip.yml" \
-            > "${PROJECT_DIR}/ansible/inventory/group_vars/kubernetes/kube-vip.yml"
+            > "${PROJECT_DIR}/ansible/inventory/kube/group_vars/kubernetes/kube-vip.yml"
 
         # generate ansible hosts file and secrets
         generate_ansible_hosts
@@ -447,8 +448,8 @@ generate_ansible_host_secrets() {
             printf "kind: Secret\n"
             printf "ansible_user: %s\n" "${!node_username}"
             printf "ansible_become_pass: %s\n" "${!node_password}"
-        } > "${PROJECT_DIR}/ansible/inventory/host_vars/${node_hostname}.sops.yml"
-        sops --encrypt --in-place "${PROJECT_DIR}/ansible/inventory/host_vars/${node_hostname}.sops.yml"
+        } > "${PROJECT_DIR}/ansible/inventory/kube/host_vars/${node_hostname}.sops.yml"
+        sops --encrypt --in-place "${PROJECT_DIR}/ansible/inventory/kube/host_vars/${node_hostname}.sops.yml"
     done
 }
 
@@ -501,7 +502,7 @@ generate_ansible_hosts() {
                 fi
             done
         fi
-    } > "${PROJECT_DIR}/ansible/inventory/hosts.yml"
+    } > "${PROJECT_DIR}/ansible/inventory/kube/hosts.yml"
 }
 
 success() {

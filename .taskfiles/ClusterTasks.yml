@@ -88,3 +88,8 @@ tasks:
       - task: certificates
       - task: ingresses
       - task: pods
+
+  commit:
+    desc: Stage, commit & push
+    cmds:
+      - git add -A && git commit -m “cleanup” # && git push

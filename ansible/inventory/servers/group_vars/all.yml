@@ -1,0 +1,5 @@
+---
+# this is the user that has ssh access to these machines
+ansible_user: root
+# Set your timezone
+system_timezone: "America/New_York"
