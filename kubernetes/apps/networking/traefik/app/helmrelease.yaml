@@ -89,7 +89,7 @@ spec:
       - --accesslog.fields.headers.defaultmode=keep
     additionalArguments:
       - --providers.kubernetescrd
-      - "--providers.kubernetesingress.ingressendpoint.ip=${SVC_TRAEFIK_ADDR}"
+      - "--providers.kubernetesingress.ingressendpoint.ip=192.168.1.95"
     tlsOptions:
       default:
         minVersion: VersionTLS12
