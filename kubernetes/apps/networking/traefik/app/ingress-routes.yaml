@@ -34,7 +34,7 @@ spec:
       middlewares:
         - name: traefik-middleware-chains-oauth
   tls:
-    secretName: cluster-secrets
+    secretName: "${SECRET_DOMAIN}-prod-cert"
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
@@ -54,5 +54,4 @@ spec:
       middlewares:
         - name: traefik-middleware-oauth
   tls:
-    certResolver:
-    secretName: cluster-secrets
+    secretName: "${SECRET_DOMAIN}-prod-cert"
