@@ -6,3 +6,4 @@ resources:
   - ./helmrelease.yaml
   - ./ingress-routes.yaml
   - ./middleware.yaml
+  - ./service.yaml
