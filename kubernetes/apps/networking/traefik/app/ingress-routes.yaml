@@ -40,26 +40,26 @@ spec:
         - name: traefik-middleware-redirect-https
   tls:
     secretName: "${SECRET_DOMAIN}-prod-tls"
----
-apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRoute
-metadata:
-  name: traefik-forward-auth
-  namespace: networking
-  labels:
-    app: traefik
-spec:
-  entryPoints:
-    - websecure
-  routes:
-    - kind: Rule
-      match: Host(`auth.${SECRET_DOMAIN}`)
-      services:
-        - name: traefik-forward-auth
-          namespace: networking
-          port: 4181
-      middlewares:
-        - name: traefik-middleware-redirect-https
-        # - name: traefik-middleware-oauth
-  tls:
-    secretName: "${SECRET_DOMAIN}-prod-tls"
+# ---
+# apiVersion: traefik.containo.us/v1alpha1
+# kind: IngressRoute
+# metadata:
+#   name: traefik-forward-auth
+#   namespace: networking
+#   labels:
+#     app: traefik
+# spec:
+#   entryPoints:
+#     - websecure
+#   routes:
+#     - kind: Rule
+#       match: Host(`auth.${SECRET_DOMAIN}`)
+#       services:
+#         - name: traefik-forward-auth
+#           namespace: networking
+#           port: 4181
+#       middlewares:
+#         - name: traefik-middleware-redirect-https
+#         # - name: traefik-middleware-oauth
+#   tls:
+#     secretName: "${SECRET_DOMAIN}-prod-tls"
