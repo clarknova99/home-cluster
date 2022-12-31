@@ -22,7 +22,7 @@ spec:
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: traefik
+  name: traefik-dashboard
   namespace: networking
   labels:
     app: traefik
@@ -36,7 +36,8 @@ spec:
         - kind: TraefikService
           name: api@internal
       middlewares:
-        - name: traefik-middleware-chains-oauth
+        # - name: traefik-middleware-chains-oauth
+        - name: traefik-middleware-redirect-https
   tls:
     secretName: "${SECRET_DOMAIN}-prod-cert"
 ---

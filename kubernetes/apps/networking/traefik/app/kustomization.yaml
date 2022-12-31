@@ -4,7 +4,7 @@ kind: Kustomization
 namespace: networking
 resources:
   - ./helmrelease.yaml
- # - ./helmrelease-forward-auth.yaml
+  # - ./helmrelease-forward-auth.yaml
   - ./ingress-routes.yaml
   - ./middleware.yaml
   - ./service.yaml
