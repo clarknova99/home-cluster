@@ -109,17 +109,17 @@ spec:
       X-Robots-Tag: "none,noarchive,nosnippet,notranslate,noimageindex,"
       City: X-GEO-City
       server: ""
----
-apiVersion: traefik.containo.us/v1alpha1
-kind: Middleware
-metadata:
-  name: traefik-middleware-oauth
-  namespace: networking
-spec:
-  forwardAuth:
-    address: http://traefik-forward-auth:4181
-    authResponseHeaders:
-      - X-Forwarded-User
+# ---
+# apiVersion: traefik.containo.us/v1alpha1
+# kind: Middleware
+# metadata:
+#   name: traefik-middleware-oauth
+#   namespace: networking
+# spec:
+#   forwardAuth:
+#     address: http://traefik-forward-auth:4181
+#     authResponseHeaders:
+#       - X-Forwarded-User
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
@@ -147,20 +147,20 @@ spec:
       - name: traefik-middleware-cloudflare-ips
       - name: traefik-middleware-rate-limit
       - name: traefik-middleware-secure-headers
----
-apiVersion: traefik.containo.us/v1alpha1
-kind: Middleware
-metadata:
-  name: traefik-middleware-chains-oauth
-  namespace: networking
-spec:
-  chain:
-    middlewares:
-      #- name: traefik-middleware-local-ips
-      - name: traefik-middleware-cloudflare-ips
-      - name: traefik-middleware-rate-limit
-      - name: traefik-middleware-secure-headers
-      - name: traefik-middleware-oauth
+# ---
+# apiVersion: traefik.containo.us/v1alpha1
+# kind: Middleware
+# metadata:
+#   name: traefik-middleware-chains-oauth
+#   namespace: networking
+# spec:
+#   chain:
+#     middlewares:
+#       #- name: traefik-middleware-local-ips
+#       - name: traefik-middleware-cloudflare-ips
+#       - name: traefik-middleware-rate-limit
+#       - name: traefik-middleware-secure-headers
+#       - name: traefik-middleware-oauth
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
