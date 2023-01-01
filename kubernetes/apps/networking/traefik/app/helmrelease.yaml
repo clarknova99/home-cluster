@@ -80,8 +80,11 @@ spec:
     providers:
       kubernetesCRD:
         enabled: true
-        ingressClass: traefik-external
-        allowExternalNameServices: true
+        allowCrossNamespace: true
+      # kubernetesCRD:
+      #   enabled: true
+      #   ingressClass: traefik-external
+      #   allowExternalNameServices: true
       kubernetesIngress:
         enabled: true
         allowExternalNameServices: true
