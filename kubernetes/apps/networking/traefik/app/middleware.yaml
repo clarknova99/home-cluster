@@ -159,7 +159,8 @@ spec:
     middlewares:
       #- name: traefik-middleware-local-ips
       #- name: traefik-middleware-cloudflare-ips
-      - name: traefik-forward-auth
+      #- name: traefik-forward-auth
+      - name: traefik-middleware-oauth
       - name: traefik-middleware-redirect-https
       - name: traefik-middleware-rate-limit
       - name: traefik-middleware-secure-headers
