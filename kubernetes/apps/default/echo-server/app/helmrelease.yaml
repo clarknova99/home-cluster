@@ -14,10 +14,6 @@ spec:
         kind: HelmRepository
         name: bjw-s
         namespace: flux-system
-  template:
-    metadata:
-      labels:
-        task: echo-server
   install:
     createNamespace: true
     remediation:
