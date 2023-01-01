@@ -14,9 +14,6 @@ spec:
         kind: HelmRepository
         name: bjw-s
         namespace: flux-system
-  selector:
-    matchLabels:
-      task: echo-server
   template:
     metadata:
       labels:
