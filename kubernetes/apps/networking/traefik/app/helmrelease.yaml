@@ -61,13 +61,9 @@ spec:
         port: 8080
         protocol: TCP
       web:
-        #exposedPort: 80
-        port: 80
-        #protocol: TCP
+        redirectTo: websecure
       websecure:
-        #exposedPort: 443
         port: 443
-        #protocol: TCP
     logs:
       general:
         level: DEBUG
@@ -117,6 +113,14 @@ spec:
       - "--providers.kubernetesingress.ingressendpoint.hostname=${SECRET_DOMAIN}"
     tlsOptions:
       default:
+        cipherSuites:
+          - TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+          - TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305
+          - TLS_AES_256_GCM_SHA384
+          - TLS_CHACHA20_POLY1305_SHA256
+        curvePreferences:
+          - CurveP521
+          - CurveP384
         minVersion: VersionTLS12
         maxVersion: VersionTLS13
         sniStrict: false
