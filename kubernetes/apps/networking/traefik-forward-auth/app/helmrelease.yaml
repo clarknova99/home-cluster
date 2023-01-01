@@ -15,13 +15,17 @@ spec:
         name: k8s-at-home-charts
         namespace: flux-system
       interval: 5m
-  # dependsOn:
-  #   - name: traefik
-  #     namespace: networking
+  dependsOn:
+    - name: traefik
+      namespace: networking
   values:
+    controller:
+      replicas: 2
+      strategy: RollingUpdate
+      rollingUpdate:
+        unavailable: 1
+        surge: 1
     image:
-      #fullnameOverride: traefik-forward-auth
-      name: traefik-forward-auth
       repository: ghcr.io/kitos9112/traefik-forward-auth
       tag: v2.6.6
       pullPolicy: IfNotPresent
@@ -29,6 +33,8 @@ spec:
       enabled: true
       nameOverride: traefik-forward-auth
     env:
+      LOG_LEVEL: trace
+      LOG_FORMAT: pretty
       AUTH_HOST: "auth.${SECRET_DOMAIN}"
       LIFETIME: "6048002592000" #30 days
       COOKIE_DOMAIN: "${SECRET_DOMAIN}"
@@ -36,6 +42,4 @@ spec:
       PROVIDERS_GOOGLE_CLIENT_ID: "${SECRET_GOOGLE_CLIENT_ID}"
       PROVIDERS_GOOGLE_CLIENT_SECRET: "${SECRET_GOOGLE_CLIENT_SECRET}"
       URL_PATH: "/_oauth"
-      LOG_LEVEL: "debug"
-      LOG_FORMAT: pretty
       WHITELIST: "${SECRET_CLOUDFLARE_EMAIL}"

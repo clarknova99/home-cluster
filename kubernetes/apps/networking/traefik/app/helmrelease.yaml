@@ -5,48 +5,69 @@ metadata:
   name: traefik
   namespace: networking
 spec:
-  interval: 5m
-  # releaseName: traefik
   chart:
     spec:
       chart: traefik
       version: 20.8.0
+      interval: 5m
       sourceRef:
         kind: HelmRepository
         name: traefik
         namespace: flux-system
-      interval: 15m
-  install:
-    createNamespace: true
-    remediation:
-      retries: 3
-  upgrade:
-    remediation:
-      retries: 3
+  interval: 5m
   dependsOn:
-    - name: cert-manager
-      namespace: cert-manager
+    # - name: cert-manager
+    #   namespace: cert-manager
+    - name: metallb
+      namespace: networking
+  # install:
+  #   createNamespace: true
+  #   remediation:
+  #     retries: 3
+  # upgrade:
+  #   remediation:
+  #     retries: 3
+  install:
+    crds: Skip
+  upgrade:
+    crds: Skip
+    force: true
   values:
-    controller:
-      replicaCount: 2
-    service:
+    # controller:
+    #   replicaCount: 2
+    deployment:
       enabled: true
-      type: LoadBalancer
+      replicas: 3
+    experimental:
+      http3:
+        enabled: true
+      plugins:
+        enabled: true
+    ingressClass:
+      enabled: true
+      isDefaultClass: true
+      fallbackApiVersion: v1
+    ingressRoute:
+      dashboard:
+        enabled: false
+    service:
+      # enabled: true
+      # type: LoadBalancer
       spec:
         loadBalancerIP: "${TRAEFIK_SERVICE_ADDR}"
-        externalTrafficPolicy: Local
+        externalTrafficPolicy: Cluster #testing Cluster - originally local
     ports:
       traefik:
         port: 8080
         protocol: TCP
       web:
-        exposedPort: 80
+        #exposedPort: 80
         port: 80
-        protocol: TCP
+        #protocol: TCP
       websecure:
-        exposedPort: 443
+        #exposedPort: 443
         port: 443
-        protocol: TCP
+        #protocol: TCP
     logs:
       general:
         level: DEBUG
@@ -68,14 +89,8 @@ spec:
           enabled: false
     rbac:
       enabled: true
-    ingressClass:
-      enabled: true
-      isDefaultClass: true
-      fallbackApiVersion: v1
-    # ingressRoute:
-    #   dashboard:
-    #     enabled: false
-    serviceAccountName: traefik-ingress-controller
+
+    # serviceAccountName: traefik-ingress-controller
     globalArguments:
       - "--entryPoints.web.address=:80/tcp"
       - "--entryPoints.websecure.address=:443/tcp"
@@ -95,24 +110,21 @@ spec:
       - --log.level=DEBUG
     additionalArguments:
       - --providers.kubernetescrd
-      - "--providers.kubernetesingress.ingressendpoint.ip=${TRAEFIK_SERVICE_ADDR}"
+      # - "--providers.kubernetesingress.ingressendpoint.ip=${TRAEFIK_SERVICE_ADDR}"
+      - "--providers.kubernetesingress.ingressendpoint.hostname=${SECRET_DOMAIN}"
     tlsOptions:
       default:
         minVersion: VersionTLS12
         maxVersion: VersionTLS13
         sniStrict: false
-    pilot:
-      enabled: false
-    experimental:
-      plugins:
-        enabled: false
     resources:
       requests:
+        cpu: 100m
         memory: 50Mi
-        cpu: 50m
       limits:
-        memory: 150Mi
-    tlsStore:
-      default:
-        defaultCertificate:
-          secretName: ${SECRET_DOMAIN}-prod-tls
+        cpu: 4000m
+        memory: 256Mi
+    # tlsStore:
+    #   default:
+    #     defaultCertificate:
+    #       secretName: ${SECRET_DOMAIN}-prod-tls
