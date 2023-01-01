@@ -117,7 +117,8 @@ metadata:
   namespace: networking
 spec:
   forwardAuth:
-    address: http://traefik-forward-auth.networking:4181
+    #address: http://traefik-forward-auth.networking:4181
+    address: http:/127.0.0.1:4181
     trustForwardHeader: true
     authResponseHeaders:
       - X-Forwarded-User
