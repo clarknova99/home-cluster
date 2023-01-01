@@ -113,7 +113,7 @@ spec:
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
-  name: traefik-middleware-oauth
+  name: traefik-forward-auth
   namespace: networking
 spec:
   forwardAuth:
