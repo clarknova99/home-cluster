@@ -147,20 +147,20 @@ spec:
       - name: traefik-middleware-cloudflare-ips
       - name: traefik-middleware-rate-limit
       - name: traefik-middleware-secure-headers
-# ---
-# apiVersion: traefik.containo.us/v1alpha1
-# kind: Middleware
-# metadata:
-#   name: traefik-middleware-chains-oauth
-#   namespace: networking
-# spec:
-#   chain:
-#     middlewares:
-#       #- name: traefik-middleware-local-ips
-#       - name: traefik-middleware-cloudflare-ips
-#       - name: traefik-middleware-rate-limit
-#       - name: traefik-middleware-secure-headers
-#       - name: traefik-middleware-oauth
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: traefik-middleware-chains-forward-auth
+  namespace: networking
+spec:
+  chain:
+    middlewares:
+      #- name: traefik-middleware-local-ips
+      #- name: traefik-middleware-cloudflare-ips
+      - name: traefik-middleware-rate-limit
+      - name: traefik-middleware-secure-headers
+      - name: traefik-forward-auth
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
