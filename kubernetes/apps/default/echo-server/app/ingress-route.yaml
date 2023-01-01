@@ -2,18 +2,19 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: &app echo-server
-  labels:
-    app: echo-server
-  namespace: default
+  name: echo-server
 spec:
   entryPoints:
     - web
+    - websecure
   routes:
     - match: Host(`echo-server.${SECRET_DOMAIN}`)
       kind: Rule
       services:
         - name: echo-server
           port: 8080
-  # tls:
-  #   secretName: "echo.${SECRET_DOMAIN}-prod-cert"
+      middleware:
+        - name: traefik-middleware-chains-default
+          namespace: networking
+  tls:
+    secretName: "echo-server-${SECRET_DOMAIN/./-}-tls"
