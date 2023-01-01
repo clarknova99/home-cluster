@@ -4,8 +4,8 @@ kind: IngressRoute
 metadata:
   name: traefik-dashboard-v3
   namespace: networking
-  annotations:
-    kubernetes.io/ingress.class: traefik-external
+  # annotations:
+  #   kubernetes.io/ingress.class: traefik-external
 spec:
   entryPoints:
     - websecure
@@ -15,9 +15,9 @@ spec:
       services:
         - name: api@internal
           kind: TraefikService
-      # middlewares:
-      #   - name: traefik-forward-auth
-      #     namespace: networking
+      middlewares:
+        - name: traefik-forward-auth
+          namespace: networking
   tls:
     secretName: "${SECRET_DOMAIN/./-}-tls"
 # ---
