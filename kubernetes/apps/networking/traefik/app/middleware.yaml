@@ -109,17 +109,18 @@ spec:
       X-Robots-Tag: "none,noarchive,nosnippet,notranslate,noimageindex,"
       City: X-GEO-City
       server: ""
-# ---
-# apiVersion: traefik.containo.us/v1alpha1
-# kind: Middleware
-# metadata:
-#   name: traefik-middleware-oauth
-#   namespace: networking
-# spec:
-#   forwardAuth:
-#     address: http://traefik-forward-auth:4181
-#     authResponseHeaders:
-#       - X-Forwarded-User
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: traefik-middleware-oauth
+  namespace: networking
+spec:
+  forwardAuth:
+    address: http://traefik-forward-auth:4181
+    trustForwardHeader: true
+    authResponseHeaders:
+      - X-Forwarded-User
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware

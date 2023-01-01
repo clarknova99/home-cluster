@@ -32,6 +32,9 @@ spec:
     middleware:
       enabled: true
       nameOverride: traefik-forward-auth
+      trustForwardHeader: true
+      authResponseHeaders:
+        - X-Forwarded-User
     env:
       LOG_LEVEL: trace
       LOG_FORMAT: pretty
