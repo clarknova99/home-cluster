@@ -55,7 +55,7 @@ spec:
       # type: LoadBalancer
       spec:
         loadBalancerIP: "${TRAEFIK_SERVICE_ADDR}"
-        externalTrafficPolicy: local #testing Cluster - originally local
+        externalTrafficPolicy: Cluster #testing Cluster - originally local
     ports:
       traefik:
         port: 8080
