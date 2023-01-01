@@ -10,6 +10,6 @@ resources:
   - ./k8s-gateway/ks.yaml
   - ./metallb/ks.yaml
   - traefik-forward-auth
-  - ./traefik-forward-auth/ks.yaml
+  #- ./traefik-forward-auth/ks.yaml
   #- wildcard-certificate
   #- ./whoami/ks.yaml
