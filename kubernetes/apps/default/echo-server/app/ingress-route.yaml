@@ -13,7 +13,7 @@ spec:
       services:
         - name: echo-server
           port: 8080
-      middleware:
+      middlewares:
         - name: traefik-middleware-chains-default
           namespace: networking
   tls:
