@@ -4,6 +4,11 @@ kind: IngressRoute
 metadata:
   name: traefik-forward-auth
   namespace: networking
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    ingress.kubernetes.io/auth-type: forward
+    ingress.kubernetes.io/auth-url: http://traefik-forward-auth.kube-system.svc.cluster.local
+    ingress.kubernetes.io/auth-response-headers: X-Forwarded-User
 spec:
   entryPoints:
     - websecure
