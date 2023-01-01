@@ -27,7 +27,7 @@ spec:
         surge: 1
     image:
       repository: ghcr.io/kitos9112/traefik-forward-auth
-      tag: v2.6.6
+      tag: latest
       pullPolicy: IfNotPresent
     middleware:
       enabled: true
