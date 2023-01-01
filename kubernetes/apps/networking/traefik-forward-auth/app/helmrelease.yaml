@@ -53,3 +53,13 @@ spec:
       PROVIDERS_GOOGLE_CLIENT_SECRET: "${SECRET_GOOGLE_CLIENT_SECRET}"
       URL_PATH: "/_oauth"
       WHITELIST: "${SECRET_GOOGLE_WHITELIST_EMAIL}"
+    affinity:
+      podAntiAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+                - key: app.kubernetes.io/name
+                  operator: In
+                  values:
+                    - traefik-forward-auth
+            topologyKey: kubernetes.io/hostname
