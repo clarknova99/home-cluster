@@ -11,5 +11,5 @@ resources:
   - ./metallb/ks.yaml
   - traefik-forward-auth
   - ./traefik-forward-auth/ks.yaml
-  - wildcard-certificate
+  #- wildcard-certificate
   #- ./whoami/ks.yaml
