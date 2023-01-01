@@ -9,7 +9,6 @@ resources:
   - ./traefik/ks.yaml
   - ./k8s-gateway/ks.yaml
   - ./metallb/ks.yaml
-  #- traefik-forward-auth
   - ./traefik-forward-auth/ks.yaml
-  #- wildcard-certificate
+  - wildcard-certificate
   #- ./whoami/ks.yaml
