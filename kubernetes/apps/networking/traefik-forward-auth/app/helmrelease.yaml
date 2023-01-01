@@ -29,12 +29,12 @@ spec:
       repository: ghcr.io/kitos9112/traefik-forward-auth
       tag: latest
       pullPolicy: IfNotPresent
-    middleware:
-      enabled: true
-      nameOverride: traefik-forward-auth
-      trustForwardHeader: true
-      authResponseHeaders:
-        - X-Forwarded-User
+    # middleware:
+    #   enabled: true
+    #   nameOverride: traefik-forward-auth
+    #   trustForwardHeader: true
+    #   authResponseHeaders:
+    #     - X-Forwarded-User
     env:
       LOG_LEVEL: trace
       LOG_FORMAT: pretty
