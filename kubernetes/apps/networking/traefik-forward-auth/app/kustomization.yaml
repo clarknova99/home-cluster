@@ -5,4 +5,4 @@ namespace: networking
 resources:
   - ./helmrelease.yaml
   - ./cert.yaml
-  - ingress-route.yaml
+  - ./ingress-route.yaml
