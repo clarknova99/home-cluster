@@ -90,8 +90,8 @@ spec:
         allowExternalNameServices: true
         publishedService:
           enabled: false
-    rbac:
-      enabled: true
+    # rbac:
+    #   enabled: true
 
     # serviceAccountName: traefik-ingress-controller
     globalArguments:
