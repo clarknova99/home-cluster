@@ -8,3 +8,4 @@ resources:
   - ./middleware.yaml
   - ./rbac.yaml
   - tls-store
+  - dashboard

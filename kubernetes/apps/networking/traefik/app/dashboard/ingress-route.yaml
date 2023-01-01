@@ -2,26 +2,6 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: web
-  namespace: networking
-  labels:
-    app: traefik
-spec:
-  entryPoints:
-    - web
-  routes:
-    - match: HostRegexp(`{any:.+}`)
-      kind: Rule
-      priority: 10
-      services:
-        - kind: TraefikService
-          name: noop@internal
-      middlewares:
-        - name: traefik-middleware-redirect-https
----
-apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRoute
-metadata:
   name: traefik-dashboard-v3
   namespace: networking
 spec:
@@ -38,6 +18,27 @@ spec:
           namespace: networking
   tls:
     secretName: "${SECRET_DOMAIN/./-}-tls"
+# ---
+# apiVersion: traefik.containo.us/v1alpha1
+# kind: IngressRoute
+# metadata:
+#   name: web
+#   namespace: networking
+#   labels:
+#     app: traefik
+# spec:
+#   entryPoints:
+#     - web
+#   routes:
+#     - match: HostRegexp(`{any:.+}`)
+#       kind: Rule
+#       priority: 10
+#       services:
+#         - kind: TraefikService
+#           name: noop@internal
+#       middlewares:
+#         - name: traefik-middleware-redirect-https
+
 
 # ---
 # apiVersion: traefik.containo.us/v1alpha1
