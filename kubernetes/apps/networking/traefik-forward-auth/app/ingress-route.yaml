@@ -4,6 +4,8 @@ kind: IngressRoute
 metadata:
   name: traefik-forward-auth
   namespace: networking
+  labels:
+    app: traefik-forward-auth
   annotations:
     kubernetes.io/ingress.class: traefik
     ingress.kubernetes.io/auth-type: forward
