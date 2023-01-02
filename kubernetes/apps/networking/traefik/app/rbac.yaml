@@ -67,4 +67,4 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: traefik-ingress-controller
-    namespace: traefik
+    namespace: networking
