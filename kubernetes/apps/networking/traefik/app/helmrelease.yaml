@@ -90,11 +90,12 @@ spec:
       #   enabled: true
       #   ingressClass: traefik-external
       #   allowExternalNameServices: true
-      # kubernetesIngress:
-      #   enabled: true
-      #   allowExternalNameServices: true
-      #   publishedService:
-      #     enabled: false
+      kubernetesIngress:
+        enabled: true
+        allowExternalNameServices: true
+        allowCrossNamespace: true
+        publishedService:
+          enabled: false
     # rbac:
     #   enabled: true
 
