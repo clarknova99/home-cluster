@@ -8,6 +8,7 @@ metadata:
     app: traefik-forward-auth
 spec:
   entryPoints:
+    - web
     - websecure
   routes:
     - match: Host(`auth.${SECRET_DOMAIN}`)
