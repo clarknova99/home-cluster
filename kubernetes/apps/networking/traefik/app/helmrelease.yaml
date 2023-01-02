@@ -112,7 +112,7 @@ spec:
       #- "--api.dashboard=true"
       - --api.insecure=true
       - --serverstransport.insecureskipverify=true
-      #- --providers.kubernetesingress.ingressclass=traefik
+      - --providers.kubernetesingress.ingressclass=traefik
       #- --metrics.prometheus=true
       #- --metrics.prometheus.entryPoint=metrics
       - --accessLog=true
