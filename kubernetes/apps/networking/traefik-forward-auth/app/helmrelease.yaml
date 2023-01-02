@@ -31,11 +31,11 @@ spec:
       pullPolicy: IfNotPresent
     middleware:
       enabled: false
-    service:
-      main:
-        ports:
-          http:
-            port: 4181
+    # service:
+    #   main:
+    #     ports:
+    #       http:
+    #         port: 4181
     # middleware:
     #   enabled: true
     #   nameOverride: traefik-forward-auth
