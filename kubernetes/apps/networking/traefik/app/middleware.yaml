@@ -117,8 +117,7 @@ metadata:
   namespace: networking
 spec:
   forwardAuth:
-    #address: http://traefik-forward-auth:4181
-    address: http://traefik-forward-auth.networking.svc.cluster.local
+    address: http://traefik-forward-auth:4181
     trustForwardHeader: true
     authResponseHeaders:
       - X-Forwarded-User
