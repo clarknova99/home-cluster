@@ -5,6 +5,7 @@ metadata:
   name: gitops
 spec:
   entryPoints:
+    - web
     - websecure
   routes:
     - match: Host(`gitops.${SECRET_DOMAIN}`)
