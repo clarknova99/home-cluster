@@ -47,9 +47,9 @@ spec:
       enabled: true
       isDefaultClass: true
       fallbackApiVersion: v1
-    # ingressRoute:
-    #   dashboard:
-    #     enabled: false
+    ingressRoute:
+      dashboard:
+        enabled: false
     service:
       # enabled: true
       # type: LoadBalancer
