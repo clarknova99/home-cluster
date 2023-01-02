@@ -71,7 +71,7 @@ spec:
         port: 443
         tls:
           enabled: true
-        #   options: "default"
+          options: "default"
         #   domains:
         #     - main: "${SECRET_DOMAIN}"
         #       sans:
