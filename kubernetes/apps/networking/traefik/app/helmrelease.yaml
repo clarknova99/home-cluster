@@ -54,8 +54,6 @@ spec:
       # enabled: true
       # type: LoadBalancer
       spec:
-        # annotations:
-        #   metallb.universe.tf/loadBalancerIPs: "${TRAEFIK_SERVICE_ADDR}"
         loadBalancerIP: "${TRAEFIK_SERVICE_ADDR}"
         externalTrafficPolicy: Cluster #testing Cluster - originally local
     ports:
