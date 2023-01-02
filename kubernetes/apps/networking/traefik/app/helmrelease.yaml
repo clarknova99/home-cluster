@@ -39,8 +39,8 @@ spec:
       enabled: true
       replicas: 3
     experimental:
-      http3:
-        enabled: true
+      # http3:
+      #   enabled: true
       plugins:
         enabled: true
     ingressClass:
