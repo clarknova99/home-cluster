@@ -61,8 +61,12 @@ spec:
         port: 8080
         protocol: TCP
         expose: true
+      # web:
+      #   redirectTo: websecure
       web:
-        redirectTo: websecure
+        port: 8080
+        protocol: TCP
+        expose: true
       websecure:
         port: 443
         tls:
@@ -86,10 +90,6 @@ spec:
         enabled: true
         allowCrossNamespace: true
         allowExternalNameServices: true
-      # kubernetesCRD:
-      #   enabled: true
-      #   ingressClass: traefik-external
-      #   allowExternalNameServices: true
       kubernetesIngress:
         enabled: true
         allowExternalNameServices: true
