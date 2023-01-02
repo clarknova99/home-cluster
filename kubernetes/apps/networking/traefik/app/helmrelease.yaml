@@ -60,7 +60,7 @@ spec:
       traefik:
         port: 8080
         protocol: TCP
-        expose: true
+        #expose: true
       # web:
       #   redirectTo: websecure
       web:
@@ -71,11 +71,11 @@ spec:
         port: 443
         tls:
           enabled: true
-          options: "default"
-          domains:
-            - main: "${SECRET_DOMAIN}"
-              sans:
-                - "*.${SECRET_DOMAIN}"
+        #   options: "default"
+        #   domains:
+        #     - main: "${SECRET_DOMAIN}"
+        #       sans:
+        #         - "*.${SECRET_DOMAIN}"
     logs:
       general:
         level: DEBUG
