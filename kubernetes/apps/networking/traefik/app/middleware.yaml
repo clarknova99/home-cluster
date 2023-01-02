@@ -145,7 +145,7 @@ spec:
     middlewares:
       - name: traefik-middleware-redirect-https
       #- name: traefik-middleware-local-ips
-      - name: traefik-middleware-cloudflare-ips
+      # - name: traefik-middleware-cloudflare-ips
       - name: traefik-middleware-rate-limit
       - name: traefik-middleware-secure-headers
 ---
@@ -159,10 +159,10 @@ spec:
     middlewares:
       #- name: traefik-middleware-local-ips
       #- name: traefik-middleware-cloudflare-ips
-      - name: traefik-forward-auth
       - name: traefik-middleware-redirect-https
-      - name: traefik-middleware-rate-limit
       - name: traefik-middleware-secure-headers
+      - name: traefik-forward-auth
+      - name: traefik-middleware-rate-limit
 
 ---
 apiVersion: traefik.containo.us/v1alpha1
