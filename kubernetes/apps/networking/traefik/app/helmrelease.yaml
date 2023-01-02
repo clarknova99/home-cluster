@@ -72,10 +72,10 @@ spec:
         tls:
           enabled: true
           options: "default"
-        #   domains:
-        #     - main: "${SECRET_DOMAIN}"
-        #       sans:
-        #         - "*.${SECRET_DOMAIN}"
+          domains:
+            - main: "${SECRET_DOMAIN}"
+              sans:
+                - "*.${SECRET_DOMAIN}"
     logs:
       general:
         level: DEBUG
