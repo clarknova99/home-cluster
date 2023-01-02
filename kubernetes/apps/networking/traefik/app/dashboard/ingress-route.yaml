@@ -2,7 +2,7 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: traefik-dashboard-v3
+  name: traefik-dashboard
   namespace: networking
   # annotations:
   #   kubernetes.io/ingress.class: traefik-external
