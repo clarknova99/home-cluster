@@ -25,23 +25,43 @@ spec:
     adminUser:
       create: true
       username: admin
+    # ingress:
+    #   enabled: true
+    #   className: traefik
+    #   annotations:
+    #     cert-manager.io/cluster-issuer: letsencrypt-production
+    #     # nginx.ingress.kubernetes.io/whitelist-source-range: |
+    #     #   10.0.0.0/8,172.16.0.0/12,192.168.0.0/16
+    #     hajimari.io/icon: sawtooth-wave
+    #   hosts:
+    #     - host: &host "gitops.${SECRET_DOMAIN}"
+    #       paths:
+    #         - path: /
+    #           pathType: Prefix
+    #   tls:
+    #     - hosts:
+    #         - *host
+    #       secretName: weave-gitops-tls
     ingress:
-      enabled: true
-      className: traefik
-      annotations:
-        cert-manager.io/cluster-issuer: letsencrypt-production
-        # nginx.ingress.kubernetes.io/whitelist-source-range: |
-        #   10.0.0.0/8,172.16.0.0/12,192.168.0.0/16
-        hajimari.io/icon: sawtooth-wave
-      hosts:
-        - host: &host "gitops.${SECRET_DOMAIN}"
-          paths:
-            - path: /
-              pathType: Prefix
-      tls:
-        - hosts:
-            - *host
-          secretName: weave-gitops-tls
+      main:
+        enabled: true
+        ingressClassName: traefik
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt-production
+          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+          traefik.ingress.kubernetes.io/router.tls: "true"
+          #traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-middleware-chains-forward-auth@kubernetescrd
+          #traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-middleware-chains-default@kubernetescrd
+          hajimari.io/enable: "false"
+        hosts:
+          - host: "gitops.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - "gitops.${SECRET_DOMAIN}"
+            secretName: "gitops-${SECRET_DOMAIN/./-}-tls"
     networkPolicy:
       create: false
     metrics:
