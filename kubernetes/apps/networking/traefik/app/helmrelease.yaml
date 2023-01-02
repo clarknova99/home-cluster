@@ -106,7 +106,7 @@ spec:
       - --entryPoints.web.forwardedHeaders.insecure
       - --entryPoints.websecure.forwardedHeaders.insecure
       #- "--api=true"
-      - "--ping=true"
+      #- "--ping=true"
       - "--providers.kubernetescrd"
       - "--providers.kubernetescrd.allowCrossNamespace=true"
       #- "--api.dashboard=true"
