@@ -60,10 +60,18 @@ spec:
       traefik:
         port: 8080
         protocol: TCP
+        expose: true
       web:
         redirectTo: websecure
       websecure:
         port: 443
+        tls:
+          enabled: true
+          options: "default"
+          domains:
+            - main: "${SECRET_DOMAIN}"
+              sans:
+                - "*.${SECRET_DOMAIN}"
     logs:
       general:
         level: DEBUG
@@ -77,6 +85,7 @@ spec:
       kubernetesCRD:
         enabled: true
         allowCrossNamespace: true
+        allowExternalNameServices: true
       # kubernetesCRD:
       #   enabled: true
       #   ingressClass: traefik-external

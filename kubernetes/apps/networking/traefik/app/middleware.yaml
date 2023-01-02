@@ -2,6 +2,22 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
+  name: traefik-middleware-error-pages
+  namespace: networking
+spec:
+  errors:
+    status:
+      - "300-300"
+      - "303-306"
+      - "308-599"
+    query: /{status}.html
+    service:
+      name: error-pages
+      port: 8080
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
   name: traefik-middleware-redirect-https
   namespace: networking
 spec:
