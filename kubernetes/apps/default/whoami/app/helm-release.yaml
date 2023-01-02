@@ -33,23 +33,23 @@ spec:
         ports:
           http:
             port: 80
-    ingress:
-      main:
-        enabled: true
-        ingressClassName: traefik
-        annotations:
-          cert-manager.io/cluster-issuer: letsencrypt-production
-          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-          traefik.ingress.kubernetes.io/router.tls: "true"
-          #traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-middleware-chains-forward-auth@kubernetescrd
-          #traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-middleware-chains-default@kubernetescrd
-          hajimari.io/enable: "true"
-        hosts:
-          - host: "whoami.${SECRET_DOMAIN}"
-            paths:
-              - path: /
-                pathType: Prefix
-        tls:
-          - hosts:
-              - "whoami.${SECRET_DOMAIN}"
-            secretName: "whoami-${SECRET_DOMAIN/./-}-tls"
+    # ingress:
+    #   main:
+    #     enabled: true
+    #     ingressClassName: traefik
+    #     annotations:
+    #       cert-manager.io/cluster-issuer: letsencrypt-production
+    #       traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+    #       traefik.ingress.kubernetes.io/router.tls: "true"
+    #       #traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-middleware-chains-forward-auth@kubernetescrd
+    #       #traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-middleware-chains-default@kubernetescrd
+    #       hajimari.io/enable: "true"
+    #     hosts:
+    #       - host: "whoami.${SECRET_DOMAIN}"
+    #         paths:
+    #           - path: /
+    #             pathType: Prefix
+    #     tls:
+    #       - hosts:
+    #           - "whoami.${SECRET_DOMAIN}"
+    #         secretName: "whoami-${SECRET_DOMAIN/./-}-tls"
