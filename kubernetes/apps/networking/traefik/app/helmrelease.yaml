@@ -64,7 +64,7 @@ spec:
       # web:
       #   redirectTo: websecure
       web:
-        port: 8080
+        port: 80
         protocol: TCP
         expose: true
       websecure:
