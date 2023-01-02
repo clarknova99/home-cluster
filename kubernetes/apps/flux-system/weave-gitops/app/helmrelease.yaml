@@ -51,8 +51,7 @@ spec:
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
           traefik.ingress.kubernetes.io/router.tls: "true"
           #traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-middleware-chains-forward-auth@kubernetescrd
-          #traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-middleware-chains-default@kubernetescrd
-          hajimari.io/enable: "false"
+          traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-middleware-chains-default@kubernetescrd
         hosts:
           - host: "gitops.${SECRET_DOMAIN}"
             paths:
