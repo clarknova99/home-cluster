@@ -3,6 +3,8 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   name: echo-server
+  annotations:
+    hajimari.io/icon: video-input-antenna
 spec:
   entryPoints:
     - web
