@@ -20,24 +20,24 @@ spec:
     #   namespace: cert-manager
     - name: metallb
       namespace: networking
-  # install:
-  #   createNamespace: true
-  #   remediation:
-  #     retries: 3
-  # upgrade:
-  #   remediation:
-  #     retries: 3
   install:
-    crds: Skip
+    createNamespace: true
+    remediation:
+      retries: 3
   upgrade:
-    crds: Skip
-    force: true
+    remediation:
+      retries: 3
+  # install:
+  #   crds: Skip
+  # upgrade:
+  #   crds: Skip
+  #   force: true
   values:
     # controller:
     #   replicaCount: 2
     deployment:
       enabled: true
-      replicas: 3
+      replicas: 1
     experimental:
       # http3:
       #   enabled: true
