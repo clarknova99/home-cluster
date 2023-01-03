@@ -23,7 +23,8 @@ spec:
           namespace: networking
   tls:
     #secretName: cluster-secrets
-    secretName: "proxmox-${SECRET_DOMAIN/./-}-tls"
+    #secretName: "proxmox-${SECRET_DOMAIN/./-}-tls"
+    secretName: "${SECRET_DOMAIN/./-}-tls"
   # tls:
   #   secretName: wildcard-tls
 
