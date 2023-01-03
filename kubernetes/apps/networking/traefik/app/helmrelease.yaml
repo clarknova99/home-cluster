@@ -109,8 +109,8 @@ spec:
       - "--ping=true"
       - "--providers.kubernetescrd"
       - "--providers.kubernetescrd.allowCrossNamespace=true"
-      #- "--api.dashboard=true"
-      #- --api.insecure=true
+      - "--api.dashboard=true" #required for the dashboard
+      #- --api.insecure=true #only used in combination with api.dashboard=true. not recommended  https://doc.traefik.io/traefik/operations/dashboard/#insecure-mode
       - --serverstransport.insecureskipverify=true
       # - --providers.kubernetesingress.ingressclass=traefik
       #- --metrics.prometheus=true
