@@ -19,10 +19,10 @@ spec:
           serversTransport: proxmox
       middlewares:
         - name: traefik-middleware-basic-auth
-  # tls:
-  #   secretName: cluster-secrets
   tls:
-    secretName: wildcard-tls
+    secretName: cluster-secrets
+  # tls:
+  #   secretName: wildcard-tls
 
 ---
 apiVersion: traefik.containo.us/v1alpha1
