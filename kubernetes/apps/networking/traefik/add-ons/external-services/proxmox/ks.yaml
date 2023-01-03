@@ -5,7 +5,7 @@ metadata:
   name: cluster-apps-networking-traefik-add-ons-external-services-proxmox
   namespace: flux-system
 spec:
-  path: ./Kubernetes/apps/networking/traefik/add-ons/external-services/proxmox/app
+  path: ./kubernetes/apps/networking/traefik/add-ons/external-services/proxmox/app
   sourceRef:
     kind: GitRepository
     name: home-kubernetes
