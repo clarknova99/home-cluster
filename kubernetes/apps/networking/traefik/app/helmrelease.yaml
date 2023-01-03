@@ -105,8 +105,8 @@ spec:
       - "--entryPoints.websecure.address=:443/tcp"
       - --entryPoints.web.forwardedHeaders.insecure
       - --entryPoints.websecure.forwardedHeaders.insecure
-      #- "--api=true"
-      #- "--ping=true"
+      - "--api=true"
+      - "--ping=true"
       - "--providers.kubernetescrd"
       - "--providers.kubernetescrd.allowCrossNamespace=true"
       #- "--api.dashboard=true"
