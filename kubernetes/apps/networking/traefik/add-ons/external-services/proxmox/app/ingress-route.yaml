@@ -22,7 +22,7 @@ spec:
   # tls:
   #   secretName: cluster-secrets
   tls:
-    secretName: "proxmox-${SECRET_DOMAIN/./-}-tls"
+    secretName: wildcard-tls
 
 ---
 apiVersion: traefik.containo.us/v1alpha1
