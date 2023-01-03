@@ -180,6 +180,19 @@ spec:
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
+  name: traefik-middleware-chains-basic-auth
+  namespace: networking
+spec:
+  chain:
+    middlewares:
+      - name: traefik-basic-auth
+      - name: traefik-middleware-redirect-https
+      - name: traefik-middleware-secure-headers
+      - name: traefik-middleware-rate-limit
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
   name: traefik-middleware-chains-forward-auth
   namespace: networking
 spec:
