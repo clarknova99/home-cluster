@@ -21,8 +21,8 @@ spec:
         - name: traefik-middleware-chains-basic-auth
           namespace: networking
   tls:
-    #secretName: cluster-secrets
-    secretName: "proxmox-${SECRET_DOMAIN/./-}-tls"
+    secretName: cluster-secrets
+    #secretName: "proxmox-${SECRET_DOMAIN/./-}-tls"
   # tls:
   #   secretName: wildcard-tls
 
