@@ -103,8 +103,8 @@ spec:
     globalArguments:
       - "--entryPoints.web.address=:80/tcp"
       - "--entryPoints.websecure.address=:443/tcp"
-      # - --entryPoints.web.forwardedHeaders.insecure
-      # - --entryPoints.websecure.forwardedHeaders.insecure
+      - --entryPoints.web.forwardedHeaders.insecure
+      - --entryPoints.websecure.forwardedHeaders.insecure
       - "--api=true"
       - "--ping=true"
       - "--providers.kubernetescrd"
