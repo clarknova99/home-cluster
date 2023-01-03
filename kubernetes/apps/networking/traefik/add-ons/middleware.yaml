@@ -189,6 +189,7 @@ spec:
       - name: traefik-middleware-redirect-https
       - name: traefik-middleware-secure-headers
       - name: traefik-middleware-rate-limit
+      - name: traefik-middleware-error-pages
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
