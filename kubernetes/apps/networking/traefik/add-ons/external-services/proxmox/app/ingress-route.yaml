@@ -2,9 +2,9 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: &name proxmox
+  name: proxmox
   labels:
-    app.kubernetes.io/name: *name
+    app.kubernetes.io/name: proxmox
 spec:
   entryPoints:
     - web
@@ -12,13 +12,13 @@ spec:
   routes:
     - kind: Rule
       match: Host(`proxmox.${SECRET_DOMAIN}`)
+      services:
+        - name: proxmox
+          port: 8006
+          namespace: networking
+          serversTransport: proxmox
       middlewares:
         - name: traefik-middleware-basic-auth
-      services:
-        - name: *name
-          port: 8006
-          namespace: default
-          serversTransport: proxmox
   # tls:
   #   secretName: cluster-secrets
   tls:
