@@ -18,7 +18,8 @@ spec:
           namespace: networking
           serversTransport: proxmox
       middlewares:
-        - name: traefik-middleware-basic-auth
+        - name: traefik-middleware-chains-basic-auth
+          namespace: networking
   tls:
     #secretName: cluster-secrets
     secretName: "proxmox-${SECRET_DOMAIN/./-}-tls"
