@@ -23,7 +23,9 @@ spec:
       replicas: 1
     nameOverride: error-pages
     env:
-      TEMPLATE_NAME: i-said-random
+      #TEMPLATE_NAME: i-said-random
+      TEMPLATE_NAME: connection
+      SHOW_DETAILS: true
     service:
       main:
         ports:
