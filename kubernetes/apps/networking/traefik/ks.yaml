@@ -24,7 +24,7 @@ spec:
       namespace: networking
   interval: 30m
   retryInterval: 1m
-  timeout: 3m
+  timeout: 1m
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
@@ -38,8 +38,8 @@ spec:
   sourceRef:
     kind: GitRepository
     name: home-kubernetes
-  dependsOn:
-    - name: cluster-apps-ingress-traefik
+  # dependsOn:
+  #   - name: cluster-apps-ingress-traefik
   healthChecks:
     - apiVersion: traefik.containo.us/v1alpha1
       kind: TLSStore
