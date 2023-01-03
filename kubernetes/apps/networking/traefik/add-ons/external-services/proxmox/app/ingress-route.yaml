@@ -3,7 +3,6 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   name: proxmox
-  namespace: networking
   labels:
     app.kubernetes.io/name: proxmox
 spec:
@@ -16,7 +15,7 @@ spec:
       services:
         - name: proxmox
           port: 8006
-          namespace: networking
+          #namespace: networking
           serversTransport: proxmox
       middlewares:
         - name: traefik-middleware-chains-basic-auth
