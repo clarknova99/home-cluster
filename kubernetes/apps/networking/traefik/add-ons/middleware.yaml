@@ -2,6 +2,16 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
+  name: traefik-basic-auth
+  namespace: networking
+spec:
+  basicAuth:
+    secret: basic-auth
+    removeHeader: true
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
   name: traefik-middleware-error-pages
   namespace: networking
 spec:
@@ -15,6 +25,7 @@ spec:
       name: error-pages
       port: 8080
 ---
+
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:

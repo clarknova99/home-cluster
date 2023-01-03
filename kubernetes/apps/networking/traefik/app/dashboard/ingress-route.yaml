@@ -17,7 +17,7 @@ spec:
         - name: api@internal
           kind: TraefikService
       middlewares:
-        - name: traefik-middleware-chains-default
+        - name: traefik-basic-auth
           namespace: networking
   tls:
     secretName: "${SECRET_DOMAIN/./-}-tls"
