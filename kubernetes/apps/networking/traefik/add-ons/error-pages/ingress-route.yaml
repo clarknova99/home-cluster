@@ -9,7 +9,7 @@ spec:
     - web
     - websecure
   routes:
-    - match: HostRegexp(`{host:.+}`) #HostRegexp(`{host:.+}`)
+    - match: HostRegexp(`{any:.+}`) #HostRegexp(`{host:.+}`) HostRegexp(`{any:.+}`)
       kind: Rule
       priority: 10
       services:
