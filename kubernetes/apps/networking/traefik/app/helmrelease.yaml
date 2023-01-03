@@ -110,7 +110,7 @@ spec:
       - "--providers.kubernetescrd"
       - "--providers.kubernetescrd.allowCrossNamespace=true"
       #- "--api.dashboard=true"
-      - --api.insecure=true
+      #- --api.insecure=true
       - --serverstransport.insecureskipverify=true
       # - --providers.kubernetesingress.ingressclass=traefik
       #- --metrics.prometheus=true
