@@ -14,7 +14,7 @@ spec:
         - name: hajimari
           port: 3000
       middlewares:
-        - name: traefik-middleware-local-ips
+        - name: networking-traefik-middleware-chains-default@
           namespace: networking
   tls:
     secretName: "hajimari-${SECRET_DOMAIN/./-}-tls"
