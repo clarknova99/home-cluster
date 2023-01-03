@@ -3,12 +3,12 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
   name: networking-external-proxmox
-  namespace: flux-system
+  namespace: networking
 spec:
   path: ./Kubernetes/apps/networking/traefik/add-ons/external-services/proxmox
   sourceRef:
     kind: GitRepository
-    name: flux-system
+    name: home-kubernetes
   interval: 30m
   prune: false
   wait: true
