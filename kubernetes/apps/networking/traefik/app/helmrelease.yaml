@@ -37,7 +37,7 @@ spec:
     #   replicaCount: 2
     deployment:
       enabled: true
-      replicas: 1
+      replicas: 3
     experimental:
       # http3:
       #   enabled: true
@@ -112,7 +112,7 @@ spec:
       #- "--api.dashboard=true"
       - --api.insecure=true
       - --serverstransport.insecureskipverify=true
-      #- --providers.kubernetesingress.ingressclass=traefik
+      - --providers.kubernetesingress.ingressclass=traefik
       #- --metrics.prometheus=true
       #- --metrics.prometheus.entryPoint=metrics
       - --accessLog=true
