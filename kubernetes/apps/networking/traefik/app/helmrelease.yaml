@@ -101,8 +101,8 @@ spec:
 
     # serviceAccountName: traefik-ingress-controller
     globalArguments:
-      # - "--entryPoints.web.address=:80/tcp"
-      # - "--entryPoints.websecure.address=:443/tcp"
+      - "--entryPoints.web.address=:80/tcp"
+      - "--entryPoints.websecure.address=:443/tcp"
       # - --entryPoints.web.forwardedHeaders.insecure
       # - --entryPoints.websecure.forwardedHeaders.insecure
       - "--api=true"
