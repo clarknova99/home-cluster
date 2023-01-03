@@ -12,7 +12,7 @@ spec:
     - kind: Rule
       match: Host(`proxmox.${SECRET_DOMAIN}`)
       middlewares:
-        - name: traefik-middleware-chains-oauth
+        - name: traefik-middleware-basic-auth
       services:
         - name: *name
           port: 8006
