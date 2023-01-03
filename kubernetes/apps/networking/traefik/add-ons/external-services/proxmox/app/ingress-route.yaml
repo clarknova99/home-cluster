@@ -19,8 +19,10 @@ spec:
           port: 8006
           namespace: default
           serversTransport: proxmox
+  # tls:
+  #   secretName: cluster-secrets
   tls:
-    secretName: cluster-secrets
+    secretName: "proxmix-${SECRET_DOMAIN/./-}-tls"
 
 ---
 apiVersion: traefik.containo.us/v1alpha1
