@@ -17,9 +17,9 @@ spec:
           port: 32400
           namespace: networking
           serversTransport: plex
-      middlewares:
-        - name: traefik-middleware-chains-default
-          namespace: networking
+      # middlewares:
+      #   - name: traefik-middleware-chains-default
+      #     namespace: networking
   tls:
     secretName: "plex-${SECRET_DOMAIN/./-}-tls"
 ---
