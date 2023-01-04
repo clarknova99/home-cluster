@@ -43,3 +43,15 @@ spec:
       port: 8006
       targetPort: https
   type: ClusterIP
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: proxmox
+subsets:
+  - addresses:
+      - ip: 192.168.1.7 #${PROXMOX_ADDR}
+    ports:
+      - name: https
+        port: 8006
+        protocol: TCP
