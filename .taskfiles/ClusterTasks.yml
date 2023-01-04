@@ -92,4 +92,8 @@ tasks:
   commit:
     desc: Stage, commit & push
     cmds:
-      - git add -A && git commit -m “cleanup” && git push && task cluster:reconcile
+      - git add -A && git commit -m {{ .CLI_ARGS }} && git push && task cluster:reconcile
+  test:
+    desc: test cli arg
+    cmds:
+      - echo {{ .CLI_ARGS }}
