@@ -53,5 +53,5 @@ subsets:
       - ip: ${PLEX_ADDR}
     ports:
       - name: https
-        port: 8006
+        port: 32400
         protocol: TCP
