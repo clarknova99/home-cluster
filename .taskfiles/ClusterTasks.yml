@@ -92,4 +92,4 @@ tasks:
   commit:
     desc: Stage, commit & push
     cmds:
-      - git add -A && git commit -m “cleanup” # && git push
+      - git add -A && git commit -m “cleanup” && git push && task cluster:reconcile
