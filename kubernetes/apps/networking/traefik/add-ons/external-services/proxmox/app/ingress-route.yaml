@@ -26,7 +26,7 @@ spec:
     #secretName: "proxmox-${SECRET_DOMAIN/./-}-tls"
     #secretName: "${SECRET_DOMAIN/./-}-tls"
     #secretName: wildcard-tls
-    secretName: "whoami-${SECRET_DOMAIN/./-}-tls"
+    secretName: "proxmox-${SECRET_DOMAIN/./-}-tls"
 
 ---
 apiVersion: traefik.containo.us/v1alpha1
