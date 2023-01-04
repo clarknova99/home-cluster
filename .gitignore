@@ -15,4 +15,4 @@ xanmanning.k3s*
 .terraform
 .terraform.tfstate*
 terraform.tfstate*
-./ansible/inventory/servers
+nuc11.yml
