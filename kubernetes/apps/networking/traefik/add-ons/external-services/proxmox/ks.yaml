@@ -12,7 +12,6 @@ spec:
     kind: GitRepository
     name: home-kubernetes
   interval: 30m
-  prune: false
-  wait: true
+  prune: true
   # dependsOn:
   #   - name: networking-traefik
