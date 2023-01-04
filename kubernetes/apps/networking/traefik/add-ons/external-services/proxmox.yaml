@@ -50,7 +50,7 @@ metadata:
   name: proxmox
 subsets:
   - addresses:
-      - ip: 192.168.1.7 #${PROXMOX_ADDR}
+      - ip: ${PROXMOX_ADDR}
     ports:
       - name: https
         port: 8006
