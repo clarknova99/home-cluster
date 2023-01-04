@@ -4,6 +4,8 @@ kind: HelmRelease
 metadata:
   name: traefik
   namespace: networking
+  labels:
+    app: traefik
 spec:
   chart:
     spec:
