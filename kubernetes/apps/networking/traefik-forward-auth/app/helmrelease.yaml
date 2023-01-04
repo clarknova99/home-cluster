@@ -22,8 +22,9 @@ spec:
   #     namespace: networking
   values:
     selector:
-    matchLabels:
-      app: traefik-forward-auth
+      app: traefik
+    # matchLabels:
+    #   app: traefik-forward-auth
     controller:
       replicas: 1
       strategy: RollingUpdate
