@@ -3,7 +3,9 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: traefik-forward-auth
-  namespace: networking
+  labels:
+  app: traefik-forward-auth
+  #namespace: networking
 spec:
   interval: 5m
   chart:
@@ -19,6 +21,9 @@ spec:
   #   - name: traefik
   #     namespace: networking
   values:
+    selector:
+    matchLabels:
+      app: traefik-forward-auth
     controller:
       replicas: 1
       strategy: RollingUpdate
