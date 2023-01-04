@@ -4,6 +4,8 @@ kind: Kustomization
 metadata:
   name: traefik-add-ons-external-services-proxmox
   namespace: flux-system
+  labels:
+  substitution.flux.home.arpa/enabled: "true"
 spec:
   path: ./kubernetes/apps/networking/traefik/add-ons/external-services/proxmox/app
   sourceRef:
