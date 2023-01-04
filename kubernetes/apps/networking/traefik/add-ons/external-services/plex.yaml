@@ -18,7 +18,7 @@ spec:
           namespace: networking
           serversTransport: plex
       middlewares:
-        - name: traefik-middleware-chains-basic-auth
+        - name: traefik-middleware-chains-default
           namespace: networking
   tls:
     secretName: "plex-${SECRET_DOMAIN/./-}-tls"
