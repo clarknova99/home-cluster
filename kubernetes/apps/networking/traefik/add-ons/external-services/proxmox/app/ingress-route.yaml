@@ -21,12 +21,14 @@ spec:
       middlewares:
         - name: traefik-middleware-chains-basic-auth
           namespace: networking
-  tls:
-    #secretName: cluster-secrets
-    #secretName: "proxmox-${SECRET_DOMAIN/./-}-tls"
-    #secretName: "${SECRET_DOMAIN/./-}-tls"
-    #secretName: wildcard-tls
-    secretName: "proxmox-${SECRET_DOMAIN/./-}-tls"
+  # tls:
+  #   - secretName:
+  #     - "cluster-secrets"
+  #     - "proxmox-${SECRET_DOMAIN/./-}-tls"
+  #   #secretName: "proxmox-${SECRET_DOMAIN/./-}-tls"
+  #   #secretName: "${SECRET_DOMAIN/./-}-tls"
+  #   #secretName: wildcard-tls
+  #   # secretName: "proxmox-${SECRET_DOMAIN/./-}-tls"
 
 ---
 apiVersion: traefik.containo.us/v1alpha1
