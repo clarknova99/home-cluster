@@ -76,6 +76,7 @@ spec:
             - main: "${SECRET_DOMAIN}"
               sans:
                 - "*.${SECRET_DOMAIN}"
+          stores: networking-default@kubernetescrd
     logs:
       general:
         level: DEBUG
