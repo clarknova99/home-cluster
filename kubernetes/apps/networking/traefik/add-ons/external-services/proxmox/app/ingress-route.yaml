@@ -2,7 +2,7 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: cluster-apps-networking-traefik-add-ons-external-services-proxmox
+  name: traefik-add-ons-external-services-proxmox
   namespace: networking
   labels:
     app.kubernetes.io/name: proxmox
@@ -14,10 +14,10 @@ spec:
     - kind: Rule
       match: Host(`proxmox.${SECRET_DOMAIN}`)
       services:
-        - name: cluster-apps-networking-traefik-add-ons-external-services-proxmox
+        - name: traefik-add-ons-external-services-proxmox
           port: 8006
           #namespace: networking
-          serversTransport: cluster-apps-networking-traefik-add-ons-external-services-proxmox
+          serversTransport: traefik-add-ons-external-services-proxmox
       middlewares:
         - name: traefik-middleware-chains-basic-auth
           namespace: networking
@@ -34,8 +34,8 @@ spec:
 apiVersion: traefik.containo.us/v1alpha1
 kind: ServersTransport
 metadata:
-  name: cluster-apps-networking-traefik-add-ons-external-services-proxmox
+  name: traefik-add-ons-external-services-proxmox
   labels:
-    app.kubernetes.io/name: cluster-apps-networking-traefik-add-ons-external-services-proxmox
+    app.kubernetes.io/name: traefik-add-ons-external-services-proxmox
 spec:
   insecureSkipVerify: true
