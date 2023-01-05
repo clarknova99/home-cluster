@@ -17,3 +17,4 @@ resources:
   - ./grafana.yaml
   - ./traefik.yaml
   - ./k8s-at-home.yaml
+  - ./kubernetes-dashboard.yaml
