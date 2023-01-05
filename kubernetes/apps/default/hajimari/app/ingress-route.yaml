@@ -5,18 +5,18 @@ metadata:
   name: hajimari
 spec:
   entryPoints:
-    - web
     - websecure
   routes:
-    - match: Host(`hajimari.${SECRET_DOMAIN}`)
-      kind: Rule
-      services:
-        - name: hajimari
-          port: 3000
-      middlewares:
-        #- name: networking-traefik-middleware-chains-default@kubernetescrd
-        #- name: networking-traefik-middleware-chains-forward-auth@kubernetescrd
+    - middlewares:
         - name: networking-traefik-forward-auth@kubernetescrd
           namespace: networking
+      services:
+        - responseForwarding: {}
+          sticky:
+            cookie: {}
+          name: hajimari
+          port: 3000
+      match: Host(`hajimari.${SECRET_DOMAIN}`)
+      kind: Rule
   tls:
     secretName: "hajimari-${SECRET_DOMAIN/./-}-tls"

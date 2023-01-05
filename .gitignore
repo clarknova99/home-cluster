@@ -16,3 +16,4 @@ xanmanning.k3s*
 .terraform.tfstate*
 terraform.tfstate*
 nuc11.yml
+.monokle
