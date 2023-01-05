@@ -2,11 +2,13 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: cluster-apps-kubernetes-dashboard
+  name: cluster-apps-kubernetes-dashboard-app
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
+  dependsOn:
+    - name: cluster-apps-ingress-nginx
   path: ./kubernetes/apps/default/kubernetes-dashboard/app
   prune: true
   sourceRef:
@@ -19,4 +21,4 @@ spec:
       namespace: default
   interval: 30m
   retryInterval: 1m
-  timeout: 3m
+  timeout: 5m
