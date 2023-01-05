@@ -25,4 +25,4 @@ spec:
   tls:
     - hosts:
         - *host
-      secretName: "hajimari-${SECRET_DOMAIN/./-}-tls"
+      secretName: "hajimari-tls"
