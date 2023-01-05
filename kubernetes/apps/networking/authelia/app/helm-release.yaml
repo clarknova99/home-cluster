@@ -74,6 +74,13 @@ spec:
         subPath: configuration.yaml
         mountPath: /config/configuration.yml
         readOnly: false
+      notifications:
+        enabled: true
+        type: configMap
+        name: *app
+        subPath: notifications.txt
+        mountPath: /config/notifications.txt
+        readOnly: false
     # persistence:
     #   config:
     #     enabled: true

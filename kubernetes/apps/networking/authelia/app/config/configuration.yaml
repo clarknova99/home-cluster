@@ -118,14 +118,14 @@ storage:
     # Password can also be set using a secret: https://docs.authelia.com/configuration/secrets.html
     # password: use docker secret file instead AUTHELIA_STORAGE_MYSQL_PASSWORD_FILE
 
-# notifier:
-#   # smtp:
-#   #   username: SMTP_USERNAME
-#   #   # This secret can also be set using the env variables AUTHELIA_NOTIFIER_SMTP_PASSWORD_FILE
-#   #   # password: # use docker secret file instead AUTHELIA_NOTIFIER_SMTP_PASSWORD_FILE
-#   #   host: SMTP_HOST
-#   #   port: 587 #465
-#   #   sender: SENDER_EMAIL
-#   # For testing purpose, notifications can be sent in a file. Be sure map the volume in docker-compose.
-#  filesystem:
-#    filename: /config/notification.txt
+notifier:
+  # smtp:
+  #   username: SMTP_USERNAME
+  #   # This secret can also be set using the env variables AUTHELIA_NOTIFIER_SMTP_PASSWORD_FILE
+  #   # password: # use docker secret file instead AUTHELIA_NOTIFIER_SMTP_PASSWORD_FILE
+  #   host: SMTP_HOST
+  #   port: 587 #465
+  #   sender: SENDER_EMAIL
+  # For testing purpose, notifications can be sent in a file. Be sure map the volume in docker-compose.
+  filesystem:
+    filename: /config/notifications.txt
