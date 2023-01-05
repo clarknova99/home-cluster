@@ -15,7 +15,8 @@ spec:
           port: 3000
       middlewares:
         #- name: networking-traefik-middleware-chains-default@kubernetescrd
-        - name: networking-traefik-middleware-chains-forward-auth@kubernetescrd
+        #- name: networking-traefik-middleware-chains-forward-auth@kubernetescrd
+        - name: networking-traefik-forward-auth@kubernetescrd
           namespace: networking
   tls:
     secretName: "hajimari-${SECRET_DOMAIN/./-}-tls"
