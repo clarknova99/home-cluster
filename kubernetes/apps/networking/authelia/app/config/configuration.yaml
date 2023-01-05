@@ -1,6 +1,38 @@
----
+###############################################################
+#                   Authelia configuration                    #
+###############################################################
+
+server:
+  ## The address to listen on.
+  host: 0.0.0.0
+  ## The port to listen on.
+  port: 9091
+log:
+  ## Level of verbosity for logs: info, debug, trace.
+  level: debug
+  format: json
+  keep_stdout: true
+
+# This secret can also be set using the env variables AUTHELIA_JWT_SECRET_FILE
+# I used this site to generate the secret: https://www.grc.com/passwords.htm
+jwt_secret: ${SECRET_AUTHELIA_JWT} # use docker secret file instead AUTHELIA_JWT_SECRET_FILE
+
+# https://docs.authelia.com/configuration/miscellaneous.html#default-redirection-url
+default_redirection_url: https://auth.${SECRET_DOMAIN}
+
 totp:
-  disable: false
+  issuer: authelia.com
+  period: 30
+  skew: 1
+
+# Enable the following for Duo Push Notification support
+# https://www.authelia.com/docs/features/2fa/push-notifications.html
+#duo_api:
+#  hostname: api-123456789.example.com
+#  integration_key: ABCDEF
+#  # This secret can also be set using the env variables AUTHELIA_DUO_API_SECRET_KEY_FILE
+#  secret_key: # use docker secret file instead AUTHELIA_DUO_API_SECRET_KEY_FILE
+
 
 authentication_backend:
   password_reset:
@@ -9,75 +41,91 @@ authentication_backend:
   file:
     path: /config/users.yaml
     password:
-      algorithm: argon2id
-      iterations: 1
-      key_length: 32
-      salt_length: 16
-      memory: 1024
-      parallelism: 8
+      algorithm: argon2
+      argon2:
+        variant: argon2id
+        iterations: 1
+        key_length: 32
+        salt_length: 16
+        memory: 1024
+        parallelism: 8
 
+# authentication_backend:
+#   file:
+#     path: /config/users.yml
+#     # customize passwords based on https://docs.authelia.com/configuration/authentication/file.html
+#     password:
+#       algorithm: argon2id
+#       iterations: 1
+#       salt_length: 16
+#       parallelism: 8
+#       memory: 1024 # blocks this much of the RAM. Tune this.
+
+# https://docs.authelia.com/configuration/access-control.html
 access_control:
   default_policy: deny
-  networks:
-    - name: internal
-      networks:
-        - 10.0.10.0/24
-        - 10.0.40.2/32
   rules:
-    - domain: "*.${SECRET_DOMAIN_NAME}"
-      networks:
-        - internal
+    # Rules applied to everyone
+    - domain: auth.${SECRET_DOMAIN}
       policy: bypass
-    - domain: "draw.${SECRET_DOMAIN_NAME}"
+    - domain: "*.${SECRET_DOMAIN}"
       policy: one_factor
-      subject:
-        - "group:app-draw"
-    - domain: "home.${SECRET_DOMAIN_NAME}"
+    - domain: "${SECRET_DOMAIN}"
       policy: one_factor
-      subject:
-        - "group:app-home"
-    - domain: "wiki.${SECRET_DOMAIN_NAME}"
-      policy: one_factor
-      subject:
-        - "group:app-wiki"
 
-telemetry:
-  metrics:
-    enabled: true
-    address: "tcp://0.0.0.0:9959"
-    buffers:
-      read: 4096
-      write: 4096
-    timeouts:
-      read: 6s
-      write: 6s
-      idle: 30s
+
+      #    - domain: radarr.example.com
+#      policy: bypass
+#      subject: "group:admins"
+#      resources:
+#      - "^/api/.*$"
+#    - domain: "*.example.com"
+#      policy: one_factor
+
 
 session:
-  redis:
-    high_availability:
-      sentinel_name: redis-master
-      nodes:
-        - host: redis-node-0.redis-headless.dbms.svc.cluster.local
-          port: 26379
-        - host: redis-node-1.redis-headless.dbms.svc.cluster.local
-          port: 26379
-        - host: redis-node-2.redis-headless.dbms.svc.cluster.local
-          port: 26379
+  name: authelia_session
+  # This secret can also be set using the env variables AUTHELIA_SESSION_SECRET_FILE
+  # Used a different secret, but the same site as jwt_secret above.
+  # secret: SECRET_GOES_HERE # use docker secret file instead AUTHELIA_SESSION_SECRET_FILE
+  expiration: 3600 # 1 hour
+  inactivity: 300 # 5 minutes
+  domain: ${SECRET_DOMAIN} # Should match whatever your root protected domain is
 
-identity_providers:
-  oidc:
-    enable_client_debug_messages: true
-    cors:
-      endpoints: ["authorization", "token", "revocation", "introspection"]
-      allowed_origins_from_client_redirect_uris: true
-    clients:
-      - id: outline
-        description: Outline
-        secret: "${SECRET_OUTLINE_OAUTH_CLIENT_SECRET}"
-        public: false
-        authorization_policy: one_factor
-        pre_configured_consent_duration: 1y
-        scopes: ["openid", "profile", "email", "offline_access"]
-        redirect_uris: ["https://wiki.${SECRET_DOMAIN_NAME}/auth/oidc.callback"]
-        userinfo_signing_algorithm: none
+# Optional. Can improve performance on a busy system. If not enabled, session info is stored in memory.
+#  redis:
+#    host: redis
+#    port: 6379
+    # This secret can also be set using the env variables AUTHELIA_SESSION_REDIS_PASSWORD_FILE
+    # password: authelia
+
+regulation:
+  max_retries: 3
+  find_time: 120
+  ban_time: 300
+
+storage:
+# For local storage, uncomment lines below and comment out mysql. https://docs.authelia.com/configuration/storage/sqlite.html
+  encryption_key: C59268DC295F23E63B814570C14D48EC766B54E13223E11D34B5EF960B4C0F94
+  local:
+    path: /config/db.sqlite3
+  # mysql:
+  # # MySQL allows running multiple authelia instances. Create database and enter details below.
+  #   host: MYSQL_HOST
+  #   port: 3306
+  #   database: authelia
+  #   username: DBUSERNAME
+    # Password can also be set using a secret: https://docs.authelia.com/configuration/secrets.html
+    # password: use docker secret file instead AUTHELIA_STORAGE_MYSQL_PASSWORD_FILE
+
+# notifier:
+#   # smtp:
+#   #   username: SMTP_USERNAME
+#   #   # This secret can also be set using the env variables AUTHELIA_NOTIFIER_SMTP_PASSWORD_FILE
+#   #   # password: # use docker secret file instead AUTHELIA_NOTIFIER_SMTP_PASSWORD_FILE
+#   #   host: SMTP_HOST
+#   #   port: 587 #465
+#   #   sender: SENDER_EMAIL
+#   # For testing purpose, notifications can be sent in a file. Be sure map the volume in docker-compose.
+#  filesystem:
+#    filename: /config/notification.txt
