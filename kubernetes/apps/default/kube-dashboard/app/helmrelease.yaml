@@ -48,6 +48,9 @@ spec:
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt-production
           external-dns.alpha.kubernetes.io/target: "kube.${SECRET_DOMAIN}"
+          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+          traefik.ingress.kubernetes.io/router.tls: "true"
+          traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-middleware-chains-default@kubernetescrd
           external-dns.home.arpa/enabled: "true"
           hajimari.io/icon: video-input-antenna
         hosts:
