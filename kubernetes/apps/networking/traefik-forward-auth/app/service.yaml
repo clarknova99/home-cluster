@@ -13,6 +13,6 @@ spec:
   selector:
     app: traefik
   ports:
-    - name: auth-http
+    - name: traefik-forward-auth
       port: 4181
       targetPort: 4181
