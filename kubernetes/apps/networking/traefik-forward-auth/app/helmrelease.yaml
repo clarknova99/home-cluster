@@ -38,6 +38,7 @@ spec:
       pullPolicy: IfNotPresent
     middleware:
       enabled: false
+      nameOverride: traefik-forward-auth
     # service:
     #   main:
     #     ports:
