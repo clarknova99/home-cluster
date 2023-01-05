@@ -1,0 +1,28 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: webhook-receiver
+  namespace: flux-system
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-production
+    external-dns.alpha.kubernetes.io/target: "${SECRET_DOMAIN}"
+    external-dns.home.arpa/enabled: "true"
+    hajimari.io/enable: "false"
+spec:
+  ingressClassName: traefik
+  rules:
+    - host: &host "hajimari.${SECRET_DOMAIN}"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: hajimari
+                port:
+                  number: 3000
+  tls:
+    - hosts:
+        - *host
+      secretName: "hajimari-${SECRET_DOMAIN/./-}-tls"
