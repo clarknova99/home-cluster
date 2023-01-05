@@ -53,8 +53,8 @@ spec:
       dashboard:
         enabled: false
     service:
-      # enabled: true
-      # type: LoadBalancer
+      enabled: true
+      type: LoadBalancer
       spec:
         loadBalancerIP: "${TRAEFIK_SERVICE_ADDR}"
         externalTrafficPolicy: Cluster #testing Cluster - originally local
