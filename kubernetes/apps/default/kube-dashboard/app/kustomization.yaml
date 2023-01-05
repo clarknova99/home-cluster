@@ -5,3 +5,4 @@ namespace: default
 resources:
   - ./rbac.yaml
   - ./helmrelease.yaml
+  - ./ingress-route.yaml
