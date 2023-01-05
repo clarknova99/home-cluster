@@ -114,7 +114,6 @@ spec:
       - "--providers.kubernetescrd.allowCrossNamespace=true"
       - "--api.dashboard=true" #required for the dashboard
       #- --api.insecure=true #only used in combination with api.dashboard=true. not recommended  https://doc.traefik.io/traefik/operations/dashboard/#insecure-mode
-      - --serverstransport.insecureskipverify=true
       # - --providers.kubernetesingress.ingressclass=traefik
       #- --metrics.prometheus=true
       #- --metrics.prometheus.entryPoint=metrics
@@ -127,6 +126,8 @@ spec:
       - --providers.kubernetescrd
       - "--providers.kubernetesingress.ingressendpoint.ip=${TRAEFIK_SERVICE_ADDR}"
       #- "--providers.kubernetesingress.ingressendpoint.hostname=${SECRET_DOMAIN}"
+      - "--serverstransport.insecureskipverify=true"
+      - "--providers.kubernetesingress.ingressclass=traefik"
     tlsOptions:
       default:
         cipherSuites:

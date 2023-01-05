@@ -32,7 +32,8 @@ spec:
         unavailable: 1
         surge: 1
     image:
-      repository: ghcr.io/kitos9112/traefik-forward-auth
+      #repository: ghcr.io/kitos9112/traefik-forward-auth
+      repository: thomseddon/traefik-forward-auth:latest
       tag: latest
       pullPolicy: IfNotPresent
     middleware:
