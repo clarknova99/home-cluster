@@ -7,3 +7,4 @@ resources:
   - ./hajimari/ks.yaml
   - ./weave-gitops/ks.yaml
   - ./whoami/ks.yaml
+  - ./kube-dashboard/ks.yaml
