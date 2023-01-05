@@ -56,7 +56,7 @@ spec:
           #traefik.ingress.kubernetes.io/router.middlewares: "traefik-system-cloudflare-only@kubernetescrd"
           external-dns/is-public: "true"
         hosts:
-          - host: "auth.${SECRET_DOMAIN_NAME}"
+          - host: "auth.${SECRET_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
