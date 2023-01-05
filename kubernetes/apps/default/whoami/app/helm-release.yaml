@@ -24,7 +24,7 @@ spec:
       retries: 5
   values:
     controller:
-      replicas: 3
+      replicas: 1
     image:
       repository: docker.io/traefik/whoami
       tag: latest
