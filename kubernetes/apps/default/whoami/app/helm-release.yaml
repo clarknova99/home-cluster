@@ -33,16 +33,19 @@ spec:
         ports:
           http:
             port: 80
-
-    volumeMounts:
-      - mountPath: /nfs-test
-        name: testing
-  volumes:
-    - name: testing
-      nfs:
-        server: 192.168.1.2
-        path: /volume1/network-storage
-        readOnly: true
+    persistence:
+      data:
+        enabled: true
+        existingClaim: nfs-data-pvc
+  #   volumeMounts:
+  #     - mountPath: /nfs-test
+  #       name: testing
+  # volumes:
+  #   - name: testing
+  #     nfs:
+  #       server: 192.168.1.2
+  #       path: /volume1/network-storage
+  #       readOnly: true
     # ingress:
     #   main:
     #     enabled: true

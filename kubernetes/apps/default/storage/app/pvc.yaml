@@ -1,29 +1,35 @@
 apiVersion: v1
-kind: PersistentVolumeClaim
+kind: PersistentVolume
 metadata:
-  name: test
-  labels:
-    app.kubernetes.io/name: storage
+  name: nfs-data
+  namespace: default
 spec:
+  storageClassName: data
+  capacity:
+    storage: 1Mi
   accessModes:
     - ReadWriteMany
-  resources:
-    requests:
-      storage: 500Gi
-  storageClassName: nfs-provisioner
-
+  persistentVolumeReclaimPolicy: Retain
+  nfs:
+    server: 192.168.1.2
+    path: "/volume1/network-storage/test"
+  mountOptions:
+    - nfsvers=4
+    - tcp
+    - intr
+    - hard
+    - noatime
+    - nodiratime
 ---
-
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: testing
-  labels:
-    app.kubernetes.io/name: storage
+  name: nfs-data-pvc
+  namespace: default
 spec:
   accessModes:
     - ReadWriteMany
+  storageClassName: data
   resources:
     requests:
-      storage: 500Gi
-  storageClassName: nfs-provisioner
+      storage: 1Mi
