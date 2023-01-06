@@ -30,7 +30,7 @@ spec:
       server: "192.168.1.2"
       path: "/volume1/network-storage"
     storageClass:
-      create: true
+      name: nfs-provision
       defaultClass: true
       pathPattern: "${.PVC.namespace}-${.PVC.name}"
       #allowVolumeExpansion: true
