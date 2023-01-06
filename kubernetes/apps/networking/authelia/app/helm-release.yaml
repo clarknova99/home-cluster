@@ -13,8 +13,6 @@ spec:
         kind: HelmRepository
         name: authelia
         namespace: flux-system
-  install:
-    createNamespace: true
   values:
     controller:
       replicas: 1
@@ -28,18 +26,6 @@ spec:
       env:
         - name: TZ
           value: ${TIMEZONE}
-      # extraVolumeMounts:
-      #   - name: users
-      #     mountPath: /config/users.yaml
-      #     subPath: users.yaml
-      #     readOnly: true
-      # extraVolumes:
-      #   - name: users
-      #     configMap:
-      #       name: authelia-users
-      #       items:
-      #         - key: users.yaml
-      #           path: users.yaml
     configMap:
       log:
         level: info
@@ -59,12 +45,11 @@ spec:
           enabled: false
         file:
           enabled: true
-          path: /config/users.yaml
+          path: /users.yaml
           search:
             email: true
           password:
             algorithm: argon2
-
       access_control:
         default_policy: deny
         rules:
@@ -86,166 +71,16 @@ spec:
       storage:
         local:
           enabled: true
-          path: /config/db.sqlite3
+          path: /db.sqlite3
         postgres:
           enabled: false
-
       notifier:
         filesystem:
-          filename: /config/notifications.txt
+          filename: /notifications.txt
     secret:
       jwt:
         value: ${SECRET_AUTHELIA_JWT}
-
-    # persistence:
-    #   config:
-    #     enabled: true
-    #     existingClaim: authelia-config
-    #   media:
-    #     enabled: true
-    #     type: custom
-    #     volumeSpec:
-    #       nfs:
-    #         server: "192.168.1.5"
-    #         path: /volume1/network-storage
-    #     mountPath: /media
-    #   incomplete:
-    #     enabled: true
-    #     type: emptyDir
-
     persistentVolume:
       enabled: true
       existingClaim: authelia-config
-
-    # persistence:
-    #   config:
-    #     enabled: true
-    #     type: configMap
-    #     name: authelia
-    #     subPath: configuration.yaml
-    #     mountPath: /config/configuration.yml
-    #     readOnly: false
-    #   notifications:
-    #     enabled: true
-    #     type: configMap
-    #     name: authelia
-    #     subPath: notifications.txt
-    #     mountPath: /config/notifications.txt
-    #     readOnly: false
   interval: 10m0s
-#     # persistence:
-#     #   config:
-#     #     enabled: true
-#     #     type: custom
-#     #     mountPath: /config
-#     #     readOnly: true
-#     #     volumeSpec:
-#     #       configMap:
-#     #         name: authelia-config
-#       # users:
-#       #   enabled: true
-#       #   type: secret
-#       #   name: authelia-files
-#       #   subPath: users.yaml
-#       #   mountPath: /config/users.yaml
-#       #   readOnly: false
-
-
-# apiVersion: helm.toolkit.fluxcd.io/v2beta1
-# kind: HelmRelease
-# metadata:
-#   name: &app authelia
-#   namespace: networking
-# spec:
-#   interval: 15m
-#   chart:
-#     spec:
-#       chart: app-template
-#       version: 1.2.1
-#       sourceRef:
-#         kind: HelmRepository
-#         name: bjw-s
-#         namespace: flux-system
-#   maxHistory: 3
-#   install:
-#     remediation:
-#       retries: 5
-#   upgrade:
-#     remediation:
-#       retries: 5
-#   values:
-#     controller:
-#       replicas: 1
-#       annotations:
-#         configmap.reloader.stakater.com/reload: *app
-#         # secret.reloader.stakater.com/reload: "*app,authelia-files"
-#     image:
-#       repository: ghcr.io/authelia/authelia
-#       tag: 4.37.5
-#     enableServiceLinks: false
-#     service:
-#       main:
-#         ports:
-#           http:
-#             port: 9091
-#           metrics:
-#             enabled: true
-#             port: 9959
-#         # monitor:
-#         #   enabled: true
-#         #   endpoints:
-#         #     - port: metrics
-#         #       scheme: http
-#         #       path: /metrics
-#         #       interval: 1m
-#         #       scrapeTimeout: 10s
-#     ingress:
-#       main:
-#         enabled: true
-#         ingressClassName: "traefik"
-#         annotations:
-#           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-#           external-dns.alpha.kubernetes.io/target: "${SECRET_DOMAIN}"
-#           #traefik.ingress.kubernetes.io/router.middlewares: "traefik-system-cloudflare-only@kubernetescrd"
-#           external-dns/is-public: "true"
-#         hosts:
-#           - host: "auth.${SECRET_DOMAIN}"
-#             paths:
-#               - path: /
-#                 pathType: Prefix
-#     # podSecurityContext:
-#     #   runAsUser: 568
-#     #   runAsGroup: 568
-#     #   fsGroup: 568
-#     #   fsGroupChangePolicy: "OnRootMismatch"
-#     persistence:
-#       config:
-#         enabled: true
-#         type: configMap
-#         name: *app
-#         subPath: configuration.yaml
-#         mountPath: /config/configuration.yml
-#         readOnly: false
-#       notifications:
-#         enabled: true
-#         type: configMap
-#         name: *app
-#         subPath: notifications.txt
-#         mountPath: /config/notifications.txt
-#         readOnly: false
-#     # persistence:
-#     #   config:
-#     #     enabled: true
-#     #     type: custom
-#     #     mountPath: /config
-#     #     readOnly: true
-#     #     volumeSpec:
-#     #       configMap:
-#     #         name: authelia-config
-#       # users:
-#       #   enabled: true
-#       #   type: secret
-#       #   name: authelia-files
-#       #   subPath: users.yaml
-#       #   mountPath: /config/users.yaml
-#       #   readOnly: false
