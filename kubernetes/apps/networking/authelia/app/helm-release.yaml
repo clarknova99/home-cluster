@@ -80,7 +80,8 @@ spec:
     secret:
       jwt:
         value: ${SECRET_AUTHELIA_JWT}
-    persistentVolume:
-      enabled: true
-      existingClaim: authelia-config
+    persistence:
+      data:
+        enabled: true
+        existingClaim: nfs-data-pvc
   interval: 10m0s
