@@ -2,25 +2,22 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: dashboard-external
-  namespace: authelia
+  name: authelia
+  namespace: networking
 spec:
   entryPoints:
     - https
   routes:
     - kind: Rule
-      match: Host(`auth.${DOMAIN_EXTERNAL}`)
+      match: Host(`auth.${SECRET_DOMAIN}`)
       services:
         - kind: Service
-          name: authelia-external
-          namespace: authelia
+          name: authelia
+          namespace: networking
           port: 80
       middlewares:
-        - name: security
-          namespace: traefik
         - name: headers
-          namespace: authelia
-        - name: error-pages
-          namespace: traefik-errors
+          namespace: networking
+
   tls:
     secretName: auth.${DOMAIN_EXTERNAL}
