@@ -33,10 +33,7 @@ spec:
         ports:
           http:
             port: 80
-    persistence:
-      data:
-        enabled: true
-        existingClaim: nfs-data-pvc
+
   #   volumeMounts:
   #     - mountPath: /nfs-test
   #       name: testing

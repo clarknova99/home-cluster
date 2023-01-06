@@ -25,6 +25,10 @@ spec:
     adminUser:
       create: true
       username: admin
+    persistence:
+      data:
+        enabled: true
+        existingClaim: nfs-data-pvc
     # ingress:
     #   enabled: true
     #   className: traefik
