@@ -98,24 +98,40 @@ spec:
         value: ${SECRET_AUTHELIA_JWT}
 
     # persistence:
-    #   enabled: true
-    #   storageClass: local-path
+    #   config:
+    #     enabled: true
+    #     existingClaim: authelia-config
+    #   media:
+    #     enabled: true
+    #     type: custom
+    #     volumeSpec:
+    #       nfs:
+    #         server: "192.168.1.5"
+    #         path: /volume1/network-storage
+    #     mountPath: /media
+    #   incomplete:
+    #     enabled: true
+    #     type: emptyDir
 
-    persistence:
-      config:
-        enabled: true
-        type: configMap
-        name: authelia
-        subPath: configuration.yaml
-        mountPath: /config/configuration.yml
-        readOnly: false
-      notifications:
-        enabled: true
-        type: configMap
-        name: authelia
-        subPath: notifications.txt
-        mountPath: /config/notifications.txt
-        readOnly: false
+    persistentVolume:
+      enabled: true
+      existingClaim: authelia-config
+
+    # persistence:
+    #   config:
+    #     enabled: true
+    #     type: configMap
+    #     name: authelia
+    #     subPath: configuration.yaml
+    #     mountPath: /config/configuration.yml
+    #     readOnly: false
+    #   notifications:
+    #     enabled: true
+    #     type: configMap
+    #     name: authelia
+    #     subPath: notifications.txt
+    #     mountPath: /config/notifications.txt
+    #     readOnly: false
   interval: 10m0s
 #     # persistence:
 #     #   config:
