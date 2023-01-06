@@ -37,9 +37,9 @@ spec:
       fsGroup: 568
       fsGroupChangePolicy: "OnRootMismatch"
     persistence:
-      data:
-        enabled: true
-        existingClaim: nfs-data-pvc
+      # data:
+      #   enabled: true
+      #   existingClaim: nfs-data-pvc
       config:
         enabled: true
         type: configMap
