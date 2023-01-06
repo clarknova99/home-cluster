@@ -14,7 +14,8 @@
       "https://json.schemastore.org/yamllint.json": [
         "file:///Users/mfeldbly/code/home-cluster/kubernetes/flux/config/traefik.yaml",
         "file:///Users/mfeldbly/code/home-cluster/kubernetes/flux/repositories/helm/traefik.yaml",
-        "file:///Users/mfeldbly/code/home-cluster/kubernetes/apps/networking/traefik/app/ingress-routes.yaml"
+        "file:///Users/mfeldbly/code/home-cluster/kubernetes/apps/networking/traefik/app/ingress-routes.yaml",
+        "file:///Users/mfeldbly/code/home-cluster/kubernetes/apps/kube-system/nfs-subdir-external-provisioner/app/deployment.yaml"
       ]
     },
     "editor.bracketPairColorization.enabled": true,
