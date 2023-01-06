@@ -19,69 +19,45 @@ spec:
     image:
       registry: ghcr.io
       repository: authelia/authelia
-      tag: '4.37'
-    domain: ${SECRET_DOMAIN}
-    pod:
-      kind: Deployment
-      env:
-        - name: TZ
-          value: ${TIMEZONE}
-    configMap:
-      log:
-        level: info
-      telemetry:
-        metrics:
-          enabled: true
-          serviceMonitor:
+      tag: '4.37.5'
+    envFrom:
+      - secretRef:
+        name: authelia-secret
+    service:
+      main:
+        ports:
+          http:
+            port: &port 8888
+          metrics:
             enabled: true
-      default_redirection_url: https://auth.${SECRET_DOMAIN}
-      theme: dark
-      webauthn:
-        display_name: auth-external@infrastructure
-      authentication_backend:
-        password_reset:
-          disable: true
-        ldap:
-          enabled: false
-        file:
-          enabled: true
-          path: /users.yaml
-          search:
-            email: true
-          password:
-            algorithm: argon2
-      access_control:
-        default_policy: deny
-        rules:
-          # Rules applied to everyone
-          - domain: auth.${SECRET_DOMAIN}
-            policy: bypass
-          - domain: "*.${SECRET_DOMAIN}"
-            policy: one_factor
-          - domain: "${SECRET_DOMAIN}"
-            policy: one_factor
-      session:
-        name: authelia_session
-        # This secret can also be set using the env variables AUTHELIA_SESSION_SECRET_FILE
-        # Used a different secret, but the same site as jwt_secret above.
-        # secret: SECRET_GOES_HERE # use docker secret file instead AUTHELIA_SESSION_SECRET_FILE
-        expiration: 3600 # 1 hour
-        inactivity: 300 # 5 minutes
-        domain: ${SECRET_DOMAIN} # Should match whatever your root protected domain is
-      storage:
-        local:
-          enabled: true
-          path: /db.sqlite3
-        postgres:
-          enabled: false
-      notifier:
-        filesystem:
-          filename: /notifications.txt
-    secret:
-      jwt:
-        value: ${SECRET_AUTHELIA_JWT}
+            port: 8080
+    podSecurityContext:
+      runAsUser: 568
+      runAsGroup: 568
+      fsGroup: 568
+      fsGroupChangePolicy: "OnRootMismatch"
     persistence:
       data:
         enabled: true
         existingClaim: nfs-data-pvc
+      config:
+        enabled: true
+        type: configMap
+        name: authelia-configmap
+        subPath: configuration.yml
+        mountPath: /config/configuration.yml
+        readOnly: false
+    topologySpreadConstraints:
+      - maxSkew: 1
+        topologyKey: kubernetes.io/hostname
+        whenUnsatisfiable: DoNotSchedule
+        labelSelector:
+          matchLabels:
+            app.kubernetes.io/name: *app
+    resources:
+      requests:
+        cpu: 5m
+        memory: 10Mi
+      limits:
+        memory: 100Mi
   interval: 10m0s
