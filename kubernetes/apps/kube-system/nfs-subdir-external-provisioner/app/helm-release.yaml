@@ -15,15 +15,13 @@ spec:
         name: nfs-subdir-external-provisioner
         namespace: flux-system
   interval: 15m
-  maxHistory: 2
-  timeout: 20m
   install:
+    createNamespace: true
     remediation:
-      retries: 300
+      retries: 5
   upgrade:
     remediation:
-      retries: 300
-  releaseName: nfs-subdir-external-provisioner
+      retries: 5
   values:
     image:
       repository: k8s.gcr.io/sig-storage/nfs-subdir-external-provisioner
@@ -32,9 +30,14 @@ spec:
     nfs:
       server: "${NFS_SERVER_ADDR}"
       path: "${NFS_SERVER_PATH}"
-      mountOptions:
-      volumeName: nfs-subdir-external-provisioner-root
-      # Reclaim policy for the main nfs volume
-      reclaimPolicy: Retain
     storageClass:
-      pathPattern: "${.PVC.namespace}/${.PVC.annotations.nfs.io/storage-path}"
+      create: true
+      defaultClass: true
+      allowVolumeExpansion: true
+      accessModes: ReadWriteMany
+    #   mountOptions:
+    #   volumeName: nfs-subdir-external-provisioner-root
+    #   # Reclaim policy for the main nfs volume
+    #   reclaimPolicy: Retain
+    # storageClass:
+    #   pathPattern: "${.PVC.namespace}/${.PVC.annotations.nfs.io/storage-path}"
