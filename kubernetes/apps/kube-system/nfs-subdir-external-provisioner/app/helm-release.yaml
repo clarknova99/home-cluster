@@ -33,11 +33,20 @@ spec:
       name: nfs-provision
       defaultClass: true
       pathPattern: "${.PVC.namespace}-${.PVC.name}"
-      #allowVolumeExpansion: true
-      #accessModes: ReadWriteMany
-    #   mountOptions:
-    #   volumeName: nfs-subdir-external-provisioner-root
-    #   # Reclaim policy for the main nfs volume
-    #   reclaimPolicy: Retain
-    # storageClass:
-    #   pathPattern: "${.PVC.namespace}/${.PVC.annotations.nfs.io/storage-path}"
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: nfs-provisioner
+  labels:
+    app.kubernetes.io/name: nfs-provisioner
+    kustomize.toolkit.fluxcd.io/substitute: disabled
+provisioner: nfs-provisioner
+reclaimPolicy: retain
+parameters:
+  pathPattern: "${.PVC.namespace}/${.PVC.annotations.nfs.io/storage-path}"
+mountOptions:
+  - nfsvers=4
+  - nolock
+  - soft
+  - rw
