@@ -7,7 +7,12 @@ resources:
   - ingress-route.yaml
   - helm-release.yaml
   - pvc.yaml
-
+configMapGenerator:
+  - name: authelia-configmap
+    files:
+      - ./config/configuration.yml
+generatorOptions:
+  disableNameSuffixHash: true
 # configMapGenerator:
 #   - name: authelia
 #     files:
