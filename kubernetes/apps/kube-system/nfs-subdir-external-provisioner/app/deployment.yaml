@@ -20,7 +20,7 @@ spec:
           image: k8s.gcr.io/sig-storage/nfs-subdir-external-provisioner:v4.0.2
           imagePullPolicy: IfNotPresent
           volumeMounts:
-            - name: nfs-subdir-external-provisioner-root
+            - name: nfs-root
               mountPath: /networkstorage
           env:
             - name: PROVISIONER_NAME
@@ -33,7 +33,7 @@ spec:
               value: "false"
       serviceAccountName: nfs-provisioner
       volumes:
-        - name: nfs-subdir-external-provisioner-root
+        - name: nfs-root
           nfs:
             server: "${NFS_SERVER_ADDR}"
             path: "${NFS_SERVER_PATH}"
