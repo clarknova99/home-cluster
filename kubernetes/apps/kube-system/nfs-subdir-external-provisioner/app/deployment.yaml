@@ -6,7 +6,7 @@ metadata:
   labels: &labels
     app.kubernetes.io/name: *name
 spec:
-  replicas: 2
+  replicas: 1
   strategy:
     type: Recreate
   selector:
@@ -20,7 +20,7 @@ spec:
           image: k8s.gcr.io/sig-storage/nfs-subdir-external-provisioner:v4.0.2
           imagePullPolicy: IfNotPresent
           volumeMounts:
-            - name: nfs-root
+            - name: nfs-rootnfs-provisioner-root
               mountPath: /networkstorage
           env:
             - name: PROVISIONER_NAME
@@ -33,7 +33,7 @@ spec:
               value: "false"
       serviceAccountName: nfs-provisioner
       volumes:
-        - name: nfs-root
+        - name: nfs-provisioner-root
           nfs:
             server: "${NFS_SERVER_ADDR}"
             path: "${NFS_SERVER_PATH}"

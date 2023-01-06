@@ -33,7 +33,7 @@ spec:
       server: "${NFS_SERVER_ADDR}"
       path: "${NFS_SERVER_PATH}"
       mountOptions:
-      volumeName: nfs-root
+      volumeName: nfs-subdir-external-provisioner-root
       # Reclaim policy for the main nfs volume
       reclaimPolicy: Retain
     storageClass:
