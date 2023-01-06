@@ -16,6 +16,8 @@ spec:
   install:
     createNamespace: true
   values:
+    controller:
+      replicas: 1
     image:
       registry: ghcr.io
       repository: authelia/authelia
