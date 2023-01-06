@@ -73,16 +73,6 @@ access_control:
     - domain: "${SECRET_DOMAIN}"
       policy: one_factor
 
-
-      #    - domain: radarr.example.com
-#      policy: bypass
-#      subject: "group:admins"
-#      resources:
-#      - "^/api/.*$"
-#    - domain: "*.example.com"
-#      policy: one_factor
-
-
 session:
   name: authelia_session
   # This secret can also be set using the env variables AUTHELIA_SESSION_SECRET_FILE
