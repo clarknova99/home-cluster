@@ -57,13 +57,13 @@ spec:
           disable: true
         ldap:
           enabled: false
-        # file:
-        #   enabled: true
-        #   path: /config/users.yaml
-        #   search:
-        #     email: true
-        #   password:
-        #     algorithm: argon2
+        file:
+          enabled: true
+          path: /config/users.yaml
+          search:
+            email: true
+          password:
+            algorithm: argon2
 
       access_control:
         default_policy: deny
