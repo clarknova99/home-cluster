@@ -27,8 +27,8 @@ spec:
   values:
     replicaCount: 1
     nfs:
-      server: "${NFS_SERVER_ADDR}"
-      path: "${NFS_SERVER_PATH}"
+      server: "192.168.1.2"
+      path: "/network-storage"
     storageClass:
       create: true
       defaultClass: true
