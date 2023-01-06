@@ -28,18 +28,18 @@ spec:
       env:
         - name: TZ
           value: ${TIMEZONE}
-      extraVolumeMounts:
-        - name: users
-          mountPath: /users.yaml
-          subPath: users.yaml
-          readOnly: true
-      extraVolumes:
-        - name: users
-          configMap:
-            name: authelia-users
-            items:
-              - key: users.yaml
-                path: users.yaml
+      # extraVolumeMounts:
+      #   - name: users
+      #     mountPath: /config/users.yaml
+      #     subPath: users.yaml
+      #     readOnly: true
+      # extraVolumes:
+      #   - name: users
+      #     configMap:
+      #       name: authelia-users
+      #       items:
+      #         - key: users.yaml
+      #           path: users.yaml
     configMap:
       log:
         level: info
@@ -57,13 +57,13 @@ spec:
           disable: true
         ldap:
           enabled: false
-        file:
-          enabled: true
-          path: /config/users.yaml
-          search:
-            email: true
-          password:
-            algorithm: argon2
+        # file:
+        #   enabled: true
+        #   path: /config/users.yaml
+        #   search:
+        #     email: true
+        #   password:
+        #     algorithm: argon2
 
       access_control:
         default_policy: deny
@@ -97,11 +97,44 @@ spec:
       jwt:
         value: ${SECRET_AUTHELIA_JWT}
 
+    # persistence:
+    #   enabled: true
+    #   storageClass: local-path
+
     persistence:
-      enabled: true
-      storageClass: local-path
+      config:
+        enabled: true
+        type: configMap
+        name: authelia
+        subPath: configuration.yaml
+        mountPath: /config/configuration.yml
+        readOnly: false
+      notifications:
+        enabled: true
+        type: configMap
+        name: authelia
+        subPath: notifications.txt
+        mountPath: /config/notifications.txt
+        readOnly: false
   interval: 10m0s
-# ---
+#     # persistence:
+#     #   config:
+#     #     enabled: true
+#     #     type: custom
+#     #     mountPath: /config
+#     #     readOnly: true
+#     #     volumeSpec:
+#     #       configMap:
+#     #         name: authelia-config
+#       # users:
+#       #   enabled: true
+#       #   type: secret
+#       #   name: authelia-files
+#       #   subPath: users.yaml
+#       #   mountPath: /config/users.yaml
+#       #   readOnly: false
+
+
 # apiVersion: helm.toolkit.fluxcd.io/v2beta1
 # kind: HelmRelease
 # metadata:
