@@ -30,7 +30,7 @@ spec:
       tag: v4.0.2
       pullPolicy: IfNotPresent
     nfs:
-      server: "${SECRET_NFS_SERVER}"
+      server: "${NFS_SERVER_ADDR}"
       path: "${NFS_SERVER_PATH}"
       mountOptions:
       volumeName: nfs-root
