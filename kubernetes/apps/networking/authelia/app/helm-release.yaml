@@ -53,7 +53,7 @@ spec:
         whenUnsatisfiable: DoNotSchedule
         labelSelector:
           matchLabels:
-            app.kubernetes.io/name: *app
+            app.kubernetes.io/name: authelia
     resources:
       requests:
         cpu: 5m
