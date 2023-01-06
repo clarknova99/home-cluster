@@ -31,7 +31,7 @@ spec:
       pullPolicy: IfNotPresent
     nfs:
       server: "${SECRET_NFS_SERVER}"
-      path: /volume2/K3S
+      path: "${NFS_SERVER_PATH}"
       mountOptions:
       volumeName: nfs-subdir-external-provisioner-root
       # Reclaim policy for the main nfs volume

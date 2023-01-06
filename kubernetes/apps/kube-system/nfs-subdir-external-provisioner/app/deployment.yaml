@@ -21,7 +21,7 @@ spec:
           imagePullPolicy: IfNotPresent
           volumeMounts:
             - name: nfs-provisioner-root
-              mountPath: /persistentvolumes
+              mountPath: /networkstorage
           env:
             - name: PROVISIONER_NAME
               value: nfs-provisioner
