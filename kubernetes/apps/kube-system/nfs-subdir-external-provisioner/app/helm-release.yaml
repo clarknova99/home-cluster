@@ -28,7 +28,7 @@ spec:
     replicaCount: 1
     nfs:
       server: "192.168.1.2"
-      path: "/network-storage"
+      path: "/volume1/network-storage"
     storageClass:
       create: true
       defaultClass: true
