@@ -6,7 +6,7 @@ resources:
   - certificate.yaml
   - ingress-route.yaml
   - helm-release.yaml
-  - pvc.yaml
+  #- pvc.yaml
 configMapGenerator:
   - name: authelia-configmap
     files:
