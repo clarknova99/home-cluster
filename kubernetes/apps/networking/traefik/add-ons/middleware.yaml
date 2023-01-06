@@ -156,11 +156,14 @@ metadata:
   namespace: networking
 spec:
   forwardAuth:
-    address: "http://authelia:9091/api/verify?rd=https://auth.${SECRET_DOMAIN}"
+    #address: "http://authelia:9091/api/verify?rd=https://auth.${SECRET_DOMAIN}"
+    address: http://authelia-external.authelia.svc.cluster.local/api/verify?rd=https://auth.${SECRET_DOMAIN}
     trustForwardHeader: true
     authResponseHeaders:
-      - "Remote-User"
-      - "Remote-Groups"
+      - Remote-User
+      - Remote-Groups
+      - Remote-Name
+      - Remote-Email
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware

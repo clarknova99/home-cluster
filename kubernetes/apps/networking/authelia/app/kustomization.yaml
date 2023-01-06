@@ -5,9 +5,9 @@ namespace: networking
 resources:
   - authelia-auth.yaml
   - helm-release.yaml
-configMapGenerator:
-  - name: authelia
-    files:
-      - config/configuration.yaml
-generatorOptions:
-  disableNameSuffixHash: true
+# configMapGenerator:
+#   - name: authelia
+#     files:
+#       - config/configuration.yaml
+# generatorOptions:
+#   disableNameSuffixHash: true
