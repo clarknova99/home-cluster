@@ -23,18 +23,16 @@ spec:
     remediation:
       retries: 5
   values:
-    image:
-      repository: k8s.gcr.io/sig-storage/nfs-subdir-external-provisioner
-      tag: v4.0.2
-      pullPolicy: IfNotPresent
+    replicaCount: 1
     nfs:
       server: "${NFS_SERVER_ADDR}"
       path: "${NFS_SERVER_PATH}"
     storageClass:
       create: true
       defaultClass: true
-      allowVolumeExpansion: true
-      accessModes: ReadWriteMany
+      pathPattern: "${.PVC.namespace}-${.PVC.name}"
+      #allowVolumeExpansion: true
+      #accessModes: ReadWriteMany
     #   mountOptions:
     #   volumeName: nfs-subdir-external-provisioner-root
     #   # Reclaim policy for the main nfs volume
