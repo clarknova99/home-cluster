@@ -59,7 +59,7 @@ spec:
           enabled: false
         file:
           enabled: true
-          path: /users.yaml
+          path: /config/users.yaml
           search:
             email: true
           password:
