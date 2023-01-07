@@ -14,8 +14,8 @@ spec:
       services:
         - name: filebrowser
           port: 80
-      middlewares:
-        - name: traefik-middleware-chains-default
-          namespace: networking
+      # middlewares:
+      #   - name: traefik-middleware-chains-default
+      #     namespace: networking
   tls:
     secretName: "filebrowser-${SECRET_DOMAIN/./-}-tls"
