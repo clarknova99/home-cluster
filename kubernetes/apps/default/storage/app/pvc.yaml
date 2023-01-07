@@ -1,50 +1,36 @@
-# ---
-# apiVersion: v1
-# kind: PersistentVolume
-# metadata:
-#   name: appdata
-#   #namespace: default
-# spec:
-#   storageClassName: data
-#   capacity:
-#     storage: 1Mi
-#   accessModes:
-#     - ReadWriteMany
-#   persistentVolumeReclaimPolicy: Retain
-#   nfs:
-#     server: 192.168.1.2
-#     path: "/volume1/network-storage"
-#   mountOptions:
-#     - nfsvers=4.2
-#     - tcp
-#     - intr
-#     - hard
-#     - noatime
-#     - nodiratime
-# ---
-# apiVersion: v1
-# kind: PersistentVolumeClaim
-# metadata:
-#   name: appdata-pvc
-#   namespace: default
-# spec:
-#   accessModes:
-#     - ReadWriteMany
-#   storageClassName: ""
-#   resources:
-#     requests:
-#       storage: 1Mi
 ---
-kind: PersistentVolumeClaim
 apiVersion: v1
+kind: PersistentVolume
 metadata:
-  name: test-claim
-  # annotations:
-  #   nfs.io/storage-path: "test" # not required, depending on whether this annotation was shown in the storage class description
+  name: appdata
+  #namespace: default
 spec:
-  storageClassName: nfs-provisioner
+  storageClassName: data
+  capacity:
+    storage: 1Mi
   accessModes:
     - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  nfs:
+    server: 192.168.1.2
+    path: "/volume1/network-storage"
+  mountOptions:
+    - nfsvers=4.2
+    - tcp
+    - intr
+    - hard
+    - noatime
+    - nodiratime
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: appdata-pvc
+  namespace: default
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: ""
   resources:
     requests:
       storage: 1Mi
