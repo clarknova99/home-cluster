@@ -20,10 +20,10 @@ spec:
       registry: ghcr.io
       repository: authelia/authelia
       tag: '4.37.5'
-    command:
-      - sh
-      - -c
-      - authelia --config /data/authelia/config/configuration.yaml
+    # command:
+    #   - sh
+    #   - -c
+    #   - authelia --config /data/authelia/config/configuration.yaml
     service:
       main:
         ports:
