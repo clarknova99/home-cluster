@@ -60,9 +60,9 @@ spec:
       data:
         enabled: true
         existingClaim: nfs-data-pvc
-      data2:
-        enabled: true
-        existingClaim: pvc-filebrowser
+      # data2:
+      #   enabled: true
+      #   existingClaim: pvc-filebrowser
 
     # ingress:
     #   main:
