@@ -1,11 +1,10 @@
 ---
+# yaml-language-server: $schema=https://kubernetes-schemas.devbu.io/helmrelease_v2beta1.json
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: cluster-apps-csi-driver-nfs
+  name: csi-driver-nfs
   namespace: kube-system
-  labels:
-    kustomize.toolkit.fluxcd.io/substitute: "disabled"
 spec:
   interval: 15m
   chart:
@@ -16,14 +15,18 @@ spec:
         kind: HelmRepository
         name: csi-driver-nfs
         namespace: flux-system
+  maxHistory: 3
   install:
     createNamespace: true
     remediation:
-      retries: 5
+      retries: 3
   upgrade:
+    cleanupOnFail: true
     remediation:
-      retries: 5
+      retries: 3
+  uninstall:
+    keepHistory: false
   values:
     kubeletDir: /var/lib/kubelet
     controller:
-      replicas: 1
+      replicas: 3
