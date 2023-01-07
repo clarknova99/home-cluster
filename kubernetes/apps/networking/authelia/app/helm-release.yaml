@@ -20,40 +20,26 @@ spec:
       registry: ghcr.io
       repository: authelia/authelia
       tag: '4.37.5'
-    envFrom:
-      - secretRef:
-        name: authelia-secret
+    command:
+      - sh
+      - -c
+      - authelia --config /data/authelia/config/configuration.yaml
     service:
       main:
         ports:
           http:
-            port: &port 9091
-          metrics:
-            enabled: true
-            port: 8080
-    podSecurityContext:
-      runAsUser: 568
-      runAsGroup: 568
-      fsGroup: 568
-      fsGroupChangePolicy: "OnRootMismatch"
+            port: 9091
     persistence:
       data:
         enabled: true
         existingClaim: pvc-default
-      # config:
-      #   enabled: true
-      #   type: configMap
-      #   name: authelia-configmap
-      #   subPath: configuration.yml
-      #   mountPath: /config/configuration.yaml
-      #   readOnly: false
-    topologySpreadConstraints:
-      - maxSkew: 1
-        topologyKey: kubernetes.io/hostname
-        whenUnsatisfiable: DoNotSchedule
-        labelSelector:
-          matchLabels:
-            app.kubernetes.io/name: authelia
+      config:
+        enabled: true
+        type: configMap
+        name: authelia-configmap
+        subPath: configuration.yml
+        mountPath: /config/configuration.yaml
+        readOnly: false
     resources:
       requests:
         cpu: 5m
