@@ -48,7 +48,7 @@ spec:
     persistence:
       data:
         enabled: true
-        existingClaim: pvc-traefik
+        existingClaim: nfs-data-pvc
     ingressClass:
       enabled: true
       isDefaultClass: true
