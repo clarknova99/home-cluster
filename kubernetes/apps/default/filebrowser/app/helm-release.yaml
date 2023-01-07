@@ -53,9 +53,6 @@ spec:
       readiness: *probes
       startup:
         enabled: false
-    # podSecurityContext:
-    #   runAsUser: "${SECURITY_CONTEXT_RUN_AS_USER}"
-    #   runAsGroup: "${SECURITY_CONTEXT_RUN_AS_GROUP}"
     persistence:
       data:
         enabled: true
