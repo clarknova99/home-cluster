@@ -29,7 +29,7 @@ spec:
       tag: latest
     env:
       TZ: "${TIMEZONE}"
-      FB_DATABASE: "/filebrowser/filebrowser.db"
+      # FB_DATABASE: "/filebrowser/filebrowser.db"
       FB_ROOT: "/"
       FB_LOG: "stdout"
       FB_NOAUTH: "true"
