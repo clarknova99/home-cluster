@@ -57,7 +57,7 @@ spec:
     #   runAsUser: "${SECURITY_CONTEXT_RUN_AS_USER}"
     #   runAsGroup: "${SECURITY_CONTEXT_RUN_AS_GROUP}"
     persistence:
-      data:
+      appdata-pvc:
         enabled: true
         existingClaim: appdata-pvc
         mountPath: /
