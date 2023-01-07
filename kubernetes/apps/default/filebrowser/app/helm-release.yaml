@@ -23,11 +23,6 @@ spec:
   upgrade:
     remediation:
       retries: 5
-  volumes:
-    - name: filebrowser-volume
-      persistentVolumeClaim:
-        claimName: pvc-filebrowser
-
   values:
     image:
       repository: docker.io/filebrowser/filebrowser
@@ -43,6 +38,10 @@ spec:
         ports:
           http:
             port: &port 80
+    volumes:
+      - name: filebrowser-volume
+        persistentVolumeClaim:
+          claimName: pvc-filebrowser
     probes:
       liveness: &probes
         enabled: true
@@ -65,6 +64,7 @@ spec:
       data:
         enabled: true
         existingClaim: nfs-data-pvc
+
     # ingress:
     #   main:
     #     enabled: true
