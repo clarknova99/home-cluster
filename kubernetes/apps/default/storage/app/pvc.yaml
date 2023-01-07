@@ -21,16 +21,16 @@ spec:
     - hard
     - noatime
     - nodiratime
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: nfs-data-pvc
-  namespace: default
-spec:
-  accessModes:
-    - ReadWriteMany
-  #storageClassName: data
-  resources:
-    requests:
-      storage: 1Mi
+# ---
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: nfs-data-pvc
+#   namespace: default
+# spec:
+#   accessModes:
+#     - ReadWriteMany
+#   #storageClassName: data
+#   resources:
+#     requests:
+#       storage: 1Mi
