@@ -6,4 +6,5 @@ resources:
   - ./kube-vip/ks.yaml
   - ./metrics-server/ks.yaml
   - ./reloader/ks.yaml
+  - ./csi-driver-nfs.yaml/ks.yaml
   #- ./nfs-subdir-external-provisioner/ks.yaml

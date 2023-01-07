@@ -19,3 +19,4 @@ resources:
   - ./traefik.yaml
   - ./k8s-at-home.yaml
   - ./kubernetes-dashboard.yaml
+  - ./csi-driver-nfs.yaml
