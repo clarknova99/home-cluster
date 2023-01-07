@@ -42,7 +42,7 @@ metadata:
   annotations:
     nfs.io/storage-path: "test" # not required, depending on whether this annotation was shown in the storage class description
 spec:
-  storageClassName: nfs-client
+  storageClassName: nfs-provisioner
   accessModes:
     - ReadWriteMany
   resources:
