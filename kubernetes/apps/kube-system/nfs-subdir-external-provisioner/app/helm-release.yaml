@@ -24,6 +24,9 @@ spec:
   upgrade:
     remediation:
       retries: 5
+      # change local-storage to non default
+      # kubectl patch storageclass local-path -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"false"}}}'
+      # kubectl patch storageclass nfs-client -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
   values:
     replicaCount: 1
     nfs:
