@@ -8,4 +8,4 @@ resources:
   - ./weave-gitops/ks.yaml
   - ./whoami/ks.yaml
   - ./kubernetes-dashboard/ks.yaml
- # - ./filebrowser/ks.yaml
+  - ./filebrowser/ks.yaml
