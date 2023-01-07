@@ -57,19 +57,3 @@ spec:
       data:
         enabled: true
         existingClaim: pvc-default
-    # ingress:
-    #   main:
-    #     enabled: true
-    #     ingressClassName: "nginx"
-    #     annotations:
-    #       auth.home.arpa/enabled: "true"
-    #       hajimari.io/enable: "true"
-    #       hajimari.io/icon: mdi:files
-    #     hosts:
-    #       - host: &host "files.${PUBLIC_DOMAIN}"
-    #         paths:
-    #           - path: /
-    #             pathType: Prefix
-    #     tls:
-    #       - hosts:
-    #           - *host
