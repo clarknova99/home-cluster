@@ -38,10 +38,6 @@ spec:
         ports:
           http:
             port: &port 80
-    volumes:
-      - name: filebrowser-volume
-        persistentVolumeClaim:
-          claimName: pvc-filebrowser
     probes:
       liveness: &probes
         enabled: true
@@ -64,6 +60,9 @@ spec:
       data:
         enabled: true
         existingClaim: nfs-data-pvc
+      data2:
+        enabled: true
+        existingClaim: pvc-filebrowser
 
     # ingress:
     #   main:
