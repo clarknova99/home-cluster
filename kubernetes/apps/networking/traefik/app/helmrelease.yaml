@@ -18,8 +18,6 @@ spec:
         namespace: flux-system
   interval: 5m
   dependsOn:
-    # - name: cert-manager
-    #   namespace: cert-manager
     - name: metallb
       namespace: networking
   install:
@@ -40,7 +38,7 @@ spec:
     #   replicaCount: 2
     deployment:
       enabled: true
-      replicas: 1
+      replicas: 2
     experimental:
       # http3:
       #   enabled: true
