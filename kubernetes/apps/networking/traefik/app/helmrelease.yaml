@@ -29,6 +29,7 @@ spec:
   upgrade:
     remediation:
       retries: 3
+
   # install:
   #   crds: Skip
   # upgrade:
