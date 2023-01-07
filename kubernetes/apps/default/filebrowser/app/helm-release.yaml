@@ -57,10 +57,9 @@ spec:
     #   runAsUser: "${SECURITY_CONTEXT_RUN_AS_USER}"
     #   runAsGroup: "${SECURITY_CONTEXT_RUN_AS_GROUP}"
     persistence:
-      appdata-pvc:
+      data:
         enabled: true
-        existingClaim: appdata-pvc
-        mountPath: /
+        existingClaim: nfs-data-pvc
     # ingress:
     #   main:
     #     enabled: true
