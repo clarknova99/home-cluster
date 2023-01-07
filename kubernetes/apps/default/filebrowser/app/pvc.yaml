@@ -25,13 +25,13 @@ spec:
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
-volumeName: pv-filebrowser
 metadata:
   name: pvc-filebrowser
   namespace: default
 spec:
   accessModes:
     - ReadWriteMany
+  volumeName: pv-filebrowser
   storageClassName: ""
   resources:
     requests:
