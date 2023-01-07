@@ -4,6 +4,7 @@ kind: Kustomization
 namespace: networking
 resources:
   - ./helmrelease.yaml
+  - ./pvc.yaml
   # - ./middleware.yaml
   # - ./rbac.yaml
   #- tls-store
