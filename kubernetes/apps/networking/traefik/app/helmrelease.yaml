@@ -45,6 +45,10 @@ spec:
       #   enabled: true
       plugins:
         enabled: true
+    persistence:
+      data:
+        enabled: true
+        existingClaim: nfs-data-pvc
     ingressClass:
       enabled: true
       isDefaultClass: true
@@ -82,6 +86,7 @@ spec:
     logs:
       general:
         level: DEBUG
+      filePath: "/data/traefik/logs/traefik.log"
       access:
         enabled: true
         fields:
