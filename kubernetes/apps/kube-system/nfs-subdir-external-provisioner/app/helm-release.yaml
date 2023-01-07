@@ -30,8 +30,8 @@ spec:
   values:
     replicaCount: 1
     nfs:
-      server: "192.168.1.2"
-      path: "/volume1/network-storage"
+      server: "${NFS_SERVER_ADDR}"
+      path: "${NFS_SERVER_PATH}"
     storageClass:
       defaultClass: false
       # name: nfs-provision
