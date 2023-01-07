@@ -9,4 +9,4 @@ resources:
   - ./whoami/ks.yaml
   - ./kubernetes-dashboard/ks.yaml
   - ./storage/ks.yaml
- #- ./filebrowser/ks.yaml
+  - ./filebrowser/ks.yaml

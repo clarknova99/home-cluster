@@ -59,7 +59,7 @@ spec:
     persistence:
       data:
         enabled: true
-        existingClaim: nfs-data-pvc
+        existingClaim: appdata-pvc
         mountPath: /
     # ingress:
     #   main:
