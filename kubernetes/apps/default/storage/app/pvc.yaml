@@ -5,7 +5,7 @@ metadata:
   name: nfs-data
   namespace: default
 spec:
-  storageClassName: data
+  #storageClassName: data
   capacity:
     storage: 1Mi
   accessModes:
@@ -30,7 +30,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteMany
-  storageClassName: data
+  #storageClassName: data
   resources:
     requests:
       storage: 1Mi
