@@ -23,12 +23,12 @@ spec:
   upgrade:
     remediation:
       retries: 5
-    spec:
-      volumes:
-        - name: filebrowser-volume
-          persistentVolumeClaim:
-            claimName: pvc-filebrowser
+
   values:
+    volumes:
+      - name: filebrowser-volume
+        persistentVolumeClaim:
+          claimName: pvc-filebrowser
     image:
       repository: docker.io/filebrowser/filebrowser
       tag: latest
