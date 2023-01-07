@@ -37,16 +37,17 @@ spec:
       fsGroup: 568
       fsGroupChangePolicy: "OnRootMismatch"
     persistence:
-      # data:
-      #   enabled: true
-      #   existingClaim: nfs-data-pvc
-      config:
+      data:
         enabled: true
-        type: configMap
-        name: authelia-configmap
-        subPath: configuration.yml
-        mountPath: /config/configuration.yaml
-        readOnly: false
+        existingClaim: nfs-data-pvc
+        mountPath: /authelia/config
+      # config:
+      #   enabled: true
+      #   type: configMap
+      #   name: authelia-configmap
+      #   subPath: configuration.yml
+      #   mountPath: /config/configuration.yaml
+      #   readOnly: false
     topologySpreadConstraints:
       - maxSkew: 1
         topologyKey: kubernetes.io/hostname
