@@ -2,6 +2,16 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
+  name: traefik-custom-headers
+  namespace: networking
+spec:
+  headers:
+    customRequestHeaders:
+      X-Forwarded-Proto: https
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
   name: traefik-basic-auth
   namespace: networking
 spec:
@@ -121,6 +131,7 @@ spec:
     hostsProxyHeaders:
       - "X-Forwarded-Host"
       - "X-Forwarded-For"
+      - "X-Forwarded-Proto"
       - "X-GEO-City"
       - "Cf-Connecting-Ip"
       - "Cf-Ipcountry"
