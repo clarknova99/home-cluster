@@ -27,7 +27,7 @@ spec:
       main:
         ports:
           http:
-            port: &port 8888
+            port: &port 9091
           metrics:
             enabled: true
             port: 8080
@@ -39,8 +39,7 @@ spec:
     persistence:
       data:
         enabled: true
-        existingClaim: nfs-data-pvc
-        mountPath: /authelia/config
+        existingClaim: pvc-default
       # config:
       #   enabled: true
       #   type: configMap
