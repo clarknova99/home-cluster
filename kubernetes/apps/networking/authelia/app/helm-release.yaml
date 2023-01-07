@@ -13,9 +13,22 @@ spec:
         kind: HelmRepository
         name: authelia
         namespace: flux-system
+      interval: 15m
+  install:
+    createNamespace: true
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
   values:
+    global:
+      nameOverride: authelia
     controller:
       replicas: 1
+      strategy: RollingUpdate
+      annotations:
+        reloader.stakater.com/auto: "true"
     image:
       registry: ghcr.io
       repository: authelia/authelia
@@ -35,11 +48,12 @@ spec:
         existingClaim: pvc-default
       config:
         enabled: true
-        type: configMap
-        name: authelia-configmap
-        # subPath: configuration.yml
-        # mountPath: /config/configuration.yaml
-        readOnly: false
+        type: custom
+        mountPath: /config
+        readOnly: true
+        volumeSpec:
+          configMap:
+            name: authelia-config
     resources:
       requests:
         cpu: 5m
