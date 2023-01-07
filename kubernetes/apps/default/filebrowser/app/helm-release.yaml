@@ -29,8 +29,8 @@ spec:
       tag: latest
     env:
       TZ: "${TIMEZONE}"
-      # FB_DATABASE: "/filebrowser/filebrowser.db"
-      #FB_ROOT: "/"
+      FB_DATABASE: "/data/filebrowser/filebrowser.db"
+      FB_ROOT: "/data"
       FB_LOG: "stdout"
       FB_NOAUTH: "true"
     service:
@@ -57,12 +57,12 @@ spec:
     #   runAsUser: "${SECURITY_CONTEXT_RUN_AS_USER}"
     #   runAsGroup: "${SECURITY_CONTEXT_RUN_AS_GROUP}"
     persistence:
-      # data:
-      #   enabled: true
-      #   existingClaim: nfs-data-pvc
-      data2:
+      data:
         enabled: true
-        existingClaim: pvc-filebrowser
+        existingClaim: nfs-data-pvc
+      # filebrowser:
+      #   enabled: true
+      #   existingClaim: pvc-filebrowser
 
     # ingress:
     #   main:
