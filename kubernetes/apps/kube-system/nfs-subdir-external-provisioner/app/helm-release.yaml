@@ -33,7 +33,7 @@ spec:
       server: "${NFS_SERVER_ADDR}"
       path: "${NFS_SERVER_PATH}"
     storageClass:
-      defaultClass: true
+      defaultClass: false
       # name: nfs-provision
 #       pathPattern: "${.PVC.namespace}-${.PVC.name}"
 # ---
