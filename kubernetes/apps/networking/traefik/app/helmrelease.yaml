@@ -53,7 +53,7 @@ spec:
       dashboard:
         enabled: false
     persistence:
-      data:
+      storage:
         enabled: true
         existingClaim: pvc-networking
     service:
@@ -66,9 +66,6 @@ spec:
       traefik:
         port: 8080
         protocol: TCP
-        #expose: true
-      # web:
-      #   redirectTo: websecure
       web:
         port: 80
         protocol: TCP
@@ -112,12 +109,12 @@ spec:
       #- --metrics.prometheus=true
       #- --metrics.prometheus.entryPoint=metrics
       - --accessLog=true
-      - --accesslog.filepath=/data/traefik/logs/access.log
+      - --accesslog.filepath=/storage/traefik/logs/access.log
       - --accesslog.fields.defaultmode=keep
       - --accesslog.fields.headers.defaultmode=keep
       - --accesslog.fields.headers.names.X-Forwarded-User=keep
       - --log.level=DEBUG
-      - --log.filePath=/data/traefik/logs/traefik.log
+      - --log.filePath=/storage/traefik/logs/traefik.log
     additionalArguments:
       - --providers.kubernetescrd
       - "--providers.kubernetesingress.ingressendpoint.ip=${TRAEFIK_SERVICE_ADDR}"
