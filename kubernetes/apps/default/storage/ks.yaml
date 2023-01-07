@@ -16,4 +16,4 @@ spec:
   retryInterval: 1m
   timeout: 5m
   dependsOn:
-    - name: nfs-system-nfs-provisioner
+    - name: cluster-apps-nfs-subdir-external-provisioner
