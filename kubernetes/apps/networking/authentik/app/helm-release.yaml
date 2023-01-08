@@ -31,7 +31,7 @@ spec:
     recreate: true
     cleanupOnFail: true
   values:
-    replicas: 1
+    #replicas: 1
     worker:
       replicas: 1
     image:
@@ -39,6 +39,17 @@ spec:
       tag: 2022.9.0
     nodeSelector:
       worker: yes
+    deployment:
+      kind: Deployment
+      replicas: 1
+    service:
+      enabled: true
+      type: LoadBalancer
+      spec:
+        loadBalancerIP: "${AUTHENTIK_INGRESS_ADDR}"
+        externalTrafficPolicy: Cluster
+      annotations:
+        metallb.universe.tf/address-pool: "${BOOTSTRAP_METALLB_LB_RANGE}"
     # ingress:
     #   enabled: true
     #   ingressClassName: nginx
