@@ -38,7 +38,7 @@ spec:
     #   replicaCount: 2
     deployment:
       enabled: true
-      replicas: 3
+      replicas: 1
     experimental:
       # http3:
       #   enabled: true
