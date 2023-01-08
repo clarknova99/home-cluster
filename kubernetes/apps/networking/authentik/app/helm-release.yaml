@@ -49,7 +49,7 @@ spec:
         loadBalancerIP: "${AUTHENTIK_INGRESS_ADDR}"
         externalTrafficPolicy: Cluster
       annotations:
-        metallb.universe.tf/address-pool: "${BOOTSTRAP_METALLB_LB_RANGE}"
+        metallb.universe.tf/address-pool: "${METALLB_LB_RANGE}"
     # ingress:
     #   enabled: true
     #   ingressClassName: nginx
