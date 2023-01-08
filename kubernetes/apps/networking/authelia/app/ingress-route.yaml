@@ -14,7 +14,7 @@ spec:
         - kind: Service
           name: authelia
           namespace: networking
-          port: 80
+          port: 9091
       middlewares:
         - name: headers
           namespace: networking
