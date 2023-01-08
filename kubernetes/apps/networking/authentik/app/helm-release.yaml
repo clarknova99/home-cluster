@@ -42,14 +42,14 @@ spec:
     deployment:
       kind: Deployment
       replicas: 1
-    service:
-      enabled: true
-      type: LoadBalancer
-      spec:
-        loadBalancerIP: "${AUTHENTIK_INGRESS_ADDR}"
-        externalTrafficPolicy: Cluster
-      annotations:
-        metallb.universe.tf/address-pool: "${METALLB_LB_RANGE}"
+    # service:
+    #   enabled: true
+    #   type: LoadBalancer
+    #   spec:
+    #     loadBalancerIP: "${AUTHENTIK_INGRESS_ADDR}"
+    #     externalTrafficPolicy: Cluster
+    #   annotations:
+    #     metallb.universe.tf/address-pool: "${METALLB_LB_RANGE}"
     # ingress:
     #   enabled: true
     #   ingressClassName: nginx

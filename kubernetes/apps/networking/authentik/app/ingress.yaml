@@ -1,0 +1,35 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-production
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+  name: authentik
+  namespace: networking
+spec:
+  rules:
+    - host: "authentik.${SECRET_DOMAIN}"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: authentik
+                port:
+                  number: 80
+    - host: "*.${SECRET_DOMAIN}"
+      http:
+        paths:
+          - path: /outpost.goauthentik.io/
+            pathType: Prefix
+            backend:
+              service:
+                name: authentik
+                port:
+                  number: 80
+  tls:
+    - hosts:
+        - authentik.${SECRET_DOMAIN}
+      secretName: authentik-devdomain-tls-staging
