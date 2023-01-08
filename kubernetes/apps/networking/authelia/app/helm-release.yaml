@@ -55,7 +55,14 @@ spec:
     configMap:
       # Enable the configMap source for the Authelia config.
       # If this is false you need to provide a volumeMount via PV/PVC or other means that mounts to /config.
-      enabled: false
+      enabled: true
+
+      secret:
+        jwt:
+        key: ${SECRET_AUTHELIA_JWT}
+      default_redirection_url: auth.${SECRET_DOMAIN}
+
+    value: ""
     service:
       main:
         ports:
