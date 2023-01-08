@@ -1,0 +1,20 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: ldap
+  namespace: networking
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`ldap.${SECRET_DOMAIN}`)
+      services:
+        - kind: Service
+          name: ldap
+          namespace: networking
+          port: 17170
+
+  tls:
+    secretName: ldap.${DOMAIN_EXTERNAL}
