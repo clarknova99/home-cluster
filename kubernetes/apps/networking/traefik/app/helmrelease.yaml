@@ -94,6 +94,13 @@ spec:
     # rbac:
     #   enabled: true
     # serviceAccountName: traefik-ingress-controller
+      volumeMounts:
+        - name: pvc-networking
+          mountPath: /storage
+    volumes:
+      - name: pvc-networking
+        persistentVolumeClaim:
+          claimName: pvc-networking
     globalArguments:
       - --entryPoints.web.address=:80/tcp
       - --entryPoints.websecure.address=:443/tcp
@@ -141,6 +148,7 @@ spec:
       limits:
         cpu: 4000m
         memory: 256Mi
+
     # tlsStore:
     #   default:
     #     defaultCertificate:
