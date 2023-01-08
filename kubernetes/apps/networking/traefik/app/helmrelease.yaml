@@ -52,10 +52,10 @@ spec:
     ingressRoute:
       dashboard:
         enabled: false
-    persistence:
-      storage:
-        enabled: true
-        existingClaim: pvc-networking
+    # persistence:
+    #   storage:
+    #     enabled: true
+    #     existingClaim: pvc-
     service:
       enabled: true
       type: LoadBalancer
