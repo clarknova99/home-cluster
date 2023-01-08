@@ -56,7 +56,6 @@ spec:
       # Enable the configMap source for the Authelia config.
       # If this is false you need to provide a volumeMount via PV/PVC or other means that mounts to /config.
       enabled: true
-
       secret:
         jwt:
         key: ${SECRET_AUTHELIA_JWT}
@@ -72,8 +71,7 @@ spec:
       name: data
       enabled: true
       accessMode: ReadWriteMany
-      path: /data
-      subPath: /data/authelia/config
+      path: /config
       existingClaim: pvc-networking
     resources:
       requests:
