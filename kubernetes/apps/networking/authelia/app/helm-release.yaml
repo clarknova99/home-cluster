@@ -37,7 +37,10 @@ spec:
       - sh
       - -c
       - authelia --config /data/authelia/config/configuration.yaml
-    configMap.enabled: false
+    configMap:
+      # Enable the configMap source for the Authelia config.
+      # If this is false you need to provide a volumeMount via PV/PVC or other means that mounts to /config.
+      enabled: false
     service:
       main:
         ports:
