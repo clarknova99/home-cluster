@@ -7,7 +7,6 @@ metadata:
     hajimari.io/icon: video-input-antenna
 spec:
   entryPoints:
-    - web
     - websecure
   routes:
     - match: Host(`echo-server.${SECRET_DOMAIN}`)
