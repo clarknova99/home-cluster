@@ -56,9 +56,13 @@ spec:
       storage:
         enabled: true
         existingClaim: pvc-networking
-      volumeMounts:
+      # volumeMounts:
+      #   - name: pvc-networking
+      #     mountPath: /var/log/traefik
+      additionalVolumeMounts:
         - name: pvc-networking
           mountPath: /var/log/traefik
+
     service:
       enabled: true
       type: LoadBalancer
