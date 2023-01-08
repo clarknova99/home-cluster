@@ -52,10 +52,10 @@ spec:
     ingressRoute:
       dashboard:
         enabled: false
-    # persistence:
-    #   storage:
-    #     enabled: true
-    #     existingClaim: pvc-
+    persistence:
+      storage:
+        enabled: true
+        existingClaim: pvc-networking
     service:
       enabled: true
       type: LoadBalancer
@@ -141,7 +141,7 @@ spec:
       limits:
         cpu: 4000m
         memory: 256Mi
-    volumeMounts:
+    additionalVolumeMounts:
       - name: pvc-networking
         mountPath: /storage
   volumes:
