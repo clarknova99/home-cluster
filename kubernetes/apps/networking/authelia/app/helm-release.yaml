@@ -47,9 +47,9 @@ spec:
       - sh
       - -c
       - authelia --config /data/authelia/configuration.yaml
-    # volumeMounts:
-    #   - mountPath: "/config"
-    #     name: data
+    volumeMounts:
+      - mountPath: "/data"
+        name: data
     # env:
     #   X_AUTHELIA_CONFIG: /data/authelia/config/configuration.yaml
 
