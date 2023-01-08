@@ -55,10 +55,10 @@ spec:
     #       - authelia
     #     args:
     #       - '--config=/data/authelia/config/configuration.yaml'
-    # command:
-    #   - sh
-    #   - -c
-    #   - authelia --config /data/authelia/configuration.yaml
+    command:
+      - sh
+      - -c
+      - authelia --config /config/configuration.yaml
     # volumeMounts:
     #   - mountPath: "/data"
     #     name: data
