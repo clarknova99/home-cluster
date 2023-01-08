@@ -65,6 +65,11 @@ spec:
         accessMode: ReadWriteMany
         path: /data
         existingClaim: pvc-networking
+      config:
+        enabled: true
+        accessMode: ReadWriteMany
+        path: /data/authelia/configuration.yaml
+        existingClaim: pvc-networking
       # config:
       #   enabled: true
       #   existingClaim: pvc-networking
