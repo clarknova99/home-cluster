@@ -3,7 +3,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: lldap
-  namespace: default
+  namespace: networking
 spec:
   interval: 15m
   chart:
@@ -32,12 +32,12 @@ spec:
       tag: latest
     env:
       TZ: "${TIMEZONE}"
-      LLDAP_LDAP_BASE_DN: "dc=home,dc=arpa"
-      UID: "${SECURITY_CONTEXT_RUN_AS_USER}"
-      GID: "${SECURITY_CONTEXT_RUN_AS_GROUP}"
+      LLDAP_LDAP_BASE_DN: "{LLDAP_LDAP_BASE_DN}"
+      # UID: "${SECURITY_CONTEXT_RUN_AS_USER}"
+      # GID: "${SECURITY_CONTEXT_RUN_AS_GROUP}"
     envFrom:
       - secretRef:
-          name: *app
+          name: lldap
     service:
       main:
         ports:
@@ -46,32 +46,27 @@ spec:
           ldap:
             enabled: true
             port: 3890
-    ingress:
-      main:
-        enabled: true
-        ingressClassName: nginx
-        annotations:
-          hajimari.io/enable: "true"
-          hajimari.io/icon: folder-key-network-outline
-        hosts:
-          - host: &host "ldap.${PUBLIC_DOMAIN}"
-            paths:
-              - path: /
-                pathType: Prefix
-        tls:
-          - hosts:
-              - *host
+
+    # ingress:
+    #   main:
+    #     enabled: true
+    #     ingressClassName: nginx
+    #     annotations:
+    #       hajimari.io/enable: "true"
+    #       hajimari.io/icon: folder-key-network-outline
+    #     hosts:
+    #       - host: &host "ldap.${PUBLIC_DOMAIN}"
+    #         paths:
+    #           - path: /
+    #             pathType: Prefix
+    #     tls:
+    #       - hosts:
+    #           - *host
     persistence:
       data:
         enabled: true
-        existingClaim: appdata
+        existingClaim: pvc-networking
         mountPath: /data
         subPath: lldap
-    # resources:
-    #   requests:
-    #     cpu: 10m
-    #     memory: 100Mi
-    #   limits:
-    #     memory: 500Mi
     podAnnotations:
-      secret.reloader.stakater.com/reload: *app
+      secret.reloader.stakater.com/reload: lldap
