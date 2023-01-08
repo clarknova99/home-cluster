@@ -141,9 +141,9 @@ spec:
       limits:
         cpu: 4000m
         memory: 256Mi
-      volumeMounts:
-        - name: pvc-networking
-          mountPath: /storage
+    volumeMounts:
+      - name: pvc-networking
+        mountPath: /storage
     volumes:
       - name: pvc-networking
         persistentVolumeClaim:
