@@ -70,8 +70,8 @@ spec:
         from: "Authentik <${SECRET_AUTHENTIK_SMTP_USERNAME}>"
       secret_key: "${SECRET_AUTHENTIK_KEY}"
       log_level: debug
-      outposts:
-        docker_image_base: ghcr.io/goauthentik/%(type)s:%(version)s
+      # outposts:
+      #   docker_image_base: ghcr.io/goauthentik/%(type)s:%(version)s
       error_reporting:
         enabled: false
       postgresql:
