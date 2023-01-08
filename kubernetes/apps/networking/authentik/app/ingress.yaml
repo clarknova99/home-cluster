@@ -32,4 +32,4 @@ spec:
   tls:
     - hosts:
         - authentik.${SECRET_DOMAIN}
-      secretName: authentik-devdomain-tls-staging
+      secretName: authentik-${SECRET_DOMAIN}-tls
