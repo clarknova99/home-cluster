@@ -10,75 +10,102 @@ spec:
     spec:
       # renovate: registryUrl=https://charts.goauthentik.io/
       chart: authentik
-      version: 2022.12.1
+      version: 2022.9.0
       sourceRef:
         kind: HelmRepository
-        name: authentik-charts
+        name: authentik
         namespace: flux-system
       interval: 5m
   install:
-    createNamespace: true
+    timeout: 10m
     remediation:
       retries: 3
   upgrade:
+    timeout: 10m
     remediation:
       retries: 3
+      remediateLastFailure: true
+    cleanupOnFail: true
+  rollback:
+    timeout: 10m
+    recreate: true
+    cleanupOnFail: true
   values:
-    replicas: 2
-
-    # image:
-    #   tag: 2022.5.3
-
-    authentik:
-      secret_key: "${AUTHENTIK_KEY}"
-      # This sends anonymous usage-data, stack traces on errors and
-      # performance data to sentry.beryju.org, and is fully opt-in
-      error_reporting:
-        enabled: false
-      postgresql:
-        password: "${AUTHENTIK_DB_PASS}"
-
-      email:
-        host: smtp-relay.system.svc.cluster.local.
-        port: 2525
-        use_ssl: true
-        from: "Authentik <auth@${SECRET_DOMAIN}>"
-
+    replicas: 1
+    worker:
+      replicas: 1
+    image:
+      repository: ghcr.io/goauthentik/server
+      tag: 2022.9.0
+    nodeSelector:
+      worker: yes
     ingress:
       enabled: true
-      ingressClassName: "traefik"
+      ingressClassName: nginx
       annotations:
-        external-dns.alpha.kubernetes.io/target: "${SECRET_DOMAIN}"
         external-dns/is-public: "true"
-        traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-        # traefik.ingress.kubernetes.io/router.middlewares: "networking-rfc1918-ips@kubernetescrd"
-        hajimari.io/enable: "true"
-        hajimari.io/icon: "shield-lock"
-        hajimari.io/group: "Home"
+        external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
+        haproxy-ingress-proxy.pfsense.org/enabled: "true"
+        haproxy-ingress-proxy.pfsense.org/frontend: "https-443"
+        haproxy-ingress-proxy.pfsense.org/backend: "nginx-443"
+        #traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        #traefik.ingress.kubernetes.io/router.middlewares: networking-rfc1918-ips@kubernetescrd
+        cert-manager.io/cluster-issuer: letsencrypt-production
       hosts:
-        - host: &host "auth.${SECRET_DOMAIN}"
+        - host: "id.${SECRET_DOMAIN}"
           paths:
             - path: /
               pathType: Prefix
       tls:
-        - hosts:
-            - *host
-          secretName: "wildcard-${SECRET_DOMAIN/./-}-tls"
-
+        - secretName: "${SECRET_DOMAIN//./-}-tls"
+          hosts:
+            - "id.${SECRET_DOMAIN}"
+    authentik:
+      email:
+        host: "${SECRET_SMTP}"
+        port: 587
+        use_tls: true
+        username: "${SECRET_SMTP_USER}"
+        password: "${SECRET_SMTP_PASSWORD}"
+        from: "Authentik <${SECRET_SMTP_USER}>"
+      secret_key: "${SECRET_AUTHENTIK_SECRET_KEY}"
+      log_level: debug
+      outposts:
+        docker_image_base: ghcr.io/goauthentik/%(type)s:%(version)s
+      error_reporting:
+        enabled: false
+      postgresql:
+        host: '${SECRET_POSTGRES_HOST}' # '{{ .Release.Name }}-postgresql' #
+        name: authentik
+        user: authentik
+        password: ${SECRET_AUTHENTIK_POSTGRES_PASSWORD}
+        s3_backup:
+          access_key: "${SECRET_MINIO_ACCESS_KEY}"
+          secret_key: "${SECRET_MINIO_SECRET_KEY}"
+          bucket: authentik
+          host: https://${SECRET_MINIO_HOST}
+      redis:
+        host: '{{ .Release.Name }}-redis-master'
+        password: ${SECRET_AUTHENTIK_REDIS_PASSWORD}
     prometheus:
-      rules:
-        create: true
       serviceMonitor:
         create: true
-
-
+        interval: 30s
+        scrapeTimeout: 3s
+      rules:
+        create: true
     postgresql:
-      enabled: true
+      enabled: false
       persistence:
-        existingClaim: authentik-pgsql-db
-      postgresqlPassword: "${AUTHENTIK_DB_PASS}"
+        enabled: false
+        existingClaim: authentik-postgresql
+
+      postgresqlUsername: authentik
+      postgresqlDatabase: authentik
+      postgresqlPassword: ${SECRET_AUTHENTIK_POSTGRES_PASSWORD}
+
     redis:
       enabled: true
-      master:
-        persistence:
-          existingClaim: authentik-redis-db
+      auth:
+        enabled: true
+        password: ${SECRET_AUTHENTIK_REDIS_PASSWORD}
