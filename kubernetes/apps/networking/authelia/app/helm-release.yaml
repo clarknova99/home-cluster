@@ -53,8 +53,8 @@ spec:
       name: data
       enabled: true
       accessMode: ReadWriteMany
-      path: /data
-      subPath: /data/authelia/config
+      path: /data/authelia/config
+      #subPath: /data/authelia/config
       existingClaim: pvc-networking
     resources:
       requests:
