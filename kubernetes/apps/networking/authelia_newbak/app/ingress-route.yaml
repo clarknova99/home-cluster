@@ -14,4 +14,4 @@ spec:
         - name: authelia
           port: 80
   tls:
-    secretName: "ldap-${SECRET_DOMAIN/./-}-tls"
+    secretName: "auth-${SECRET_DOMAIN/./-}-tls"
