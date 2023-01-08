@@ -47,7 +47,7 @@ spec:
       secret:
         jwt:
         key: ${SECRET_AUTHELIA_JWT}
-      default_redirection_url: auth.${SECRET_DOMAIN}
+      default_redirection_url: https://auth.${SECRET_DOMAIN}
       totp:
         issuer: authelia.com
         period: 30
