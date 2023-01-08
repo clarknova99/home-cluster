@@ -5,6 +5,7 @@ metadata:
   name: authelia
   namespace: networking
 spec:
+  interval: 15m
   chart:
     spec:
       chart: authelia
@@ -33,7 +34,7 @@ spec:
       registry: ghcr.io
       repository: authelia/authelia
       tag: '4.37.5'
-    args: ["--config", "/data/authelia/configuration.yaml"]
+    #args: ["--config", "/data/authelia/configuration.yaml"]
     #args: ["--config", "/data/authelia/config/configuration.yaml", "--config.experimental.filters", "expand-env"]
     # containers:
     #   - name: authelia
@@ -42,11 +43,10 @@ spec:
     #       - authelia
     #     args:
     #       - '--config=/data/authelia/config/configuration.yaml'
-
-    # command:
-    #   - sh
-    #   - -c
-    #   - authelia --config /data/authelia/config/configuration.yaml
+    command:
+      - sh
+      - -c
+      - authelia --config /data/authelia/configuration.yaml
     # volumeMounts:
     #   - mountPath: "/config"
     #     name: data
@@ -65,14 +65,14 @@ spec:
         accessMode: ReadWriteMany
         path: /data
         existingClaim: pvc-networking
-      config:
-        enabled: true
-        type: custom
-        mountPath: /config
-        readOnly: true
-        volumeSpec:
-          configMap:
-            name: authelia-config
+      # config:
+      #   enabled: true
+      #   type: custom
+      #   mountPath: /config
+      #   readOnly: true
+      #   volumeSpec:
+      #     configMap:
+      #       name: authelia-config
       # config:
       #   enabled: true
       #   existingClaim: pvc-networking
@@ -84,4 +84,3 @@ spec:
         memory: 10Mi
       limits:
         memory: 100Mi
-  interval: 10m0s
