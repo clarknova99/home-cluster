@@ -27,16 +27,6 @@ spec:
   upgrade:
     remediation:
       retries: 3
-
-  # initContainers:
-  #   # The "volume-permissions" init container is required if you run into permission issues.
-  #   # Related issue: https://github.com/containous/traefik/issues/6972
-  #   - name: volume-permissions
-  #     image: busybox:1.31.1
-  #     command: ["sh", "-c", "chmod -Rv 600 /certs/*"]
-  #     volumeMounts:
-  #       - name: data
-  #         mountPath: /certs
   values:
     deployment:
       enabled: true
@@ -54,24 +44,12 @@ spec:
     ingressRoute:
       dashboard:
         enabled: false
-    # persistence:
-    #   storage:
-    #     enabled: true
-    #     accessMode: ReadWriteMany
-    #     existingClaim: pvc-networking
     persistence:
       name: data
       enabled: true
       accessMode: ReadWriteMany
       path: /data
       existingClaim: pvc-networking
-      # volumeMounts:
-      #   - name: pvc-networking
-      #     mountPath: /var/log/traefik
-      # additionalVolumeMounts:
-      #   - name: pvc-networking
-      #     mountPath: /var/log/traefik
-
     service:
       enabled: true
       type: LoadBalancer
@@ -107,9 +85,6 @@ spec:
         allowCrossNamespace: true
         publishedService:
           enabled: false
-    # rbac:
-    #   enabled: true
-    # serviceAccountName: traefik-ingress-controller
     globalArguments:
       - --entryPoints.web.address=:80/tcp
       - --entryPoints.websecure.address=:443/tcp
@@ -132,7 +107,6 @@ spec:
       - --accesslog.fields.defaultmode=keep
       - --accesslog.fields.headers.defaultmode=keep
       - --accesslog.fields.headers.names.X-Forwarded-User=keep
-
       - --providers.kubernetescrd
       - --providers.kubernetesingress.ingressendpoint.ip=${TRAEFIK_SERVICE_ADDR}"
       #- "--providers.kubernetesingress.ingressendpoint.hostname=${SECRET_DOMAIN}"
@@ -158,11 +132,6 @@ spec:
       limits:
         cpu: 4000m
         memory: 256Mi
-
-  # volumes:
-  #   - name: pvc-networking
-  #     persistentVolumeClaim:
-  #       claimName: pvc-networking
   # tlsStore:
     #   default:
     #     defaultCertificate:
