@@ -56,6 +56,9 @@ spec:
       storage:
         enabled: true
         existingClaim: pvc-networking
+      volumeMounts:
+        - name: pvc-networking
+          mountPath: /storage
     service:
       enabled: true
       type: LoadBalancer
@@ -141,9 +144,7 @@ spec:
       limits:
         cpu: 4000m
         memory: 256Mi
-      volumeMounts:
-        - name: pvc-networking
-          mountPath: /storage
+
   # volumes:
   #   - name: pvc-networking
   #     persistentVolumeClaim:
