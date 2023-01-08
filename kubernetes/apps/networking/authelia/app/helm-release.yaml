@@ -33,13 +33,15 @@ spec:
       registry: ghcr.io
       repository: authelia/authelia
       tag: '4.37.5'
-    command:
-      - sh
-      - -c
-      - authelia --config /data/authelia/config/configuration.yaml
-    volumeMounts:
-      - mountPath: "/config"
-        name: data
+    # command:
+    #   - sh
+    #   - -c
+    #   - authelia --config /data/authelia/config/configuration.yaml
+    # volumeMounts:
+    #   - mountPath: "/config"
+    #     name: data
+    env:
+      X_AUTHELIA_CONFIG: /data/authelia/config/configuration.yaml
     configMap:
       # Enable the configMap source for the Authelia config.
       # If this is false you need to provide a volumeMount via PV/PVC or other means that mounts to /config.
@@ -53,7 +55,7 @@ spec:
       name: data
       enabled: true
       accessMode: ReadWriteMany
-      path: /data/authelia/config
+      path: /data
       #subPath: /data/authelia/config
       existingClaim: pvc-networking
     resources:
