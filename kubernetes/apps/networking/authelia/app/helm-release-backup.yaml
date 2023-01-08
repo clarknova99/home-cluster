@@ -1,0 +1,122 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: authelia
+  namespace: networking
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: authelia
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: authelia
+        namespace: flux-system
+      interval: 15m
+  install:
+    createNamespace: true
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
+
+  values:
+    # global:
+    #   nameOverride: authelia
+    controller:
+      replicas: 1
+      strategy: RollingUpdate
+      rollingUpdate:
+        surge: 1
+    podAnnotations:
+      configmap.reloader.stakater.com/reload: authelia
+      secret.reloader.stakater.com/reload: authelia
+    image:
+      registry: ghcr.io
+      repository: authelia/authelia
+      tag: '4.37.5'
+
+    enableServiceLinks: false
+
+    envFrom:
+      - secretRef:
+          name: authelia
+
+
+    #args: ["--config", "/data/authelia/configuration.yaml"]
+    #args: ["--config", "/data/authelia/config/configuration.yaml", "--config.experimental.filters", "expand-env"]
+    # containers:
+    #   - name: authelia
+    #     image: docker.io/authelia/authelia:fix-missing-head-handler
+    #     command:
+    #       - authelia
+    #     args:
+    #       - '--config=/data/authelia/config/configuration.yaml'
+    command:
+      - sh
+      - -c
+      - authelia --config /config/configuration.yaml
+    # volumeMounts:
+    #   - mountPath: "/data"
+    #     name: data
+    # env:
+    #   X_AUTHELIA_CONFIG: /data/authelia/config/configuration.yaml
+
+    service:
+      main:
+        ports:
+          http:
+            port: 9091
+    # persistence:
+    #   config:
+    #     enabled: true
+    #     type: configMap
+    #     name: authelia
+    #     subPath: configuration.yml
+    #     mountPath: /config/configuration.yml
+    #     readOnly: false
+    persistence:
+      config:
+        enabled: true
+        type: custom
+        mountPath: /config
+        readOnly: true
+        volumeSpec:
+          configMap:
+            name: authelia-config
+    # persistence:
+    #   data:
+    #     enabled: true
+    #     accessMode: ReadWriteMany
+    #     path: /data
+    #     existingClaim: pvc-networking
+      # config:
+      #   enabled: true
+      #   type: custom
+      #   mountPath: /config
+      #   readOnly: true
+      #   volumeSpec:
+      #     configMap:
+      #       name: authelia-config
+      # config:
+      #   enabled: true
+      #   existingClaim: pvc-networking
+      #   path: /data/authelia
+
+    resources:
+      requests:
+        cpu: 5m
+        memory: 10Mi
+      limits:
+        memory: 200Mi
+
+    topologySpreadConstraints:
+      - maxSkew: 1
+        topologyKey: kubernetes.io/hostname
+        whenUnsatisfiable: DoNotSchedule
+        labelSelector:
+          matchLabels:
+            app.kubernetes.io/name: authelia
