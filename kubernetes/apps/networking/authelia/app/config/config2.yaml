@@ -13,10 +13,8 @@ metadata:
     helm.sh/chart: authelia-0.8.53
     helm.toolkit.fluxcd.io/name: authelia
     helm.toolkit.fluxcd.io/namespace: networking
-  name: authelia
+  name: authelia-config
   namespace: networking
-  resourceVersion: "6828287"
-  uid: de3c52e0-233d-47f6-97a1-84da21ab53c5
 data:
   configuration.yaml: |
     ---
