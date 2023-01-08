@@ -67,9 +67,12 @@ spec:
         existingClaim: pvc-networking
       config:
         enabled: true
-        accessMode: ReadWriteMany
-        path: /data/authelia/configuration.yaml
-        existingClaim: pvc-networking
+        type: custom
+        mountPath: /config
+        readOnly: true
+        volumeSpec:
+          configMap:
+            name: authelia-config
       # config:
       #   enabled: true
       #   existingClaim: pvc-networking
