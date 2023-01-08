@@ -22,9 +22,6 @@ spec:
   upgrade:
     remediation:
       retries: 5
-  dependsOn:
-    - name: ingress-nginx
-      namespace: networking
   values:
     image:
       # https://hub.docker.com/r/nitnelave/lldap
@@ -32,12 +29,11 @@ spec:
       tag: latest
     env:
       TZ: "${TIMEZONE}"
-      LLDAP_LDAP_BASE_DN: "{LLDAP_LDAP_BASE_DN}"
+      LLDAP_LDAP_BASE_DN: "{SECRET_LLDAP_LDAP_BASE_DN}"
+      LLDAP_LDAP_USER_PASS: "{SECRET_LLDAP_LDAP_USER_PASS}"
+      LLDAP_JWT_SECRET: "{SECRET_LLDAP_JWT}"
       # UID: "${SECURITY_CONTEXT_RUN_AS_USER}"
       # GID: "${SECURITY_CONTEXT_RUN_AS_GROUP}"
-    envFrom:
-      - secretRef:
-          name: lldap
     service:
       main:
         ports:

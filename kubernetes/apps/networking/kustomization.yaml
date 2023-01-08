@@ -12,3 +12,4 @@ resources:
   #- wildcard-certificate
   #- traefik-error-pages
   #- ./authelia/ks.yaml
+  - ./lldap/ks.yaml
