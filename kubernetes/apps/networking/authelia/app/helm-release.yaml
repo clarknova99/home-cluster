@@ -33,7 +33,7 @@ spec:
       registry: ghcr.io
       repository: authelia/authelia
       tag: '4.37.5'
-    args: ["--config", "/data/authelia/config/configuration.yaml"]
+    #args: ["--config", "/data/authelia/config/configuration.yaml"]
     #args: ["--config", "/data/authelia/config/configuration.yaml", "--config.experimental.filters", "expand-env"]
     # containers:
     #   - name: authelia
