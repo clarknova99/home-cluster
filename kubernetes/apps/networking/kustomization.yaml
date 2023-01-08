@@ -11,5 +11,5 @@ resources:
   #- ./traefik-forward-auth/ks.yaml
   #- wildcard-certificate
   #- traefik-error-pages
-  #- ./authelia/ks.yaml
+  - ./authelia/ks.yaml
   - ./lldap/ks.yaml

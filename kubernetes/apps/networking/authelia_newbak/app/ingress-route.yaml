@@ -1,0 +1,17 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: authelia
+  namespace: networking
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`auth.${SECRET_DOMAIN}`)
+      services:
+        - name: authelia
+          port: 80
+  tls:
+    secretName: "ldap-${SECRET_DOMAIN/./-}-tls"

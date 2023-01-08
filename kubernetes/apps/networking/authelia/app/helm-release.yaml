@@ -33,27 +33,21 @@ spec:
       registry: ghcr.io
       repository: authelia/authelia
       tag: '4.37.5'
-    # command:
-    #   - sh
-    #   - -c
-    #   - authelia --config /data/authelia/config/configuration.yaml
+    command:
+      - sh
+      - -c
+      - authelia --config /data/authelia/config/configuration.yaml
     service:
       main:
         ports:
           http:
-            port: 9091
+            port: 80
     persistence:
-      data:
-        enabled: true
-        existingClaim: pvc-default
-      config:
-        enabled: true
-        type: custom
-        mountPath: /config
-        readOnly: true
-        volumeSpec:
-          configMap:
-            name: authelia-config
+      name: data
+      enabled: true
+      accessMode: ReadWriteMany
+      path: /data
+      existingClaim: pvc-networking
     resources:
       requests:
         cpu: 5m
