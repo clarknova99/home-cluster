@@ -29,17 +29,19 @@ spec:
       strategy: RollingUpdate
       annotations:
         reloader.stakater.com/auto: "true"
-    # image:
-    #   registry: ghcr.io
-    #   repository: authelia/authelia
-    #   tag: '4.37.5'
-    containers:
-      - name: authelia
-        image: docker.io/authelia/authelia:fix-missing-head-handler
-        command:
-          - authelia
-        args:
-          - '--config=/data/authelia/config/configuration.yaml'
+    image:
+      registry: ghcr.io
+      repository: authelia/authelia
+      tag: '4.37.5'
+    args: ["--config", "/data/authelia/config/configuration.yaml"]
+    #args: ["--config", "/data/authelia/config/configuration.yaml", "--config.experimental.filters", "expand-env"]
+    # containers:
+    #   - name: authelia
+    #     image: docker.io/authelia/authelia:fix-missing-head-handler
+    #     command:
+    #       - authelia
+    #     args:
+    #       - '--config=/data/authelia/config/configuration.yaml'
 
     # command:
     #   - sh
