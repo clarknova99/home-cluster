@@ -11,8 +11,7 @@ spec:
     - kind: Rule
       match: Host(`ldap.${SECRET_DOMAIN}`)
       services:
-        - name: ldap
+        - name: lldap
           port: 17170
-
   tls:
     secretName: "ldap-${SECRET_DOMAIN/./-}-tls"
