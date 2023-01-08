@@ -37,6 +37,7 @@ spec:
       - sh
       - -c
       - authelia --config /data/authelia/config/configuration.yaml
+    configMap.enabled: false
     service:
       main:
         ports:
@@ -47,6 +48,7 @@ spec:
       enabled: true
       accessMode: ReadWriteMany
       path: /data
+      subPath: /data/authelia/config
       existingClaim: pvc-networking
     resources:
       requests:
