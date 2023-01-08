@@ -58,7 +58,7 @@ spec:
         existingClaim: pvc-networking
       volumeMounts:
         - name: pvc-networking
-          mountPath: /storage
+          mountPath: /var/log/traefik
     service:
       enabled: true
       type: LoadBalancer
@@ -113,9 +113,9 @@ spec:
       #- --metrics.prometheus.entryPoint=metrics
     additionalArguments:
       - --log.level=DEBUG
-      - --log.filePath=/storage/traefik/logs/traefik.log
+      - --log.filePath=traefik.log
       - --accessLog=true
-      - --accesslog.filepath=/storage/traefik/logs/access.log
+      - --accesslog.filepath=access.log
       - --accesslog.fields.defaultmode=keep
       - --accesslog.fields.headers.defaultmode=keep
       - --accesslog.fields.headers.names.X-Forwarded-User=keep
