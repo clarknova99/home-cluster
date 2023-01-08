@@ -17,4 +17,4 @@ spec:
           port: 17170
 
   tls:
-    secretName: ldap.${SECRET_DOMAIN}
+    secretName: "ldap-${SECRET_DOMAIN/./-}-tls"
