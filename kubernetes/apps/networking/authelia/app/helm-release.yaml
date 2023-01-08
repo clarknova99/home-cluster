@@ -22,18 +22,30 @@ spec:
   upgrade:
     remediation:
       retries: 5
+
   values:
     # global:
     #   nameOverride: authelia
     controller:
       replicas: 1
       strategy: RollingUpdate
-      annotations:
-        reloader.stakater.com/auto: "true"
+      rollingUpdate:
+        surge: 1
+    podAnnotations:
+      configmap.reloader.stakater.com/reload: authelia
+      secret.reloader.stakater.com/reload: authelia
     image:
       registry: ghcr.io
       repository: authelia/authelia
       tag: '4.37.5'
+
+    enableServiceLinks: false
+
+    envFrom:
+      - secretRef:
+          name: authelia
+
+
     #args: ["--config", "/data/authelia/configuration.yaml"]
     #args: ["--config", "/data/authelia/config/configuration.yaml", "--config.experimental.filters", "expand-env"]
     # containers:
@@ -43,16 +55,15 @@ spec:
     #       - authelia
     #     args:
     #       - '--config=/data/authelia/config/configuration.yaml'
-    command:
-      - sh
-      - -c
-      - authelia --config /data/authelia/configuration.yaml
-    volumeMounts:
-      - mountPath: "/data"
-        name: data
+    # command:
+    #   - sh
+    #   - -c
+    #   - authelia --config /data/authelia/configuration.yaml
+    # volumeMounts:
+    #   - mountPath: "/data"
+    #     name: data
     # env:
     #   X_AUTHELIA_CONFIG: /data/authelia/config/configuration.yaml
-
 
     service:
       main:
@@ -60,11 +71,19 @@ spec:
           http:
             port: 9091
     persistence:
-      data:
+      config:
         enabled: true
-        accessMode: ReadWriteMany
-        path: /data
-        existingClaim: pvc-networking
+        type: configMap
+        name: authelia
+        subPath: configuration.yml
+        mountPath: /config/configuration.yml
+        readOnly: false
+    # persistence:
+    #   data:
+    #     enabled: true
+    #     accessMode: ReadWriteMany
+    #     path: /data
+    #     existingClaim: pvc-networking
       # config:
       #   enabled: true
       #   type: custom
@@ -84,3 +103,11 @@ spec:
         memory: 10Mi
       limits:
         memory: 100Mi
+
+    topologySpreadConstraints:
+      - maxSkew: 1
+        topologyKey: kubernetes.io/hostname
+        whenUnsatisfiable: DoNotSchedule
+        labelSelector:
+          matchLabels:
+            app.kubernetes.io/name: authelia
