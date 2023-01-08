@@ -11,7 +11,7 @@ commonLabels:
 patchesStrategicMerge:
   - ./patches/env.yaml
 configMapGenerator:
-  - name: authelia
+  - name: authelia-config
     files:
       - ./config/configuration.yaml
 generatorOptions:

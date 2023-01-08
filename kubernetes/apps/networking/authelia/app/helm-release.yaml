@@ -70,14 +70,23 @@ spec:
         ports:
           http:
             port: 9091
+    # persistence:
+    #   config:
+    #     enabled: true
+    #     type: configMap
+    #     name: authelia
+    #     subPath: configuration.yml
+    #     mountPath: /config/configuration.yml
+    #     readOnly: false
     persistence:
       config:
         enabled: true
-        type: configMap
-        name: authelia
-        subPath: configuration.yml
-        mountPath: /config/configuration.yml
-        readOnly: false
+        type: custom
+        mountPath: /config
+        readOnly: true
+        volumeSpec:
+          configMap:
+            name: authelia-config
     # persistence:
     #   data:
     #     enabled: true
