@@ -2,7 +2,7 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: ldap
+  name: lldap
   namespace: networking
 spec:
   entryPoints:
@@ -11,9 +11,7 @@ spec:
     - kind: Rule
       match: Host(`ldap.${SECRET_DOMAIN}`)
       services:
-        - kind: Service
-          name: ldap
-          namespace: networking
+        - name: ldap
           port: 17170
 
   tls:
