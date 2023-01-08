@@ -126,9 +126,9 @@ spec:
       #- --metrics.prometheus.entryPoint=metrics
     additionalArguments:
       - --log.level=DEBUG
-      - --log.filePath=traefik.log
+      - --log.filePath=/data/traefik/logs/traefik.log
       - --accessLog=true
-      - --accesslog.filepath=access.log
+      - --accesslog.filepath=/data/traefik/logs/access.log
       - --accesslog.fields.defaultmode=keep
       - --accesslog.fields.headers.defaultmode=keep
       - --accesslog.fields.headers.names.X-Forwarded-User=keep
