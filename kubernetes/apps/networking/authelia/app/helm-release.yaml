@@ -29,10 +29,18 @@ spec:
       strategy: RollingUpdate
       annotations:
         reloader.stakater.com/auto: "true"
-    image:
-      registry: ghcr.io
-      repository: authelia/authelia
-      tag: '4.37.5'
+    # image:
+    #   registry: ghcr.io
+    #   repository: authelia/authelia
+    #   tag: '4.37.5'
+    containers:
+      - name: authelia
+        image: docker.io/authelia/authelia:fix-missing-head-handler
+        command:
+          - authelia
+        args:
+          - '--config=/data/authelia/config/configuration.yaml'
+
     # command:
     #   - sh
     #   - -c
@@ -40,8 +48,8 @@ spec:
     # volumeMounts:
     #   - mountPath: "/config"
     #     name: data
-    env:
-      X_AUTHELIA_CONFIG: /data/authelia/config/configuration.yaml
+    # env:
+    #   X_AUTHELIA_CONFIG: /data/authelia/config/configuration.yaml
     configMap:
       # Enable the configMap source for the Authelia config.
       # If this is false you need to provide a volumeMount via PV/PVC or other means that mounts to /config.
