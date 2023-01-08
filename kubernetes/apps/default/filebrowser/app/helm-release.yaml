@@ -57,4 +57,4 @@ spec:
       data:
         enabled: true
         existingClaim: pvc-default
-        mountPath: /data/filebrowser
+        #mountPath: /data/filebrowser
