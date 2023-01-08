@@ -28,14 +28,16 @@ spec:
     remediation:
       retries: 3
 
-  # install:
-  #   crds: Skip
-  # upgrade:
-  #   crds: Skip
-  #   force: true
+  # initContainers:
+  #   # The "volume-permissions" init container is required if you run into permission issues.
+  #   # Related issue: https://github.com/containous/traefik/issues/6972
+  #   - name: volume-permissions
+  #     image: busybox:1.31.1
+  #     command: ["sh", "-c", "chmod -Rv 600 /certs/*"]
+  #     volumeMounts:
+  #       - name: data
+  #         mountPath: /certs
   values:
-    # controller:
-    #   replicaCount: 2
     deployment:
       enabled: true
       replicas: 1
@@ -52,16 +54,23 @@ spec:
     ingressRoute:
       dashboard:
         enabled: false
+    # persistence:
+    #   storage:
+    #     enabled: true
+    #     accessMode: ReadWriteMany
+    #     existingClaim: pvc-networking
     persistence:
-      storage:
-        enabled: true
-        existingClaim: pvc-networking
+      name: data
+      enabled: true
+      accessMode: ReadWriteMany
+      path: /data
+      existingClaim: pvc-networking
       # volumeMounts:
       #   - name: pvc-networking
       #     mountPath: /var/log/traefik
-      additionalVolumeMounts:
-        - name: pvc-networking
-          mountPath: /var/log/traefik
+      # additionalVolumeMounts:
+      #   - name: pvc-networking
+      #     mountPath: /var/log/traefik
 
     service:
       enabled: true
