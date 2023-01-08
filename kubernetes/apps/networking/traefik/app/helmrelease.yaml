@@ -38,7 +38,7 @@ spec:
     #   replicaCount: 2
     deployment:
       enabled: true
-      replicas: 2
+      replicas: 1
     experimental:
       # http3:
       #   enabled: true
@@ -111,19 +111,20 @@ spec:
       # - --providers.kubernetesingress.ingressclass=traefik
       #- --metrics.prometheus=true
       #- --metrics.prometheus.entryPoint=metrics
+    additionalArguments:
+      - --log.level=DEBUG
+      - --log.filePath=/storage/traefik/logs/traefik.log
       - --accessLog=true
       - --accesslog.filepath=/storage/traefik/logs/access.log
       - --accesslog.fields.defaultmode=keep
       - --accesslog.fields.headers.defaultmode=keep
       - --accesslog.fields.headers.names.X-Forwarded-User=keep
-      - --log.level=DEBUG
-      - --log.filePath=/storage/traefik/logs/traefik.log
-    additionalArguments:
+
       - --providers.kubernetescrd
-      - "--providers.kubernetesingress.ingressendpoint.ip=${TRAEFIK_SERVICE_ADDR}"
+      - --providers.kubernetesingress.ingressendpoint.ip=${TRAEFIK_SERVICE_ADDR}"
       #- "--providers.kubernetesingress.ingressendpoint.hostname=${SECRET_DOMAIN}"
-      - "--serverstransport.insecureskipverify=true"
-      - "--providers.kubernetesingress.ingressclass=traefik"
+      - --serverstransport.insecureskipverify=true
+      - --providers.kubernetesingress.ingressclass=traefik
     tlsOptions:
       default:
         cipherSuites:
