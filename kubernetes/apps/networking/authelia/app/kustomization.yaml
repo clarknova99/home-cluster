@@ -5,3 +5,7 @@ namespace: networking
 resources:
   - ingress-route.yaml
   - helm-release.yaml
+configMapGenerator:
+  - name: authelia-config
+    files:
+      - ./config/config2.yaml
