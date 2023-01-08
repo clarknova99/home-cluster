@@ -37,6 +37,7 @@ spec:
     image:
       repository: ghcr.io/authelia/authelia
       tag: 4.36.6
+    enableServiceLinks: false
     # https://www.authelia.com/configuration/methods/secrets/
     # env:
     #   AUTHELIA_JWT_SECRET_FILE: /app/secrets/JWT_SECRET
@@ -121,7 +122,7 @@ spec:
       #   subPath: OIDC_ISSUER_PRIVATE_KEY
       #   mountPath: /app/secrets/OIDC_ISSUER_PRIVATE_KEY
       #   readOnly: true
-    enableServiceLinks: false
+
     service:
       main:
         ports:

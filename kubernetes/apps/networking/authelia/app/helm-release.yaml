@@ -22,8 +22,8 @@ spec:
     remediation:
       retries: 5
   values:
-    global:
-      nameOverride: authelia
+    # global:
+    #   nameOverride: authelia
     controller:
       replicas: 1
       strategy: RollingUpdate
