@@ -144,10 +144,10 @@ spec:
     volumeMounts:
       - name: pvc-networking
         mountPath: /storage
-    volumes:
-      - name: pvc-networking
-        persistentVolumeClaim:
-          claimName: pvc-networking
+  volumes:
+    - name: pvc-networking
+      persistentVolumeClaim:
+        claimName: pvc-networking
   # tlsStore:
     #   default:
     #     defaultCertificate:
