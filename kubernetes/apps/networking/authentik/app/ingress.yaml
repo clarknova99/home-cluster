@@ -10,7 +10,7 @@ metadata:
 spec:
   ingressClassName: "traefik"
   rules:
-    - host: "authentik.${SECRET_DOMAIN}"
+    - host: "auth.${SECRET_DOMAIN}"
       http:
         paths:
           - path: /
@@ -32,8 +32,8 @@ spec:
                   number: 80
   tls:
     - hosts:
-        - authentik.${SECRET_DOMAIN}
-      secretName: authentik-${SECRET_DOMAIN}-tls
+        - auth.${SECRET_DOMAIN}
+      secretName: auth-${SECRET_DOMAIN}-tls
 # ---
 # apiVersion: networking.k8s.io/v1
 # kind: Ingress
