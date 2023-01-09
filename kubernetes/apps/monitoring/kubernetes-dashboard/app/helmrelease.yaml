@@ -34,28 +34,28 @@ spec:
       - --disable-settings-authorizer
       - --enable-insecure-login
       - --token-ttl=43200
-    ingress:
-      enabled: true
-      className: traefik
-      annotations:
-        cert-manager.io/cluster-issuer: "letsencrypt-production"
-        traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-        traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-middlewares-authentik@kubernetescrd
-      tls:
-        - hosts:
-            - &host "kube.${SECRET_DOMAIN}"
-          secretName: "kubernetes-dashboard-tls"
-      rules:
-        - host: *host
-          http:
-            paths:
-              - path: /
-                pathType: Prefix
-                backend:
-                  service:
-                    name: kubernetes-dashboard
-                    port:
-                      number: 443
+    # ingress:
+    #   enabled: true
+    #   className: traefik
+    #   annotations:
+    #     cert-manager.io/cluster-issuer: "letsencrypt-production"
+    #     traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+    #     traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-middlewares-authentik@kubernetescrd
+    #   tls:
+    #     - hosts:
+    #         - &host "kube.${SECRET_DOMAIN}"
+    #       secretName: "kubernetes-dashboard-tls"
+    #   rules:
+    #     - host: *host
+    #       http:
+    #         paths:
+    #           - path: /
+    #             pathType: Prefix
+    #             backend:
+    #               service:
+    #                 name: kubernetes-dashboard
+    #                 port:
+    #                   number: 443
     # metricsScraper:
     #   enabled: true
     # serviceMonitor:
