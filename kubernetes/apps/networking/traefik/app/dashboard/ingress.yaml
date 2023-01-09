@@ -22,6 +22,8 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: traefik
+                name: api@internal
+              #- name: api@internal
+                kind: TraefikService
                 port:
                   number: 8080
