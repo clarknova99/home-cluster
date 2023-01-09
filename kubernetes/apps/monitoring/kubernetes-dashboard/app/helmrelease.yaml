@@ -34,6 +34,7 @@ spec:
       - --disable-settings-authorizer
       - --enable-insecure-login
       - --token-ttl=43200
+      - --insecure-bind-address=0.0.0.0
     # ingress:
     #   enabled: true
     #   className: traefik
