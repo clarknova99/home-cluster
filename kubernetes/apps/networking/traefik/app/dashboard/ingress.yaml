@@ -5,8 +5,8 @@ metadata:
   name: traefik
   namespace: networking
   annotations:
-    cert-manager.io/cluster-issuer: "letsencrypt-production"
-    traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+    cert-manager.io/cluster-issuer: letsencrypt-production
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
     traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-middlewares-authentik@kubernetescrd
 spec:
   ingressClassName: "traefik"
@@ -22,8 +22,8 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: api@internal
+                name: traefik
               #- name: api@internal
-                kind: TraefikService
+                #kind: TraefikService
                 port:
                   number: 8080
