@@ -102,8 +102,13 @@ spec:
       postgresqlDatabase: ${SECRET_AUTHENTIK_POSTGRES_USERNAME}
       postgresqlPassword: ${SECRET_AUTHENTIK_POSTGRES_PASSWORD}
 
+    # redis:
+    #   enabled: false
+    #   auth:
+    #     enabled: true
+    #     password: ${SECRET_AUTHENTIK_REDIS_PASSWORD}
     redis:
-      enabled: false
-      auth:
-        enabled: true
-        password: ${SECRET_AUTHENTIK_REDIS_PASSWORD}
+      enabled: true
+      master:
+        persistence:
+          existingClaim: pvc-authentik
