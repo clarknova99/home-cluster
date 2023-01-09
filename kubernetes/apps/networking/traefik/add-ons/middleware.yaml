@@ -2,7 +2,7 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
-  name: traefik-middlewares-authentik
+  name: traefik-middleware-authentik
   namespace: networking
 spec:
   forwardAuth:
@@ -247,7 +247,7 @@ spec:
       - name: traefik-middleware-redirect-https
       - name: traefik-middleware-secure-headers
       - name: traefik-middleware-rate-limit
-      - name: traefik-middlewares-authentik
+      - name: traefik-middleware-authentik
 
 ---
 apiVersion: traefik.containo.us/v1alpha1

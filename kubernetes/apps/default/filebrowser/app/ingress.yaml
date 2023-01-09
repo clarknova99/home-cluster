@@ -9,7 +9,7 @@ metadata:
     #cert-manager.io/cluster-issuer: "ca-issuer"
     traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
     #traefik.ingress.kubernetes.io/router.middlewares: networking-middlewares-authentik@kubernetescrd
-    traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-middlewares-authentik@kubernetescrd
+    traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-middleware-authentik@kubernetescrd
 spec:
   ingressClassName: "traefik"
   tls:
