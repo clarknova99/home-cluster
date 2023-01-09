@@ -8,7 +8,6 @@ metadata:
   #   kubernetes.io/ingress.class: traefik-external
 spec:
   entryPoints:
-    - web
     - websecure
   routes:
     - match: Host(`traefik.${SECRET_DOMAIN}`) #&& (PathPrefix(`/dashboard`) || PathPrefix(`/api`))
