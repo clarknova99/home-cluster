@@ -48,16 +48,3 @@ subsets:
       - ip: ${PROXMOX_ADDR}}
     ports:
       - port: 8006
----
-apiVersion: traefik.containo.us/v1alpha1
-kind: Middleware
-metadata:
-  name: chain-authentik-proxmox
-  namespace: networking
-spec:
-  chain:
-    middlewares:
-      - name: traefik-middleware-redirect-https
-      - name: traefik-middleware-secure-headers
-      - name: traefik-middleware-rate-limit
-      - name: traefik-middleware-authentik
