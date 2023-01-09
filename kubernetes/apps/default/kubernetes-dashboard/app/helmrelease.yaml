@@ -83,10 +83,20 @@ spec:
         kind: HelmRepository
         name: kubernetes-dashboard
         namespace: flux-system
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
   values:
+    env:
+      TZ: "${TIMEZONE}"
     extraArgs:
       - --enable-skip-login
       - --disable-settings-authorizer
       - --enable-insecure-login
+      - --token-ttl=43200
     metricsScraper:
       enabled: true

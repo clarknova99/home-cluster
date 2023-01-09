@@ -112,26 +112,28 @@ spec:
       #- "--providers.kubernetesingress.ingressendpoint.hostname=${SECRET_DOMAIN}"
       - --serverstransport.insecureskipverify=true
       - --providers.kubernetesingress.ingressclass=traefik
+      - --providers.kubernetesingress.allowexternalnameservices=true
+      - --providers.kubernetescrd.allowexternalnameservices=true
     tlsOptions:
       default:
-        cipherSuites:
-          - TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-          - TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305
-          - TLS_AES_256_GCM_SHA384
-          - TLS_CHACHA20_POLY1305_SHA256
-        curvePreferences:
-          - CurveP521
-          - CurveP384
+        # cipherSuites:
+        #   - TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+        #   - TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305
+        #   - TLS_AES_256_GCM_SHA384
+        #   - TLS_CHACHA20_POLY1305_SHA256
+        # curvePreferences:
+        #   - CurveP521
+        #   - CurveP384
         minVersion: VersionTLS12
         maxVersion: VersionTLS13
-        sniStrict: false
+        sniStrict: true
     resources:
       requests:
         cpu: 100m
         memory: 50Mi
       limits:
         cpu: 4000m
-        memory: 256Mi
+        memory: 500Mi
   # tlsStore:
     #   default:
     #     defaultCertificate:
