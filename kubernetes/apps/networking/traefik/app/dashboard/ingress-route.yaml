@@ -20,7 +20,7 @@ spec:
         - name: networking-traefik-middleware-chains-authentik@kubernetescrd
           namespace: networking
   tls:
-    secretName: "${SECRET_DOMAIN/./-}-tls"
+    secretName: "traefik-${SECRET_DOMAIN/./-}-tls"
 # ---
 # apiVersion: traefik.containo.us/v1alpha1
 # kind: IngressRoute
