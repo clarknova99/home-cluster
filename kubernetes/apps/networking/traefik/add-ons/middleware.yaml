@@ -220,7 +220,7 @@ spec:
       # - name: traefik-middleware-cloudflare-ips
       - name: traefik-middleware-rate-limit
       - name: traefik-middleware-secure-headers
-      - name: traefik-middleware-error-pages
+      #- name: traefik-middleware-error-pages
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
