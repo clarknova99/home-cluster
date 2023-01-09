@@ -6,4 +6,5 @@ resources:
   #- ./rbac.yaml
   - ./cluster-role-binding.yaml
   - ./helmrelease.yaml
+  - ./ingress.yaml
   #- ./ingress-route.yaml
