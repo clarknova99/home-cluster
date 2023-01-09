@@ -17,7 +17,7 @@ spec:
         - name: api@internal
           kind: TraefikService
       middlewares:
-        - name: traefik-middleware-chains-basic-auth
+        - name: networking-traefik-middleware-chains-authentik@kubernetescrd
           namespace: networking
   tls:
     secretName: "${SECRET_DOMAIN/./-}-tls"
