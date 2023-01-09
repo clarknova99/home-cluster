@@ -5,16 +5,17 @@ metadata:
   name: hajimari
   namespace: default
   annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-production
-    external-dns.alpha.kubernetes.io/target: "${SECRET_DOMAIN}"
-    external-dns.home.arpa/enabled: "true"
-    hajimari.io/enable: "false"
-    traefik.ingress.kubernetes.io/router.tls: "true"
-    traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-forward-auth@kubernetescrd
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+    traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+    traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-middlewares-authentik@kubernetescrd
 spec:
-  ingressClassName: traefik
+  ingressClassName: "traefik"
+  tls:
+    - hosts:
+        - "hajimari.${SECRET_DOMAIN}"
+      secretName: "hajimari-tls"
   rules:
-    - host: &host "hajimari.${SECRET_DOMAIN}"
+    - host: "hajimari.${SECRET_DOMAIN}"
       http:
         paths:
           - path: /
@@ -24,8 +25,3 @@ spec:
                 name: hajimari
                 port:
                   number: 3000
-
-  tls:
-    - hosts:
-        - *host
-      secretName: "hajimari-tls"
