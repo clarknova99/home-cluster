@@ -161,14 +161,22 @@ spec:
     stsIncludeSubdomains: true
     stsPreload: true
     forceSTSHeader: true
+    customFrameOptionsValue: "allow-from https:${SECRET_DOMAIN}" #CSP takes care of this but may be needed for organizr.
     contentTypeNosniff: true
     browserXssFilter: true
-    referrerPolicy: "same-origin"
-    permissionsPolicy: "camera=(), microphone=(), geolocation=(), payment=(), usb=(), vr=()"
+    referrerPolicy: "origin-when-cross-origin"
+    #referrerPolicy: "same-origin"
+    # Setting contentSecurityPolicy is more secure but it can break things. Proper auth will reduce the risk.
+    # the below line also breaks some apps due to 'none' - sonarr, radarr, etc.
+    # contentSecurityPolicy: "frame-ancestors '*.example.com:*';object-src 'none';script-src 'none';"
+    permissionsPolicy: "camera 'none'; geolocation 'none'; microphone 'none'; payment 'none'; usb 'none'; vr 'none';"
     customResponseHeaders:
       X-Robots-Tag: "none,noarchive,nosnippet,notranslate,noimageindex,"
-      City: X-GEO-City
-      server: ""
+    # permissionsPolicy: "camera=(), microphone=(), geolocation=(), payment=(), usb=(), vr=()"
+    # customResponseHeaders:
+    #   X-Robots-Tag: "none,noarchive,nosnippet,notranslate,noimageindex,"
+    #   City: X-GEO-City
+    #   server: ""
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
@@ -190,7 +198,8 @@ metadata:
 spec:
   forwardAuth:
     #address: "http://authelia:9091/api/verify?rd=https://auth.${SECRET_DOMAIN}"
-    address: http://authelia-external.authelia.svc.cluster.local/api/verify?rd=https://auth.${SECRET_DOMAIN}
+    #address: http://authelia-external.authelia.svc.cluster.local/api/verify?rd=https://auth.${SECRET_DOMAIN}
+    address: http://authelia/api/verify?rd=https://authelia.${SECRET_DEV_DOMAIN}
     trustForwardHeader: true
     authResponseHeaders:
       - Remote-User
@@ -230,17 +239,15 @@ spec:
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
-  name: traefik-middleware-chains-forward-auth
+  name: traefik-middleware-chains-authentik
   namespace: networking
 spec:
   chain:
     middlewares:
-      #- name: traefik-middleware-local-ips
-      #- name: traefik-middleware-cloudflare-ips
-      - name: traefik-forward-auth
-      # - name: traefik-middleware-redirect-https
-      # - name: traefik-middleware-secure-headers
+      - name: traefik-middleware-redirect-https
+      - name: traefik-middleware-secure-headers
       - name: traefik-middleware-rate-limit
+      - name: traefik-middlewares-authentik
 
 ---
 apiVersion: traefik.containo.us/v1alpha1
