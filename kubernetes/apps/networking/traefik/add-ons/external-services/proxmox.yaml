@@ -31,20 +31,22 @@ apiVersion: v1
 kind: Service
 metadata:
   name: proxmox
-  namespace: networking
 spec:
   ports:
-    - port: 80
+    - name: https
       protocol: TCP
-      targetPort: 8006
+      port: 8006
+      targetPort: https
+  type: ClusterIP
 ---
 apiVersion: v1
 kind: Endpoints
 metadata:
   name: proxmox
-  namespace: networking
 subsets:
   - addresses:
       - ip: ${PROXMOX_ADDR}
     ports:
-      - port: 8006
+      - name: https
+        port: 8006
+        protocol: TCP
