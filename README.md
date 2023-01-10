@@ -26,4 +26,16 @@ _... managed with Flux and Renovate_ :robot:
 
 This is home to my personal Kubernetes cluster. [Flux](https://github.com/fluxcd/flux2) watches this Git repository and makes the changes to my cluster based on the manifests in the [Kubernetes](./Kubernetes/) directory. [Renovate](https://github.com/renovatebot/renovate) also watches this Git repository and creates pull requests when it finds updates to Docker images, Helm charts, and other dependencies.
 
+Installation
+My cluster is k3s provisioned over VM's running on [Proxmox] (https://www.proxmox.com/) running on bare-metal Debian Servers
 
+
+## 🔧 Hardware
+| Device | Count | Ram | Operating System | Purpose |
+| --- | --- | --- | --- | --- |
+| Intel NUC11PAHi7 | 1   | 64GB | Ubuntu | Kubernetes Masters |
+| Intel NUC8i5BEH | 1   | 32GB | Ubuntu | Kubernetes Workers |
+| Raspberry Pi 4 | 4   | 8GB | Ubuntu | Kubernetes Workers |
+| Firewalla Gold | 1   | - | Ubuntu | Router |
+| Zyxel GS1900-24E Switch | 1   | -   | -   | Network Switch) |
+| APC SMT1500C | 1   | -   | -   | UPS |
