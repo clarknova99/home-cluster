@@ -11,7 +11,6 @@ metadata:
     hajimari.io/appName: "traefik"
     hajimari.io/enable: "true"
     hajimari.io/icon: "web"
-
 spec:
   ingressClassName: "traefik"
   tls:
