@@ -38,9 +38,9 @@ spec:
   tls:
     - hosts:
         - "proxmox.${SECRET_DOMAIN}"
-      secretName: "hajimari-tls"
+      secretName: "proxmox-tls"
   rules:
-    - host: "hajimari.${SECRET_DOMAIN}"
+    - host: "proxmox.${SECRET_DOMAIN}"
       http:
         paths:
           - path: /
