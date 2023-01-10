@@ -60,10 +60,12 @@ spec:
       traefik:
         port: 8080
         protocol: TCP
+      # web:
+      #   port: 80
+      #   protocol: TCP
+      #   expose: true
       web:
-        port: 80
-        protocol: TCP
-        expose: true
+        redirectTo: websecure
       websecure:
         port: 443
         tls:
