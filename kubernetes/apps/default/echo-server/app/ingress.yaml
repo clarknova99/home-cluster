@@ -2,27 +2,26 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: filebrowser
+  name: echo-server
   namespace: default
   annotations:
     cert-manager.io/cluster-issuer: "letsencrypt-production"
     hajimari.io/enable: "true"
     traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-    traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-middleware-authentik@kubernetescrd
 spec:
   ingressClassName: "traefik"
   tls:
     - hosts:
-        - "filebrowser.${SECRET_DOMAIN}"
-      secretName: "filebrowser-tls"
+        - "echo-server.${SECRET_DOMAIN}"
+      secretName: "echo-server-tls"
   rules:
-    - host: "filebrowser.${SECRET_DOMAIN}"
+    - host: "echo-server.${SECRET_DOMAIN}"
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: filebrowser
+                name: echo-server
                 port:
                   number: 80
