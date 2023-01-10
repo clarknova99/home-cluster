@@ -45,6 +45,6 @@ metadata:
   namespace: networking
 subsets:
   - addresses:
-      - ip: ${PROXMOX_ADDR}}
+      - ip: ${PROXMOX_ADDR}
     ports:
       - port: 8006
