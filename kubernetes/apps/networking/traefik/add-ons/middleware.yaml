@@ -282,6 +282,7 @@ spec:
   chain:
     middlewares:
       - name: traefik-middleware-rate-limit
+      - name: traefik-middleware-redirect-https
       - name: traefik-middleware-plex-addprefix
       - name: traefik-middleware-secure-headers
       - name: traefik-middleware-authentik
