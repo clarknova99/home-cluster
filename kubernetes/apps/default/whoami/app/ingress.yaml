@@ -1,0 +1,28 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: whoami
+  namespace: default
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+    traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+    #traefik.ingress.kubernetes.io/router.middlewares: networking-middlewares-authentik@kubernetescrd
+    #traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-middleware-authentik@kubernetescrd
+spec:
+  ingressClassName: "traefik"
+  tls:
+    - hosts:
+        - "whoami.${SECRET_DOMAIN}"
+      secretName: "whoami-tls"
+  rules:
+    - host: "whoami.${SECRET_DOMAIN}"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: whoami
+                port:
+                  number: 80
