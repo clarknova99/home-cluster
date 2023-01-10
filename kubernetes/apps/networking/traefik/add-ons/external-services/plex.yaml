@@ -8,7 +8,7 @@ metadata:
     coredns.io/hostname: "plex.${SECRET_DOMAIN}"
     cert-manager.io/cluster-issuer: letsencrypt-production
     traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-    traefik.ingress.kubernetes.io/router.middlewares: networking-chain-authentik-plex@kubernetescrd
+    traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-middleware-chains-authentik-plex@kubernetescrd
 spec:
   ingressClassName: traefik
   rules:
@@ -48,25 +48,3 @@ subsets:
       - ip: ${PLEX_ADDR}
     ports:
       - port: 32400
----
-apiVersion: traefik.containo.us/v1alpha1
-kind: Middleware
-metadata:
-  name: middlewares-plex-addprefix
-  namespace: networking
-spec:
-  addPrefix:
-    prefix: "/web"
----
-apiVersion: traefik.containo.us/v1alpha1
-kind: Middleware
-metadata:
-  name: chain-authentik-plex
-  namespace: networking
-spec:
-  chain:
-    middlewares:
-      - name: middlewares-rate-limit
-      - name: middlewares-plex-addprefix
-      - name: middlewares-secure-headers
-      - name: traefik-middlewares-authentik

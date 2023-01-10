@@ -225,6 +225,15 @@ spec:
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
+  name: traefik-middlewares-plex-addprefix
+  namespace: networking
+spec:
+  addPrefix:
+    prefix: "/web"
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
   name: traefik-middleware-chains-basic-auth
   namespace: networking
 spec:
@@ -263,3 +272,16 @@ spec:
       - name: traefik-middleware-rate-limit
       - name: traefik-middleware-secure-headers
       - name: traefik-middleware-authelia
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: traefik-middleware-chains-authentik-plex
+  namespace: networking
+spec:
+  chain:
+    middlewares:
+      - name: traefik-middleware-rate-limit
+      - name: traefik-middlewares-plex-addprefix
+      - name: traefik-middleware-secure-headers
+      - name: traefik-middlewares-authentik
