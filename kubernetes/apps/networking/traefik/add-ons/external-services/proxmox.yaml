@@ -37,7 +37,6 @@ spec:
       protocol: TCP
       port: 8006
       targetPort: https
-  type: ClusterIP
 ---
 apiVersion: v1
 kind: Endpoints
