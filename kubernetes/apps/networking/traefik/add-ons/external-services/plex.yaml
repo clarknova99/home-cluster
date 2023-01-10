@@ -5,6 +5,7 @@ metadata:
   name: plex
   namespace: networking
   annotations:
+    hajimari.io/enable: "true"
     coredns.io/hostname: "plex.${SECRET_DOMAIN}"
     cert-manager.io/cluster-issuer: letsencrypt-production
     traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
@@ -12,7 +13,7 @@ metadata:
 spec:
   ingressClassName: traefik
   rules:
-    - host: &host "plex.${SECRET_DOMAIN}"
+    - host: "plex.${SECRET_DOMAIN}"
       http:
         paths:
           - backend:
@@ -24,7 +25,7 @@ spec:
             pathType: Prefix
   tls:
     - hosts:
-        - *host
+        - "plex.${SECRET_DOMAIN}"
       secretName: "plex-${SECRET_DOMAIN/./-}-tls"
 ---
 apiVersion: v1
@@ -34,7 +35,8 @@ metadata:
   namespace: networking
 spec:
   ports:
-    - port: 80
+    - name: https
+      port: 80
       protocol: TCP
       targetPort: 32400
 ---
@@ -47,4 +49,5 @@ subsets:
   - addresses:
       - ip: ${PLEX_ADDR}
     ports:
-      - port: 32400
+      - name: https
+        port: 32400
