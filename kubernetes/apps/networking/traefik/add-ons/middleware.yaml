@@ -225,7 +225,7 @@ spec:
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
-  name: traefik-middlewares-plex-addprefix
+  name: traefik-middleware-plex-addprefix
   namespace: networking
 spec:
   addPrefix:
@@ -282,6 +282,6 @@ spec:
   chain:
     middlewares:
       - name: traefik-middleware-rate-limit
-      - name: traefik-middlewares-plex-addprefix
+      - name: traefik-middleware-plex-addprefix
       - name: traefik-middleware-secure-headers
-      - name: traefik-middlewares-authentik
+      - name: traefik-middleware-authentik
