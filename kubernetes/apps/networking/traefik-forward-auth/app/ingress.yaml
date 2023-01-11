@@ -21,6 +21,16 @@ spec:
                 name: traefik-forward-auth
                 port:
                   number: 4181
+    - host: "*.${SECRET_DOMAIN}"
+      http:
+        paths:
+          - path: /_oauth
+            pathType: Prefix
+            backend:
+              service:
+                name: traefik-forward-auth
+                port:
+                  number: 80
   tls:
     - hosts:
         - auth.${SECRET_DOMAIN}
