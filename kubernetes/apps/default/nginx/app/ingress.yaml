@@ -24,7 +24,7 @@ spec:
               service:
                 name: nginx-site
                 port:
-                  number: 80
+                  number: 8080
     - host: "www.${SECRET_DOMAIN}"
       http:
         paths:
@@ -34,4 +34,4 @@ spec:
               service:
                 name: nginx-site
                 port:
-                  number: 80
+                  number: 8080
