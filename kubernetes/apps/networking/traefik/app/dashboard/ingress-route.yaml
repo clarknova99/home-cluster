@@ -4,6 +4,9 @@ kind: IngressRoute
 metadata:
   name: traefik-dashboard
   namespace: networking
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-production
+    hajimari.io/enable: "true"
   # annotations:
   #   kubernetes.io/ingress.class: traefik-external
 spec:
