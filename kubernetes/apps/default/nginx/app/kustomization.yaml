@@ -4,4 +4,4 @@ kind: Kustomization
 resources:
   - helm-release.yaml
   - ingress.yaml
- # - pvc.yaml
+  - pvc.yaml
