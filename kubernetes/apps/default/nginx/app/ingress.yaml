@@ -2,7 +2,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: nginx
+  name: nginx-site
   namespace: default
   annotations:
     cert-manager.io/cluster-issuer: "letsencrypt-production"
@@ -12,7 +12,7 @@ spec:
   tls:
     - hosts:
         - "${SECRET_DOMAIN}"
-        - "www.{SECRET_DOMAIN}"
+        - "www.${SECRET_DOMAIN}"
       secretName: "web-tls"
   rules:
     - host: "${SECRET_DOMAIN}"
@@ -22,7 +22,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: nginx
+                name: nginx-site
                 port:
                   number: 80
     - host: "www.${SECRET_DOMAIN}"
@@ -32,6 +32,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: nginx
+                name: nginx-site
                 port:
                   number: 80
