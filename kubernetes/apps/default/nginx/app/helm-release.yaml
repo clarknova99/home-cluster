@@ -48,7 +48,7 @@ spec:
           claimName: pvc-nginx-www
 
     extraVolumeMounts:
-      - mountPath: /var/www
+      - mountPath: /app
         name: nginx-www
 
     persistence:
