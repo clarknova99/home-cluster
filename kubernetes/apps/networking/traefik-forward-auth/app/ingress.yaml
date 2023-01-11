@@ -11,7 +11,7 @@ metadata:
 spec:
   ingressClassName: "traefik"
   rules:
-    - host: "forwardauth.${SECRET_DOMAIN}"
+    - host: "auth.${SECRET_DOMAIN}"
       http:
         paths:
           - path: /
@@ -23,5 +23,5 @@ spec:
                   number: 4181
   tls:
     - hosts:
-        - forwardauth.${SECRET_DOMAIN}
-      secretName: forwardauth-${SECRET_DOMAIN}-tls
+        - auth.${SECRET_DOMAIN}
+      secretName: auth-${SECRET_DOMAIN}-tls

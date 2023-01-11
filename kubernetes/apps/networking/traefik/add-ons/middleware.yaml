@@ -181,7 +181,7 @@ spec:
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
-  name: traefik-forward-auth
+  name: traefik-middleware-forward-auth
   namespace: networking
 spec:
   forwardAuth:
@@ -256,7 +256,7 @@ spec:
       - name: traefik-middleware-redirect-https
       - name: traefik-middleware-secure-headers
       - name: traefik-middleware-rate-limit
-      - name: traefik-middleware-authentik
+      - name: traefik-middleware-forward-auth
 
 ---
 apiVersion: traefik.containo.us/v1alpha1
@@ -286,3 +286,16 @@ spec:
       - name: traefik-middleware-plex-addprefix
       - name: traefik-middleware-secure-headers
       - name: traefik-middleware-authentik
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: traefik-middleware-chains-forwardauth
+  namespace: networking
+spec:
+  chain:
+    middlewares:
+      - name: traefik-middleware-redirect-https
+      - name: traefik-middleware-secure-headers
+      - name: traefik-middleware-rate-limit
+      - name: traefik-middleware-forward-auth
