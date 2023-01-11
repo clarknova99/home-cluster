@@ -2,20 +2,16 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
+  annotations:
+    external-dns/is-public: "true"
+    cert-manager.io/cluster-issuer: letsencrypt-production
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
   name: traefik-forward-auth
   namespace: networking
-  annotations:
-    cert-manager.io/cluster-issuer: "letsencrypt-production"
-    traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-    traefik.ingress.kubernetes.io/router.middlewares: "networking-traefik-forward-auth@kubernetescrd"
 spec:
   ingressClassName: "traefik"
-  tls:
-    - hosts:
-        - "auth.${SECRET_DOMAIN}"
-      secretName: "traefik-forward-auth-tls"
   rules:
-    - host: "auth.${SECRET_DOMAIN}"
+    - host: "forwardauth.${SECRET_DOMAIN}"
       http:
         paths:
           - path: /
@@ -25,3 +21,7 @@ spec:
                 name: traefik-forward-auth
                 port:
                   number: 4181
+  tls:
+    - hosts:
+        - forwardauth.${SECRET_DOMAIN}
+      secretName: forwardauth-${SECRET_DOMAIN}-tls

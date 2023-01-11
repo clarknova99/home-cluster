@@ -4,7 +4,7 @@ kind: Kustomization
 namespace: networking
 resources:
   - ./helmrelease.yaml
-  - ./cert.yaml
+ # - ./cert.yaml
   #- ./ingress-route.yaml
   - ./ingress.yaml
   # - ./service.yaml
