@@ -40,7 +40,10 @@ spec:
         listen 80;
         server_name ${SECRET_DOMAIN} www.${SECRET_DOMAIN};
       }
-
+      server {
+        listen 80;
+        server_name ${SECRET_DOMAIN} ${SECRET_DOMAIN};
+      }
 
     extraVolumes:
       - name: nginx-www
