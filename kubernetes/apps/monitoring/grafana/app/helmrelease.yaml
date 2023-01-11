@@ -119,6 +119,7 @@ spec:
         hajimari.io/icon: "chart-scatter-plot-hexbin"
         cert-manager.io/cluster-issuer: "letsencrypt-production"
         traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+        traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-middleware-chains-authentik@kubernetescrd
       hosts:
         - "grafana.${SECRET_DOMAIN}"
       tls:
