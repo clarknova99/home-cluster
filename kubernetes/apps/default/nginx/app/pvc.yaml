@@ -31,7 +31,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteMany
-  volumeName: pv-nginx
+  volumeName: pv-nginx-www
   storageClassName: ""
   resources:
     requests:
