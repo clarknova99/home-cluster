@@ -4,4 +4,4 @@ kind: Kustomization
 namespace: networking
 resources:
   - proxmox.yaml
-  - plex.yaml
+  #- plex.yaml
