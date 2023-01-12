@@ -9,4 +9,4 @@ resources:
   - ./whoami/ks.yaml
   - ./filebrowser/ks.yaml
   - ./nginx/ks.yaml
-  #- ./plex/ks.yaml
+  - ./plex/ks.yaml
