@@ -16,3 +16,4 @@ data:
   NFS_SERVER_PATH: "/volume1/network-storage"
   PROXMOX_ADDR: "192.168.1.7"
   PLEX_ADDR: "192.168.1.25"
+  SVC_PLEX_ADDR: "192.168.1.94"
