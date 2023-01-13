@@ -23,15 +23,27 @@ fedora:
 
 ubuntu:
   packages:
+    - apt-transport-https
+    - arptables
+    - ca-certificates
+    - curl
+    - ebtables
+    - gdisk
     - hdparm
     - htop
-    - intel-gpu-tools
+    #- intel-gpu-tools
+    - iputils-ping
     - ipvsadm
     - lm-sensors
     - mc
     - nano
+    - net-tools
     - nfs-common
     - nvme-cli
-    - socat
+    - psmisc
     - python3-kubernetes
     - python3-yaml
+    - smartmontools
+    - socat
+    - software-properties-common
+    - unzip

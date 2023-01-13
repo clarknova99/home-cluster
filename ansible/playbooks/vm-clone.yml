@@ -17,7 +17,7 @@
         - key1: "305"
           key2: "k3s-5"
     - name: Resize
-      ansible.builtin.command: "qm resize {{ item.key1 }} scsi0 +5G"
+      ansible.builtin.command: "qm resize {{ item.key1 }} scsi0 +10G"
       with_items:
         - key1: "301"
         - key1: "302"

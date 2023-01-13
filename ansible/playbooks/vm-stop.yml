@@ -14,10 +14,10 @@
       state: stopped
       timeout: 300
     with_items:
-      - key1: "401"
-      - key1: "402"
-      - key1: "403"
-      - key1: "404"
-      - key1: "405"
+      - key1: "301"
+      - key1: "302"
+      - key1: "303"
+      - key1: "304"
+      - key1: "305"
 
 ...

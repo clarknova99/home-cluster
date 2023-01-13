@@ -43,3 +43,9 @@ k3s_server:
   kube-apiserver-arg:
     # Required for HAProxy health-checks
     - "anonymous-auth=true"
+    - "--audit-log-path=/var/lib/rancher/k3s/audit.log"
+    - "--audit-policy-file=/var/lib/rancher/k3s/audit-policy.yaml"
+    - "--audit-log-maxage=2"
+    # https://github.com/k3s-io/k3s/issues/1264
+    - "default-not-ready-toleration-seconds=20"
+    - "default-unreachable-toleration-seconds=20"

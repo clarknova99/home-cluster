@@ -27,4 +27,4 @@ spec:
               service:
                 name: plex
                 port:
-                  number: 3000
+                  number: 32400

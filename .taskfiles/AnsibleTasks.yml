@@ -79,6 +79,18 @@ tasks:
     cmds:
       - ansible-playbook {{.ANSIBLE_PLAYBOOK_DIR}}/vm-start.yml
 
+  vm-stop:
+    desc: stop vms
+    dir: "{{.ANSIBLE_DIR}}"
+    cmds:
+      - ansible-playbook {{.ANSIBLE_PLAYBOOK_DIR}}/vm-stop.yml
+
+  vm-delete:
+    desc: delete vms
+    dir: "{{.ANSIBLE_DIR}}"
+    cmds:
+      - ansible-playbook {{.ANSIBLE_PLAYBOOK_DIR}}/vm-delete.yml
+
   vm-clone:
     desc: clone vms
     dir: "{{.ANSIBLE_DIR}}"
