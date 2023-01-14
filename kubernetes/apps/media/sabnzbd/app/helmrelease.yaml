@@ -86,7 +86,7 @@ spec:
     #     name: pvc-downloads
 
     persistence:
-      data:
+      downloads:
         enabled: true
         existingClaim: pvc-downloads
         mountPath: /downloads
