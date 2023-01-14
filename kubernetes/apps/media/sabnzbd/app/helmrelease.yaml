@@ -48,7 +48,7 @@ spec:
       main:
         ports:
           http:
-            port: *port
+            port: 8085
     # ingress:
     #   main:
     #     enabled: true
