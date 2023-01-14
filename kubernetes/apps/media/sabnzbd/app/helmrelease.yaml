@@ -90,9 +90,9 @@ spec:
       #   enabled: true
       #   existingClaim: pvc-downloads
         #mountPath: /downloads
-      movies:
-        enabled: true
-        existingClaim: pvc-movies
+      # movies:
+      #   enabled: true
+      #   existingClaim: pvc-movies
         #mountPath: /movies
       # tv:
       #   enabled: true
