@@ -67,13 +67,13 @@ spec:
     #     tls:
     #       - hosts:
     #           - *host
-    podSecurityContext:
-      runAsUser: 568
-      runAsGroup: 568
-      fsGroup: 568
-      fsGroupChangePolicy: "OnRootMismatch"
-      supplementalGroups:
-        - 100
+    # podSecurityContext:
+    #   runAsUser: 568
+    #   runAsGroup: 568
+    #   fsGroup: 568
+    #   fsGroupChangePolicy: "OnRootMismatch"
+    #   supplementalGroups:
+    #     - 100
 
 
     # extraVolumes:
@@ -89,15 +89,15 @@ spec:
       downloads:
         enabled: true
         existingClaim: pvc-downloads
-        mountPath: /downloads
+        #mountPath: /downloads
       movies:
         enabled: true
         existingClaim: pvc-movies
-        mountPath: /movies
+        #mountPath: /movies
       tv:
         enabled: true
         existingClaim: pvc-tv
-        mountPath: /tv
+        #mountPath: /tv
       incomplete:
         enabled: true
         type: emptyDir
