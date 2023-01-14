@@ -86,17 +86,17 @@ spec:
     #     name: pvc-downloads
 
     persistence:
-      downloads:
-        enabled: true
-        existingClaim: pvc-downloads
-        #mountPath: /downloads
-      movies:
-        enabled: true
-        existingClaim: pvc-movies
-        #mountPath: /movies
-      tv:
-        enabled: true
-        existingClaim: pvc-tv
+      # downloads:
+      #   enabled: true
+      #   existingClaim: pvc-downloads
+      #   #mountPath: /downloads
+      # movies:
+      #   enabled: true
+      #   existingClaim: pvc-movies
+      #   #mountPath: /movies
+      # tv:
+      #   enabled: true
+      #   existingClaim: pvc-tv
         #mountPath: /tv
       incomplete:
         enabled: true
