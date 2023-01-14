@@ -15,7 +15,7 @@ spec:
   tls:
     - hosts:
         - "sabnzbd.${SECRET_DOMAIN}"
-      secretName: "filebrowser-tls"
+      secretName: "sabnzbd-tls"
   rules:
     - host: "sabnzbd.${SECRET_DOMAIN}"
       http:
@@ -26,4 +26,4 @@ spec:
               service:
                 name: sabnzbd
                 port:
-                  number: 80
+                  number: 8085
