@@ -4,3 +4,6 @@ kind: Kustomization
 resources:
   - ./pvc-default.yaml
   - ./pvc-networking.yaml
+  - ./pvc-downloads.yaml
+  - ./pvc-movies.yaml
+  - ./pvc-tv.yaml
