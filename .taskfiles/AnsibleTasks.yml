@@ -23,6 +23,11 @@ tasks:
     cmds:
       - ansible all -i {{.ANSIBLE_INVENTORY_DIR}}/hosts.yml --list-hosts
 
+  raspi-list:
+    desc: List raspi hosts
+    dir: "{{.ANSIBLE_DIR}}"
+    cmds:
+      - ansible raspi -i {{.ANSIBLE_INVENTORY_DIR}}/hosts.yml --list-hosts
   prepare:
     desc: Prepare all the k8s nodes for running k3s
     dir: "{{.ANSIBLE_DIR}}"
@@ -40,6 +45,12 @@ tasks:
     dir: "{{.ANSIBLE_DIR}}"
     cmds:
       - ansible-playbook -i {{.ANSIBLE_INVENTORY_DIR}}/hosts.yml {{.ANSIBLE_PLAYBOOK_DIR}}/cluster-installation.yml
+
+  install-raspi:
+    desc: Install Kubernetes on the nodes
+    dir: "{{.ANSIBLE_DIR}}"
+    cmds:
+      - ansible-playbook -i {{.ANSIBLE_INVENTORY_DIR}}/hosts.yml {{.ANSIBLE_PLAYBOOK_DIR}}/cluster-installation-raspi.yml
 
   nuke:
     desc: Uninstall Kubernetes on the nodes
@@ -102,3 +113,23 @@ tasks:
     dir: "{{.ANSIBLE_DIR}}"
     cmds:
       - ansible-playbook {{.ANSIBLE_PLAYBOOK_DIR}}/lxc-create.yml
+  lxc-start:
+    desc: clone vms
+    dir: "{{.ANSIBLE_DIR}}"
+    cmds:
+      - ansible-playbook {{.ANSIBLE_PLAYBOOK_DIR}}/lxc-start.yml
+  lxc-stop:
+    desc: clone vms
+    dir: "{{.ANSIBLE_DIR}}"
+    cmds:
+      - ansible-playbook {{.ANSIBLE_PLAYBOOK_DIR}}/lxc-stop.yml
+  lxc-delete:
+    desc: clone vms
+    dir: "{{.ANSIBLE_DIR}}"
+    cmds:
+      - ansible-playbook {{.ANSIBLE_PLAYBOOK_DIR}}/lxc-delete.yml
+  check:
+    desc: check hosts
+    dir: "{{.ANSIBLE_DIR}}"
+    cmds:
+      - ansible-playbook {{.ANSIBLE_PLAYBOOK_DIR}}/cluster-check.yml

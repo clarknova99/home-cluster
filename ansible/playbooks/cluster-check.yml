@@ -1,0 +1,42 @@
+---
+- hosts:
+    - worker
+  become: true
+  gather_facts: true
+  tasks:
+    - name: Distribution
+      ansible.builtin.debug:
+        msg: "{{ ansible_distribution }}"
+    - name: Distribution version
+      ansible.builtin.debug:
+        msg: "{{ ansible_distribution_version }}"
+    - name: Distribution major version
+      ansible.builtin.debug:
+        msg: "{{ ansible_distribution_major_version }}"
+    - name: Distribution kernel
+      ansible.builtin.command: grep -e raspi /proc/version
+      register: grep_kernel_raspi
+      failed_when: false
+      changed_when: false
+    - name: Set raspi fact to true
+      ansible.builtin.set_fact:
+        raspi: true
+      when: grep_kernel_raspi.rc == 0
+
+    #   - name: Test for raspberry pi /proc/cpuinfo
+    #   command: grep -E "Raspberry Pi|BCM2708|BCM2709|BCM2835|BCM2836" /proc/cpuinfo
+    #   register: grep_cpuinfo_raspberrypi
+    #   failed_when: false
+    #   changed_when: false
+
+    # - name: Test for raspberry pi /proc/device-tree/model
+    #   command: grep -E "Raspberry Pi" /proc/device-tree/model
+    #   register: grep_device_tree_model_raspberrypi
+    #   failed_when: false
+    #   changed_when: false
+
+    # - name: Set raspberry_pi fact to true
+    #   set_fact:
+    #     raspberry_pi: true
+    #   when:
+    #     grep_cpuinfo_raspberrypi.rc == 0 or grep_device_tree_model_raspberrypi.rc == 0
