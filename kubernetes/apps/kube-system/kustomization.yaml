@@ -9,4 +9,5 @@ resources:
   - ./node-feature-discovery/ks.yaml
   - ./reloader/ks.yaml
   - ./nfs-subdir-external-provisioner/ks.yaml
+  - ./local-path-provisioner/ks.yaml
   - ./storage/ks.yaml
