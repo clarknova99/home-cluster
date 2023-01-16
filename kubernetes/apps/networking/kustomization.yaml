@@ -5,7 +5,7 @@ resources:
   - ./namespace.yaml
   - ./cloudflare-ddns/ks.yaml
   - ./external-dns/ks.yaml
-  #- ./traefik/ks.yaml
+  - ./traefik/ks.yaml
   #- ./k8s-gateway/ks.yaml
   - ./metallb/ks.yaml
   #- ./traefik-forward-auth/ks.yaml
@@ -13,4 +13,4 @@ resources:
   #- traefik-error-pages
   #- ./authelia/ks.yaml
   #- ./lldap/ks.yaml
-  #- ./authentik/ks.yaml
+  - ./authentik/ks.yaml
