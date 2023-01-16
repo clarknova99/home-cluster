@@ -46,6 +46,21 @@ tasks:
     cmds:
       - kubectl get pods {{.CLI_ARGS | default "-A"}}
 
+  services:
+    desc: List all the pods in your cluster
+    cmds:
+      - kubectl get services {{.CLI_ARGS | default "-A"}}
+
+  pv:
+    desc: List all the pods in your cluster
+    cmds:
+      - kubectl get pv {{.CLI_ARGS | default "-A"}}
+
+  pvc:
+    desc: List all the pods in your cluster
+    cmds:
+      - kubectl get pvc {{.CLI_ARGS | default "-A"}}
+
   kustomizations:
     desc: List all the kustomizations in your cluster
     cmds:
@@ -86,7 +101,10 @@ tasks:
       - task: helmrepositories
       - task: gitrepositories
       - task: certificates
+      - task: services
       - task: ingresses
+      - task: pvc
+      - task: pv
       - task: pods
 
   commit:
