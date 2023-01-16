@@ -31,6 +31,7 @@ My cluster is k3s provisioned over VM's running on [Proxmox](https://www.proxmox
 | --- | --- | --- | --- | --- |
 | Intel NUC11PAHi7 | 1   | 64GB | Ubuntu | Kubernetes Masters |
 | Intel NUC8i5BEH | 1   | 32GB | Ubuntu | Kubernetes Workers |
+| Alienware X51  | 1   | 16GB | Ubuntu | Kubernetes Workers |
 | Raspberry Pi 4 | 4   | 8GB | Ubuntu | Kubernetes Workers |
 | Synology 1513+ | 1   | 8GB | Ubuntu | NAS |
 | Firewalla Gold | 1   | - | Ubuntu | Router |
