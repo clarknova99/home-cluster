@@ -20,20 +20,30 @@
 
 ## :book:&nbsp; Overview
 
-This is home to my personal Kubernetes cluster. [Flux](https://github.com/fluxcd/flux2) watches this Git repository and makes the changes to my cluster based on the manifests in the [Kubernetes](./Kubernetes/) directory. [Renovate](https://github.com/renovatebot/renovate) also watches this Git repository and creates pull requests when it finds updates to Docker images, Helm charts, and other dependencies.
+The repo is home for the code to automate the provisioning and management of my Kubernetes cluster.
+* [Ansible](https://www.ansible.com) for provisioning [Proxmox](https://www.proxmox.com/en/) VMs & bootstrapping Ubuntu servers with [K3s](https://k3s.io).
+* [Flux](https://toolkit.fluxcd.io)  watches this git repo and applies changes to Kubernetes when they are pushed to the repo.
+* [Renovate](https://github.com/renovatebot/renovate) monitors the repo, creating pull requests when it finds updates to dependencies.
 
-Installation
-My cluster is k3s provisioned over VM's running on [Proxmox](https://www.proxmox.com/) running on bare-metal Ubuntu servers.
 
+## :gear: Core Components
+* [traefik](https://traefik.io): Kubernetes ingress controller used for HTTP reserve proxy of service ingresses
+* [cert-manager](https://cert-manager.io) to request SSL certificates to store as Kubernetes resources
+* [metallb](https://metallb.universe.tf/) Load balancer for Kubernetes services
+* [SOPS](https://github.com/mozilla/sops) with [Age](https://github.com/FiloSottile/age) to encrypt secrets used in Ansible & Flux
 
 ## 🔧 Hardware
 | Device | Count | Ram | Operating System | Purpose |
 | --- | --- | --- | --- | --- |
-| Intel NUC11PAHi7 | 1   | 64GB | Ubuntu | Kubernetes Masters |
-| Intel NUC8i5BEH | 1   | 32GB | Ubuntu | Kubernetes Workers |
+| Intel NUC11PAHi7 | 1   | 64GB | Promox | Kubernetes Masters |
+| Intel NUC8i5BEH | 1   | 32GB | Promox | Kubernetes Workers |
 | Alienware X51  | 1   | 16GB | Ubuntu | Kubernetes Workers |
 | Raspberry Pi 4 | 4   | 8GB | Ubuntu | Kubernetes Workers |
 | Synology 1513+ | 1   | 8GB | Ubuntu | NAS |
 | Firewalla Gold | 1   | - | Ubuntu | Router |
 | Zyxel GS1900-24E Switch | 1   | -   | -   | Network Switch |
 | APC SMT1500C | 1   | -   | -   | UPS |
+
+---
+
+Thanks goes out to [onedr0p](https://github.com/onedr0p) and his awesome [flux template](https://github.com/onedr0p)
