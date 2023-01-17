@@ -27,7 +27,7 @@ The repo is home for the code to automate the provisioning and management of my 
 
 
 ## :gear: Core Components
-* [traefik](https://traefik.io): Kubernetes ingress controller used for HTTP reserve proxy of service ingresses
+* [traefik](https://traefik.io): Kubernetes ingress controller used for HTTP reverse proxy of service ingresses
 * [cert-manager](https://cert-manager.io) to request SSL certificates to store as Kubernetes resources
 * [metallb](https://metallb.universe.tf/) Load balancer for Kubernetes services
 * [SOPS](https://github.com/mozilla/sops) with [Age](https://github.com/FiloSottile/age) to encrypt secrets used in Ansible & Flux
