@@ -132,7 +132,7 @@ spec:
         storageSpec:
           volumeClaimTemplate:
             spec:
-              storageClassName: home-kubernetes
+              storageClassName: nfs-client
               resources:
                 requests:
                   storage: 5Gi
