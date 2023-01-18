@@ -111,13 +111,13 @@ spec:
         podMonitorSelectorNilUsesHelmValues: false
         probeSelectorNilUsesHelmValues: false
         retention: 2d
-        retentionSize: 6GB
+        retentionSize: 2GB
         enableAdminAPI: true
         walCompression: true
         storageSpec:
           volumeClaimTemplate:
             spec:
-              storageClassName: local-path
+              storageClassName: home-kubernetes
               resources:
                 requests:
                   storage: 5Gi
