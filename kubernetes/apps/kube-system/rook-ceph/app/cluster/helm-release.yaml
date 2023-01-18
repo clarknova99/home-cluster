@@ -6,6 +6,7 @@ metadata:
   namespace: kube-system
   meta.helm.sh/release-name: rook-ceph-cluster
   meta.helm.sh/release-namespace: kube-system
+  app.kubernetes.io/managed-by: Helm
 spec:
   interval: 15m
   releaseName: rook-ceph-cluster
