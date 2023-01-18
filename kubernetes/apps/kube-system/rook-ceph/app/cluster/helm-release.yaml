@@ -6,7 +6,6 @@ metadata:
   namespace: kube-system
 spec:
   interval: 15m
-  releaseName: rook-ceph-cluster
   chart:
     spec:
       chart: rook-ceph-cluster
