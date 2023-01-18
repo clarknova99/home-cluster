@@ -11,4 +11,4 @@ resources:
   - ./nfs-subdir-external-provisioner/ks.yaml
   - ./local-path-provisioner/ks.yaml
   - ./storage/ks.yaml
-  - ./rook-ceph/ks.yaml
+ # - ./rook-ceph/ks.yaml
