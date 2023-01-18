@@ -3,7 +3,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: rook-ceph-cluster
-  namespace: rook-ceph
+  namespace: kube-system
 spec:
   interval: 15m
   chart:
@@ -12,7 +12,7 @@ spec:
       version: v1.10.9
       sourceRef:
         kind: HelmRepository
-        name: rook-ceph-charts
+        name: rook-ceph
         namespace: flux-system
       interval: 15m
   maxHistory: 3
@@ -107,22 +107,24 @@ spec:
         config:
           osdsPerDevice: "1"
         nodes:
-          - name: "k8s-4"
+          - name: "k3s-1"
             devices:
               - name: "nvme0n1"
-          - name: "k8s-5"
+          - name: "k3s-2"
             devices:
               - name: "nvme0n1"
-          - name: "k8s-6"
+          - name: "k3s-3"
             devices:
               - name: "nvme0n1"
-
+          - name: "k3s-4"
+            devices:
+              - name: "nvme0n1"
     ingress:
       dashboard:
         ingressClassName: "traefik"
         annotations:
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
-          traefik.ingress.kubernetes.io/router.middlewares: traefik-system-internal@kubernetescrd
+          traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-middleware-authentik@kubernetescrd
         host:
           name: "rook.${SECRET_DOMAIN_NAME}"
           path: "/"
@@ -155,11 +157,11 @@ spec:
         spec:
           metadataPool:
             replicated:
-              size: 3
+              size: 4
           dataPools:
             - failureDomain: host
               replicated:
-                size: 3
+                size: 4
           metadataServer:
             activeCount: 1
             activeStandby: true
