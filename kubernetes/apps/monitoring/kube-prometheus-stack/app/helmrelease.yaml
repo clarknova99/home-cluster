@@ -79,17 +79,12 @@ spec:
           enabled: true
           label: grafana_dashboard
           labelValue: "1"
-    extraVolumes:
-      - name: pvc-prometheus
-        persistentVolumeClaim:
-          claimName: pvc-prometheus
-    extraVolumeMounts:
-      - mountPath: /app
-        name: pvc-prometheus
     persistence:
-      data:
+      config:
         enabled: true
-        existingClaim: pvc-prometheus
+        size: 40Gi
+        storageClass: nfs-client
+        accessMode: ReadWriteMany
     prometheus:
       ingress:
         enabled: true
