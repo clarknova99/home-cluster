@@ -2,7 +2,7 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: rook-ceph-operator
+  name: rook-ceph
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
@@ -14,7 +14,7 @@ spec:
   healthChecks:
     - apiVersion: helm.toolkit.fluxcd.io/v2beta1
       kind: HelmRelease
-      name: rook-ceph-operator
+      name: rook-ceph
       namespace: kube-system
   prune: true
   wait: true
@@ -35,7 +35,7 @@ spec:
     kind: GitRepository
     name: home-kubernetes
   dependsOn:
-    - name: rook-ceph-operator
+    - name: rook-ceph
   healthChecks:
     - apiVersion: helm.toolkit.fluxcd.io/v2beta1
       kind: HelmRelease
