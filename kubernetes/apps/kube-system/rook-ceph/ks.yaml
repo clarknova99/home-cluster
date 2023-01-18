@@ -46,23 +46,23 @@ spec:
   interval: 30m
   retryInterval: 2m
   timeout: 1m
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
-kind: Kustomization
-metadata:
-  name: rook-ceph-addons
-  namespace: flux-system
-  labels:
-    substitution.flux.home.arpa/enabled: "true"
-spec:
-  path: ./kubernetes/apps/kube-system/rook-ceph/app/add-ons
-  sourceRef:
-    kind: GitRepository
-    name: home-kubernetes
-  dependsOn:
-    - name: rook-ceph-operator
-  prune: true
-  wait: true
-  interval: 30m
-  retryInterval: 2m
-  timeout: 1m
+# ---
+# apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+# kind: Kustomization
+# metadata:
+#   name: rook-ceph-addons
+#   namespace: flux-system
+#   labels:
+#     substitution.flux.home.arpa/enabled: "true"
+# spec:
+#   path: ./kubernetes/apps/kube-system/rook-ceph/app/add-ons
+#   sourceRef:
+#     kind: GitRepository
+#     name: home-kubernetes
+#   dependsOn:
+#     - name: rook-ceph-operator
+#   prune: true
+#   wait: true
+#   interval: 30m
+#   retryInterval: 2m
+#   timeout: 1m
