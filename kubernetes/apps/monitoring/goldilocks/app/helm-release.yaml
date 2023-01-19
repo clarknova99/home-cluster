@@ -43,16 +43,16 @@ spec:
           memory: 64Mi
         limits:
           memory: 105M
-      ingress:
-        enabled: true
-        ingressClassName: "traefik"
-        annotations:
-          cert-manager.io/cluster-issuer: "letsencrypt-production"
-          external-dns.home.arpa/enabled: "true"
-          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-          traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-middleware-chains-authentik@kubernetescrd
-        hosts:
-          - host: "goldilocks.${SECRET_DOMAIN_NAME}"
-            paths:
-              - path: /
-                type: Prefix
+      # ingress:
+      #   enabled: true
+      #   ingressClassName: "traefik"
+      #   annotations:
+      #     cert-manager.io/cluster-issuer: "letsencrypt-production"
+      #     external-dns.home.arpa/enabled: "true"
+      #     traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+      #     traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-middleware-chains-authentik@kubernetescrd
+      #   hosts:
+      #     - host: "goldilocks.${SECRET_DOMAIN_NAME}"
+      #       paths:
+      #         - path: /
+      #           type: Prefix

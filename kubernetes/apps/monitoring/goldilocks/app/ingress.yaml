@@ -13,16 +13,29 @@ spec:
   ingressClassName: "traefik"
   tls:
     - hosts:
-        - "monitoring.${SECRET_DOMAIN}"
-      secretName: "filebrowser-tls"
+        - "goldilocks.${SECRET_DOMAIN}"
+      secretName: "goldilocks-tls"
   rules:
-    - host: "monitoring.${SECRET_DOMAIN}"
+    - host: "goldilocks.${SECRET_DOMAIN}"
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: monitoring
+                name: goldilocks
                 port:
                   number: 80
+      # ingress:
+      #   enabled: true
+      #   ingressClassName: "traefik"
+      #   annotations:
+      #     cert-manager.io/cluster-issuer: "letsencrypt-production"
+      #     external-dns.home.arpa/enabled: "true"
+      #     traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+      #     traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-middleware-chains-authentik@kubernetescrd
+      #   hosts:
+      #     - host: "goldilocks.${SECRET_DOMAIN_NAME}"
+      #       paths:
+      #         - path: /
+      #           type: Prefix
