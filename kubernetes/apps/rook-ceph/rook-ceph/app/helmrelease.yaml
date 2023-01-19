@@ -4,6 +4,12 @@ kind: HelmRelease
 metadata:
   name: rook-ceph-operator
   namespace: rook-ceph
+  selectors:
+    app.kubernetes.io/managed-by: Helm
+    meta.helm.sh/release-name: rook-ceph
+    meta.helm.sh/release-namespace: rook-ceph
+  labels:
+    app.kubernetes.io/managed-by: Helm
 spec:
   interval: 15m
   chart:
