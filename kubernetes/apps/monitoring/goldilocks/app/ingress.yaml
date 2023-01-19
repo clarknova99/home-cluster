@@ -25,7 +25,7 @@ spec:
               service:
                 name: goldilocks
                 port:
-                  number: 80
+                  number: 8080
       # ingress:
       #   enabled: true
       #   ingressClassName: "traefik"
