@@ -26,12 +26,12 @@ spec:
     remediation:
       retries: 3
   values:
-  server:
     securityContext:
-      runAsUser: 0
-      runAsNonRoot: false
-      runAsGroup: 0
-      fsGroup: 0
+      runAsGroup: 65534
+      runAsNonRoot: true
+      runAsUser: 65534
+      # set fsGroup equal to runAsGroup
+      fsGroup: 65534
     fullnameOverride: prometheus
     defaultRules:
       create: true
