@@ -35,6 +35,11 @@ spec:
         global:
           resolve_timeout: 5m
 
+    securityContext:
+      runAsGroup: 2000
+      runAsNonRoot: true
+      runAsUser: 1000
+      fsGroup: 2000
       ingress:
         enabled: true
         pathType: Prefix
@@ -85,6 +90,7 @@ spec:
         size: 40Gi
         storageClass: nfs-client
         accessMode: ReadWriteMany
+
     prometheus:
       ingress:
         enabled: true
