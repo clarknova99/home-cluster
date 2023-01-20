@@ -35,11 +35,6 @@ spec:
         global:
           resolve_timeout: 5m
 
-    securityContext:
-      runAsGroup: 2000
-      runAsNonRoot: true
-      runAsUser: 1000
-      fsGroup: 2000
       ingress:
         enabled: true
         pathType: Prefix
@@ -84,12 +79,6 @@ spec:
           enabled: true
           label: grafana_dashboard
           labelValue: "1"
-    persistence:
-      config:
-        enabled: true
-        size: 40Gi
-        storageClass: nfs-client
-        accessMode: ReadWriteMany
 
     prometheus:
       ingress:
@@ -107,11 +96,6 @@ spec:
           - hosts:
               - "prom.${SECRET_DOMAIN}"
             secretName: "prom.${SECRET_DOMAIN}"
-      securityContext:
-        fsGroup: 65534
-        runAsGroup: 0
-        runAsNonRoot: false
-        runAsUser: 0
 
       thanosService:
         enabled: true
@@ -127,13 +111,13 @@ spec:
         podMonitorSelectorNilUsesHelmValues: false
         probeSelectorNilUsesHelmValues: false
         retention: 2d
-        retentionSize: 2GB
+        retentionSize: 6GB
         enableAdminAPI: true
         walCompression: true
         storageSpec:
           volumeClaimTemplate:
             spec:
-              storageClassName: nfs-client
+              storageClassName: local-path
               resources:
                 requests:
                   storage: 5Gi
