@@ -24,13 +24,7 @@ spec:
     remediation:
       retries: 3
   values:
-  ## Security context to be added to server pods
-  ##
-  securityContext:
-    runAsUser: 0
-    runAsNonRoot: false
-    runAsGroup: 0
-    fsGroup: 0
+
     alertmanager:
       config:
         global:
@@ -108,6 +102,13 @@ spec:
               - node
             targetLabel: instance
     prometheus:
+  ## Security context to be added to server pods
+  ##
+    securityContext:
+      runAsUser: 0
+      runAsNonRoot: false
+      runAsGroup: 0
+      fsGroup: 0
       ingress:
         enabled: true
         pathType: Prefix
