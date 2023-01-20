@@ -182,21 +182,25 @@ spec:
               resources:
                 requests:
                   storage: 2Gi
-          securityContext:
-            runAsNonRoot: true
-            runAsUser: 1000
-          initContainers:
-            - command: ["chown", "-R", "1000:1000", "/prometheus"]
-              image: busybox
-              name: prometheus-data-permission-fix
-              volumeMounts:
-                - mountPath: /prometheus
-                  name: prometheus-server-prometheus-db
-                  subPath: prometheus-db
-              securityContext:
-                runAsNonRoot: false
-                runAsUser: 0
-                runAsGroup: 0
+        containers:
+          - name: prometheus
+            image: docker.io/prom/prometheus:v2.12.0
+            volumeMounts:
+              - mountPath: "/prometheus/data"
+                name: prometheus-data
+        initContainers:
+          - name: prometheus-data-permission-fix
+            image: busybox
+            command: ["/bin/chmod", "-R", "777", "/data"]
+            volumeMounts:
+              - name: prometheus-data
+                mountPath: /data
+        volumes:
+          - name: prometheus-data
+            persistentVolumeClaim:
+              claimName: pvc-prometheus
+
+
         thanos:
           image: quay.io/thanos/thanos:v0.29.0
           # renovate: datasource=docker depName=quay.io/thanos/thanos
