@@ -7,6 +7,6 @@ resources:
   #- recurrent-jobs.yaml
   #- volume-snapshot-class.yaml
   #- secret.sops.yaml
-  - ingress.yaml
+  #- ingress.yaml
   #- service-monitor.yaml
   #- prometheus-rules.yaml
