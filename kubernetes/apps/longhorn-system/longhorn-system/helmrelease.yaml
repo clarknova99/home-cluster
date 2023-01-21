@@ -1,5 +1,4 @@
 ---
----
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
@@ -49,6 +48,13 @@ spec:
         hajimari.io/icon: cow
         hajimari.io/group: storage
         hajimari.io/appName: longhorn
+    resources:
+      requests:
+        cpu: "50m"
+        memory: "50Mi"
+      limits:
+        cpu: "2500m"
+        memory: "500Mi"
 # apiVersion: helm.toolkit.fluxcd.io/v2beta1
 # kind: HelmRelease
 # metadata:
