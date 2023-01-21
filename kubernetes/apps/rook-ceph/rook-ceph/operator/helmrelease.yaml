@@ -11,7 +11,7 @@ spec:
       version: 1.9.x
       sourceRef:
         kind: HelmRepository
-        name: rook-release
+        name: rook-ceph
         namespace: flux-system
   interval: 30m
   timeout: 10m
