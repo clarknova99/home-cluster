@@ -8,5 +8,5 @@ resources:
   #- volume-snapshot-class.yaml
   #- secret.sops.yaml
   - ingress.yaml
-  - service-monitor.yaml
+  #- service-monitor.yaml
   #- prometheus-rules.yaml
