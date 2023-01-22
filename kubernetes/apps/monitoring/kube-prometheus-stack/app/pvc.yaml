@@ -26,29 +26,28 @@ spec:
     path: /network-storage/prometheus/alerts
     type: DirectoryOrCreate
   storageClassName: ''
-
-# ---
-# apiVersion: v1
-# kind: PersistentVolume
-# metadata:
-#   name: pv-prometheus
-#   namespace: monitoring
-#   labels:
-#     app.kubernetes.io/name: kube-prometheus-stack
-# spec:
-#   storageClassName: ""
-#   capacity:
-#     storage: 2Gi
-#   accessModes:
-#     - ReadWriteMany
-#   persistentVolumeReclaimPolicy: Retain
-#   nfs:
-#     server: 192.168.1.2
-#     path: "/volume1/network-storage/prometheus"
-#     readOnly: false
-#   mountOptions:
-#     - nfsvers=4.1
-#     - hard
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-prometheus
+  namespace: monitoring
+  labels:
+    app.kubernetes.io/name: kube-prometheus-stack
+spec:
+  storageClassName: ""
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  nfs:
+    server: 192.168.1.2
+    path: "/volume1/network-storage/prometheus"
+    readOnly: false
+  mountOptions:
+    - nfsvers=4.1
+    - hard
 # ---
 # apiVersion: v1
 # kind: PersistentVolume
