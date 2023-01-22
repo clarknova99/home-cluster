@@ -2,44 +2,37 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: sabnzbd-config
+  name: pv-sabnzbd-config
+  namespace: media
 spec:
-  accessModes:
-    - ReadWriteOnce
+  storageClassName: ""
   capacity:
-    storage: 10Gi
-  hostPath:
-    path: /network-storage/sabnzbd
-    type: DirectoryOrCreate
-  storageClassName: local
+    storage: 10Mi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  nfs:
+    server: 192.168.1.2
+    path: "/network-storage/sabnzbd"
+    readOnly: false
+  mountOptions:
+    - nfsvers=4.1
+    - hard
 ---
 apiVersion: v1
-kind: PersistentVolume
+kind: PersistentVolumeClaim
 metadata:
-  name: sabnzbd-complete
+  name: pvc-sabnzbd-config
+  namespace: media
 spec:
   accessModes:
-    - ReadWriteOnce
-  capacity:
-    storage: 10Gi
-  hostPath:
-    path: /downloads/complete
-    type: DirectoryOrCreate
-  storageClassName: local
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: sabnzbd-complete
-spec:
-  accessModes:
-    - ReadWriteOnce
-  capacity:
-    storage: 10Gi
-  hostPath:
-    path: /downloads/incomplete
-    type: DirectoryOrCreate
-  storageClassName: local
+    - ReadWriteMany
+  volumeName: pv-sabnzbd-config
+  storageClassName: ""
+  resources:
+    requests:
+      storage: 10Mi
+
 # ---
 # apiVersion: v1
 # kind: PersistentVolume
