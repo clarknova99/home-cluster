@@ -110,6 +110,12 @@ tasks:
     cmds:
       - ansible-playbook {{.ANSIBLE_PLAYBOOK_DIR}}/vm-clone.yml
 
+  vm-mount:
+    desc: clone vms
+    dir: "{{.ANSIBLE_DIR}}"
+    cmds:
+      - ansible-playbook {{.ANSIBLE_PLAYBOOK_DIR}}/vm-mount-storage.yml
+
   lxc-create:
     desc: clone vms
     dir: "{{.ANSIBLE_DIR}}"

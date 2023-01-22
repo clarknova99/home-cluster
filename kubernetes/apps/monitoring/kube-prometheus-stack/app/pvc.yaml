@@ -4,10 +4,12 @@ kind: PersistentVolume
 metadata:
   name: pv-prometheus
   namespace: monitoring
+  labels:
+    app.kubernetes.io/name: kube-prometheus-stack
 spec:
   storageClassName: ""
   capacity:
-    storage: 1Mi
+    storage: 2Gi
   accessModes:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
@@ -18,21 +20,43 @@ spec:
   mountOptions:
     - nfsvers=4.1
     - hard
-    # - noatime
-    # - nodiratime
-    # - tcp
-    # - intr
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: pvc-prometheus
-  namespace: monitoring
-spec:
-  accessModes:
-    - ReadWriteMany
-  volumeName: pv-prometheus
-  storageClassName: ""
-  resources:
-    requests:
-      storage: 1Mi
+# ---
+# apiVersion: v1
+# kind: PersistentVolume
+# metadata:
+#   name: pv-prometheus-alerts
+#   namespace: monitoring
+#   labels:
+#     app.kubernetes.io/name: kube-prometheus-stack
+# spec:
+#   storageClassName: ""
+#   capacity:
+#     storage: 2Gi
+#   accessModes:
+#     - ReadWriteMany
+#   persistentVolumeReclaimPolicy: Retain
+#   nfs:
+#     server: 192.168.1.2
+#     path: "/volume1/network-storage/prometheus"
+#     readOnly: false
+#   mountOptions:
+#     - nfsvers=4.1
+#     - hard
+#     # - noatime
+#     # - nodiratime
+#     # - tcp
+#     # - intr
+# ---
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: pvc-prometheus
+#   namespace: monitoring
+# spec:
+#   accessModes:
+#     - ReadWriteMany
+#   volumeName: pv-prometheus
+#   storageClassName: ""
+#   resources:
+#     requests:
+#       storage: 1Mi

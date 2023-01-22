@@ -14,7 +14,6 @@ spec:
         kind: HelmRepository
         name: prometheus-community
         namespace: flux-system
-      interval: 15m
   maxHistory: 3
   install:
     createNamespace: true
@@ -22,104 +21,63 @@ spec:
     remediation:
       retries: 3
   upgrade:
+    cleanupOnFail: true
     crds: CreateReplace
     remediation:
       retries: 3
+  uninstall:
+    keepHistory: false
   values:
-    securityContext:
-      runAsGroup: 65534
-      runAsNonRoot: true
-      runAsUser: 65534
-      # set fsGroup equal to runAsGroup
-      fsGroup: 65534
-    fullnameOverride: prometheus
-    defaultRules:
-      create: true
-      rules:
-        alertmanager: true
-        etcd: true
-        configReloaders: true
-        general: true
-        k8s: true
-        kubeApiserver: true
-        kubeApiserverAvailability: true
-        kubeApiserverSlos: true
-        kubelet: true
-        kubeProxy: false
-        kubePrometheusGeneral: true
-        kubePrometheusNodeRecording: true
-        kubernetesApps: true
-        kubernetesResources: true
-        kubernetesStorage: true
-        kubernetesSystem: true
-        kubeScheduler: false
-        kubeStateMetrics: true
-        network: true
-        node: true
-        nodeExporterAlerting: true
-        nodeExporterRecording: true
-        prometheus: true
-        prometheusOperator: true
-    kubeControllerManager:
-      enabled: false
-    kubeEtcd:
-      enabled: false
-    kubelet:
-      enabled: true
-      serviceMonitor:
-        metricRelabelings:
-          - action: replace
-            sourceLabels:
-              - node
-            targetLabel: instance
-    kubeApiServer:
-      enabled: true
-    kubeProxy:
-      enabled: false
-    kubeScheduler:
-      enabled: false
-    kubeStateMetrics:
-      enabled: true
-    kube-state-metrics:
-      fullnameOverride: kube-state-metrics
-      metricLabelsAllowlist:
-        - persistentvolumeclaims=[*]
-      prometheus:
-        monitor:
-          enabled: true
-          relabelings:
-            - action: replace
-              regex: (.*)
-              replacement: $1
-              sourceLabels:
-                - __meta_kubernetes_pod_node_name
-              targetLabel: kubernetes_node
-    alertmanager:
-      ingress:
+    persistence:
+      alerts:
         enabled: true
-        annotations:
-          kubernetes.io/ingress.class: traefik
-          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-          traefik.ingress.kubernetes.io/router.middlewares: "traefik-system-internal@kubernetescrd"
-        hosts:
-          - "alerts.${SECRET_DOMAIN_NAME}"
-        path: /
-        pathType: Prefix
+        type: hostPath
+        hostPath: /network-storage/prometheus/alerts
+        hostPathType: Directory
+        readOnly: false
+    cleanPrometheusOperatorObjectNames: true
+    alertmanager:
+      enabled: true
       config:
         global:
           resolve_timeout: 5m
-        templates:
-          - /etc/alertmanager/config/*.tmpl
+
+      ingress:
+        enabled: true
+        pathType: Prefix
+        ingressClassName: traefik
+        annotations:
+          hajimari.io/appName: "Alert Manager"
+          hajimari.io/icon: mdi:alert-decagram-outline
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
+          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+        hosts:
+          - "alerts.${SECRET_DOMAIN}"
+        tls:
+          - hosts:
+              - "alerts.${SECRET_DOMAIN}"
+            secretName: "alerts.${SECRET_DOMAIN}"
       alertmanagerSpec:
-        storage:
-          volumeClaimTemplate:
-            spec:
-              storageClassName: longhorn
-              resources:
-                requests:
-                  storage: 1Gi
-    prometheus-node-exporter:
-      fullnameOverride: node-exporter
+        replicas: 1
+        podAntiAffinity: hard
+      storage:
+        volumeClaimTemplate:
+          spec:
+            selector:
+              matchLabels:
+                app.kubernetes.io/name: kube-prometheus-stack
+            resources:
+              requests:
+                storage: 2Gi
+        # storage:
+        #   volumeClaimTemplate:
+        #     spec:
+        #       storageClassName: local-path
+        #       resources:
+        #         requests:
+        #           storage: 1Gi
+    kube-state-metrics:
+      metricLabelsAllowlist: ["persistentvolumeclaims=[*]"]
       prometheus:
         monitor:
           enabled: true
@@ -127,61 +85,69 @@ spec:
             - action: replace
               regex: (.*)
               replacement: $1
-              sourceLabels:
-                - __meta_kubernetes_pod_node_name
+              sourceLabels: ["__meta_kubernetes_pod_node_name"]
               targetLabel: kubernetes_node
-    prometheusOperator:
-      prometheusConfigReloader:
-        resources:
-          requests:
-            cpu: 100m
-            memory: 50Mi
-          limits:
-            cpu: 200m
-            memory: 100Mi
+    grafana:
+      enabled: false
+      forceDeployDashboards: true
+      sidecar:
+        dashboards:
+          enabled: true
+          label: grafana_dashboard
+          labelValue: "1"
+
     prometheus:
       ingress:
         enabled: true
+        ingressClassName: traefik
         annotations:
-          kubernetes.io/ingress.class: traefik
-          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-          traefik.ingress.kubernetes.io/router.middlewares: "traefik-system-internal@kubernetescrd"
+          hajimari.io/appName: Prometheus
+          hajimari.io/icon: simple-icons:prometheus
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
         hosts:
-          - "prometheus.${SECRET_DOMAIN_NAME}"
+          - "prom.${SECRET_DOMAIN}"
         path: /
         pathType: Prefix
+        tls:
+          - hosts:
+              - "prom.${SECRET_DOMAIN}"
+            secretName: "prom.${SECRET_DOMAIN}"
+
       thanosService:
         enabled: true
       thanosServiceMonitor:
         enabled: true
       prometheusSpec:
         replicas: 1
-        podAntiAffinity: hard
-        retentionSize: "6GB"
-        replicaExternalLabelName: "replica"
-        ruleSelector: {}
-        ruleNamespaceSelector: {}
+        replicaExternalLabelName: __replica__
+        externalLabels:
+          cluster: home-ops
         ruleSelectorNilUsesHelmValues: false
-        serviceMonitorSelector: {}
-        serviceMonitorNamespaceSelector: {}
         serviceMonitorSelectorNilUsesHelmValues: false
-        podMonitorSelector: {}
-        podMonitorNamespaceSelector: {}
         podMonitorSelectorNilUsesHelmValues: false
+        probeSelectorNilUsesHelmValues: false
         retention: 2d
+        retentionSize: 2GB
         enableAdminAPI: true
         walCompression: true
         storageSpec:
           volumeClaimTemplate:
             spec:
-              storageClassName: longhorn
+              selector:
+                matchLabels:
+                  app.kubernetes.io/name: kube-prometheus-stack
               resources:
                 requests:
-                  storage: 10Gi
-    grafana:
-      enabled: false
-      forceDeployDashboards: true
-      sidecar:
-        dashboards:
-          annotations:
-            grafana_folder: Prometheus
+                  storage: 2Gi
+          # volumeClaimTemplate:
+          #   spec:
+          #     storageClassName: home-kubernetes
+          #     resources:
+          #       requests:
+          #         storage: 5Gi
+        resources:
+          requests:
+            cpu: 10m
+            memory: 2000Mi
+          limits:
+            memory: 4000Mi
