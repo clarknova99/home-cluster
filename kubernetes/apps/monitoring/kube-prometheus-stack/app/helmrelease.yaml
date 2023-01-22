@@ -60,6 +60,16 @@ spec:
       alertmanagerSpec:
         replicas: 1
         podAntiAffinity: hard
+        storage:
+          disableMountSubPath: true
+          volumeClaimTemplate:
+            spec:
+              accessModes: ["ReadWriteOnce"]
+              volumeName: prometheus-alerts
+              storageClassName: local
+              resources:
+                requests:
+                  storage: 10Gi
       # storage:
       #   volumeClaimTemplate:
       #     spec:
@@ -69,13 +79,13 @@ spec:
       #       resources:
       #         requests:
       #           storage: 2Gi
-        storage:
-          volumeClaimTemplate:
-            spec:
-              storageClassName: nfs-client
-              resources:
-                requests:
-                  storage: 1Gi
+        # storage:
+        #   volumeClaimTemplate:
+        #     spec:
+        #       storageClassName: nfs-client
+        #       resources:
+        #         requests:
+        #           storage: 1Gi
     kube-state-metrics:
       metricLabelsAllowlist: ["persistentvolumeclaims=[*]"]
       prometheus:
@@ -121,7 +131,7 @@ spec:
         replicas: 1
         replicaExternalLabelName: __replica__
         externalLabels:
-          cluster: home-ops
+          cluster: home-kubernetes
         ruleSelectorNilUsesHelmValues: false
         serviceMonitorSelectorNilUsesHelmValues: false
         podMonitorSelectorNilUsesHelmValues: false
@@ -130,6 +140,9 @@ spec:
         retentionSize: 2GB
         enableAdminAPI: true
         walCompression: true
+        ## Prometheus StorageSpec for persistent data
+        ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/user-guides/storage.md
+        ##
         storageSpec:
           disableMountSubPath: true
           volumeClaimTemplate:

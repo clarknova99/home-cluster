@@ -12,7 +12,20 @@ spec:
     path: /network-storage/prometheus/db
     type: DirectoryOrCreate
   storageClassName: ''
-
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: prometheus-alerts
+spec:
+  accessModes:
+    - ReadWriteOnce
+  capacity:
+    storage: 10Gi
+  hostPath:
+    path: /network-storage/prometheus/alerts
+    type: DirectoryOrCreate
+  storageClassName: ''
 
 # ---
 # apiVersion: v1
