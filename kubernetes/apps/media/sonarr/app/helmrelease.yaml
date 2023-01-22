@@ -61,10 +61,10 @@ spec:
     #     labels:
     #       snapshot.home.arpa/enabled: "true"
     persistence:
-      config:
-        enabled: true
-        existingClaim: pvc-sonarr-config
-        mountPath: /config
+      # config:
+      #   enabled: true
+      #   existingClaim: pvc-sonarr-config
+      #   mountPath: /config
       downloads:
         enabled: true
         existingClaim: pvc-downloads
