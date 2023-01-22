@@ -2,24 +2,40 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: pv-prometheus
-  namespace: monitoring
-  labels:
-    app.kubernetes.io/name: kube-prometheus-stack
+  name: prometheus-db
 spec:
-  storageClassName: ""
-  capacity:
-    storage: 2Gi
   accessModes:
-    - ReadWriteMany
-  persistentVolumeReclaimPolicy: Retain
-  nfs:
-    server: 192.168.1.2
-    path: "/volume1/network-storage/prometheus"
-    readOnly: false
-  mountOptions:
-    - nfsvers=4.1
-    - hard
+    - ReadWriteOnce
+  capacity:
+    storage: 10Gi
+  hostPath:
+    path: /network-storage/prometheus/db
+    type: DirectoryOrCreate
+  storageClassName: ''
+
+
+# ---
+# apiVersion: v1
+# kind: PersistentVolume
+# metadata:
+#   name: pv-prometheus
+#   namespace: monitoring
+#   labels:
+#     app.kubernetes.io/name: kube-prometheus-stack
+# spec:
+#   storageClassName: ""
+#   capacity:
+#     storage: 2Gi
+#   accessModes:
+#     - ReadWriteMany
+#   persistentVolumeReclaimPolicy: Retain
+#   nfs:
+#     server: 192.168.1.2
+#     path: "/volume1/network-storage/prometheus"
+#     readOnly: false
+#   mountOptions:
+#     - nfsvers=4.1
+#     - hard
 # ---
 # apiVersion: v1
 # kind: PersistentVolume

@@ -131,6 +131,16 @@ spec:
         enableAdminAPI: true
         walCompression: true
         storageSpec:
+          disableMountSubPath: true
+          volumeClaimTemplate:
+            spec:
+              accessModes: ["ReadWriteOnce"]
+              volumeName: prometheus-db
+              storageClassName: local
+              resources:
+                requests:
+                  storage: 10Gi
+          #storageSpec:
           # volumeClaimTemplate:
           #   spec:
           #     selector:
@@ -139,12 +149,13 @@ spec:
           #     resources:
           #       requests:
           #         storage: 2Gi
-          volumeClaimTemplate:
-            spec:
-              storageClassName: nfs-client
-              resources:
-                requests:
-                  storage: 5Gi
+        # storageSpec:
+        #   volumeClaimTemplate:
+        #     spec:
+        #       storageClassName: nfs-client
+        #       resources:
+        #         requests:
+        #           storage: 5Gi
         resources:
           requests:
             cpu: 10m
