@@ -31,7 +31,7 @@ spec:
     replicaCount: 1
     nfs:
       server: "${NFS_SERVER_ADDR}"
-      path: "${NFS_SERVER_PATH}"
+      path: "${NFS_SERVER_PATH}/dynamic"
     storageClass:
       defaultClass: true
       # name: nfs-provision
