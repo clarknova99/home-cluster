@@ -1,0 +1,88 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: &app sonarr
+  namespace: media
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: 1.2.1
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  maxHistory: 3
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    controller:
+      type: statefulset
+      annotations:
+        reloader.stakater.com/auto: "true"
+    image:
+      repository: ghcr.io/onedr0p/sonarr-develop
+      tag: 4.0.0.356@sha256:c7d3cd0d6b87673b5cf92e4bce71df22608a314a1c4f14fbd6bd14c74ad7af4a
+    env:
+      SONARR__INSTANCE_NAME: Sonarr
+      SONARR__PORT: &port 80
+      SONARR__LOG_LEVEL: info
+    envFrom:
+      - secretRef:
+          name: sonarr-secret
+    service:
+      main:
+        ports:
+          http:
+            port: *port
+    podSecurityContext:
+      runAsUser: 568
+      runAsGroup: 568
+      fsGroup: 568
+      fsGroupChangePolicy: "OnRootMismatch"
+      supplementalGroups:
+        - 100
+    # volumeClaimTemplates:
+    #   - name: config
+    #     mountPath: /config
+    #     accessMode: ReadWriteOnce
+    #     size: 10Gi
+    #     storageClass: ceph-block
+    #     labels:
+    #       snapshot.home.arpa/enabled: "true"
+    persistence:
+      config:
+        enabled: true
+        existingClaim: pvc-sonarr-config
+        mountPath: /config
+      downloads:
+        enabled: true
+        existingClaim: pvc-downloads
+        mountPath: /downloads
+      movies:
+        enabled: true
+        existingClaim: pvc-movies
+        mountPath: /movies
+      tv:
+        enabled: true
+        existingClaim: pvc-tv
+        mountPath: /tv
+      incomplete:
+        enabled: true
+        type: emptyDir
+    resources:
+      requests:
+        cpu: 10m
+        memory: 250Mi
+      limits:
+        memory: 2000Mi
