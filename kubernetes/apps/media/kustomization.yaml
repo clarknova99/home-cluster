@@ -4,4 +4,4 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./sabnzbd/ks.yaml
-  - ./sonarr/ks.yaml
+  # - ./sonarr/ks.yaml
