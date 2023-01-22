@@ -60,22 +60,22 @@ spec:
       alertmanagerSpec:
         replicas: 1
         podAntiAffinity: hard
-      storage:
-        volumeClaimTemplate:
-          spec:
-            selector:
-              matchLabels:
-                app.kubernetes.io/name: kube-prometheus-stack
-            resources:
-              requests:
-                storage: 2Gi
-        # storage:
-        #   volumeClaimTemplate:
-        #     spec:
-        #       storageClassName: local-path
-        #       resources:
-        #         requests:
-        #           storage: 1Gi
+      # storage:
+      #   volumeClaimTemplate:
+      #     spec:
+      #       selector:
+      #         matchLabels:
+      #           app.kubernetes.io/name: kube-prometheus-stack
+      #       resources:
+      #         requests:
+      #           storage: 2Gi
+        storage:
+          volumeClaimTemplate:
+            spec:
+              storageClassName: nfs-client
+              resources:
+                requests:
+                  storage: 1Gi
     kube-state-metrics:
       metricLabelsAllowlist: ["persistentvolumeclaims=[*]"]
       prometheus:
@@ -131,20 +131,20 @@ spec:
         enableAdminAPI: true
         walCompression: true
         storageSpec:
-          volumeClaimTemplate:
-            spec:
-              selector:
-                matchLabels:
-                  app.kubernetes.io/name: kube-prometheus-stack
-              resources:
-                requests:
-                  storage: 2Gi
           # volumeClaimTemplate:
           #   spec:
-          #     storageClassName: home-kubernetes
+          #     selector:
+          #       matchLabels:
+          #         app.kubernetes.io/name: kube-prometheus-stack
           #     resources:
           #       requests:
-          #         storage: 5Gi
+          #         storage: 2Gi
+          volumeClaimTemplate:
+            spec:
+              storageClassName: nfs-client
+              resources:
+                requests:
+                  storage: 5Gi
         resources:
           requests:
             cpu: 10m
