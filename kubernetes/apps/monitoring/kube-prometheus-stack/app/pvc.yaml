@@ -11,7 +11,7 @@ spec:
   hostPath:
     path: /network-storage/prometheus/db
     type: DirectoryOrCreate
-  storageClassName: ''
+  storageClassName: local
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -25,7 +25,7 @@ spec:
   hostPath:
     path: /network-storage/prometheus/alerts
     type: DirectoryOrCreate
-  storageClassName: ''
+  storageClassName: local
 # ---
 # apiVersion: v1
 # kind: PersistentVolume
