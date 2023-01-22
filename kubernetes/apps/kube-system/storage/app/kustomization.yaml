@@ -6,4 +6,4 @@ resources:
   - ./pvc-networking.yaml
   - ./pvc-downloads.yaml
   - ./pvc-movies.yaml
-  - ./pvc-tv.yaml
+  # - ./pvc-tv.yaml
