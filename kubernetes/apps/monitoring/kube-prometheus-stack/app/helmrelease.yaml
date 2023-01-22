@@ -28,13 +28,13 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    persistence:
-      alerts:
-        enabled: true
-        type: hostPath
-        hostPath: /network-storage/prometheus/alerts
-        hostPathType: Directory
-        readOnly: false
+    # persistence:
+    #   alerts:
+    #     enabled: true
+    #     type: hostPath
+    #     hostPath: /network-storage/prometheus/alerts
+    #     hostPathType: Directory
+    #     readOnly: false
     cleanPrometheusOperatorObjectNames: true
     alertmanager:
       enabled: true
