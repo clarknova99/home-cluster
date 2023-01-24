@@ -88,8 +88,11 @@ spec:
     persistence:
       config:
         enabled: true
-        existingClaim: pvc-sabnzbd-config
-        mountPath: /config
+        existingClaim: sabnzbd-config
+      # config:
+      #   enabled: true
+      #   existingClaim: pvc-sabnzbd-config
+      #   mountPath: /config
       downloads:
         enabled: true
         existingClaim: pvc-downloads
