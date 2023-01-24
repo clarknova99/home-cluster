@@ -31,6 +31,9 @@ spec:
     image:
       repository: ghcr.io/onedr0p/sabnzbd
       tag: 3.7.1@sha256:e1a805ab246712b2c9a834b88ffefd77aba89b2ffcfdf1a9535333fcb4a60f91
+      volumeMounts:
+        - name: config
+          mountPath: /config
     env:
       TZ: America/New_York
       SABNZBD__PORT: 8085
@@ -49,47 +52,16 @@ spec:
         ports:
           http:
             port: 8085
-    # ingress:
-    #   main:
-    #     enabled: true
-    #     ingressClassName: nginx
-    #     annotations:
-    #       nginx.ingress.kubernetes.io/configuration-snippet: |
-    #         proxy_set_header Accept-Encoding "";
-    #         sub_filter '</head>' '<link rel="stylesheet" type="text/css" href="https://theme-park.devbu.io/css/base/sabnzbd/nord.css"></head>';
-    #         sub_filter_once on;
-    #       hajimari.io/icon: mdi:download
-    #     hosts:
-    #       - host: &host "{{ .Release.Name }}.devbu.io"
-    #         paths:
-    #           - path: /
-    #             pathType: Prefix
-    #     tls:
-    #       - hosts:
-    #           - *host
-    # podSecurityContext:
-    #   runAsUser: 568
-    #   runAsGroup: 568
-    #   fsGroup: 568
-    #   fsGroupChangePolicy: "OnRootMismatch"
-    #   supplementalGroups:
-    #     - 100
 
-
-    # extraVolumes:
-    #   - name: nginx-www
-    #     persistentVolumeClaim:
-    #       claimName: pvc-nginx-www
-
-    # extraVolumeMounts:
-    #   - mountPath: /downloads
-    #     name: pvc-downloads
-
+    volumes:
+      - name: config
+        persistentVolumeClaim:
+          claimName: longhorn-pvc-sabnzbd-config
     persistence:
-      config:
-        enabled: true
-        existingClaim: sabnzbd-config
       # config:
+      #   enabled: true
+      #   existingClaim: sabnzbd-config
+      # # config:
       #   enabled: true
       #   existingClaim: pvc-sabnzbd-config
       #   mountPath: /config
