@@ -4,5 +4,5 @@ kind: Namespace
 metadata:
   name: longhorn-system
   labels:
-    kustomize.toolkit.fluxcd.io/prune: "true"
+    kustomize.toolkit.fluxcd.io/prune: "false"
     goldilocks.fairwinds.com/enabled: "true"
