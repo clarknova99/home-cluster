@@ -32,22 +32,41 @@ spec:
       storageMinimalAvailablePercentage: 10
       defaultReplicaCount: 2
       defaultLonghornStaticStorageClass: longhorn
+
     ingress:
       enabled: true
-      host: "longhorn.${SECRET_DOMAIN}"
-      path: /
-      tls: true
-      tlsSecret: longhorn
+      ingressClassName: traefik
       annotations:
         kubernetes.io/ingress.class: traefik
         cert-manager.io/cluster-issuer: "letsencrypt-production"
         traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
         traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-middleware-authentik@kubernetescrd
-        coredns.io/hostname: "longhorn.${SECRET_DOMAIN}"
         hajimari.io/enable: "true"
         hajimari.io/icon: cow
         hajimari.io/group: storage
         hajimari.io/appName: longhorn
+      hosts:
+        - "longhorn.${SECRET_DOMAIN}"
+      path: /
+      pathType: Prefix
+      tls:
+        - hosts:
+            - "longhorn.${SECRET_DOMAIN}"
+          secretName: "longhorn.${SECRET_DOMAIN}"
+
+    # ingress:
+    #   enabled: true
+    #   host: "longhorn.${SECRET_DOMAIN}"
+    #   path: /
+    #   tls: true
+    #   tlsSecret: longhorn
+    #   annotations:
+    #     kubernetes.io/ingress.class: traefik
+    #     cert-manager.io/cluster-issuer: "letsencrypt-production"
+    #     traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+    #     traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-middleware-authentik@kubernetescrd
+    #     coredns.io/hostname: "longhorn.${SECRET_DOMAIN}"
+
     resources:
       requests:
         cpu: "50m"
