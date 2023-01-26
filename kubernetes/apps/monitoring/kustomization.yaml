@@ -4,7 +4,7 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./kubernetes-dashboard/ks.yaml
-  # - ./goldilocks/ks.yaml
-  # - ./vpa/ks.yaml
+  - ./goldilocks/ks.yaml
+  - ./vpa/ks.yaml
   - ./kube-prometheus-stack/ks.yaml
   - ./grafana/ks.yaml
