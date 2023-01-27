@@ -2,11 +2,12 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: longhorn-frontend
+  name: longhorn
   namespace: longhorn-system
   annotations:
     cert-manager.io/cluster-issuer: "letsencrypt-production"
     hajimari.io/enable: "true"
+    hajimari.io/icon: cow
     traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
     traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-middleware-authentik@kubernetescrd
 spec:
@@ -23,7 +24,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: longhorn-frontend
+                name: longhorn
                 namespace: longhorn-system
                 port:
                   number: 80
