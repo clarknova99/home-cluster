@@ -5,6 +5,7 @@ metadata:
   name: longhorn
   namespace: longhorn-system
   annotations:
+    external-dns/is-public: "true"
     cert-manager.io/cluster-issuer: "letsencrypt-production"
     hajimari.io/enable: "true"
     hajimari.io/icon: cow
@@ -24,7 +25,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: longhorn
+                name: longhorn-frontend
                 # namespace: longhorn-system
                 port:
                   number: 80
