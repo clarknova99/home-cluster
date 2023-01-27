@@ -25,6 +25,6 @@ spec:
             backend:
               service:
                 name: longhorn
-                namespace: longhorn-system
+                # namespace: longhorn-system
                 port:
                   number: 80
