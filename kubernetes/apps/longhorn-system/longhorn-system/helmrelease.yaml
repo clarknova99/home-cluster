@@ -25,11 +25,12 @@ spec:
       defaultClass: true
       defaultClassReplicaCount: 2
       reclaimPolicy: Delete
+      defaultFsType: ext4
     defaultSettings:
       storageMinimalAvailablePercentage: 10
       nodeDownPodDeletionPolicy: delete-both-statefulset-and-deployment-pod
       defaultDataLocality: best-effort
-
+      defaultLonghornStaticStorageClass: longhorn
     #   backupstorePollInterval: 300
     #   backupTarget: nfs://${NFS_SERVER_ADDR}:${NFS_SERVER_PATH}/longhorn_backup
     #   createDefaultDiskLabeledNodes: true
@@ -37,7 +38,7 @@ spec:
 
     #   concurrentAutomaticEngineUpgradePerNodeLimit: 1
     #   defaultReplicaCount: 2
-    #   defaultLonghornStaticStorageClass: longhorn
+
 
     # ingress:
     #   enabled: true
