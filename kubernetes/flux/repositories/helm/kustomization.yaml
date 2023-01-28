@@ -7,6 +7,7 @@ resources:
   # - ./csi-driver-nfs.yaml
   - ./bitnami.yaml
   - ./bjw-s.yaml
+  - ./dysnix.yaml
   - ./external-dns.yaml
   - ./fairwinds.yaml
   - ./grafana.yaml
