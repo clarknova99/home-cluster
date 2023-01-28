@@ -38,7 +38,7 @@ spec:
       RADARR__INSTANCE_NAME: Radarr
       RADARR__PORT: &port 80
       RADARR__APPLICATION_URL: "radarr.${SECRET_DOMAIN}"
-      RADARR__LOG_LEVEL: info
+      RADARR__LOG_LEVEL: debug
     service:
       main:
         ports:
@@ -54,7 +54,7 @@ spec:
       - name: config
         mountPath: /config
         accessMode: ReadWriteOnce
-        size: 1Gi
+        size: 5Gi
         storageClass: longhorn
         labels:
           snapshot.home.arpa/enabled: "true"
