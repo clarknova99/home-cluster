@@ -1,10 +1,5 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - namespace.yaml
-  - helm-release.yaml
-  - storageclass.yaml
-  - recurringjobs-release.yaml
-  - service-monitor.yaml
-  - prometheus-rules.yaml
-  - ingress.yaml
+  - ./namespace.yaml
+  - longhorn-system
