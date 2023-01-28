@@ -44,6 +44,14 @@ spec:
         ports:
           http:
             port: *port
+    volumeClaimTemplates:
+      - name: config
+        mountPath: /config
+        accessMode: ReadWriteOnce
+        size: 1Gi
+        storageClass: longhorn
+        labels:
+          snapshot.home.arpa/enabled: "true"
     persistence:
       downloads:
         enabled: true
