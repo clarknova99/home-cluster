@@ -42,7 +42,6 @@ spec:
     policy: sync
     sources:
       - ingress
-      - ingressRoute
     # sources: ["ingress"]
     # txtPrefix: k8s.
     # txtOwnerId: default
