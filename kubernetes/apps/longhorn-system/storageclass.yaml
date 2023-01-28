@@ -15,11 +15,11 @@ parameters:
 kind: StorageClass
 apiVersion: storage.k8s.io/v1
 metadata:
-  name: longhorn-xfs
+  name: longhorn-ext4
 provisioner: driver.longhorn.io
 allowVolumeExpansion: true
 parameters:
   numberOfReplicas: "3"
   staleReplicaTimeout: "2880" # 48 hours in minutes
   fromBackup: ""
-  fsType: "xfs"
+  fsType: "ext4"

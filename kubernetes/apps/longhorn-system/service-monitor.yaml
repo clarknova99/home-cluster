@@ -1,8 +1,10 @@
----
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: longhorn
+  name: longhorn-prometheus-servicemonitor
+  namespace: longhorn-system
+  labels:
+    name: longhorn-prometheus-servicemonitor
 spec:
   selector:
     matchLabels:
