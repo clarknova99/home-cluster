@@ -19,20 +19,25 @@ spec:
       interval: 5m
   values:
     enablePSP: false
+    csi:
+      kubeletRootDir: /var/lib/kubelet
     persistence:
-      defaultClass: false
+      defaultClass: true
       defaultClassReplicaCount: 2
-      reclaimPolicy: Retain
+      reclaimPolicy: Delete
     defaultSettings:
-      backupstorePollInterval: 300
-      backupTarget: nfs://${NFS_SERVER_ADDR}:${NFS_SERVER_PATH}/longhorn_backup
-      createDefaultDiskLabeledNodes: true
-      defaultDataLocality: best-effort
-      nodeDownPodDeletionPolicy: delete-both-statefulset-and-deployment-pod
-      concurrentAutomaticEngineUpgradePerNodeLimit: 1
       storageMinimalAvailablePercentage: 10
-      defaultReplicaCount: 2
-      defaultLonghornStaticStorageClass: longhorn
+      nodeDownPodDeletionPolicy: delete-both-statefulset-and-deployment-pod
+      defaultDataLocality: best-effort
+
+    #   backupstorePollInterval: 300
+    #   backupTarget: nfs://${NFS_SERVER_ADDR}:${NFS_SERVER_PATH}/longhorn_backup
+    #   createDefaultDiskLabeledNodes: true
+
+
+    #   concurrentAutomaticEngineUpgradePerNodeLimit: 1
+    #   defaultReplicaCount: 2
+    #   defaultLonghornStaticStorageClass: longhorn
 
     # ingress:
     #   enabled: true
