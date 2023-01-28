@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: &app sonarr
+  name: bazarr
   namespace: media
 spec:
   interval: 15m
@@ -28,23 +28,16 @@ spec:
   values:
     controller:
       type: statefulset
-      annotations:
-        reloader.stakater.com/auto: "true"
     image:
-      repository: ghcr.io/onedr0p/sonarr-develop
-      tag: 4.0.0.356@sha256:c7d3cd0d6b87673b5cf92e4bce71df22608a314a1c4f14fbd6bd14c74ad7af4a
+      repository: ghcr.io/onedr0p/bazarr
+      tag: 1.1.4@sha256:73de30b5f8143f7e41a76ef0645a1d12808d57b4933c86623937017024119e46
     env:
-      SONARR__INSTANCE_NAME: Sonarr
-      SONARR__PORT: &port 80
-      SONARR__LOG_LEVEL: info
-    # envFrom:
-    #   - secretRef:
-    #       name: sonarr-secret
+      TZ: America/New_York
     service:
       main:
         ports:
           http:
-            port: *port
+            port: 6767
     podSecurityContext:
       runAsUser: 568
       runAsGroup: 568
@@ -60,10 +53,6 @@ spec:
         labels:
           snapshot.home.arpa/enabled: "true"
     persistence:
-      # config:
-      #   enabled: true
-      #   existingClaim: pvc-sonarr-config
-      #   mountPath: /config
       downloads:
         enabled: true
         existingClaim: pvc-downloads
@@ -79,6 +68,10 @@ spec:
       incomplete:
         enabled: true
         type: emptyDir
+      add-ons:
+        enabled: true
+        type: emptyDir
+        mountPath: /add-ons
     resources:
       requests:
         cpu: 10m
