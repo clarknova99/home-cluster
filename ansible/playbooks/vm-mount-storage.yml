@@ -10,7 +10,7 @@
     permission: '0777'
     myopts: 'rw,sync'
   tasks:
-    - name: Utility present debian-like
+    - name: Install NFS dependencies
       ansible.builtin.apt:
         name:
           - nfs-common
@@ -21,7 +21,7 @@
       ansible.builtin.file:
         path: "{{ item.path }}"
         state: directory
-        mode: "{{ permission }}"
+        mode: "0777"
         owner: root
         group: root
       with_items:
@@ -35,7 +35,7 @@
         src: "{{ item.src }}"
         path: "{{ item.path }}"
         fstype: nfs
-        opts: "{{ myopts }}"
+        opts: "rw,sync"
         state: mounted
       with_items:
         - src: "192.168.1.2:/volume1/network-storage"
