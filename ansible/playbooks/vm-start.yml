@@ -1,23 +1,37 @@
 ---
-
 - name: Start All VMs
   hosts: nuc11
   become: true
   tasks:
-  - name: Start VMs
-    community.general.proxmox_kvm:
-      api_user: tf@pam
-      api_token_id: "terraform_token"
-      api_token_secret: "ff81891e-6a47-4439-a1f4-f5b37773a21b"
-      api_host: nuc11
-      vmid: "{{ item.key1 }}"
-      state: started
-      timeout: 300
-    with_items:
-      - key1: "301"
-      - key1: "302"
-      - key1: "303"
-      - key1: "304"
-      - key1: "305"
+    - name: Start VMs
+      community.general.proxmox_kvm:
+        api_user: tf@pam
+        api_token_id: "terraform_token"
+        api_token_secret: "ff81891e-6a47-4439-a1f4-f5b37773a21b"
+        api_host: nuc11
+        vmid: "{{ item.key1 }}"
+        state: started
+        timeout: 300
+      with_items:
+        - key1: "301"
+        - key1: "302"
+        - key1: "303"
+        - key1: "304"
+        - key1: "305"
+- name: Start All VMs
+  hosts: nuc
+  become: true
+  tasks:
+    - name: Start VMs
+      community.general.proxmox_kvm:
+        api_user: tf@pam
+        api_token_id: "terraform_token"
+        api_token_secret: "ff81891e-6a47-4439-a1f4-f5b37773a21b"
+        api_host: nuc
+        vmid: "{{ item.key1 }}"
+        state: started
+        timeout: 300
+      with_items:
+        - key1: "307"
 
 ...
