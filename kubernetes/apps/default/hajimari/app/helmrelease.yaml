@@ -38,6 +38,8 @@ spec:
           - default
           - networking
           - monitoring
+          - media
+          - longhorn-system
     podAnnotations:
       configmap.reloader.stakater.com/reload: hajimari-settings
     persistence:
