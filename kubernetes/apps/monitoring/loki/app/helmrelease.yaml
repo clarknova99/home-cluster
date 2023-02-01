@@ -125,17 +125,16 @@ spec:
         enabled: true
         ingressClassName: traefik
         annotations:
-          hajimari.io/appName: Prometheus
-          hajimari.io/icon: simple-icons:prometheus
+          hajimari.io/enable: "false"
           cert-manager.io/cluster-issuer: "letsencrypt-production"
         hosts:
-          - "prom.${SECRET_DOMAIN}"
+          - "loki.${SECRET_DOMAIN}"
         path: /
         pathType: Prefix
         tls:
           - hosts:
-              - "prom.${SECRET_DOMAIN}"
-            secretName: "prom.${SECRET_DOMAIN}"
+              - "loki.${SECRET_DOMAIN}"
+            secretName: "loki.${SECRET_DOMAIN}"
     write:
       replicas: 3
       persistence:
