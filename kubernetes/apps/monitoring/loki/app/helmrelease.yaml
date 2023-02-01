@@ -139,8 +139,8 @@ spec:
       replicas: 3
       persistence:
         size: 5Gi
-        #storageClass: local-path
-        storageClass: longhorn
+        storageClass: local-path
+        #storageClass: longhorn
     read:
       replicas: 3
       extraVolumeMounts:
