@@ -58,13 +58,6 @@ spec:
         common:
           path_prefix: /var/loki
           replication_factor: 3
-          storage:
-            s3:
-              s3: null
-              endpoint: minio.default.svc.cluster.local:9000
-              bucketnames: loki
-              insecure: true
-              s3forcepathstyle: true
           ring:
             kvstore:
               store: memberlist
