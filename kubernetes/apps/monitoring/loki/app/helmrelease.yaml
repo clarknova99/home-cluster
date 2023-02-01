@@ -1,5 +1,4 @@
 ---
-# yaml-language-server: $schema=https://kubernetes-schemas.devbu.io/helmrelease_v2beta1.json
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
@@ -10,7 +9,7 @@ spec:
   chart:
     spec:
       chart: loki
-      version: 3.8.1
+      version: 4.4.2
       sourceRef:
         kind: HelmRepository
         name: grafana
@@ -105,23 +104,38 @@ spec:
     gateway:
       enabled: true
       replicas: 3
-      image:
-        registry: ghcr.io
-        repository: nginxinc/nginx-unprivileged
-        tag: 1.23-alpine
+      # image:
+      #   registry: ghcr.io
+      #   repository: nginxinc/nginx-unprivileged
+      #   tag: 1.23-alpine
+      # ingress:
+      #   enabled: true
+      #   ingressClassName: nginx
+      #   annotations:
+      #     hajimari.io/enable: "false"
+      #   hosts:
+      #     - host: &host loki.devbu.io
+      #       paths:
+      #         - path: /
+      #           pathType: Prefix
+      #   tls:
+      #     - hosts:
+      #         - *host
       ingress:
         enabled: true
-        ingressClassName: nginx
+        ingressClassName: traefik
         annotations:
-          hajimari.io/enable: "false"
+          hajimari.io/appName: Prometheus
+          hajimari.io/icon: simple-icons:prometheus
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
         hosts:
-          - host: &host loki.devbu.io
-            paths:
-              - path: /
-                pathType: Prefix
+          - "prom.${SECRET_DOMAIN}"
+        path: /
+        pathType: Prefix
         tls:
           - hosts:
-              - *host
+              - "prom.${SECRET_DOMAIN}"
+            secretName: "prom.${SECRET_DOMAIN}"
     write:
       replicas: 3
       persistence:
@@ -160,12 +174,3 @@ spec:
         enabled: false
     test:
       enabled: false
-  valuesFrom:
-    - targetPath: loki.structuredConfig.common.storage.s3.access_key_id
-      kind: Secret
-      name: loki-secret
-      valuesKey: AWS_ACCESS_KEY_ID
-    - targetPath: loki.structuredConfig.common.storage.s3.secret_access_key
-      kind: Secret
-      name: loki-secret
-      valuesKey: AWS_SECRET_ACCESS_KEY
