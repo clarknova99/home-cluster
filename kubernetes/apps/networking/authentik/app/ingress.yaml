@@ -4,6 +4,7 @@ kind: Ingress
 metadata:
   annotations:
     external-dns/is-public: "true"
+    hajimari.io/icon: mdi:account-security-outline
     cert-manager.io/cluster-issuer: letsencrypt-production
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
   name: authentik
