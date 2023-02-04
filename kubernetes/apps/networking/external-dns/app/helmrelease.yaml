@@ -36,8 +36,7 @@ spec:
           secretKeyRef:
             name: external-dns-secret
             key: api-key
-    args:
-      - --log-level=debug
+    log-level: debug
     extraArgs:
       - --cloudflare-proxied
       - --annotation-filter=external-dns.home.arpa/enabled in (true)
