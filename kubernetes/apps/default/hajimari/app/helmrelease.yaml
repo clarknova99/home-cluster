@@ -36,10 +36,34 @@ spec:
       namespaceSelector:
         matchNames:
           - default
-          - networking
+          - kube-system
+          - longhorn-system
           - monitoring
           - media
-          - longhorn-system
+          - networking
+      customApps:
+        - group: Infra
+          apps:
+            - name: Proxmox
+              url: "https://prox.${SECRET_DOMAIN}"
+              icon: server
+            - name: Plex
+              url: "https://plex.${SECRET_DOMAIN}"
+              icon: plex
+      globalBookmarks:
+        - group: Daily
+          bookmarks:
+            - name: k8s-at-home-search
+              url: "https://nanne.dev/k8s-at-home-search/"
+            - name: Home-Cluster
+              url: "https://github.com/clarknova99/home-cluster"
+            - name: GitHub
+              url: "https://github.com"
+            - name: InfoSecNews
+              url: "https://allinfosecnews.com"
+            - name: Unifi
+              url: "https://unifi"
+
     podAnnotations:
       configmap.reloader.stakater.com/reload: hajimari-settings
     persistence:

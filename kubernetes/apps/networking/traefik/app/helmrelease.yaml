@@ -20,6 +20,8 @@ spec:
   dependsOn:
     - name: metallb
       namespace: networking
+    - name: cert-manager
+      namespace: cert-manager
   install:
     createNamespace: true
     remediation:
@@ -99,8 +101,8 @@ spec:
       - --providers.kubernetescrd
       - --providers.kubernetescrd.allowCrossNamespace=true
       # - --providers.kubernetesingress.ingressclass=traefik
-      #- --metrics.prometheus=true
-      #- --metrics.prometheus.entryPoint=metrics
+      - --metrics.prometheus=true
+      - --metrics.prometheus.entryPoint=metrics
     additionalArguments:
       - --log.level=DEBUG
       - --log.filePath=/data/traefik/logs/traefik.log
