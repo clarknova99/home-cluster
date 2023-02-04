@@ -23,6 +23,7 @@ resources:
   - ./metrics-server.yaml
   - ./node-feature-discovery.yaml
   - ./nfs-subdir-external-provisioner.yaml
+  - ./portainer.yaml
   - ./prometheus-community.yaml
   # - ./rook-ceph.yaml
   - ./stakater.yaml
