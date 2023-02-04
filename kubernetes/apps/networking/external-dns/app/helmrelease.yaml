@@ -26,9 +26,8 @@ spec:
       - service
       - ingress
     policy: sync
-    loglevel: debug
+    logLevel: debug
     interval: 2m
-    # logLevel: debug
     provider: cloudflare
     env:
       - name: CF_API_EMAIL
