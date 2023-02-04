@@ -43,8 +43,8 @@ spec:
     extraArgs:
       - --cloudflare-proxied
       - --annotation-filter=external-dns.home.arpa/enabled in (true)
-    txtPrefix: k8s.
-    txtOwnerId: default
+    # txtPrefix: k8s.
+    # txtOwnerId: default
     domainFilters:
       - "${SECRET_DOMAIN}"
     serviceMonitor:
