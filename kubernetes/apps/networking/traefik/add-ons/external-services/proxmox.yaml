@@ -6,7 +6,7 @@ metadata:
   namespace: networking
   annotations:
     hajimari.io/enable: "true"
-    hajimari.io/icon: server``
+    hajimari.io/icon: simple-icons:proxmox
     coredns.io/hostname: "proxmox.${SECRET_DOMAIN}"
     cert-manager.io/cluster-issuer: letsencrypt-production
     traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
