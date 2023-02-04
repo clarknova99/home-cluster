@@ -40,13 +40,10 @@ spec:
           secretKeyRef:
             name: external-dns-secret
             key: api-key
-
     extraArgs:
       - --cloudflare-proxied
       - --annotation-filter=external-dns.home.arpa/enabled in (true)
-
-    # sources: ["ingress"]
-    # txtPrefix: k8s.
+    txtPrefix: k8s.
     txtOwnerId: default
     domainFilters:
       - "${SECRET_DOMAIN}"
