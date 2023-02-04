@@ -4,6 +4,7 @@ kind: HelmRelease
 metadata:
   name: helm-dashboard
   namespace: monitoring
+  app.kubernetes.io/managed-by: helm
 spec:
   interval: 5m
   chart:
