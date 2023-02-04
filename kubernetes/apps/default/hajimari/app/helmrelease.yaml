@@ -41,15 +41,15 @@ spec:
           - monitoring
           - media
           - networking
-      customApps:
-        - group: Infra
-          apps:
-            - name: Proxmox
-              url: "https://prox.${SECRET_DOMAIN}"
-              icon: server
-            - name: Plex
-              url: "https://plex.${SECRET_DOMAIN}"
-              icon: plex
+      # customApps:
+      #   - group: Infra
+      #     apps:
+      #       - name: Proxmox
+      #         url: "https://prox.${SECRET_DOMAIN}"
+      #         icon: server
+      #       - name: Plex
+      #         url: "https://plex.${SECRET_DOMAIN}"
+      #         icon: plex
       globalBookmarks:
         - group: Daily
           bookmarks:
@@ -57,12 +57,9 @@ spec:
               url: "https://nanne.dev/k8s-at-home-search/"
             - name: Home-Cluster
               url: "https://github.com/clarknova99/home-cluster"
-            - name: GitHub
-              url: "https://github.com"
-            - name: InfoSecNews
-              url: "https://allinfosecnews.com"
-            - name: Unifi
-              url: "https://unifi"
+            - name: onedr0p
+              url: "https://github.com/onedr0p/home-ops"
+
 
     podAnnotations:
       configmap.reloader.stakater.com/reload: hajimari-settings
