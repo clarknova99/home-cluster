@@ -22,17 +22,17 @@ spec:
       namespace: longhorn-system
 
   values:
-    ingress:
-      enabled: true
-      className: "traefik"
-      hosts:
-        - host: &host "helm.${SECRET_DOMAIN}"
-          paths:
-            - path: /
-              pathType: Prefix
-      tls:
-        - hosts:
-            - *host
+    # ingress:
+    #   enabled: true
+    #   className: "traefik"
+    #   hosts:
+    #     - host: &host "helm.${SECRET_DOMAIN}"
+    #       paths:
+    #         - path: /
+    #           pathType: Prefix
+    #   tls:
+    #     - hosts:
+    #         - *host
 
     dashboard:
       persistence:
