@@ -87,6 +87,7 @@ spec:
         enabled: true
         allowExternalNameServices: true
         allowCrossNamespace: true
+        # https://github.com/kubernetes-sigs/external-dns/issues/1940
         publishedService:
           enabled: false
     globalArguments:
