@@ -46,7 +46,7 @@ spec:
       - --annotation-filter=external-dns.home.arpa/enabled in (true)
       - --zone-id-filter=399537a1da4ab599fac7bf35849ee71f
     # txtPrefix: k8s.
-    txtOwnerId: ""
+    #txtOwnerId: ""
     domainFilters:
       - "${SECRET_DOMAIN}"
     serviceMonitor:
