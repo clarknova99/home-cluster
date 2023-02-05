@@ -23,7 +23,7 @@ spec:
       retries: 3
   values:
     sources:
-      - service
+      # - service
       - ingress
     policy: sync
     logLevel: debug
