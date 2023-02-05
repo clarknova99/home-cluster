@@ -43,3 +43,4 @@ spec:
       recordType: CNAME
       targets:
         - "echo-server.${SECRET_DOMAIN}"
+        - "${SECRET_DOMAIN}"
