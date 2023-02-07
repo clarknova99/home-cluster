@@ -6,6 +6,8 @@ metadata:
   namespace: media
   annotations:
     cert-manager.io/cluster-issuer: "letsencrypt-production"
+    external-dns.alpha.kubernetes.io/target: "${SECRET_DOMAIN}"
+    external-dns.alpha.kubernetes.io/hostname: radarr.${SECRET_DOMAIN}
     hajimari.io/enable: "true"
     hajimari.io/icon: mdi:filmstrip
     traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
