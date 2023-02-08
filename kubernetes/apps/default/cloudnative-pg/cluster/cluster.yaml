@@ -1,0 +1,21 @@
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: postgres
+  namespace: dev
+spec:
+  instances: 3
+  imageName: ghcr.io/cloudnative-pg/postgresql:14.5
+  primaryUpdateStrategy: unsupervised
+  storage:
+    size: 20Gi
+    storageClass: local-path
+  superuserSecret:
+    name: cloudnative-pg-secret
+  postgresql:
+    parameters:
+      max_connections: "300"
+      shared_buffers: 512MB
+  monitoring:
+    enablePodMonitor: true

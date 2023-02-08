@@ -7,6 +7,7 @@ resources:
   # - ./csi-driver-nfs.yaml
   - ./bitnami.yaml
   - ./bjw-s.yaml
+  - ./cloudnative-pg.yaml
   - ./dysnix.yaml
   - ./external-dns.yaml
   - ./fairwinds.yaml
