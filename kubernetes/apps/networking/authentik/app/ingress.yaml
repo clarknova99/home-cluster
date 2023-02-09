@@ -26,16 +26,16 @@ spec:
                 name: authentik
                 port:
                   number: 80
-    # - host: "*.${SECRET_DOMAIN}"
-    #   http:
-    #     paths:
-    #       - path: /outpost.goauthentik.io/
-    #         pathType: Prefix
-    #         backend:
-    #           service:
-    #             name: authentik
-    #             port:
-    #               number: 80
+    - host: "*.${SECRET_DOMAIN}"
+      http:
+        paths:
+          - path: /outpost.goauthentik.io/
+            pathType: Prefix
+            backend:
+              service:
+                name: authentik
+                port:
+                  number: 80
   tls:
     - hosts:
         - auth.${SECRET_DOMAIN}
