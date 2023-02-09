@@ -3,8 +3,8 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
-    # external-dns/is-public: "true"
-    # external-dns.home.arpa/enabled: "true"
+    external-dns/is-public: "true"
+    external-dns.home.arpa/enabled: "false"
     # external-dns.alpha.kubernetes.io/target: "${SECRET_DOMAIN}"
     # external-dns.alpha.kubernetes.io/hostname: auth.${SECRET_DOMAIN}
     hajimari.io/enable: "true"
