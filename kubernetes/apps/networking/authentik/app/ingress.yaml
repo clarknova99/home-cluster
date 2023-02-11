@@ -5,8 +5,8 @@ metadata:
   annotations:
     external-dns/is-public: "true"
     external-dns.home.arpa/enabled: "true"
-    # external-dns.alpha.kubernetes.io/target: "${SECRET_DOMAIN}"
-    # external-dns.alpha.kubernetes.io/hostname: auth.${SECRET_DOMAIN}
+    external-dns.alpha.kubernetes.io/target: "${SECRET_DOMAIN}"
+    external-dns.alpha.kubernetes.io/hostname: auth.${SECRET_DOMAIN}
     hajimari.io/enable: "true"
     hajimari.io/icon: mdi:account-security-outline
     cert-manager.io/cluster-issuer: letsencrypt-production
