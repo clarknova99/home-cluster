@@ -15,20 +15,20 @@ spec:
   ingressClassName: "traefik"
   tls:
     - hosts:
-        - "${SECRET_DOMAIN}"
+        # - "${SECRET_DOMAIN}"
         - "www.${SECRET_DOMAIN}"
       secretName: "web-tls"
-  rules:
-    - host: "${SECRET_DOMAIN}"
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: nginx-site
-                port:
-                  number: 8080
+  # rules:
+  #   - host: "${SECRET_DOMAIN}"
+  #     http:
+  #       paths:
+  #         - path: /
+  #           pathType: Prefix
+  #           backend:
+  #             service:
+  #               name: nginx-site
+  #               port:
+  #                 number: 8080
     - host: "www.${SECRET_DOMAIN}"
       http:
         paths:
