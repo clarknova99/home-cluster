@@ -25,7 +25,7 @@ spec:
     sources:
       # - service
       - ingress
-      - crd
+      #- crd
     policy: sync
     logLevel: debug
     interval: 2m
