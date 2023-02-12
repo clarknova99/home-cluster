@@ -7,8 +7,6 @@ metadata:
   # app.kubernetes.io/managed-by: helm
 spec:
   interval: 5m
-  updateStrategy:
-    type: Recreate
   chart:
     spec:
       chart: helm-dashboard
@@ -24,6 +22,8 @@ spec:
       namespace: longhorn-system
 
   values:
+    updateStrategy:
+      type: Recreate
     # ingress:
     #   enabled: true
     #   className: "traefik"
