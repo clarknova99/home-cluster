@@ -15,6 +15,8 @@ spec:
         name: cloudnative-pg
         namespace: flux-system
   maxHistory: 3
+    ## sops --encrypt --in-place ./kubernetes/apps/default/cloudnative-pg/app/postgres.sops.yaml
+    ## sops --decrypt ./kubernetes/apps/default/cloudnative-pg/app/postgres.sops.yaml | kubectl apply -f -
   install:
     createNamespace: true
     remediation:
