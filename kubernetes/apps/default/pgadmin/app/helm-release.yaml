@@ -21,7 +21,7 @@ spec:
     strategy:
       type: RollingUpdate
     env:
-      email: ${SECRET_POSTGRES_USERNAME}
+      email: ${SECRET_AUTHENTIK_SMTP_USERNAME}
       password: ${SECRET_POSTGRES_PASSWORD}
     persistentVolume:
       enabled: true
