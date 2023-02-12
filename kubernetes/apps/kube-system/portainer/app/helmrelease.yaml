@@ -33,6 +33,9 @@ spec:
         hajimari.io/enable: "true"
         hajimari.io/appName: "portainer"
         hajimari.io/icon: "pier-crane"
+        external-dns.home.arpa/enabled: "true"
+        external-dns.alpha.kubernetes.io/target: "${SECRET_DOMAIN}"
+        external-dns.alpha.kubernetes.io/hostname: pgadmin.${SECRET_DOMAIN}
         traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
         traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-middleware-authentik@kubernetescrd
       hosts:
