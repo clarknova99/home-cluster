@@ -11,3 +11,4 @@ resources:
   - ./nginx/ks.yaml
 #  - ./plex/ks.yaml
   - ./cloudnative-pg/ks.yaml
+  - ./pgadmin/ks.yaml
