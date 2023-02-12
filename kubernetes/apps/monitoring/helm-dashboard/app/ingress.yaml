@@ -5,14 +5,13 @@ metadata:
   name: helm-dashboard
   namespace: monitoring
   annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
     external-dns.home.arpa/enabled: "true"
     external-dns.alpha.kubernetes.io/target: "${SECRET_DOMAIN}"
     external-dns.alpha.kubernetes.io/hostname: helm.${SECRET_DOMAIN}
-   # external-dns.alpha.kubernetes.io/ttl: "120"
-    cert-manager.io/cluster-issuer: "letsencrypt-production"
     hajimari.io/enable: "true"
     traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-    traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-middleware-authentik@kubernetescrd
+    traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-middleware-chains-authentik@kubernetescrd
 spec:
   ingressClassName: "traefik"
   tls:
