@@ -18,7 +18,7 @@ spec:
         # - "${SECRET_DOMAIN}"
         - "www.${SECRET_DOMAIN}"
       secretName: "web-tls"
-  # rules:
+  rules:
   #   - host: "${SECRET_DOMAIN}"
   #     http:
   #       paths:
