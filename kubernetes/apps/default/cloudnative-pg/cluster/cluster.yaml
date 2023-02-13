@@ -16,6 +16,14 @@ spec:
     name: cloudnative-pg
   monitoring:
     enablePodMonitor: false
+  bootstrap:
+    initdb:
+      database: app
+      owner: ${SECRET_POSTGRES_USERNAME}
+    secret:
+      name: cloudnative-pg
+
+
 # ---
 # apiVersion: postgresql.cnpg.io/v1
 # kind: Cluster
