@@ -20,8 +20,8 @@ spec:
     initdb:
       database: app
       owner: ${SECRET_POSTGRES_USERNAME}
-    secret:
-      name: cloudnative-pg
+      secret:
+        name: cloudnative-pg
 
 
 # ---
