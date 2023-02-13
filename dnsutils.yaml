@@ -3,7 +3,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: dnsutils
-  namespace: media
+  namespace: default
 spec:
   containers:
     - name: dnsutils
@@ -12,5 +12,5 @@ spec:
         - sleep
         - "infinity"
       imagePullPolicy: IfNotPresent
-      restartPolicy: Always
+  restartPolicy: Always
 ...
