@@ -5,6 +5,7 @@ namespace: default
 resources:
   - ./postgres.sops.yaml
   - ./helmrelease.yaml
+  - ./service.yaml
 configMapGenerator:
   - name: cloudnative-pg-dashboard
     files:
