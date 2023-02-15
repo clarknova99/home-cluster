@@ -27,8 +27,8 @@ spec:
       darkTheme: espresso
       alwaysTargetBlank: true
       showGreeting: false
-      showAppGroups: false
-      showAppStatus: false
+      showAppGroups: true
+      showAppStatus: true
       showBookmarkGroups: false
       showGlobalBookmarks: false
       showAppUrls: false
@@ -59,6 +59,12 @@ spec:
               url: "https://github.com/clarknova99/home-cluster"
             - name: onedr0p
               url: "https://github.com/onedr0p/home-ops"
+            - name: OneDrive
+              url: 'https://onedrive.live.com'
+              icon: 'mdi:microsoft-onedrive'
+              info: ondedrive
+            - name: AdGuard
+              url: 'http://192.168.1.14'
 
 
     podAnnotations:
