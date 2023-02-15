@@ -6,7 +6,7 @@ metadata:
   name: postgres
   namespace: default
 spec:
-  instances: 3
+  instances: 1
   imageName: ghcr.io/cloudnative-pg/postgresql:15.1
   primaryUpdateStrategy: unsupervised
   storage:
@@ -16,12 +16,12 @@ spec:
     name: cloudnative-pg
   monitoring:
     enablePodMonitor: false
-  bootstrap:
-    initdb:
-      database: app
-      owner: ${SECRET_POSTGRES_USERNAME}
-      secret:
-        name: cloudnative-pg
+  # bootstrap:
+  #   initdb:
+  #     database: fags
+  #     owner: ${SECRET_POSTGRES_USERNAME}
+  #     secret:
+  #       name: cloudnative-pg
 
 
 # ---
