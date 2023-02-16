@@ -4,3 +4,4 @@ kind: Kustomization
 namespace: default
 resources:
   - ./cluster.yaml
+  - ./service.yaml
