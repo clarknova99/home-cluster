@@ -10,5 +10,5 @@ resources:
   - ./filebrowser/ks.yaml
   - ./nginx/ks.yaml
 #  - ./plex/ks.yaml
-  - ./cloudnative-pg/ks.yaml
+ # - ./cloudnative-pg/ks.yaml
   - ./pgadmin/ks.yaml
