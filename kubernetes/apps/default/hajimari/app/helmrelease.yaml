@@ -65,6 +65,8 @@ spec:
               info: ondedrive
             - name: AdGuard
               url: 'http://192.168.1.14'
+            - name: Renovate
+              url: https://app.renovatebot.com/dashboard#github/clarknova99/home-cluster
 
 
     podAnnotations:
