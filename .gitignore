@@ -22,4 +22,5 @@ vm-start.yaml
 terraform/
 lxc-create.yml
 servers/
+.vscode/
 ansible/inventory/servers/
