@@ -13,4 +13,4 @@ resources:
   #- traefik-error-pages
   #- ./authelia/ks.yaml
   #- ./lldap/ks.yaml
-  - ./authentik/ks.yaml
+  #- ./authentik/ks.yaml
