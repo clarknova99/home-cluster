@@ -41,6 +41,7 @@ spec:
     deployment:
       kind: Deployment
       replicas: 1
+    # kubectl exec -it deployment/authentik-worker -c authentik -- ak dump_config
     authentik:
       email:
         host: "${SECRET_SMTP}"
