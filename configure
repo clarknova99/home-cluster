@@ -513,7 +513,8 @@ success() {
 _log() {
     local type="${1}"
     local msg="${2}"
-    printf "[%s] [%s] %s\n" "$(date -u)" "${type}" "${msg}"
+    #printf "[%s] [%s] %s\n" "$(date -u)" "${type}" "${msg}"
+    printf 'timestamp="%s" type="%s" message="%s"\n' "$(date)" "${type}" "${msg}"
 }
 
 main "$@"
