@@ -47,6 +47,7 @@ spec:
               - *host
 
     persistence:
+
       config:
         enabled: true
         mountPath: /app/appdata
