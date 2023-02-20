@@ -48,8 +48,9 @@
             autoremove: true
         - name: Packages | RasPi packages
           ansible.builtin.apt:
+            # 22.04 ubuntu needs linux-modules-extra-5.15.0-1005-raspi
             name: ["linux-modules-extra-raspi"]
-            install_recommends: false
+            install_recommends: true
           notify: Reboot
           when: "'raspi' in ansible_kernel"
       when: ansible_facts['distribution'] == 'Ubuntu'
