@@ -129,7 +129,7 @@ tasks:
       - ansible-playbook {{.ANSIBLE_PLAYBOOK_DIR}}/vm-clone.yml
 
   vm-mount:
-    desc: clone vms
+    desc: mount nas drives
     dir: "{{.ANSIBLE_DIR}}"
     cmds:
       - ansible-playbook {{.ANSIBLE_PLAYBOOK_DIR}}/vm-mount-storage.yml
