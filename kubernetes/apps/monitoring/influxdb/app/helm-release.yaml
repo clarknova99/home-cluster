@@ -19,7 +19,7 @@ spec:
   values:
     image:
       repository: influxdb
-      tag: 1.8.5-debian-10-r264
+      tag: 1.8.5
 
     pdb:
       create: false
