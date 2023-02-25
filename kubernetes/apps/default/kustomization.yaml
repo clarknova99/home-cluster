@@ -4,11 +4,11 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./echo-server/ks.yaml
-#   - ./hajimari/ks.yaml
-#   - ./weave-gitops/ks.yaml
+  - ./hajimari/ks.yaml
+  - ./weave-gitops/ks.yaml
   - ./whoami/ks.yaml
-#   - ./filebrowser/ks.yaml
-#   - ./nginx/ks.yaml
-#   - ./plex/ks.yaml
-#   - ./cloudnative-pg/ks.yaml
-#   - ./pgadmin/ks.yaml
+  - ./filebrowser/ks.yaml
+  - ./nginx/ks.yaml
+  - ./plex/ks.yaml
+  - ./cloudnative-pg/ks.yaml
+  - ./pgadmin/ks.yaml
