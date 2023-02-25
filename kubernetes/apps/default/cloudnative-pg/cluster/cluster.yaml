@@ -11,7 +11,8 @@ spec:
   primaryUpdateStrategy: unsupervised
   storage:
     size: 20Gi
-    storageClass: longhorn
+    #storageClass: longhorn
+    storageClass: nfs-client
   superuserSecret:
     name: cloudnative-pg
   monitoring:
