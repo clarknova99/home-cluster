@@ -46,13 +46,13 @@ spec:
     #   bucket: "default"
     #   password: ${INFLUXDB_PASSWORD}
     extraVolumes:
-      - name: nginx-www
+      - name: influxdb
         persistentVolumeClaim:
           claimName: pvc-influxdb
 
     extraVolumeMounts:
       - mountPath: /var/lib/influxdb
-        name: nginx-www
+        name: influxdb
 
     persistence:
       data:
