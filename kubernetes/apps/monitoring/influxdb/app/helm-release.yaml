@@ -39,20 +39,28 @@ spec:
         cpu: 100m
         memory: 128Mi
 
+    volumes:
+      - name: influxdb-data
+        persistentVolumeClaim:
+          claimName: pvc-influxdb
+    volumeMounts:
+      - mountPath: /var/lib/influxdb
+        name: influxdb-data
+
     # adminUser:
     #   organization: "homelab"
     #   user: "admin"
     #   retention_policy: "60d"
     #   bucket: "default"
     #   password: ${INFLUXDB_PASSWORD}
-    extraVolumes:
-      - name: influxdb
-        persistentVolumeClaim:
-          claimName: pvc-influxdb
+    # extraVolumes:
+    #   - name: influxdb
+    #     persistentVolumeClaim:
+    #       claimName: pvc-influxdb
 
-    extraVolumeMounts:
-      - mountPath: /var/lib/influxdb
-        name: influxdb
+    # extraVolumeMounts:
+    #   - mountPath: /var/lib/influxdb
+    #     name: influxdb
 
     persistence:
       data:
