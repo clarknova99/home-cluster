@@ -40,12 +40,12 @@ spec:
         memory: 128Mi
 
     volumes:
-      - name: influxdb-data
+      - name: pv-influxdb
         persistentVolumeClaim:
           claimName: pvc-influxdb
     volumeMounts:
       - mountPath: /var/lib/influxdb
-        name: influxdb-data
+        name: pv-influxdb
 
     # adminUser:
     #   organization: "homelab"
