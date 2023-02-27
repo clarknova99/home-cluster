@@ -38,14 +38,20 @@ spec:
       requests:
         cpu: 100m
         memory: 128Mi
+    persistence:
+      config:
+        enabled: true
+        type: nfs
+        server: 192.168.1.2
+        path: /volume1/network-storage/influxdb
 
-    volumes:
-      - name: pv-influxdb
-        persistentVolumeClaim:
-          claimName: pvc-influxdb
-    volumeMounts:
-      - mountPath: /var/lib/influxdb
-        name: pv-influxdb
+    # volumes:
+    #   - name: pv-influxdb
+    #     persistentVolumeClaim:
+    #       claimName: pvc-influxdb
+    # volumeMounts:
+    #   - mountPath: /var/lib/influxdb
+    #     name: pv-influxdb
 
     # adminUser:
     #   organization: "homelab"
@@ -62,10 +68,10 @@ spec:
     #   - mountPath: /var/lib/influxdb
     #     name: influxdb
 
-    persistence:
-      data:
-        enabled: true
-        existingClaim: pvc-influxdb
+    # persistence:
+    #   data:
+    #     enabled: true
+    #     existingClaim: pvc-influxdb
 
 
     # persistence:
