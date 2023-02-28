@@ -19,7 +19,50 @@ spec:
   values:
     image:
       repository: influxdb
-      tag: 1.8.5
+      tag: 1.8.5-alpine
+  # template:
+  #   spec:
+  #     volumes:
+  #       - name: config
+  #         configMap:
+  #           name: influxdb
+  #           defaultMode: 420
+  #     containers:
+  #       - name: influxdb
+  #         image: influxdb:1.8.5
+  #         ports:
+  #           - name: api
+  #             containerPort: 8086
+  #             protocol: TCP
+  #           - name: rpc
+  #             containerPort: 8088
+  #             protocol: TCP
+  #         env:
+  #           - name: TZ
+  #             value: America/New_York
+  #         resources:
+  #           limits:
+  #             memory: 128Mi
+  #           requests:
+  #             cpu: 100m
+  #             memory: 128Mi
+  #         volumeMounts:
+  #           - name: influxdb-data
+  #             mountPath: /var/lib/influxdb
+  #           - name: config
+  #             mountPath: /etc/influxdb
+  #   volumeClaimTemplates:
+  #     - kind: PersistentVolumeClaim
+  #       apiVersion: v1
+  #       metadata:
+  #         name: pvc-influxdb
+  #       spec:
+  #         accessModes:
+  #           - ReadWriteOnce
+  #         resources:
+  #           requests:
+  #             storage: 8Gi
+  #         volumeMode: Filesystem
 
     pdb:
       create: false
@@ -31,13 +74,33 @@ spec:
     env:
       - name: TZ
         value: "${TIMEZONE}"
-
     resources:
       limits:
         memory: 128Mi
       requests:
         cpu: 100m
         memory: 128Mi
+    ## Persist data to a persistent volume
+    ##
+    persistence:
+      data:
+        enabled: true
+        existingClaim: pvc-influxdb
+        storageClass: ""
+
+      ## A manually managed Persistent Volume and Claim
+      ## Requires persistence.enabled: true
+      ## If defined, PVC must be created manually before volume will be bound
+      # existingClaim:
+      ## influxdb data Persistent Volume Storage Class
+      ## If defined, storageClassName: <storageClass>
+      ## If set to "-", storageClassName: "", which disables dynamic provisioning
+      ## If undefined (the default) or set to null, no storageClassName spec is
+      ##   set, choosing the default provisioner. (nfs-client)
+      # storageClass: "-"
+      annotations:
+      accessMode: ReadWriteOnce
+      size: 8Gi
     # persistence:
     #   data:
     #     enabled: true
@@ -54,10 +117,10 @@ spec:
     # volumeMounts:
     #   - mountPath: /var/lib/influxdb
     #     name: pv-influxdb
-    persistence:
-      enabled: true
-      useExisting: true
-      name: pvc-influxdb
+    # persistence:
+    #   enabled: true
+    #   useExisting: true
+    #   name: pvc-influxdb
     # persistence:
     #   data:
     #     enabled: true
