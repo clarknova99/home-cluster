@@ -15,7 +15,7 @@ spec:
         name: influxdata
         namespace: flux-system
       interval: 60m
-  # Values link: https://github.com/influxdata/helm-charts/blob/master/charts/influxdb2/values.yaml
+  # Values link: https://github.com/influxdata/helm-charts/blob/master/charts/influxdb/values.yaml
   values:
     image:
       repository: influxdb
@@ -85,6 +85,7 @@ spec:
     persistence:
       enabled: true
       useExisting: true
+      existingClaim: pvc-influxdb
       name: pvc-influxdb
     # persistence:
     #   data:
