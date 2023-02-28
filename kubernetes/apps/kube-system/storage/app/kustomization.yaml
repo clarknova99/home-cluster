@@ -4,7 +4,7 @@ kind: Kustomization
 resources:
   - ./pvc-default.yaml
   - ./pvc-downloads.yaml
-  - ./pvc-influxdb.yaml
+  # - ./pvc-influxdb.yaml
   - ./pvc-movies.yaml
   - ./pvc-networking.yaml
   - ./pvc-postgres.yaml
