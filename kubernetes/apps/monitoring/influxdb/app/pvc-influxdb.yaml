@@ -17,8 +17,8 @@ spec:
     readOnly: false
   mountOptions:
     - nfsvers=4.1
-    - hard
-    # - noatime
+    #- hard
+    - noatime
     # - nodiratime
     # - tcp
     # - intr
