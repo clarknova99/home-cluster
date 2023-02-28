@@ -98,9 +98,9 @@ spec:
       ## If undefined (the default) or set to null, no storageClassName spec is
       ##   set, choosing the default provisioner. (nfs-client)
       # storageClass: "-"
-      annotations:
-      accessMode: ReadWriteOnce
-      size: 8Gi
+      # annotations:
+      # accessMode: ReadWriteOnce
+      # size: 8Gi
     # persistence:
     #   data:
     #     enabled: true
