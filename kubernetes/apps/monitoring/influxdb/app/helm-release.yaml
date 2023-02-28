@@ -83,10 +83,14 @@ spec:
     ## Persist data to a persistent volume
     ##
     persistence:
-      data:
-        enabled: true
-        existingClaim: pvc-influxdb
-        storageClass: ""
+      enabled: true
+      useExisting: true
+      name: pvc-influxdb
+    # persistence:
+    #   data:
+    #     enabled: true
+    #     existingClaim: pvc-influxdb
+    #     storageClass: ""
 
       ## A manually managed Persistent Volume and Claim
       ## Requires persistence.enabled: true
