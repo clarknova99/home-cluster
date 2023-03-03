@@ -41,10 +41,10 @@ spec:
         enabled: true
         ports:
           http:
-            port: &port-console 9001
+            port: &port-console 9002
           api:
             enabled: true
-            port: &port-api 9000
+            port: &port-api 9003
         monitor:
           enabled: false
           # endpoints:
