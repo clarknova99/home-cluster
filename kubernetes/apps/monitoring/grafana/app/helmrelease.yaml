@@ -59,6 +59,11 @@ spec:
         enabled: true
         org_id: 1
         org_role: Viewer
+    persistence:
+      enabled: true
+      #useExisting: true
+      existingClaim: pvc-grafana
+      name: pvc-grafana
 
     # dashboardProviders:
     #   dashboardproviders.yaml:
