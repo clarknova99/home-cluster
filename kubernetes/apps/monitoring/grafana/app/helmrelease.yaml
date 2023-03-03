@@ -64,6 +64,9 @@ spec:
       #useExisting: true
       existingClaim: pvc-grafana
       name: pvc-grafana
+    volumeMounts:
+      - mountPath: /var/lib/grafana
+        name: grafana-data
 
     # dashboardProviders:
     #   dashboardproviders.yaml:
