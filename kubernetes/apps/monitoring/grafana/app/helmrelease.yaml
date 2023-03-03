@@ -34,6 +34,7 @@ spec:
     admin:
       existingSecret: grafana-admin-creds
     env:
+      GF_SMTP_ENABLED: "true"
       GF_SMTP_HOST: ${SECRET_GF_SMTP_HOST}
       GF_SMTP_FROM_ADDRESS: "${SECRET_GF_SMTP_FROM_ADDRESS}"
       GF_SMTP_FROM_NAME: "${SECRET_GF_SMTP_FROM_NAME}"
