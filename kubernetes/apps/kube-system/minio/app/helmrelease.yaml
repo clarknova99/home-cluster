@@ -35,7 +35,7 @@ spec:
     ## sops --decrypt ./kubernetes/apps/kube-system/minio/app/minio.sops.yaml | kubectl apply -f -
       - secretRef:
           name: *app
-    args: ["server", "/data", "--console-address", ":9002"]
+    args: ["server", "/data", "--console-address", ":9001"]
     service:
       main:
         enabled: true
