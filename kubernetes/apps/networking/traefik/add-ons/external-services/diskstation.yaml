@@ -42,7 +42,7 @@ spec:
     - name: https
       protocol: TCP
       port: 80
-      targetPort: 5000
+      targetPort: 5001
 ---
 apiVersion: v1
 kind: Endpoints
@@ -53,5 +53,5 @@ subsets:
       - ip: 192.168.1.2
     ports:
       - name: https
-        port: 5000
+        port: 5001
         protocol: TCP
