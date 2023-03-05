@@ -10,7 +10,8 @@ metadata:
     external-dns.alpha.kubernetes.io/hostname: minio.${SECRET_DOMAIN},"s3.${SECRET_DOMAIN}"
     cert-manager.io/cluster-issuer: "letsencrypt-production"
     traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-    traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-middleware-chains-default@kubernetescrd
+    # traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-middleware-chains-default@kubernetescrd
+    traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-middleware-authentik@kubernetescrd
 spec:
   ingressClassName: "traefik"
   tls:
