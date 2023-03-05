@@ -5,165 +5,66 @@ metadata:
   name: loki
   namespace: monitoring
 spec:
-  interval: 15m
+  interval: 5m
   chart:
     spec:
       chart: loki
-      version: 4.6.1
+      version: 4.8.0
       sourceRef:
         kind: HelmRepository
         name: grafana
         namespace: flux-system
-  maxHistory: 3
+      interval: 5m
   install:
     createNamespace: true
-    remediation:
-      retries: 3
-  upgrade:
-    cleanupOnFail: true
-    remediation:
-      retries: 3
-  uninstall:
-    keepHistory: false
   values:
-    loki:
-      structuredConfig:
-        auth_enabled: false
-        server:
-          log_level: info
-          http_listen_port: 3100
-          grpc_listen_port: 9095
-        memberlist:
-          join_members: ["loki-memberlist"]
-        limits_config:
-          retention_period: 14d
-          enforce_metric_name: false
-          reject_old_samples: true
-          reject_old_samples_max_age: 168h
-          max_cache_freshness_per_query: 10m
-          split_queries_by_interval: 15m
-          ingestion_rate_mb: 8
-          ingestion_burst_size_mb: 16
-          shard_streams:
-            enabled: true
-        schema_config:
-          configs:
-            - from: "2021-08-01"
-              store: boltdb-shipper
-              object_store: s3
-              schema: v11
-              index:
-                prefix: loki_index_
-                period: 24h
-        common:
-          path_prefix: /var/loki
-          replication_factor: 3
-          ring:
-            kvstore:
-              store: memberlist
-        ruler:
-          enable_api: true
-          enable_alertmanager_v2: true
-          alertmanager_url: http://kube-prometheus-stack-alertmanager:9093
-          storage:
-            type: local
-            local:
-              directory: /rules
-          rule_path: /tmp/scratch
-          ring:
-            kvstore:
-              store: memberlist
-        distributor:
-          ring:
-            kvstore:
-              store: memberlist
-        compactor:
-          working_directory: /var/loki/boltdb-shipper-compactor
-          shared_store: s3
-          compaction_interval: 10m
-          retention_enabled: true
-          retention_delete_delay: 2h
-          retention_delete_worker_count: 150
-        ingester:
-          max_chunk_age: 1h
-          lifecycler:
-            ring:
-              kvstore:
-                store: memberlist
-        analytics:
-          reporting_enabled: false
-      podAnnotations:
-        secret.reloader.stakater.com/reload: loki-secret
-    gateway:
+    ingress:
       enabled: true
-      replicas: 3
-      image:
-        registry: ghcr.io
-        repository: nginxinc/nginx-unprivileged
-        tag: 1.23-alpine
-      ingress:
-        enabled: true
-        ingressClassName: nginx
-        annotations:
-          hajimari.io/enable: "false"
-        hosts:
-          - host: &host loki.${SECRET_DOMAIN}
-            paths:
-              - path: /
-                pathType: Prefix
-        tls:
-          - hosts:
-              - *host
-      # ingress:
-      #   enabled: true
-      #   ingressClassName: traefik
-      #   annotations:
-      #     hajimari.io/enable: "false"
-      #     cert-manager.io/cluster-issuer: "letsencrypt-production"
-      #   hosts:
-      #     - "loki.${SECRET_DOMAIN}"
-      #   path: /
-      #   pathType: Prefix
-      #   tls:
-      #     - hosts:
-      #         - "loki.${SECRET_DOMAIN}"
-      #       secretName: "loki.${SECRET_DOMAIN}"
-    write:
-      replicas: 3
-      persistence:
-        size: 5Gi
-        storageClass: local-path
-        #storageClass: longhorn
-    read:
-      replicas: 3
-      extraVolumeMounts:
-        - name: loki-rules
-          mountPath: /rules/fake
-        - name: loki-rules-tmp
-          mountPath: /tmp/scratch
-        - name: loki-tmp
-          mountPath: /tmp/loki-tmp
-      extraVolumes:
-        - name: loki-rules
-          configMap:
-            name: loki-alerting-rules
-        - name: loki-rules-tmp
-          emptyDir: {}
-        - name: loki-tmp
-          emptyDir: {}
-      persistence:
-        size: 10Gi
-        storageClass: local-path
-    monitoring:
-      serviceMonitor:
-        enabled: false
-        metricsInstance:
-          enabled: false
-      selfMonitoring:
-        enabled: false
-        grafanaAgent:
-          installOperator: false
-      lokiCanary:
-        enabled: false
-    test:
-      enabled: false
+      ingressClassName: "traefik"
+      annotations:
+        cert-manager.io/cluster-issuer: "letsencrypt-production"
+        traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+      hosts:
+        - host: "loki.${SECRET_DOMAIN}"
+          paths:
+            - /
+      tls:
+        - secretName: "loki-tls"
+          hosts:
+            - "loki.${SECRET_DOMAIN}"
+    # extraArgs:
+    #   log.level: debug
+    config:
+      limits_config:
+        enforce_metric_name: false
+        reject_old_samples: true
+        reject_old_samples_max_age: 168h
+        ingestion_rate_mb: 16
+        ingestion_burst_size_mb: 24
+      storage_config:
+        aws:
+          bucketnames: loki
+          endpoint: "http://${NAS_ADDR}:11000"
+          access_key_id: "${SECRET_MINIO_LOKI_ACCESS_KEY}"
+          secret_access_key: "${SECRET_MINIO_LOKI_SECRET_KEY}"
+          s3forcepathstyle: true
+          insecure: true
+          region: us-east-1
+        boltdb_shipper:
+          active_index_directory: /data/loki/index
+          cache_location: /data/loki/index_cache
+          resync_interval: 5s
+          shared_store: s3
+      compactor:
+        retention_enabled: true
+      # ruler:
+      #   storage:
+      #     type: local
+      #     local:
+      #       directory: /rules
+      #   rule_path: /tmp/scratch
+      #   alertmanager_url: http://prometheus-alertmanager:9093
+      #   ring:
+      #     kvstore:
+      #       store: inmemory
+      #   enable_api: true
