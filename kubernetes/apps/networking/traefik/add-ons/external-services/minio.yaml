@@ -29,7 +29,7 @@ spec:
             path: /
             pathType: Prefix
     - host: "s3.${SECRET_DOMAIN}"
-      api:
+      http:
         paths:
           - path: /
             pathType: Prefix
