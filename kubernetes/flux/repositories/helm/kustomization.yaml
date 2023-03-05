@@ -30,5 +30,6 @@ resources:
   - ./prometheus-community.yaml
   - ./runix.yaml
   - ./stakater.yaml
+  - ./vector.yaml
   - ./weave-gitops.yaml
   - ./traefik.yaml

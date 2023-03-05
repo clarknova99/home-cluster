@@ -109,34 +109,6 @@ spec:
           #     bearerTokenSecret:
           #       name: minio-prometheus
           #       key: token
-    # ingress:
-    #   main:
-    #     enabled: true
-    #     ingressClassName: "traefik"
-    #     annotations:
-    #       cert-manager.io/cluster-issuer: "letsencrypt-production"
-    #       external-dns.home.arpa/enabled: "true"
-    #       external-dns.alpha.kubernetes.io/target: "${SECRET_DOMAIN}"
-    #       external-dns.alpha.kubernetes.io/hostname: minio.${SECRET_DOMAIN}
-    #       traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-
-    #     hosts:
-    #       - host: &host-console "minio.${SECRET_DOMAIN}"
-    #         paths:
-    #           - path: /
-    #             pathType: Prefix
-    #             service:
-    #               port: *port-console
-    #       - host: &host-api "s3.${SECRET_DOMAIN}"
-    #         paths:
-    #           - path: /
-    #             pathType: Prefix
-    #             service:
-    #               port: *port-api
-    #     tls:
-    #       - hosts:
-    #           - *host-console
-    #           - *host-api
     # podSecurityContext:
     #   runAsUser: 568
     #   runAsGroup: 568
