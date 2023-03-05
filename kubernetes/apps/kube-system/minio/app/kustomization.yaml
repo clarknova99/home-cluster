@@ -7,3 +7,4 @@ resources:
   - ./helmrelease.yaml
   - ./ingress.yaml
   - ./minio.sops.yaml
+  - ./service-monitor.yaml
