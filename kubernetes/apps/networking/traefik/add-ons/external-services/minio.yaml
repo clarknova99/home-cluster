@@ -22,7 +22,7 @@ spec:
         paths:
           - backend:
               service:
-                name: minio
+                name: minio-console
                 port:
                   number: 9001
             path: /
@@ -34,7 +34,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: api
+                name: minio-s3
                 port:
                   number: 9000
   tls:
@@ -46,22 +46,30 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: minio
+  name: minio-console
 spec:
   ports:
     - name: https
       protocol: TCP
       port: 9001
       targetPort: 9001
-    - name: api
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: minio-s3
+spec:
+  ports:
+    - name: https
       protocol: TCP
       port: 9000
       targetPort: 9000
+
 ---
 apiVersion: v1
 kind: Endpoints
 metadata:
-  name: minio
+  name: minio-console
 subsets:
   - addresses:
       - ip: 192.168.1.2
@@ -69,6 +77,15 @@ subsets:
       - name: https
         port: 9001
         protocol: TCP
-      - name: api
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: minio-s3
+subsets:
+  - addresses:
+      - ip: 192.168.1.2
+    ports:
+      - name: https
         port: 9000
         protocol: TCP
