@@ -10,7 +10,7 @@ metadata:
     external-dns.alpha.kubernetes.io/hostname: minio.${SECRET_DOMAIN},"s3.${SECRET_DOMAIN}"
     hajimari.io/enable: "true"
     hajimari.io/icon: simple-icons:proxmox
-    coredns.io/hostname: "minio.${SECRET_DOMAIN}"
+    # coredns.io/hostname: "minio.${SECRET_DOMAIN}"
     cert-manager.io/cluster-issuer: letsencrypt-production
     traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
     traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-middleware-chains-authentik@kubernetescrd
@@ -27,9 +27,20 @@ spec:
                   number: 80
             path: /
             pathType: Prefix
+    - host: "s3.${SECRET_DOMAIN}"
+      api:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: api
+                port:
+                  number: 9000
   tls:
     - hosts:
         - "minio.${SECRET_DOMAIN}"
+        - "s3.${SECRET_DOMAIN}"
       secretName: "minio-${SECRET_DOMAIN/./-}-tls"
 ---
 apiVersion: v1
@@ -42,6 +53,10 @@ spec:
       protocol: TCP
       port: 80
       targetPort: 9001
+    - name: api
+      protocol: TCP
+      port: 80
+      targetPort: 9000
 ---
 apiVersion: v1
 kind: Endpoints
@@ -53,4 +68,7 @@ subsets:
     ports:
       - name: https
         port: 9001
+        protocol: TCP
+      - name: api
+        port: 9000
         protocol: TCP
