@@ -24,7 +24,7 @@ spec:
               service:
                 name: minio
                 port:
-                  number: 80
+                  number: 9001
             path: /
             pathType: Prefix
     - host: "s3.${SECRET_DOMAIN}"
@@ -51,11 +51,11 @@ spec:
   ports:
     - name: https
       protocol: TCP
-      port: 80
+      port: 9001
       targetPort: 9001
-    - name: api
+    - name: https
       protocol: TCP
-      port: 81
+      port: 9000
       targetPort: 9000
 ---
 apiVersion: v1
@@ -70,5 +70,5 @@ subsets:
         port: 9001
         protocol: TCP
       - name: api
-        port: 81
+        port: 9000
         protocol: TCP
