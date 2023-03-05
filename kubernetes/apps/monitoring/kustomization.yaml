@@ -10,5 +10,5 @@ resources:
   - ./kube-prometheus-stack/ks.yaml
   - ./grafana/ks.yaml
   - ./helm-dashboard/ks.yaml
-  # - ./loki/ks.yaml
-  # - ./vector/ks.yaml
+  - ./loki/ks.yaml
+  - ./vector/ks.yaml
