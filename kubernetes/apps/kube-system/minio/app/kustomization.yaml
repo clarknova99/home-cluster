@@ -5,6 +5,6 @@ kind: Kustomization
 namespace: kube-system
 resources:
   - ./helmrelease.yaml
-  - ./ingress.yaml
+  # - ./ingress.yaml
   - ./minio.sops.yaml
   # - ./service-monitor.yaml
