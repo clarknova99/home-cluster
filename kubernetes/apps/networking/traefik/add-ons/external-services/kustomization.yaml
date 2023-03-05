@@ -4,6 +4,6 @@ kind: Kustomization
 namespace: networking
 resources:
   - proxmox.yaml
-  # - minio.yaml
+  - minio.yaml
   - diskstation.yaml
   #- plex.yaml
