@@ -53,7 +53,7 @@ spec:
       protocol: TCP
       port: 9001
       targetPort: 9001
-    - name: https
+    - name: api
       protocol: TCP
       port: 9000
       targetPort: 9000
