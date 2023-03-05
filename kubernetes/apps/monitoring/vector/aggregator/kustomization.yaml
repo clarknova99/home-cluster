@@ -4,11 +4,3 @@ kind: Kustomization
 namespace: monitoring
 resources:
   - ./helmrelease.yaml
-# patchesStrategicMerge:
-#   - ./patches/geoip.yaml
-configMapGenerator:
-  - name: vector-aggregator-configmap
-    files:
-      - vector.yaml=./config/vector.yaml
-generatorOptions:
-  disableNameSuffixHash: true
