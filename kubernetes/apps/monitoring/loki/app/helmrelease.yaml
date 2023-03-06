@@ -119,22 +119,25 @@ spec:
             paths:
               - path: /
                 pathType: Prefix
-        tls: {}
-    write:
-      replicas: 1
-      persistence:
-        size: 1Gi
-        storageClass: longhorn
-    read:
-      replicas: 1
-      persistence:
-        storageClass: longhorn
-      extraVolumeMounts:
-        - name: rules
-          mountPath: /rules
-      extraVolumes:
-        - name: rules
-          emptyDir: {}
+        tls:
+          - hosts:
+              - "loki.${SECRET_DOMAIN}"
+            secretName: "loki-tls"
+    # write:
+    #   replicas: 1
+    #   persistence:
+    #     size: 1Gi
+    #     storageClass: longhorn
+    # read:
+    #   replicas: 1
+    #   persistence:
+    #     storageClass: longhorn
+    #   extraVolumeMounts:
+    #     - name: rules
+    #       mountPath: /rules
+    #   extraVolumes:
+    #     - name: rules
+    #       emptyDir: {}
     backend:
       replicas: 1
       persistence:
