@@ -12,7 +12,6 @@ metadata:
     hajimari.io/enable: "true"
     traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
     traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-middleware-chains-authentik@kubernetescrd
-
 spec:
   ingressClassName: "traefik"
   tls:
