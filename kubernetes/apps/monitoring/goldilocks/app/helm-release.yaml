@@ -43,24 +43,25 @@ spec:
           memory: 64Mi
         limits:
           memory: 105M
-    ingress:
-      enabled: true
-      ingressClassName: "traefik"
-      annotations:
-        hajimari.io/enable: "true"
-        hajimari.io/icon: "chart-scatter-plot-hexbin"
-        external-dns.home.arpa/enabled: "true"
-        external-dns.alpha.kubernetes.io/target: "${SECRET_DOMAIN}"
-        external-dns.alpha.kubernetes.io/hostname: goldilocks.${SECRET_DOMAIN}
-        cert-manager.io/cluster-issuer: "letsencrypt-production"
-        traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-        traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-middleware-chains-default@kubernetescrd
-      hosts:
-        - "goldilocks.${SECRET_DOMAIN}"
-      tls:
-        - hosts:
-            - "goldilocks.${SECRET_DOMAIN}"
-          secretName: "goldilocks.${SECRET_DOMAIN}"
+      ingress:
+        enabled: true
+        ingressClassName: "traefik"
+        annotations:
+          hajimari.io/enable: "true"
+          hajimari.io/icon: "chart-scatter-plot-hexbin"
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
+          external-dns.home.arpa/enabled: "true"
+          external-dns.alpha.kubernetes.io/target: "${SECRET_DOMAIN}"
+          external-dns.alpha.kubernetes.io/hostname: goldilocks.${SECRET_DOMAIN}
+          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+          traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-middleware-chains-default@kubernetescrd
+        hosts:
+          - "goldilocks.${SECRET_DOMAIN}"
+        tls:
+          - hosts:
+              - "goldilocks.${SECRET_DOMAIN}"
+            secretName: "goldilocks.${SECRET_DOMAIN}"
+
       # ingress:
       #   enabled: true
       #   ingressClassName: "traefik"
