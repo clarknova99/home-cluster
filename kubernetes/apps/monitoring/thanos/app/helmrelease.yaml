@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: thanos
-      version: 11.6.8
+      version: 12.1.2
       sourceRef:
         kind: HelmRepository
         name: bitnami
@@ -32,13 +32,11 @@ spec:
         endpoint: minio.kube-system.svc.cluster.local:9000
         bucket: thanos
         insecure: true
-    queryFrontend:
-      enabled: false
     query:
       enabled: true
       replicaCount: 3
       podAntiAffinityPreset: hard
-      replicaLabel: ["__replica__"]
+      replicaLabel: ["__replica__"] # must match with kube-prometheus-stack value `.prometheus.prometheusSpec.replicaExternalLabelName`
       dnsDiscovery:
         sidecarsService: kube-prometheus-stack-thanos-discovery
         sidecarsNamespace: monitoring
@@ -62,59 +60,45 @@ spec:
             secretName: "thanos.${SECRET_DOMAIN}"
     bucketweb:
       enabled: true
-      replicaCount: 3
-      podAntiAffinityPreset: hard
-      ingress:
-        enabled: true
-        ingressClassName: traefik
-        annotations:
-          hajimari.io/enable: "false"
-          cert-manager.io/cluster-issuer: "letsencrypt-production"
-          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-          traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-middleware-chains-default@kubernetescrd
-        hostname: "thanos-bucketweb.${SECRET_DOMAIN}"
-        tls: true
-        extraTls:
-          - hosts:
-              - "thanos-bucketweb.${SECRET_DOMAIN}"
+      resources:
+        requests:
+          cpu: 15m
+          memory: 64M
+        limits:
+          memory: 64M
+
     compactor:
       enabled: true
-      extraFlags: ["--compact.concurrency", "4"]
-      retentionResolutionRaw: 7d
+      extraFlags:
+        - "--compact.concurrency"
+        - "4"
+      retentionResolutionRaw: 14d
       retentionResolution5m: 14d
       retentionResolution1h: 30d
-      ingress:
-        enabled: true
-        ingressClassName: traefik
-        annotations:
-          hajimari.io/enable: "false"
-        hostname: "thanos-compactor.${SECRET_DOMAIN}"
-        tls: true
-        extraTls:
-          - hosts:
-              - "thanos-compactor.${SECRET_DOMAIN}"
+      resources:
+        requests:
+          cpu: 15m
+          memory: 204M
+        limits:
+          memory: 270M
       persistence:
         enabled: true
-        storageClass: local-path
-        size: 5Gi
+        storageClass: "ceph-block"
+        size: 15Gi
+
     storegateway:
       enabled: true
-      replicaCount: 3
-      podAntiAffinityPreset: hard
-      ingress:
-        enabled: true
-        ingressClassName: traefik
-        annotations:
-          hajimari.io/enable: "false"
-        hostname: &host thanos-storegateway.${SECRET_DOMAIN}
-        tls: true
-        extraTls:
-          - hosts:
-              - *host
+      resources:
+        requests:
+          cpu: 23m
+          memory: 204M
+        limits:
+          memory: 226M
       persistence:
         enabled: true
-        storageClass: local-path
-        size: 5Gi
+        storageClass: "ceph-block"
+        size: 1Gi
+
     ruler:
       enabled: true
       replicaCount: 3
@@ -130,21 +114,33 @@ spec:
             rules:
               - alert: "PrometheusDown"
                 expr: absent(up{job="kube-prometheus-stack-prometheus"})
-      ingress:
-        enabled: true
-        ingressClassName: traefik
-        annotations:
-          hajimari.io/enable: "false"
-        hostname: &host thanos-ruler.${SECRET_DOMAIN}
-        tls: true
-        extraTls:
-          - hosts:
-              - *host
       persistence:
         enabled: true
         storageClass: local-path
-        size: 5Gi
+        size: 512Mi
+
     metrics:
       enabled: true
       serviceMonitor:
         enabled: true
+  valuesFrom:
+    - kind: Secret
+      name: thanos-secret
+      valuesKey: thanos
+      targetPath: objstoreConfig.config.bucket
+    # - kind: Secret
+    #   name: thanos-secret
+    #   valuesKey: S3_BUCKET_HOST
+    #   targetPath: objstoreConfig.config.endpoint
+    # - kind: Secret
+    #   name: thanos-secret
+    #   valuesKey: S3_BUCKET_REGION
+    #   targetPath: objstoreConfig.config.region
+    # - kind: Secret
+    #   name: thanos-secret
+    #   valuesKey:"goldilocks.${SECRET_DOMAIN}"
+    #   targetPath: objstoreConfig.config.access_key
+    # - kind: Secret
+    #   name: thanos-secret
+    #   valuesKey: S3_SECRET_KEY
+    #   targetPath: objstoreConfig.config.secret_key
