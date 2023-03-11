@@ -30,7 +30,7 @@ spec:
     # https://github.com/onedr0p/home-ops/blob/e9a0bad87512024e6c824ca9d0890bd051dda14b/cluster/apps/monitoring/vector/aggregator/helm-release.yaml
     image:
       repository: timberio/vector
-      tag: 0.28.0-debian
+      tag: 0.28.1-debian
     role: Stateless-Aggregator
     customConfig:
       data_dir: /vector-data-dir
