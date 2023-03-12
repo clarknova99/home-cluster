@@ -40,7 +40,7 @@ spec:
       tag: 2023.2.2
     deployment:
       kind: Deployment
-      replicas: 1
+      replicas: 2
     # kubectl exec -it deployment/authentik-worker -c authentik -- ak dump_config
     authentik:
       email:
