@@ -48,31 +48,6 @@ spec:
       readiness: *probes
       startup:
         enabled: false
-    # ingress:
-    #   main:
-    #     enabled: true
-    #     ingressClassName: traefik
-    #     annotations:
-    #       cert-manager.io/cluster-issuer: letsencrypt-production
-    #       external-dns.alpha.kubernetes.io/target: "${SECRET_DOMAIN}"
-    #       external-dns.home.arpa/enabled: "true"
-    #       hajimari.io/icon: video-input-antenna
-    #     hosts:
-    #       - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
-    #         paths:
-    #           - path: /
-    #             pathType: Prefix
-    #     tls:
-    #       - hosts:
-    #           - *host
-    #         secretName: echo-server-tls
-    topologySpreadConstraints:
-      - maxSkew: 1
-        topologyKey: kubernetes.io/hostname
-        whenUnsatisfiable: DoNotSchedule
-        labelSelector:
-          matchLabels:
-            app.kubernetes.io/name: *app
     resources:
       requests:
         cpu: 5m
