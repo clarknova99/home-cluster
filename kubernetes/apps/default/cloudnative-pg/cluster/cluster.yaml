@@ -10,9 +10,10 @@ spec:
   imageName: ghcr.io/cloudnative-pg/postgresql:15.1
   primaryUpdateStrategy: unsupervised
   storage:
-    size: 20Gi
+    size: 10Gi
     #storageClass: longhorn
-    storageClass: nfs-client
+    #storageClass: nfs-client
+    storageClass: local-pg
   superuserSecret:
     name: cloudnative-pg
   monitoring:
