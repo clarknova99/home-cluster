@@ -1,0 +1,35 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: postgresql
+  namespace: storage
+spec:
+  interval: 10m
+  chart:
+    spec:
+      chart: postgresql
+      version: 12.1.9
+      sourceRef:
+        kind: HelmRepository
+        name: bitnami
+        namespace: flux-system
+  values:
+    image:
+      repository: bitnami/postgresql
+      tag: 14.6.0
+    auth:
+      postgresPassword: ${SECRET_GRAFANA_ADMIN_PASSWORD}
+    primary:
+      persistence:
+        enabled: true
+        existingClaim: postgresql
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: In
+                    values:
+                      - k8s-3
