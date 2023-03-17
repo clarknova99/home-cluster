@@ -25,7 +25,7 @@ spec:
       password: ${SECRET_POSTGRES_PASSWORD}
     persistentVolume:
       enabled: true
-      existingClaim: pv-pgadmin
+      existingClaim: pvc-pgadmin
     resources:
       requests:
         cpu: 15m

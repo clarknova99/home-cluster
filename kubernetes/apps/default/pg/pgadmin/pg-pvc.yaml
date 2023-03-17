@@ -22,3 +22,17 @@ spec:
     # - nodiratime
     # - tcp
     # - intr
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-pgadmin
+  namespace: default
+spec:
+  accessModes:
+    - ReadWriteMany
+  volumeName: pv-pgadmin
+  storageClassName: ""
+  resources:
+    requests:
+      storage: 1Mi
