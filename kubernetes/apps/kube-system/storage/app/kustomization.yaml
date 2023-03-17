@@ -6,5 +6,5 @@ resources:
   # - ./pvc-influxdb.yaml
   - ./pvc-movies.yaml
   - ./pvc-networking.yaml
-  - ./pvc-postgres.yaml
+  # - ./pvc-postgres.yaml
   - ./pvc-tv.yaml
