@@ -1,13 +1,24 @@
 ---
 apiVersion: v1
-kind: PersistentVolumeClaim
+kind: PersistentVolume
 metadata:
-  name: pgadmin
+  name: pv-pgadmin
   namespace: default
 spec:
+  storageClassName: ""
+  capacity:
+    storage: 1Mi
   accessModes:
     - ReadWriteMany
-  storageClassName: longhorn
-  resources:
-    requests:
-      storage: 2Gi
+  persistentVolumeReclaimPolicy: Retain
+  nfs:
+    server: 192.168.1.2
+    path: "/volume1/network-storage/pgadmin"
+    readOnly: false
+  mountOptions:
+    - nfsvers=4.1
+    - hard
+    # - noatime
+    # - nodiratime
+    # - tcp
+    # - intr

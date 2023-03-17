@@ -8,7 +8,7 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-cloudnative-pg
-  path: ./kubernetes/apps/default/pgadmin/app
+  path: ./kubernetes/apps/default/pg/pgadmin/app
   sourceRef:
     kind: GitRepository
     name: home-kubernetes

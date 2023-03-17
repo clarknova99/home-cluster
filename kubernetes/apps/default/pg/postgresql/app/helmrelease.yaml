@@ -3,13 +3,13 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: postgresql
-  namespace: storage
+  namespace: default
 spec:
   interval: 10m
   chart:
     spec:
       chart: postgresql
-      version: 12.1.9
+      version: 12.2.2
       sourceRef:
         kind: HelmRepository
         name: bitnami
@@ -17,13 +17,13 @@ spec:
   values:
     image:
       repository: bitnami/postgresql
-      tag: 14.6.0
+      tag: 15.2.0
     auth:
       postgresPassword: ${SECRET_GRAFANA_ADMIN_PASSWORD}
     primary:
       persistence:
         enabled: true
-        existingClaim: postgresql
+        existingClaim: pv-postgres
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -32,4 +32,4 @@ spec:
                   - key: kubernetes.io/hostname
                     operator: In
                     values:
-                      - k8s-3
+                      - k3s-01
