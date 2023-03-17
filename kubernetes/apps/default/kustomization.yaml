@@ -12,4 +12,4 @@ resources:
   # - ./plex/ks.yaml
   # - ./cloudnative-pg/ks.yaml
   # - ./pgadmin/ks.yaml
-  # - ./pgadmin/ks.yaml
+  - ./pg/ks.yaml
