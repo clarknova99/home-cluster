@@ -11,4 +11,4 @@ spec:
   hostPath:
     path: /network-storage/postgres
     type: DirectoryOrCreate
-  storageClassName: local
+  storageClassName: local-pg
