@@ -69,7 +69,7 @@ spec:
               storageClassName: local
               resources:
                 requests:
-                  storage: 2Gi
+                  storage: 10Gi
       # storage:
       #   volumeClaimTemplate:
       #     spec:
@@ -155,7 +155,7 @@ spec:
               storageClassName: local
               resources:
                 requests:
-                  storage: 5Gi
+                  storage: 10Gi
           #storageSpec:
           # volumeClaimTemplate:
           #   spec:
