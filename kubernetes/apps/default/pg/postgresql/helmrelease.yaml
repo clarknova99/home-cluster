@@ -23,7 +23,7 @@ spec:
     primary:
       persistence:
         enabled: true
-        existingClaim: pv-postgres
+        existingClaim: pvc-postgres
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
