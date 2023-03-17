@@ -66,7 +66,7 @@ spec:
             spec:
               accessModes: ["ReadWriteOnce"]
               volumeName: prometheus-alerts
-              storageClassName: nfs-client
+              storageClassName: local
               resources:
                 requests:
                   storage: 2Gi
@@ -152,7 +152,7 @@ spec:
             spec:
               accessModes: ["ReadWriteOnce"]
               volumeName: prometheus-db
-              storageClassName: nfs-client
+              storageClassName: local
               resources:
                 requests:
                   storage: 5Gi
