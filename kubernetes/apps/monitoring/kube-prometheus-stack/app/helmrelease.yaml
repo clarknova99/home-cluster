@@ -67,9 +67,9 @@ spec:
               accessModes: ["ReadWriteOnce"]
               volumeName: prometheus-alerts
               storageClassName: local
-              resources:
-                requests:
-                  storage: 10Gi
+              # resources:
+              #   requests:
+              #     storage: 10Gi
       # storage:
       #   volumeClaimTemplate:
       #     spec:
@@ -153,9 +153,9 @@ spec:
               accessModes: ["ReadWriteOnce"]
               volumeName: prometheus-db
               storageClassName: local
-              resources:
-                requests:
-                  storage: 10Gi
+              # resources:
+              #   requests:
+              #     storage: 10Gi
           #storageSpec:
           # volumeClaimTemplate:
           #   spec:
