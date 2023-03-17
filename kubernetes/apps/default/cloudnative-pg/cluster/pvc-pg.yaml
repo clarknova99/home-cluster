@@ -9,6 +9,6 @@ spec:
   capacity:
     storage: 10Gi
   hostPath:
-    path: /network-storage/postgres
+    path: /network-storage/postgres2
     type: DirectoryOrCreate
   storageClassName: local-pg
