@@ -18,12 +18,12 @@ spec:
     name: cloudnative-pg
   monitoring:
     enablePodMonitor: false
-  # bootstrap:
-  #   initdb:
-  #     database: fags
-  #     owner: ${SECRET_POSTGRES_USERNAME}
-  #     secret:
-  #       name: cloudnative-pg
+  bootstrap:
+    initdb:
+      database: fags
+      owner: ${SECRET_POSTGRES_USERNAME}
+      secret:
+        name: cloudnative-pg
 
 
 # ---
