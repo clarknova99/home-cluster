@@ -2,37 +2,27 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: pv-prometheus
-  namespace: monitoring
+  name: prometheus-db
 spec:
-  storageClassName: ""
-  capacity:
-    storage: 1Mi
   accessModes:
-    - ReadWriteMany
-  persistentVolumeReclaimPolicy: Retain
-  nfs:
-    server: 192.168.1.2
-    path: "/volume1/network-storage/prometheus"
-    readOnly: false
-  mountOptions:
-    - nfsvers=4.1
-    - hard
-    # - noatime
-    # - nodiratime
-    # - tcp
-    # - intr
+    - ReadWriteOnce
+  capacity:
+    storage: 10Gi
+  hostPath:
+    path: /network-storage/prometheus/db
+    type: DirectoryOrCreate
+  storageClassName: local
 ---
 apiVersion: v1
-kind: PersistentVolumeClaim
+kind: PersistentVolume
 metadata:
-  name: pvc-prometheus
-  namespace: monitoring
+  name: prometheus-alerts
 spec:
   accessModes:
-    - ReadWriteMany
-  volumeName: pv-prometheus
-  storageClassName: ""
-  resources:
-    requests:
-      storage: 1Mi
+    - ReadWriteOnce
+  capacity:
+    storage: 10Gi
+  hostPath:
+    path: /network-storage/prometheus/alerts
+    type: DirectoryOrCreate
+  storageClassName: local

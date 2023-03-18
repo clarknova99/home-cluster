@@ -7,6 +7,8 @@ metadata:
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
+  dependsOn:
+    - name: cluster-apps-postgresql
   path: ./kubernetes/apps/networking/authentik/app
   prune: true
   sourceRef:
