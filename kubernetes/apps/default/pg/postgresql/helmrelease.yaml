@@ -19,7 +19,7 @@ spec:
       repository: bitnami/postgresql
       tag: 15.2.0
     auth:
-      postgresPassword: ${SECRET_GRAFANA_ADMIN_PASSWORD}
+      postgresPassword: ${SECRET_POSTGRES_PASSWORD}
     primary:
       persistence:
         enabled: true
