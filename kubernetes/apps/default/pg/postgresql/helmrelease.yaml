@@ -35,7 +35,7 @@ spec:
         enabled: true
         existingClaim: pvc-postgres
       service:
-        externalTrafficPolicy: local
+        externalTrafficPolicy: Cluster
         clusterIP: "192.168.1.97"
         type: LoadBalancer
     volumePermissions:
