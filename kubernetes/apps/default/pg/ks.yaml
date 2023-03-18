@@ -17,7 +17,7 @@ spec:
       name: postgresql
       namespace: default
   interval: 30m
-  prune: false
+  prune: true
   wait: true
   timeout: 5m
 ---
@@ -41,6 +41,6 @@ spec:
       name: pgadmin
       namespace: default
   interval: 30m
-  prune: false
+  prune: true
   wait: true
   timeout: 5m
