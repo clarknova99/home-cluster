@@ -64,9 +64,12 @@ spec:
           disableMountSubPath: true
           volumeClaimTemplate:
             spec:
+              selector:
+                matchLabels:
+                  app.kubernetes.io/name: prometheus-alerts
               accessModes: ["ReadWriteOnce"]
               volumeName: prometheus-alerts
-              storageClassName: local
+              #storageClassName: local
               # resources:
               #   requests:
               #     storage: 10Gi
@@ -150,9 +153,12 @@ spec:
           disableMountSubPath: true
           volumeClaimTemplate:
             spec:
+              selector:
+                matchLabels:
+                  app.kubernetes.io/name: prometheus-db
               accessModes: ["ReadWriteOnce"]
               volumeName: prometheus-db
-              storageClassName: local
+              #storageClassName: local
               # resources:
               #   requests:
               #     storage: 10Gi
