@@ -60,15 +60,15 @@ spec:
       alertmanagerSpec:
         replicas: 1
         podAntiAffinity: hard
-        storage:
-          disableMountSubPath: true
-          volumeClaimTemplate:
-            spec:
-              selector:
-                matchLabels:
-                  app.kubernetes.io/name: prometheus-alerts
-              accessModes: ["ReadWriteOnce"]
-              volumeName: prometheus-alerts
+        # storage:
+        #   disableMountSubPath: true
+        #   volumeClaimTemplate:
+        #     spec:
+        #       selector:
+        #         matchLabels:
+        #           app.kubernetes.io/name: prometheus-alerts
+        #       accessModes: ["ReadWriteOnce"]
+        #       volumeName: prometheus-alerts
               #storageClassName: local
               # resources:
               #   requests:
@@ -82,13 +82,13 @@ spec:
       #       resources:
       #         requests:
       #           storage: 2Gi
-        # storage:
-        #   volumeClaimTemplate:
-        #     spec:
-        #       storageClassName: nfs-client
-        #       resources:
-        #         requests:
-        #           storage: 1Gi
+        storage:
+          volumeClaimTemplate:
+            spec:
+              storageClassName: nfs-client
+              resources:
+                requests:
+                  storage: 1Gi
     kube-state-metrics:
       metricLabelsAllowlist: ["persistentvolumeclaims=[*]"]
       prometheus:
@@ -149,15 +149,15 @@ spec:
         ## Prometheus StorageSpec for persistent data
         ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/user-guides/storage.md
         ##
-        storageSpec:
-          disableMountSubPath: true
-          volumeClaimTemplate:
-            spec:
-              selector:
-                matchLabels:
-                  app.kubernetes.io/name: prometheus-db
-              accessModes: ["ReadWriteOnce"]
-              volumeName: prometheus-db
+        # storageSpec:
+        #   disableMountSubPath: true
+        #   volumeClaimTemplate:
+        #     spec:
+        #       selector:
+        #         matchLabels:
+        #           app.kubernetes.io/name: prometheus-db
+        #       accessModes: ["ReadWriteOnce"]
+        #       volumeName: prometheus-db
               #storageClassName: local
               # resources:
               #   requests:
@@ -171,13 +171,13 @@ spec:
           #     resources:
           #       requests:
           #         storage: 2Gi
-        # storageSpec:
-        #   volumeClaimTemplate:
-        #     spec:
-        #       storageClassName: nfs-client
-        #       resources:
-        #         requests:
-        #           storage: 5Gi
+        storageSpec:
+          volumeClaimTemplate:
+            spec:
+              storageClassName: nfs-client
+              resources:
+                requests:
+                  storage: 5Gi
         resources:
           requests:
             cpu: 10m
