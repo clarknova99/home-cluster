@@ -3,6 +3,8 @@ apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: prometheus-db
+  labels:
+    app.kubernetes.io/name: prometheus-db
 spec:
   accessModes:
     - ReadWriteOnce
@@ -11,12 +13,14 @@ spec:
   hostPath:
     path: /network-storage/prometheus/db
     type: DirectoryOrCreate
-  storageClassName: local
+  storageClassName: ""
 ---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: prometheus-alerts
+  labels:
+    app.kubernetes.io/name: prometheus-alerts
 spec:
   accessModes:
     - ReadWriteOnce
@@ -25,4 +29,4 @@ spec:
   hostPath:
     path: /network-storage/prometheus/alerts
     type: DirectoryOrCreate
-  storageClassName: local
+  storageClassName: ""
