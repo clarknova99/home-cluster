@@ -82,13 +82,13 @@ spec:
       #       resources:
       #         requests:
       #           storage: 2Gi
-        storage:
-          volumeClaimTemplate:
-            spec:
-              storageClassName: nfs-client
-              resources:
-                requests:
-                  storage: 1Gi
+        # storage:
+        #   volumeClaimTemplate:
+        #     spec:
+        #       storageClassName: nfs-client
+        #       resources:
+        #         requests:
+        #           storage: 1Gi
     kube-state-metrics:
       metricLabelsAllowlist: ["persistentvolumeclaims=[*]"]
       prometheus:
@@ -171,13 +171,13 @@ spec:
           #     resources:
           #       requests:
           #         storage: 2Gi
-        storageSpec:
-          volumeClaimTemplate:
-            spec:
-              storageClassName: nfs-client
-              resources:
-                requests:
-                  storage: 5Gi
+        # storageSpec:
+        #   volumeClaimTemplate:
+        #     spec:
+        #       storageClassName: nfs-client
+        #       resources:
+        #         requests:
+        #           storage: 5Gi
         resources:
           requests:
             cpu: 10m
