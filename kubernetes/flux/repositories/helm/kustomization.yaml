@@ -21,7 +21,7 @@ resources:
   - ./k8s-gateway.yaml
   - ./komodorio.yaml
   - ./kubernetes-dashboard.yaml
-  - ./longhorn.yaml
+  # - ./longhorn.yaml
   - ./metallb.yaml
   - ./metrics-server.yaml
   - ./node-feature-discovery.yaml
