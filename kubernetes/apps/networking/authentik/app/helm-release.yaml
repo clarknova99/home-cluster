@@ -68,6 +68,7 @@ spec:
       postgresqlPassword: ${SECRET_AUTHENTIK_POSTGRES_PASSWORD}
     redis:
       enabled: true
-      # master:
-      #   persistence:
-      #     existingClaim: pvc-authentik
+      master:
+        persistence:
+          storageClass: local-path
+          #existingClaim: pvc-authentik
