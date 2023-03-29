@@ -1,5 +1,30 @@
 ---
 apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: local-path-authentik-redis
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  resources:
+    requests:
+      storage: 128Mi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: local-path-authentik-redis
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  resources:
+    requests:
+      storage: 128Mi
+
+---
+apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: pv-authentik
@@ -15,12 +40,13 @@ spec:
     server: 192.168.1.2
     path: "/volume1/network-storage/authentik"
     readOnly: false
-  # mountOptions:
-  #   - hard
-  #   # - noatime
-  #   # - nodiratime
-  #   # - tcp
-  #   # - intr
+  mountOptions:
+    - nfsvers=4.1
+    - hard
+    # - noatime
+    # - nodiratime
+    # - tcp
+    # - intr
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
