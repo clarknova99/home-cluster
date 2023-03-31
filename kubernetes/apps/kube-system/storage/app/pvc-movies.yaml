@@ -15,13 +15,13 @@ spec:
     server: 192.168.1.2
     path: "/volume1/Video/Movies"
     readOnly: false
-  mountOptions:
-    - nfsvers=4.1
-    - hard
-    # - noatime
-    # - nodiratime
-    # - tcp
-    # - intr
+  # mountOptions:
+  #   - nfsvers=4.1
+  #   - hard
+  #   # - noatime
+  #   # - nodiratime
+  #   # - tcp
+  #   # - intr
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
