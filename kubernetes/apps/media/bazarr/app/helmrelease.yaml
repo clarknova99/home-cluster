@@ -47,7 +47,7 @@ spec:
     persistence:
       config:
         enabled: true
-        existingClaim: pvc-radarr-config
+        existingClaim: pvc-bazarr-config
         mountPath: /config
       downloads:
         enabled: true
