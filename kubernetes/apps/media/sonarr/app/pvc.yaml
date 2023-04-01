@@ -7,17 +7,14 @@ metadata:
 spec:
   storageClassName: ""
   capacity:
-    storage: 1Mi
+    storage: 1Gi
   accessModes:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   nfs:
     server: 192.168.1.2
-    path: "/network-storage/sonarr"
+    path: "/volume1/network-storage/sonarr"
     readOnly: false
-  mountOptions:
-    - nfsvers=4.1
-    - hard
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -31,4 +28,4 @@ spec:
   storageClassName: ""
   resources:
     requests:
-      storage: 1Mi
+      storage: 1Gi
