@@ -60,12 +60,12 @@ spec:
       fsGroup: 568
       fsGroupChangePolicy: "OnRootMismatch"
       supplementalGroups: [10000]
-    volumeClaimTemplates:
-      - name: pvc-sabnzbd-config
-        mountPath: /config
-        accessMode: ReadWriteOnce
-        size: 21Gi
-        storageClass: sabnzbd-config
+    # volumeClaimTemplates:
+    #   - name: pvc-sabnzbd-config
+    #     mountPath: /config
+    #     accessMode: ReadWriteOnce
+    #     size: 1Gi
+    #     storageClass: sabnzbd-config
 
     # volumeClaimTemplates:
     #   - name: config
@@ -80,13 +80,11 @@ spec:
     #     persistentVolumeClaim:
     #       claimName: longhorn-pvc-sabnzbd-config
     persistence:
+      config:
       # config:
-      #   enabled: true
-      #   existingClaim: sabnzbd-config
-      # # config:
-      #   enabled: true
-      #   existingClaim: pvc-sabnzbd-config
-      #   mountPath: /config
+        enabled: true
+        existingClaim: pvc-sabnzbd-config
+        mountPath: /config
       downloads:
         enabled: true
         existingClaim: pvc-downloads

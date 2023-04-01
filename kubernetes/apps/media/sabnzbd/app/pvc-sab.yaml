@@ -5,7 +5,7 @@ metadata:
   name: pv-sabnzbd-config
   namespace: media
 spec:
-  storageClassName: "sabnzbd-config"
+  storageClassName: ""
   capacity:
     storage: 1Gi
   accessModes:
@@ -15,17 +15,17 @@ spec:
     server: 192.168.1.2
     path: "/volume1/sabnzbd"
     readOnly: false
-# ---
-# apiVersion: v1
-# kind: PersistentVolumeClaim
-# metadata:
-#   name: pvc-sabnzbd-config
-#   namespace: media
-# spec:
-#   accessModes:
-#     - ReadWriteMany
-#   volumeName: pv-sabnzbd-config
-#   storageClassName: "sabnzbd-config"
-#   resources:
-#     requests:
-#       storage: 1Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-sabnzbd-config
+  namespace: media
+spec:
+  accessModes:
+    - ReadWriteMany
+  volumeName: pv-sabnzbd-config
+  storageClassName: ""
+  resources:
+    requests:
+      storage: 1Gi
