@@ -8,8 +8,8 @@ resources:
   - ./weave-gitops/ks.yaml
   - ./whoami/ks.yaml
   - ./filebrowser/ks.yaml
-  # - ./nginx/ks.yaml
+  - ./nginx/ks.yaml
   # - ./plex/ks.yaml
   # - ./cloudnative-pg/ks.yaml
   # - ./pgadmin/ks.yaml
-  # - ./pg/ks.yaml
+  - ./pg/ks.yaml
