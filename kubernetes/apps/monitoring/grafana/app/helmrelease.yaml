@@ -94,11 +94,11 @@ spec:
             access: proxy
             url: http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090/
             isDefault: true
-          - name: influxdb
-            type: influxdb
-            access: proxy
-            url: http://influxdb.monitoring.svc.cluster.local:8086/
-            isDefault: false
+          # - name: influxdb
+          #   type: influxdb
+          #   access: proxy
+          #   url: http://influxdb.monitoring.svc.cluster.local:8086/
+          #   isDefault: false
     dashboards:
       default:
         radarr:
@@ -134,8 +134,8 @@ spec:
         external-dns.alpha.kubernetes.io/hostname: grafana.${SECRET_DOMAIN}
         cert-manager.io/cluster-issuer: "letsencrypt-production"
         traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-        #traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-middleware-chains-authentik@kubernetescrd
-        traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-middleware-chains-default@kubernetescrd
+        traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-middleware-chains-authentik@kubernetescrd
+        #traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-middleware-chains-default@kubernetescrd
       hosts:
         - "grafana.${SECRET_DOMAIN}"
       tls:
