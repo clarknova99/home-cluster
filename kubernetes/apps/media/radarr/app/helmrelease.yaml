@@ -73,3 +73,10 @@ spec:
         memory: 250Mi
       limits:
         memory: 2000Mi
+    metrics:
+      enabled: true
+      serviceMonitor:
+        interval: 3m
+        scrapeTimeout: 1m
+      prometheusRule:
+        enabled: true
