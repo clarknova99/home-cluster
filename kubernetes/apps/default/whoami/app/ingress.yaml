@@ -33,7 +33,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: whoami
+  name: whoami-webscure
   namespace: default
   annotations:
     cert-manager.io/cluster-issuer: "letsencrypt-production"
