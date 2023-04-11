@@ -72,3 +72,19 @@ spec:
         persistence:
           existingClaim: pvc-authentik
           #storageClass: local-path
+    # The redis sub-chart does not have arm support
+    # Authentik helm applies this to all it's pieces. No mix-and-match like with keycloak
+    # May have to stop with the keycloak comparisons. Keycloak is far superior for customizability (imo)
+    affinity:
+      nodeAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 60
+            preference:
+              matchExpressions:
+                - key: kubernetes.io/arch
+                  operator: In
+                  values:
+                    - amd64
+                    - i386
+                    - i686
+                    - x86
