@@ -6,4 +6,4 @@ resources:
   - proxmox.yaml
   # - minio.yaml
   - diskstation.yaml
-  #- plex.yaml
+  - plex.yaml
