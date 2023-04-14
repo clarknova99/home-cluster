@@ -34,8 +34,9 @@ spec:
       enabled: true
       isDefault: false
       persistence:
-        enabled: true
-        existingClaim: pvc-loki
+        storageClass: nfs-client
+        # enabled: true
+        # existingClaim: pvc-loki
       # persistence:
       #   enabled: true
       #   storageClassName: nfs-client
