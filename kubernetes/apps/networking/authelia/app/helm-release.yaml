@@ -21,6 +21,16 @@ spec:
       replicas: 1
       strategy:
         type: Recreate
+      extraVolumeMounts:
+        - name: config-users
+          mountPath: /config
+      extraVolumes:
+        - name: config-users
+          configMap:
+            name: authelia-config-users
+            items:
+              - key: users_database.yml
+                path: users_database.yml
       env:
         AUTHELIA_DEFAULT_REDIRECTION_URL: "https://auth.${SECRET_DOMAIN}"
         AUTHELIA_DUO_API_DISABLE: "true"
@@ -52,11 +62,15 @@ spec:
           enabled: false
         file:
           enabled: true
-          path: /config/users_database.yml
           password:
-            algorithm: sha512
-            iterations: 50000
-            salt_length: 16
+            algorithm: argon2id
+        # file:
+        #   enabled: true
+        #   path: /config/users_database.yml
+        #   password:
+        #     algorithm: sha512
+        #     iterations: 50000
+        #     salt_length: 16
       access_control:
         default_policy: deny
         rules:
