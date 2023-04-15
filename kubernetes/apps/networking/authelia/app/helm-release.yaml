@@ -108,7 +108,7 @@ spec:
         existingClaim: pvc-authelia
       data:
         enabled: true
-        existingClaim: pv-authelia-nfs
+        existingClaim: pvc-authelia-nfs
         mountPath: /data
 
 # ---
