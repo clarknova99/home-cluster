@@ -4,7 +4,7 @@ kind: Kustomization
 namespace: networking
 resources:
   - authelia-secrets.sops.yaml
-  - users.yaml
+  # - users.yaml
   # - pvc-authelia.yaml
   - pvc-authelia-nfs.yaml
   - ingress.yaml
