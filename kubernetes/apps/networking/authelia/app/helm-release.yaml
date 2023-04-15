@@ -108,10 +108,10 @@ spec:
       config:
         enabled: true
         existingClaim: pvc-authelia
-      data:
-        enabled: true
-        existingClaim: pvc-authelia-nfs
-        mountPath: /data
+      # data:
+      #   enabled: true
+      #   existingClaim: pvc-authelia-nfs
+      #   mountPath: /data
 
 # ---
 # apiVersion: helm.toolkit.fluxcd.io/v2beta1

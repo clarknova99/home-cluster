@@ -5,7 +5,7 @@ namespace: networking
 resources:
   - authelia-secrets.sops.yaml
   - pvc-authelia.yaml
-  - pvc-authelia-nfs.yaml
+#  - pvc-authelia-nfs.yaml
   - ingress.yaml
   - helm-release.yaml
 labels:
