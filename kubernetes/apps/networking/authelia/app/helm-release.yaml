@@ -87,7 +87,7 @@ spec:
       storage:
         local:
           enabled: true
-          path: /config/db.sqlite3
+          # path: /config/db.sqlite3
         mysql:
           enabled: false
         postgres:
@@ -96,7 +96,7 @@ spec:
         disable_startup_check: true
         filesystem:
           enabled: true
-          filename: /config/notification.txt
+          # filename: /config/notification.txt
         smtp:
           enabled: false
     secret:
