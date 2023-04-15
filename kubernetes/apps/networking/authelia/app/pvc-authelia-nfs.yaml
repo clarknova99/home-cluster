@@ -4,6 +4,10 @@ kind: PersistentVolume
 metadata:
   name: pv-authelia-nfs
   namespace: networking
+  labels:
+    app.kubernetes.io/name: &name authelia
+    app.kubernetes.io/instance: *name
+    snapshot.home.arpa/enabled: "true"
 spec:
   storageClassName: ""
   capacity:
@@ -21,6 +25,10 @@ kind: PersistentVolumeClaim
 metadata:
   name: pvc-authelia-nfs
   namespace: networking
+  labels:
+    app.kubernetes.io/name: &name authelia
+    app.kubernetes.io/instance: *name
+    snapshot.home.arpa/enabled: "true"
 spec:
   accessModes:
     - ReadWriteMany
