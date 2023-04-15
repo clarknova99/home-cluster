@@ -93,23 +93,23 @@ spec:
           enabled: false
         postgres:
           enabled: false
-      # notifier:
-      #   disable_startup_check: true
-      #   filesystem:
-      #     enabled: true
-      #     # filename: /config/notification.txt
-      #   smtp:
-      #     enabled: false
+      notifier:
+        disable_startup_check: true
+        filesystem:
+          enabled: true
+          # filename: /config/notification.txt
+        smtp:
+          enabled: false
     secret:
       existingSecret: authelia-secrets
-    # persistence:
-    #   enabled: true
-    #   existingClaim: pvc-authelia
     persistence:
       config:
         enabled: true
+        existingClaim: pvc-authelia
+      data:
+        enabled: true
         existingClaim: pv-authelia-nfs
-        mountPath: /config
+        mountPath: /data
 
 # ---
 # apiVersion: helm.toolkit.fluxcd.io/v2beta1
