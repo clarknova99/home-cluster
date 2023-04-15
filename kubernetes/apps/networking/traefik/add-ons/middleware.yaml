@@ -199,7 +199,7 @@ spec:
   forwardAuth:
     #address: "http://authelia:9091/api/verify?rd=https://auth.${SECRET_DOMAIN}"
     #address: http://authelia-external.authelia.svc.cluster.local/api/verify?rd=https://auth.${SECRET_DOMAIN}
-    address: http://authelia/api/verify?rd=https://authelia.${SECRET_DEV_DOMAIN}
+    address: http://authelia.networking.svc.local/api/verify?rd=https://authelia.${SECRET_DEV_DOMAIN}
     trustForwardHeader: true
     authResponseHeaders:
       - Remote-User
