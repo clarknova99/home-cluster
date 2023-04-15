@@ -21,16 +21,16 @@ spec:
       replicas: 1
       strategy:
         type: Recreate
-      extraVolumeMounts:
-        - name: config-users
-          mountPath: /config
-      extraVolumes:
-        - name: config-users
-          configMap:
-            name: authelia-config-users
-            items:
-              - key: users_database.yml
-                path: users_database.yml
+      # extraVolumeMounts:
+      #   - name: config-users
+      #     mountPath: /config
+      # extraVolumes:
+      #   - name: config-users
+      #     configMap:
+      #       name: authelia-config-users
+      #       items:
+      #         - key: users_database.yml
+      #           path: users_database.yml
       env:
         AUTHELIA_DEFAULT_REDIRECTION_URL: "https://auth.${SECRET_DOMAIN}"
         AUTHELIA_DUO_API_DISABLE: "true"
@@ -62,6 +62,7 @@ spec:
           enabled: false
         file:
           enabled: true
+          path: /config/users_database.yml
           password:
             algorithm: argon2id
         # file:
@@ -79,15 +80,15 @@ spec:
             subject:
               - "group:admins"
       session:
-        expiration: 4h
-        inactivity: 30m
+        expiration: 24h
+        inactivity: 24h
         remember_me_duration: 1M
         redis:
           enabled: false
       storage:
         local:
           enabled: true
-          # path: /config/db.sqlite3
+          path: /config/db.sqlite3
         mysql:
           enabled: false
         postgres:
@@ -101,9 +102,15 @@ spec:
       #     enabled: false
     secret:
       existingSecret: authelia-secrets
+    # persistence:
+    #   enabled: true
+    #   existingClaim: pvc-authelia
     persistence:
-      enabled: true
-      existingClaim: pvc-authelia
+      config:
+        enabled: true
+        existingClaim: pv-authelia-nfs
+        mountPath: /config
+
 # ---
 # apiVersion: helm.toolkit.fluxcd.io/v2beta1
 # kind: HelmRelease
