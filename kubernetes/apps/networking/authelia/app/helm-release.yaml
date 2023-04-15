@@ -60,18 +60,18 @@ spec:
         # disable_reset_password: true
         ldap:
           enabled: false
+        # file:
+        #   enabled: true
+        #   path: /config/users_database.yml
+        #   password:
+        #     algorithm: argon2id
         file:
           enabled: true
           path: /config/users_database.yml
           password:
             algorithm: argon2id
-        # file:
-        #   enabled: true
-        #   path: /config/users_database.yml
-        #   password:
-        #     algorithm: sha512
-        #     iterations: 50000
-        #     salt_length: 16
+            # iterations: 50000
+            # salt_length: 16
       access_control:
         default_policy: deny
         rules:
@@ -97,7 +97,7 @@ spec:
         disable_startup_check: true
         filesystem:
           enabled: true
-          # filename: /config/notification.txt
+          filename: /config/notification.txt
         smtp:
           enabled: false
     secret:
