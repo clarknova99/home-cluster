@@ -3,6 +3,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: networking
 resources:
+  - authelia-secrets.sops.yaml
   - pvc-authelia.yaml
   - ingress.yaml
   - helm-release.yaml
