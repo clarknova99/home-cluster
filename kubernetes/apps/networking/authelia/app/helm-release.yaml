@@ -56,6 +56,8 @@ spec:
           cpu: 150m
     configMap:
       enabled: true
+      log:
+        level: debug
       authentication_backend:
         # disable_reset_password: true
         ldap:
