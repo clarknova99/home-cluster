@@ -104,6 +104,7 @@ spec:
           enabled: false
     secret:
       existingSecret: authelia-secrets
+
     persistence:
       enabled: true
       existingClaim: pvc-authelia
@@ -111,6 +112,15 @@ spec:
       #   enabled: true
       #   existingClaim: pvc-authelia-nfs
       #   mountPath: /data
+    # persistence:
+    #   config:
+    #     enabled: true
+    #     type: configMap
+    #     name: authelia-configmap
+    #     subPath: configuration.yaml
+    #     mountPath: /config/configuration.yml
+    #     readOnly: false
+
 
 # ---
 # apiVersion: helm.toolkit.fluxcd.io/v2beta1
