@@ -276,6 +276,7 @@ spec:
       # - name: traefik-middleware-local-ips
       # - name: traefik-middleware-cloudflare-ips
       - name: traefik-middleware-authelia
+      - name: traefik-middleware-error-pages
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
