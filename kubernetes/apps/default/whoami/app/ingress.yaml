@@ -12,6 +12,7 @@ metadata:
     traefik.ingress.kubernetes.io/router.entrypoints: "web"
     #traefik.ingress.kubernetes.io/router.middlewares: networking-middlewares-authentik@kubernetescrd
     #traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-middleware-authentik@kubernetescrd
+    traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-middleware-chains-authelia@kubernetescrd
 spec:
   ingressClassName: "traefik"
   tls:
@@ -43,6 +44,7 @@ metadata:
     traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
     #traefik.ingress.kubernetes.io/router.middlewares: networking-middlewares-authentik@kubernetescrd
     #traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-middleware-authentik@kubernetescrd
+    traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-middleware-chains-authelia@kubernetescrd
 spec:
   ingressClassName: "traefik"
   tls:
