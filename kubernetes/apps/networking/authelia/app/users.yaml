@@ -13,3 +13,4 @@ data:
         email: ${SECRET_AUTHELIA_EMAIL}
         groups:
           - admins
+          - dev
