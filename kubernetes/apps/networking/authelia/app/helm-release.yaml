@@ -105,9 +105,8 @@ spec:
     secret:
       existingSecret: authelia-secrets
     persistence:
-      config:
-        enabled: true
-        existingClaim: pvc-authelia
+      enabled: true
+      existingClaim: pvc-authelia
       # data:
       #   enabled: true
       #   existingClaim: pvc-authelia-nfs
