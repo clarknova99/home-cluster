@@ -118,13 +118,21 @@ spec:
           enabled: false
         postgres:
           enabled: false
-      notifier:
-        disable_startup_check: true
-        filesystem:
-          enabled: true
-          filename: /config/notification.txt
-        smtp:
-          enabled: false
+    notifier:
+      disable_startup_check: true
+      smtp:
+        username: ${SECRET_AUTHENTIK_SMTP_USERNAME}
+        password: ${SECRET_AUTHENTIK_SMTP_PASSWORD}
+        host: smtp.gmail.com
+        port: 587
+    # sender: test@gmail.com
+    #   notifier:
+    #     disable_startup_check: true
+    #     filesystem:
+    #       enabled: true
+    #       filename: /config/notification.txt
+    #     smtp:
+    #       enabled: false
     secret:
       existingSecret: authelia-secrets
 
