@@ -42,14 +42,6 @@ spec:
         AUTHELIA_THEME: grey
         AUTHELIA_TOTP_ISSUER: authelia.com
         AUTHELIA_WEBAUTHN_DISABLE: "true"
-        # AUTHELIA_AUTHENTICATION_BACKEND_FILE_PATH: /config/users.yaml
-        # AUTHELIA_AUTHENTICATION_BACKEND_FILE_PASSWORD_ALGORITHM: argon2
-        # AUTHELIA_AUTHENTICATION_BACKEND_FILE_PASSWORD_ARGON2_VARIANT: argon2id
-        # AUTHELIA_AUTHENTICATION_BACKEND_FILE_PASSWORD_ARGON2_ITERATIONS: 1
-        # AUTHELIA_AUTHENTICATION_BACKEND_FILE_PASSWORD_ARGON2_KEY_LENGTH: 32
-        # AUTHELIA_AUTHENTICATION_BACKEND_FILE_PASSWORD_ARGON2_SALT_LENGTH: 16
-        # AUTHELIA_AUTHENTICATION_BACKEND_FILE_PASSWORD_ARGON2_MEMORY: 1024
-        # AUTHELIA_AUTHENTICATION_BACKEND_FILE_PASSWORD_ARGON2_PARALLELISM: 8
         #AUTHELIA_ACCESS_CONTROL_DEFAULT_POLICY: deny
         #AUTHELIA_ACCESS_CONTROL_RULES_DOMAIN
       resources:
@@ -79,19 +71,18 @@ spec:
             # salt_length: 16
       access_control:
         default_policy: deny
-        networks:
-          - name: internal
-            networks:
-              - 10.42.0.0/16
-              - 192.168.1.0/24
-
+        # networks:
+        #   - name: internal
+        #     networks:
+        #       - 10.42.0.0/16
+        #       - 192.168.1.0/24
         rules:
           - domain: "authelia.${SECRET_DOMAIN}"
             policy: bypass
-          - domain: "*.${SECRET_DOMAIN}"
-            policy: bypass
-            networks:
-              - internal
+          # - domain: "*.${SECRET_DOMAIN}"
+          #   policy: bypass
+          #   networks:
+          #     - internal
           - domain: "*.${SECRET_DOMAIN}"
             policy: one_factor
             subject:
