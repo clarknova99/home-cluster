@@ -16,6 +16,8 @@ spec:
         namespace: flux-system
   values:
     domain: "${SECRET_DOMAIN}"
+    service:
+      port: 9091
     pod:
       kind: Deployment
       replicas: 1
