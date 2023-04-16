@@ -32,7 +32,7 @@ spec:
               - key: users_database.yml
                 path: users_database.yml
       env:
-        AUTHELIA_DEFAULT_REDIRECTION_URL: "https://auth.${SECRET_DOMAIN}"
+        AUTHELIA_DEFAULT_REDIRECTION_URL: "https://authelia.${SECRET_DOMAIN}"
         AUTHELIA_DUO_API_DISABLE: "true"
         AUTHELIA_LOG_LEVEL: trace
         AUTHELIA_SERVER_PORT: 9091
