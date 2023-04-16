@@ -6,8 +6,9 @@ metadata:
   namespace: networking
 data:
   users_database.yml: |
+    ---
     users:
-      "${SECRET_AUTHELIA_DISPLAY_NAME}":
+      ${SECRET_AUTHELIA_DISPLAY_NAME}:
         displayname: "${SECRET_AUTHELIA_DISPLAY_NAME}"
         password: "${SECRET_AUTHELIA_PASSWORD}"
         email: ${SECRET_AUTHELIA_EMAIL}
