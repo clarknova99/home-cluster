@@ -12,7 +12,8 @@ metadata:
     hajimari.io/enable: "true"
     hajimari.io/icon: mdi:floppy-disk
     traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-    traefik.ingress.kubernetes.io/router.middlewares: traefik-middleware-chains-default
+    traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-middleware-chains-default@kubernetescrd
+
   #subdomain: authelia
 spec:
   ingressClassName: "traefik"
