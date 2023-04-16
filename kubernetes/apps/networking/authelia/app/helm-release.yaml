@@ -69,7 +69,7 @@ spec:
         #     algorithm: argon2id
         file:
           enabled: true
-          path: /config/users_database.yml
+          path: /data/users_database.yml
           password:
             algorithm: argon2id
             # iterations: 50000
