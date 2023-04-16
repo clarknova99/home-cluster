@@ -60,7 +60,7 @@ spec:
       enabled: true
       theme: dark
       log:
-        level: debug
+        level: trace
       authentication_backend:
         # disable_reset_password: true
         ldap:
