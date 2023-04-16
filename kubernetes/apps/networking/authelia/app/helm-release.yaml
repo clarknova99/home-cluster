@@ -81,6 +81,11 @@ spec:
             policy: one_factor
             subject:
               - "group:admins"
+          - domain: "filebrowser.${SECRET_DOMAIN}"
+            policy: one_factor
+            subject:
+              - "group:admins"
+
       session:
         expiration: 24h
         inactivity: 24h
