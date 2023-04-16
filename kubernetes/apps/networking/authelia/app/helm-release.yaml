@@ -23,7 +23,7 @@ spec:
         type: Recreate
       extraVolumeMounts:
         - name: config-users
-          mountPath: /config
+          mountPath: /data
       extraVolumes:
         - name: config-users
           configMap:
