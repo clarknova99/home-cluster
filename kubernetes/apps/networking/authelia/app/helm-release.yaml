@@ -79,13 +79,19 @@ spec:
             # salt_length: 16
       access_control:
         default_policy: deny
+        networks:
+          - name: internal
+            networks:
+              - 10.42.0.0/16
+              - 192.168.1.0/24
+
         rules:
           - domain: "authelia.${SECRET_DOMAIN}"
             policy: bypass
-          - domain: "${SECRET_DOMAIN}"
-            policy: one_factor
-            subject:
-              - "group:admins"
+          - domain: "*.${SECRET_DOMAIN}"
+            policy: bypass
+            networks:
+              - internal
           - domain: "*.${SECRET_DOMAIN}"
             policy: one_factor
             subject:
@@ -94,10 +100,13 @@ spec:
             policy: one_factor
             subject:
               - "group:admins"
-
+      regulation:
+        max_retries: 3
+        find_time: 2m
+        ban_time: 5m
       session:
-        expiration: 24h
-        inactivity: 24h
+        expiration: 1h
+        inactivity: 15m
         remember_me_duration: 1M
         redis:
           enabled: false
