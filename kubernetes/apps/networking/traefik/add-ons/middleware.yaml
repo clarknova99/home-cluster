@@ -267,10 +267,11 @@ metadata:
 spec:
   chain:
     middlewares:
-      - name: traefik-middleware-local-ips
-      - name: traefik-middleware-cloudflare-ips
-      - name: traefik-middleware-rate-limit
+      - name: traefik-middleware-redirect-https
       - name: traefik-middleware-secure-headers
+      - name: traefik-middleware-rate-limit
+      # - name: traefik-middleware-local-ips
+      # - name: traefik-middleware-cloudflare-ips
       - name: traefik-middleware-authelia
 ---
 apiVersion: traefik.containo.us/v1alpha1
