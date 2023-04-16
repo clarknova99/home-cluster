@@ -125,7 +125,7 @@ spec:
         password: ${SECRET_AUTHENTIK_SMTP_PASSWORD}
         host: smtp.gmail.com
         port: 587
-    # sender: test@gmail.com
+        sender: Athelia <${SECRET_AUTHENTIK_SMTP_USERNAME}>
     #   notifier:
     #     disable_startup_check: true
     #     filesystem:
