@@ -21,16 +21,16 @@ spec:
       replicas: 1
       strategy:
         type: Recreate
-      # extraVolumeMounts:
-      #   - name: config-users
-      #     mountPath: /config
-      # extraVolumes:
-      #   - name: config-users
-      #     configMap:
-      #       name: authelia-config-users
-      #       items:
-      #         - key: users_database.yml
-      #           path: users_database.yml
+      extraVolumeMounts:
+        - name: config-users
+          mountPath: /config
+      extraVolumes:
+        - name: config-users
+          configMap:
+            name: authelia-config-users
+            items:
+              - key: users_database.yml
+                path: users_database.yml
       env:
         AUTHELIA_DEFAULT_REDIRECTION_URL: "https://auth.${SECRET_DOMAIN}"
         AUTHELIA_DUO_API_DISABLE: "true"
