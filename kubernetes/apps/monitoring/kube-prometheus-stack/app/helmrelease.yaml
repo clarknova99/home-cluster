@@ -120,6 +120,7 @@ spec:
           external-dns.alpha.kubernetes.io/target: "${SECRET_DOMAIN}"
           external-dns.alpha.kubernetes.io/hostname: prom.${SECRET_DOMAIN}
           cert-manager.io/cluster-issuer: "letsencrypt-production"
+          traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-middleware-chains-authelia@kubernetescrd
         hosts:
           - "prom.${SECRET_DOMAIN}"
         path: /
