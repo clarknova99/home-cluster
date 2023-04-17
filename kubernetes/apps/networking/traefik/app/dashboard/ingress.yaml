@@ -10,7 +10,8 @@ metadata:
     external-dns.alpha.kubernetes.io/hostname: traefik.${SECRET_DOMAIN}
     cert-manager.io/cluster-issuer: letsencrypt-production
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
-    traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-middleware-chains-authentik@kubernetescrd
+    #traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-middleware-chains-authentik@kubernetescrd
+    traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-middleware-chains-authelia@kubernetescrd
     hajimari.io/appName: "traefik"
     hajimari.io/enable: "true"
     hajimari.io/icon: "web"
