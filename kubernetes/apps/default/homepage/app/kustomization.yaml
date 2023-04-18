@@ -5,14 +5,14 @@ namespace: default
 resources:
   - helm-release.yaml
   - ingress.yaml
-configMapGenerator:
-  - name: homepage
-    files:
-      - config/settings.yaml
-      - config/widgets.yaml
-      - config/services.yaml
-      - config/bookmarks.yaml
-      - config/docker.yaml
-      - config/kubernetes.yaml
-generatorOptions:
-  disableNameSuffixHash: true
+# configMapGenerator:
+#   - name: homepage
+#     files:
+#       - config/settings.yaml
+#       - config/widgets.yaml
+#       - config/services.yaml
+#       - config/bookmarks.yaml
+#       - config/docker.yaml
+#       - config/kubernetes.yaml
+# generatorOptions:
+#   disableNameSuffixHash: true
