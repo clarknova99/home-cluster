@@ -19,7 +19,7 @@
       label: "cluster"
     nodes:
       # Shows node-specific statistics
-      show: true
+      show: false
       # Shows the CPU for each node
       cpu: true
       # Shows the memory for each node
