@@ -1,4 +1,5 @@
 ---
+mode: cluster
 widgets:
   # show the kubernetes widget, with the cluster summary and individual nodes
   - kubernetes:
@@ -13,9 +14,3 @@ widgets:
         cpu: true
         memory: true
         showLabel: true
-  - search:
-      provider: duckduckgo
-      target: _blank
-kubernetes:
-  mode: cluster
-settings:
