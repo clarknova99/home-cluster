@@ -4,10 +4,10 @@ theme: dark
 color: slate
 headerStyle: clean
 layout:
-  Media:
-    style: row
-    columns: 4
-    icon: mdi-play-circle
+  # Media:
+  #   style: row
+  #   columns: 4
+  #   icon: mdi-play-circle
   Infrastructure:
     style: row
     columns: 4
