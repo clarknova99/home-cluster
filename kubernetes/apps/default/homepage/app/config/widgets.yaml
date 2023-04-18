@@ -1,11 +1,11 @@
 ---
 - search:
-    provider: [google, duckduckgo]
-    focus: false
-    target: _blank
+  provider: [google, duckduckgo]
+  focus: false
+  target: _blank
 - greeting:
-    text_size: xl
-    text: "Greetings Citizen!"
+  text_size: xl
+  text: "Greetings Citizen!"
 - kubernetes:
     cluster:
       cpu: true
@@ -16,7 +16,7 @@
     nodes:
       cpu: true
       memory: true
-      show: false
+      show: true
       showLabel: true
 # - openmeteo:
 #     label: Home
@@ -24,6 +24,9 @@
 #     longitude: ${LONGITUDE}
 #     units: metric
 #     cache: 5
+- kubernetes:
+  url: http://sabnzbd.media.svc.cluster.local
+  key: 5uoxjbnyyl65i8446m6zsydgdwdf4zl2
 - datetime:
     text_size: xl
     format:
