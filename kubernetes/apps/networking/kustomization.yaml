@@ -6,7 +6,7 @@ resources:
   - ./cloudflare-ddns/ks.yaml
   - ./external-dns/ks.yaml
   - ./traefik/ks.yaml
-  - ./authentik/ks.yaml
+  # - ./authentik/ks.yaml
   - ./metallb/ks.yaml
   - ./authelia/ks.yaml
   #- ./k8s-gateway/ks.yaml
