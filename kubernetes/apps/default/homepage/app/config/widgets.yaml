@@ -24,9 +24,6 @@
 #     longitude: ${LONGITUDE}
 #     units: metric
 #     cache: 5
-- sabnzbd:
-  url: https://sabnzbd.bigwang.org/
-  key: 5uoxjbnyyl65i8446m6zsydgdwdf4zl2
 - datetime:
     text_size: xl
     format:
