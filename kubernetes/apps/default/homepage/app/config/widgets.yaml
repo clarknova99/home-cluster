@@ -35,6 +35,6 @@
 - datetime:
     text_size: xl
     format:
-      dateStyle: long
+      dateStyle: short
       timeStyle: short
-      hourCycle: h23
+      hour12: true
