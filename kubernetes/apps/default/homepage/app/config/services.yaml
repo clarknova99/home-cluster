@@ -9,6 +9,7 @@
         href: https://grafana.${SECRET_DOMAIN}
         icon: grafana.png
         description: Metric Monitoring
+        ping: grafana.{SECRET_DOMAIN}
     - Alertmanager:
         href: https://alertmanager.${SECRET_DOMAIN}
         icon: alertmanager.png
