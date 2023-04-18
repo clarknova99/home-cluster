@@ -5,7 +5,7 @@
   target: _blank
 - greeting:
   text_size: xl
-  text: "Greetings Citizen!"
+  text: "haroh!"
 - kubernetes:
     cluster:
       cpu: true
@@ -24,7 +24,7 @@
 #     longitude: ${LONGITUDE}
 #     units: metric
 #     cache: 5
-- kubernetes:
+- sabnzbd:
   url: http://sabnzbd.media.svc.cluster.local
   key: 5uoxjbnyyl65i8446m6zsydgdwdf4zl2
 - datetime:
