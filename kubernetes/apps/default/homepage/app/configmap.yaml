@@ -19,7 +19,7 @@ data:
         target: _blank
     - greeting:
         text_size: xl
-        text: "Howdy!"
+        text: "Haroh!"
     - kubernetes:
         cluster:
           show: true
