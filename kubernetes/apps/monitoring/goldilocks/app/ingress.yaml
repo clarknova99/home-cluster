@@ -11,7 +11,7 @@ metadata:
     cert-manager.io/cluster-issuer: "letsencrypt-production"
     hajimari.io/enable: "true"
     traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-    traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-middleware-chains-authentik@kubernetescrd
+    traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-middleware-chains-authelia@kubernetescrd
 spec:
   ingressClassName: "traefik"
   tls:
@@ -29,16 +29,3 @@ spec:
                 name: goldilocks
                 port:
                   number: 8080
-      # ingress:
-      #   enabled: true
-      #   ingressClassName: "traefik"
-      #   annotations:
-      #     cert-manager.io/cluster-issuer: "letsencrypt-production"
-      #     external-dns.home.arpa/enabled: "true"
-      #     traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-      #     traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-middleware-chains-authentik@kubernetescrd
-      #   hosts:
-      #     - host: "goldilocks.${SECRET_DOMAIN_NAME}"
-      #       paths:
-      #         - path: /
-      #           type: Prefix
