@@ -6,44 +6,20 @@ metadata:
   namespace: kube-system
 spec:
   interval: 5m
-  dependsOn:
-    - name: longhorn
-      namespace: longhorn-system
   chart:
     spec:
       chart: portainer
-      version: 1.0.40
+      version: 1.0.41
       sourceRef:
         kind: HelmRepository
         name: portainer
         namespace: flux-system
       interval: 5m
   values:
-    # image:
-    #   repository: ghcr.io/onedr0p/sonarr-develop
-    #   tag: 4.0.0.356@sha256:c7d3cd0d6b87673b5cf92e4bce71df22608a314a1c4f14fbd6bd14c74ad7af4a
+
+    # persistence:
+    #   size: "256Mi"
+    #   storageClass: nfs-client
     persistence:
-      size: "256Mi"
-      storageClass: nfs-client
-    # ingress:
-    #   enabled: true
-    #   ingressClassName: "traefik"
-    #   annotations:
-    #     cert-manager.io/cluster-issuer: "letsencrypt-production"
-    #     hajimari.io/enable: "true"
-    #     hajimari.io/appName: "portainer"
-    #     hajimari.io/icon: "pier-crane"
-    #     external-dns.home.arpa/enabled: "true"
-    #     external-dns.alpha.kubernetes.io/target: "${SECRET_DOMAIN}"
-    #     external-dns.alpha.kubernetes.io/hostname: portainer.${SECRET_DOMAIN}
-    #     traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-    #     traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-middleware-authentik@kubernetescrd
-    #   hosts:
-    #     - host: &host "portainer.${SECRET_DOMAIN}"
-    #       paths:
-    #         - path: /
-    #           pathType: Prefix
-    #   tls:
-    #     - hosts:
-    #         - *host
-    #       secretName: "portainer-tls"
+      enabled: true
+      existingClaim: portainer-pvc

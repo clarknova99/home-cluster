@@ -13,7 +13,7 @@ metadata:
     external-dns.alpha.kubernetes.io/target: "${SECRET_DOMAIN}"
     external-dns.alpha.kubernetes.io/hostname: portainer.${SECRET_DOMAIN}
     traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-    traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-middleware-chains-authentik@kubernetescrd
+    traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-middleware-chains-authelia@kubernetescrd
 spec:
   ingressClassName: "traefik"
   tls:
