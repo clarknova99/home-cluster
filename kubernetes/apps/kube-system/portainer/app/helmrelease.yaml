@@ -22,4 +22,4 @@ spec:
     #   storageClass: nfs-client
     persistence:
       enabled: true
-      existingClaim: portainer-pvc
+      existingClaim: pvc-portainer
