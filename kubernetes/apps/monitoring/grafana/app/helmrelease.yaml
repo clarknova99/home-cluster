@@ -51,6 +51,7 @@ spec:
         provisioning: /etc/grafana/provisioning
       log:
         mode: console
+      app_tls_skip_verify_insecure: true
       grafana_net:
         url: https://grafana.net
       auth.basic:
