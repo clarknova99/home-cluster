@@ -40,6 +40,7 @@ spec:
       GF_SMTP_FROM_NAME: "${SECRET_GF_SMTP_FROM_NAME}"
       GF_SMTP_USER: "${SECRET_GF_SMTP_USER}"
       GF_SMTP_PASSWORD: ${SECRET_GF_SMTP_PASSWORD}
+      GF_ALLOW_LOADING_UNSIGNED_PLUGINS: mullerpeter-databricks-datasource
     grafana.ini:
       server:
         root_url: "https://grafana.${SECRET_DOMAIN}"
