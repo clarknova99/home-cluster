@@ -51,7 +51,9 @@ spec:
         provisioning: /etc/grafana/provisioning
       log:
         mode: console
+      allow_loading_unsigned_plugins: mullerpeter-databricks-datasource
       app_tls_skip_verify_insecure: true
+
       grafana_net:
         url: https://grafana.net
       auth.basic:
