@@ -88,3 +88,13 @@ spec:
           port: 9794
           additionalMetrics: true
           unknownQueueItems: true
+    affinity:
+      nodeAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 60
+            preference:
+              matchExpressions:
+                - key: kubernetes.io/hostname
+                  operator: In
+                  values:
+                    - k3s-05
