@@ -9,7 +9,7 @@ resources:
   # - ./authentik/ks.yaml
   - ./metallb/ks.yaml
   - ./authelia/ks.yaml
-  #- ./k8s-gateway/ks.yaml
+  - ./k8s-gateway/ks.yaml
   #- ./traefik-forward-auth/ks.yaml
   #- wildcard-certificate
   #- traefik-error-pages
