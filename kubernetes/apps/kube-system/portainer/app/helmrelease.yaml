@@ -16,7 +16,8 @@ spec:
         namespace: flux-system
       interval: 5m
   values:
-
+    service:
+      type: ClusterIP
     # persistence:
     #   size: "256Mi"
     #   storageClass: nfs-client
