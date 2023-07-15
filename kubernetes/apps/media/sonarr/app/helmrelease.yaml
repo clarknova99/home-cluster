@@ -32,7 +32,7 @@ spec:
         reloader.stakater.com/auto: "true"
     image:
       repository: ghcr.io/onedr0p/sonarr-develop
-      tag: 4.0.0.542@sha256:36fc497816500ddd8322622bd9b29d0970ff6c48ba42e88bb0b9394d8550c154
+      tag: 4.0.0.559@sha256:62cc0157d673e68691c83c27a13011d416f28734134431bf27cf9b557cb7c2c5
     env:
       SONARR__INSTANCE_NAME: Sonarr
       SONARR__PORT: &port 80
