@@ -8,3 +8,4 @@ resources:
   - ./pvc-networking.yaml
   # - ./pvc-postgres.yaml
   - ./pvc-tv.yaml
+  - ./pvc-youtube.yaml
