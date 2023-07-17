@@ -40,12 +40,12 @@ spec:
       media:
         enabled: true
         existingClaim: pvc-youtube
-        # subPath:
+        subPath:
         #   - path: /audio
         #     mountPath: /app/audio
-        #   - path: /video
-        #     mountPath: /app/video
-        #   - path: /subscriptions
+          - path: video
+            mountPath: /app/video
+          # - path: /subscriptions
         #     mountPath: /app/subscriptions
         #   - path: /users
         #     mountPath: /app/users
