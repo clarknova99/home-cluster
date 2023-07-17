@@ -29,7 +29,7 @@ spec:
       tag: latest
     env:
       TZ: "${TIMEZONE}"
-      ytdl_url: ytd.${SECRET_DOMAIN}
+      #ytdl_url: ytd.${SECRET_DOMAIN}
       write_ytdl_config: true
     persistence:
       data:
