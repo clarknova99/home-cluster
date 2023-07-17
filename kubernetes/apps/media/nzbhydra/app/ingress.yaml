@@ -10,7 +10,7 @@ metadata:
     external-dns.alpha.kubernetes.io/target: "${SECRET_DOMAIN}"
     external-dns.alpha.kubernetes.io/hostname: nzbhydra.${SECRET_DOMAIN}
     hajimari.io/enable: "true"
-    hajimari.io/icon: youtube
+    hajimari.io/icon: download-box
     traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
     traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-middleware-chains-authelia@kubernetescrd
 spec:

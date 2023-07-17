@@ -1,4 +1,3 @@
-# https://github.com/Tzahi12345/YoutubeDL-Material/blob/master/docker-compose.yml
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
