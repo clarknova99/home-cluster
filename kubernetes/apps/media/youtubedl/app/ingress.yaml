@@ -8,19 +8,19 @@ metadata:
     cert-manager.io/cluster-issuer: "letsencrypt-production"
     external-dns.home.arpa/enabled: "true"
     external-dns.alpha.kubernetes.io/target: "${SECRET_DOMAIN}"
-    external-dns.alpha.kubernetes.io/hostname: youtubedl.${SECRET_DOMAIN}
+    external-dns.alpha.kubernetes.io/hostname: ytd.${SECRET_DOMAIN}
     hajimari.io/enable: "true"
-    hajimari.io/icon: mdi:subtitles-outline
+    hajimari.io/icon: youtube
     traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-    traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-middleware-authentik@kubernetescrd
+    traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-middleware-chains-authelia@kubernetescrd
 spec:
   ingressClassName: "traefik"
   tls:
     - hosts:
-        - "youtubedl.${SECRET_DOMAIN}"
+        - "ytd.${SECRET_DOMAIN}"
       secretName: "youtubedl-tls"
   rules:
-    - host: "youtubedl.${SECRET_DOMAIN}"
+    - host: "ytd.${SECRET_DOMAIN}"
       http:
         paths:
           - path: /
@@ -29,4 +29,4 @@ spec:
               service:
                 name: youtubedl
                 port:
-                  number: 80
+                  number: 17442

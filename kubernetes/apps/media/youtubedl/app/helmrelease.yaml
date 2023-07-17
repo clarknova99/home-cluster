@@ -30,6 +30,7 @@ spec:
     env:
       TZ: "${TIMEZONE}"
       ytdl_url: ytd.${SECRET_DOMAIN}
+      write_ytdl_config: true
     persistence:
       data:
         enabled: true
@@ -48,29 +49,29 @@ spec:
             mountPath: /app/subscriptions
           - path: /users
             mountPath: /app/users
-    service:
-      main:
-        ports:
-          http:
-            port: 17442
-    ingress:
-      enabled: true
-      ingressClassName: "traefik"
-      annotations:
-        hajimari.io/enable: "true"
-        hajimari.io/icon: "youtube"
-        external-dns.home.arpa/enabled: "true"
-        external-dns.alpha.kubernetes.io/target: "${SECRET_DOMAIN}"
-        external-dns.alpha.kubernetes.io/hostname: ytd.${SECRET_DOMAIN}
-        cert-manager.io/cluster-issuer: "letsencrypt-production"
-        traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-        traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-middleware-chains-authelia@kubernetescrd
-      hosts:
-        - "ytd.${SECRET_DOMAIN}"
-      tls:
-        - hosts:
-            - "ytd.${SECRET_DOMAIN}"
-          secretName: "ytd.${SECRET_DOMAIN}"
+    # service:
+    #   main:
+    #     ports:
+    #       http:
+    #         port: 17442
+    # ingress:
+    #   enabled: true
+    #   ingressClassName: "traefik"
+    #   annotations:
+    #     hajimari.io/enable: "true"
+    #     hajimari.io/icon: "youtube"
+    #     external-dns.home.arpa/enabled: "true"
+    #     external-dns.alpha.kubernetes.io/target: "${SECRET_DOMAIN}"
+    #     external-dns.alpha.kubernetes.io/hostname: ytd.${SECRET_DOMAIN}
+    #     cert-manager.io/cluster-issuer: "letsencrypt-production"
+    #     traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+    #     traefik.ingress.kubernetes.io/router.middlewares: networking-traefik-middleware-chains-authelia@kubernetescrd
+    #   hosts:
+    #     - "ytd.${SECRET_DOMAIN}"
+    #   tls:
+    #     - hosts:
+    #         - "ytd.${SECRET_DOMAIN}"
+    #       secretName: "ytd.${SECRET_DOMAIN}"
     # ingress:
     #   main:
     #     enabled: true

@@ -7,3 +7,4 @@ resources:
   - ./helmrelease.yaml
   - ./pvc-youtube.yaml
   - ./pvc.yaml
+  - ./ingress.yaml
