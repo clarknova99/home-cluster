@@ -98,3 +98,13 @@ spec:
         memory: 250Mi
       limits:
         memory: 6000Mi
+    affinity:
+      nodeAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 60
+            preference:
+              matchExpressions:
+                - key: kubernetes.io/hostname
+                  operator: In
+                  values:
+                    - k3s-06
