@@ -26,7 +26,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: pvc-tv
+  name: pvc-youtube
   namespace: media
 spec:
   accessModes:
