@@ -29,6 +29,7 @@ spec:
       tag: latest
     env:
       TZ: "${TIMEZONE}"
+      ytdl_url: ytd.${SECRET_DOMAIN}
       # ytdl_use_local_db: "false"
       # write_ytdl_config: "true"
       # ytdl_mongodb_connection_string:
@@ -44,15 +45,15 @@ spec:
         #subPath: youtubedl
       media:
         enabled: true
-        existingClaim: media
+        existingClaim: pvc-youtube
         subPath:
-          - path: library/youtube/audio
+          - path: /audio
             mountPath: /app/audio
-          - path: library/youtube/video
+          - path: /video
             mountPath: /app/video
-          - path: library/youtube/subscriptions
+          - path: /subscriptions
             mountPath: /app/subscriptions
-          - path: library/youtube/users
+          - path: /users
             mountPath: /app/users
     service:
       main:
