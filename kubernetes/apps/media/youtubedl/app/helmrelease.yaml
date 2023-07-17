@@ -49,11 +49,11 @@ spec:
             mountPath: /app/subscriptions
           - path: /users
             mountPath: /app/users
-    # service:
-    #   main:
-    #     ports:
-    #       http:
-    #         port: 17442
+    service:
+      main:
+        ports:
+          http:
+            port: 17442
     # ingress:
     #   enabled: true
     #   ingressClassName: "traefik"
