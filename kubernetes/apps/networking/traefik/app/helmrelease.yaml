@@ -11,7 +11,7 @@ spec:
     spec:
       #test
       chart: traefik
-      version: 22.1.0
+      version: 23.2.0
       #version: 23.0.1
       interval: 5m
       sourceRef:
