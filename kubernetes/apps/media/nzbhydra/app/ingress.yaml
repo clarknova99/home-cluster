@@ -17,7 +17,7 @@ spec:
   ingressClassName: "traefik"
   tls:
     - hosts:
-        - "ytd.${SECRET_DOMAIN}"
+        - "nzbhydra.${SECRET_DOMAIN}"
       secretName: "nzbhydra-tls"
   rules:
     - host: "nzbhydra.${SECRET_DOMAIN}"
