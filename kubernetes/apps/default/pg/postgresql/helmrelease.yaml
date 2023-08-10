@@ -27,7 +27,7 @@ spec:
   values:
     image:
       repository: bitnami/postgresql
-      tag: 15.2.0
+      tag: 15.4.0
     auth:
       postgresPassword: ${SECRET_POSTGRES_PASSWORD}
     primary:
