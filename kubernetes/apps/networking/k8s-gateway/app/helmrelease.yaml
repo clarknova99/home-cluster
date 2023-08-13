@@ -29,6 +29,9 @@ spec:
     fullnameOverride: k8s-gateway
     domain: "${SECRET_DOMAIN}"
     ttl: 1
+    priorityClassName: system-cluster-critical
+    debug:
+      enabled: false
     service:
       type: LoadBalancer
       port: 53
