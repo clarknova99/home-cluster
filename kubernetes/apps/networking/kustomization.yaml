@@ -4,7 +4,7 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./cloudflare-ddns/ks.yaml
-  - ./external-dns/ks.yaml
+  #- ./external-dns/ks.yaml
   - ./traefik/ks.yaml
   # - ./authentik/ks.yaml
   - ./metallb/ks.yaml
