@@ -26,7 +26,7 @@ spec:
     sources:
       # - service
       - ingress
-      #- crd
+      - crd
     policy: sync
     logLevel: debug
     interval: 2m
@@ -43,9 +43,16 @@ spec:
             name: external-dns-secret
             key: api-key
     extraArgs:
-      - --cloudflare-proxied
+      # old
+      # - --cloudflare-proxied
+      # - --annotation-filter=external-dns.home.arpa/enabled in (true)
+      # - --zone-id-filter=399537a1da4ab599fac7bf35849ee71f
+      # https://github.com/kubernetes-sigs/external-dns/blob/master/docs/faq.md
       - --annotation-filter=external-dns.home.arpa/enabled in (true)
-      - --zone-id-filter=399537a1da4ab599fac7bf35849ee71f
+      - --cloudflare-proxied
+      - --crd-source-apiversion=externaldns.k8s.io/v1alpha1
+      - --crd-source-kind=DNSEndpoint
+
     # txtPrefix: k8s.
     #txtOwnerId: ""
     domainFilters:
