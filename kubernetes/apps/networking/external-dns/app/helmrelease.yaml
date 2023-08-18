@@ -54,8 +54,8 @@ spec:
       - --crd-source-kind=DNSEndpoint
       - --zone-id-filter=399537a1da4ab599fac7bf35849ee71f
 
-    txtPrefix: k8s.
-    txtOwnerId: "lab"
+    #txtPrefix: k8s.
+    #txtOwnerId: "lab"
     domainFilters:
       - "${SECRET_DOMAIN}"
     serviceMonitor:
