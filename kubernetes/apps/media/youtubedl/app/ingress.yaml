@@ -1,0 +1,27 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ytd
+  namespace: media
+  annotations:
+    external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+    hajimari.io/enable: "true"
+    hajimari.io/icon: youtube
+spec:
+  ingressClassName: internal
+  rules:
+    - host: "ytd.${SECRET_DOMAIN}"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: youtubedl
+                port:
+                  number: 17442
+  tls:
+    - hosts:
+        - "ytd.${SECRET_DOMAIN}"
+

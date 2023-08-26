@@ -1,0 +1,62 @@
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-youtubedl
+  namespace: media
+spec:
+  storageClassName: "network-storage"
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  nfs:
+    server: 192.168.1.2
+    path: "/volume1/network-storage/youtubedl"
+    readOnly: false
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-youtubedl
+  namespace: media
+spec:
+  accessModes:
+    - ReadWriteMany
+  volumeName: pv-youtubedl
+  storageClassName: "network-storage"
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-youtube
+  namespace: media
+spec:
+  storageClassName: "network-storage"
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  nfs:
+    server: 192.168.1.2
+    path: "/volume1/Video/youtube"
+    readOnly: false
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-youtube
+  namespace: media
+spec:
+  accessModes:
+    - ReadWriteMany
+  volumeName: pv-youtube
+  storageClassName: "network-storage"
+  resources:
+    requests:
+      storage: 1Gi

@@ -1,0 +1,36 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: website
+  namespace: default
+  annotations:
+    external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+    hajimari.io/enable: "true"
+spec:
+  ingressClassName: external
+  rules:
+    - host: "www.${SECRET_DOMAIN}"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: website-nginx
+                port:
+                  number: 80
+    - host: "www.${SECRET_DOMAIN2}"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: website-nginx
+                port:
+                  number: 80
+  tls:
+    - hosts:
+        - "www.${SECRET_DOMAIN}"
+        - "www.${SECRET_DOMAIN2}"
