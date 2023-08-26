@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: external-name
+  name: proxmox
+spec:
+  endpoints:
+  - addresses:
+      - 192.168.1.9
+  ports:
+  - name: https
+    port: 8006
+    protocol: TCP
+    targetPort: 8006
+  sessionAffinity: None
+  type: ExternalName
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: proxmox
+  namespace: networking
+spec:
+  ingressClassName: internal
+  rules:
+  - host: proxmox.${SECRET_DOMAIN}
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: proxmox-svc
+            port:
+              number: 8006
+  tls:
+    - hosts:
+      - "proxmox.${SECRET_DOMAIN}"
