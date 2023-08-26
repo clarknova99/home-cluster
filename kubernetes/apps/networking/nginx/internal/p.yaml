@@ -28,7 +28,7 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: proxmox-svc
+            name: proxmox
             port:
               number: 8006
   tls:
