@@ -65,6 +65,7 @@ spec:
         proxy-body-size: 0
         proxy-buffer-size: 16k
         ssl-protocols: TLSv1.3 TLSv1.2
+      maxmindLicenseKey: ${SECRET_MAXMIND_LICENSE_KEY}
       metrics:
         enabled: true
         serviceMonitor:
