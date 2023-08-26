@@ -18,6 +18,8 @@ kind: Ingress
 metadata:
   name: proxmox
   namespace: networking
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
 spec:
   ingressClassName: internal
   rules:
