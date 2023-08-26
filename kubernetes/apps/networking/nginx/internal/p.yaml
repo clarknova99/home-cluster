@@ -19,7 +19,8 @@ metadata:
   name: proxmox
   namespace: networking
   annotations:
-    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    #nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS" #important
 spec:
   ingressClassName: internal
   rules:
