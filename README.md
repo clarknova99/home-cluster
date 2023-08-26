@@ -10,7 +10,7 @@
 
 [![k3s](https://img.shields.io/badge/k3s-v1.27-brightgreen?logo=kubernetes&logoColor=white)](https://k3s.io/)
 [![renovate](https://img.shields.io/badge/renovate-enabled-brightgreen?logo=renovatebot&logoColor=white)](https://github.com/renovatebot/renovate)
-[![Lines of code](https://img.shields.io/tokei/lines/github/clarknova99/home-cluster?color=brightgreen&label=lines&logo=codefactor&logoColor=white)](https://github.com/clarknova99/home-cluster)
+[![repo size](https://img.shields.io/github/repo-size/clarknova99/home-cluster)](https://github.com/clarknova99/home-cluster)
 
 
 </div>
@@ -25,7 +25,7 @@ The repo is home for the code to automate the provisioning and management of my 
 * [renovate](https://github.com/renovatebot/renovate) monitors the repo, creating pull requests when it finds updates to dependencies.
 
 ## :gear: Core Components
-* [cilium](https://cilium.io/) for network management
+* [cilium](https://cilium.io/) for networking within the cluster and load balancer for exposed services
 * [cert-manager](https://cert-manager.io) to request SSL certificates to store as Kubernetes resources
 * [sops](https://github.com/mozilla/sops) with [age](https://github.com/FiloSottile/age) to encrypt secrets used in Ansible & Flux
 * [ingress-nginx](https://github.com/kubernetes/ingress-nginx): Kubernetes ingress controller used for HTTP reverse proxy of service ingresses
