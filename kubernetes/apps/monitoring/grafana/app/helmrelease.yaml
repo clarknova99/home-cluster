@@ -40,6 +40,8 @@ spec:
         check_for_updates: false
         check_for_plugin_updates: false
         reporting_enabled: false
+    plugins:
+      - grafana-worldmap-panel
     dashboardProviders:
       dashboardproviders.yaml:
         apiVersion: 1
