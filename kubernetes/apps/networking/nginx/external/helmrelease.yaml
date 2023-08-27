@@ -56,12 +56,13 @@ spec:
         keep-alive-requests: 10000
         keep-alive: 120
         log-format-escape-json: "true"
+        ## http://nginx.org/en/docs/http/ngx_http_geoip_module.html
         log-format-upstream: >
           {"time": "$time_iso8601", "remote_addr": "$proxy_protocol_addr", "x_forwarded_for": "$proxy_add_x_forwarded_for",
           "request_id": "$req_id", "remote_user": "$remote_user", "bytes_sent": $bytes_sent, "request_time": $request_time,
           "status": $status, "vhost": "$host", "request_proto": "$server_protocol", "path": "$uri", "request_query": "$args",
           "request_length": $request_length, "duration": $request_time, "method": "$request_method", "http_referrer": "$http_referer",
-          "http_user_agent": "$http_user_agent", "geoip_country_code": "$geoip_country_code",
+          "http_user_agent": "$http_user_agent", "geoip_country_code": "$geoip_country_code", "geoip_country_name": "$geoip_country_name",
           "geoip_city": "$geoip_city", "geoip_latitude": "$geoip_latitude", "geoip_longitude": "$geoip_longitude", "geoip_region": "$geoip_region", "geoip_region_name": "$geoip_region_name"}
         proxy-body-size: 0
         proxy-buffer-size: 16k
