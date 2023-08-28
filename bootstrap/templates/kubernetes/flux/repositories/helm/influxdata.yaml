@@ -2,8 +2,9 @@
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
 metadata:
-  name: signoz
+  name: influxdata
   namespace: flux-system
 spec:
-  interval: 2h
-  url: https://charts.signoz.io
+  interval: 30m
+  url: https://helm.influxdata.com
+  timeout: 3m
