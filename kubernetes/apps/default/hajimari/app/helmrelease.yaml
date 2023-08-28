@@ -41,6 +41,7 @@ spec:
           - default
           - monitoring
           - media
+          - kube-system
       globalBookmarks:
         - group: Daily
           bookmarks:
