@@ -5,3 +5,4 @@ resources:
   - ./namespace.yaml
   - ./hajimari/ks.yaml
   - ./website/ks.yaml
+  - ./whoami/ks.yaml
