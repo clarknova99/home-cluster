@@ -29,10 +29,10 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    persistence:
-      enabled: true
-      existingClaim: pvc-signoz
-      name: pvc-signoz
+    # persistence:
+    #   enabled: true
+    #   existingClaim: pvc-signoz
+    #   name: pvc-signoz
     # frontend:
     #   ingress:
     #     enabled: true
