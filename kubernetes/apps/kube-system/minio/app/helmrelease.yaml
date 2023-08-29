@@ -1,0 +1,111 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: &app minio
+  namespace: kube-system
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: 1.5.1
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  install:
+    createNamespace: true
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
+  values:
+    image:
+      repository: quay.io/minio/minio
+      tag: RELEASE.2023-08-23T10-07-06Z
+      #tag: RELEASE.2022-09-07T22-25-02Z
+    env:
+      TZ: "${TIMEZONE}"
+      MINIO_UPDATE: "off"
+      MINIO_BROWSER_REDIRECT_URL: "https://minio.${SECRET_DOMAIN}"
+      MINIO_SERVER_URL: "https://s3.${SECRET_DOMAIN}"
+      MINIO_PROMETHEUS_URL: http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090
+      MINIO_PROMETHEUS_JOB_ID: minio
+    # envFrom:
+    # ## sops --encrypt --in-place ./kubernetes/apps/kube-system/minio/app/minio.sops.yaml
+    # ## sops --decrypt ./kubernetes/apps/kube-system/minio/app/minio.sops.yaml | kubectl apply -f -
+    #   - secretRef:
+    #       name: *app
+    args: ["server", "/data", "--console-address", ":9001"]
+    service:
+      main:
+        enabled: true
+        ports:
+          http:
+            port: &console-port 9001
+          api:
+            enabled: true
+            port: &api-port 9000
+    serviceMonitor:
+      main:
+        enabled: true
+        endpoints:
+          - port: api
+            scheme: http
+            path: /minio/v2/metrics/cluster
+            interval: 1m
+            scrapeTimeout: 10s
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: internal
+        annotations:
+          hajimari.io/icon: mdi:pail
+        hosts:
+          - host: &console-host "minio.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  port: *console-port
+        tls:
+          - hosts:
+              - *console-host
+      s3:
+        enabled: true
+        ingressClassName: internal
+        annotations:
+          hajimari.io/enable: "false"
+          nginx.ingress.kubernetes.io/proxy-connect-timeout: "180"
+          nginx.ingress.kubernetes.io/proxy-body-size: 1024m
+          nginx.ingress.kubernetes.io/proxy-request-buffering: "off"
+          nginx.ingress.kubernetes.io/configuration-snippet: |
+            chunked_transfer_encoding off;
+        hosts:
+          - host: &api-host "s3.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  port: *api-port
+        tls:
+          - hosts:
+              - *api-host
+    persistence:
+      config:
+        enabled: true
+        type: nfs
+        server: 192.168.1.2
+        path: /volume1/network-storage/s3
+        readOnly: false
+        mountPath: /data
+    podAnnotations:
+      secret.reloader.stakater.com/reload: minio
+    resources:
+      requests:
+        memory: 100Mi
+        cpu: 100m
+      limits:
+        memory: 750Mi
