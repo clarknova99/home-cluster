@@ -35,7 +35,7 @@ spec:
       isDefault: false
       persistence:
         enabled: true
-        existingClaim: pvc-loki
+        existingClaim: pvc-loki-stack
       config:
         table_manager:
           retention_deletes_enabled: true
