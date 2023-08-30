@@ -37,6 +37,7 @@ spec:
         enabled: true
         existingClaim: pvc-loki-stack
       config:
+        ## important: limit
         limits_config:
           split_queries_by_interval: 0
         table_manager:
