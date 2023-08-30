@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: pv-loki
+  name: pv-loki-stack
   namespace: monitoring
 spec:
   storageClassName: "network-storage"
@@ -19,12 +19,12 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: pvc-loki
+  name: pvc-loki-stack
   namespace: monitoring
 spec:
   accessModes:
     - ReadWriteMany
-  volumeName: pv-loki
+  volumeName: pv-loki-stack
   storageClassName: "network-storage"
   resources:
     requests:
