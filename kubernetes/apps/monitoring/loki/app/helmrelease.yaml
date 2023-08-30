@@ -29,8 +29,8 @@ spec:
         s3:
           s3: s3://minio.kube-system.svc.cluster.local:9001/loki
           endpoint: minio.kube-system.svc.cluster.local:9001
-          secretAccessKey: "${SECRET_MINIO_SECRET_KEY}"
-          accessKeyId: "${SECRET_MINIO_ACCESS_KEY}"
+          # secretAccessKey: "${SECRET_MINIO_SECRET_KEY}"
+          # accessKeyId: "${SECRET_MINIO_ACCESS_KEY}"
           s3ForcePathStyle: true
           insecure: true
         filesystem: null
