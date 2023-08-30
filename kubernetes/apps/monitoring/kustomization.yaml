@@ -7,5 +7,5 @@ resources:
   - ./influxdb/ks.yaml
   - ./kube-prometheus-stack/ks.yaml
   - ./kubernetes-dashboard/ks.yaml
-  - ./loki-stack/ks.yaml
+  #- ./loki-stack/ks.yaml
   #- ./loki/ks.yaml
