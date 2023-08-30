@@ -17,6 +17,21 @@ spec:
       interval: 5m
   values:
     loki:
+    gateway:
+      enabled: true
+      replicas: 3
+      ingress:
+        enabled: true
+        ingressClassName: internal
+        hosts:
+          - host: &host "loki.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - *host
+
       serviceMonitor:
         enabled: true
       limits_config:
@@ -39,5 +54,7 @@ spec:
         grafanaAgent:
           installOperator: false
         enabled: false
+        lokiCanary:
+          enabled: false
     test:
       enabled: false
