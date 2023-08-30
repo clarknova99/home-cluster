@@ -1,0 +1,60 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: loki
+spec:
+  interval: 5m
+  chart:
+    spec:
+      # renovate: registryUrl=https://grafana.github.io/helm-charts
+      chart: loki
+      version: 5.15.0
+      sourceRef:
+        kind: HelmRepository
+        name: grafana
+        namespace: flux-system
+      interval: 5m
+  values:
+    loki:
+    gateway:
+      enabled: true
+      replicas: 3
+      ingress:
+        enabled: true
+        ingressClassName: internal
+        hosts:
+          - host: &host "loki.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - *host
+
+      serviceMonitor:
+        enabled: true
+      limits_config:
+        reject_old_samples: false
+      storage:
+        bucketnames:
+          chunks: loki-chunks
+          ruler: loki-ruler
+          admin: loki-admin
+        s3:
+          s3: s3://minio.kube-system.svc.cluster.local:9001/loki
+          endpoint: minio.kube-system.svc.cluster.local:9001
+          secretAccessKey: "${SECRET_MINIO_SECRET_KEY}"
+          accessKeyId: "${SECRET_MINIO_ACCESS_KEY}"
+          s3ForcePathStyle: true
+          insecure: true
+        filesystem: null
+    monitoring:
+      selfMonitoring:
+        grafanaAgent:
+          installOperator: false
+        enabled: false
+        lokiCanary:
+          enabled: false
+    test:
+      enabled: false
