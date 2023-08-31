@@ -30,9 +30,9 @@ spec:
       tag: 2023.8.4
     env:
       TZ: "America/New_York"
-    envFrom:
-      - secretRef:
-          name: home-assistant
+    # envFrom:
+    #   - secretRef:
+    #       name: home-assistant
     service:
       main:
         ports:
