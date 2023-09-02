@@ -66,16 +66,16 @@ spec:
     #           - *host
     #         secretName: promlens-tls
     ingress:
-      enabled: true
-      ingressClassName: external
-      annotations:
-        external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
-        hajimari.io/icon: simple-icons:grafana
-      hosts:
-        - &host "promlens.${SECRET_DOMAIN}"
-      tls:
-        - hosts:
-            - *host
+      main:
+        enabled: true
+        ingressClassName: external
+        annotations:
+          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+        hosts:
+          - &host "promlens.${SECRET_DOMAIN}"
+        tls:
+          - hosts:
+              - *host
     topologySpreadConstraints:
       - maxSkew: 1
         topologyKey: kubernetes.io/hostname
