@@ -3,12 +3,12 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: promlens
-  namespace: default
+  namespace: monitoring
   annotations:
-    external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+    # external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
     hajimari.io/enable: "true"
 spec:
-  ingressClassName: external
+  ingressClassName: internal
   rules:
     - host: "promlens.${SECRET_DOMAIN}"
       http:
