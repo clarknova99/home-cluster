@@ -26,8 +26,9 @@ spec:
       replicas: 1
       strategy: RollingUpdate
     image:
-      repository: promlabs/promlens
-      tag: v1.1.0
+      #repository: promlabs/promlens
+      repository: prom/promlens
+      tag: latest
     service:
       main:
         ports:
