@@ -9,5 +9,4 @@ resources:
   - ./kubernetes-dashboard/ks.yaml
   - ./loki-stack/ks.yaml
   - ./promlens/ks.yaml
-  - ./robusta/ks.yaml
 
