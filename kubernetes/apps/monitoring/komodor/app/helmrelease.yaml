@@ -28,7 +28,7 @@ spec:
     # ## sops --encrypt --in-place ./kubernetes/apps/monitoring/komodor/app/komodor.sops.yaml
     # ## sops --decrypt ./kubernetes/apps/monitoring/komodor/app/komodor.sops.yaml | kubectl apply -f -
   values:
-    createNamespace: true
+    createNamespace: false
     existingSecret: komodor-secret
     watcher:
       clusterName: home
