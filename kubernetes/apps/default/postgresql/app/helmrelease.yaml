@@ -35,8 +35,10 @@ spec:
         enabled: true
         existingClaim: pvc-postgresql
       service:
+        annotations:
+          io.cilium/lb-ipam-ips: "192.168.2.49"
         externalTrafficPolicy: Cluster
-        clusterIP: "192.168.2.49"
+        # clusterIP: "192.168.2.49"
         type: LoadBalancer
     volumePermissions:
       enabled: true
