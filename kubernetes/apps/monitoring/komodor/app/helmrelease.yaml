@@ -38,3 +38,6 @@ spec:
       enableHelm: true
     helm:
       enableActions: true
+
+    image:
+      arm: true
