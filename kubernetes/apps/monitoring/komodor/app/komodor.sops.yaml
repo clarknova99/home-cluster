@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Secret
 metadata:
     name: komodor-secret
-    namespace: monitoring
+    namespace: komodor
 stringData:
     apiKey: ENC[AES256_GCM,data:iOLgGNS+7KTFoZRdERg9iYJu1C0sLDHX32OJoFL1PmhXO14x,iv:v0ZR+b/7qCC926bNi4Inb0n8+gEwiflCLKZABLaGv28=,tag:UMfALqPOm35Sb3fRpuX0Yw==,type:str]
 sops:
@@ -20,8 +20,8 @@ sops:
             RXE1Zk5BdnpxREtNeHlwYVc3SHljZDgKhoaoI1EJ32Z51zrH1i5cZdRtRSiCdySd
             dWIXUb7IBPLxpl3giwYIB2hIZiLygOkIDDtIya1SXt8voPWx7UPWiw==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2023-09-04T03:15:05Z"
-    mac: ENC[AES256_GCM,data:R6cOIHyQ22MFSOviFu5JP5EL64vSpPgJOXHM5GbheORAIkZ1hklmYNDGu/rEkK2ZM3DBl2xO0nSO8JBrmEY7Y65MPxzwwGCR0FxHR4VsLciuXrsS0NosFU/cdAUiq4koDKydipkTbK0/Gl3mbhWci4rklJvtMDbEeFlw+DTgY6w=,iv:CztMRPFcHYKV3tKrmaEik8ZH4lyLKRhlfvoTbgf+ZrM=,tag:otJ5E2uMhc3eMam9xcEenA==,type:str]
+    lastmodified: "2023-09-04T03:19:27Z"
+    mac: ENC[AES256_GCM,data:uyt0wJY28579nFJQ9K0kvZ2E0EwP/Sl9LfleZnaFkwDPndM4OFJf0JZQja8liz21T4x+HpHiWP8PIndav2j8Bjb94Ea6838QudaNc2Ixn3Y6D6qKYK94gevyGHZ+tH+8RKKQ5VZG0fchnES9Vq5CZcRloimtnSzSq6wRIo2ulcc=,iv:bjBUtr3f0S+BlnPMht0JS7i58glS1wK7MRAQbIZbBt0=,tag:TdA5d6nDPndkjs2snHA00A==,type:str]
     pgp: []
     encrypted_regex: ^(data|stringData)$
     version: 3.7.3
