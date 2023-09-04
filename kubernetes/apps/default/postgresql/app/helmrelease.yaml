@@ -33,19 +33,19 @@ spec:
     primary:
       persistence:
         enabled: true
-        existingClaim: pvc-postgres
+        existingClaim: pvc-postgresql
       service:
         externalTrafficPolicy: Cluster
-        clusterIP: "192.168.1.97"
+        clusterIP: "192.168.2.49"
         type: LoadBalancer
     volumePermissions:
       enabled: true
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-              - matchExpressions:
-                  - key: kubernetes.io/hostname
-                    operator: In
-                    values:
-                      - k3s-01
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: kubernetes.io/arch
+                  operator: In
+                  values:
+                    - amd64
