@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: komodor-secret
+    namespace: monitoring
+stringData:
+    apiKey: ENC[AES256_GCM,data:iOLgGNS+7KTFoZRdERg9iYJu1C0sLDHX32OJoFL1PmhXO14x,iv:v0ZR+b/7qCC926bNi4Inb0n8+gEwiflCLKZABLaGv28=,tag:UMfALqPOm35Sb3fRpuX0Yw==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age14q9x9ftcpqfw2kmhmlfzpx5g2wmn7tdnq34uhh4x0r2h6qfmm5dqk07z2e
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBqbno0SGJ3VUp6QnFBRElp
+            bmd3aHBpckt1SkFlZkpwTFpKYjBpUjdIRkR3CkpsYnNleXR5Qmdjby9OVnhzdTlm
+            OUhoR3MzYmFtcWV5ZmdTak5FUEFlVjgKLS0tIFNhWDY1ZU43V1VobE1rVllTTjhW
+            RXE1Zk5BdnpxREtNeHlwYVc3SHljZDgKhoaoI1EJ32Z51zrH1i5cZdRtRSiCdySd
+            dWIXUb7IBPLxpl3giwYIB2hIZiLygOkIDDtIya1SXt8voPWx7UPWiw==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2023-09-04T03:15:05Z"
+    mac: ENC[AES256_GCM,data:R6cOIHyQ22MFSOviFu5JP5EL64vSpPgJOXHM5GbheORAIkZ1hklmYNDGu/rEkK2ZM3DBl2xO0nSO8JBrmEY7Y65MPxzwwGCR0FxHR4VsLciuXrsS0NosFU/cdAUiq4koDKydipkTbK0/Gl3mbhWci4rklJvtMDbEeFlw+DTgY6w=,iv:CztMRPFcHYKV3tKrmaEik8ZH4lyLKRhlfvoTbgf+ZrM=,tag:otJ5E2uMhc3eMam9xcEenA==,type:str]
+    pgp: []
+    encrypted_regex: ^(data|stringData)$
+    version: 3.7.3
