@@ -19,7 +19,7 @@ spec:
               service:
                 name: pgadmin
                 port:
-                  number: 8123
+                  number: 80
   tls:
     - hosts:
         - "pgadmin.${SECRET_DOMAIN}"
