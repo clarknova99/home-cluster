@@ -19,5 +19,6 @@ resources:
   - ./metrics-server.yaml
   - ./prometheus-community.yaml
   - ./robusta.yaml
+  - ./runix.yaml
   - ./stakater.yaml
   - ./weave-gitops.yaml
