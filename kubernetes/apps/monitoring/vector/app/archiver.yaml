@@ -1,0 +1,49 @@
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: vector-archiver
+  namespace: monitoring
+spec:
+  successfulJobsHistoryLimit: 3
+  suspend: false
+  concurrencyPolicy: Forbid
+  failedJobsHistoryLimit: 1
+  # 5 minutes after midnight
+  schedule: '5 0 * * *'
+  timeZone: "Etc/UTC"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: logrotate
+            image: public.ecr.aws/docker/library/busybox:1.36.1@sha256:3fbc632167424a6d997e74f52b878d7cc478225cffac6bc977eedfe51c7f4e79
+            command: [sh, -c]
+            # Delete all files older than 30 days
+            # Compress all files older than 1 day
+            # Symlink latest foo-$date.log to foo.log
+            args:
+            - >
+              find /var/logs/k8s -type f -mtime '+30' -delete -print &&
+              find /var/logs/k8s -type f -mtime '+0' -name '*.log' -exec gzip {} \; &&
+              find /var/logs/k8s -type f -name "*$(date +%Y%m%d).log" | while read latest; do
+                target="${latest%-*}.log";
+                ln -s -f $(basename "$latest") "$target";
+              done
+            resources:
+              requests:
+                cpu: 10m
+                memory: 10Mi
+            securityContext:
+              allowPrivilegeEscalation: false
+              capabilities:
+                drop: ["ALL"]
+            volumeMounts:
+            - name: pvc-vector
+              mountPath: /var/logs/k8s
+          restartPolicy: Never
+          volumes:
+          - name: pvc-vector
+            persistentVolumeClaim:
+              claimName: pvc-vector
