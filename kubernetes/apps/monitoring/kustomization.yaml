@@ -10,4 +10,4 @@ resources:
   - ./kubernetes-dashboard/ks.yaml
   - ./loki-stack/ks.yaml
   - ./promlens/ks.yaml
-  #- ./vector/ks.yaml
+  - ./vector/ks.yaml
