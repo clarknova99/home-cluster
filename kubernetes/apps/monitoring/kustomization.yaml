@@ -8,6 +8,6 @@ resources:
   # - ./komodor/ks.yaml
   - ./kube-prometheus-stack/ks.yaml
   - ./kubernetes-dashboard/ks.yaml
-  #- ./loki-stack/ks.yaml
+  - ./loki-stack/ks.yaml
   - ./promlens/ks.yaml
   - ./vector/ks.yaml
