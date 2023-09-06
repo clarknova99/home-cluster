@@ -42,3 +42,9 @@ spec:
         ports:
           http:
             port: 5076
+    resources:
+      requests:
+        cpu: 10m
+        memory: 555Mi
+      limits:
+        memory: 800Mi
