@@ -70,7 +70,18 @@ spec:
         mountPath: /add-ons
     resources:
       requests:
-        cpu: 10m
-        memory: 250Mi
+        cpu: 15m
+        memory: 381Mi
       limits:
-        memory: 2000Mi
+        memory: 816Mi
+    sidecars:
+        subcleaner:
+          image: registry.k8s.io/git-sync/git-sync:v4.0.0
+          imagePullPolicy: IfNotPresent
+          args:
+            - --repo=https://github.com/KBlixt/subcleaner
+            - --branch=master
+            - --wait=86400 # 1 day
+            - --root=/add-ons
+          volumeMounts:
+            - { name: add-ons, mountPath: /add-ons }
