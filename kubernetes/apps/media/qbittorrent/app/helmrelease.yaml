@@ -24,7 +24,7 @@ spec:
       retries: 5
   values:
     image:
-      repository: dghcr.io/onedr0p/qbittorrent
+      repository: ghcr.io/onedr0p/qbittorrent
       tag: 4.5.4
     env:
       TZ: "${TIMEZONE}"
