@@ -78,11 +78,6 @@
             dest: /etc/profile.d/neofetch.sh
             mode: "0755"
             content: neofetch --config none
-        # - name: System Configuration | Disable apparmor
-        #   ansible.builtin.systemd:
-        #     name: apparmor
-        #     state: stopped
-        #     masked: true
         - name: System Configuration | Disable swap
           ansible.posix.mount:
             name: "{{ item }}"

@@ -5,7 +5,7 @@
   vars_files:
     - defaults/main.yaml
     - vars/config.yaml
-    - vars/addons.yaml
+#    - vars/addons.yaml
   tasks:
     - name: Get absolute path to this Git repository # noqa: command-instead-of-module
       ansible.builtin.command: git rev-parse --show-toplevel
