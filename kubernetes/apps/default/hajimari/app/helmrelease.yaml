@@ -48,9 +48,11 @@ spec:
             - name: k8s-at-home-search
               url: "https://nanne.dev/k8s-at-home-search/"
             - name: Home-Cluster
-              url: "https://github.com/clarknova99/home-cluster-v2"
+              url: "https://github.com/clarknova99/home-cluster"
             - name: onedr0p
               url: "https://github.com/onedr0p/home-ops"
+            - name: onedr0p-flux-cluster-template
+              url: https://github.com/onedr0p/flux-cluster-template
             - name: Renovate
               url: https://app.renovatebot.com/dashboard#github/clarknova99/
     ingress:
