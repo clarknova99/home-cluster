@@ -1,0 +1,65 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: qbittorrent
+  namespace: media
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: app-template
+      version: 1.5.1
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+      interval: 5m
+  install:
+    createNamespace: true
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
+  values:
+    image:
+      repository: dghcr.io/onedr0p/qbittorrent
+      tag: 4.5.4
+    env:
+      TZ: "${TIMEZONE}"
+      QBITTORRENT__PORT: &port 8080
+      QBITTORRENT__BT_PORT: &port-bt 50413
+    persistence:
+      config:
+        enabled: true
+        existingClaim: pvc-qbittorrent
+        subPath:
+          - path: config
+            mountPath: /config
+          - path: download
+            mountPath: /download
+    service:
+      main:
+        ports:
+          http:
+            port: *port
+      bittorrent:
+        enabled: true
+        type: LoadBalancer
+        annotations:
+          io.cilium/lb-ipam-ips: 192.168.2.48
+        externalIPs: ["192.168.2.48"]
+        ports:
+          bittorrent:
+            enabled: true
+            port: *port-bt
+            protocol: TCP
+            targetPort: *port-bt
+        externalTrafficPolicy: Local
+    # resources:
+    #   requests:
+    #     cpu: 10m
+    #     memory: 555Mi
+    #   limits:
+    #     memory: 800Mi
