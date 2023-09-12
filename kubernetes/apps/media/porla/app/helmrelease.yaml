@@ -35,6 +35,14 @@ spec:
     image:
       repository: ghcr.io/porla/porla
       tag: beta-latest@sha256:3d03e5dc15d4fdd4203390ad0806880c9364cf1fb8493c3d2f5ad8993d9cf778
+    # envFrom:
+    # ## sops --encrypt --in-place ./kubernetes/apps/media/porla/app/portla.sops.yaml
+    # ## sops --decrypt ./kubernetes/apps/media/porla/app/porla.sops.yaml | kubectl apply -f -
+    #   - secretRef:
+    #       name: *app
+    envFrom:
+      - secretRef:
+          name: porla-secret
     env:
       TZ: "${TIMEZONE}"
       PORLA_STATE_DIR: /config

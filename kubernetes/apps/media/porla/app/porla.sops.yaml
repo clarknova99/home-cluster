@@ -1,11 +1,27 @@
 apiVersion: v1
 kind: Secret
 metadata:
-    name: porla
+    name: porla-secret
     namespace: media
 stringData:
-    PORLA_STATE_DIR: /config
-    PORLA_WORKFLOW_DIR: /config/workflows
-    PORLA_CONFIG_FILE: /config/config.toml
-    PORLA_LOG_LEVEL: debug
-    PORLA_SECRET_KEY: "{{ .PORLA_SECRET_KEY }}"
+    PORLA_SECRET_KEY: ENC[AES256_GCM,data:UBj5Y7HGoq6jrC8miSw5EyUSSHGPaEDJhmyMX4OBME0=,iv:81vChBC+CUc878nPKQvMA6PaVyqd/2ZG5MlImIYfci4=,tag:WwuIOZtbMEXUpjo9g6NjJw==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age14q9x9ftcpqfw2kmhmlfzpx5g2wmn7tdnq34uhh4x0r2h6qfmm5dqk07z2e
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBFVm9sUlFnK1BQT01xMmt4
+            S1p0QXpXbFpTVUZnbkZWb1V6bWhhdURuY2xZCnBtcmUzdDcwemtibEpkL2ZSNitT
+            TVQwRFd1RHZwaFV5ZElGaUJJcU9sS2sKLS0tIEh0Ly91L1MxM3N2dWJtTzNJZlBw
+            a2l1cGxkcE1ObDlkUUI5REp4WE1kN1kKtsJ5d6UION8XHU0/P5tql5eX+1h10SWQ
+            JeBo3vGUICbycepIMngami667jBLAkQSYKz7YGHDZwroIvtECboSLg==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2023-09-12T20:28:17Z"
+    mac: ENC[AES256_GCM,data:VVLx1jXS9UQgvle0LVOEv6E1iDc+VNEO8iBz0Lw9UkXxtenl4xsoq3bnBA0e2wOj5Oc/ULBoXNrGTtM5M4Gu6wDu2tvfJGVbpR3d9T+2Ngq0EJVy9XJ9ISdXtY8dy8lzMk3u7RYcuGj8RO2eiq0UdDyKJNFrGQYL3eQczmIXKAs=,iv:+eo6rfZTC9U2cWUbhcUerIWC0OKPtZdWpKikY1QOCtc=,tag:ZhZimQUXV3bk63WObEGwTg==,type:str]
+    pgp: []
+    encrypted_regex: ^(data|stringData)$
+    version: 3.7.3
