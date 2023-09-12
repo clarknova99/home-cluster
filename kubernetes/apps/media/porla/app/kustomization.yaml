@@ -6,3 +6,7 @@ resources:
   - ./helmrelease.yaml
   - ./ingress.yaml
   - ./pvc.yaml
+configMapGenerator:
+  - name: porla-configmap
+    files:
+      - config.toml
