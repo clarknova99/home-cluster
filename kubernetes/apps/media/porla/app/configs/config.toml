@@ -1,2 +1,15 @@
+listen_interfaces = [
+  ["0.0.0.0", 13370],
+
+]
 [plugins]
 allow_git = true
+
+[presets.default]
+category = "default"
+download_limit = -1
+upload_limit = -1
+max_connections = 100
+max_uploads = 25
+save_path = "/downloads"
+storage_mode = "allocate"
