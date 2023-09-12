@@ -58,14 +58,6 @@ spec:
       config:
         enabled: true
         existingClaim: pvc-porla
-
-      config-file:
-        enabled: true
-        type: configMap
-        name: porla-configmap
-        subPath: config.toml
-        mountPath: /config/config.toml
-        readOnly: true
       downloads:
         enabled: true
         existingClaim: pvc-downloads
