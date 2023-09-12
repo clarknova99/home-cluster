@@ -38,14 +38,14 @@ spec:
       fsGroupChangePolicy: OnRootMismatch
       supplementalGroups: [10000]
     persistence:
+      downloads:
+        enabled: true
+        existingClaim: pvc-downloads
+        mountPath: /downloads
       config:
         enabled: true
         existingClaim: pvc-qbittorrent
-        subPath:
-          - path: config
-            mountPath: /config
-          - path: download
-            mountPath: /download
+        mountPath: /config
     service:
       main:
         ports:
@@ -56,14 +56,13 @@ spec:
         type: LoadBalancer
         annotations:
           io.cilium/lb-ipam-ips: 192.168.2.48
-        externalIPs: ["192.168.2.48"]
         ports:
           bittorrent:
             enabled: true
             port: *port-bt
             protocol: TCP
             targetPort: *port-bt
-        externalTrafficPolicy: Local
+        externalTrafficPolicy: Cluster
     # resources:
     #   requests:
     #     cpu: 10m
