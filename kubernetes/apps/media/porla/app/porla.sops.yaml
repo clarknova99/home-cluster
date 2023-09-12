@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: porla
+    namespace: media
+stringData:
+    PORLA_STATE_DIR: /config
+    PORLA_WORKFLOW_DIR: /config/workflows
+    PORLA_CONFIG_FILE: /config/config.toml
+    PORLA_LOG_LEVEL: debug
+    PORLA_SECRET_KEY: "{{ .PORLA_SECRET_KEY }}"

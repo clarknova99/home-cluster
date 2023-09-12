@@ -1,0 +1,27 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: porla
+  namespace: media
+  annotations:
+    external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+    hajimari.io/enable: "true"
+    hajimari.io/icon: material-symbols:cloud-download
+spec:
+  ingressClassName: internal
+  rules:
+    - host: "porla.${SECRET_DOMAIN}"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: porla
+                port:
+                  number: 1337
+  tls:
+    - hosts:
+        - "porla.${SECRET_DOMAIN}"
+
