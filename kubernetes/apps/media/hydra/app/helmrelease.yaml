@@ -24,7 +24,8 @@ spec:
       retries: 5
   values:
     image:
-      repository: docker.io/linuxserver/nzbhydra2
+      #repository: docker.io/linuxserver/nzbhydra2
+      repository: ghcr.io/hotio/nzbhydra2
       tag: latest
     env:
       TZ: "${TIMEZONE}"
