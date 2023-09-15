@@ -131,14 +131,14 @@ spec:
         scrapeConfigSelectorNilUsesHelmValues: false
         enableAdminAPI: true
         walCompression: true
-        retentionSize: 8GB
+        retentionSize: 20GB
         storageSpec:
           volumeClaimTemplate:
             spec:
               storageClassName: local-path
               resources:
                 requests:
-                  storage: 10Gi
+                  storage: 20Gi
     grafana:
       enabled: false
       forceDeployDashboards: true
