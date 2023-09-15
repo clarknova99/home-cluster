@@ -35,4 +35,4 @@ spec:
                 defaultMode: 0744
             - name: backup-volume
               persistentVolumeClaim:
-                claimName: pvc-postgresql
+                claimName: pvc-postgresql-backup
