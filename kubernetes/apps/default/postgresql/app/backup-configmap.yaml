@@ -1,4 +1,9 @@
 apiVersion: v1
+kind: ConfigMap
+metadata:
+ # creationTimestamp: null
+  name: postgresql-backup-config
+  namespace: default
 data:
   backup.sh: |
     #!/bin/bash
@@ -25,8 +30,4 @@ data:
 
     echo 'Successfully Backed Up'
     exit 0
-kind: ConfigMap
-metadata:
-  creationTimestamp: null
-  name: postgresql-backup-config
-  namespace: default
+
