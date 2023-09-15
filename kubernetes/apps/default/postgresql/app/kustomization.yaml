@@ -5,4 +5,5 @@ namespace: default
 resources:
   - ./pvc.yaml
   - ./helmrelease.yaml
-
+  - ./backup-configmap.yaml
+  - ./backup-cronjob.yaml
