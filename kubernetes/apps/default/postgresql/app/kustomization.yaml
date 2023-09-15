@@ -7,3 +7,4 @@ resources:
   - ./helmrelease.yaml
   - ./backup-configmap.yaml
   - ./backup-cronjob.yaml
+  - ./postgres-backup-pvc.yaml
