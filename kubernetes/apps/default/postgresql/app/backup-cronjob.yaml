@@ -23,8 +23,8 @@ spec:
                 - /usr/local/bin/postgresql/backup.sh
 
               volumeMounts:
-                - name: backup-volume
-                  mountPath: /bitnami/postgresql
+                # - name: backup-volume
+                #   mountPath: /bitnami/postgresql
                 - name: backup-config-volume
                   mountPath: /usr/local/bin/postgresql
           restartPolicy: Never
@@ -35,4 +35,5 @@ spec:
                 defaultMode: 0744
             - name: backup-volume
               persistentVolumeClaim:
-                claimName: pvc-postgresql-backup
+                #claimName: pvc-postgresql-backup
+                claimName: pvc-postgresql
