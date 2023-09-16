@@ -2,25 +2,25 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: postgresql
-  namespace: default
+  name: authelia
+  namespace: networking
   annotations:
     external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
     hajimari.io/enable: "true"
 spec:
   ingressClassName: internal
   rules:
-    - host: "postgresql.${SECRET_DOMAIN}"
+    - host: "authelia.${SECRET_DOMAIN}"
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: postgresql
+                name: authelia
                 port:
-                  number: 5432
+                  number: 9091
   tls:
     - hosts:
-        - "postgresql.${SECRET_DOMAIN}"
+        - "authelia.${SECRET_DOMAIN}"
 

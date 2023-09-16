@@ -4,7 +4,7 @@ kind: Kustomization
 namespace: default
 resources:
   - ./pvc.yaml
-  - ./helmrelease.yaml
+  - ./pvc-postgres-backup.yaml
   - ./backup-configmap.yaml
   - ./backup-cronjob.yaml
-  - ./postgres-backup-pvc.yaml
+  - ./helmrelease.yaml
