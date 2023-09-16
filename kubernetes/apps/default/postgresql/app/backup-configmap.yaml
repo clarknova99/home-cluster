@@ -14,7 +14,8 @@ data:
     echo "Listing mounts"
     df -h
     echo "Cleaning dumps older than two weeks"
-    find . -name "backupOn*" -type f -mtime +7 -delete
+
+    find /bitnami/postgresql/backup -name "backupOn*" -type f -mtime +7 -delete
 
     DUMP_FILE_NAME="backupOn`date +%Y-%m-%d-%H-%M`.sql"
     echo "Creating dump: $DUMP_FILE_NAME"
