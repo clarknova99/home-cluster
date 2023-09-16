@@ -11,6 +11,8 @@ data:
     PGUSER='postgres'
     BACKDIR=/bitnami/postgresql/backup
 
+    echo "Listing mounts"
+    df -h
     echo "Cleaning dumps older than two weeks"
     find . -name "backupOn*" -type f -mtime +7 -delete
 

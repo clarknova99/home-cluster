@@ -24,7 +24,7 @@ spec:
 
               volumeMounts:
                 - name: backup-volume
-                  mountPath: /bitnami/postgresql
+                  mountPath: /bitnami/postgresql/backup
                 - name: backup-config-volume
                   mountPath: /usr/local/bin/postgresql
           restartPolicy: Never
