@@ -36,6 +36,9 @@ spec:
             items:
               - key: users_database.yml
                 path: users_database.yml
+      envFrom:
+        - secretRef:
+          name: authelia-secrets
       env:
         AUTHELIA_DEFAULT_REDIRECTION_URL: "https://authelia.${SECRET_DOMAIN}"
         AUTHELIA_DUO_API_DISABLE: "true"

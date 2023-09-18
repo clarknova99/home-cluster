@@ -4,7 +4,11 @@ kind: Kustomization
 namespace: networking
 resources:
   - ./helmrelease.yaml
-  - authelia.sops.yaml
-  - pvc.yaml
-  - users.yaml
-  - ingress.yaml
+  - ./authelia.sops.yaml
+  - ./pvc.yaml
+ # - users.yaml
+  - ./ingress.yaml
+configMapGenerator:
+  - name: authelia-config-users
+    files:
+      - ./users-config.yaml
