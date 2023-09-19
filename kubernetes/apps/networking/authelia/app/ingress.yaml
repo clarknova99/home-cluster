@@ -16,7 +16,7 @@ metadata:
 spec:
   ingressClassName: external
   rules:
-    - host: "authelia.${SECRET_DOMAIN}"
+    - host: "auth.${SECRET_DOMAIN}"
       http:
         paths:
           - path: /
@@ -28,5 +28,5 @@ spec:
                   number: 80
   tls:
     - hosts:
-        - "authelia.${SECRET_DOMAIN}"
+        - "auth.${SECRET_DOMAIN}"
 
