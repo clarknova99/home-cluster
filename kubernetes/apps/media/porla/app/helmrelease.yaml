@@ -34,7 +34,7 @@ spec:
         reloader.stakater.com/auto: "true"
     image:
       repository: ghcr.io/porla/porla
-      tag: beta-latest@sha256:3d03e5dc15d4fdd4203390ad0806880c9364cf1fb8493c3d2f5ad8993d9cf778
+      tag: beta-latest@sha256:0d437323926484ee54bf34a3f6d894e228ebf9c1fce042cc331a557f22ec380a
     # envFrom:
     # ## sops --encrypt --in-place ./kubernetes/apps/media/porla/app/portla.sops.yaml
     # ## sops --decrypt ./kubernetes/apps/media/porla/app/porla.sops.yaml | kubectl apply -f -
