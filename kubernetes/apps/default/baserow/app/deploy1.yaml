@@ -18,51 +18,21 @@ spec:
         name: bjw-s
         namespace: flux-system
       interval: 15m
-  # values:
-  #   controllers:
-  #     main:
-  #       strategy: Recreate
-
-  #       containers:
-  #         main:
-  #           image:
-  #             # -- image repository
-  #             repository: docker.io/baserow/backend
-  #             # -- image tag
-  #             # this example is not automatically updated, so be sure to use the latest image
-  #             tag: 1.20.2
-  #             # -- image pull policy
-  #             pullPolicy: IfNotPresent
-  #           workingDir: /baserow
-  #           args:
-  #             - "gunicorn"
-
-  #           # -- environment variables.
-  #           # See [image docs](https://github.com/dani-garcia/vaultwarden/blob/main/.env.template) for more details.
-  #           env:
-  #             # -- Config dir
-  #             DATA_FOLDER: "config"
-
-  #   # -- Configures service settings for the chart.
-  #   service:
-  #     main:
-  #       ports:
-  #         http:
-  #           port: 80
-  #         websocket:
-  #           enabled: true
-  #           port: 3012
   values:
     controllers:
       main:
-        enabled: true
-        type: deployment
+        strategy: Recreate
+
         containers:
           main:
-            nameOverride: backend-asgi
             image:
+              # -- image repository
               repository: baserow/backend
+              # -- image tag
+              # this example is not automatically updated, so be sure to use the latest image
               tag: 1.20.2
+              # -- image pull policy
+              pullPolicy: IfNotPresent
             workingDir: /baserow
             args:
               - "gunicorn"
@@ -72,6 +42,7 @@ spec:
             envFrom:
               - secretRef:
                   name: baserow-secret
+    # -- Configures service settings for the chart.
     service:
       main:
         type: ClusterIP
@@ -79,3 +50,30 @@ spec:
           http:
             port: 80
             targetPort: 8000
+  # values:
+  #   controllers:
+  #     main:
+  #       enabled: true
+  #       type: deployment
+  #       containers:
+  #         main:
+  #           nameOverride: backend-asgi
+  #           image:
+  #             repository: baserow/backend
+  #             tag: 1.20.2
+  #           workingDir: /baserow
+  #           args:
+  #             - "gunicorn"
+  #           ports:
+  #             - targetPort: 8000
+  #           imagePullPolicy: Always
+  #           envFrom:
+  #             - secretRef:
+  #                 name: baserow-secret
+  #   service:
+  #     main:
+  #       type: ClusterIP
+  #       ports:
+  #         http:
+  #           port: 80
+  #           targetPort: 8000
