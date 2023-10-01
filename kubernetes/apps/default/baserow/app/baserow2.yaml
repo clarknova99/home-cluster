@@ -553,7 +553,7 @@ spec:
 
       ingress:
         # -- Enable ingress record generation for the backend
-        enabled: false
+        enabled: true
         # -- IngressClass that will be be used to implement the Ingress
         className: "internal"
         # -- Additional annotations for the Ingress resource
@@ -605,7 +605,7 @@ spec:
         # -- Name of the database to use
         database: baserow
         # -- Name of existing secret to use for PostgreSQL credentials
-     #   existingSecret: ""
+        existingSecret: baserow-secret
         # -- Password to use
         password: ${DATABASE_PASSWORD}
         # -- Name of the user to use
@@ -633,7 +633,7 @@ spec:
         # -- if authentication should be used with external Redis™
         enabled: true
         # -- Name of existing secret to use for Redis™ credentials
-       # existingSecret: ""
+        existingSecret: baserow-secret
         # -- Password to use
         password: ${REDIS_PASSWORD}
         # -- Key in the secret containing the password
