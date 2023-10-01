@@ -607,9 +607,9 @@ spec:
         # -- Name of existing secret to use for PostgreSQL credentials
         existingSecret: baserow-secret
         # -- Password to use
-        password: ${DATABASE_PASSWORD}
+        password: ${SECRET_POSTGRES_PASSWORD}
         # -- Name of the user to use
-        username: ${DATABASE_USER}
+        username: ${SECRET_POSTGRES_USERNAME}
         # -- Key in the secret containing the password
    #     userPasswordKey: ""
       # -- Hostname of the PostgreSQL database
@@ -635,7 +635,7 @@ spec:
         # -- Name of existing secret to use for Redis™ credentials
         existingSecret: baserow-secret
         # -- Password to use
-        password: ${REDIS_PASSWORD}
+        password: ${SECRET_POSTGRES_USERNAME}
         # -- Key in the secret containing the password
     #    userPasswordKey: ""
       # -- Hostname of Redis™
