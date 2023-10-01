@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: whoami
+  name: whoami2
   namespace: default
 spec:
   interval: 15m
