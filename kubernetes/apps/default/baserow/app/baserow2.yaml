@@ -86,7 +86,7 @@ spec:
       ingress:
         # # -- Enable ingress record generation for the frontend
 
-        enabled: false
+        enabled: true
         # # -- IngressClass that will be be used to implement the Ingress
         className: "internal"
         # # -- Additional annotations for the Ingress resource
