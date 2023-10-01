@@ -391,9 +391,9 @@ spec:
         jwtSigningKey: ""
         logging:
           # -- If set to “on” then will enable the non production safe debug mode for the Baserow django backend.
-          backendDebug: "off"
+          backendDebug: "on"
           # -- The default log level used by the backend, supports ERROR, WARNING, INFO, DEBUG, TRACE
-          backendLogLevel: "INFO"
+          backendLogLevel: "DEBUG"
           # -- The default log level used for database related logs in the backend. Supports the same values as the normal log level. If you also enable BASEROW_BACKEND_DEBUG and set this to DEBUG you will be able to see all SQL queries in the backend logs.
           databaseLogLevel: "ERROR"
         # -- The max number of per row errors than can occur in a file import before an overall failure is declared.
