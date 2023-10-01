@@ -18,7 +18,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: redisinsight-svc
+                name: redisinsight-redisinsight-svc
                 port:
                   number: 8001
   tls:
