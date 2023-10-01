@@ -134,7 +134,7 @@ spec:
             successThreshold: 1
           envFrom:
             - secretRef:
-                name: YOUR_ENV_SECRET_REF
+                name: baserow-secret
 
 # The backend WSGI worker handling normal http api requests
 ---
