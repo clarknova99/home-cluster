@@ -26,7 +26,7 @@ spec:
           main:
             image:
               # -- image repository
-              repository: vaultwarden/server
+              repository: docker.io/vaultwarden/server
               # -- image tag
               # this example is not automatically updated, so be sure to use the latest image
               tag: 1.25.2
