@@ -1,0 +1,49 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: redis
+  namespace: default
+spec:
+  interval: 5m
+  chart:
+    spec:
+      # renovate: registryUrl=https://charts.bitnami.com/bitnami
+      chart: redis
+      version: 18.1.1
+      sourceRef:
+        kind: HelmRepository
+        name: bitnami
+        namespace: flux-system
+      interval: 5m
+  values:
+    architecture: standalone
+    auth:
+      enabled: true
+      sentinal: true
+      password: "${SECRET_REDIS_PASSWORD}"
+    master:
+      persistence:
+        size: 5Gi
+        existingClaim: pvc-redis
+    sentinal:
+      enabled: true
+      masterSet: redis-master
+    # Bitnami hasn't added ARM support yet
+    affinity: |
+      nodeAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 60
+            preference:
+              matchExpressions:
+                - key: kubernetes.io/arch
+                  operator: In
+                  values:
+                    - amd64
+                    - i386
+                    - i686
+                    - x86
+    metrics:
+      enabled: true
+      serviceMonitor:
+        enabled: true
