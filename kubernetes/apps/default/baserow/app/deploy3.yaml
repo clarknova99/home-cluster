@@ -21,9 +21,12 @@ spec:
         containers:
           main:
             image:
-              repository: ghcr.io/mendhak/http-https-echo
-              tag: 30
-              pullPolicy: IfNotPresent
+              - repository: ghcr.io/mendhak/http-https-echo
+                tag: 30
+                pullPolicy: IfNotPresent
+            ports:
+            - containerPort: 8887
+              name: http
+              protocol: TCP
             env:
               HTTP_PORT: 8887
-              HTTPS_PORT: 9997
