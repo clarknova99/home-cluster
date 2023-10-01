@@ -635,7 +635,7 @@ spec:
         # -- Name of existing secret to use for Redis™ credentials
         #existingSecret: baserow-secret
         # -- Password to use
-        password: ${SECRET_POSTGRES_USERNAME}
+        password: ${SECRET_POSTGRES_PASSWORD}
         # -- Key in the secret containing the password
     #    userPasswordKey: ""
       # -- Hostname of Redis™
