@@ -18,13 +18,6 @@ spec:
         name: bjw-s
         namespace: flux-system
       interval: 15m
-  maxHistory: 3
-  install:
-    remediation:
-      retries: 5
-  upgrade:
-    remediation:
-      retries: 5
   values:
     controllers:
       main:
