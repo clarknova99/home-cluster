@@ -22,7 +22,6 @@ spec:
     controllers:
       main:
         strategy: Recreate
-
         containers:
           main:
             image:
