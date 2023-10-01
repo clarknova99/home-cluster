@@ -36,17 +36,6 @@ spec:
               - containerPort: 8000
                 name: backend-asgi
             imagePullPolicy: Always
-            readinessProbe:
-              exec:
-                command:
-                  - curl
-                  - --fail
-                  - --silent
-                  - http://localhost:8000/api/_health/
-              initialDelaySeconds: 5
-              periodSeconds: 5
-              timeoutSeconds: 5
-              successThreshold: 1
             envFrom:
               - secretRef:
                   name: baserow-secret
