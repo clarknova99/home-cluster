@@ -18,6 +18,37 @@ spec:
         name: bjw-s
         namespace: flux-system
       interval: 15m
+  # values:
+  #   controllers:
+  #     main:
+  #       strategy: Recreate
+
+  #       containers:
+  #         main:
+  #           image:
+  #             # -- image repository
+  #             repository: docker.io/baserow/backend
+  #             # -- image tag
+  #             # this example is not automatically updated, so be sure to use the latest image
+  #             tag: 1.20.2
+  #             # -- image pull policy
+  #             pullPolicy: IfNotPresent
+
+  #           # -- environment variables.
+  #           # See [image docs](https://github.com/dani-garcia/vaultwarden/blob/main/.env.template) for more details.
+  #           env:
+  #             # -- Config dir
+  #             DATA_FOLDER: "config"
+
+  #   # -- Configures service settings for the chart.
+  #   service:
+  #     main:
+  #       ports:
+  #         http:
+  #           port: 80
+  #         websocket:
+  #           enabled: true
+  #           port: 3012
   values:
     controllers:
       main:
