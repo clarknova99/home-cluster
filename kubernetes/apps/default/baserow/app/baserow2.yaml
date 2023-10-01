@@ -605,7 +605,7 @@ spec:
         # -- Name of the database to use
         database: baserow
         # -- Name of existing secret to use for PostgreSQL credentials
-        existingSecret: baserow-secret
+        #existingSecret: baserow-secret
         # -- Password to use
         password: ${SECRET_POSTGRES_PASSWORD}
         # -- Name of the user to use
@@ -633,7 +633,7 @@ spec:
         # -- if authentication should be used with external Redis™
         enabled: true
         # -- Name of existing secret to use for Redis™ credentials
-        existingSecret: baserow-secret
+        #existingSecret: baserow-secret
         # -- Password to use
         password: ${SECRET_POSTGRES_USERNAME}
         # -- Key in the secret containing the password
