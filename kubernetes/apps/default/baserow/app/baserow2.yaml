@@ -613,7 +613,7 @@ spec:
         # -- Key in the secret containing the password
    #     userPasswordKey: ""
       # -- Hostname of the PostgreSQL database
-      hostname: ${DATABASE_HOST}
+      hostname: postgresql.default.svc.cluster.local
       # -- Port used to connect to PostgreSQL database
       port: 5432
 
@@ -639,6 +639,6 @@ spec:
         # -- Key in the secret containing the password
     #    userPasswordKey: ""
       # -- Hostname of Redis™
-      hostname: ${REDIS_HOST}
+      hostname: redis-master.default.svc.cluster.local
       # -- Port used to connect to Redis
       port: 6379
