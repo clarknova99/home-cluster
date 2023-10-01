@@ -12,7 +12,7 @@ spec:
       version: 1.25.0
       sourceRef:
         kind: HelmRepository
-        name: runix
+        name: baserow
         namespace: flux-system
   values:
     # -- Provide a name in place of `baserow`
