@@ -61,14 +61,13 @@ spec:
           main:
             nameOverride: backend-asgi
             image:
-              repository: docker.io/baserow/backend
+              repository: baserow/backend
               tag: 1.20.2
             workingDir: /baserow
             args:
               - "gunicorn"
             ports:
-              - containerPort: 8000
-                name: backend-asgi
+              - targetPort: 8000
             imagePullPolicy: Always
             envFrom:
               - secretRef:
