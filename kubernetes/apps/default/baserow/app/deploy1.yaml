@@ -21,17 +21,16 @@ spec:
   values:
     controllers:
       main:
-        strategy: Recreate
         containers:
           main:
             image:
               # -- image repository
-              repository: baserow/backend
+              - repository: baserow/backend
               # -- image tag
               # this example is not automatically updated, so be sure to use the latest image
-              tag: 1.20.2
+                tag: 1.20.2
               # -- image pull policy
-              pullPolicy: IfNotPresent
+                pullPolicy: IfNotPresent
             workingDir: /baserow
             args:
               - "gunicorn"
