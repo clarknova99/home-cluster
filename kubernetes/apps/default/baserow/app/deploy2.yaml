@@ -35,9 +35,9 @@ spec:
 
             # -- environment variables.
             # See [image docs](https://github.com/dani-garcia/vaultwarden/blob/main/.env.template) for more details.
-            env:
-              # -- Config dir
-              DATA_FOLDER: "config"
+            # env:
+            #   # -- Config dir
+            #   DATA_FOLDER: "config"
 
     # -- Configures service settings for the chart.
     service:
@@ -73,11 +73,11 @@ spec:
     #               port: websocket
 
     # -- Configure persistence settings for the chart under this key.
-    persistence:
-      config:
-        enabled: true
-        type: persistentVolumeClaim
-        accessMode: ReadWriteOnce
-        size: 1Gi
-        mountPath: /config
+    # persistence:
+    #   config:
+    #     enabled: true
+    #     type: persistentVolumeClaim
+    #     accessMode: ReadWriteOnce
+    #     size: 1Gi
+    #     mountPath: /config
 
