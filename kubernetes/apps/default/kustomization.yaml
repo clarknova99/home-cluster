@@ -8,5 +8,6 @@ resources:
   - ./n8n/ks.yaml
   - ./postgresql/ks.yaml
   - ./redis/ks.yaml
+  - ./redisinsight/ks.yaml
   - ./website/ks.yaml
   - ./whoami/ks.yaml
