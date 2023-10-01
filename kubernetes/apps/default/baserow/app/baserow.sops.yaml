@@ -1,0 +1,46 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: baserow-secret
+    namespace: default
+stringData:
+    SECRET_KEY: ENC[AES256_GCM,data:8prZ3A==,iv:0cCFFFeNwMf0rfS47GVL/OLduowV7P/ndKCB0VQjhsA=,tag:a94qd13L5O1V8C2xuyAJTw==,type:str]
+    PRIVATE_BACKEND_URL: ENC[AES256_GCM,data:Q0HKXhZ2WWKKRP5LhCjwCCrRmDjp9yZ129pPOAGDwg==,iv:oPHXfx/0y6R5ji2b3fnCc4yQcfsyMWiD3xNyTDiiJ1Q=,tag:xs8QTEQSwNNp8OceB9HbyQ==,type:str]
+    PUBLIC_BACKEND_URL: ""
+    PUBLIC_WEB_FRONTEND_URL: ""
+    DATABASE_HOST: ENC[AES256_GCM,data:RomURjtZ5DGQiD3Hlu1YDG9DpmgQV2ltsbstZKJfb99RwWmH,iv:niD/PwoQwiSWwzrQrkyt33IGkuwCcWoI5viWkcR+nVs=,tag:3bwdVmCaOg/IhfW9erzixw==,type:str]
+    DATABASE_USER: ENC[AES256_GCM,data:oX6Kkt0u74A=,iv:+AkHh0z52In8oIKagD7oa47BckqloozKRgBBDVpD+yc=,tag:LWGp2t/ub5OqIjRThpoN4w==,type:str]
+    DATABASE_PASSWORD: ENC[AES256_GCM,data:Av122RBytTg/,iv:vQF7Ju2yh0IS7klLNr/lyLf/W8UVimgbDsfBGe5MlAg=,tag:peN0bKxgIg8WR0yLf+UcOg==,type:str]
+    DATABASE_PORT: ENC[AES256_GCM,data:7bjPvg==,iv:3iCM6o++jQeu2+M1o4JSPJktGgTN/FNQju6SQfq62p8=,tag:8dK2HgIHoQ8ieZBJxqV94g==,type:str]
+    DATABASE_NAME: ENC[AES256_GCM,data:vZfNmDXBeA==,iv:Mg9+DcqYLMj0DDEZZ4wCXOD55U5kHzIVmbu3CzeBhko=,tag:0b2H/pTNAPO343yTXcfNjg==,type:str]
+    REDIS_HOST: ENC[AES256_GCM,data:7DAe6nobjrRcMcTkz2zsL7Evb50gp9ulz+bDEe++7OCLl96wGLY=,iv:LfEzn7x2zMTlKBewIv0UAmJI/dG2wMw8q8v5QI/Hef0=,tag:LpPfv9pKu1ovMvWuDayoww==,type:str]
+    REDIS_PORT: ENC[AES256_GCM,data:+ysWJQ==,iv:xpJMzoG2kuZRcfSgOVE28ugVNOs8dDd1PourqjBtZp4=,tag:P+9Lp5XWK6o/KzJeC/UBdA==,type:str]
+    REDIS_USER: ENC[AES256_GCM,data:Ece0ykz8SQ==,iv:++sK+5b3LsZiH/Z88lRW0VCRI1+53fGqPElgIX8lCS0=,tag:yzonPTye7wHRJkVZiUvaXQ==,type:str]
+    REDIS_PASSWORD: ENC[AES256_GCM,data:FhOqa9bz6ZiY,iv:o7lnpJqj5clHAjd5aDXjnQ4QOsw31B30S1lYIWGVjcc=,tag://emuNeLhLuPMcuUyw3wPA==,type:str]
+    REDIS_PROTOCOL: ENC[AES256_GCM,data:xpbzceE=,iv:IEzMTwt7rIyzeya5X073kOEwHf74nzhdpP9MFEXYRMU=,tag:0v2zOSfmLptMQa/qG85lbg==,type:str]
+    BASEROW_AMOUNT_OF_GUNICORN_WORKERS: ENC[AES256_GCM,data:QQ==,iv:RyvWFLi323Wi+cFMi7f+hS+mG+7wtMD9MZAcv/lGbI0=,tag:1EpZYorxjMXknz0CYyvDug==,type:str]
+    #ENC[AES256_GCM,data:Pm5e8ZmwDwIew9m5Ls7iHuHEgAGNWzVcCShU3sQE+jNQt9mVv6hltrVMVSSAnosqe9ozsMXKCwo9gwYv1tSIazvt6DSLmG6vJmfIm2eQWbOalnq05mNAMLY5,iv:Yx7BAnv6OJx20MGkKzNJ/CysqdciaM9FNyHme92QFpY=,tag:gsUWwZe8wqxLjGpFbEe7MQ==,type:comment]
+    #ENC[AES256_GCM,data:pYSTg7CxSwmc0KReWNI9oJrBRuW7rS+5tQiuadRxAupoOG7iKv3P8MZ/4VTRG7jaqr2lbVuJwB21pryyVqsNhSStXh6yGL52iGwZGqgIEv1J26CJWamqBtNOFqx9sNR0zG4bOJuk7wWG22eXMCyj,iv:UM3jVICaM2rIA+1eqWWdNldLvT19sJmvV7bmR2MzzLE=,tag:pTbfPFDKf1qyMgtAGvrakw==,type:comment]
+    AWS_ACCESS_KEY_ID: ""
+    AWS_SECRET_ACCESS_KEY: ""
+    AWS_STORAGE_BUCKET_NAME: ""
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age14q9x9ftcpqfw2kmhmlfzpx5g2wmn7tdnq34uhh4x0r2h6qfmm5dqk07z2e
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA5RS9aQnkyemxFaWMrUWtK
+            VnFqV200cnlka1JXZ2NIZkthWnlLeXBQb3lnCitack9GdzBlUzd2NzRJQjlvODUz
+            L1BlbXhabEZzZ3NDWXRJRzlISGtjamcKLS0tIERHVmJkZExTOUQxS2l5dUxxbkp3
+            eHJTYVgxWE1qNWdGbGErbjNtY0N5SXMKr7kCWtxO0Qy5IATF4p6YkDaiRiB10bro
+            r9aW9jxaGifYbqCaauSElCOGzlQyWmnEhc/xqq+bKykIod8WBz40uw==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2023-10-01T17:27:50Z"
+    mac: ENC[AES256_GCM,data:/ohTYLoD81qghZlwL9LsofAA+orieIPqtokxtaTslwodt51CeSF9T/rSF8F9F8AlW6rhkF/zrU4xOOu6HUOHQAXH0/Sxr19udVYMK2A+5+P9Qo5PQAerYn6p4PDmvOQfWTc7y8v2Kb5NhxrJioW3yxoopBDFASRpBRib0Gu3l4g=,iv:5C7MPBq6gyDsadfbU7sok7er3XX9Ts8SRktq1JHPV6o=,tag:XOQPQyDt1Jk3sv5EXOVDbg==,type:str]
+    pgp: []
+    encrypted_regex: ^(data|stringData)$
+    version: 3.8.0

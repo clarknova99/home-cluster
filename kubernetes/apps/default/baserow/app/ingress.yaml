@@ -5,27 +5,67 @@ metadata:
   name: baserow
   namespace: default
   annotations:
-    external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
-    # nginx.ingress.kubernetes.io/auth-method: GET
-    # nginx.ingress.kubernetes.io/auth-url: http://authelia.networking.svc.cluster.local/api/verify
-    # nginx.ingress.kubernetes.io/auth-signin: https://authelia.${SECRET_DOMAIN}?rm=$request_method
-    # nginx.ingress.kubernetes.io/auth-response-headers: Remote-User,Remote-Name,Remote-Groups,Remote-Email
-    # nginx.ingress.kubernetes.io/auth-snippet: proxy_set_header X-Forwarded-Method $request_method;
+    nginx.ingress.kubernetes.io/affinity: "cookie"
+    nginx.ingress.kubernetes.io/session-cookie-name: "route"
+    nginx.ingress.kubernetes.io/session-cookie-expires: "172800"
+    nginx.ingress.kubernetes.io/session-cookie-max-age: "172800"
+    nginx.ingress.kubernetes.io/proxy-body-size: 20m
     hajimari.io/enable: "true"
 spec:
-  ingressClassName: external
+  # TODO a tsl block
   rules:
-    - host: "baserow.${SECRET_DOMAIN}"
+    - host: REPLACE_WITH_YOUR_BACKEND_HOST
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/ws/"
+            backend:
+              service:
+                name: backend-asgi
+                port:
+                  number: 80
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: backend-wsgi
+                port:
+                  number: 80
+    - host: REPLACE_WITH_YOUR_WEB_FRONTEND_HOST
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: web-frontend
+                port:
+                  number: 80
+
+spec:
+  ingressClassName: internal
+  rules:
+    - host: "brbackend.${SECRET_DOMAIN}"
+      http:
+        paths:
+          - path: "/ws/"
+            pathType: Prefix
+            backend:
+              service:
+                name: backend-wsgi
+                port:
+                  number: 80
+    - host: "baserow.${SECRET_DOMAIN2}"
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: baserow
+                name: web-frontend
                 port:
                   number: 80
   tls:
     - hosts:
-        - "baserow.${SECRET_DOMAIN}"
-
+        - "brbackend.${SECRET_DOMAIN}"
+        - "baserow.${SECRET_DOMAIN2}"
