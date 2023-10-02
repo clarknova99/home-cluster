@@ -127,8 +127,15 @@ spec:
       tolerations: []
 
       # -- Affinity settings for pod assignment
-      affinity: {}
-
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/arch
+                    operator: In
+                    values:
+                      - amd64
       # -- additional environment variables to be added to the pods
       extraEnv: []
 
@@ -226,8 +233,15 @@ spec:
         tolerations: []
 
         # -- Affinity settings for pod assignment
-        affinity: {}
-
+        affinity:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+                - matchExpressions:
+                    - key: kubernetes.io/arch
+                      operator: In
+                      values:
+                        - amd64
         # -- additional environment variables to be added to the pods
         extraEnv: []
 
@@ -306,8 +320,15 @@ spec:
         tolerations: []
 
         # -- Affinity settings for pod assignment
-        affinity: {}
-
+        affinity:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+                - matchExpressions:
+                    - key: kubernetes.io/arch
+                      operator: In
+                      values:
+                        - amd64
         # -- additional environment variables to be added to the pods
         extraEnv: []
 
@@ -546,8 +567,15 @@ spec:
         tolerations: []
 
         # -- Affinity settings for pod assignment
-        affinity: {}
-
+        affinity:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+                - matchExpressions:
+                    - key: kubernetes.io/arch
+                      operator: In
+                      values:
+                        - amd64
         # -- additional environment variables to be added to the pods
         extraEnv: []
 
