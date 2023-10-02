@@ -611,9 +611,9 @@ spec:
       # -- Controls how many application snapshots can be created per group.
       maxSnapshotsPerGroup: "-1"
       # -- The publicly accessible URL of the backend. Should include the port if non-standard.
-      publicBackendUrl: "http://baserow-api.${SECRET_DOMAIN}"
+      publicBackendUrl: "https://baserow-api.${SECRET_DOMAIN}"
       # -- The publicly accessible URL of the frontend. Should include the port if non-standard.
-      publicFrontendUrl: "http://baserow.${SECRET_DOMAIN}"
+      publicFrontendUrl: "https://baserow.${SECRET_DOMAIN}"
 
     postgresql:
       # -- enable PostgreSQL™ subchart from Bitnami
