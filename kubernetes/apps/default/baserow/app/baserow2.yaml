@@ -340,7 +340,7 @@ spec:
           # -- The number of concurrent celery worker processes used to process asynchronous tasks. If not set will default to the number of available cores. Each celery process uses memory, to reduce Baserow’s memory footprint consider setting and reducing this variable.
           amountOfWorkers: ""
           # -- The logging level for the celery beat service.
-          beatDebugLevel: "INFO"
+          beatDebugLevel: "debug"
           # -- The number of seconds the celery beat worker sleeps before starting up.
           beatStartupDelay: "15"
           # -- When BASEROW_AMOUNT_OF_WORKERS is 1 and this is set to a non empty value Baserow will not run the export-worker but instead run both the celery export and normal tasks on the normal celery worker. Set this to lower the memory usage of Baserow in expense of performance.
@@ -395,7 +395,7 @@ spec:
           # -- The default log level used by the backend, supports ERROR, WARNING, INFO, DEBUG, TRACE
           backendLogLevel: "DEBUG"
           # -- The default log level used for database related logs in the backend. Supports the same values as the normal log level. If you also enable BASEROW_BACKEND_DEBUG and set this to DEBUG you will be able to see all SQL queries in the backend logs.
-          databaseLogLevel: "ERROR"
+          databaseLogLevel: "DEBUG"
         # -- The max number of per row errors than can occur in a file import before an overall failure is declared.
         maxFileImportErrorCount: "30"
         # -- The maximum row error count tolerated before a file import fails. Before this max error count the import will continue and the non failing rows will be imported and after it, no rows are imported at all.
@@ -562,7 +562,7 @@ spec:
           # kubernetes.io/ingress.class: nginx
           # kubernetes.io/tls-acme: "true"
         # -- The publicly reachable hostname for the backend
-        hostname: "brbackend.${SECRET_DOMAIN}"
+        hostname: "baserow-api.${SECRET_DOMAIN}"
         paths:
           # -- The path under witch the asgi backend should be reached
           asgiPath: "/ws/"
@@ -571,7 +571,7 @@ spec:
         # -- An array with the tls configuration
           tls:
             - hosts:
-                - "brbackend.${SECRET_DOMAIN}"
+                - "baserow-api.${SECRET_DOMAIN}"
         #  - secretName: chart-example-tls
         #    hosts:
         #      - chart-example.local
@@ -583,9 +583,9 @@ spec:
       # -- Controls how many application snapshots can be created per group.
       maxSnapshotsPerGroup: "-1"
       # -- The publicly accessible URL of the backend. Should include the port if non-standard.
-      publicBackendUrl: "http://baserow.${SECRET_DOMAIN}"
+      publicBackendUrl: "http://baserow-api.${SECRET_DOMAIN}"
       # -- The publicly accessible URL of the frontend. Should include the port if non-standard.
-      publicFrontendUrl: "http://brbackend.${SECRET_DOMAIN}"
+      publicFrontendUrl: "http://baserow.${SECRET_DOMAIN}"
 
     postgresql:
       # -- enable PostgreSQL™ subchart from Bitnami
