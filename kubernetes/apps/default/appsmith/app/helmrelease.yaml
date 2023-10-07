@@ -21,7 +21,8 @@ spec:
       auth:
         enabled: false
       master:
-        nodeSelector: {}
+        nodeSelector:
+          kubernetes.io/arch: amd64
       replica:
         replicaCount: 1
         nodeSelector: {}
@@ -36,7 +37,9 @@ spec:
       replicaCount: 2
       architecture: "replicaset"
       replicaSetName: rs0
-      nodeSelector: {}
+      nodeSelector:
+        nodeSelector:
+          kubernetes.io/arch: amd64
       arbiter:
         nodeSelector: {}
       hidden:
