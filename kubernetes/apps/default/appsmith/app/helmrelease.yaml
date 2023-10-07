@@ -25,7 +25,8 @@ spec:
           kubernetes.io/arch: amd64
       replica:
         replicaCount: 1
-        nodeSelector: {}
+        nodeSelector:
+          kubernetes.io/arch: amd64
 
     mongodb:
       enabled: true
@@ -41,9 +42,11 @@ spec:
         nodeSelector:
           kubernetes.io/arch: amd64
       arbiter:
-        nodeSelector: {}
+        nodeSelector:
+          kubernetes.io/arch: amd64
       hidden:
-        nodeSelector: {}
+        nodeSelector:
+          kubernetes.io/arch: amd64
 
     ## @section Global parameters
     ## Global Docker image parameters
