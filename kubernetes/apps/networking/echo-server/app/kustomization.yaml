@@ -4,3 +4,6 @@ kind: Kustomization
 namespace: networking
 resources:
   - ./helmrelease.yaml
+commonLabels:
+  app.kubernetes.io/name: echo-server
+  app.kubernetes.io/instance: echo-server
