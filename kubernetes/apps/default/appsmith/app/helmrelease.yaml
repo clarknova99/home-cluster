@@ -240,7 +240,7 @@ spec:
       ## @param persistence.storageClass PVC Storage Class
       ##
       existingClaim: pvc-appsmith
-      storageClass: ""
+      #storageClass: ""
       ## @param persistence.annotations Additional custom annotations for the PVC
       ##
       # annotations: {}
