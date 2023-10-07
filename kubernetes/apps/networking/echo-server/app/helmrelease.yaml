@@ -61,10 +61,17 @@ spec:
             paths:
               - path: /
                 pathType: Prefix
+                service:
+                  name: main
+                  port: http
           - host: &host2 "{{ .Release.Name }}.${SECRET_DOMAIN2}"
             paths:
               - path: /
                 pathType: Prefix
+                service:
+                  name: main
+                  port: http
+
         tls:
           - hosts:
               - *host
