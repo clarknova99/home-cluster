@@ -9,47 +9,40 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 1.5.1
+      version: 2.0.2
+      interval: 30m
       sourceRef:
         kind: HelmRepository
         name: bjw-s
         namespace: flux-system
-  maxHistory: 2
-  install:
-    remediation:
-      retries: 3
-  upgrade:
-    cleanupOnFail: true
-    remediation:
-      retries: 3
-  uninstall:
-    keepHistory: false
-  values:
-    controller:
-      strategy: RollingUpdate
-    image:
-      repository: docker.io/jmalloc/echo-server
-      tag: 0.3.5
-    service:
-      main:
-        ports:
-          http:
-            port: &port 8080
-    probes:
-      liveness: &probes
-        enabled: true
-        custom: true
-        spec:
-          httpGet:
-            path: /health
-            port: *port
-          initialDelaySeconds: 0
-          periodSeconds: 10
-          timeoutSeconds: 1
-          failureThreshold: 3
-      readiness: *probes
-      startup:
-        enabled: false
+
+    values:
+      controllers:
+        main:
+          annotations:
+            reloader.stakater.com/auto: "true"
+
+          containers:
+            main:
+              image:
+                repository: ghcr.io/mendhak/http-https-echo
+                tag: 30
+              env:
+                HTTP_PORT: &port 8080
+                LOG_WITHOUT_NEWLINE: "true"
+                LOG_IGNORE_PATH: "/healthz"
+              resources:
+                requests:
+                  cpu: 5m
+                  memory: 30M
+                limits:
+                  memory: 30M
+      service:
+        main:
+          ports:
+            http:
+              port: *port
+
     ingress:
       main:
         enabled: true
@@ -75,9 +68,3 @@ spec:
           - hosts:
               - *host
               - *host2
-    resources:
-      requests:
-        cpu: 5m
-        memory: 10Mi
-      limits:
-        memory: 50Mi
