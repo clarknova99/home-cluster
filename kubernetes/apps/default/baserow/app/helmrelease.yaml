@@ -160,7 +160,7 @@ spec:
           # -- image pull policy
           pullPolicy: Always
           # -- Overrides the image tag
-          tag: "1.19.1"
+          tag: "1.20.2"
 
         # -- If defined, uses a Secret to pull an image from a private Docker registry or repository.
         imagePullSecrets: []
@@ -253,7 +253,7 @@ spec:
           # -- image pull policy
           pullPolicy: Always
           # -- Overrides the image tag
-          tag: "1.19.1"
+          tag: "1.20.2"
 
         # -- If defined, uses a Secret to pull an image from a private Docker registry or repository.
         imagePullSecrets: []
@@ -494,7 +494,7 @@ spec:
           # -- image pull policy
           pullPolicy: Always
           # -- Overrides the image tag
-          tag: "1.19.1"
+          tag: "1.20.2"
 
         # -- If defined, uses a Secret to pull an image from a private Docker registry or repository.
         imagePullSecrets: []
