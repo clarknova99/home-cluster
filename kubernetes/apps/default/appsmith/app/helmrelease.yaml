@@ -21,12 +21,10 @@ spec:
       auth:
         enabled: false
       master:
-        nodeSelector:
-          kubernetes.io/arch: amd64
+        nodeSelector: {}
       replica:
         replicaCount: 1
-        nodeSelector:
-          kubernetes.io/arch: amd64
+        nodeSelector: {}
 
     mongodb:
       enabled: true
@@ -38,15 +36,11 @@ spec:
       replicaCount: 2
       architecture: "replicaset"
       replicaSetName: rs0
-      nodeSelector:
-        nodeSelector:
-          kubernetes.io/arch: amd64
+      nodeSelector: {}
       arbiter:
-        nodeSelector:
-          kubernetes.io/arch: amd64
+        nodeSelector: {}
       hidden:
-        nodeSelector:
-          kubernetes.io/arch: amd64
+        nodeSelector: {}
 
     ## @section Global parameters
     ## Global Docker image parameters
@@ -58,7 +52,7 @@ spec:
     ## @param global.namespaceOverride Override the namespace for resource deployed by the chart, but can itself be overridden by the local namespaceOverride
     ##
     global:
-      storageClass: "network-storage"
+      storageClass: "local-path"
       namespaceOverride: ""
     ## @param fullnameOverride String to fully override appsmith.fullname template
     ##
