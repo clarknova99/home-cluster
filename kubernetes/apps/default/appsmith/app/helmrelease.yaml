@@ -52,7 +52,7 @@ spec:
     ## @param global.namespaceOverride Override the namespace for resource deployed by the chart, but can itself be overridden by the local namespaceOverride
     ##
     global:
-      storageClass: ""
+      storageClass: "network-storage"
       namespaceOverride: ""
     ## @param fullnameOverride String to fully override appsmith.fullname template
     ##
