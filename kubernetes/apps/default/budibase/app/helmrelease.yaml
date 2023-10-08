@@ -3,7 +3,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: budibase
-  namespace: budibase
+  namespace: default
 spec:
   interval: 30m
   chart:
@@ -323,11 +323,11 @@ spec:
       ## provisioning of Persistent Volumes; leaving it unset will invoke the default
       ## provisioner.
       persistentVolume:
-        enabled: false
+        enabled: true
         accessModes:
           - ReadWriteOnce
         size: 10Gi
-        storageClass: "local-path"
+        storageClass: ""
 
       ## The CouchDB image
       image:

@@ -3,7 +3,7 @@ apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: pv-budibase
-  namespace: budibase
+  namespace: default
 spec:
   storageClassName: "network-storage"
   capacity:
@@ -20,7 +20,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: pvc-budibase
-  namespace: budibase
+  namespace: default
 spec:
   accessModes:
     - ReadWriteMany
