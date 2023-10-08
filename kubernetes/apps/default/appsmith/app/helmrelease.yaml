@@ -814,10 +814,10 @@ spec:
         mountPath: /bitnami/appsmith
         ## @param backend.persistence.subPath The subdirectory of the volume to mount to, useful in dev environments and one PV for multiple services
         ##
-        subPath: ""
+        #subPath: ""
         ## @param backend.persistence.gitDataPath The subdirectory in `/mountPath` or `/mountPath/subPath` where git connected apps will store their local git data.
         ##
-        gitDataPath: ""
+        #gitDataPath: ""
         ## @param backend.persistence.storageClass Storage class of backing PVC
         ## If defined, storageClassName: <storageClass>
         ## If set to "-", storageClassName: "", which disables dynamic provisioning
@@ -825,20 +825,20 @@ spec:
         ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
         ##   GKE, AWS & OpenStack)
         ##
-        storageClass: ""
+        #storageClass: ""
         ## @param backend.persistence.annotations Persistent Volume Claim annotations
         ##
-        annotations: {}
+        #annotations: {}
         ## @param backend.persistence.accessModes Persistent Volume Access Modes
         ##
-        accessModes:
-          - ReadWriteOnce
+        #accessModes:
+        #  - ReadWriteOnce
         ## @param backend.persistence.size Size of data volume
         ##
-        size: 8Gi
+        #size: 8Gi
         ## @param backend.persistence.existingClaim The name of an existing PVC to use for persistence
         ##
-        existingClaim: ""
+        existingClaim: pvc-appsmith
         ## @param backend.persistence.selector Selector to match an existing Persistent Volume for WordPress data PVC
         ## If set, the PVC can't have a PV dynamically provisioned for it
         ## E.g.
