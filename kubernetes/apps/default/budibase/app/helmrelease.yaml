@@ -61,7 +61,8 @@ spec:
       aws: false
       nginx: false
       certificateArn: ""
-      className: "internal"
+      #className: "internal"
+      ingressClassName: "internal"
       annotations:
         nginx.ingress.kubernetes.io/client-max-body-size: 150M
         nginx.ingress.kubernetes.io/proxy-body-size: 50m
