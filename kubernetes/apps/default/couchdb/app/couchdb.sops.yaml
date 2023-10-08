@@ -4,8 +4,8 @@ metadata:
     name: couchdb-secrets
     namespace: default
 stringData:
-    COUCHDB_USER: ENC[AES256_GCM,data:2rC3dUhHwA==,iv:C3Ni2l37ZbiHzboohuK6QH7FhUlp+rk+XS9CtMb28B0=,tag:7TbwBZWREAnyosk9B1krcw==,type:str]
-    COUCHDB_PASSWORD: ENC[AES256_GCM,data:z/qWr9pTVZOj,iv:61rvpN3lFp4aAbi/PvmjVDBXytiiEcKbYa9X55oYpA4=,tag:nBiLwSrwVbIJj+xwhhDOyA==,type:str]
+    COUCHDB_USER: ENC[AES256_GCM,data:zOyLk3ClVADd,iv:EsNlq6Vi/dvGQdP8yPY1B32vapN4WHgsHeOLwcs1oBo=,tag:B11rIvMbz035icTtaSI9KQ==,type:str]
+    COUCHDB_PASSWORD: ENC[AES256_GCM,data:EfwEhjnOBDNEehNwEA==,iv:agGc1TZFnNKLDiY/UVG1gU42/bSahrpzoPTJrFNoNHM=,tag:cTGxfwQTnQMMQWpIJEZGdA==,type:str]
 sops:
     kms: []
     gcp_kms: []
@@ -21,8 +21,8 @@ sops:
             cDVzQkpaeXZUMTZBMkV3VERnUWJDVlUKsIzYZvGmyvb2tJtoQDqNZHw9Ov5Bz0hB
             E2cfhmPcZL5Aj38M2977maTwRWjzCPIaf/5skqyUQcvG0b6LhW5HEw==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2023-10-08T21:34:51Z"
-    mac: ENC[AES256_GCM,data:Qh30H2NBtp7BZkv31+lPQsD9nTF4jNl+VCo6yMDkOrlZdQR22v91X6WzXuhjBR1Nx07DeDTCmgRE4KdacDFdWhL+m/97u4lNphUV5IqpX/7eJ2Y/4J3onbzepKwBBOYu4LRmkMaW72tdDIhE7bGj30D7sKU6OEHmUCSWTldnphw=,iv:WhQmZ9FXeJTtft9+fOwYounh/I946mt2L1xOnRUl9Kk=,tag:txNJh8oTyqvfu8wpCM82Hg==,type:str]
+    lastmodified: "2023-10-08T22:56:03Z"
+    mac: ENC[AES256_GCM,data:78atCMHoqLY9ETzzaBJs1HguDNOOu708rEidNHPbkO5D8+5OljylTAyn9r0RH7wRjgCdTuZoeZiSwZfSqrDaVG1ViLWQp0OrgS5cD34w2tgxCWa9h/gfAGhlWLvag62UyPvbYHxZ/3fWvyb61drPVY4pE79HTlCUKCt12FofEOU=,iv:XEWZl+17z1M2bsKEsoMqdvMsT1KRptDXIgPa9hfoIWA=,tag:Uc0P0YhavYuMaMZAmGRGaQ==,type:str]
     pgp: []
     encrypted_regex: ^(data|stringData)$
     version: 3.8.0
