@@ -366,8 +366,16 @@ spec:
       ## Optional tolerations
       tolerations: []
 
-      affinity: {}
-
+      #affinity: {}
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/arch
+                    operator: In
+                    values:
+                      - amd64
       service:
         # annotations:
         enabled: true
