@@ -3,7 +3,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: budibase
-  namespace: default
+  namespace: budibase
 spec:
   interval: 30m
   chart:
@@ -59,7 +59,7 @@ spec:
     ingress:
       enabled: true
       aws: false
-      #nginx: true
+      nginx: false
       certificateArn: ""
       className: "internal"
       annotations:
@@ -250,43 +250,44 @@ spec:
           resources: {}
 
       redis:
-        enabled: true # disable if using external redis
+        enabled: false # disable if using external redis
         port: 6379
         replicaCount: 1
-        url: "" # only change if pointing to existing redis cluster and enabled: false
-        password: "budibase" # recommended to override if using built-in redis
-        storage: 100Mi
+        #url: "" # only change if pointing to existing redis cluster and enabled: false
+        host: redis-master.default.svc.cluster.local
+        password: ${SECRET_POSTGRES_PASSWORD} # recommended to override if using built-in redis
+#        storage: 100Mi
         ## If defined, storageClassName: <storageClass>
         ## If set to "-", storageClassName: "", which disables dynamic provisioning
         ## If undefined (the default) or set to null, no storageClassName spec is
         ##   set, choosing the default provisioner.
-        storageClass: ""
-        resources: {}
+ #       storageClass: ""
+ #       resources: {}
 
       objectStore:
         # Set to false if using another object store such as S3
-        minio: true
-        browser: true
+        minio: false
+        browser: false
         port: 9000
         replicaCount: 1
-        accessKey: "" # AWS_ACCESS_KEY if using S3 or existing minio access key
-        secretKey: "" # AWS_SECRET_ACCESS_KEY if using S3 or existing minio secret
-        region: "" # AWS_REGION if using S3 or existing minio secret
-        url: "http://minio-service:9000" # only change if pointing to existing minio cluster or S3 and minio: false
-        storage: 100Mi
+        accessKey: "yaTtD4RN1crz8fxAF446" # AWS_ACCESS_KEY if using S3 or existing minio access key
+        secretKey: "a9qFyJvP8PBhFrhkCkwGIKkxkEn2mSOwlkFuq2WF" # AWS_SECRET_ACCESS_KEY if using S3 or existing minio secret
+#        region: "" # AWS_REGION if using S3 or existing minio secret
+        url: "minio.kube-system.svc.cluster.local:9000" # only change if pointing to existing minio cluster or S3 and minio: false
+#        storage: 100Mi
         ## If defined, storageClassName: <storageClass>
         ## If set to "-", storageClassName: "", which disables dynamic provisioning
         ## If undefined (the default) or set to null, no storageClassName spec is
         ##   set, choosing the default provisioner.
-        storageClass: ""
-        resources: {}
-        cloudfront:
+#        storageClass: ""
+#        resources: {}
+#        cloudfront:
           # Set the url of a distribution to enable cloudfront
-          cdn: ""
+#         cdn: ""
           # ID of public key stored in cloudfront
-          publicKeyId: ""
+#          publicKeyId: ""
           # Base64 encoded private key for the above public key
-          privateKey64: ""
+#          privateKey64: ""
 
     # Override values in couchDB subchart
     couchdb:
