@@ -109,7 +109,7 @@ spec:
       pullSecrets: []
       ## Enable debug mode
       ##
-      debug: false
+      debug: true
 
     ## @section Appsmith Client Parameters
     ##
