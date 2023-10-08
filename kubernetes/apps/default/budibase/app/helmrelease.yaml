@@ -246,19 +246,26 @@ spec:
       #      co.elastic.logs/multiline.negate: false
       #      co.elastic.logs/multiline.match: after
 
+      # couchdb:
+      #   enabled: true
+      #   # url: "" # only change if pointing to existing couch server
+      #   # user: "" # only change if pointing to existing couch server
+      #   # password: "" # only change if pointing to existing couch server
+      #   port: 5984
+      #   backup:
+      #     enabled: false
+      #     # target couchDB instance to back up to
+      #     target: ""
+      #     # backup interval in seconds
+      #     interval: ""
+      #     resources: {}
+
       couchdb:
-        enabled: true
-        # url: "" # only change if pointing to existing couch server
-        # user: "" # only change if pointing to existing couch server
-        # password: "" # only change if pointing to existing couch server
-        port: 5984
-        backup:
-          enabled: false
-          # target couchDB instance to back up to
-          target: ""
-          # backup interval in seconds
-          interval: ""
-          resources: {}
+        enabled: false
+        replicaCount: 3
+        url: "http://couchdb.default.svc.cluster.local:5984"
+        user: "couchuser"
+        password: "couchpassword"
 
       redis:
         enabled: false # disable if using external redis
@@ -301,14 +308,6 @@ spec:
 #          privateKey64: ""
 
     # Override values in couchDB subchart
-    couchdb:
-      enabled: false
-      replicaCount: 3
-      url: "http://couchdb.default.svc.cluster.local:5984"
-      user: "couchuser"
-      password: "couchpassword"
-
-
 
     # couchdb:
     #   ## clusterSize is the initial size of the CouchDB cluster.

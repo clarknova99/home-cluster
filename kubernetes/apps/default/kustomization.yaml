@@ -5,7 +5,7 @@ resources:
   - ./namespace.yaml
  # - ./appsmith/ks.yaml
   - ./baserow/ks.yaml
-  - ./budibase/ks.yaml
+  #- ./budibase/ks.yaml
   - ./couchdb/ks.yaml
   - ./hajimari/ks.yaml
   - ./home-assistant/ks.yaml
