@@ -1206,7 +1206,7 @@ spec:
     externalDatabase:
       hosts: ["mongodb.default.svc.cluster.local"]
       port: 27017
-      username: root
+      username:
       database: appsmith
       password: ""
       existingSecret: ""
