@@ -26,16 +26,18 @@ spec:
     persistence:
       existingClaim: pvc-mongodb
     auth:
-      databases:
-        - appsmith
-      directoryPerDB: true
-      enabled: true
-      rootUser: root
-      rootPassword: mongo
-      usernames:
-        - appsmith
-      passwords:
-        - appsmith
+      enabled: false
+    # auth:
+    #   databases:
+    #     - appsmith
+    #   directoryPerDB: true
+    #   enabled: true
+    #   rootUser: root
+    #   rootPassword: mongo
+    #   usernames:
+    #     - appsmith
+    #   passwords:
+    #     - appsmith
     service:
       annotations:
         io.cilium/lb-ipam-ips: "192.168.2.47"
