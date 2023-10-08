@@ -149,8 +149,10 @@ spec:
         upstreams:
           apps: "http://app-service.{{ .Release.Namespace }}.svc.{{ .Values.services.dns }}:{{ .Values.services.apps.port }}"
           worker: "http://worker-service.{{ .Release.Namespace }}.svc.{{ .Values.services.dns }}:{{ .Values.services.worker.port }}"
-          minio: "http://minio-service.{{ .Release.Namespace }}.svc.{{ .Values.services.dns }}:{{ .Values.services.objectStore.port }}"
-          couchdb: "http://{{ .Release.Name }}-svc-couchdb:{{ .Values.services.couchdb.port }}"
+          #minio: "http://minio-service.{{ .Release.Namespace }}.svc.{{ .Values.services.dns }}:{{ .Values.services.objectStore.port }}"
+          minio: http://minio.kube-system.svc.cluster.local:9000
+          couchdb: http://couchdb.default.svc.cluster.local:5984
+          #couchdb: "http://{{ .Release.Name }}-svc-couchdb:{{ .Values.services.couchdb.port }}"
         resources: {}
         startupProbe:
           httpGet:
