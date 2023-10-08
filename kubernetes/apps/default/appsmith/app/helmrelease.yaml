@@ -1204,7 +1204,7 @@ spec:
     ## @param externalDatabase.existingSecretPasswordKey Name of an existing secret key containing the database credentials
     ##
     externalDatabase:
-      hosts: []
+      hosts: ["mongodb.default.svc.cluster.local"]
       port: 27017
       username: root
       database: appsmith
