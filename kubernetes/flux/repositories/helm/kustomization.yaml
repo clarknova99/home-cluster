@@ -5,6 +5,7 @@ resources:
   - ./appsmith.yaml
   - ./authelia.yaml
   - ./baserow.yaml
+  - ./budibase.yaml
   - ./bitnami.yaml
   - ./bjw-s.yaml
   - ./cilium.yaml
