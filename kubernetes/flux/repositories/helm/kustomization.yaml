@@ -10,6 +10,7 @@ resources:
   - ./bjw-s.yaml
   - ./cilium.yaml
   - ./coredns.yaml
+  - ./couchdb.yaml
   - ./csi-driver-nfs.yaml
   - ./external-dns.yaml
   - ./grafana.yaml

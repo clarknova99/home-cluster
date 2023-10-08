@@ -1,0 +1,9 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: couchdb
+  namespace: flux-system
+spec:
+  interval: 10m0s
+  url: https://apache.github.io/couchdb-helm
