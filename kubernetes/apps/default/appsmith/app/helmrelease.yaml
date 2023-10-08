@@ -1260,7 +1260,7 @@ spec:
     mongodb:
       ## @param mongodb.enabled Deploy MongoDB subchart
       ##
-      enabled: true
+      enabled: false
       ## @param mongodb.architecture MongoDB architecture (Appsmith requires a Replica Set)
       ## This is a requirement for Appsmith components like RTS
       ##
