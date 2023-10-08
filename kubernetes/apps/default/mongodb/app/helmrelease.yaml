@@ -26,7 +26,7 @@ spec:
     persistence:
       existingClaim: pvc-mongodb
     auth:
-      enabled: false
+      enabled: true
     affinity:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
