@@ -59,7 +59,7 @@ spec:
     ingress:
       enabled: true
       aws: false
-      nginx: true
+      #nginx: true
       certificateArn: ""
       className: "internal"
       annotations:
