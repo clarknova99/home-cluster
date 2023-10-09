@@ -262,7 +262,7 @@ spec:
 
       couchdb:
         enabled: false
-        replicaCount: 3
+        #replicaCount: 3
         url: "http://couchdb.default.svc.cluster.local:5984"
         user: "couchuser"
         password: "couchpassword"
