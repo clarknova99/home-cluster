@@ -1,0 +1,9 @@
+---
+# yaml-language-server: $schema=https://json.schemastore.org/kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  # ## sops --encrypt --in-place ./kubernetes/apps/actions-runner-system/actions-runner-controller/app/actions.sops.yaml
+  # ## sops --decrypt ./kubernetes/apps/actions-runner-system/actions-runner-controller/app/actions.sops.yaml | kubectl apply -f -
+  - ./helmrelease.yaml
+  - ./actions.sops.yaml
