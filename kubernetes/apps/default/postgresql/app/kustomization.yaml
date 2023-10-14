@@ -8,3 +8,4 @@ resources:
   - ./backup-configmap.yaml
   - ./backup-cronjob.yaml
   - ./helmrelease.yaml
+  - ./ingress.yaml
