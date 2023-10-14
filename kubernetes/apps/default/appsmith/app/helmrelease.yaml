@@ -383,22 +383,36 @@ spec:
         sessionAffinityConfig: {}
 
       ## ref: http://kubernetes.io/docs/user-guide/ingress/
-      ##
       ingress:
-        ## @param client.ingress.enabled Enable ingress record generation for Appsmith
-        ##
-        enabled: true
-        annotations:
-          hajimari.io/enable: "true"
-        ingressClassName: internal
-        hosts:
-          - host: "appsmith.${SECRET_DOMAIN}"
+        main:
+          enabled: true
+          ingressClassName: internal
+          annotations:
+            hajimari.io/enable: "true"
+          hosts:
+            - host: &host "hajimari.${SECRET_DOMAIN}"
+              paths:
+                - path: /
+                  pathType: Prefix
+          tls:
+            - hosts:
+                - *host
+      ##
+      # ingress:
+      #   ## @param client.ingress.enabled Enable ingress record generation for Appsmith
+      #   ##
+      #   enabled: true
+      #   annotations:
+      #     hajimari.io/enable: "true"
+      #   ingressClassName: internal
+      #   hosts:
+      #     - host: "appsmith.${SECRET_DOMAIN}"
 
-        tls:
-          - hosts:
-              - "appsmith.${SECRET_DOMAIN}"
-        path: /
-        pathType: Prefix
+      #   tls:
+      #     - hosts:
+      #         - "appsmith.${SECRET_DOMAIN}"
+      #   path: /
+      #   pathType: Prefix
         ## @param client.ingress.pathType Ingress path type
 
         ##
