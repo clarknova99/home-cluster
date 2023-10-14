@@ -2,8 +2,8 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: influxdb
-  namespace: monitoring
+  name: postgresql
+  namespace: default
   annotations:
     hajimari.io/enable: "true"
 spec:
@@ -16,7 +16,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: influxdb
+                name: postgresql
                 port:
                   number: 5342
   tls:
