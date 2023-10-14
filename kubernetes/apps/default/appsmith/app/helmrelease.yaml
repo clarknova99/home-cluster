@@ -390,7 +390,7 @@ spec:
           annotations:
             hajimari.io/enable: "true"
           hosts:
-            - host: &host "hajimari.${SECRET_DOMAIN}"
+            - host: &host "appsmith.${SECRET_DOMAIN}"
               paths:
                 - path: /
                   pathType: Prefix
