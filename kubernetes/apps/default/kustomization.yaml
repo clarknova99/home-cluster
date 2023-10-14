@@ -11,7 +11,7 @@ resources:
   - ./home-assistant/ks.yaml
   - ./mongodb/ks.yaml
   - ./n8n/ks.yaml
-  #- ./postgresql/ks.yaml
+  - ./postgresql/ks.yaml
   - ./postgresql16/ks.yaml
   - ./redis/ks.yaml
   - ./redisinsight/ks.yaml
