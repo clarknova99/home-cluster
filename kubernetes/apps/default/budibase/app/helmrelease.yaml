@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: budibase
-      version: 2.11.15
+      version: 2.11.33
       sourceRef:
         kind: HelmRepository
         name: budibase
