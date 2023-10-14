@@ -31,6 +31,8 @@ spec:
     auth:
       postgresPassword: ${SECRET_POSTGRES_PASSWORD}
     primary:
+      containerSecurityContext:
+          runAsUser: 0
       persistence:
         enabled: true
         existingClaim: pvc-postgresql
