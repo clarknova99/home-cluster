@@ -1,9 +1,8 @@
 ---
-# yaml-language-server: $schema=https://kubernetes-schemas.devbu.io/kustomize.toolkit.fluxcd.io/kustomization_v1.json
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: database-cloudnative-pg
+  name: cluster-apps-cloudnative-pg
   namespace: flux-system
 spec:
   path: ./kubernetes/apps/default/cloudnative-pg/app
@@ -15,17 +14,15 @@ spec:
   interval: 30m
   retryInterval: 1m
   timeout: 5m
-
 ---
-# yaml-language-server: $schema=https://kubernetes-schemas.devbu.io/kustomize.toolkit.fluxcd.io/kustomization_v1.json
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: database-cloudnative-pg-cluster
+  name: cluster-apps-cloudnative-pg-cluster
   namespace: flux-system
 spec:
   dependsOn:
-    - name: database-cloudnative-pg
+    - name: cluster-apps-cloudnative-pg
   path: ./kubernetes/apps/default/cloudnative-pg/cluster
   prune: true
   sourceRef:

@@ -2,8 +2,8 @@
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
-  name: postgres
-  namespace: database
+  name: cloudnative-pg-cluster
+  namespace: default
 # ## sops --encrypt --in-place ./kubernetes/apps/default/cloudnative-pg/cluster/cnpg.s3.sops.yaml
 # ## sops --decrypt ./kubernetes/apps/default/cloudnative-pg/cluster/cnpg.s3.sops.yaml | kubectl apply -f -
 spec:
@@ -30,7 +30,7 @@ spec:
       wal:
         compression: bzip2
         maxParallel: 8
-      destinationPath: &dest-path s3://postgresql-data/
+      destinationPath: &dest-path s3://cloudnative-pg/
       endpointURL: &endpoint-url http://minio.kube-system.svc.cluster.local:9000
       serverName: postgres-v3 #This must increment when bootstrapping. You cannot have this be the same as the bootstrap version
       s3Credentials: &s3-creds
