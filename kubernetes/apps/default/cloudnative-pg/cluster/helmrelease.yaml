@@ -35,10 +35,10 @@ spec:
       serverName: postgres-v1 #This must increment when bootstrapping. You cannot have this be the same as the bootstrap version
       s3Credentials: &s3-creds
         accessKeyId:
-          name: cloudnative-pg-s3-secrets
+          name: cloudnative-pg-secrets
           key: AWS_ACCESS_KEY_ID
         secretAccessKey:
-          name: cloudnative-pg-s3-secrets
+          name: cloudnative-pg-secrets
           key: AWS_SECRET_ACCESS_KEY
   # Note: externalClusters is needed when recovering from an existing cnpg cluster
   externalClusters:
