@@ -2,11 +2,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: postgres-lb
+  name: cloudnative-pg-cluster
   namespace: default
   annotations:
-    external-dns.alpha.kubernetes.io/hostname: postgres.devbu.io
-    io.cilium/lb-ipam-ips: 192.168.2.205
+    io.cilium/lb-ipam-ips: 192.168.2.45
 spec:
   type: LoadBalancer
   externalTrafficPolicy: Cluster
@@ -16,5 +15,6 @@ spec:
       protocol: TCP
       targetPort: 5432
   selector:
-    postgresql: postgres
+    #postgresql: postgres
+    cnpg.io/cluster: cloudnative-pg-cluster
     role: primary
