@@ -23,7 +23,7 @@ data:
     cd $BACKDIR
 
     echo "pg_dumpall -h $PGHOST -p 5432 -U $PGUSER > $DUMP_FILE_NAME"
-    PGPASSWORD="${SECRET_POSTGRES_PASSWORD}" pg_dumpall -h $PGHOST -p 5432 -U $PGUSER > $DUMP_FILE_NAME
+    PGPASSWORD="${SECRET_POSTGRES_PASSWORD}" pg_dumpall -h $PGHOST -p 5432 -U $PGUSER -E UTF-8 -f $DUMP_FILE_NAME
 
     if [ $? -ne 0 ]; then
       rm $DUMP_FILE_NAME

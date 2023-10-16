@@ -10,3 +10,4 @@ kubeconfig
 *.key
 # Ansible
 .venv*
+*.sql
