@@ -1,0 +1,52 @@
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: postgres
+  namespace: database
+# ## sops --encrypt --in-place ./kubernetes/apps/default/cloudnative-pg/cluster/cnpg.s3.sops.yaml
+# ## sops --decrypt ./kubernetes/apps/default/cloudnative-pg/cluster/cnpg.s3.sops.yaml | kubectl apply -f -
+spec:
+  instances: 3
+  imageName: ghcr.io/cloudnative-pg/postgresql:14.8-4
+  primaryUpdateStrategy: unsupervised
+  storage:
+    size: 10Gi
+    storageClass: local-path
+  superuserSecret:
+    name: cloudnative-pg-secrets
+  bootstrap:
+    recovery:
+      source: &previous-cluster postgres-v2 #This must match backup.barmanObjectStore.serverName from previous backup
+  postgresql:
+    parameters:
+      max_connections: "600"
+      shared_buffers: 512MB
+  monitoring:
+    enablePodMonitor: true
+  backup:
+    retentionPolicy: 30d
+    barmanObjectStore:
+      wal:
+        compression: bzip2
+        maxParallel: 8
+      destinationPath: &dest-path s3://postgresql-data/
+      endpointURL: &endpoint-url http://minio.kube-system.svc.cluster.local:9000
+      serverName: postgres-v3 #This must increment when bootstrapping. You cannot have this be the same as the bootstrap version
+      s3Credentials: &s3-creds
+        accessKeyId:
+          name: cloudnative-pg-s3-secrets
+          key: AWS_ACCESS_KEY_ID
+        secretAccessKey:
+          name: cloudnative-pg-s3-secrets
+          key: AWS_SECRET_ACCESS_KEY
+  # Note: externalClusters is needed when recovering from an existing cnpg cluster
+  externalClusters:
+    - name: *previous-cluster
+      barmanObjectStore:
+        wal:
+          compression: bzip2
+          maxParallel: 8
+        destinationPath: *dest-path
+        endpointURL: *endpoint-url
+        s3Credentials: *s3-creds
