@@ -7,6 +7,9 @@ metadata:
 # ## sops --encrypt --in-place ./kubernetes/apps/default/cloudnative-pg/cluster/cnpg.s3.sops.yaml
 # ## sops --decrypt ./kubernetes/apps/default/cloudnative-pg/cluster/cnpg.s3.sops.yaml | kubectl apply -f -
 spec:
+  affinity:
+    nodeSelector:
+      kubernetes.io/arch: amd64
   instances: 3
   imageName: ghcr.io/cloudnative-pg/postgresql:14.8-4
   primaryUpdateStrategy: unsupervised
