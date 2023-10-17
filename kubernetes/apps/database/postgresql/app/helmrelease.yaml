@@ -1,0 +1,56 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: postgresql
+  namespace: database
+spec:
+  interval: 10m
+  chart:
+    spec:
+      chart: postgresql
+      version: 12.12.10
+      sourceRef:
+        kind: HelmRepository
+        name: bitnami
+        namespace: flux-system
+  maxHistory: 3
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    image:
+      repository: bitnami/postgresql
+      tag: 15.4.0
+    auth:
+      postgresPassword: ${SECRET_POSTGRES_PASSWORD}
+    primary:
+      # podSecurityContext.enabled: true
+      # containerSecurityContext:
+      #     runAsUser: 0
+      persistence:
+        enabled: true
+        existingClaim: pvc-postgresql
+      service:
+        annotations:
+          io.cilium/lb-ipam-ips: "192.168.2.49"
+        externalTrafficPolicy: Cluster
+        # clusterIP: "192.168.2.49"
+        type: LoadBalancer
+    volumePermissions:
+      enabled: true
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: kubernetes.io/arch
+                  operator: In
+                  values:
+                    - amd64

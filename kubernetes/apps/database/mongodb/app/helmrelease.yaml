@@ -1,0 +1,59 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: mongodb
+  namespace: database
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: mongodb
+      version: 14.0.10
+      sourceRef:
+        kind: HelmRepository
+        name: bitnami
+        namespace: flux-system
+      interval: 15m
+  install:
+    createNamespace: true
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
+  values:
+    persistence:
+      existingClaim: pvc-mongodb
+    auth:
+      enabled: false
+    # auth:
+    #   databases:
+    #     - appsmith
+    #   directoryPerDB: true
+    #   enabled: true
+    #   rootUser: root
+    #   rootPassword: mongo
+    #   usernames:
+    #     - appsmith
+    #   passwords:
+    #     - appsmith
+    service:
+      annotations:
+        io.cilium/lb-ipam-ips: "192.168.2.47"
+      externalTrafficPolicy: Cluster
+      # clusterIP: "192.168.2.49"
+      type: LoadBalancer
+    externalAccess:
+      enabled: true
+      service:
+        type: LoadBalancer
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: kubernetes.io/hostname
+                  operator: In
+                  values:
+                    - k8s-01

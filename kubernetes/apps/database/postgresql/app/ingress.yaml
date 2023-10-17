@@ -1,0 +1,25 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: postgresql
+  namespace: database
+  annotations:
+    hajimari.io/enable: "true"
+spec:
+  ingressClassName: internal
+  rules:
+    - host: "postgresql.${SECRET_DOMAIN}"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: postgresql
+                port:
+                  number: 5342
+  tls:
+    - hosts:
+        - "postgresql.${SECRET_DOMAIN}"
+

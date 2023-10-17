@@ -1,0 +1,39 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: postgresql-backup
+  namespace: database
+spec:
+  schedule: "0 1 * * *"
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            role: backup
+        spec:
+          containers:
+            - name: postgresql
+              image: bitnami/postgresql
+              imagePullPolicy: IfNotPresent
+              # command: [ "/bin/bash", "-c", "-" ]
+              # args: ["while true; do sleep 30; done;"]
+
+              command:
+                - /usr/local/bin/postgresql/backup.sh
+
+              volumeMounts:
+                - name: backup-volume
+                  mountPath: /bitnami/postgresql/backup
+                - name: backup-config-volume
+                  mountPath: /usr/local/bin/postgresql
+          restartPolicy: Never
+          volumes:
+            - name: backup-config-volume
+              configMap:
+                name: postgresql-backup-config
+                defaultMode: 0744
+            - name: backup-volume
+              persistentVolumeClaim:
+                claimName: pvc-postgresql-backup
+                #claimName: pvc-postgresql

@@ -1,0 +1,31 @@
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-pgadmin
+  namespace: database
+spec:
+  storageClassName: "network-storage"
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  nfs:
+    server: 192.168.1.2
+    path: "/volume1/network-storage/pgadmin"
+    readOnly: false
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-pgadmin
+  namespace: database
+spec:
+  accessModes:
+    - ReadWriteMany
+  volumeName: pv-pgadmin
+  storageClassName: "network-storage"
+  resources:
+    requests:
+      storage: 1Gi

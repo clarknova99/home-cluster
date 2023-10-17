@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: cloudnative-pg-secrets
+    namespace: database
+stringData:
+    username: ENC[AES256_GCM,data:rHv9XsZtzng=,iv:PdTbJtCao2AMu50HB9iB084rcqioPhpHZugXZ9V2mZk=,tag:QSlcR6zRYLEQr1cLbCokyQ==,type:str]
+    password: ENC[AES256_GCM,data:NEsuQVeV65Yb,iv:qkU6CtWAQfctCqGu9sz3bHhoJ6oB7uz8DryOnKOiYc4=,tag:ulgBSrlyutqaAbFb/1BFjA==,type:str]
+    AWS_ACCESS_KEY_ID: ENC[AES256_GCM,data:Dul8kcMybcxuNcBRJilaeaeeiac=,iv:zo93Z/OZmhJxfodie3oB7J6HUiU9Fu5I5hcN/5DUgCY=,tag:2Xn8h5i+z3QvI7+y9mlagw==,type:str]
+    AWS_SECRET_ACCESS_KEY: ENC[AES256_GCM,data:oiNRlFUqKx32EJqQLCd9TS0CZf5rGlj59IoqNbJIhsVjHerU6msqvA==,iv:pzTnq9GZmWOD7t57g1uLV+1TmojmlqrvWnUqYOWixco=,tag:Lv7Dv9aeJq06PGDGo12ODA==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age14q9x9ftcpqfw2kmhmlfzpx5g2wmn7tdnq34uhh4x0r2h6qfmm5dqk07z2e
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA3MWlQbFlGblhVV2NDY05R
+            NndtVjBlQUIxQ1lTc0R3dkJaZVVBMGVJeURRCnR5UTVEcmttWUxnbXM5d3lxMy9n
+            c1ZnYzVFNEZCWVFpWVFBeWRqblk1SzQKLS0tIE5mNGRwQmo5bGJmMk01QzhXczVK
+            QWoxWFQxYVFPTGwvaWFNbFk5YWV3cmsK3sIsfUa27RXNffnMirefUqNhBWZfvVcj
+            JEQa+WxUQWgAVvYAKkxvPyI+jHwmXnd04NRg55DrOWgJFAy0F3fqfg==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2023-10-17T18:08:59Z"
+    mac: ENC[AES256_GCM,data:VbwgzsVx3HJd+kBwY+dU1EL5KKZojFBYJUATP9sJEhm9Uj32u4tMj1q0uBAaIgfO06vKQy+6v9ln2NSzNB6ugptqYOhJHdpdJadlL6O9JDqwbLSaGmqXWtSG5pNy7TSr5GdgcLJOQnV9xPjQZ23urTvGAlOlSd4+ZrUZgW7I4xo=,iv:Sy6c2mvEbN5wRI154EajMqbtZNSNc6FInYqXTczZMWw=,tag:fzt0AbM+n7uXG2k3uAK5wg==,type:str]
+    pgp: []
+    encrypted_regex: ^(data|stringData)$
+    version: 3.8.1

@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: couchdb-secrets
+    namespace: database
+stringData:
+    COUCHDB_USER: ENC[AES256_GCM,data:hoooqDKW/H4P,iv:TXBmD1dTDtG5UPXqClpR/zvlvaSDva/+4Juz59nchsk=,tag:M/iGLg1NLG+y0wStYHKMMg==,type:str]
+    COUCHDB_PASSWORD: ENC[AES256_GCM,data:7qe4ZbcfK1e42T86DQ==,iv:XWQcLufcZYDp79vAmvnzx6npbDBU4HiJreqE/oPc0Zg=,tag:SvH+wpZxDR0hmRJS1QFAqw==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age14q9x9ftcpqfw2kmhmlfzpx5g2wmn7tdnq34uhh4x0r2h6qfmm5dqk07z2e
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBWN3ZtVkhxdUo5elUwR2gy
+            ZHZpRHNiaGJUTHd6dEx2aXM3UjVNOExBVVNnCjYyRGZoa0RUM2tIZkhxa0VyS3RD
+            RGQwZUlMMVEwdjFLbDBZNzNQbUZiV3MKLS0tIHUwRmUvdmV1RUl6TUhNOEYxSFZM
+            TGYzOEhiRFdya25pYnpkcG96VGRueGsKXlCYQI2zjoAxsajdMcoUszBNqZ+LYsXU
+            ine7cXmRSOjO/isfxAU6i+jPq9iYDNqtHelwU53UdYQD8sJpGSs0Pw==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2023-10-17T18:10:50Z"
+    mac: ENC[AES256_GCM,data:UY/7iFNsoANXOcCiTM5WmPB040w3UU+c+s5aOAVBG2BERYzEcnAtD9ZjZ1agLrcDQhYhEli/V0S0jReO0XszDxTmYrIHCoGPXhUBclRelZi5Ps/GMrDJpnrEDpH6HOVuKIVbt6te6hvF6D/e5CPPlerC2TVmRzUqF5wMyVOvjBA=,iv:TKobPD9bahdhTTZNDsGiPmcsit3bbfP2Oj3jKgCzgI0=,tag:r5tTWhLcxrBubDKkBaqvnQ==,type:str]
+    pgp: []
+    encrypted_regex: ^(data|stringData)$
+    version: 3.8.1
