@@ -6,6 +6,6 @@ resources:
   - ./cloudnative-pg/ks.yaml
   - ./couchdb/ks.yaml
   - ./mongodb/ks.yaml
-  #- ./postgresql/ks.yaml
+  - ./postgresql/ks.yaml
   - ./redis/ks.yaml
   - ./redisinsight/ks.yaml
