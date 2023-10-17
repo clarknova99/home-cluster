@@ -7,7 +7,7 @@ metadata:
 data:
   backup.sh: |
     #!/bin/bash
-    PGHOST='postgresql.default.svc.cluster.local'
+    PGHOST='postgresql.database.svc.cluster.local'
     PGUSER='postgres'
     BACKDIR=/bitnami/postgresql/backup
 

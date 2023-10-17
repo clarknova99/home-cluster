@@ -5,7 +5,7 @@ metadata:
   name: cluster-apps-postgresql
   namespace: flux-system
 spec:
-  path: ./kubernetes/apps/default/postgresql/app
+  path: ./kubernetes/apps/database/postgresql/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -21,7 +21,7 @@ metadata:
   name: cluster-apps-pgadmin
   namespace: flux-system
 spec:
-  path: ./kubernetes/apps/default/postgresql/pgadmin
+  path: ./kubernetes/apps/database/postgresql/pgadmin
   prune: true
   sourceRef:
     kind: GitRepository

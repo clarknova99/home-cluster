@@ -5,7 +5,7 @@ metadata:
   name: cluster-apps-mongodb
   namespace: flux-system
 spec:
-  path: ./kubernetes/apps/default/mongodb/app
+  path: ./kubernetes/apps/database/mongodb/app
   prune: true
   sourceRef:
     kind: GitRepository

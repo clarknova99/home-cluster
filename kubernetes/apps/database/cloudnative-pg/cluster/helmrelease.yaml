@@ -4,8 +4,8 @@ kind: Cluster
 metadata:
   name: cloudnative-pg-cluster
   namespace: database
-# ## sops --encrypt --in-place ./kubernetes/apps/default/cloudnative-pg/cluster/cnpg.s3.sops.yaml
-# ## sops --decrypt ./kubernetes/apps/default/cloudnative-pg/cluster/cnpg.s3.sops.yaml | kubectl apply -f -
+# ## sops --encrypt --in-place ./kubernetes/apps/database/cloudnative-pg/cluster/cnpg.s3.sops.yaml
+# ## sops --decrypt ./kubernetes/apps/database/cloudnative-pg/cluster/cnpg.s3.sops.yaml | kubectl apply -f -
 spec:
   affinity:
     nodeSelector:
