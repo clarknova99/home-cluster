@@ -15,12 +15,12 @@ spec:
   primaryUpdateStrategy: unsupervised
   storage:
     size: 10Gi
-    storageClass: local-path
+    storageClass: cnpg
   superuserSecret:
     name: cloudnative-pg-secrets
-  bootstrap:
-    recovery:
-      source: &previous-cluster postgres-v2 #This must match backup.barmanObjectStore.serverName from previous backup
+  # bootstrap:
+  #   recovery:
+  #     source: &previous-cluster postgres-backup #This must match backup.barmanObjectStore.serverName from previous backup
   postgresql:
     parameters:
       max_connections: "600"
