@@ -5,9 +5,9 @@ metadata:
   name: pv-cloudnative-pg
   namespace: database
 spec:
-  storageClassName: "cnpg"
+  storageClassName: ""
   capacity:
-    storage: 10Gi
+    storage: 1Gi
   accessModes:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
@@ -25,7 +25,7 @@ spec:
   accessModes:
     - ReadWriteMany
   volumeName: pv-cloudnative-pg
-  storageClassName: "cnpg"
+  storageClassName: ""
   resources:
     requests:
-      storage: 10Gi
+      storage: 1Gi
