@@ -18,9 +18,9 @@ spec:
     storageClass: local-path
   superuserSecret:
     name: cloudnative-pg-secrets
-  # bootstrap:
-  #   recovery:
-  #     source: &previous-cluster postgres-v2 #This must match backup.barmanObjectStore.serverName from previous backup
+  bootstrap:
+    recovery:
+      source: &previous-cluster postgres-v1 #This must match backup.barmanObjectStore.serverName from previous backup
   postgresql:
     parameters:
       max_connections: "600"
