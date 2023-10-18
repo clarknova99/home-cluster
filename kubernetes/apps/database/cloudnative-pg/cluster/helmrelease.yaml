@@ -20,7 +20,7 @@ spec:
     name: cloudnative-pg-secrets
   bootstrap:
     recovery:
-      source: &previous-cluster postgres-v1 #This must match backup.barmanObjectStore.serverName from previous backup
+      source: &previous-cluster postgres-v2 #This must match backup.barmanObjectStore.serverName from previous backup
   postgresql:
     parameters:
       max_connections: "600"
@@ -45,7 +45,7 @@ spec:
           key: AWS_SECRET_ACCESS_KEY
   # Note: externalClusters is needed when recovering from an existing cnpg cluster
   externalClusters:
-    - name: postgres-v1
+    - name: postgres-v2
       barmanObjectStore:
         wal:
           compression: bzip2
