@@ -36,7 +36,7 @@ spec:
       N8N_METRICS: true
       DB_TYPE: postgresdb
       DB_POSTGRESDB_DATABASE: n8n
-      DB_POSTGRESDB_HOST: postgresql.database.svc.cluster.local
+      DB_POSTGRESDB_HOST: cloudnative-pg-cluster.database.svc.cluster.local
       DB_POSTGRESDB_USER: postgres
       DB_POSTGRESDB_PASSWORD: ${SECRET_POSTGRES_PASSWORD}
       DB_POSTGRESDB_PORT: 5432
