@@ -1087,7 +1087,7 @@ spec:
     ## @param externalDatabase.existingSecretPasswordKey Name of an existing secret key containing the database credentials
     ##
     externalDatabase:
-      hosts: ["mongodb.default.svc.cluster.local"]
+      hosts: ["mongodb.database.svc.cluster.local"]
       port: 27017
       username: appsmith
       database: appsmith
@@ -1104,7 +1104,7 @@ spec:
     ## @param externalRedis.existingSecretPasswordKey Name of an existing secret key containing the Redis credentials
     ##
     externalRedis:
-      host: redis-master.default.svc.cluster.local
+      host: redis-master.database.svc.cluster.local
       port: 6379
       password: ${SECRET_POSTGRES_PASSWORD}
       existingSecret: ""
