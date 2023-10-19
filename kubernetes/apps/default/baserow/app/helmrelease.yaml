@@ -637,7 +637,7 @@ spec:
         # -- Password to use
         password: ${SECRET_POSTGRES_PASSWORD}
         # -- Name of the user to use
-        username: ${SECRET_POSTGRES_USERNAME}
+        username: postgres
         # -- Key in the secret containing the password
    #     userPasswordKey: ""
       # -- Hostname of the PostgreSQL database
