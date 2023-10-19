@@ -641,7 +641,8 @@ spec:
         # -- Key in the secret containing the password
    #     userPasswordKey: ""
       # -- Hostname of the PostgreSQL database
-      hostname: postgresql.default.svc.cluster.local
+      #hostname: postgresql.default.svc.cluster.local
+      hostname: cloudnative-pg-cluster.database.svc.cluster.local
       # -- Port used to connect to PostgreSQL database
       port: 5432
 
