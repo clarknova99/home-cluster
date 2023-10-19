@@ -6,3 +6,4 @@ metadata:
 spec:
   cluster:
     name: cloudnative-pg-cluster
+# kubectl -f kubernetes/apps/database/cloudnative-pg/cluster/backup.yaml apply
