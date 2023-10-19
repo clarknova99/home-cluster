@@ -668,6 +668,6 @@ spec:
         # -- Key in the secret containing the password
     #    userPasswordKey: ""
       # -- Hostname of Redis™
-      hostname: redis-master.default.svc.cluster.local
+      hostname: redis-master.database.svc.cluster.local
       # -- Port used to connect to Redis
       port: 6379
