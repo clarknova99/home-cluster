@@ -18,11 +18,11 @@ spec:
     ## Use the PostgreSQL chart dependency.
     ## Set to false if bringing your own PostgreSQL.
     postgresql:
-      enabled: true
+      enabled: false
     redis:
     ## If you are bringing your own redis, you can set the host in supersetNode.connections.redis_host
     ## Set to false if bringing your own redis.
-      enabled: true
+      enabled: false
     envFromSecret: superset-secrets
     supersetNode:
       connections:
