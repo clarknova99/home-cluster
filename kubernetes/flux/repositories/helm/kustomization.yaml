@@ -24,8 +24,8 @@ resources:
   - ./kubernetes-dashboard.yaml
   - ./metrics-server.yaml
   - ./prometheus-community.yaml
-  - ./retool.yaml
   - ./runix.yaml
   - ./stakater.yaml
+  - ./tooljet.yaml
   - ./vector.yaml
   - ./weave-gitops.yaml

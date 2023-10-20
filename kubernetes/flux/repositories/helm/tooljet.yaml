@@ -2,8 +2,8 @@
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
 metadata:
-  name: retool
+  name: tooljet
   namespace: flux-system
 spec:
   interval: 10m0s
-  url: https://charts.retool.com
+  url: https://github.com/ToolJet/helm-charts.git
