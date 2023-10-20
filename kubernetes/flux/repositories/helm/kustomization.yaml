@@ -26,6 +26,7 @@ resources:
   - ./prometheus-community.yaml
   - ./runix.yaml
   - ./stakater.yaml
+  - ./stakater.yaml
   - ./tooljet.yaml
   - ./vector.yaml
   - ./weave-gitops.yaml
