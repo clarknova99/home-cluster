@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: tooljet-secrets
+    namespace: default
+# ## sops --encrypt --in-place ./kubernetes/apps/default/tooljet/app/tooljet.sops.yaml
+# ## sops --decrypt ./kubernetes/apps/default/tooljet/app/tooljet.sops.yaml | kubectl apply -f -
+stringData:
+    LOCKBOX_MASTER_KEY: ENC[AES256_GCM,data:rUgNqSIF+A3HHB44p7X8Or2fEj9FlQU+J8zXYUxETpMFGf7IqvEdTNKZHdzMZvlxDXK0+YbtKij/07FjMN6gxw==,iv:cTVb6wBhxbZ0RnmOqOvaQlCg5gRkoa1cHD3tDQjpubg=,tag:Ku455I++i+BzbCwKfwcGtQ==,type:str]
+    SECRET_KEY_BASE: ENC[AES256_GCM,data:n96mv0CPqwpqCnVVU8F9VlVOyGZxDs8uOlooXhPwYXVlPJ2MHChEkNVmwtK3HaLxQPSnCXJblsNQ33mciv1jGOVq6oOHH1XF7fJ9qEVXQSwaATvGsAOaZ5YCfeaO5BTuRe10RsEsJwmPpHM+DvVPBmAzPGCuy7xaMKNXd6baUBk=,iv:QrHmkhoBNO4FHqqT/w9I/4h0UQUW4xycaIKVRSBj1is=,tag:/3G8DTpaKHd5m5M1icknTg==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age14q9x9ftcpqfw2kmhmlfzpx5g2wmn7tdnq34uhh4x0r2h6qfmm5dqk07z2e
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSAya0VNWEdJVmY2Qnc3V3Uz
+            Y0Ruc3BJdGp4VC9OeVltaEhrQm9YWVBHM3ljCjhUQ1M3SmtYRUFHUU9HTE1JQ0dm
+            dlVPNmY0OHBYaWxkZThTeGU1SXdVeTQKLS0tIGR0d1gvbXJBaXh5eURWcnpGYlJl
+            endNb2FuWjRiVWQ4bVlwV3hVdkxMMXMKFCPJHGuprJL50ds9JwbfZJP9105D0EZ2
+            AS+pF4mFqHjjzjLEkgizJWu8PrBhmNSZqrlFzX5ojNtMqKlUDEqZow==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2023-10-20T05:05:33Z"
+    mac: ENC[AES256_GCM,data:FmJxlmPfctPZ63bq3UNpI7GSZF6NpyRy2fiHeJWkxT5PkMWJVqfX484Y7t6DncICx1thxqhAGCgzao0LcvmwdNawhm6KYRAv6KMlEQ5F1HKXH25/F0Y0gLYlqA7h03vgobwDm/N/8ad5Eic2Gofud4Xu952SxOr2+mLMilwfqhg=,iv:mcYYhBz1qNaN79KGuCbOivw6kQZ7ImysVjZWzeK6H74=,tag:3lmHD9UQuBjN17Tlzb9fxw==,type:str]
+    pgp: []
+    encrypted_regex: ^(data|stringData)$
+    version: 3.8.1
