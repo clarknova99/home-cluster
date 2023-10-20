@@ -1,0 +1,27 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: superset
+  namespace: default
+  annotations:
+    external-dns.alpha.kubernetes.io/target: "superset.${SECRET_DOMAIN}"
+    hajimari.io/enable: "true"
+    hajimari.io/icon: "cog"
+spec:
+  ingressClassName: internal
+  rules:
+    - host: "superset.${SECRET_DOMAIN}"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: superset
+                port:
+                  number: 80
+  tls:
+    - hosts:
+        - "superset.${SECRET_DOMAIN}"
+

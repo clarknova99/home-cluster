@@ -1,0 +1,38 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: superset
+  namespace: default
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: superset
+      version: 0.10.11
+      sourceRef:
+        kind: HelmRepository
+        name: superset
+        namespace: flux-system
+  values:
+    ## Use the PostgreSQL chart dependency.
+    ## Set to false if bringing your own PostgreSQL.
+    postgresql:
+      enabled: true
+    redis:
+    ## If you are bringing your own redis, you can set the host in supersetNode.connections.redis_host
+    ## Set to false if bringing your own redis.
+      enabled: true
+    envFromSecret: superset-secrets
+    supersetNode:
+      connections:
+        # -- Change in case of bringing your own redis and then also set redis.enabled:false
+        redis_host: redis-master.database.svc.cluster.local
+        redis_password: ${SECRET_POSTGRES_PASSWORD}
+        redis_port: "6379"
+        # You need to change below configuration incase bringing own PostgresSQL instance and also set postgresql.enabled:false
+        db_host: cloudnative-pg-cluster.database.svc.cluster.local
+        db_port: "5432"
+        db_user: postgres
+        db_pass: ${SECRET_POSTGRES_PASSWORD}
+        db_name: superset

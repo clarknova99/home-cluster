@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: superset-secrets
+    namespace: default
+# ## sops --encrypt --in-place ./kubernetes/apps/default/superset/app/superset.sops.yaml
+# ## sops --decrypt ./kubernetes/apps/default/superset/app/superset.sops.yaml | kubectl apply -f -
+stringData:
+    SUPERSET_SECRET_KEY: ENC[AES256_GCM,data:2Nf0pgg/PD4MzBUT6Ac8q++zJQ1t6PC1ZM496P17m0Nr+RtQmBJhdw/8sullzft5WYHbkTaWWR8=,iv:QNMej2tk1eeJIKJM73ln796k4EYjuqiRP/kTde6U5h8=,tag:O53g3JaMoibeYh7YF1uSdg==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age14q9x9ftcpqfw2kmhmlfzpx5g2wmn7tdnq34uhh4x0r2h6qfmm5dqk07z2e
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA4aUF3cnM3cnRjQ1BEWGlY
+            NUZXNm16Ni9aeGxzeFBLa0xpWEV2a3dCSWpJClFwMUx6czFJYzFWRXNncTliN1M4
+            bGk0ZTNrZUFRZU55UWlCY293cWR2RVkKLS0tIE56aEdsVDlzWkxEVURSREJGaVpa
+            UjFIRmdDaUx5SHd4Z2czbXFEVHhEbXcK3Bz+zXBWSDmnJHqpJy9nKLXUFEkhp6tt
+            GP+jJWUzYWGhO/ZQrjZayZi42secOaLpK9/2bIxtI0+ZEMDfIo3HOQ==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2023-10-20T23:26:54Z"
+    mac: ENC[AES256_GCM,data:K1no0l564i8cGBrfysf2vX+mklHyC6v7FbBnM2NwWRYidPp1EnMEf5opUsiXzUcLhpZ83p5nDb/U0Sag4bSvVF7PBW/H2nYdd0FUYmTzZ+P4XeBu8HCv74146Gd5Ev23Fd+GX2xgjw6Ldnt+X1HL2slxjxouvqv8VVOm44oDvOU=,iv:pWscpirVskwkm1rd4T67qKj8UzHdOh573WmqzGhMVv4=,tag:hHotm8HKYc6fMZmmch0pSQ==,type:str]
+    pgp: []
+    encrypted_regex: ^(data|stringData)$
+    version: 3.8.1
