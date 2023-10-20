@@ -1,0 +1,127 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: tooljet
+  namespace: default
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: tooljet
+      version: 2.0.6
+      sourceRef:
+        kind: HelmRepository
+        name: tooljet
+        namespace: flux-system
+  values:
+    apps:
+      tooljet:
+        service:
+          type: ClusterIP
+          host: "https://tooljet.${SECRET_DOMAIN}"
+        deployment:
+          image:
+            repository: tooljet/tooljet-ce
+            pullPolicy: Always
+            tag: v2.6.0
+          resources:
+            requests:
+              memory: "1000Mi"
+              cpu: "1000m"
+            limits:
+              memory: "2000Mi"
+              cpu: "2000m"
+        hpa:
+          min: 1
+          max: 1
+          threshhold:
+            cpu: 0.75
+            ram: 768Mi
+        secret:
+          name: tooljet-server
+          data:
+            lockbox_key: "0123456789ABCDEF"
+            secret_key_base: "0123456789ABCDEF"
+
+    # ingress:
+    #   enabled: true
+    #   hostname: tooljet.localhost
+    #   ingressClassName: 'nginx'
+    #   kubernetes.io/ingress.class: "nginx"
+    #   annotations:
+    #     {}
+    #   tls: []
+    # https://artifacthub.io/packages/helm/bitnami/postgresql#global-parameters
+
+    postgresql:
+      enabled: true
+      postgresqlExtendedConf:
+        maxConnections: 1024
+      replication:
+        enabled: true
+      auth:
+        username: "postgres"
+        # Keys below are ignored if auth.existingSecret with key password is provided
+        postgresPassword: ${SECRET_POSTGRES_PASSWORD} # Password for the "postgres" admin user
+        password: ${SECRET_POSTGRES_PASSWORD}
+        database: "tooljet_production"
+      primary:
+        persistence:
+          enabled: true
+          size: 8Gi
+          storageClass: ""
+      # The following variables are to be used when internal PG is disabled
+      postgresqlHost: "cloudnative-pg-cluster.database.svc.cluster.local"
+      postgresqlPort: 5432
+      # When defined the `postgresqlPassword` field is ignored
+      # existingSecret: secret-name
+      # existingSecretKey: password
+
+    # Environment variables
+    # Configure additional env variables down below
+    # https://docs.tooljet.com/docs/setup/env-vars/
+    env:
+      DEPLOYMENT_PLATFORM: "k8s:helm"
+      db_uri: "postgres://postgres:${SECRET_POSTGRES_PASSWORD}@cloudnative-pg-cluster.database.svc.cluster.local:5432/tooljet_db"
+      jwt_secret: "779ce303294a7d84a2aea9ff1ef1912f9ac57220a0dd2c0861a11ca5ae6c5817"
+      ENABLE_TOOLJET_DB: '"true"'
+      TOOLJET_DB_USER: "postgres"
+      TOOLJET_DB_HOST: "cloudnative-pg-cluster.database.svc.cluster.local"
+      TOOLJET_DB_PASS: ${SECRET_POSTGRES_PASSWORD}
+      TOOLJET_DB: "tooljet_db"
+      PGRST_HOST: "cloudnative-pg-cluster.database.svc.cluster.local"
+
+    enterprise:
+      enabled: false
+      LICENSE_KEY: ""
+      REDIS_HOST: "redis-master"
+      REDIS_PORT: '"6379"'
+
+    redis:
+      fullnameOverride: redis
+      usePassword: false
+      auth:
+        enabled: false
+
+    autoscaling:
+      enabled: false
+      minReplicas: 1
+      maxReplicas: 100
+      targetCPUUtilizationPercentage: 80
+      # targetMemoryUtilizationPercentage: 80
+
+    image:
+      repository: postgrest/postgrest
+      tag: v10.1.1.20221215
+      pullPolicy: IfNotPresent
+
+    postgrest:
+      targetPort: 3000
+      port: 80
+      containerPort: 3000
+
+    service:
+      type: ClusterIP
+      port: 3000
+      annotations: {}

@@ -1,0 +1,27 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: tooljet
+  namespace: default
+  annotations:
+    external-dns.alpha.kubernetes.io/target: "tooljet.${SECRET_DOMAIN}"
+    hajimari.io/enable: "true"
+    hajimari.io/icon: "cog"
+spec:
+  ingressClassName: internal
+  rules:
+    - host: "tooljet.${SECRET_DOMAIN}"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: tooljet
+                port:
+                  number: 80
+  tls:
+    - hosts:
+        - "tooljet.${SECRET_DOMAIN}"
+
