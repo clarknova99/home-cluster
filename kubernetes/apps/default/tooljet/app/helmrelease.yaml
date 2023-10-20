@@ -55,7 +55,7 @@ spec:
     # https://artifacthub.io/packages/helm/bitnami/postgresql#global-parameters
 
     postgresql:
-      enabled: true
+      enabled: false
       postgresqlExtendedConf:
         maxConnections: 1024
       replication:
@@ -95,14 +95,15 @@ spec:
     enterprise:
       enabled: false
       LICENSE_KEY: ""
-      REDIS_HOST: "redis-master"
+      REDIS_HOST: redis-master.database.svc.cluster.local
       REDIS_PORT: '"6379"'
 
     redis:
       fullnameOverride: redis
-      usePassword: false
+      usePassword: true
+      password: ${SECRET_POSTGRES_PASSWORD}
       auth:
-        enabled: false
+        enabled: true
 
     autoscaling:
       enabled: false
