@@ -5,7 +5,7 @@ resources:
   - ./namespace.yaml
   - ./grafana/ks.yaml
   - ./influxdb/ks.yaml
-  - ./kube-prometheus-stack/ks.yaml
+ # - ./kube-prometheus-stack/ks.yaml
   - ./kubernetes-dashboard/ks.yaml
   - ./loki-stack/ks.yaml
   - ./promlens/ks.yaml
