@@ -133,20 +133,20 @@ spec:
         walCompression: true
         retentionSize: 20GB
         storageSpec:
-          # volumeClaimTemplate:
-          #   spec:
-          #     storageClassName: local-path
-          #     resources:
-          #       requests:
-          #         storage: 20Gi
           volumeClaimTemplate:
             spec:
-              selector:
-                matchLabels:
-                  app.kubernetes.io/name: pv-prometheus
+              storageClassName: local-path
               resources:
                 requests:
                   storage: 20Gi
+          # volumeClaimTemplate:
+          #   spec:
+          #     selector:
+          #       matchLabels:
+          #         app.kubernetes.io/name: pv-prometheus
+          #     resources:
+          #       requests:
+          #         storage: 20Gi
     grafana:
       enabled: false
       forceDeployDashboards: true
