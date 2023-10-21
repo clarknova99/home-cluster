@@ -27,9 +27,9 @@ spec:
       retries: 3
   uninstall:
     keepHistory: false
-  dependsOn:
-    - name: local-path-provisioner
-      namespace: kube-system
+  # dependsOn:
+  #   - name: local-path-provisioner
+  #     namespace: kube-system
   values:
     crds:
       enabled: true
@@ -133,9 +133,17 @@ spec:
         walCompression: true
         retentionSize: 20GB
         storageSpec:
+          # volumeClaimTemplate:
+          #   spec:
+          #     storageClassName: local-path
+          #     resources:
+          #       requests:
+          #         storage: 20Gi
           volumeClaimTemplate:
             spec:
-              storageClassName: local-path
+              selector:
+                matchLabels:
+                  app.kubernetes.io/name: pv-prometheus
               resources:
                 requests:
                   storage: 20Gi

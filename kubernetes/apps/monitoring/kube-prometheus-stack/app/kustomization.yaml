@@ -5,3 +5,4 @@ namespace: monitoring
 resources:
   - ./helmrelease.yaml
   - ./scrapeconfigs
+  - ./pvc.yaml
