@@ -131,7 +131,7 @@ spec:
 
     image:
       repository: postgrest/postgrest
-      tag: v10.1.1.20221215
+      tag: v10.2.0.20230407
       pullPolicy: IfNotPresent
 
     postgrest:
