@@ -79,11 +79,11 @@ spec:
         spec:
           failureDomain: host
           replicated:
-            size: 6
+            size: 3
         storageClass:
           enabled: true
           name: ceph-block
-          isDefault: true
+          isDefault: false
           reclaimPolicy: Delete
           allowVolumeExpansion: true
           parameters:
@@ -101,11 +101,11 @@ spec:
         spec:
           metadataPool:
             replicated:
-              size: 6
+              size: 3
           dataPools:
             - failureDomain: host
               replicated:
-                size: 6
+                size: 3
               name: data0
           metadataServer:
             activeCount: 1
@@ -137,7 +137,7 @@ spec:
           metadataPool:
             failureDomain: host
             replicated:
-              size: 6
+              size: 3
           dataPool:
             failureDomain: host
             erasureCoded:
