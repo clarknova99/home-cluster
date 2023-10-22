@@ -5,6 +5,7 @@ resources:
   - ./actions-runner-controller-charts.yaml
   - ./appsmith.yaml
   - ./authelia.yaml
+  - ./backube.yaml
   - ./baserow.yaml
   - ./budibase.yaml
   - ./bitnami.yaml
