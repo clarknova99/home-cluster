@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: template-secret
+    namespace: default
+stringData:
+    SECRET_KEY: TODO
+    SECRET_KEY2: TODO
