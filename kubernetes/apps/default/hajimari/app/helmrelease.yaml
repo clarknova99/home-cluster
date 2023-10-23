@@ -39,6 +39,7 @@ spec:
       namespaceSelector:
         matchNames:
           - default
+          - database
           - monitoring
           - networking
           - media
