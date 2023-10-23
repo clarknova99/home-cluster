@@ -18,7 +18,7 @@ notifier:
 
 access_control:
   #default_policy: two_factor
-  default_policy: deny
+  default_policy: one_factor
   rules:
   - domain: "authelia.${SECRET_DOMAIN}"
     policy: bypass
@@ -41,7 +41,7 @@ identity_providers:
         description: Grafana
         secret: CEE177DB2D1EC6353B1110D1B84CD9FE08FCAE1BCC4C00E7C635E24B937FF213
         public: false
-        authorization_policy: two_factor
+        authorization_policy: one_factor
         pre_configured_consent_duration: 1y
         scopes: ["openid", "profile", "groups", "email"]
         redirect_uris: ["https://grafana.${SECRET_DOMAIN}/login/generic_oauth"]
