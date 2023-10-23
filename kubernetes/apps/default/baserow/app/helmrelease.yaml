@@ -653,14 +653,14 @@ spec:
       architecture: standalone
       auth:
         # -- Enable password authentication
-        enabled: true
+        enabled: false
         # -- Redis™ password
         password: baserow
 
     externalRedis:
       auth:
         # -- if authentication should be used with external Redis™
-        enabled: true
+        enabled: false
         # -- Name of existing secret to use for Redis™ credentials
         #existingSecret: baserow-secret
         # -- Password to use
