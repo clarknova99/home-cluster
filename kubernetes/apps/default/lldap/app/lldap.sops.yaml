@@ -8,7 +8,7 @@ metadata:
 stringData:
     LLDAP_JWT_SECRET: ENC[AES256_GCM,data:ihEdv9dtTCbHDL4zZp1RopEhaCsG27TaK46W+85wyp/7cw4geF0G8wZxP+9C9Gg4/eWobAcSAPCdSTuA75esBA==,iv:iEFS/yDgCRUAMLdIMn63xFCOYYxqdz6CWSJUE0o6ddY=,tag:mlmzutbsvqAGUY6APkprUw==,type:str]
     LLDAP_LDAP_USER_PASS: ENC[AES256_GCM,data:Te5rkLKOxAan,iv:T0VVeOmqqAPntRBo3HNJTvlxz7eHfD45+6fTGXBbaoY=,tag:9qVQk/6avW5icPTA9Vo3Gg==,type:str]
-    LLDAP_USER_DN: ENC[AES256_GCM,data:hex9FuWsf2Adn5Rvaw3Cf08q/8bL/Ljy5FKaZSbn7bIxka67BZz5,iv:vpXTZbCgVEouNtMRJQjjwe57zxN8cDYuN1L/VeOtZfs=,tag:12VKXxsSvnKdsBct9OnBoA==,type:str]
+    LLDAP_USER_DN: ENC[AES256_GCM,data:6aqypcoeqlajkAX3rmn8nW7hJNLsorRXWY5M1tYml0n6Xwc=,iv:RBBo2+aUqCoP5pjkcK2JPu4PYAqLOt6T7plEMySeny0=,tag:SHd1zwCTAWXYIC9RTad4FQ==,type:str]
     LLDAP_LDAP_USER_EMAIL: ENC[AES256_GCM,data:SgIv/CGkjZJwJPEjHcdkFRVdRbv2,iv:/dkgpK/Akd3JU+ZXzcUu1G55/ueqI8EmJzf/M45CcqI=,tag:5EEIK/CU3drUWhPxGJPOaw==,type:str]
     LLDAP_SERVER_KEY_SEED: ENC[AES256_GCM,data:WTiArhli9UcJ,iv:Q8BQbWI6xxHnMagxBiTDu0fRbpsq4EKHhg3PGr2ergE=,tag:m9VMAoPTxjmWiHhbBhslag==,type:str]
     LLDAP_DATABASE_URL: ENC[AES256_GCM,data:r7xp3NQe8Frj7zpkVJZ+4lEiNt/Xy39bk4dSUW11quDTZ2Vvv8xpHHl/TGDM2j/Y19blfbZtWUFRBZVkZYZvoJ8I+tfzGbjGqKT5mvrG2ueZF6eeONZw5uCk,iv:CFcaq/aUqXSPHbQRFbrGGNypyCXj6G7iUVHl5kpyuQU=,tag:zJH5/kRJMxgHdPlVFd8c+w==,type:str]
@@ -33,8 +33,8 @@ sops:
             VnhycnZLai9KSmdpbGdkbU5ldlg0R0UK3ZnFPCuQ57lUj9pSLuSpyw5hw9e1GBDc
             ErUYkEtKjDO0GaqhV3Iq3vJJzyGopD0uOAWG2tkBYcfChP0DmP48/w==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2023-10-22T16:22:37Z"
-    mac: ENC[AES256_GCM,data:BQlQBxBCVVLyWj+bFbbziFR5TZD0f8SLxqmfviJBsfPh7rJohBnMP6EJMdXG58JR6YiDWCMVl39kxLTgJb6W3SCSthX607ODCNYXXaXIkpX4zdUBFnscVdEeiAhjCtIIwPlaqh8sfvhAVieIQyjvPIMTMPX8p7aIwEXPmZpEoHs=,iv:GTaM0j2qagqXWm6c0SBMYItaPXUfR3t2WvrKEDoF52s=,tag:tothYMkXovH0N2WNv4mxxg==,type:str]
+    lastmodified: "2023-10-23T22:19:43Z"
+    mac: ENC[AES256_GCM,data:rKKFB0BRL67QIzKbZJc1tYR/FqGunK/7a2eTCyWQCbuambNvdrhQ972/zPYQ4+zYSvGBttxyZTXYroqe3xRp0xyBn2uDr4dpXnD7xRSKzlzgOXoldD6EXX3bBUnEuN9JgOoBysvYE1NsORV+YbuSGxePVXGhWZpXMar+UJYgiz0=,iv:YGTtj7lWnAND9Z+Y3NwPMcJ4OxLz8p2w2BKbbippGUA=,tag:TNZvCpxfghDo4n3F3LPUvg==,type:str]
     pgp: []
     encrypted_regex: ^(data|stringData)$
     version: 3.8.1
