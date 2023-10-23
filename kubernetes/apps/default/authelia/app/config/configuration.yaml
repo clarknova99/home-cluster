@@ -3,18 +3,17 @@ session:
   redis:
     host: redis-master.database.svc.cluster.local
     port: 6379
-    password: ${SECRET_REDIS_PASSWORD}
     database_index: 15
     maximum_active_connections: 8
     minimum_idle_connections: 0
 
-notifier:
-  disable_startup_check: true
-  filesystem:
-    enabled: true
-    filename: /config/notification.txt
-  smtp:
-    enabled: false
+# notifier:
+#   disable_startup_check: true
+#   filesystem:
+#     enabled: true
+#     filename: /config/notification.txt
+#   smtp:
+#     enabled: false
 
 access_control:
   #default_policy: two_factor
@@ -36,13 +35,13 @@ identity_providers:
     cors:
       endpoints: ["authorization", "token", "revocation", "introspection"]
       allowed_origins_from_client_redirect_uris: true
-    clients:
-      - id: grafana
-        description: Grafana
-        secret: CEE177DB2D1EC6353B1110D1B84CD9FE08FCAE1BCC4C00E7C635E24B937FF213
-        public: false
-        authorization_policy: two_factor
-        pre_configured_consent_duration: 1y
-        scopes: ["openid", "profile", "groups", "email"]
-        redirect_uris: ["https://grafana.${SECRET_DOMAIN}/login/generic_oauth"]
-        userinfo_signing_algorithm: none
+    # clients:
+    #   - id: grafana
+    #     description: Grafana
+    #     secret: CEE177DB2D1EC6353B1110D1B84CD9FE08FCAE1BCC4C00E7C635E24B937FF213
+    #     public: false
+    #     authorization_policy: two_factor
+    #     pre_configured_consent_duration: 1y
+    #     scopes: ["openid", "profile", "groups", "email"]
+    #     redirect_uris: ["https://grafana.${SECRET_DOMAIN}/login/generic_oauth"]
+    #     userinfo_signing_algorithm: none
