@@ -7,13 +7,14 @@ session:
     maximum_active_connections: 8
     minimum_idle_connections: 0
 
-# notifier:
-#   disable_startup_check: true
-#   filesystem:
-#     enabled: true
-#     filename: /config/notification.txt
-#   smtp:
-#     enabled: false
+notifier:
+  smtp:
+    username: ${SECRET_GMAIL_USERNAME}
+    # Password can also be set using a secret: https://www.authelia.com/configuration/methods/secrets/
+    password: ${SECRET_GMAIL_PASSWORD}
+    sender: ${SECRET_GMAIL_USERNAME}
+    host: ${SECRET_GMAIL_HOST}
+    port: ${SECRET_GMAIL_PORT}
 
 access_control:
   #default_policy: two_factor
