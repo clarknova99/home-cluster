@@ -9,12 +9,12 @@ session:
 
 notifier:
   smtp:
-    username: ${SECRET_MAIL_USERNAME}
+    username: "${SECRET_MAIL_USERNAME}"
     # Password can also be set using a secret: https://www.authelia.com/configuration/methods/secrets/
-    password: ${SECRET_MAIL_PASSWORD}
-    sender: ${SECRET_MAIL_USERNAME}
-    host: ${SECRET_MAIL_HOST}
-    port: ${SECRET_MAIL_PORT}
+    password: "${SECRET_MAIL_PASSWORD}"
+    sender: "${SECRET_MAIL_USERNAME}"
+    host: "${SECRET_MAIL_HOST}"
+    port: "${SECRET_MAIL_PORT}"
 
 access_control:
   #default_policy: two_factor
@@ -39,7 +39,7 @@ identity_providers:
     clients:
       - id: grafana
         description: Grafana
-        secret: ${SECRET_GRAFANA_OAUTH_CLIENT_SECRET}
+        secret: "${SECRET_GRAFANA_OAUTH_CLIENT_SECRET}"
         public: false
         authorization_policy: one_factor
         pre_configured_consent_duration: 1y
