@@ -19,9 +19,9 @@ spec:
   values:
     architecture: standalone
     auth:
-      enabled: true
+      enabled: false
       sentinal: true
-      password: "${SECRET_REDIS_PASSWORD}"
+      #password: "${SECRET_REDIS_PASSWORD}"
     master:
       persistence:
         size: 5Gi
