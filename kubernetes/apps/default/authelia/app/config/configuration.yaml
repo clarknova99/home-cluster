@@ -1,5 +1,8 @@
 ---
 session:
+  expiration: 1h
+  inactivity: 15m
+  remember_me_duration: 1M
   redis:
     enabled: false
 
