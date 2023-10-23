@@ -4,7 +4,7 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./appsmith/ks.yaml
-  - ./authelia/ks.yaml
+ # - ./authelia/ks.yaml
   - ./baserow/ks.yaml
   # - ./budibase/ks.yaml
   - ./hajimari/ks.yaml
