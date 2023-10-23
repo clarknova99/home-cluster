@@ -9,12 +9,12 @@ session:
 
 notifier:
   smtp:
-    username: ${SECRET_GMAIL_USERNAME}
+    username: ${SECRET_MAIL_USERNAME}
     # Password can also be set using a secret: https://www.authelia.com/configuration/methods/secrets/
-    password: ${SECRET_GMAIL_PASSWORD}
-    sender: ${SECRET_GMAIL_USERNAME}
-    host: ${SECRET_GMAIL_HOST}
-    port: ${SECRET_GMAIL_PORT}
+    password: ${SECRET_MAIL_PASSWORD}
+    sender: ${SECRET_MAIL_USERNAME}
+    host: ${SECRET_MAIL_HOST}
+    port: ${SECRET_MAIL_PORT}
 
 access_control:
   #default_policy: two_factor
