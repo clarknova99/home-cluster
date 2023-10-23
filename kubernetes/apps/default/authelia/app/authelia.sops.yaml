@@ -4,7 +4,7 @@ metadata:
     name: authelia-secrets
     namespace: networking
 ## sops --encrypt --in-place ./kubernetes/apps/default/authelia/app/authelia-secrets.sops.yaml
-## sops --decrypt ./kubernetes/apps/default/authelia/app/authelia-secrets.sops.yaml | kubectl apply -f -
+## sops --decrypt ./kubernetes/apps/default/authelia/app/authelia.sops.yaml | kubectl apply -f -
 stringData:
     JWT_TOKEN: ENC[AES256_GCM,data:8tcfdzOuQz8rCCw77iqibSw8Tij4csbsDp+ucLUQFVYIYqPold9uuZcoBxwjJHixQl22FxB6xJdS0XLt+Ny65w==,iv:Eta+vN2rW2xZtq+ADXSkrU3LhQXG+igWPF0eGzhly9o=,tag:wbGoSVYbahMKd+YI2pBpxw==,type:str]
     AUTHELIA_EMAIL: ENC[AES256_GCM,data:eNLdC6Sp2sgzkAb4GnlaV8SwA+s5,iv:DGtxfXS3NAWGbeemV7V6hc93uPJv709SGVC3DCSuMJg=,tag:RBHjOD76oyz2QdMuHwEnMg==,type:str]
@@ -48,8 +48,8 @@ sops:
             RUNRQWxDSXFBbWZNbFlMcnl2K2tBYW8K2l867Dmw7qGOyRSMtc9v5zaoOle18tOX
             4e2FLr1Z73BOjq0B3yEnf5BCRlbPROO3BCsPB3rLzijMFSFgrR7Fhw==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2023-10-23T03:14:17Z"
-    mac: ENC[AES256_GCM,data:5AEuH+B/EFd6f773BF+Icl4wXhEElKMWRyBd0lpUUwVvbYqFtxspTQ6EPS3n9Vl85TxW1O53yPI1sEK1nwFdcdjsPXG7qxuii+KkdyFCcqWL9VlNEWZfViiVmlQxXDNoaNFGhoXwCEUet8maWMi4E2gmjsHmNa1fKvBxjFO+GDo=,iv:ZK5QoWrIoka+JBYGYGoJisL9OAZm4XR9xr9CgPGJVIQ=,tag:s24msIfqfoobHm6PgIqjBQ==,type:str]
+    lastmodified: "2023-10-23T03:23:35Z"
+    mac: ENC[AES256_GCM,data:ftnZS+TJdpnk5/D+Q/vTE/N+ZYCqr5iJuZymDBxTsRG6MV10k1KLzrz0IjRQo2orBZbf5kNw0gHMe8chA+z2PJn2GyPHrTq1cOKUj8F7l1BFzSkEGe8V9qwtigyzDEsGj0rvMk4LFAGEzlpMM6UoCfmtTwNSfGTPdjHO6iCmV38=,iv:xcIr3gbBL4R+CJHJhxldyPh1nv1ije1yHcd2Q+UQ9ZM=,tag:c/oh87m7fbws58XDeqC6CQ==,type:str]
     pgp: []
     encrypted_regex: ^(data|stringData)$
     version: 3.8.1
