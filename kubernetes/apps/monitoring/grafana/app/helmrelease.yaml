@@ -39,7 +39,7 @@ spec:
       GF_AUTH_GENERIC_OAUTH_TOKEN_URL: https://auth.${SECRET_DOMAIN}/api/oidc/token
       GF_EXPLORE_ENABLED: true
       GF_SERVER_ROOT_URL: "https://grafana.${SECRET_DOMAIN}"
-      GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET:
+      GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET: ${SECRET_GRAFANA_OAUTH_CLIENT_SECRET}
     grafana.ini:
       analytics:
         check_for_updates: false
