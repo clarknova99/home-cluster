@@ -40,6 +40,11 @@ spec:
       GF_EXPLORE_ENABLED: true
       GF_SERVER_ROOT_URL: "https://grafana.${SECRET_DOMAIN}"
       GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET: ${SECRET_GRAFANA_OAUTH_CLIENT_SECRET}
+      GF_SMTP_HOST: "${SECRET_MAIL_HOST}:${SECRET_MAIL_PORT}"
+      GF_SMTP_FROM_ADDRESS: grafana@${SECRET_DOMAIN}
+      GF_SMTP_FROM_NAME: grafana
+      GF_SMTP_USER: ${SECRET_MAIL_USERNAME}
+      GF_SMTP_PASSWORD: ${SECRET_MAIL_PASSWORD}
     grafana.ini:
       analytics:
         check_for_updates: false
