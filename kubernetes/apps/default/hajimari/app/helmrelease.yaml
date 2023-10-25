@@ -56,7 +56,8 @@ spec:
             - name: onedr0p-flux-cluster-template
               url: https://github.com/onedr0p/flux-cluster-template
             - name: Renovate
-              url: https://app.renovatebot.com/dashboard#github/clarknova99/
+              #url: https://app.renovatebot.com/dashboard#github/clarknova99/
+              url: https://developer.mend.io/github/clarknova99/home-cluster
     ingress:
       main:
         enabled: true
