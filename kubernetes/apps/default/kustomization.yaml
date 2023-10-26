@@ -10,7 +10,7 @@ resources:
   - ./hajimari/ks.yaml
   - ./home-assistant/ks.yaml
   - ./lldap/ks.yaml
-  - ./n8n/ks.yaml
+  #- ./n8n/ks.yaml
   #- ./superset/ks.yaml
   #- ./tooljet/ks.yaml
   - ./website/ks.yaml
