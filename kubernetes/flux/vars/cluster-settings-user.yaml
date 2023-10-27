@@ -5,4 +5,4 @@ metadata:
   name: cluster-settings-user
   namespace: flux-system
 data:
-  REDIS_ADDR_V4: 192.168.2.49
+  SVC_LOKI_ADDR: 192.168.2.46
