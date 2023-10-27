@@ -20,14 +20,16 @@ spec:
     ingress:
       enabled: true
       ingressClassName: "internal"
+      annotations:
+        hajimari.io/enable: "false"
       hosts:
-        - host: "loki.${SECRET_DOMAIN}"
+        - host: &host "loki.${SECRET_DOMAIN}"
           paths:
-          - path: /
-            pathType: Prefix
+            - path: /
+              pathType: Prefix
       tls:
         - hosts:
-            - "loki.${SECRET_DOMAIN}"
+            - *host
     service:
       type: LoadBalancer
       annotations:
