@@ -9,5 +9,5 @@ resources:
   - ./kubernetes-dashboard/ks.yaml
   #- ./loki-stack/ks.yaml
   - ./promlens/ks.yaml
-  # - ./loki/ks.yaml
-  # - ./promtail/ks.yaml
+  - ./loki/ks.yaml
+  - ./promtail/ks.yaml
