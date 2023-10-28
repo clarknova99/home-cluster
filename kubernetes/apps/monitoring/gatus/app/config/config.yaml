@@ -201,20 +201,22 @@ endpoints:
   ## APPS
   - name: bazarr
     group: apps
-    url: https://bazarr.${SECRET_DOMAIN}
+    url: "tcp://bazarr.media.svc.cluster.local:6767"
     interval: 1m
-    client:
-      dns-resolver: tcp://192.168.2.1:53
+    ui:
+      hide-hostname: true
+      hide-url: true
     conditions:
-      - "[STATUS] == 200"
+      - "[CONNECTED] == true"
   - name: radarr
     group: apps
-    url: https://radarr.${SECRET_DOMAIN}
+    url: "tcp://radarr.media.svc.cluster.local:80"
     interval: 1m
-    client:
-      dns-resolver: tcp://192.168.2.1:53
+    ui:
+      hide-hostname: true
+      hide-url: true
     conditions:
-      - "[STATUS] == 200"
+      - "[CONNECTED] == true"
   - name: hydra
     group: apps
     url: "tcp://hydra.media.svc.cluster.local:5076"
@@ -226,20 +228,22 @@ endpoints:
       - "[CONNECTED] == true"
   - name: prowlarr
     group: apps
-    url: https://prowlarr.${SECRET_DOMAIN}
+    url: "tcp://prowlarr.media.svc.cluster.local:80"
     interval: 1m
-    client:
-      dns-resolver: tcp://192.168.2.1:53
+    ui:
+      hide-hostname: true
+      hide-url: true
     conditions:
-      - "[STATUS] == 200"
+      - "[CONNECTED] == true"
   - name: sonarr
     group: apps
-    url: https://sonarr.${SECRET_DOMAIN}
+    url: "tcp://sonarr.media.svc.cluster.local:80"
     interval: 1m
-    client:
-      dns-resolver: tcp://192.168.2.1:53
+    ui:
+      hide-hostname: true
+      hide-url: true
     conditions:
-      - "[STATUS] == 200"
+      - "[CONNECTED] == true"
   - name: youtube-dl
     group: apps
     url: "tcp://youtubedl.media.svc.cluster.local:17442"
