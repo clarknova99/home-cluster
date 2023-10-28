@@ -24,14 +24,52 @@ connectivity:
     target: 1.1.1.1:53
     interval: 1m
 endpoints:
+  ## services
+  - name: authentication
+    group: services
+    url: https://auth.${SECRET_DOMAIN}
+    interval: 1m
+    client:
+      dns-resolver: tcp://1.1.1.1:53
+    conditions:
+      - "[STATUS] == 200"
+  - name: website
+    group: services
+    url: https://www.${SECRET_DOMAIN}
+    interval: 1m
+    client:
+      dns-resolver: tcp://1.1.1.1:53
+    conditions:
+      - "[STATUS] == 200"
+
+  ## Monitoring
   - name: status
-    group: external
+    group: monitoring
     url: https://status.${SECRET_DOMAIN}
     interval: 1m
     client:
       dns-resolver: tcp://1.1.1.1:53
     conditions:
       - "[STATUS] == 200"
+  - name: grafana
+    group: monitoring
+    url: "tcp://grafana.monitoring.svc.cluster.local:80"
+    interval: 1m
+    ui:
+      hide-hostname: true
+      hide-url: true
+    conditions:
+      - "[CONNECTED] == true"
+  - name: grafana - external connections
+    group: external
+    url: https://grafana.${SECRET_DOMAIN}
+    interval: 1m
+    client:
+      dns-resolver: tcp://1.1.1.1:53
+    conditions:
+      - "[STATUS] == 200"
+
+  ## Database
   - name: postgresql
     group: database
     url: "tcp://cloudnative-pg-cluster.database.svc.cluster.local:5432"
@@ -106,9 +144,33 @@ endpoints:
       dns-resolver: tcp://192.168.2.1:53
     conditions:
       - "[STATUS] == 200"
+  - name: hydra
+    group: apps
+    url: https://hydra.${SECRET_DOMAIN}
+    interval: 1m
+    client:
+      dns-resolver: tcp://192.168.2.1:53
+    conditions:
+      - "[STATUS] == 200"
+  - name: prowlarr
+    group: apps
+    url: https://prowlarr.${SECRET_DOMAIN}
+    interval: 1m
+    client:
+      dns-resolver: tcp://192.168.2.1:53
+    conditions:
+      - "[STATUS] == 200"
   - name: sonarr
     group: apps
     url: https://sonarr.${SECRET_DOMAIN}
+    interval: 1m
+    client:
+      dns-resolver: tcp://192.168.2.1:53
+    conditions:
+      - "[STATUS] == 200"
+  - name: youtube-dl
+    group: apps
+    url: https://ytd.${SECRET_DOMAIN}
     interval: 1m
     client:
       dns-resolver: tcp://192.168.2.1:53
