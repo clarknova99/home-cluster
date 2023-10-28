@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: &app sonarr
+  name: &app radarr
   namespace: media
 spec:
   interval: 15m
@@ -31,12 +31,14 @@ spec:
       annotations:
         reloader.stakater.com/auto: "true"
     image:
-      repository: ghcr.io/onedr0p/sonarr-develop
-      tag: 4.0.0.703@sha256:7f97e4783153bedc1c70568beb2bf925826fc92a4461d61ba58e8eda1649b49f
+      repository: ghcr.io/onedr0p/radarr-develop
+      tag: 5.1.1.8195@sha256:9579f7c96c5db2f1f98219e83a296b27c696d1f7e18ab4cf2deb90e9e9b3ef37
     env:
-      SONARR__INSTANCE_NAME: Sonarr
-      SONARR__PORT: &port 80
-      SONARR__LOG_LEVEL: info
+      TZ: ${TIMEZONE}
+      RADARR__INSTANCE_NAME: Radarr
+      RADARR__PORT: &port 80
+      RADARR__APPLICATION_URL: "radarr.${SECRET_DOMAIN}"
+      RADARR__LOG_LEVEL: debug
     service:
       main:
         ports:
@@ -51,7 +53,7 @@ spec:
     persistence:
       config:
         enabled: true
-        existingClaim: pvc-sonarr-config
+        existingClaim: pvc-radarr-config
         mountPath: /config
       downloads:
         enabled: true
@@ -74,18 +76,3 @@ spec:
         memory: 250Mi
       limits:
         memory: 2000Mi
-    metrics:
-      enabled: true
-      serviceMonitor:
-        interval: 3m
-        scrapeTimeout: 1m
-      prometheusRule:
-        enabled: true
-      exporter:
-        image:
-          repository: ghcr.io/onedr0p/exportarr
-          tag: v1.6.0
-        env:
-          port: 9794
-          additionalMetrics: true
-          unknownQueueItems: true

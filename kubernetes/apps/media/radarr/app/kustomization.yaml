@@ -4,5 +4,6 @@ kind: Kustomization
 namespace: media
 resources:
   - ./helmrelease.yaml
+  - ./radarr.sops.yaml
   - ./ingress.yaml
   - ./pvc.yaml
