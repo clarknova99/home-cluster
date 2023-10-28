@@ -104,6 +104,7 @@ spec:
         enabled: true
         className: external
         annotations:
+          hajimari.io/icon: material-symbols:detector-status
           external-dns.alpha.kubernetes.io/target: external.${SECRET_DOMAIN}
         hosts:
           - host: &host status.${SECRET_DOMAIN}

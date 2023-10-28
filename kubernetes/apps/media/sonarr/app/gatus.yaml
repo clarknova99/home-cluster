@@ -11,7 +11,7 @@ data:
     endpoints:
       - name: sonarr
         group: guarded
-        url: 1.1.1.1
+        url: 192.168.2.1
         interval: 1m
         ui:
           hide-hostname: true
