@@ -32,5 +32,10 @@ endpoints:
       dns-resolver: tcp://1.1.1.1:53
     conditions:
       - "[STATUS] == 200"
-    # alerts:
-    #   - type: pushover
+  - name: postgresql
+    group: database
+    url: "tcp:cloudnative-pg-cluster.database.svc.cluster.local:5432"
+    interval: 1m
+    conditions:
+      - "[STATUS] == 200"
+
