@@ -6,4 +6,4 @@ resources:
   - ./helmrelease.yaml
   - ./pvc.yaml
   - ./ingress.yaml
-  - ./gatus.yaml
+

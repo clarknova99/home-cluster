@@ -43,6 +43,15 @@ endpoints:
       - "[STATUS] == 200"
   - name: website
     group: services
+    url: "tcp://website-nginx.default.svc.cluster.local:80"
+    interval: 1m
+    ui:
+      hide-hostname: true
+      hide-url: true
+    conditions:
+      - "[CONNECTED] == true"
+  - name: website - external connections
+    group: services
     url: https://www.${SECRET_DOMAIN}
     interval: 1m
     client:
@@ -53,12 +62,22 @@ endpoints:
   ## Monitoring
   - name: status
     group: monitoring
+    url: "tcp://gatus.monitoring.svc.cluster.local:80"
+    interval: 1m
+    ui:
+      hide-hostname: true
+      hide-url: true
+    conditions:
+      - "[CONNECTED] == true"
+  - name: status - external connections
+    group: monitoring
     url: https://status.${SECRET_DOMAIN}
     interval: 1m
     client:
       dns-resolver: tcp://1.1.1.1:53
     conditions:
       - "[STATUS] == 200"
+
   - name: grafana
     group: monitoring
     url: "tcp://grafana.monitoring.svc.cluster.local:80"
