@@ -1,0 +1,20 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: radarr-gatus-ep
+  namespace: media
+  labels:
+    gatus.io/enabled: "true"
+data:
+  config.yaml: |
+    endpoints:
+      - name: radarr
+        group: guarded
+        url: https://radarr.${SECRET_DOMAIN}
+        interval: 1m
+        client:
+          dns-resolver: tcp://192.168.2.5:53
+        conditions:
+          - "[STATUS] == 200"
+
