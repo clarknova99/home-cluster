@@ -216,7 +216,7 @@ endpoints:
     conditions:
       - "[STATUS] == 200"
   - name: hydra
-    group: media
+    group: apps
     url: "tcp://hydra.media.svc.cluster.local:5076"
     interval: 1m
     ui:
