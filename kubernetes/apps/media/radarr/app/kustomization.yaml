@@ -7,4 +7,3 @@ resources:
   - ./radarr.sops.yaml
   - ./ingress.yaml
   - ./pvc.yaml
-  - ./gatus.yaml

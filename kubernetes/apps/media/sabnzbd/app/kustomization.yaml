@@ -9,4 +9,3 @@ resources:
   - ./pvc-tv.yaml
   - ./helmrelease.yaml
   - ./ingress.yaml
-  - ./gatus.yaml

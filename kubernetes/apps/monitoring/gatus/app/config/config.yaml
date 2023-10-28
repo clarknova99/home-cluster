@@ -33,6 +33,14 @@ endpoints:
       dns-resolver: tcp://1.1.1.1:53
     conditions:
       - "[STATUS] == 200"
+  - name: lldap
+    group: services
+    url: https://lldap.${SECRET_DOMAIN}
+    interval: 1m
+    client:
+      dns-resolver: tcp://192.168.2.1:53
+    conditions:
+      - "[STATUS] == 200"
   - name: website
     group: services
     url: https://www.${SECRET_DOMAIN}
@@ -61,13 +69,31 @@ endpoints:
     conditions:
       - "[CONNECTED] == true"
   - name: grafana - external connections
-    group: external
+    group: monitoring
     url: https://grafana.${SECRET_DOMAIN}
     interval: 1m
     client:
       dns-resolver: tcp://1.1.1.1:53
     conditions:
       - "[STATUS] == 200"
+  - name: loki
+    group: monitoring
+    url: "tcp://loki-stack.monitoring.svc.cluster.local:3100"
+    interval: 1m
+    ui:
+      hide-hostname: true
+      hide-url: true
+    conditions:
+      - "[CONNECTED] == true"
+  - name: prometheus
+    group: monitoring
+    url: "tcp://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090"
+    interval: 1m
+    ui:
+      hide-hostname: true
+      hide-url: true
+    conditions:
+      - "[CONNECTED] == true"
 
   ## Database
   - name: postgresql
@@ -171,6 +197,38 @@ endpoints:
   - name: youtube-dl
     group: apps
     url: https://ytd.${SECRET_DOMAIN}
+    interval: 1m
+    client:
+      dns-resolver: tcp://192.168.2.1:53
+    conditions:
+      - "[STATUS] == 200"
+  - name: appsmith
+    group: apps
+    url: https://appsmith.${SECRET_DOMAIN}
+    interval: 1m
+    client:
+      dns-resolver: tcp://192.168.2.1:53
+    conditions:
+      - "[STATUS] == 200"
+  - name: baserow
+    group: apps
+    url: https://baserow.${SECRET_DOMAIN}
+    interval: 1m
+    client:
+      dns-resolver: tcp://192.168.2.1:53
+    conditions:
+      - "[STATUS] == 200"
+  - name: n8n
+    group: apps
+    url: https://n8n.${SECRET_DOMAIN}
+    interval: 1m
+    client:
+      dns-resolver: tcp://192.168.2.1:53
+    conditions:
+      - "[STATUS] == 200"
+  - name: sabnzbd
+    group: apps
+    url: https://sabnzbd.${SECRET_DOMAIN}
     interval: 1m
     client:
       dns-resolver: tcp://192.168.2.1:53

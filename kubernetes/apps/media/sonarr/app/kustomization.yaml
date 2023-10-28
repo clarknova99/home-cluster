@@ -7,4 +7,3 @@ resources:
   - ./sonarr.sops.yaml
   - ./ingress.yaml
   - ./pvc.yaml
-  - ./gatus.yaml
