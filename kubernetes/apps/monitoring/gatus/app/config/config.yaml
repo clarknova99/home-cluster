@@ -59,6 +59,15 @@ endpoints:
       hide-url: true
     conditions:
       - "[CONNECTED] == true"
+  - name: couchdb
+    group: database
+    url: "tcp://couchdb.database.svc.cluster.local:5984"
+    interval: 1m
+    ui:
+      hide-hostname: true
+      hide-url: true
+    conditions:
+      - "[CONNECTED] == true"
   - name: influxdb
     group: database
     url: "tcp://influxdb.monitoring.svc.cluster.local:8086"
@@ -80,3 +89,28 @@ endpoints:
     conditions:
       - "[STATUS] == 200"
 
+  ## APPS
+  - name: bazarr
+    group: apps
+    url: https://bazarr.${SECRET_DOMAIN}
+    interval: 1m
+    client:
+      dns-resolver: tcp://192.168.2.1:53
+    conditions:
+      - "[STATUS] == 200"
+  - name: radarr
+    group: apps
+    url: https://radarr.${SECRET_DOMAIN}
+    interval: 1m
+    client:
+      dns-resolver: tcp://192.168.2.1:53
+    conditions:
+      - "[STATUS] == 200"
+  - name: sonarr
+    group: apps
+    url: https://sonarr.${SECRET_DOMAIN}
+    interval: 1m
+    client:
+      dns-resolver: tcp://192.168.2.1:53
+    conditions:
+      - "[STATUS] == 200"
