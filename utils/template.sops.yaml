@@ -3,6 +3,8 @@ kind: Secret
 metadata:
     name: template-secret
     namespace: default
+## sops --encrypt --in-place ./kubernetes/apps/default/lldap/app/lldap.sops.yaml
+## sops --decrypt ./kubernetes/apps/default/lldap/app/lldap.sops.yaml | kubectl apply -f -
 stringData:
     SECRET_KEY: TODO
     SECRET_KEY2: TODO

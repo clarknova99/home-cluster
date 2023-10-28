@@ -35,6 +35,9 @@ spec:
               repository: ghcr.io/onedr0p/postgres-init
               tag: 14.9
               pullPolicy: IfNotPresent
+            envFrom: &envFrom
+              - secretRef:
+                  name: sonarr-secret
         containers:
           main:
             image:
@@ -48,6 +51,7 @@ spec:
               SONARR__PORT: &port 80
               SONARR__LOG_LEVEL: info
               #SONARR__THEME: dark
+            envFrom: *envFrom
             probes:
               liveness: &probes
                 enabled: true
