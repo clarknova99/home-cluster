@@ -2,19 +2,18 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: authelia-gatus-ep
+  name: website-gatus-ep
   namespace: default
   labels:
     gatus.io/enabled: "true"
 data:
   config.yaml: |
     endpoints:
-      - name: authelia
+      - name: website
         group: external
-        url: https://auth.${SECRET_DOMAIN}
+        url: https://www.${SECRET_DOMAIN}
         interval: 1m
         client:
           dns-resolver: tcp://1.1.1.1:53
         conditions:
           - "[STATUS] == 200"
-
