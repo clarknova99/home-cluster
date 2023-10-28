@@ -8,8 +8,8 @@ storage:
 metrics: true
 debug: false
 ui:
-  title: Status | Gatus
-  header: Status
+  title: feldblyum.com status
+  header: feldblyum.com status
 # alerting:
 #   pushover:
 #     application-token: ${CUSTOM_PUSHOVER_APP_TOKEN}
