@@ -239,12 +239,13 @@ endpoints:
       - "[STATUS] == 200"
   - name: n8n
     group: apps
-    url: https://n8n.${SECRET_DOMAIN}
+    url: "tcp://n8n.default.svc.cluster.local:80"
     interval: 1m
-    client:
-      dns-resolver: tcp://192.168.2.1:53
+    ui:
+      hide-hostname: true
+      hide-url: true
     conditions:
-      - "[STATUS] == 200"
+      - "[CONNECTED] == true"
   - name: sabnzbd
     group: apps
     url: https://sabnzbd.${SECRET_DOMAIN}
