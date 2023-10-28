@@ -104,5 +104,3 @@ spec:
       incomplete:
         enabled: true
         type: emptyDir
-      media:
-        existingClaim: media
