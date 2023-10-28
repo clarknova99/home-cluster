@@ -9,10 +9,13 @@ metadata:
 data:
   config.yaml: |
     endpoints:
-      - name: influxdb-brad
+      - name: influxdb
         group: external
-        url: https://influxdb-brad.${SECRET_DOMAIN}
+        url: https://influxdb-brad.${SECRET_DOMAIN}/health
         interval: 1m
+        ui:
+          hide-hostname: true
+          hide-url: true
         client:
           dns-resolver: tcp://1.1.1.1:53
         conditions:
