@@ -10,11 +10,11 @@ data:
   config.yaml: |
     endpoints:
       - name: radarr
-        group: guarded
+        group: internal
         url: https://radarr.${SECRET_DOMAIN}
         interval: 1m
         client:
-          dns-resolver: tcp://192.168.2.5:53
+          dns-resolver: tcp://192.168.2.1:53
         conditions:
           - "[STATUS] == 200"
 
