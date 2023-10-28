@@ -6,43 +6,31 @@ metadata:
   name: youtubedl
   namespace: media
 spec:
-  interval: 30m
+  interval: 5m
   chart:
     spec:
       chart: app-template
-      version: 2.0.3
+      version: 1.5.1
       sourceRef:
         kind: HelmRepository
         name: bjw-s
         namespace: flux-system
-  maxHistory: 2
+      interval: 5m
   install:
+    createNamespace: true
     remediation:
-      retries: 3
+      retries: 5
   upgrade:
-    cleanupOnFail: true
     remediation:
-      retries: 3
-  uninstall:
-    keepHistory: false
+      retries: 5
   values:
-    controllers:
-      main:
-        annotations:
-          reloader.stakater.com/auto: "true"
-        containers:
-          main:
-            image:
-              repository: docker.io/tzahi12345/youtubedl-material
-              tag: 4.3.2
-            env:
-              TZ: America/New_York
-              write_ytdl_config: true
-    service:
-      main:
-        ports:
-          http:
-            port: 17442
+    image:
+      repository: docker.io/tzahi12345/youtubedl-material
+      tag: latest
+    env:
+      TZ: "${TIMEZONE}"
+      #ytdl_url: ytd.${SECRET_DOMAIN}
+      write_ytdl_config: true
     persistence:
       data:
         enabled: true
@@ -55,4 +43,8 @@ spec:
         subPath:
           - path: video
             mountPath: /app/video
-
+    service:
+      main:
+        ports:
+          http:
+            port: 17442
