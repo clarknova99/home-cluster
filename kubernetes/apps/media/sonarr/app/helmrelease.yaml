@@ -48,7 +48,6 @@ spec:
               SONARR__PORT: &port 80
               SONARR__LOG_LEVEL: info
               #SONARR__THEME: dark
-            envFrom: *envFrom
             probes:
               liveness: &probes
                 enabled: true
