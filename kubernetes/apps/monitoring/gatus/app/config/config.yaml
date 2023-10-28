@@ -36,6 +36,27 @@ endpoints:
     group: database
     url: "tcp://cloudnative-pg-cluster.database.svc.cluster.local:5432"
     interval: 1m
+    ui:
+      hide-hostname: true
+      hide-url: true
+    conditions:
+      - "[CONNECTED] == true"
+  - name: redis
+    group: database
+    url: "tcp://redis-master.database.svc.cluster.local:6379"
+    interval: 1m
+    ui:
+      hide-hostname: true
+      hide-url: true
+    conditions:
+      - "[CONNECTED] == true"
+  - name: mongodb
+    group: database
+    url: "tcp://mongodb.database.svc.cluster.local:27017"
+    interval: 1m
+    ui:
+      hide-hostname: true
+      hide-url: true
     conditions:
       - "[CONNECTED] == true"
 
