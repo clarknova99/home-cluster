@@ -68,4 +68,15 @@ endpoints:
       hide-url: true
     conditions:
       - "[CONNECTED] == true"
+  - name: influxdb - external connections
+    group: database
+    url: https://influxdb-brad.${SECRET_DOMAIN}/health
+    interval: 1m
+    ui:
+      hide-hostname: true
+      hide-url: true
+    client:
+      dns-resolver: tcp://1.1.1.1:53
+    conditions:
+      - "[STATUS] == 200"
 
