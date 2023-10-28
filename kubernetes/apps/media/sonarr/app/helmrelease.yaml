@@ -37,7 +37,7 @@ spec:
               pullPolicy: IfNotPresent
             envFrom: &envFrom
               - secretRef:
-                  name: sonarr-secret
+                  name: sonarr-secrets
         containers:
           main:
             image:
