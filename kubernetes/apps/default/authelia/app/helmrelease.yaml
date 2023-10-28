@@ -50,7 +50,7 @@ spec:
           main:
             image:
               repository: ghcr.io/authelia/authelia
-              tag: master@sha256:fc9c91b047c03b609d786a1f418743476f0ccbf069cfeca37960722bddc05e6f
+              tag: master@sha256:ec89ec38238b7e67f52428d621e345fba8658b34cde22e00efa9052b96097fbe
             env:
               AUTHELIA_AUTHENTICATION_BACKEND_LDAP_ADDITIONAL_GROUPS_DN: ou=groups
               AUTHELIA_AUTHENTICATION_BACKEND_LDAP_ADDITIONAL_USERS_DN: ou=people
