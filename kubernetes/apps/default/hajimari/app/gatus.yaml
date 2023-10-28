@@ -11,13 +11,9 @@ data:
     endpoints:
       - name: hajimari
         group: guarded
-        url: 1.1.1.1
+        url: https://hajimari.${SECRET_DOMAIN}
         interval: 1m
-        ui:
-          hide-hostname: true
-          hide-url: true
-        dns:
-          query-name: hajimari.${SECRET_DOMAIN}
-          query-type: A
+        client:
+          dns-resolver: tcp://192.168.2.4:53
         conditions:
-          - "len([BODY]) == 0"
+          - "[STATUS] == 200"
