@@ -59,4 +59,13 @@ endpoints:
       hide-url: true
     conditions:
       - "[CONNECTED] == true"
+  - name: influxdb
+    group: database
+    url: "tcp://influxdb.monitoring.svc.cluster.local:8086"
+    interval: 1m
+    ui:
+      hide-hostname: true
+      hide-url: true
+    conditions:
+      - "[CONNECTED] == true"
 
