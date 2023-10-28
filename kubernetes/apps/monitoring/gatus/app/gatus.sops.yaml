@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: gatus-secrets
+    namespace: media
+stringData:
+    #ENC[AES256_GCM,data:Yut3/wI4UaCL2CuvwSh+Ckryxj5KPwNLafdg5NV8kBJUoLjE2cHodN6xKGBdkVryD/pcws2e4e5YI2X9FJv5VVk1Cu5tMYaYS9Js33BhVZxJ6g==,iv:b2tw1crpkd38XBNG14fvXUq1kGmgGsK9kKdIyD0L9kA=,tag:u5ycdpwcM3Cwejal7oPGPg==,type:comment]
+    INIT_POSTGRES_DBNAME: ENC[AES256_GCM,data:xV22LkE=,iv:Imj6oKu7cUQWudiaNtWwgiqRJKCbKkRq+YoXzqxiS0M=,tag:38uLcFFewoZxvDjEJt1NZA==,type:str]
+    INIT_POSTGRES_HOST: ENC[AES256_GCM,data:mCkvh48aQAEevs6bsQVyGLosVIubqj9mpo8402h4oncSw4oINfF62zrCIuepjOOnSA==,iv:XuGkz5bVYuINFDpbTyy2CbuBTIfcrGmM+1VSYmRqieI=,tag:8jkQm9keT+wj13Zma7wQPg==,type:str]
+    INIT_POSTGRES_USER: ENC[AES256_GCM,data:c0rrGCiC0FA=,iv:q3LnSxCTu4Sb0IO8soq3e0RVoY/H2JXaeAjOtzuZQn8=,tag:X9gCPm2ZVJ2rQoTEc2JuXw==,type:str]
+    INIT_POSTGRES_PASS: ENC[AES256_GCM,data:q704G7v0N/wv,iv:DOCBK0cemBih3EGE0sIOdHMOD+qaQqwlTy0/2HszQcc=,tag:JZGOD15tKeImOGp6SotEig==,type:str]
+    INIT_POSTGRES_SUPER_PASS: ENC[AES256_GCM,data:FchrT2m5v2uK,iv:oN4bK3C02vAFoy0Y2DvOA2h049e9DJ1gtJ21hqS16uQ=,tag:s30HbzfCcOtZ3+oivl+CCg==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age14q9x9ftcpqfw2kmhmlfzpx5g2wmn7tdnq34uhh4x0r2h6qfmm5dqk07z2e
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSByY2xZYllGNVVPK25TRE14
+            cG9VREhWUXhEQStNbkFqcTN5V216MlB4a1FnCmE0cS9zSFhIZUQ2b3h0MEN3M3Za
+            VFZ1MkFIM2JTY1ExVzFPRXZjNFV0UG8KLS0tIFRuVU54YkcvRUZUMG9FWFBQdFVt
+            WDljb3BqR0lHTGR1d1NybTBJdkVFUlkKfrzl3GNxfTkAjpHG6dIlM757AHPK77of
+            ofDxO5ZAeaWb0jVuprPn+YyQxSfMQ6FoCvsEQDByvhqiEGEYDlP2Lw==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2023-10-28T18:39:12Z"
+    mac: ENC[AES256_GCM,data:LUUSQK2sLOoS9VrGXuRKiThVRrF2k4BVbga3wZvOt4qCs/nXefYycIPH55CPsqJumKuFJRXWztKBZwm/s3BCdpTbUASDzWVU8686TE5UkUk6bWa9hhokiZpcYD6wy7h1WIwoJ+HcjySO3WnD4ctpr4wWXEypqjcWwCxIApB8FkE=,iv:S85wjfb5B/BFgJbU2MLcv8u9mYwL9br7giawYgk+16I=,tag:LLPUzLMG+3uAEGwZVvvkbg==,type:str]
+    pgp: []
+    encrypted_regex: ^(data|stringData)$
+    version: 3.8.1
