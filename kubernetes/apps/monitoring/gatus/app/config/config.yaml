@@ -37,5 +37,5 @@ endpoints:
     url: "tcp://cloudnative-pg-cluster.database.svc.cluster.local:5432"
     interval: 1m
     conditions:
-      - "[STATUS] == 200"
+      - "[CONNECTED] == true"
 
