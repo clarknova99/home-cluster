@@ -242,36 +242,40 @@ endpoints:
       - "[STATUS] == 200"
   - name: youtube-dl
     group: apps
-    url: https://ytd.${SECRET_DOMAIN}
+    url: "tcp://youtubedl.media.svc.cluster.local:17442"
     interval: 1m
-    client:
-      dns-resolver: tcp://192.168.2.1:53
+    ui:
+      hide-hostname: true
+      hide-url: true
     conditions:
-      - "[STATUS] == 200"
+      - "[CONNECTED] == true"
   - name: appsmith
     group: apps
-    url: https://appsmith.${SECRET_DOMAIN}
+    url: "tcp://appsmith.default.svc.cluster.local:80"
     interval: 1m
-    client:
-      dns-resolver: tcp://192.168.2.1:53
+    ui:
+      hide-hostname: true
+      hide-url: true
     conditions:
-      - "[STATUS] == 200"
+      - "[CONNECTED] == true"
   - name: baserow
     group: apps
-    url: https://baserow.${SECRET_DOMAIN}
+    url: "tcp://baserow-frontend.default.svc.cluster.local:3000"
     interval: 1m
-    client:
-      dns-resolver: tcp://192.168.2.1:53
+    ui:
+      hide-hostname: true
+      hide-url: true
     conditions:
-      - "[STATUS] == 200"
+      - "[CONNECTED] == true"
   - name: home-assistant
     group: apps
-    url: https://hass.${SECRET_DOMAIN}
+    url: "tcp://home-assistant.default.svc.cluster.local:8123"
     interval: 1m
-    client:
-      dns-resolver: tcp://192.168.2.1:53
+    ui:
+      hide-hostname: true
+      hide-url: true
     conditions:
-      - "[STATUS] == 200"
+      - "[CONNECTED] == true"
   - name: n8n
     group: apps
     url: "tcp://n8n.default.svc.cluster.local:80"
@@ -283,9 +287,10 @@ endpoints:
       - "[CONNECTED] == true"
   - name: sabnzbd
     group: apps
-    url: https://sabnzbd.${SECRET_DOMAIN}
+    url: "tcp://sabnzbd.media.svc.cluster.local:8085"
     interval: 1m
-    client:
-      dns-resolver: tcp://192.168.2.1:53
+    ui:
+      hide-hostname: true
+      hide-url: true
     conditions:
-      - "[STATUS] == 200"
+      - "[CONNECTED] == true"
