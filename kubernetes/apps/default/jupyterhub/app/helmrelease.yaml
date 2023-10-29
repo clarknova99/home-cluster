@@ -26,6 +26,9 @@ spec:
     keepHistory: false
   values:
     hub:
+      db:
+        pvc:
+          storageClassName: local-path
       nodeSelector:
         kubernetes.io/arch: amd64
       config:
