@@ -76,11 +76,12 @@ spec:
 
     ingress:
       enabled: true
+      ingressClassName: internal
       annotations:
         external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
         hajimari.io/icon: simple-icons:jupyter
       hosts:
-        - &host "jupyter.${SECRET_DOMAIN}"
+        - &host "jupyterhub.${SECRET_DOMAIN}"
       tls:
         - hosts:
             - *host
