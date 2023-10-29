@@ -47,8 +47,8 @@ spec:
       globalBookmarks:
         - group: Daily
           bookmarks:
-            - name: k8s-at-home-search
-              url: "https://nanne.dev/k8s-at-home-search/"
+            - name: kubesearch
+              url: "https://kubesearch.dev/"
             - name: Home-Cluster
               url: "https://github.com/clarknova99/home-cluster"
             - name: onedr0p
