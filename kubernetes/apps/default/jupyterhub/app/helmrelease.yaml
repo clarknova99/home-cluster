@@ -28,7 +28,7 @@ spec:
     hub:
       db:
         type: postgres
-        url: "postgresql+psycopg2://${SECRET_POSTGRES_USERNAME}:${SECRET_POSTGRES_PASSWORD}@${SECRET_POSTGRES_HOSTNANE}:5432/jupyter"
+        url: "postgresql+psycopg2://${SECRET_POSTGRES_USERNAME}:${SECRET_POSTGRES_PASSWORD}@${SECRET_POSTGRES_HOSTNAME}:5432/jupyter"
       nodeSelector:
         kubernetes.io/arch: amd64
       config:
@@ -78,20 +78,20 @@ spec:
       #       image: ghcr.io/jamesdbrock/ihaskell-notebook:master
       # extraEnv:
       #   EDITOR: "vim"
-      storage:
-        type: dynamic
-        capacity: 5Gi
-        dynamic:
-          storageClass: local-path
       # storage:
-      #   type: static
-      #   extraVolumes:
-      #     - name: jupyterhub
-      #       persistentVolumeClaim:
-      #         claimName: pvc-jupyterhub
-      #   extraVolumeMounts:
-      #     - name: jupyterhub
-      #       mountPath: /home/shared
+      #   type: dynamic
+      #   capacity: 5Gi
+      #   dynamic:
+      #     storageClass: local-path
+      storage:
+        type: static
+        extraVolumes:
+          - name: jupyterhub
+            persistentVolumeClaim:
+              claimName: pvc-jupyterhub
+        extraVolumeMounts:
+          - name: jupyterhub
+            mountPath: /home/shared
 
     ingress:
       enabled: true
