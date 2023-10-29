@@ -46,7 +46,7 @@ spec:
             - openid
             - profile
             - email
-          username_key: preferred_username
+          #username_key: preferred_username
         JupyterHub:
           authenticator_class: generic-oauth
     singleuser:
@@ -78,20 +78,20 @@ spec:
       #       image: ghcr.io/jamesdbrock/ihaskell-notebook:master
       # extraEnv:
       #   EDITOR: "vim"
-      # storage:
-      #   type: dynamic
-      #   capacity: 5Gi
-      #   dynamic:
-      #     storageClass: local-path
       storage:
-        type: static
-        extraVolumes:
-          - name: jupyterhub
-            persistentVolumeClaim:
-              claimName: pvc-jupyterhub
-        extraVolumeMounts:
-          - name: jupyterhub
-            mountPath: /home/shared
+        type: dynamic
+        capacity: 5Gi
+        dynamic:
+          storageClass: local-path
+      # storage:
+      #   type: static
+      #   extraVolumes:
+      #     - name: jupyterhub
+      #       persistentVolumeClaim:
+      #         claimName: pvc-jupyterhub
+      #   extraVolumeMounts:
+      #     - name: jupyterhub
+      #       mountPath: /home/shared
 
     ingress:
       enabled: true
