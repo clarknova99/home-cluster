@@ -47,6 +47,16 @@ spec:
         JupyterHub:
           authenticator_class: generic-oauth
     singleuser:
+      extraNodeAffinity:
+        required:
+          - matchExpressions:
+              - key: kubernetes.io/arch
+                operator: In
+                values:
+                  - amd64
+                  - i386
+                  - i686
+                  - x86
       image:
         #https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html
         name: jupyter/pyspark-notebook
@@ -66,7 +76,7 @@ spec:
       # extraEnv:
       #   EDITOR: "vim"
       storage:
-        type: dynamic
+        type: static
         extraVolumes:
           - name: jupyterhub
             persistentVolumeClaim:
