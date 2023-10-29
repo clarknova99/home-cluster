@@ -25,9 +25,9 @@ spec:
   uninstall:
     keepHistory: false
   values:
+    debug:
+      enabled: true
     hub:
-      debug:
-        enabled: true
       db:
         type: postgres
         url: "postgresql+psycopg2://${SECRET_POSTGRES_USERNAME}:${SECRET_POSTGRES_PASSWORD}@${SECRET_POSTGRES_HOSTNAME}:5432/jupyter"
