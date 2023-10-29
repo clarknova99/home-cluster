@@ -76,14 +76,19 @@ spec:
       # extraEnv:
       #   EDITOR: "vim"
       storage:
-        type: static
-        extraVolumes:
-          - name: jupyterhub
-            persistentVolumeClaim:
-              claimName: pvc-jupyterhub
-        extraVolumeMounts:
-          - name: jupyterhub
-            mountPath: /home/shared
+        type: dynamic
+        capacity: 5Gi
+        dynamic:
+          storageClass: local-path
+      # storage:
+      #   type: static
+      #   extraVolumes:
+      #     - name: jupyterhub
+      #       persistentVolumeClaim:
+      #         claimName: pvc-jupyterhub
+      #   extraVolumeMounts:
+      #     - name: jupyterhub
+      #       mountPath: /home/shared
 
     ingress:
       enabled: true
@@ -96,8 +101,8 @@ spec:
       tls:
         - hosts:
             - *host
-    storage:
-      type: dynamic
-      capacity: 5Gi
-      dynamic:
-        storageClass: local-path
+    # storage:
+    #   type: dynamic
+    #   capacity: 5Gi
+    #   dynamic:
+    #     storageClass: local-path
