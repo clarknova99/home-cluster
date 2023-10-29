@@ -66,6 +66,7 @@ spec:
       # extraEnv:
       #   EDITOR: "vim"
       storage:
+        type: dynamic
         extraVolumes:
           - name: jupyterhub
             persistentVolumeClaim:
