@@ -10,6 +10,7 @@ debug: false
 ui:
   title: feldblyum.com status
   header: feldblyum.com status
+  logo: "https://www.feldblyum.com/content/video3/images/ev.jpg"
 # alerting:
 #   pushover:
 #     application-token: ${CUSTOM_PUSHOVER_APP_TOKEN}
