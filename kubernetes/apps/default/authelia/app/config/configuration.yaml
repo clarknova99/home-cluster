@@ -46,3 +46,12 @@ identity_providers:
         scopes: ["openid", "profile", "groups", "email"]
         redirect_uris: ["https://grafana.${SECRET_DOMAIN}/login/generic_oauth"]
         userinfo_signing_algorithm: none
+      - id: jupyterhub
+        description: jupyterhub
+        secret: "${SECRET_JUPYTERHUB_OAUTH_CLIENT_SECRET}"
+        public: false
+        authorization_policy: one_factor
+        pre_configured_consent_duration: 1y
+        scopes: ["openid", "profile", "groups", "email"]
+        redirect_uris: ["https://jupyterhub.${SECRET_DOMAIN}/hub/oauth_callback"]
+        userinfo_signing_algorithm: none
