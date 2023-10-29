@@ -29,8 +29,11 @@ spec:
       enabled: true
     hub:
       db:
-        type: postgres
-        url: "postgresql+psycopg2://${SECRET_POSTGRES_USERNAME}:${SECRET_POSTGRES_PASSWORD}@${SECRET_POSTGRES_HOSTNAME}:5432/jupyter"
+        pvc:
+          storageClassName: local-path
+      # db:
+      #   type: postgres
+      #   url: "postgresql+psycopg2://${SECRET_POSTGRES_USERNAME}:${SECRET_POSTGRES_PASSWORD}@${SECRET_POSTGRES_HOSTNAME}:5432/jupyter"
       nodeSelector:
         kubernetes.io/arch: amd64
       # config:
