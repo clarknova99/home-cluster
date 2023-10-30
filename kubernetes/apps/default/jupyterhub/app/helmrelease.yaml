@@ -116,8 +116,3 @@ spec:
       tls:
         - hosts:
             - *host
-    storage:
-      type: dynamic
-      capacity: 5Gi
-      dynamic:
-        storageClass: local-path
