@@ -84,12 +84,6 @@ spec:
           description: "If you want the additional bells and whistles: Python, R, and Julia."
           kubespawner_override:
             image: jupyter/datascience-notebook:latest
-      #   - display_name: "Haskell environment"
-      #     description: "The Jupyter Stacks ihaskell"
-      #     kubespawner_override:
-      #       image: ghcr.io/jamesdbrock/ihaskell-notebook:master
-      # extraEnv:
-      #   EDITOR: "vim"
       storage:
         type: dynamic
         capacity: 5Gi
