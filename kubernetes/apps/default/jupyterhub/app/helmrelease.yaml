@@ -72,14 +72,18 @@ spec:
         #https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html
         name: jupyter/pyspark-notebook
         tag: latest
-      # profileList:
-      #   - display_name: "Minimal environment"
-      #     description: "To avoid too much bells and whistles: Python."
-      #   - display_name: "Datascience environment"
-      #     description: "If you want the additional bells and whistles: Python, R, and Julia."
-      #     kubespawner_override:
-      #       image: jupyter/datascience-notebook:latest
-      #     default: true
+      profileList:
+        - display_name: "Minimal environment"
+          description: "To avoid too much bells and whistles: Python."
+        - display_name: "Pyspark environment"
+          description: "Spark Env"
+          kubespawner_override:
+            image: jupyter/pyspark-notebook:latest
+          default: true
+        - display_name: "Datascience environment"
+          description: "If you want the additional bells and whistles: Python, R, and Julia."
+          kubespawner_override:
+            image: jupyter/datascience-notebook:latest
       #   - display_name: "Haskell environment"
       #     description: "The Jupyter Stacks ihaskell"
       #     kubespawner_override:
@@ -112,8 +116,8 @@ spec:
       tls:
         - hosts:
             - *host
-    # storage:
-    #   type: dynamic
-    #   capacity: 5Gi
-    #   dynamic:
-    #     storageClass: local-path
+    storage:
+      type: dynamic
+      capacity: 5Gi
+      dynamic:
+        storageClass: local-path
