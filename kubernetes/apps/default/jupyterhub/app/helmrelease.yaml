@@ -30,7 +30,9 @@ spec:
     hub:
       db:
         pvc:
-          storageClassName: local-path
+          #storageClassName: local-path
+          storageClassName: network-storage
+          subPath: "/jupyterhub/db"
       # db:
       #   type: postgres
       #   url: "postgresql+psycopg2://${SECRET_POSTGRES_USERNAME}:${SECRET_POSTGRES_PASSWORD}@${SECRET_POSTGRES_HOSTNAME}:5432/jupyter"
