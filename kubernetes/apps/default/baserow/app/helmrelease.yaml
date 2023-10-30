@@ -585,7 +585,8 @@ spec:
         # -- IngressClass that will be be used to implement the Ingress
         className: "internal"
         # -- Additional annotations for the Ingress resource
-        annotations: {}
+        annotations:
+          hajimari.io/enable: "false"
           # cert-manager.io/cluster-issuer: cluster-issuer-name
           # kubernetes.io/ingress.class: nginx
           # kubernetes.io/tls-acme: "true"
@@ -600,9 +601,6 @@ spec:
           tls:
             - hosts:
                 - "baserow-api.${SECRET_DOMAIN}"
-        #  - secretName: chart-example-tls
-        #    hosts:
-        #      - chart-example.local
 
     # General configuration shared between the frontend and backend
     config:
