@@ -27,7 +27,7 @@ spec:
   values:
     hajimari:
       title: Apps
-      darkTheme: espresso
+      darkTheme: tron
       alwaysTargetBlank: true
       showGreeting: false
       showAppGroups: true
