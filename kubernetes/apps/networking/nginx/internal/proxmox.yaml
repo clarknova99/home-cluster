@@ -20,6 +20,7 @@ metadata:
   namespace: networking
   annotations:
     nginx.ingress.kubernetes.io/backend-protocol: "HTTPS" #important
+    hajimari.io/icon: simple-icons:proxmox
 spec:
   ingressClassName: internal
   rules:
