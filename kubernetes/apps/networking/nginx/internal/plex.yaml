@@ -45,6 +45,7 @@ metadata:
   annotations:
     #external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
     nginx.ingress.kubernetes.io/app-root: /web
+    hajimari.io/icon: mdi:plex
 spec:
   ingressClassName: internal
   rules:
