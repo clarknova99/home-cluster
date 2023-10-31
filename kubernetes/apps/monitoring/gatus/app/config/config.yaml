@@ -8,8 +8,8 @@ storage:
 metrics: true
 debug: false
 ui:
-  title: feldblyum.com status
-  header: feldblyum.com status
+  title: feldblyum cloud status
+  header: feldblyum cloud status
   logo: "https://www.feldblyum.com/content/video3/images/ev.jpg"
 # alerting:
 #   pushover:
