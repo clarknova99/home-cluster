@@ -74,7 +74,8 @@ spec:
       main:
         enabled: true
         ingressClassName: internal
-        hajimari.io/enable: "false"
+        annotations:
+          hajimari.io/enable: "false"
         hosts:
           - host: &host couchdb.${SECRET_DOMAIN}
             paths:
