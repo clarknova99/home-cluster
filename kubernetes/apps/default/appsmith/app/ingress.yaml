@@ -7,7 +7,7 @@ metadata:
   annotations:
     external-dns.alpha.kubernetes.io/target: "appsmith.${SECRET_DOMAIN}"
     hajimari.io/enable: "true"
-    hajimari.io/icon: "cog"
+    hajimari.io/icon: mdi:application-braces
 spec:
   ingressClassName: internal
   rules:

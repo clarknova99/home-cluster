@@ -7,7 +7,7 @@ metadata:
   annotations:
     external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
     hajimari.io/enable: "true"
-    hajimari.io/icon: "cog"
+    hajimari.io/icon: mdi:water-flow
 spec:
   ingressClassName: internal
   rules:
