@@ -201,6 +201,13 @@ spec:
       tls:
         - hosts:
             - *host
+    imageRenderer:
+      enabled: true
+      replicas: 2
+      networkPolicy:
+        limitIngress: false
+      serviceMonitor:
+        enabled: true
     persistence:
       # enabled: true
       # storageClassName: local-path
