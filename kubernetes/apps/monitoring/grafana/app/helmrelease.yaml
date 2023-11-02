@@ -47,6 +47,11 @@ spec:
       GF_SMTP_USER: ${SECRET_MAIL_USERNAME}
       GF_SMTP_PASSWORD: ${SECRET_MAIL_PASSWORD}
     grafana.ini:
+      orgs:
+        - id: 1
+          name: private
+        - id: 2
+          name: public
       analytics:
         check_for_updates: false
         check_for_plugin_updates: false
@@ -71,7 +76,10 @@ spec:
       auth.basic:
         enabled: false
       auth.anonymous:
-        enabled: false
+        enabled: true
+        org_name: public
+        org_role: Viewer
+        hide_version: true
     plugins:
       - grafana-worldmap-panel
     dashboardProviders:
@@ -138,9 +146,17 @@ spec:
         cert-manager:
           url: https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/cert-manager/dashboards/cert-manager.json
           datasource: Prometheus
+        minio:
+          gnetId: 13502  #https://grafana.com/grafana/dashboards/13502?tab=revisions
+          revision: 24
+          datasource: Prometheus
         node-exporter-full:
           gnetId: 1860 # https://grafana.com/grafana/dashboards/1860?tab=revisions
-          revision: 31
+          revision: 33
+          datasource: Prometheus
+        redis:
+          gnetId: 763 # https://grafana.com/grafana/dashboards/763?tab=revisions
+          revision: 5
           datasource: Prometheus
       flux:
         flux-cluster:
@@ -168,7 +184,7 @@ spec:
         kubernetes-pods:
           url: https://raw.githubusercontent.com/dotdc/grafana-dashboards-kubernetes/master/dashboards/k8s-views-pods.json
           datasource: Prometheus
-      nginx:
+      nginx-default:
         nginx:
           url: https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/grafana/dashboards/nginx.json
           datasource: Prometheus
