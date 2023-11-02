@@ -33,6 +33,13 @@ spec:
       MINIO_SERVER_URL: "https://s3.${SECRET_DOMAIN}"
       MINIO_PROMETHEUS_URL: http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090
       MINIO_PROMETHEUS_JOB_ID: minio
+
+      MINIO_IDENTITY_OPENID_CONFIG_URL: https://auth.${SECRET_DOMAIN}/.well-known/openid-configuration
+      MINIO_IDENTITY_OPENID_CLIENT_ID: minio
+      MINIO_IDENTITY_OPENID_CLIENT_SECRET: "${SECRET_MINIO_OAUTH_CLIENT_SECRET}"
+      MINIO_IDENTITY_OPENID_CLAIM_PREFIX: authelia
+      MINIO_IDENTITY_OPENID_SCOPES: openid,profile,email
+      MINIO_IDENTITY_OPENID_REDIRECT_URI: https://minio.${SECRET_DOMAIN}/oauth_callback
     # envFrom:
     # ## sops --encrypt --in-place ./kubernetes/apps/kube-system/minio/app/minio.sops.yaml
     # ## sops --decrypt ./kubernetes/apps/kube-system/minio/app/minio.sops.yaml | kubectl apply -f -
