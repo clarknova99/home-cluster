@@ -121,7 +121,7 @@ spec:
                   port: http
         tls:
           - hosts:
-              - *host
+              - *host1
               - *host2
     serviceAccount:
       create: true
