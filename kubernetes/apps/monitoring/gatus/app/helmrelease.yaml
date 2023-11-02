@@ -107,7 +107,13 @@ spec:
           hajimari.io/icon: material-symbols:detector-status
           external-dns.alpha.kubernetes.io/target: external.${SECRET_DOMAIN}
         hosts:
-          - host: &host status.${SECRET_DOMAIN}
+          - host: &host1 status.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                service:
+                  name: main
+                  port: http
+          - host: &host2 status.${SECRET_DOMAIN2}
             paths:
               - path: /
                 service:
@@ -116,6 +122,7 @@ spec:
         tls:
           - hosts:
               - *host
+              - *host2
     serviceAccount:
       create: true
       name: gatus
