@@ -41,6 +41,7 @@ spec:
       MINIO_IDENTITY_OPENID_CLAIM_PREFIX: authelia
       MINIO_IDENTITY_OPENID_SCOPES: openid,profile,email
       MINIO_IDENTITY_OPENID_REDIRECT_URI: https://minio.${SECRET_DOMAIN}/oauth_callback
+      MINIO_IDENTITY_OPENID_CLAIM_USERINFO: "on"
     # envFrom:
     # ## sops --encrypt --in-place ./kubernetes/apps/kube-system/minio/app/minio.sops.yaml
     # ## sops --decrypt ./kubernetes/apps/kube-system/minio/app/minio.sops.yaml | kubectl apply -f -
