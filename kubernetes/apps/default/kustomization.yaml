@@ -13,6 +13,6 @@ resources:
   - ./lldap/ks.yaml
   - ./n8n/ks.yaml
   #- ./superset/ks.yaml
-  - ./tooljet/ks.yaml
+  #- ./tooljet/ks.yaml
   - ./website/ks.yaml
   - ./whoami/ks.yaml
