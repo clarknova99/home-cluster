@@ -39,8 +39,8 @@ spec:
             cpu: 0.75
             ram: 768Mi
         env:
-          LOCKBOX_MASTER_KEY: ${SECRET_TOOLJET_MASTER_KEY}
-          SECRET_KEY_BASE: ${SECRET_TOOLJET_KEY_BASE}
+          LOCKBOX_MASTER_KEY: "${SECRET_TOOLJET_MASTER_KEY}"
+          SECRET_KEY_BASE: "${SECRET_TOOLJET_KEY_BASE}"
           # - name: LOCKBOX_MASTER_KEY
           #   valueFrom:
           #     secretKeyRef:
@@ -69,16 +69,16 @@ spec:
 
     postgresql:
       enabled: false
-      postgresqlExtendedConf:
-        maxConnections: 1024
-      replication:
-        enabled: true
-      auth:
-        username: "postgres"
-        # Keys below are ignored if auth.existingSecret with key password is provided
-        postgresPassword: ${SECRET_POSTGRES_PASSWORD} # Password for the "postgres" admin user
-        password: ${SECRET_POSTGRES_PASSWORD}
-        database: "tooljet_production"
+      # postgresqlExtendedConf:
+      #   maxConnections: 1024
+      # replication:
+      #   enabled: true
+      # auth:
+      #   username: "postgres"
+      #   # Keys below are ignored if auth.existingSecret with key password is provided
+      #   postgresPassword: ${SECRET_POSTGRES_PASSWORD} # Password for the "postgres" admin user
+      #   password: ${SECRET_POSTGRES_PASSWORD}
+      #   database: "tooljet_production"
       primary:
         persistence:
           enabled: true
