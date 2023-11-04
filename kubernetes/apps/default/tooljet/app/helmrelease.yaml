@@ -39,16 +39,18 @@ spec:
             cpu: 0.75
             ram: 768Mi
         env:
-          - name: LOCKBOX_MASTER_KEY
-            valueFrom:
-              secretKeyRef:
-                name: tooljet-secrets
-                key: LOCKBOX_MASTER_KEY
-          - name: SECRET_KEY_BASE
-            valueFrom:
-              secretKeyRef:
-                name: tooljet-secrets
-                key: SECRET_KEY_BASE
+          LOCKBOX_MASTER_KEY: ${SECRET_TOOLJET_MASTER_KEY}
+          SECRET_KEY_BASE: ${SECRET_TOOLJET_KEY_BASE}
+          # - name: LOCKBOX_MASTER_KEY
+          #   valueFrom:
+          #     secretKeyRef:
+          #       name: tooljet-secrets
+          #       key: LOCKBOX_MASTER_KEY
+          # - name: SECRET_KEY_BASE
+          #   valueFrom:
+          #     secretKeyRef:
+          #       name: tooljet-secrets
+          #       key: SECRET_KEY_BASE
         # secret:
         #   name: tooljet-server
         #   data:
