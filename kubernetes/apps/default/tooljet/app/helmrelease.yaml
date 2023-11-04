@@ -38,9 +38,9 @@ spec:
           threshhold:
             cpu: 0.75
             ram: 768Mi
-        env:
-          LOCKBOX_MASTER_KEY: "${SECRET_TOOLJET_MASTER_KEY}"
-          SECRET_KEY_BASE: "${SECRET_TOOLJET_KEY_BASE}"
+        # env:
+        #   LOCKBOX_MASTER_KEY: "${SECRET_TOOLJET_MASTER_KEY}"
+        #   SECRET_KEY_BASE: "${SECRET_TOOLJET_KEY_BASE}"
           # - name: LOCKBOX_MASTER_KEY
           #   valueFrom:
           #     secretKeyRef:
@@ -106,6 +106,8 @@ spec:
       PGRST_HOST: "cloudnative-pg-cluster.database.svc.cluster.local"
       # LOCKBOX_MASTER_KEY: "ec78705255d83cb2c60ebe875fa7a1e0f7b37c90ccc753ae21fadddd3965d36d"
       # SECRET_KEY_BASE: "b322c3518bf650192b80e98afa76d32bedade70583170fc1cb850c38e405f129ce9860b6b096e3167618780d2e166edd167580e090df673ff783b388d90471c2"
+      LOCKBOX_MASTER_KEY: "${SECRET_TOOLJET_MASTER_KEY}"
+      SECRET_KEY_BASE: "${SECRET_TOOLJET_KEY_BASE}"
 
 
 
