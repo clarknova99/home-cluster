@@ -8,6 +8,8 @@ stringData:
     password: ENC[AES256_GCM,data:NEsuQVeV65Yb,iv:qkU6CtWAQfctCqGu9sz3bHhoJ6oB7uz8DryOnKOiYc4=,tag:ulgBSrlyutqaAbFb/1BFjA==,type:str]
     AWS_ACCESS_KEY_ID: ENC[AES256_GCM,data:Dul8kcMybcxuNcBRJilaeaeeiac=,iv:zo93Z/OZmhJxfodie3oB7J6HUiU9Fu5I5hcN/5DUgCY=,tag:2Xn8h5i+z3QvI7+y9mlagw==,type:str]
     AWS_SECRET_ACCESS_KEY: ENC[AES256_GCM,data:oiNRlFUqKx32EJqQLCd9TS0CZf5rGlj59IoqNbJIhsVjHerU6msqvA==,iv:pzTnq9GZmWOD7t57g1uLV+1TmojmlqrvWnUqYOWixco=,tag:Lv7Dv9aeJq06PGDGo12ODA==,type:str]
+    POSTGRES_SUPER_USER: ENC[AES256_GCM,data:84Z0NtE4Qgs=,iv:oiJ329vKjhX+Mps0uO86Kxm0P8t3s9+iJRyQatlDmIA=,tag:bVYDorBOIHfPRobkgO6TbA==,type:str]
+    POSTGRES_SUPER_PASS: ENC[AES256_GCM,data:gmiQYHFJUdTU,iv:5E7SEjpeXuBPenkxYefU4573Sgxfdy3AT/IY18CTnjc=,tag:ED2ogvtsjf/LkEtnR3Db1g==,type:str]
 sops:
     kms: []
     gcp_kms: []
@@ -23,8 +25,8 @@ sops:
             QWoxWFQxYVFPTGwvaWFNbFk5YWV3cmsK3sIsfUa27RXNffnMirefUqNhBWZfvVcj
             JEQa+WxUQWgAVvYAKkxvPyI+jHwmXnd04NRg55DrOWgJFAy0F3fqfg==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2023-10-17T18:08:59Z"
-    mac: ENC[AES256_GCM,data:VbwgzsVx3HJd+kBwY+dU1EL5KKZojFBYJUATP9sJEhm9Uj32u4tMj1q0uBAaIgfO06vKQy+6v9ln2NSzNB6ugptqYOhJHdpdJadlL6O9JDqwbLSaGmqXWtSG5pNy7TSr5GdgcLJOQnV9xPjQZ23urTvGAlOlSd4+ZrUZgW7I4xo=,iv:Sy6c2mvEbN5wRI154EajMqbtZNSNc6FInYqXTczZMWw=,tag:fzt0AbM+n7uXG2k3uAK5wg==,type:str]
+    lastmodified: "2023-11-05T03:33:12Z"
+    mac: ENC[AES256_GCM,data:eu/q9VfvwUPddx6aKJYqePI1gWdSTp1yEBDPCz+gVndo1pHYXFBaUgXTgjFD6ZyFjgRIn/e59feRgRH4ac1uazHE39Gx7i+xS2+rm39mChsxwN1frNFyoAtBkvjNGeUf35wZcBxQ4AAFWHPWbEUYucxLUVo6jr/EsfUv8AgYKjo=,iv:lR0+C6TUf/FlgVIYYvVrGkPDl5eZDvXWgBYVE18ok6M=,tag:UjfZyFbCPkMmj0CajMQT/A==,type:str]
     pgp: []
     encrypted_regex: ^(data|stringData)$
     version: 3.8.1
