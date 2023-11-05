@@ -44,6 +44,7 @@ spec:
           - networking
           - media
           - kube-system
+          - rook-ceph
       globalBookmarks:
         - group: Daily
           bookmarks:
