@@ -64,15 +64,22 @@ spec:
         config:
           osdsPerDevice: "1"
         nodes:
+          - name: k8s-01
+            devices:
+              #- name: /dev/disk/by-id/usb-MEGAZ_USB_3.0_DD564198838A2-0:0
+              - name: sdb
           - name: k8s-07
             devices:
-              - name: /dev/disk/by-id/usb-SABRENT_SABRENT_DB9876543214E-0:0
+              #- name: /dev/disk/by-id/usb-SABRENT_SABRENT_DB9876543214E-0:0
+              - name: sdb
           - name: k8s-10
             devices:
-              - name: /dev/disk/by-id/usb-SABRENT_SABRENT_DB9876543214E-0:0
+              #- name: /dev/disk/by-id/usb-SABRENT_SABRENT_DB9876543214E-0:0
+              - name: sdb
           - name: k8s-11
             devices:
-              - name: /dev/disk/by-id/usb-SABRENT_SABRENT_DB9876543214E-0:0
+              #- name: /dev/disk/by-id/usb-SABRENT_SABRENT_DB9876543214E-0:0
+              - name: sdb
     # enable log collector, daemons will log on files and rotate
     logCollector:
       enabled: true
