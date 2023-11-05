@@ -7,6 +7,5 @@ resources:
   - ./couchdb/ks.yaml
   - ./mongodb/ks.yaml
   - ./pgadmin/ks.yaml
-  #- ./postgresql/ks.yaml
   - ./redis/ks.yaml
   - ./redisinsight/ks.yaml
