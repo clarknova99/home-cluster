@@ -16,6 +16,7 @@ spec:
   storage:
     size: 10Gi
     storageClass: local-path
+  enableSuperuserAccess: true
   superuserSecret:
     name: cloudnative-pg-secrets
   bootstrap:
