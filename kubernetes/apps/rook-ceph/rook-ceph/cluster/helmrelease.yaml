@@ -10,7 +10,7 @@ spec:
   chart:
     spec:
       chart: rook-ceph-cluster
-      version: v1.12.6
+      version: v1.12.7
       sourceRef:
         kind: HelmRepository
         name: rook-ceph
@@ -44,7 +44,7 @@ spec:
       [global]
       bdev_enable_discard = true
       bdev_async_discard = true
-      osd_class_update_on_start = false
+ #     osd_class_update_on_start = false
     cephClusterSpec:
       network:
         provider: host
@@ -64,15 +64,20 @@ spec:
         config:
           osdsPerDevice: "1"
         nodes:
-          - name: k8s-05
+          - name: k8s-07
             devices:
-              - name: /dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_drive-scsi2
-          - name: k8s-06
-            devices:
-              - name: /dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_drive-scsi2
+              - name: /dev/disk/by-id/usb-SABRENT_SABRENT_DB9876543214E-0:0
           - name: k8s-10
             devices:
-              - name: /dev/disk/by-id/nvme-Samsung_SSD_980_PRO_1TB_S5P2NS0RB39752X
+              - name: /dev/disk/by-id/usb-SABRENT_SABRENT_DB9876543214E-0:0
+          - name: k8s-11
+            devices:
+              - name: /dev/disk/by-id/usb-SABRENT_SABRENT_DB9876543214E-0:0
+    # enable log collector, daemons will log on files and rotate
+    logCollector:
+      enabled: true
+      periodicity: daily # one of: hourly, daily, weekly, monthly
+      maxLogSize: 500M # SUFFIX may be 'M' or 'G'. Must be at least 1M.
     cephBlockPools:
       - name: ceph-blockpool
         spec:
@@ -122,6 +127,7 @@ spec:
           pool: data0
           reclaimPolicy: Delete
           allowVolumeExpansion: true
+          mountOptions: []
           parameters:
             csi.storage.k8s.io/provisioner-secret-name: rook-csi-cephfs-provisioner
             csi.storage.k8s.io/provisioner-secret-namespace: rook-ceph

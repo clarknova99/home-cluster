@@ -11,7 +11,7 @@ spec:
   chart:
     spec:
       chart: rook-ceph
-      version: v1.12.6
+      version: v1.12.7
       sourceRef:
         kind: HelmRepository
         name: rook-ceph
@@ -27,6 +27,11 @@ spec:
   uninstall:
     keepHistory: false
   values:
+    # -- Global log level for the operator.
+    # Options: `ERROR`, `WARNING`, `INFO`, `DEBUG`
+    logLevel: DEBUG
+    crds:
+      enabled: true
     csi:
       csiAddons:
         enabled: false # Set to true when using kubernetes-csi-addons
