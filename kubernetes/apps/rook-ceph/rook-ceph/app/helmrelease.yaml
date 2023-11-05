@@ -29,12 +29,12 @@ spec:
   values:
     # -- Global log level for the operator.
     # Options: `ERROR`, `WARNING`, `INFO`, `DEBUG`
-    logLevel: DEBUG
+   #logLevel: DEBUG
     crds:
       enabled: true
     csi:
-      csiAddons:
-        enabled: false # Set to true when using kubernetes-csi-addons
+      # csiAddons:
+      #   enabled: false # Set to true when using kubernetes-csi-addons
       cephFSKernelMountOptions: ms_mode=secure # Set when encryption/compression is enabled
     monitoring:
       enabled: true
