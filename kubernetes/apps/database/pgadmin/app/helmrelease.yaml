@@ -37,10 +37,10 @@ spec:
       enabled: true
       servers:
         postgres:
-          Name: postgres
+          Name: cnpg
           Group: Servers
           Port: 5432
           Username: postgres
-          Host: postgresql.database.svc.cluster.local
+          Host: cloudnative-pg-cluster-rw.database.svc.cluster.local
           SSLMode: prefer
           MaintenanceDB: app
