@@ -6,7 +6,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: cluster-apps-postgresql
+    - name: cluster-apps-cloudnative-pg-cluster
   path: ./kubernetes/apps/media/prowlarr/app
   prune: true
   sourceRef:
