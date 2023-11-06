@@ -70,16 +70,20 @@ spec:
               #- name: sdb
           - name: k8s-07
             devices:
-              - name: /dev/disk/by-id/usb-SABRENT_SABRENT_DB9876543214E-0:0
-              - name: /dev/disk/by-id/dm-name-nvme--local-ceph01
+              #- name: /dev/disk/by-id/dm-name-nvme--local-ceph01
+              - name: /dev/nvme-local/ceph01
               #- name: sdb
           - name: k8s-10
             devices:
-              - name: /dev/disk/by-id/dm-name-nvme--local-ceph02
+              - name: /dev/disk/by-id/usb-SABRENT_SABRENT_DB9876543214E-0:0
+              - name: /dev/bus/usb/004
+              #- name: /dev/disk/by-id/dm-name-nvme--local-ceph02
+              - name: /dev/nvme-local/ceph02
               #- name: sdb
           - name: k8s-11
             devices:
               - name: /dev/disk/by-id/dm-name-nvme--local-ceph03
+              - name: /dev/nvme-local/ceph03
               #- name: sdb
     # enable log collector, daemons will log on files and rotate
     logCollector:
