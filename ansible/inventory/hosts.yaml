@@ -35,6 +35,6 @@ kubernetes:
         k8s-10:
           ansible_user: debian
           ansible_host: 192.168.2.19
-        k8s-11:
+        aurora:
           ansible_user: debian
           ansible_host: 192.168.2.20
