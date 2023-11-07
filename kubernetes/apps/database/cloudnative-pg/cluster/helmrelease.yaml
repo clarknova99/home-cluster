@@ -19,7 +19,7 @@ spec:
     name: cloudnative-pg-secrets
   bootstrap:
     recovery:
-      source: &previous-cluster postgres-v3 #This must match backup.barmanObjectStore.serverName from previous backup
+      source: &previous-cluster postgres-v4 #This must match backup.barmanObjectStore.serverName from previous backup
   postgresql:
     parameters:
       max_connections: "600"
@@ -34,7 +34,7 @@ spec:
         maxParallel: 8
       destinationPath: &dest-path s3://cloudnative-pg/
       endpointURL: &endpoint-url http://minio.kube-system.svc.cluster.local:9000
-      serverName: postgres-v4 #This must increment when bootstrapping. You cannot have this be the same as the bootstrap version
+      serverName: postgres-v5 #This must increment when bootstrapping. You cannot have this be the same as the bootstrap version
       s3Credentials: &s3-creds
         accessKeyId:
           name: cloudnative-pg-secrets
@@ -44,7 +44,7 @@ spec:
           key: AWS_SECRET_ACCESS_KEY
   # Note: externalClusters is needed when recovering from an existing cnpg cluster
   externalClusters:
-    - name: postgres-v3
+    - name: postgres-v4
       barmanObjectStore:
         wal:
           compression: bzip2
