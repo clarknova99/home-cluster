@@ -180,7 +180,7 @@ spec:
         ceph:
           ceph-cluster:
             # renovate: depName="Ceph Cluster"
-            gnetId: 2842
+            gnetId: 2842  #https://grafana.com/grafana/dashboards/2842?tab=revisions
             revision: 17
             datasource: Prometheus
           ceph-osd:
