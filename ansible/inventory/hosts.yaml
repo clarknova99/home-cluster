@@ -20,21 +20,9 @@ kubernetes:
         k8s-05:
           ansible_user: debian
           ansible_host: 192.168.2.14
-        k8s-06:
-          ansible_user: debian
-          ansible_host: 192.168.2.15
-        k8s-07:
-          ansible_user: debian
-          ansible_host: 192.168.2.16
-        k8s-08:
-          ansible_user: debian
-          ansible_host: 192.168.2.17
-        k8s-09:
-          ansible_user: debian
-          ansible_host: 192.168.2.18
-        k8s-10:
-          ansible_user: debian
-          ansible_host: 192.168.2.19
         aurora:
           ansible_user: debian
           ansible_host: 192.168.2.20
+        nuc11:
+          ansible_user: debian
+          ansible_host: 192.168.2.15
