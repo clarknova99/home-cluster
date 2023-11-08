@@ -4,7 +4,7 @@ metadata:
   namespace: networking
   name: proxmox
 spec:
-  externalName: nuc11.local
+  externalName: nuc.local
   ports:
   - name: https
     port: 8006
