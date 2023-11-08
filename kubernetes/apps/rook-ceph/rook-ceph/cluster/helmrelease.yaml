@@ -32,6 +32,8 @@ spec:
     ingress:
       dashboard:
         ingressClassName: internal
+        annotations:
+          hajimari.io/icon: mdi:chess-rook
         host:
           name: &host rook.${SECRET_DOMAIN}
           path: /
@@ -136,15 +138,21 @@ spec:
     cephObjectStores:
       - name: ceph-objectstore
         spec:
+          # metadataPool:
+          #   failureDomain: host
+          #   replicated:
+          #     size: 3
+          # dataPool:
+          #   failureDomain: host
+          #   erasureCoded:
+          #     dataChunks: 2
+          #     codingChunks: 1
           metadataPool:
-            failureDomain: host
             replicated:
-              size: 3
+              size: 1
           dataPool:
-            failureDomain: host
-            erasureCoded:
-              dataChunks: 4
-              codingChunks: 2
+            replicated:
+              size: 1
           preservePoolsOnDelete: true
           gateway:
             port: 80
