@@ -70,7 +70,7 @@ spec:
           - name: k8s-01
             devices:
               - name: /dev/disk/by-id/usb-MEGAZ_USB_3.0_DD564198838A2-0:0
-          - name: k8s-07
+          - name: nuc11
             devices:
               - name: /dev/disk/by-id/nvme-Samsung_SSD_980_PRO_1TB_S5P2NS0RB39752X
     # enable log collector, daemons will log on files and rotate
