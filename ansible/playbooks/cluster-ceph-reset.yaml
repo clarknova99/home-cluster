@@ -1,4 +1,4 @@
---
+---
 - name: Reset Ceph Drives
   hosts: all
   become: true

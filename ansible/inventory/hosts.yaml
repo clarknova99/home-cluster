@@ -6,6 +6,8 @@ kubernetes:
         k8s-01:
           ansible_user: debian
           ansible_host: 192.168.2.10
+          ceph_drives:
+            - /dev/disk/by-id/usb-SABRENT_SABRENT_DB9876543214E-0:0
         k8s-02:
           ansible_user: debian
           ansible_host: 192.168.2.11
@@ -20,12 +22,13 @@ kubernetes:
         k8s-05:
           ansible_user: debian
           ansible_host: 192.168.2.14
-        k8s-08:
-          ansible_user: debian
-          ansible_host: 192.168.2.17
         aurora:
           ansible_user: debian
           ansible_host: 192.168.2.20
+          ceph_drives:
+            - /dev/disk/by-id/ata-Samsung_SSD_870_EVO_2TB_S753NS0W819426L
         nuc11:
           ansible_user: debian
           ansible_host: 192.168.2.15
+          ceph_drives:
+            - /dev/disk/by-id/nvme-Samsung_SSD_980_PRO_1TB_S5P2NS0RB39752X

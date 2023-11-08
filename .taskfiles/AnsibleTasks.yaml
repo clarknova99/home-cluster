@@ -54,6 +54,6 @@ tasks:
     cmd: ansible all -i {{.ANSIBLE_INVENTORY_DIR}}/hosts.yaml --one-line -a 'uptime'
 
   ceph-nuke:
-    desc: nuke ceph drive
+    desc: nuke ceph drives
     dir: "{{.ANSIBLE_DIR}}"
     cmd: ansible-playbook -i {{.ANSIBLE_INVENTORY_DIR}}/hosts.yaml {{.ANSIBLE_PLAYBOOK_DIR}}/cluster-ceph-reset.yaml
