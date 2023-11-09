@@ -185,7 +185,7 @@ spec:
             datasource: Prometheus
           ceph-osd:
             # renovate: depName="Ceph - OSD (Single)"
-            gnetId: 5336
+            gnetId: 5336 #https://grafana.com/grafana/dashboards/5336?tab=revisions
             revision: 9
             datasource: Prometheus
           ceph-pools:
