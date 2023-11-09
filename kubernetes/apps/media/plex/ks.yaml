@@ -5,7 +5,7 @@ metadata:
   name: cluster-apps-plex
   namespace: flux-system
 spec:
-  path: ./kubernetes/apps/default/plex/app
+  path: ./kubernetes/apps/media/plex/app
   prune: true
   sourceRef:
     kind: GitRepository
