@@ -69,9 +69,9 @@ spec:
           - name: aurora
             devices:
               - name: /dev/disk/by-id/ata-Samsung_SSD_870_EVO_2TB_S753NS0W819426L
-          - name: k8s-01
+          - name: nuc8
             devices:
-              - name: /dev/disk/by-id/usb-SABRENT_SABRENT_DB9876543214E-0:0
+              - name: /dev/disk/by-id/nvme-WD_Blue_SN580_1TB_234169800705
           - name: nuc11
             devices:
               - name: /dev/disk/by-id/nvme-Samsung_SSD_980_PRO_1TB_S5P2NS0RB39752X
