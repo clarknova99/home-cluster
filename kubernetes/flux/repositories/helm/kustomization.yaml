@@ -20,6 +20,7 @@ resources:
   - ./hajimari.yaml
   - ./influxdata.yaml
   - ./ingress-nginx.yaml
+  - ./intel.yaml
   - ./jetstack.yaml
   - ./jupyterhub.yaml
   - ./k8s-gateway.yaml
@@ -33,5 +34,5 @@ resources:
   - ./stakater.yaml
   - ./superset.yaml
   - ./tooljet.yaml
-  - ./vector.yaml
+  #- ./vector.yaml
   - ./weave-gitops.yaml
