@@ -104,6 +104,6 @@ spec:
       transcode:
         type: emptyDir
       media:
-        existingClaim: media
+        existingClaim: pvc-videos
         globalMounts:
           - readOnly: true
