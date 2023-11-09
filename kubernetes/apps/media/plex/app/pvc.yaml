@@ -1,0 +1,31 @@
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-videos
+  namespace: media
+spec:
+  storageClassName: "network-storage"
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  nfs:
+    server: 192.168.1.2
+    path: "/volume1/Video"
+    readOnly: false
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-videos
+  namespace: media
+spec:
+  accessModes:
+    - ReadWriteMany
+  volumeName: pv-videos
+  storageClassName: "network-storage"
+  resources:
+    requests:
+      storage: 1Gi
