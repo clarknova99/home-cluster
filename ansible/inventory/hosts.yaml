@@ -6,8 +6,6 @@ kubernetes:
         k8s-01:
           ansible_user: debian
           ansible_host: 192.168.2.10
-          ceph_drives:
-            - /dev/disk/by-id/usb-SABRENT_SABRENT_DB9876543214E-0:0
         k8s-02:
           ansible_user: debian
           ansible_host: 192.168.2.11
