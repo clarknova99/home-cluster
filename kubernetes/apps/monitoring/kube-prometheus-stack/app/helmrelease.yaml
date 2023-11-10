@@ -47,14 +47,14 @@ spec:
         tls:
           - hosts:
               - alertmanager.${SECRET_DOMAIN}"
-    alertmanagerSpec:
-      storage:
-        volumeClaimTemplate:
-          spec:
-            storageClassName: local-path
-            resources:
-              requests:
-                storage: 1Gi
+        alertmanagerSpec:
+          storage:
+            volumeClaimTemplate:
+              spec:
+                storageClassName: local-path
+                resources:
+                  requests:
+                    storage: 1Gi
     kube-state-metrics:
       metricLabelsAllowlist:
         - "deployments=[*]"
