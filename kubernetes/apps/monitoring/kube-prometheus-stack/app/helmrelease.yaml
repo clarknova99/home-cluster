@@ -37,24 +37,24 @@ spec:
       enabled: true
     cleanPrometheusOperatorObjectNames: true
     alertmanager:
-      enabled: false
-      # ingress:
-      #   enabled: true
-      #   pathType: Prefix
-      #   ingressClassName: internal
-      #   hosts:
-      #     - alertmanager.${SECRET_DOMAIN}"
-      #   tls:
-      #     - hosts:
-      #         - alertmanager.${SECRET_DOMAIN}"
-      # alertmanagerSpec:
-      #   storage:
-      #     volumeClaimTemplate:
-      #       spec:
-      #         storageClassName: local-path
-      #         resources:
-      #           requests:
-      #             storage: 1Gi
+#      enabled: false
+      ingress:
+        enabled: true
+        pathType: Prefix
+        ingressClassName: internal
+        hosts:
+          - alertmanager.${SECRET_DOMAIN}"
+        tls:
+          - hosts:
+              - alertmanager.${SECRET_DOMAIN}"
+      alertmanagerSpec:
+        storage:
+          volumeClaimTemplate:
+            spec:
+              storageClassName: local-path
+              resources:
+                requests:
+                  storage: 1Gi
     kube-state-metrics:
       metricLabelsAllowlist:
         - "deployments=[*]"
