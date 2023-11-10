@@ -30,12 +30,34 @@ spec:
   dependsOn:
     - name: local-path-provisioner
       namespace: kube-system
+    - name: rook-ceph-cluster
+      namespace: rook-ceph
   values:
     crds:
       enabled: true
     cleanPrometheusOperatorObjectNames: true
     alertmanager:
-      enabled: false
+      enabled: true
+      ingress:
+        enabled: true
+        pathType: Prefix
+        ingressClassName: internal
+        hosts:
+          - &host alertmanager.${SECRET_DOMAIN}"
+        tls:
+          - hosts:
+              - *host
+      alertmanagerSpec:
+        storage:
+          volumeClaimTemplate:
+            spec:
+              storageClassName: local-path
+              resources:
+                requests:
+                  storage: 1Gi
+
+
+
     kube-state-metrics:
       metricLabelsAllowlist:
         - "deployments=[*]"
@@ -135,18 +157,10 @@ spec:
         storageSpec:
           volumeClaimTemplate:
             spec:
-              storageClassName: local-path
+              storageClassName: ceph-block
               resources:
                 requests:
                   storage: 20Gi
-          # volumeClaimTemplate:
-          #   spec:
-          #     selector:
-          #       matchLabels:
-          #         app.kubernetes.io/name: pv-prometheus
-          #     resources:
-          #       requests:
-          #         storage: 20Gi
     grafana:
       enabled: false
       forceDeployDashboards: true
