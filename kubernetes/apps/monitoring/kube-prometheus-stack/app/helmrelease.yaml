@@ -55,9 +55,6 @@ spec:
               resources:
                 requests:
                   storage: 1Gi
-
-
-
     kube-state-metrics:
       metricLabelsAllowlist:
         - "deployments=[*]"
