@@ -30,8 +30,8 @@ spec:
   dependsOn:
     - name: local-path-provisioner
       namespace: kube-system
-    - name: rook-ceph-cluster
-      namespace: rook-ceph
+    # - name: rook-ceph-cluster
+    #   namespace: rook-ceph
   values:
     crds:
       enabled: true
@@ -154,7 +154,7 @@ spec:
         storageSpec:
           volumeClaimTemplate:
             spec:
-              storageClassName: ceph-block
+              storageClassName: local-path
               resources:
                 requests:
                   storage: 20Gi
