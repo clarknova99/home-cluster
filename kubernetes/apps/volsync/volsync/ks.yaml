@@ -2,10 +2,10 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: cluster-apps-robusta
+  name: cluster-apps-volsync
   namespace: flux-system
 spec:
-  path: ./kubernetes/apps/monitoring/robusta/app
+  path: ./kubernetes/apps/volsync/volsync/app
   prune: true
   sourceRef:
     kind: GitRepository
