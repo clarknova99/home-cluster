@@ -33,10 +33,9 @@ spec:
       # backupTargetCredentialSecret: longhorn-secret
       defaultReplicaCount: 2
       defaultLonghornStaticStorageClass: longhorn
-
       # backupstorePollInterval: 0
-      # createDefaultDiskLabeledNodes: true
-      # defaultDataPath: /mnt/external/longhorn
+      createDefaultDiskLabeledNodes: true
+      defaultDataPath: /mnt/data
       # restoreVolumeRecurringJobs: true
       # storageOverProvisioningPercentage: 100
       # storageMinimalAvailablePercentage: 1

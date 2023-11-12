@@ -1,0 +1,37 @@
+---
+- name: Setup longhorn drives
+  hosts: all
+  become: true
+  gather_facts: true
+  any_errors_fatal: true
+  pre_tasks:
+    - name: Pausing for 2 seconds...
+      ansible.builtin.pause:
+        seconds: 2
+  tasks:
+    - name: Reset Longhorn Drives # noqa: ignore-errors
+      ignore_errors: true
+      when: add_drives | default([]) | length > 0
+      block:
+        - name: Wipe (sgdisk) # noqa: no-changed-when
+          ansible.builtin.command: "sgdisk --zap-all {{ item }}"
+          loop: "{{ add_drives }}"
+        - name: Wipe (dd) # noqa: no-changed-when
+          ansible.builtin.command: "dd if=/dev/zero of={{ item }} bs=1M count=100 oflag=direct,dsync"
+          loop: "{{ add_drives }}"
+        - name: Wipe (blkdiscard) # noqa: no-changed-when
+          ansible.builtin.command: "blkdiscard {{ item }}"
+          loop: "{{ add_drives }}"
+        - name: format ext4 # noqa: no-changed-when
+          ansible.builtin.command: "mkfs.ext4 {{ item }}"
+          loop: "{{ add_drives }}"
+        - name: partprobe # noqa: no-changed-when
+          ansible.builtin.command: "partprobe {{ item }}"
+          loop: "{{ add_drives }}"
+        - name: Mount to fstab
+          ansible.posix.mount:
+            path: /mnt/data
+            src: "{{ item }}"
+            fstype: ext4
+            state: present
+          loop: "{{ add_drives }}"

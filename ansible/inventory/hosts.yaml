@@ -25,13 +25,19 @@ kubernetes:
           ansible_host: 192.168.2.20
           ceph_drives:
             - /dev/disk/by-id/ata-Samsung_SSD_870_EVO_2TB_S753NS0W819426L
+          add_drives:
+            - /dev/sdb
         nuc11:
           ansible_user: debian
           ansible_host: 192.168.2.15
           ceph_drives:
             - /dev/disk/by-id/nvme-Samsung_SSD_980_PRO_1TB_S5P2NS0RB39752X
+          add_drives:
+            - /dev/nvme0n1
         nuc8:
           ansible_user: debian
           ansible_host: 192.168.2.16
           ceph_drives:
             - /dev/disk/by-id/nvme-WD_Blue_SN580_1TB_234169800705
+          add_drives:
+            - /dev/nvme0n1
