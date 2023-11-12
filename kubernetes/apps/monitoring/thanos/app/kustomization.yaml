@@ -6,3 +6,4 @@ namespace: monitoring
 resources:
   - ./helmrelease.yaml
   - ./thanos.sops.yaml
+  - ./dashboard
