@@ -5,3 +5,9 @@ namespace: monitoring
 resources:
   - ./helmrelease.yaml
   - ./loki.sops.yaml
+configMapGenerator:
+  - name: loki-alerting-rules
+    files:
+      - loki-alerting-rules.yaml=./rules/loki-alerting-rules.yaml
+generatorOptions:
+  disableNameSuffixHash: true
