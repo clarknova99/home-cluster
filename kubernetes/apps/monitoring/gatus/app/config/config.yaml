@@ -116,7 +116,7 @@ endpoints:
       - "[STATUS] == 200"
   - name: loki
     group: monitoring
-    url: "tcp://loki-gateway.monitoring.svc.cluster.local:3100"
+    url: "tcp://loki-gateway.monitoring.svc.cluster.local:80"
     interval: 1m
     ui:
       hide-hostname: true
