@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Secret
 metadata:
     name: longhorn-secrets
-    namespace: monitoring
+    namespace: longhorn-system
 stringData:
     AWS_ENDPOINTS: ENC[AES256_GCM,data:stGoArQFN6roOWWH7ha6cUym6pmA05rZ87+EcP0H+HgSo7Jp8CPC9D18P0Dd+Tw=,iv:7DnW34tpsTwavpkLxqGGy5irjdXpu5bkRcMHjzoWt9k=,tag:DbpOLiOIEu10pkKsUBJ+oQ==,type:str]
     AWS_ACCESS_KEY_ID: ENC[AES256_GCM,data:ICD3U72AGuOXcXUyckfm43EgRrM=,iv:bXhteygu6OZuVL5AZqHtFg6cBCjGnLwIs4BUIRNYF6g=,tag:0fR/tDREKk677BQat6V1ig==,type:str]
@@ -22,8 +22,8 @@ sops:
             QWoxWFQxYVFPTGwvaWFNbFk5YWV3cmsK3sIsfUa27RXNffnMirefUqNhBWZfvVcj
             JEQa+WxUQWgAVvYAKkxvPyI+jHwmXnd04NRg55DrOWgJFAy0F3fqfg==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2023-11-12T21:55:11Z"
-    mac: ENC[AES256_GCM,data:B9W5HoyjoGxhii32gt+FWX8bFCBrH/PwlwSiLv7xmkwqLE+BMKcf+ANO9krzaaPS4dj84K1TL6rSKdMTZwqdVyJcTfqFHlOYkmTT14wuQbcuZGmjUDgKkrdG/1+Egc8ZY5V1HvhXRtcIwjtDXCtMcySP3ZPtSYcgq2OPIIdz4Kk=,iv:wpLkcYFqnSG/a6MFCzh5LCvd46baaUtgvKotMuj4NHE=,tag:Ie1eg0osAD8XjdaYi9lJ1g==,type:str]
+    lastmodified: "2023-11-12T21:57:58Z"
+    mac: ENC[AES256_GCM,data:W6Q5AwbbG5o9n7JhikAYvxasfccR3aTw45G1PWBF2Eu/efEu+qmG9t5KQsp20liAoGTfj4WDCT7iB+Q9zBny+bSOFvs1wQhS86uW/sBCe4yHPrcs2IaSW2McobI0izM064ycpeFELF+s2NzlmuAPlbWbX8YTE+W1o36t3YG/NdE=,iv:P8h7/5aofLUkZVtEyBavDib+HRM8Yup2ybq9LnKKz74=,tag:/57RzhmjTVtVBXkaHAXiyQ==,type:str]
     pgp: []
     encrypted_regex: ^(data|stringData)$
     version: 3.8.1
