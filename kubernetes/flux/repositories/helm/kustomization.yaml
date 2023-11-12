@@ -35,5 +35,6 @@ resources:
   - ./stakater.yaml
   - ./superset.yaml
   - ./tooljet.yaml
+  - ./tyzbit.yaml
   #- ./vector.yaml
   - ./weave-gitops.yaml

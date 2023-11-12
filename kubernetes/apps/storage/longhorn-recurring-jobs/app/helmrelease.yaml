@@ -1,0 +1,36 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  namespace: storage
+  name: longhorn-recurring-jobs
+spec:
+  targetNamespace: storage
+  releaseName: longhorn-recurring-jobs
+  timeout: 120s
+  chart:
+    spec:
+      chart: longhorn-recurring-jobs
+      version: "5.0.2"
+      sourceRef:
+        kind: HelmRepository
+        name: tyzbit
+        namespace: flux-system
+  interval: 2m0s
+  values:
+    minuteStep: 5
+    hourStep: 2
+    createStorageClasses: true
+    storageclass:
+      allowVolumeExpansion: true
+      reclaimPolicy: Retain
+    parameters:
+      replicaAutoBalance: best-effort
+      dataLocality: best-effort
+      numberOfReplicas: "3"
+      staleReplicaTimeout: "30"
+    groups:
+      "Apps":
+        backup:
+          - interval: 1d
+            retain: 14
