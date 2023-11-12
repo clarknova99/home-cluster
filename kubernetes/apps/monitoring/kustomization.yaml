@@ -11,5 +11,6 @@ resources:
   - ./loki/ks.yaml
   #- ./loki-stack/ks.yaml
   - ./promlens/ks.yaml
+  - ./promtail/ks.yaml
   - ./thanos/ks.yaml
 
