@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: thanos-secrets
+    namespace: monitoring
+stringData:
+    access_key: ENC[AES256_GCM,data:vXLD333ZHlt27c3pgl+jodF5imU=,iv:eUKesD500VBtDV4k8A1e61mr42lAf/jVP0CLNGiuSnk=,tag:pFLufwqfXBzn2+HYxubHzA==,type:str]
+    secret_key: ENC[AES256_GCM,data:33UlagWB33/18HLyf8jutfDDuZbxme3KDv0gZK1NyVol9qh45xjJnA==,iv:5mK4CyES8UCs4WlKeRUb4wCXz+N8YS9B5ABQbcHILzY=,tag:RPbd6DGq6WkPcDnUiPoW2w==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age14q9x9ftcpqfw2kmhmlfzpx5g2wmn7tdnq34uhh4x0r2h6qfmm5dqk07z2e
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA3MWlQbFlGblhVV2NDY05R
+            NndtVjBlQUIxQ1lTc0R3dkJaZVVBMGVJeURRCnR5UTVEcmttWUxnbXM5d3lxMy9n
+            c1ZnYzVFNEZCWVFpWVFBeWRqblk1SzQKLS0tIE5mNGRwQmo5bGJmMk01QzhXczVK
+            QWoxWFQxYVFPTGwvaWFNbFk5YWV3cmsK3sIsfUa27RXNffnMirefUqNhBWZfvVcj
+            JEQa+WxUQWgAVvYAKkxvPyI+jHwmXnd04NRg55DrOWgJFAy0F3fqfg==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2023-11-12T17:02:44Z"
+    mac: ENC[AES256_GCM,data:6IAAl6ZswTjmb9n6gD4io3ZineNloc6qh6ju8+TrFM8nM4Jqlp3pZifZYW9uTHWwB3Ub0oq1/NphkBXiMVA4QZHBWWZwIdnD+UBwmI/R+rOBPy07lRzX4nRaG1SmcZJUSya9OkmsOK9SqwjrIjAeBwicRwmvD+AI2NJM3kXGygI=,iv:STNzleAeaMzA+bL0QyPHr/6RsR4K9xGYCOaOxYqbPhw=,tag:swiUfk8X3aaZaQbAIMeNpA==,type:str]
+    pgp: []
+    encrypted_regex: ^(data|stringData)$
+    version: 3.8.1

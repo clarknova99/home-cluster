@@ -24,6 +24,7 @@ spec:
       retries: 3
   uninstall:
     keepHistory: false
+  #https://github.com/longhorn/longhorn/blob/master/chart/values.yaml
   values:
     monitoring:
       enabled: true

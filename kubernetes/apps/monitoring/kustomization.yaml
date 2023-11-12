@@ -10,5 +10,5 @@ resources:
   - ./kubernetes-dashboard/ks.yaml
   - ./loki-stack/ks.yaml
   - ./promlens/ks.yaml
-  #- ./thanos/ks.yaml
+  - ./thanos/ks.yaml
 
