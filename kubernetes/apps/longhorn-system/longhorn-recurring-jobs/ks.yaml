@@ -2,12 +2,12 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: storage-longhorn-recurring-jobs
+  name: cluster-apps-longhorn-recurring-jobs
   namespace: flux-system
 spec:
   dependsOn:
-    - name: storage-longhorn
-  path: ./kubernetes/apps/storage/longhorn-recurring-jobs/app
+    - name: cluster-apps-longhorn
+  path: ./kubernetes/apps/longhorn-system/longhorn-recurring-jobs/app
   prune: true
   sourceRef:
     kind: GitRepository

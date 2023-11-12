@@ -44,8 +44,7 @@ spec:
           - networking
           - media
           - kube-system
-          - rook-ceph
-          - storage
+          - longhorn-system
       globalBookmarks:
         - group: Daily
           bookmarks:
