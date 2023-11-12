@@ -6,7 +6,7 @@ metadata:
 stringData:
     s3_bucket_name: ENC[AES256_GCM,data:mYsKuA==,iv:35VknkhTgOlIql26JKwlEGDOHm7rue1QFuorBJIIfk4=,tag:zeIsKcgrE04LpwCFDAtCxA==,type:str]
     s3_bucket_host: ENC[AES256_GCM,data:6KS36z4aCZCNRueH7ym+fnVX+3vSHJUazH+jd/nTN8vImHBgCV+sPQ==,iv:ypWdI6NHQf0sLzuFT/Ez2sdAKWdmQV/e82rSzEyKTl4=,tag:3aPAOmEEETfJIJH/mzphng==,type:str]
-    s3_bucket_region: ""
+    s3_bucket_region: ENC[AES256_GCM,data:tf/J9SztsNJo,iv:M4VQ1JWy37XPNZpPY9YKWMXHx4nGkFxcoQofogVsgDg=,tag:vol2LGY+r0Dh+6Z/j/z0iQ==,type:str]
     access_key: ENC[AES256_GCM,data:vXLD333ZHlt27c3pgl+jodF5imU=,iv:eUKesD500VBtDV4k8A1e61mr42lAf/jVP0CLNGiuSnk=,tag:pFLufwqfXBzn2+HYxubHzA==,type:str]
     secret_key: ENC[AES256_GCM,data:33UlagWB33/18HLyf8jutfDDuZbxme3KDv0gZK1NyVol9qh45xjJnA==,iv:5mK4CyES8UCs4WlKeRUb4wCXz+N8YS9B5ABQbcHILzY=,tag:RPbd6DGq6WkPcDnUiPoW2w==,type:str]
 sops:
@@ -24,8 +24,8 @@ sops:
             QWoxWFQxYVFPTGwvaWFNbFk5YWV3cmsK3sIsfUa27RXNffnMirefUqNhBWZfvVcj
             JEQa+WxUQWgAVvYAKkxvPyI+jHwmXnd04NRg55DrOWgJFAy0F3fqfg==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2023-11-12T18:57:31Z"
-    mac: ENC[AES256_GCM,data:ovu//93bP3H2ODdbwRYZik3rFODF1RyjPCYr5FltFjOxs8mwc7sI8N5Or8z6vq4WU9ZAqKblgQ4l0X/g/PGxqz/CkqVuJ7OaNDIfHAPobx7oCnAQ5iTKV4wnDYtfgUUTd4ofR1saCYMLy3RE/AS+Gbcnw+NAhoSP7I2mYJRZins=,iv:UvnKIVVUdjvZXjNqItkBqK+XHlkHHWh/U2UwpKWHskE=,tag:dCdqa99VmmTpwzP+Wc/8iQ==,type:str]
+    lastmodified: "2023-11-12T19:06:16Z"
+    mac: ENC[AES256_GCM,data:xuv1CBw4uRVvPeLMrmrvB9xaazarYUgPKqXtWVV9QLFnkDLq6oc52KO41nPhKOpWAOXJ9E+PNpLjNIZDQlppzWWZd+GRtDLdDBdNebjKy0tUVaeX6HKMDRaZ8PWY8zKmsss0bUFRUExqp79pRyOJAO6CMFAB25Ey+LYpYNuz3ac=,iv:JDPTB88ZF9LNPI3XNtGLU98WlsydwZVifmCnR11PLT4=,tag:r+Stvaew4A3pACsSi/Bvyg==,type:str]
     pgp: []
     encrypted_regex: ^(data|stringData)$
     version: 3.8.1
