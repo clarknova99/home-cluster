@@ -50,10 +50,8 @@ spec:
       ingressClassName: internal
       annotations:
         hajimari.io/icon: mdi:harddisk
-      host:
-        name: &host longhorn.${SECRET_DOMAIN}
-        path: /
-      tls:
-        - hosts:
-            - *host
+      host: longhorn.${SECRET_DOMAIN}
+      tls: true
+      tlsSecret: longhorn.${SECRET_DOMAIN}
+
 

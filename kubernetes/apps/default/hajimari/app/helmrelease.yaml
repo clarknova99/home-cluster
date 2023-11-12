@@ -45,6 +45,7 @@ spec:
           - media
           - kube-system
           - rook-ceph
+          - storage
       globalBookmarks:
         - group: Daily
           bookmarks:
