@@ -19,3 +19,19 @@ spec:
   interval: 30m
   retryInterval: 1m
   timeout: 3m
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cluster-apps-longhorn-recurring-jobs
+  namespace: flux-system
+spec:
+  path: ./kubernetes/apps/longhorn-system/longhorn/recurring-jobs
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: home-kubernetes
+  wait: true
+  interval: 30m
+  retryInterval: 1m
+  timeout: 5m
