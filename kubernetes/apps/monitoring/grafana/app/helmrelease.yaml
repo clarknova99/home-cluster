@@ -80,8 +80,6 @@ spec:
         org_name: public
         org_role: Viewer
         hide_version: true
-    plugins:
-      - grafana-worldmap-panel
     dashboardProviders:
       dashboardproviders.yaml:
         apiVersion: 1
@@ -144,7 +142,8 @@ spec:
             type: prometheus
             uid: prometheus
             access: proxy
-            url: http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090
+            url: http://thanos-query-frontend.monitoring.svc.cluster.local:9090
+            #url: http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090
             jsonData:
               prometheusType: Prometheus
             isDefault: true
@@ -240,6 +239,13 @@ spec:
         enabled: true
         searchNamespace: ALL
         labelValue: ""
+    plugins:
+      - grafana-clock-panel
+      - grafana-piechart-panel
+      - grafana-worldmap-panel
+      - natel-discrete-panel
+      - pr0ps-trackmap-panel
+      - vonage-status-panel
     serviceMonitor:
       enabled: true
     ingress:
