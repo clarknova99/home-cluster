@@ -25,6 +25,7 @@ resources:
   - ./jupyterhub.yaml
   - ./k8s-gateway.yaml
   - ./kubernetes-dashboard.yaml
+  - ./longhorn.yaml
   - ./metrics-server.yaml
   - ./node-feature-discovery.yaml
   - ./piraeus.yaml
