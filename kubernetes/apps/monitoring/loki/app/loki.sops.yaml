@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: loki-secrets
+    namespace: monitoring
+stringData:
+    s3_bucket_name: ENC[AES256_GCM,data:mYsKuA==,iv:35VknkhTgOlIql26JKwlEGDOHm7rue1QFuorBJIIfk4=,tag:zeIsKcgrE04LpwCFDAtCxA==,type:str]
+    s3_bucket_host: ENC[AES256_GCM,data:6KS36z4aCZCNRueH7ym+fnVX+3vSHJUazH+jd/nTN8vImHBgCV+sPQ==,iv:ypWdI6NHQf0sLzuFT/Ez2sdAKWdmQV/e82rSzEyKTl4=,tag:3aPAOmEEETfJIJH/mzphng==,type:str]
+    access_key: ENC[AES256_GCM,data:vXLD333ZHlt27c3pgl+jodF5imU=,iv:eUKesD500VBtDV4k8A1e61mr42lAf/jVP0CLNGiuSnk=,tag:pFLufwqfXBzn2+HYxubHzA==,type:str]
+    secret_key: ENC[AES256_GCM,data:33UlagWB33/18HLyf8jutfDDuZbxme3KDv0gZK1NyVol9qh45xjJnA==,iv:5mK4CyES8UCs4WlKeRUb4wCXz+N8YS9B5ABQbcHILzY=,tag:RPbd6DGq6WkPcDnUiPoW2w==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age14q9x9ftcpqfw2kmhmlfzpx5g2wmn7tdnq34uhh4x0r2h6qfmm5dqk07z2e
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA3MWlQbFlGblhVV2NDY05R
+            NndtVjBlQUIxQ1lTc0R3dkJaZVVBMGVJeURRCnR5UTVEcmttWUxnbXM5d3lxMy9n
+            c1ZnYzVFNEZCWVFpWVFBeWRqblk1SzQKLS0tIE5mNGRwQmo5bGJmMk01QzhXczVK
+            QWoxWFQxYVFPTGwvaWFNbFk5YWV3cmsK3sIsfUa27RXNffnMirefUqNhBWZfvVcj
+            JEQa+WxUQWgAVvYAKkxvPyI+jHwmXnd04NRg55DrOWgJFAy0F3fqfg==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2023-11-12T18:08:35Z"
+    mac: ENC[AES256_GCM,data:0chKPZpJ+GvbAgOWgf8tk57UElojJd16dYH0Xz5o58ZLgOCqY6b74mrIhmRk5CVUg9ec8At02KWX+DF0w+gfrsrXZtxOjYVN3SHWFRAaujxugvN1Gzbud0jJw5be1DyLSlKBVc4W15z0EgZltigsluiowkVyO37w1NysYl+qHOw=,iv:QoQYUZAiAcqpvflYEQen1gGjY5HE4SDCYxmYR9vfzWM=,tag:RbR0Gz/7a0F0EKGbJeeusQ==,type:str]
+    pgp: []
+    encrypted_regex: ^(data|stringData)$
+    version: 3.8.1
