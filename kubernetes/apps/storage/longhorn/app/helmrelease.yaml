@@ -51,7 +51,7 @@ spec:
       annotations:
         hajimari.io/icon: mdi:harddisk
       host:
-        name: &host rook.${SECRET_DOMAIN}
+        name: &host longhorn.${SECRET_DOMAIN}
         path: /
       tls:
         - hosts:
