@@ -34,7 +34,7 @@ spec:
       backupTargetCredentialSecret: longhorn-secrets
       defaultReplicaCount: 2
       defaultLonghornStaticStorageClass: longhorn
-      # backupstorePollInterval: 0
+      backupstorePollInterval: 0
       #backupTarget: nfs://${NAS_ADDR}:/mnt/user/nfs-backup
       createDefaultDiskLabeledNodes: true
       defaultDataPath: /mnt/data
