@@ -30,7 +30,7 @@ The repo is home for the code to automate the provisioning and management of my 
 * [sops](https://github.com/mozilla/sops) with [age](https://github.com/FiloSottile/age) to encrypt secrets used in Ansible & Flux
 * [ingress-nginx](https://github.com/kubernetes/ingress-nginx): Kubernetes ingress controller used for HTTP reverse proxy of service ingresses
 * [longhorn](https://longhorn.io/): Replicated, persisted storage
-* [minio](https://min.io/): Object Storage for PVC & Database backup storage
+* [minio](https://min.io/): Object Storage for PVC & Database backups
 
 
 
@@ -42,7 +42,7 @@ The repo is home for the code to automate the provisioning and management of my 
 | Alienware Aurora | 1   | 24GB | debian | Kubernetes Workers |
 | Alienware X51  | 1   | 16GB | debian | Kubernetes Workers |
 | Raspberry Pi 4 | 4   | 8GB | debian | Kubernetes Workers |
-| Synology 1513+ | 1   | 8GB | debian | NAS |
+| Synology 1513+ | 1   | 8GB | - | NAS |
 | Firewalla Gold | 1   | - | Ubuntu | Router |
 | Zyxel GS1900-24E Switch | 1   | -   | -   | Network Switch |
 | APC SMT1500C | 1   | -   | -   | UPS |
