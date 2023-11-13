@@ -31,8 +31,8 @@ spec:
       MINIO_UPDATE: "off"
       MINIO_BROWSER_REDIRECT_URL: "https://minio.${SECRET_DOMAIN}"
       MINIO_SERVER_URL: "https://s3.${SECRET_DOMAIN}"
-      #MINIO_PROMETHEUS_URL: http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090
-      MINIO_PROMETHEUS_URL: http://thanos-query.monitoring.svc.cluster.local:9090
+      MINIO_PROMETHEUS_URL: http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090
+      #MINIO_PROMETHEUS_URL: http://thanos-query.monitoring.svc.cluster.local:9090
       MINIO_PROMETHEUS_JOB_ID: minio
       MINIO_IDENTITY_OPENID_CONFIG_URL: https://auth.${SECRET_DOMAIN}/.well-known/openid-configuration
       MINIO_IDENTITY_OPENID_CLIENT_ID: minio
