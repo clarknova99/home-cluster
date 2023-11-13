@@ -20,7 +20,7 @@
 ## :book:&nbsp; Overview
 
 The repo is home for the code to automate the provisioning and management of my Kubernetes cluster.
-* [ansible](https://www.ansible.com) for provisioning [proxmox](https://www.proxmox.com/en/) VMs & bootstrapping Ubuntu servers with [K3s](https://k3s.io).
+* [ansible](https://www.ansible.com) for provisioning & bootstrapping debian servers with [K3s](https://k3s.io).
 * [flux](https://toolkit.fluxcd.io)  watches this git repo and applies changes to Kubernetes when they are pushed to the repo.
 * [renovate](https://github.com/renovatebot/renovate) monitors the repo, creating pull requests when it finds updates to dependencies.
 
@@ -29,6 +29,8 @@ The repo is home for the code to automate the provisioning and management of my 
 * [cert-manager](https://cert-manager.io) to request SSL certificates to store as Kubernetes resources
 * [sops](https://github.com/mozilla/sops) with [age](https://github.com/FiloSottile/age) to encrypt secrets used in Ansible & Flux
 * [ingress-nginx](https://github.com/kubernetes/ingress-nginx): Kubernetes ingress controller used for HTTP reverse proxy of service ingresses
+* [longhorn](https://longhorn.io/): Replicated, persisted storage
+* [minio](https://min.io/): Object Storage for PVC & Database backup storage
 
 
 
