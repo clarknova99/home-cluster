@@ -37,11 +37,11 @@ The repo is home for the code to automate the provisioning and management of my 
 ## 🔧 Hardware
 | Device | Count | Ram | Operating System | Purpose |
 | --- | --- | --- | --- | --- |
-| Intel NUC11PAHi7 | 1   | 64GB | Promox | Kubernetes Masters |
-| Intel NUC8i5BEH | 1   | 32GB | Promox | Kubernetes Workers |
-| Alienware X51  | 1   | 16GB | Ubuntu | Kubernetes Workers |
-| Raspberry Pi 4 | 4   | 8GB | Ubuntu | Kubernetes Workers |
-| Synology 1513+ | 1   | 8GB | Ubuntu | NAS |
+| Intel NUC11PAHi7 | 1   | 64GB | debian | Kubernetes Masters |
+| Intel NUC8i5BEH | 1   | 32GB | debian | Kubernetes Workers |
+| Alienware X51  | 1   | 16GB | debian | Kubernetes Workers |
+| Raspberry Pi 4 | 4   | 8GB | debian | Kubernetes Workers |
+| Synology 1513+ | 1   | 8GB | debian | NAS |
 | Firewalla Gold | 1   | - | Ubuntu | Router |
 | Zyxel GS1900-24E Switch | 1   | -   | -   | Network Switch |
 | APC SMT1500C | 1   | -   | -   | UPS |
