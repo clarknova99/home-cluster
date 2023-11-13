@@ -66,6 +66,9 @@ spec:
             path: /minio/v2/metrics/cluster
             interval: 1m
             scrapeTimeout: 10s
+            bearerTokenSecret:
+              name: minio
+              key: MINIO_ROOT_PASSWORD
     ingress:
       main:
         enabled: true
