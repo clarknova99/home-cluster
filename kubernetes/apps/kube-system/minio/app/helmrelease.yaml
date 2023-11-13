@@ -68,7 +68,7 @@ spec:
             scrapeTimeout: 10s
             bearerTokenSecret:
               name: minio
-              key: MINIO_ROOT_PASSWORD
+              key: MINIO_PROMETHEUS_TOKEN
     ingress:
       main:
         enabled: true
@@ -121,3 +121,12 @@ spec:
         cpu: 100m
       limits:
         memory: 750Mi
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: kubernetes.io/arch
+                  operator: In
+                  values:
+                    - amd64
