@@ -162,6 +162,11 @@ spec:
         cert-manager:
           url: https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/cert-manager/dashboards/cert-manager.json
           datasource: Prometheus
+        longhorn:
+          gnetId: 16888  #https://grafana.com/grafana/dashboards/16888?tab=revisions
+          revision: 8
+          datasource:
+            - { name: DS_PROMETHEUS, value: Prometheus }
         minio:
           gnetId: 13502  #https://grafana.com/grafana/dashboards/13502?tab=revisions
           revision: 24
