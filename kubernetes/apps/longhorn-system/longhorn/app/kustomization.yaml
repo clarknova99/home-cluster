@@ -5,3 +5,4 @@ namespace: longhorn-system
 resources:
   - ./helmrelease.yaml
   - ./longhorn.sops.yaml
+  - ./service-monitor.yaml
