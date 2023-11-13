@@ -27,8 +27,6 @@ spec:
   dependsOn:
     - name: intel-device-plugin-gpu
       namespace: kube-system
-    - name: rook-ceph-cluster
-      namespace: rook-ceph
   values:
     controllers:
       main:
@@ -73,7 +71,7 @@ spec:
             - name: config
               accessMode: ReadWriteOnce
               size: 100Gi
-              storageClass: ceph-block
+              storageClass: longhorn
               globalMounts:
                 - path: /config
     service:
