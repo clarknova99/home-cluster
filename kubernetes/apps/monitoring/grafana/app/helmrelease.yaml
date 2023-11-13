@@ -27,6 +27,8 @@ spec:
   dependsOn:
     - name: local-path-provisioner
       namespace: kube-system
+    - name: longhorn
+      namespace: longhorn-system
   values:
     deploymentStrategy:
       type: Recreate
@@ -50,8 +52,6 @@ spec:
       orgs:
         - id: 1
           name: private
-        - id: 2
-          name: public
       analytics:
         check_for_updates: false
         check_for_plugin_updates: false
@@ -100,14 +100,6 @@ spec:
             editable: true
             options:
               path: /var/lib/grafana/dashboards/flux
-          # - name: ceph
-          #   orgId: 1
-          #   folder: Ceph
-          #   type: file
-          #   disableDeletion: false
-          #   editable: true
-          #   options:
-          #     path: /var/lib/grafana/dashboards/ceph
           - name: kubernetes
             orgId: 1
             folder: Kubernetes
@@ -124,14 +116,14 @@ spec:
             editable: true
             options:
               path: /var/lib/grafana/dashboards/nginx
-          - name: nginx-default
+          - name: thanos
             orgId: 1
-            folder: Nginx-default
+            folder: Thanos
             type: file
             disableDeletion: false
             editable: true
             options:
-              path: /var/lib/grafana/dashboards/nginx-default
+              path: /var/lib/grafana/dashboards/thanos
     datasources:
       datasources.yaml:
         apiVersion: 1
@@ -158,10 +150,11 @@ spec:
     dashboards:
       default:
         cloudflared:
+          # renovate: depName="Cloudflare Tunnels (cloudflared)"
           gnetId: 17457 # https://grafana.com/grafana/dashboards/17457?tab=revisions
           revision: 6
           datasource:
-            - { name: Prometheus, value: Prometheus }
+            - { name: DS_PROMETHEUS, value: Prometheus }
         external-dns:
           gnetId: 15038 # https://grafana.com/grafana/dashboards/15038?tab=revisions
           revision: 1
@@ -172,7 +165,8 @@ spec:
         minio:
           gnetId: 13502  #https://grafana.com/grafana/dashboards/13502?tab=revisions
           revision: 24
-          datasource: Prometheus
+          datasource:
+            - { name: DS_PROMETHEUS, value: Prometheus }
         node-exporter-full:
           gnetId: 1860 # https://grafana.com/grafana/dashboards/1860?tab=revisions
           revision: 33
@@ -184,22 +178,6 @@ spec:
         cloudnative-pg:
           url: https://raw.githubusercontent.com/cloudnative-pg/cloudnative-pg/main/docs/src/samples/monitoring/grafana-dashboard.json
           datasource: Prometheus
-        # ceph:
-        #   ceph-cluster:
-        #     # renovate: depName="Ceph Cluster"
-        #     gnetId: 2842  #https://grafana.com/grafana/dashboards/2842?tab=revisions
-        #     revision: 17
-        #     datasource: Prometheus
-        #   ceph-osd:
-        #     # renovate: depName="Ceph - OSD (Single)"
-        #     gnetId: 5336 #https://grafana.com/grafana/dashboards/5336?tab=revisions
-        #     revision: 9
-        #     datasource: Prometheus
-        #   ceph-pools:
-        #     # renovate: depName="Ceph - Pools"
-        #     gnetId: 5342
-        #     revision: 9
-        #     datasource: Prometheus
       flux:
         flux-cluster:
           url: https://raw.githubusercontent.com/fluxcd/flux2/main/manifests/monitoring/monitoring-config/dashboards/cluster.json
@@ -207,31 +185,79 @@ spec:
         flux-control-plane:
           url: https://raw.githubusercontent.com/fluxcd/flux2/main/manifests/monitoring/monitoring-config/dashboards/control-plane.json
           datasource: Prometheus
+        flux-logs:
+          url: https://raw.githubusercontent.com/fluxcd/flux2/main/manifests/monitoring/monitoring-config/dashboards/logs.json
+          datasource: Prometheus
       kubernetes:
         kubernetes-api-server:
-          url: https://raw.githubusercontent.com/dotdc/grafana-dashboards-kubernetes/master/dashboards/k8s-system-api-server.json
+          # renovate: depName="Kubernetes / System / API Server"
+          gnetId: 15761
+          revision: 14
           datasource: Prometheus
         kubernetes-coredns:
-          url: https://raw.githubusercontent.com/dotdc/grafana-dashboards-kubernetes/master/dashboards/k8s-system-coredns.json
+          # renovate: depName="Kubernetes / System / CoreDNS"
+          gnetId: 15762
+          revision: 13
           datasource: Prometheus
         kubernetes-global:
-          url: https://raw.githubusercontent.com/dotdc/grafana-dashboards-kubernetes/master/dashboards/k8s-views-global.json
+          # renovate: depName="Kubernetes / Views / Global"
+          gnetId: 15757
+          revision: 31
           datasource: Prometheus
         kubernetes-namespaces:
-          url: https://raw.githubusercontent.com/dotdc/grafana-dashboards-kubernetes/master/dashboards/k8s-views-namespaces.json
+          # renovate: depName="Kubernetes / Views / Namespaces"
+          gnetId: 15758
+          revision: 27
           datasource: Prometheus
         kubernetes-nodes:
-          url: https://raw.githubusercontent.com/dotdc/grafana-dashboards-kubernetes/master/dashboards/k8s-views-nodes.json
+          # renovate: depName="Kubernetes / Views / Nodes"
+          gnetId: 15759
+          revision: 19
           datasource: Prometheus
         kubernetes-pods:
-          url: https://raw.githubusercontent.com/dotdc/grafana-dashboards-kubernetes/master/dashboards/k8s-views-pods.json
+          # renovate: depName="Kubernetes / Views / Pods"
+          gNetId: 15760
+          revision: 21
           datasource: Prometheus
-      nginx-default:
+        kubernetes-volumes:
+          # renovate: depName="K8s / Storage / Volumes / Cluster"
+          gnetId: 11454
+          revision: 14
+          datasource: Prometheus
+      nginx:
         nginx:
           url: https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/grafana/dashboards/nginx.json
           datasource: Prometheus
         nginx-request-handling-performance:
           url: https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/grafana/dashboards/request-handling-performance.json
+          datasource: Prometheus
+      thanos:
+        thanos-bucket-replicate:
+          url: https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/thanos/dashboards/bucket-replicate.json
+          datasource: Prometheus
+        thanos-compact:
+          url: https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/thanos/dashboards/compact.json
+          datasource: Prometheus
+        thanos-overview:
+          url: https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/thanos/dashboards/overview.json
+          datasource: Prometheus
+        thanos-query:
+          url: https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/thanos/dashboards/query.json
+          datasource: Prometheus
+        thanos-query-frontend:
+          url: https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/thanos/dashboards/query-frontend.json
+          datasource: Prometheus
+        thanos-receieve:
+          url: https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/thanos/dashboards/receive.json
+          datasource: Prometheus
+        thanos-rule:
+          url: https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/thanos/dashboards/rule.json
+          datasource: Prometheus
+        thanos-sidecar:
+          url: https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/thanos/dashboards/sidecar.json
+          datasource: Prometheus
+        thanos-store:
+          url: https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/thanos/dashboards/store.json
           datasource: Prometheus
     sidecar:
       dashboards:
@@ -275,13 +301,16 @@ spec:
       serviceMonitor:
         enabled: true
     persistence:
-      # enabled: true
-      # storageClassName: local-path
       enabled: true
-      existingClaim: pvc-grafana
-      name: pvc-grafana
-    volumeMounts:
-      - mountPath: /var/lib/grafana
-        name: grafana-data
+      storageClassName: longhorn
+      size: 1Gi
+      accessModes:
+        - ReadWriteOnce
+    #   enabled: true
+    #   existingClaim: pvc-grafana
+    #   name: pvc-grafana
+    # volumeMounts:
+    #   - mountPath: /var/lib/grafana
+    #     name: grafana-data
     testFramework:
       enabled: false
