@@ -4,4 +4,4 @@ kind: Kustomization
 namespace: database
 resources:
   - ./helmrelease.yaml
-  - ./pvc.yaml
+  - ./pvc-longhorn.yaml

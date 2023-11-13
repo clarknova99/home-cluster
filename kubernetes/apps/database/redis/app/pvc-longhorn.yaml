@@ -2,7 +2,7 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: redis-longhorn-pvc
+  name: pvc-longhorn-redis
   namespace: databases
 spec:
   accessModes:
