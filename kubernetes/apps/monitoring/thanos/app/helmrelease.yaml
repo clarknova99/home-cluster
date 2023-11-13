@@ -44,6 +44,8 @@ spec:
       enabled: true
       replicaCount: 2
       ingress:
+        annotations:
+          hajimari.io/icon: simple-icons:prometheus
         enabled: true
         ingressClassName: internal
         hostname: &host thanos-query-frontend.${SECRET_DOMAIN}

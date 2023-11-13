@@ -5,4 +5,4 @@ namespace: networking
 resources:
   - ./helmrelease.yaml
   # - ./plex.yaml
-  - ./proxmox.yaml
+  #- ./proxmox.yaml
