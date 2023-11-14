@@ -50,7 +50,7 @@ jobs:
               -v ${{ env.SCHEMA_DIR }}:/crds \
               -u $(id -u) \
               --entrypoint /bin/sh \
-              ghcr.io/clarknova99/kubernetes-schemas:latest \
+              ghcr.io/clarknova99/kubernetes-schemas-oci:latest \
               -c "cp -r /usr/share/nginx/html/* /crds"
 
       - name: Run kubeconform
