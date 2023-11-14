@@ -33,7 +33,7 @@ spec:
           main:
             image:
               repository: ghcr.io/clarknova99/kubernetes-schemas-oci
-              tag: latest@sha256:ddcc3eea6bc2b1ef66b8ddd739b989d7fc5559217bd41df7fa2ee457e72d0d5b
+              tag: latest
             resources:
               requests:
                 cpu: 5m
