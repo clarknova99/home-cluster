@@ -16,4 +16,4 @@ resources:
   #- ./n8n/ks.yaml
   #- ./superset/ks.yaml
   - ./website/ks.yaml
-  #- ./whoami/ks.yaml
+  - ./whoami/ks.yaml
