@@ -24,10 +24,13 @@ spec:
       retries: 5
   values:
     controller:
-      replicas: 1
-    image:
-      repository: docker.io/traefik/whoami
-      tag: latest
+      main:
+        replicas: 1
+        containers:
+          main:
+            image:
+              repository: docker.io/traefik/whoami
+              tag: latest
     service:
       main:
         ports:
