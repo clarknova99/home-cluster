@@ -73,7 +73,7 @@ jobs:
               https://raw.githubusercontent.com/datreeio/CRDs-catalog/main/Utilities/crd-extractor.sh
           chmod +x $GITHUB_WORKSPACE/crd-extractor.sh
           bash $GITHUB_WORKSPACE/crd-extractor.sh
-          cat ${{ steps.kubeconfig.outputs.filePath }}
+          mv /home/runner/.datree/crdSchemas/* /home/runner/crds
 
       - name: Write Dockerfile
         shell: bash
