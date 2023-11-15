@@ -32,7 +32,7 @@ spec:
         containers:
           main:
             image:
-              repository: ghcr.io/clarknova99/kubernetes-schemas-oci
+              repository: ghcr.io/clarknova99/kubernetes-schemas
               tag: latest
             resources:
               requests:
