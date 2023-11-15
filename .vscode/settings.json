@@ -6,9 +6,18 @@
         "**/ansible/**/inventory/**/*.yaml": "yaml",
         "**/kubernetes/**/*.sops.toml": "plaintext"
     },
+    "yaml.schemaStore.enable": true,
     "yaml.schemas": {
-        "ansible": "**/ansible/*.yaml",
-        "Kubernetes": "**/kubernetes/*.yaml"
+      "ansible": "ansible/**/*.yaml",
+      "kubernetes": "kubernetes/**/*.yaml"
     },
+    "editor.fontFamily": "FiraCode Nerd Font",
+    "editor.fontLigatures": true,
+    "editor.bracketPairColorization.enabled": true,
+    "editor.guides.bracketPairs": true,
+    "editor.guides.bracketPairsHorizontal": true,
+    "editor.guides.highlightActiveBracketPair": true,
+    "editor.hover.delay": 1500,
+    "editor.stickyScroll.enabled": false,
     "sops.defaults.ageKeyFile": "age.key"
 }
