@@ -1,7 +1,7 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:base",
+    "config:recommended",
     "docker:enableMajor",
     ":disableRateLimiting",
     ":dependencyDashboard",
@@ -10,6 +10,7 @@
     ":automergeBranch",
     "github>clarknova99/home-cluster//.github/renovate/autoMerge.json5",
     "github>clarknova99/home-cluster//.github/renovate/commitMessage.json5",
+    "github>clarknova99/home-cluster//.github/renovate/customDatasources.json5",
     "github>clarknova99/home-cluster//.github/renovate/groups.json5",
     "github>clarknova99/home-cluster//.github/renovate/labels.json5",
     "github>clarknova99/home-cluster//.github/renovate/semanticCommits.json5",
