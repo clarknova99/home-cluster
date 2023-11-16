@@ -1,0 +1,112 @@
+---
+# yaml-language-server: $schema=https://github.com/fluxcd-community/flux2-schemas/raw/main/helmrelease-helm-v2beta1.json
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: blackbox-exporter
+  namespace: monitoring
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: prometheus-blackbox-exporter
+      version: 8.5.0
+      sourceRef:
+        kind: HelmRepository
+        name: prometheus-community
+        namespace: flux-system
+  maxHistory: 2
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    fullnameOverride: blackbox-exporter
+    podSecurityContext:
+      sysctls:
+        - name: net.ipv4.ping_group_range
+          value: "0 65536"
+    pspEnabled: false
+    config:
+      modules:
+        icmp:
+          prober: icmp
+          icmp:
+            preferred_ip_protocol: "ip4"
+            ip_protocol_fallback: false
+        icmp6:
+          prober: icmp
+          icmp:
+            preferred_ip_protocol: "ip6"
+            ip_protocol_fallback: false
+        http_2xx:
+          prober: http
+          timeout: 5s
+          http:
+            valid_http_versions: ["HTTP/1.1", "HTTP/2.0"]
+            follow_redirects: true
+            preferred_ip_protocol: "ip4"
+    service:
+      ipFamilyPolicy: PreferDualStack
+    ingress:
+      enabled: true
+      className: internal
+      annotations:
+        hajimari.io/enable: "false"
+      hosts:
+        - host: &host blackbox.${SECRET_DOMAIN}
+          paths:
+            - path: /
+              pathType: Prefix
+      tls:
+        - hosts:
+            - *host
+    podAnnotations:
+      reloader.stakater.com/auto: "true"
+    resources:
+      requests:
+        cpu: 15m
+        memory: 64M
+      limits:
+        cpu: 100m
+        memory: 64M
+
+    serviceMonitor:
+      enabled: true
+      defaults:
+        labels:
+          release: prometheus
+        interval: 30s
+        scrapeTimeout: 30s
+      targets:
+        - module: icmp
+          name: nas
+          url: 192.168.1.2
+        - module: http_2xx
+          name: site
+          url: "https://${SECRET_DOMAIN}"
+    prometheusRule:
+      enabled: true
+      additionalLabels:
+        app: prometheus-operator
+        release: prometheus
+      rules:
+        - alert: HostDown
+          expr: probe_success == 0
+          for: 1m
+          labels:
+            severity: critical
+          annotations:
+            message: The host "{{ $labels.target }}" is currently unreachable
+        - alert: SlowResponseTime
+          annotations:
+            message: The response time for "{{ $labels.target }}" has been greater than 30 seconds for 5 minutes.
+          expr: probe_duration_seconds > 30
+          for: 5m
+          labels:
+            severity: warning

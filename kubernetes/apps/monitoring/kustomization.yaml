@@ -1,8 +1,10 @@
 ---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/kustomization-kustomize-v1beta1.json
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - ./namespace.yaml
+  - ./blackbox-exporter/ks.yaml
   - ./gatus/ks.yaml
   - ./grafana/ks.yaml
   - ./influxdb/ks.yaml
@@ -12,5 +14,6 @@ resources:
   - ./loki/ks.yaml
   - ./promlens/ks.yaml
   - ./promtail/ks.yaml
+  - ./smartctl-exporter/ks.yaml
   - ./thanos/ks.yaml
 
