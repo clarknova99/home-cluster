@@ -1,0 +1,18 @@
+---
+global:
+  resolve_timeout: 5m
+  slack_api_url: "https://hooks.slack.com/services/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"
+
+route:
+  group_by: ["alertname", "job"]
+  group_interval: 10m
+  group_wait: 1m
+  receiver: 'slack'
+
+
+receivers:
+  - name: 'slack'
+    slack_configs:
+        - send_resolved: true
+          title: "{{ .CommonAnnotations.summary }}"
+          text: "{{ .CommonAnnotations.description }}"
