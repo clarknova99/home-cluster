@@ -47,7 +47,7 @@ spec:
       GF_AUTH_GENERIC_OAUTH_CLIENT_ID: grafana
       GF_AUTH_GENERIC_OAUTH_TOKEN_URL: https://auth.${SECRET_DOMAIN}/api/oidc/token
       GF_EXPLORE_ENABLED: true
-      GF_FEATURE_TOGGLES_ENABLE: publicDashboards
+      GF_FEATURE_TOGGLES_ENABLE: publicDashboards, dashgpt, toggleLabelsInLogsUI
       GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS: natel-discrete-panel,pr0ps-trackmap-panel,panodata-map-panel
       GF_SERVER_ROOT_URL: "https://grafana.${SECRET_DOMAIN}"
       GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET: ${SECRET_GRAFANA_OAUTH_CLIENT_SECRET}
