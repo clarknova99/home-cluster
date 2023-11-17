@@ -58,6 +58,8 @@ spec:
       GF_SMTP_FROM_NAME: grafana
       GF_SMTP_USER: ${SECRET_MAIL_USERNAME}
       GF_SMTP_PASSWORD: ${SECRET_MAIL_PASSWORD}
+    envFromSecrets:
+      - name: grafana-admin-secret
     grafana.ini:
       orgs:
         - id: 1
