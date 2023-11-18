@@ -8,7 +8,7 @@ resources:
   - ./gatus/ks.yaml
   - ./grafana/ks.yaml
   - ./influxdb/ks.yaml
-  #- ./kube-prometheus-stack/ks.yaml
+  - ./kube-prometheus-stack/ks.yaml
   - ./kube-state-metrics/ks.yaml
   - ./kubernetes-dashboard/ks.yaml
   - ./loki/ks.yaml
@@ -16,4 +16,3 @@ resources:
   - ./promtail/ks.yaml
   - ./smartctl-exporter/ks.yaml
   - ./thanos/ks.yaml
-
