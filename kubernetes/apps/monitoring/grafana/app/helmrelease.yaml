@@ -143,6 +143,7 @@ spec:
         deleteDatasources:
           - { name: Prometheus, orgId: 1 }
           - { name: Loki, orgId: 1 }
+          - { name: Alertmanager, orgId: 1 }
         datasources:
           - name: Prometheus
             type: prometheus
@@ -160,6 +161,12 @@ spec:
             url: http://loki-gateway.monitoring.svc.cluster.local
             jsonData:
               maxLines: 250
+          - name: Alertmanager
+            type: alertmanager
+            access: proxy
+            url: http://alertmanager.monitoring.svc.cluster.local:9093
+            jsonData:
+              implementation: prometheus
     dashboards:
       default:
         cloudflared:
