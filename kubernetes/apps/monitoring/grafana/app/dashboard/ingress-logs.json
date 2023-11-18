@@ -25,7 +25,7 @@
     {
       "datasource": {
         "type": "loki",
-        "uid": "P8E80F9AEF21F6940"
+        "uid": "loki"
       },
       "fieldConfig": {
         "defaults": {
@@ -147,7 +147,7 @@
         {
           "datasource": {
             "type": "loki",
-            "uid": "P8E80F9AEF21F6940"
+            "uid": "loki"
           },
           "editorMode": "code",
           "expr": "sum by (geoip_latitude, geoip_longitude, geoip_city, geoip_country_code, vhost, path) (count_over_time({app=\"ingress-nginx\", instance=\"nginx-external\"} \n| json  \n| x_forwarded_for !~ `.*192.168.*`| geoip_country_code !=\"\" |__error__=``[$__range]))",
@@ -179,7 +179,7 @@
     {
       "datasource": {
         "type": "loki",
-        "uid": "P8E80F9AEF21F6940"
+        "uid": "loki"
       },
       "description": "",
       "fieldConfig": {
@@ -235,7 +235,7 @@
         {
           "datasource": {
             "type": "loki",
-            "uid": "P8E80F9AEF21F6940"
+            "uid": "loki"
           },
           "editorMode": "code",
           "expr": "sum by(geoip_city, geoip_region_name, geoip_country_name) (count_over_time({app=\"ingress-nginx\", instance=\"nginx-external\"} | json | x_forwarded_for !~ `.*192.168.*` | geoip_country_code != \"\"| __error__=`` [$__interval]))",
@@ -252,7 +252,7 @@
     {
       "datasource": {
         "type": "loki",
-        "uid": "P8E80F9AEF21F6940"
+        "uid": "loki"
       },
       "description": "",
       "gridPos": {
@@ -276,7 +276,7 @@
         {
           "datasource": {
             "type": "loki",
-            "uid": "P8E80F9AEF21F6940"
+            "uid": "loki"
           },
           "editorMode": "code",
           "expr": "{app=\"ingress-nginx\", instance=\"nginx-external\"} | json | x_forwarded_for !~ `.*192.168.*` | x_forwarded_for !~ `.*10.42.*` | \n  line_format `{{.time}} - {{.status}} - {{.vhost}} - {{.x_forwarded_for}} - {{.http_user_agent}} - {{.geoip_city}}, {{.geoip_region_name}} {{.geoip_country_code}} - {{.path}} - {{.http_referrer}}` |\n __error__=``",
@@ -290,7 +290,7 @@
     {
       "datasource": {
         "type": "loki",
-        "uid": "P8E80F9AEF21F6940"
+        "uid": "loki"
       },
       "description": "",
       "gridPos": {
@@ -314,7 +314,7 @@
         {
           "datasource": {
             "type": "loki",
-            "uid": "P8E80F9AEF21F6940"
+            "uid": "loki"
           },
           "editorMode": "code",
           "expr": "{app=\"ingress-nginx\"} | json | x_forwarded_for !~ `.*192.168.*` |\n  line_format `{{.time}} - {{.node_name}} - {{.instance}} - {{.status}} - {{.vhost}} - {{.x_forwarded_for}} - {{.geoip_city}}, {{.geoip_region_name}} {{.geoip_country_code}} - {{.path}} - {{.http_referrer}}` |\n  status != \"200\" | status != \"204\" \n __error__=``",
@@ -328,7 +328,7 @@
     {
       "datasource": {
         "type": "loki",
-        "uid": "P8E80F9AEF21F6940"
+        "uid": "loki"
       },
       "description": "",
       "gridPos": {
@@ -352,7 +352,7 @@
         {
           "datasource": {
             "type": "loki",
-            "uid": "P8E80F9AEF21F6940"
+            "uid": "loki"
           },
           "editorMode": "code",
           "expr": "{app=\"ingress-nginx\", instance=\"nginx-external\"} | json | x_forwarded_for !~ `.*192.168.*` | vhost !~ \"influxdb-brad.bigwang.org\" |\n  line_format `{{.time}} - {{.status}} - {{.vhost}} - {{.x_forwarded_for}} - {{.http_user_agent}} - {{.geoip_city}}, {{.geoip_region_name}} {{.geoip_country_code}} - {{.path}} - {{.http_referrer}}` |\n __error__=``",
@@ -468,7 +468,7 @@
     {
       "datasource": {
         "type": "loki",
-        "uid": "P8E80F9AEF21F6940"
+        "uid": "loki"
       },
       "description": "",
       "gridPos": {
@@ -492,7 +492,7 @@
         {
           "datasource": {
             "type": "loki",
-            "uid": "P8E80F9AEF21F6940"
+            "uid": "loki"
           },
           "editorMode": "code",
           "expr": "{app=\"ingress-nginx\", instance=\"nginx-external\"} | json | x_forwarded_for !~ `.*192.168.*` | vhost !~ \"influxdb-brad.bigwang.org\" |\n __error__=``",
@@ -506,7 +506,7 @@
     {
       "datasource": {
         "type": "loki",
-        "uid": "P8E80F9AEF21F6940"
+        "uid": "loki"
       },
       "description": "",
       "fieldConfig": {
@@ -659,7 +659,7 @@
         {
           "datasource": {
             "type": "loki",
-            "uid": "P8E80F9AEF21F6940"
+            "uid": "loki"
           },
           "editorMode": "code",
           "expr": "{app=\"ingress-nginx\", instance=\"nginx-external\"} | json | x_forwarded_for !~ `.*192.168.*` | vhost !~ \"influxdb-brad.bigwang.org\" |\n __error__=``",
@@ -759,7 +759,7 @@
     {
       "datasource": {
         "type": "loki",
-        "uid": "P8E80F9AEF21F6940"
+        "uid": "loki"
       },
       "description": "",
       "gridPos": {
@@ -783,7 +783,7 @@
         {
           "datasource": {
             "type": "loki",
-            "uid": "P8E80F9AEF21F6940"
+            "uid": "loki"
           },
           "editorMode": "code",
           "expr": "{app=\"ingress-nginx\", instance=\"nginx-external\"} | json | x_forwarded_for !~ `.*192.168.*` |\n  line_format `{{.time}} - {{.status}} - {{.vhost}} - {{.x_forwarded_for}} - {{.geoip_city}}, {{.geoip_region_name}} {{.geoip_country_code}} - {{.path}} - {{.http_referrer}}` |\n __error__=``",
