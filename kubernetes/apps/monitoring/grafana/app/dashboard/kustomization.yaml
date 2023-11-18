@@ -10,10 +10,10 @@ configMapGenerator:
   - name: smartctl-exporter-dashboard
     files:
       - smartctl-exporter.json
-  - name: Ingress Logs
+  - name: ingress-logs-dashboard
     files:
       - ingress-logs.json
-  - name: Machine temps
+  - name: machine-temps-dashboard
     files:
       - temperatures.json
 generatorOptions:
