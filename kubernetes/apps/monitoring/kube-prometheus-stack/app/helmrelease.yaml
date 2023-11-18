@@ -83,10 +83,10 @@ spec:
         pathType: Prefix
         ingressClassName: internal
         hosts:
-          - alertmanager.${SECRET_DOMAIN}"
+          - alertmanager.${SECRET_DOMAIN}
         tls:
           - hosts:
-              - alertmanager.${SECRET_DOMAIN}"
+              - alertmanager.${SECRET_DOMAIN}
       alertmanagerSpec:
         replicas: 2
         storage:

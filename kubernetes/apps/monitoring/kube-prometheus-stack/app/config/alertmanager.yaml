@@ -51,6 +51,6 @@ inhibit_rules:
         title: >-
           {{ "{{" }} .CommonLabels.alertname {{ "}}" }}
           [{{ "{{" }} .Status | toUpper {{ "}}" }}{{ "{{" }} if eq .Status "firing" {{ "}}" }}:{{ "{{" }} .Alerts.Firing | len {{ "}}" }}{{ "{{" }} end {{ "}}" }}]
-        token: "${{SECRET_PUSHOVER_TOKEN }}"
+        token: "${SECRET_PUSHOVER_TOKEN}"
         url_title: View in Alertmanager
-        user_key: "${{SECRET_PUSHOVER_USER_KEY }}"
+        user_key: "${SECRET_PUSHOVER_USER_KEY}"
