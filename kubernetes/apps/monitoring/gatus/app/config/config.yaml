@@ -11,15 +11,15 @@ ui:
   title: feldblyum cloud status
   header: feldblyum cloud status
   logo: "https://www.feldblyum.com/content/video3/images/ev.jpg"
-# alerting:
-#   pushover:
-#     application-token: ${CUSTOM_PUSHOVER_APP_TOKEN}
-#     user-key: ${CUSTOM_PUSHOVER_USER_KEY}
-#     default-alert:
-#       description: health-check failed
-#       send-on-resolved: true
-#       failure-threshold: 5
-#       success-threshold: 2
+alerting:
+  pushover:
+    application-token: ${SECRET_PUSHOVER_TOKEN}
+    user-key: ${SECRET_PUSHOVER_USER_KEY}
+    default-alert:
+      description: health-check failed
+      send-on-resolved: true
+      failure-threshold: 5
+      success-threshold: 2
 connectivity:
   checker:
     target: 1.1.1.1:53

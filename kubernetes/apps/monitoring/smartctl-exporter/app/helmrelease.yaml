@@ -1,5 +1,15 @@
 ---
 # yaml-language-server: $schema=https://kubernetes-schemas.devbu.io/helm.toolkit.fluxcd.io/helmrelease_v2beta1.json
+# https://github.com/jr0dd/home-ops/blob/main/cluster/apps/monitoring/grafana/helm-release.yaml
+      #  smart-summary:
+      #     url: https://raw.githubusercontent.com/jr0dd/grafana-dashboards/main/smart-summary.json
+      #     datasource: Prometheus
+      #   smart-errors:
+      #     url: https://raw.githubusercontent.com/jr0dd/grafana-dashboards/main/smart-errors.json
+      #     datasource: Prometheus
+#
+# https://www.wirewd.com/hacks/blog/monitoring_a_mixed_fleet_of_flash_hdd_and_nvme_devices_with_node_exporter_and_prometheus
+#
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
