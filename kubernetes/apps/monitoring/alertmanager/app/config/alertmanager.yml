@@ -57,4 +57,3 @@ inhibit_rules:
     target_matchers:
       - severity = "warning"
     equal: ["alertname", "namespace"]
-
