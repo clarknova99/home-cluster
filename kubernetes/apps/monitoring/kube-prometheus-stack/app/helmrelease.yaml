@@ -31,31 +31,32 @@ spec:
   dependsOn:
     - name: local-path-provisioner
       namespace: kube-system
-    # - name: rook-ceph-cluster
-    #   namespace: rook-ceph
+    - name: longhorn
+      namespace: longhorn-system
   values:
     crds:
       enabled: true
     cleanPrometheusOperatorObjectNames: true
     alertmanager:
-      enabled: false
-      # ingress:
-      #   enabled: true
-      #   pathType: Prefix
-      #   ingressClassName: internal
-      #   hosts:
-      #     - alertmanager.${SECRET_DOMAIN}"
-      #   tls:
-      #     - hosts:
-      #         - alertmanager.${SECRET_DOMAIN}"
-      # alertmanagerSpec:
-      #   storage:
-      #     volumeClaimTemplate:
-      #       spec:
-      #         storageClassName: local-path
-      #         resources:
-      #           requests:
-      #             storage: 2Gi
+      # enabled: false
+      ingress:
+        enabled: true
+        pathType: Prefix
+        ingressClassName: internal
+        hosts:
+          - alertmanager.${SECRET_DOMAIN}"
+        tls:
+          - hosts:
+              - alertmanager.${SECRET_DOMAIN}"
+      alertmanagerSpec:
+        replicas: 2
+        storage:
+          volumeClaimTemplate:
+            spec:
+              storageClassName: local-path
+              resources:
+                requests:
+                  storage: 2Gi
 
     kubelet:
       enabled: true
