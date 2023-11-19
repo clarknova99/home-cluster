@@ -43,11 +43,11 @@ transforms:
       # Drop pod_labels
       del(.pod_labels)
 
-  syslog_remap:
-    type: remap
-    inputs: ["syslog_source"]
-    source: |
-      msg = parse_syslog!(string!(.message))
+  # syslog_remap:
+  #   type: remap
+  #   inputs: ["syslog_source"]
+  #   source: |
+  #     msg = parse_syslog!(string!(.message))
 
   # syslog_route:
   #   type: route
