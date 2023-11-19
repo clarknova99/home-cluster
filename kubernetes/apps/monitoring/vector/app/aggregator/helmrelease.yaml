@@ -52,6 +52,15 @@ spec:
               tag: 0.34.1-debian
             args: ["--config", "/etc/vector/vector.yaml"]
         pod:
+          affinity:
+            podAntiAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                - labelSelector:
+                    matchExpressions:
+                    - key: kubernetes.io/arch
+                      operator: In
+                      values:
+                        - amd64
           topologySpreadConstraints:
             - maxSkew: 1
               topologyKey: kubernetes.io/hostname
