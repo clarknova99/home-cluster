@@ -93,7 +93,7 @@ sinks:
       node: '{{ kubernetes.pod_node_name }}'
 
   syslog:
-    inputs: ["syslog_remap"]
+    inputs: ["syslog_source"]
     type: loki
     endpoint: http://loki-gateway.monitoring.svc.cluster.local
     encoding:
