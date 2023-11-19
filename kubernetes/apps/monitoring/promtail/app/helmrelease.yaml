@@ -73,7 +73,7 @@ spec:
         service:
           type: LoadBalancer
           annotations:
-            io.cilium/lb-ipam-ips: ${SVC_SYSLOG_ADDR}
+            io.cilium/lb-ipam-ips: 192.168.2.60
     extraVolumes:
       - name: journal
         hostPath:
