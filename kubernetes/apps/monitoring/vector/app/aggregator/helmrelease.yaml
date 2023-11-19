@@ -43,11 +43,8 @@ spec:
               GEOIPUPDATE_EDITION_IDS: GeoLite2-City
               GEOIPUPDATE_FREQUENCY: "0"
               GEOIPUPDATE_VERBOSE: "true"
-              GEOIPUPDATE_ACCOUNT_ID: "{{ .ACCOUNT_ID }}"
-              GEOIPUPDATE_LICENSE_KEY: "{{ .LICENSE_KEY }}"
-            envFrom:
-              - secretRef:
-                  name: vector-aggregator-secret
+              GEOIPUPDATE_ACCOUNT_ID: "${SECRET_MAXMIND_ACCOUNT_ID}"
+              GEOIPUPDATE_LICENSE_KEY: "${SECRET_MAXMIND_LICENSE_KEY}"
         containers:
           main:
             image:
@@ -67,8 +64,8 @@ spec:
         controller: main
         type: LoadBalancer
         annotations:
-          external-dns.alpha.kubernetes.io/hostname: vector.devbu.io
-          io.cilium/lb-ipam-ips: 192.168.42.201
+          external-dns.alpha.kubernetes.io/hostname: vector.${SECRET_DOMAIN}
+          io.cilium/lb-ipam-ips: 192.168.2.65
         ports:
           http:
             port: 8686
@@ -76,8 +73,8 @@ spec:
             port: 6000
           kubernetes:
             port: 6010
-          vyos:
-            port: 6020
+          syslog:
+            port: 1514
             # protocol: UDP
     persistence:
       config:

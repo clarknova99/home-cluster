@@ -14,6 +14,6 @@ resources:
   - ./kubernetes-dashboard/ks.yaml
   - ./loki/ks.yaml
   - ./promlens/ks.yaml
-  - ./promtail/ks.yaml
+  #- ./promtail/ks.yaml
   - ./smartctl-exporter/ks.yaml
   - ./thanos/ks.yaml
