@@ -51,16 +51,9 @@ spec:
               repository: docker.io/timberio/vector
               tag: 0.34.1-debian
             args: ["--config", "/etc/vector/vector.yaml"]
+
+
         pod:
-          affinity:
-            podAntiAffinity:
-              requiredDuringSchedulingIgnoredDuringExecution:
-                - labelSelector:
-                    matchExpressions:
-                    - key: kubernetes.io/arch
-                      operator: In
-                      values:
-                        - amd64
           topologySpreadConstraints:
             - maxSkew: 1
               topologyKey: kubernetes.io/hostname
@@ -102,3 +95,12 @@ spec:
         type: emptyDir
         globalMounts:
           - path: /usr/share/GeoIP
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: kubernetes.io/arch
+                  operator: In
+                  values:
+                    - amd64
