@@ -85,7 +85,7 @@ sinks:
     endpoint: http://loki-gateway.monitoring.svc.cluster.local
     encoding: { codec: json }
     out_of_order_action: accept
-    remove_label_fields: true
+    #remove_label_fields: true
     remove_timestamp: true
     labels:
       app: '{{ custom_app_name }}'
