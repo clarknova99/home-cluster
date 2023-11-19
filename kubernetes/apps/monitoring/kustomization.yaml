@@ -17,3 +17,4 @@ resources:
   #- ./promtail/ks.yaml
   - ./smartctl-exporter/ks.yaml
   - ./thanos/ks.yaml
+  - ./vector/ks.yaml
