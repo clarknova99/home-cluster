@@ -91,7 +91,7 @@ sinks:
       app: '{{ custom_app_name }}'
       namespace: '{{ kubernetes.pod_namespace }}'
       node: '{{ kubernetes.pod_node_name }}'
-      instance: '{{ kubernetes.instance }}'
+      #instance: '{{ kubernetes.instance }}'
 
   syslog:
     inputs: ["syslog_source"]
