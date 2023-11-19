@@ -47,42 +47,22 @@ transforms:
     type: remap
     inputs: ["syslog_source"]
     source: |
-      msg = parse_csv!(string!(.message))
-      # Only parse IPv4 / IPv6
-      if msg[8] == "4" || msg[8] == "6" {
-        .filter_interface = msg[4]
-        .filter_direction = msg[7]
-        .filter_action = msg[6]
-        .filter_ip_version = msg[8]
-        .filter_protocol = msg[16]
-        .filter_source_ip = msg[18]
-        .filter_destination_ip = msg[19]
-        if (msg[16] == "icmp" || msg[16] == "igmp" || msg[16] == "gre") {
-          .filter_data = msg[20]
-        } else {
-          .filter_source_port = msg[20]
-          .filter_destination_port = msg[21]
-          .filter_data_length = msg[22]
-          if msg[8] == "4" && msg[16] == "tcp" {
-            .filter_tcp_flags = msg[23]
-          }
-        }
-      }
+      msg = parse_syslog!(string!(.message))
 
-  syslog_route:
-    type: route
-    inputs: ["syslog_remap"]
-    route:
-      pass_action: .filter_action == "pass"
+  # syslog_route:
+  #   type: route
+  #   inputs: ["syslog_remap"]
+  #   route:
+  #     pass_action: .filter_action == "pass"
 
-  syslog_geoip_remap:
-    type: remap
-    inputs: ["syslog_route.pass_action"]
-    source: |
-      .geoip = get_enrichment_table_record!("geoip_table",
-        {
-          "ip": .filter_source_ip
-        })
+  # syslog_geoip_remap:
+  #   type: remap
+  #   inputs: ["syslog_route.pass_action"]
+  #   source: |
+  #     .geoip = get_enrichment_table_record!("geoip_table",
+  #       {
+  #         "ip": .filter_source_ip
+  #       })
 #
 # Sinks
 #
@@ -113,15 +93,13 @@ sinks:
       node: '{{ kubernetes.pod_node_name }}'
 
   syslog:
-    inputs:
-      - syslog_route._unmatched
-      - syslog_geoip_remap
+    inputs: ["syslog_remap"]
     type: loki
     endpoint: http://loki-gateway.monitoring.svc.cluster.local
     encoding:
       codec: json
     out_of_order_action: accept
-    remove_label_fields: true
+    #remove_label_fields: true
     remove_timestamp: true
     labels:
       hostname: '{{ host }}'
