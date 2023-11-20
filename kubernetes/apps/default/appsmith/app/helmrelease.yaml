@@ -251,7 +251,16 @@ spec:
       ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
       ## NOTE: `client.podAffinityPreset`, `client.podAntiAffinityPreset`, and `client.nodeAffinityPreset` will be ignored when it's set
       ##
-      affinity: {}
+      #affinity: {}
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/arch
+                    operator: In
+                    values:
+                      - amd64
       ## @param client.nodeSelector Node labels for Appsmith client pods assignment
       ## ref: https://kubernetes.io/docs/user-guide/node-selection/
       ##
@@ -551,7 +560,16 @@ spec:
       ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
       ## NOTE: `backend.podAffinityPreset`, `backend.podAntiAffinityPreset`, and `backend.nodeAffinityPreset` will be ignored when it's set
       ##
-      affinity: {}
+      #affinity: {}
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/arch
+                    operator: In
+                    values:
+                      - amd64
       ## @param backend.nodeSelector Node labels for Appsmith backend pods assignment
       ## ref: https://kubernetes.io/docs/user-guide/node-selection/
       ##
@@ -875,7 +893,16 @@ spec:
       ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
       ## NOTE: `rts.podAffinityPreset`, `rts.podAntiAffinityPreset`, and `rts.nodeAffinityPreset` will be ignored when it's set
       ##
-      affinity: {}
+      #affinity: {}
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/arch
+                    operator: In
+                    values:
+                      - amd64
       ## @param rts.nodeSelector Node labels for Appsmith rts pods assignment
       ## ref: https://kubernetes.io/docs/user-guide/node-selection/
       ##
