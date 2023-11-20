@@ -40,6 +40,7 @@ transforms:
     source: |
       # Standardize 'app' index
       .custom_app_name = .pod_labels."app.kubernetes.io/name" || .pod_labels.app || .pod_labels."k8s-app" || "unknown"
+      .custom_instance_name = .pod_labels."app.kubernetes.io/instance"
       # Drop pod_labels
       del(.pod_labels)
 
@@ -91,7 +92,7 @@ sinks:
       app: '{{ custom_app_name }}'
       namespace: '{{ kubernetes.pod_namespace }}'
       node: '{{ kubernetes.pod_node_name }}'
-      #instance: '{{ kubernetes.instance }}'
+      instance: '{{ custom_instance_name }}'
 
   syslog:
     inputs: ["syslog_source"]
