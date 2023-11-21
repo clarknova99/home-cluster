@@ -11,7 +11,7 @@ spec:
   chart:
     spec:
       chart: thanos
-      version: 12.15.0
+      version: 12.16.0
       sourceRef:
         kind: HelmRepository
         name: bitnami
@@ -74,14 +74,14 @@ spec:
       retentionResolution1h: 90d
       persistence:
         enabled: true
-        storageClass: longhorn
+        storageClass: local-path
         size: 10Gi
     storegateway:
       enabled: true
       replicaCount: 2
       persistence:
         enabled: true
-        storageClass: longhorn
+        storageClass: local-path
         size: 10Gi
     ruler:
       enabled: true
@@ -102,7 +102,7 @@ spec:
                   severity: critical
       persistence:
         enabled: true
-        storageClass: longhorn
+        storageClass: local-path
         size: 10Gi
     metrics:
       enabled: true
