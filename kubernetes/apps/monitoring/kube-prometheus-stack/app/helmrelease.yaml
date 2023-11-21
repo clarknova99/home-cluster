@@ -192,6 +192,11 @@ spec:
       thanosServiceMonitor:
         enabled: true
       prometheusSpec:
+        alertingEndpoints:
+          - namespace: monitoring
+            name: alertmanager
+            port: 9093
+            apiVersion: v2
         replicas: 2
         replicaExternalLabelName: __replica__
         ruleSelectorNilUsesHelmValues: false
