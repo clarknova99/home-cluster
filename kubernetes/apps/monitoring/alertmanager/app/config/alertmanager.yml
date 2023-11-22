@@ -8,6 +8,7 @@ receivers:
         send_resolved: true
         priority: |-
           {{ if eq .Status "firing" }}1{{ else }}0{{ end }}
+        url: https://karma.${SECRET_DOMAIN}/?q=%40receiver%3Dpushover
         url_title: View in Alert Manager
         title: |-
           [{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}] {{ .CommonLabels.alertname }}
