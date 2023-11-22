@@ -39,3 +39,9 @@ spec:
       servicemonitor:
         enabled: true
         prometheusInstance: monitoring
+        targetPort: 9402
+        path: /metrics
+        interval: 60s
+        scrapeTimeout: 10s
+        labels: {}
+        honorLabels: false
