@@ -16,7 +16,7 @@ resources:
   - ./lldap/ks.yaml
   - ./mosquitto/ks.yaml
   - ./n8n/ks.yaml
-  #- ./scrypted/ks.yaml
+  - ./scrypted/ks.yaml
   #- ./superset/ks.yaml
   - ./website/ks.yaml
   - ./whoami/ks.yaml
