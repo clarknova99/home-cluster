@@ -5,8 +5,6 @@ metadata:
   name: frigate-nfs
   namespace: default
 provisioner: nfs.csi.k8s.io
-parameters:
-  archiveOnDelete: "false"
 ---
 apiVersion: v1
 kind: PersistentVolume
