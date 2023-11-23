@@ -4,7 +4,7 @@ kind: StorageClass
 metadata:
   name: frigate-nfs
   namespace: default
-provisioner: nfs
+provisioner: nfs.csi.k8s.io
 parameters:
   archiveOnDelete: "false"
 ---
