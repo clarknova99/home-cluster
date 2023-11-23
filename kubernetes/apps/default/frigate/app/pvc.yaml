@@ -1,32 +1,27 @@
 ---
-apiVersion: storage.k8s.io/v1
-kind: StorageClass
-metadata:
-  name: frigate-nfs
-  namespace: default
-provisioner: nfs.csi.k8s.io
----
 apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: pv-frigate
   namespace: default
 spec:
-  storageClassName: frigate-nfs
+  storageClassName: "network-storage"
   capacity:
-    storage: 1Mi # Size does not matter ...twss
-  accessModes: ["ReadWriteMany"]
+    storage: 1Gi
+  accessModes:
+    - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   nfs:
     server: 192.168.1.2
     path: "/volume1/network-storage/frigate"
-  mountOptions:
-    - nfsvers=4.2
-    - nconnect=8
-    - hard
-    - noatime
-    - rsize=131072
-    - wsize=131072
+    readOnly: false
+  # mountOptions:
+  # - nfsvers=4.2
+  # - nconnect=8
+  # - hard
+  # - noatime
+  # - rsize=131072
+  # - wsize=131072
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -34,8 +29,10 @@ metadata:
   name: pvc-frigate
   namespace: default
 spec:
-  accessModes: ["ReadWriteMany"]
-  storageClassName: frigate-nfs
+  accessModes:
+    - ReadWriteMany
+  volumeName: pv-frigate
+  storageClassName: "network-storage"
   resources:
     requests:
-      storage: 1Mi # Size does not matter ...twss
+      storage: 1Gi
