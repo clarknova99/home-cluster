@@ -105,4 +105,4 @@ spec:
       media:
         existingClaim: pvc-videos
         globalMounts:
-          - readOnly: true
+          - path: /media
