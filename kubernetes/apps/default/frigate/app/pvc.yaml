@@ -31,7 +31,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteMany
-  volumeName: pv-frigate-data0
+  volumeName: pv-frigate-data
   storageClassName: "network-storage"
   resources:
     requests:
