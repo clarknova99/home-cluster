@@ -96,7 +96,7 @@ spec:
     persistence:
       config:
         enabled: true
-        existingClaim: frigate
+        existingClaim: pvc-frigate
         globalMounts:
           - path: /data
       config-file:
