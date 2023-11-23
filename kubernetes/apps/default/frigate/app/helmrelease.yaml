@@ -42,8 +42,8 @@ spec:
               LIBVA_DRIVER_NAME: i965
               PLUS_API_KEY:
               # Mosquitto
-              FRIGATE_MQTT_USERNAME: frigate
-              FRIGATE_MQTT_PASSWORD: frigate
+              FRIGATE_MQTT_USERNAME: ${SECRET_MQTT_USERNAME}
+              FRIGATE_MQTT_PASSWORD: ${SECRET_MQTT_PASSWORD}
             probes:
               liveness: &probes
                 enabled: true
