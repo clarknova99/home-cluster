@@ -49,15 +49,15 @@ spec:
                 gpu.intel.com/i915: 1
                 memory: 10Gi
         pod:
-          affinity:
-            podAntiAffinity:
-              requiredDuringSchedulingIgnoredDuringExecution:
-                - labelSelector:
-                    matchExpressions:
-                      - key: app.kubernetes.io/name
-                        operator: In
-                        values: ["nuc11"]
-                  topologyKey: kubernetes.io/hostname
+          # affinity:
+          #   podAntiAffinity:
+          #     requiredDuringSchedulingIgnoredDuringExecution:
+          #       - labelSelector:
+          #           matchExpressions:
+          #             - key: app.kubernetes.io/name
+          #               operator: In
+          #               values: ["nuc11"]
+          #         topologyKey: kubernetes.io/hostname
           nodeSelector:
             intel.feature.node.kubernetes.io/gpu: "true"
           securityContext:
