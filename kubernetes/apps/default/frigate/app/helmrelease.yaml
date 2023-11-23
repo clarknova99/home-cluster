@@ -121,4 +121,4 @@ spec:
         globalMounts:
           - path: /dev/bus/usb
       media:
-        existingClaim: frigate-nfs
+        existingClaim: pvc-frigate
