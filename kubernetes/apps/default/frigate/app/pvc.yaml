@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: pv-frigate
+  name: pv-frigate-data
   namespace: default
 spec:
   storageClassName: "network-storage"
@@ -13,7 +13,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   nfs:
     server: 192.168.1.2
-    path: "/volume1/network-storage/frigate"
+    path: "/volume1/network-storage/frigate/data"
     readOnly: false
   # mountOptions:
   # - nfsvers=4.2
@@ -31,7 +31,45 @@ metadata:
 spec:
   accessModes:
     - ReadWriteMany
-  volumeName: pv-frigate
+  volumeName: pv-frigate-data0
+  storageClassName: "network-storage"
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-frigate-media
+  namespace: default
+spec:
+  storageClassName: "network-storage"
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  nfs:
+    server: 192.168.1.2
+    path: "/volume1/network-storage/frigate/media"
+    readOnly: false
+  # mountOptions:
+  # - nfsvers=4.2
+  # - nconnect=8
+  # - hard
+  # - noatime
+  # - rsize=131072
+  # - wsize=131072
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-frigate-media
+  namespace: default
+spec:
+  accessModes:
+    - ReadWriteMany
+  volumeName: pv-frigate-media
   storageClassName: "network-storage"
   resources:
     requests:
