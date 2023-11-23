@@ -1,0 +1,76 @@
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-scrypted-data
+  namespace: default
+spec:
+  storageClassName: "network-storage"
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  nfs:
+    server: 192.168.1.2
+    path: "/volume1/network-storage/scrypted/data"
+    readOnly: false
+  # mountOptions:
+  # - nfsvers=4.2
+  # - nconnect=8
+  # - hard
+  # - noatime
+  # - rsize=131072
+  # - wsize=131072
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-scrypted-data
+  namespace: default
+spec:
+  accessModes:
+    - ReadWriteMany
+  volumeName: pv-scrypted-data
+  storageClassName: "network-storage"
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-scrypted-config
+  namespace: default
+spec:
+  storageClassName: "network-storage"
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  nfs:
+    server: 192.168.1.2
+    path: "/volume1/network-storage/scrypted/config"
+    readOnly: false
+  # mountOptions:
+  # - nfsvers=4.2
+  # - nconnect=8
+  # - hard
+  # - noatime
+  # - rsize=131072
+  # - wsize=131072
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-scrypted-config
+  namespace: default
+spec:
+  accessModes:
+    - ReadWriteMany
+  volumeName: pv-scrypted-config
+  storageClassName: "network-storage"
+  resources:
+    requests:
+      storage: 1Gi
