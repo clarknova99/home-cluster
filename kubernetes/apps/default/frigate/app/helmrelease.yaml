@@ -73,9 +73,9 @@ spec:
           nodeSelector:
             intel.feature.node.kubernetes.io/gpu: "true"
     service:
-      annotations:
-        io.cilium/lb-ipam-ips: ${SVC_FRIGATE_ADDR}
       main:
+        annotations:
+          io.cilium/lb-ipam-ips: ${SVC_FRIGATE_ADDR}
         type: LoadBalancer
         #loadBalancerIP: ${SVC_FRIGATE_ADDR}
         externalTrafficPolicy: Cluster
