@@ -20,6 +20,11 @@ go2rtc:
   streams:
     frontyard:
       - ffmpeg:rtsp://${SECRET_CAM_USERNAME}:${SECRET_CAM_PASSWORD}@192.168.1.101:554/0
+  webrtc:
+    listen: ":8555"
+    candidates:
+      - ${SVC_FRIGATE_ADDR}:8555 # <--- enter frigate host IP here
+      - stun:8555
 ffmpeg:
   global_args: ["-hide_banner", "-loglevel", "warning"]
   hwaccel_args: ["-hwaccel", "vaapi", "-hwaccel_device", "/dev/dri/renderD128", "-hwaccel_output_format", "yuv420p"]

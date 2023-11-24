@@ -73,12 +73,25 @@ spec:
           nodeSelector:
             intel.feature.node.kubernetes.io/gpu: "true"
     service:
+      annotations:
+        io.cilium/lb-ipam-ips: ${SVC_FRIGATE_ADDR}
       main:
+        type: LoadBalancer
+        #loadBalancerIP: ${SVC_FRIGATE_ADDR}
+        externalTrafficPolicy: Cluster
         ports:
           http:
             port: *port
           rtsp:
             port: 8554
+          webrtc:
+            enabled: true
+            port: 8555
+            protocol: TCP
+          webrtc-udp:
+            enabled: true
+            port: 8555
+            protocol: UDP
     ingress:
       main:
         enabled: true
