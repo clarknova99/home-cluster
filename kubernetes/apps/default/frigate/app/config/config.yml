@@ -14,6 +14,11 @@ mqtt:
 database:
   path: /data/frigate.db
 
+
+go2rtc:
+  streams:
+    frontyard:
+      - rtsp://${SECRET_CAM_USERNAME}:${SECRET_CAM_PASSWORD}@192.168.1.101:554/0
 ffmpeg:
   global_args: ["-hide_banner", "-loglevel", "warning"]
   hwaccel_args: ["-hwaccel", "vaapi", "-hwaccel_device", "/dev/dri/renderD128", "-hwaccel_output_format", "yuv420p"]
