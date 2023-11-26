@@ -100,6 +100,7 @@ cameras:
           roles:
             - detect
             - record
+            - rtmp
         # - path: rtsp://${SECRET_BACKYARDCAM_USERNAME}:${SECRET_BACKYARDCAM_PASSWORD}@192.168.1.206:554/ch0_0.264
         #   roles: ["detect"]
         # - path: rtsp://${SECRET_BACKYARDCAM_USERNAME}:${SECRET_BACKYARDCAM_PASSWORD}@192.168.1.206:554/ch0_0.264
