@@ -104,6 +104,8 @@ cameras:
         #   roles: ["detect"]
         # - path: rtsp://${SECRET_BACKYARDCAM_USERNAME}:${SECRET_BACKYARDCAM_PASSWORD}@192.168.1.206:554/ch0_0.264
         #   roles: ["record"]
+    rtmp:
+      enabled: False # <-- RTMP should be disabled if your stream is not H264
     onvif:
       host: 192.168.1.206
       port: 8888
