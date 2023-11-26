@@ -21,7 +21,6 @@ go2rtc:
     frontyard:
       - ffmpeg:rtsp://${SECRET_CAM_USERNAME}:${SECRET_CAM_PASSWORD}@192.168.1.101:554/0
     backyard:
-      #- rtsp://192.168.1.206:554/ch0_0.264
       - ffmpeg:rtsp://${SECRET_BACKYARDCAM_USERNAME}:${SECRET_BACKYARDCAM_PASSWORD}@192.168.1.206:554/ch0_0.264
       #- "ffmpeg:backyard#video=h264"
   webrtc:
@@ -87,7 +86,7 @@ cameras:
         - path: rtsp://${SECRET_BACKYARDCAM_USERNAME}:${SECRET_BACKYARDCAM_PASSWORD}@192.168.1.206:554/ch0_0.264
           roles: ["record"]
     detect:
-      enabled: false # <---- disable detection until you have a working camera feed
+      enabled: true # <---- disable detection until you have a working camera feed
       width: 1280 # <---- update for your camera's resolution
       height: 720 # <---- update for your camera's resolution
 
