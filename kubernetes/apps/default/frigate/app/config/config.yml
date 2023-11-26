@@ -86,8 +86,8 @@ cameras:
     onvif:
       host: 192.168.1.101
       port: 80
-      user: ${SECRET_CAM_USERNAME}
-      password: ${SECRET_CAM_PASSWORD}
+      # user: ${SECRET_CAM_USERNAME}
+      # password: ${SECRET_CAM_PASSWORD}
     detect:
       enabled: true # <---- disable detection until you have a working camera feed
       width: 1280 # <---- update for your camera's resolution
