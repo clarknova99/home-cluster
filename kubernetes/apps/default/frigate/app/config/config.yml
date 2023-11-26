@@ -96,7 +96,7 @@ cameras:
           roles: ["record"]
     onvif:
       host: 192.168.1.206
-      port: 80
+      port: 8888
       user: ${SECRET_BACKYARDCAM_USERNAME}
       password: ${SECRET_BACKYARDCAM_PASSWORD}
     detect:
