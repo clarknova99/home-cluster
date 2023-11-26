@@ -79,6 +79,7 @@ cameras:
           roles:
             - detect
             - record
+            - rtmp
         # - path: rtsp://192.168.1.101:554
         #   roles: ["detect"]
         # - path: rtsp://192.168.1.101:554
