@@ -91,7 +91,10 @@ cameras:
     ffmpeg:
       inputs:
         - path: rtsp://127.0.0.1:8554/backyard
-          roles: ["detect","record"]
+          input_args: preset-rtsp-restream
+          roles:
+            - detect
+            - record
         # - path: rtsp://${SECRET_BACKYARDCAM_USERNAME}:${SECRET_BACKYARDCAM_PASSWORD}@192.168.1.206:554/ch0_0.264
         #   roles: ["detect"]
         # - path: rtsp://${SECRET_BACKYARDCAM_USERNAME}:${SECRET_BACKYARDCAM_PASSWORD}@192.168.1.206:554/ch0_0.264
