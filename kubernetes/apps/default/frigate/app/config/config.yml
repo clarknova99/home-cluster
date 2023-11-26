@@ -74,10 +74,15 @@ cameras:
   frontyard:
     ffmpeg:
       inputs:
-        - path: rtsp://192.168.1.101:554
-          roles: ["detect"]
-        - path: rtsp://192.168.1.101:554
-          roles: ["record"]
+        - path: rtsp://127.0.0.1:8554/frontyard
+          input_args: preset-rtsp-restream
+          roles:
+            - detect
+            - record
+        # - path: rtsp://192.168.1.101:554
+        #   roles: ["detect"]
+        # - path: rtsp://192.168.1.101:554
+        #   roles: ["record"]
     onvif:
       host: 192.168.1.101
       port: 80
