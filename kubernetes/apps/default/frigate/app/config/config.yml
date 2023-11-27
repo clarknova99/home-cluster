@@ -4,6 +4,7 @@ logger:
   default: info
   logs:
     frigate.record: debug
+    frigate.ptz.onvif: debug
 
 mqtt:
   host: mosquitto.default.svc.cluster.local
