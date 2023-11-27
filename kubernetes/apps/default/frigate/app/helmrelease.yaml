@@ -72,6 +72,7 @@ spec:
         pod:
           nodeSelector:
             intel.feature.node.kubernetes.io/gpu: "true"
+            kubernetes.io/hostname: "nuc11"
     service:
       main:
         annotations:
