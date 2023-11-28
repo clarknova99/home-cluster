@@ -50,10 +50,14 @@ timestamp_style:
 # Uses https://github.com/AlexxIT/go2rtc (v1.2.0)
 go2rtc:
   streams:
-    frontyard:
+    frontyard_hq:
       - ffmpeg:rtsp://${SECRET_CAM_USERNAME}:${SECRET_CAM_PASSWORD}@192.168.1.101:554/0
-    backyard:
+    frontyard_lq:
+      - ffmpeg:rtsp://${SECRET_CAM_USERNAME}:${SECRET_CAM_PASSWORD}@192.168.1.101:554/1
+    backyard_hq:
       - ffmpeg:rtsp://${SECRET_BACKYARDCAM_USERNAME}:${SECRET_BACKYARDCAM_PASSWORD}@192.168.1.206:554/ch0_0.264
+    backyard_lq:
+      - ffmpeg:rtsp://${SECRET_BACKYARDCAM_USERNAME}:${SECRET_BACKYARDCAM_PASSWORD}@192.168.1.206:554/ch0_1.264
       #- "ffmpeg:backyard#video=h264"
   webrtc:
     listen: ":8555"
@@ -104,21 +108,14 @@ cameras:
   frontyard:
     ffmpeg:
       inputs:
-        - path: rtsp://127.0.0.1:8554/frontyard
+        - path: rtsp://127.0.0.1:8554/frontyard_lq
           input_args: preset-rtsp-restream
           roles:
             - detect
+        - path: rtsp://127.0.0.1:8554/frontyard_hq
+          input_args: preset-rtsp-restream
+          roles:
             - record
-            # - rtmp
-        # - path: rtsp://192.168.1.101:554
-        #   roles: ["detect"]
-        # - path: rtsp://192.168.1.101:554
-        #   roles: ["record"]
-    # onvif:
-    #   host: 192.168.1.101
-    #   port: 80
-    #   user: ${SECRET_CAM_USERNAME}
-    #   password: ${SECRET_CAM_PASSWORD}
     detect:
       enabled: true # <---- disable detection until you have a working camera feed
       width: 1280 # <---- update for your camera's resolution
@@ -126,18 +123,14 @@ cameras:
   backyard:
     ffmpeg:
       inputs:
-        - path: rtsp://127.0.0.1:8554/backyard
+        - path: rtsp://127.0.0.1:8554/backyard_lq
           input_args: preset-rtsp-restream
           roles:
             - detect
+        - path: rtsp://127.0.0.1:8554/backyard_hq
+          input_args: preset-rtsp-restream
+          roles:
             - record
-            # - rtmp
-        # - path: rtsp://${SECRET_BACKYARDCAM_USERNAME}:${SECRET_BACKYARDCAM_PASSWORD}@192.168.1.206:554/ch0_0.264
-        #   roles: ["detect"]
-        # - path: rtsp://${SECRET_BACKYARDCAM_USERNAME}:${SECRET_BACKYARDCAM_PASSWORD}@192.168.1.206:554/ch0_0.264
-        #   roles: ["record"]
-    # rtmp:
-    #   enabled: False # <-- RTMP should be disabled if your stream is not H264
     onvif:
       host: 192.168.1.206
       port: 8888
