@@ -15,6 +15,11 @@ mqtt:
 database:
   path: /data/frigate.db
 
+detectors:
+  coral:
+    type: edgetpu
+    device: usb
+
 birdseye:
   enabled: True
   mode: continuous
