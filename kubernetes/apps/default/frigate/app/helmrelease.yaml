@@ -27,6 +27,8 @@ spec:
   dependsOn:
     - name: intel-device-plugin-gpu
       namespace: kube-system
+    - name: mosquitto
+      namespace: default
   values:
     controllers:
       main:
