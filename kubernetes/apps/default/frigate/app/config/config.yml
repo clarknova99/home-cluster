@@ -2,9 +2,11 @@
 
 logger:
   default: info
-  # logs:
-  #   frigate.record: debug
-  #   #frigate.ptz.onvif: debug
+  logs:
+    frigate.record: debug
+    ffmpeg.frontyard_hq: error
+    ffmpeg.backyard_hq: error
+    #frigate.ptz.onvif: debug
 
 mqtt:
   host: mosquitto.default.svc.cluster.local
