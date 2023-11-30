@@ -61,6 +61,8 @@ spec:
         ports:
           http:
             port: 11080
+          https:
+            port: 10443
           rebroadcast:
             port: 34135
 
