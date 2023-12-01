@@ -41,8 +41,8 @@ go2rtc:
     backyard_hq:
       - ffmpeg:rtsp://${SECRET_BACKYARDCAM_USERNAME}:${SECRET_BACKYARDCAM_PASSWORD}@192.168.1.206:554/ch0_0.264
     backyard_lq:
-      - rtsp://${SECRET_BACKYARDCAM_USERNAME}:${SECRET_BACKYARDCAM_PASSWORD}@192.168.1.206:554/ch0_1.264
-      - "ffmpeg:backyard#video=h264"
+      - ffmpeg:rtsp://${SECRET_BACKYARDCAM_USERNAME}:${SECRET_BACKYARDCAM_PASSWORD}@192.168.1.206:554/ch0_1.264
+      #- "ffmpeg:backyard#video=h264"
   webrtc:
     listen: ":8555"
     candidates:
