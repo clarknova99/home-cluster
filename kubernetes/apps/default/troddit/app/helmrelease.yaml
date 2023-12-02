@@ -31,7 +31,6 @@ spec:
             image:
               repository: docker.io/bsyed/troddit
               tag: latest
-            env:
             envFrom:
               - secretRef:
                   name: troddit-secrets

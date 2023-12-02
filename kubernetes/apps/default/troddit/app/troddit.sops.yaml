@@ -3,8 +3,6 @@ kind: Secret
 metadata:
     name: troddit-secrets
     namespace: default
-## sops --encrypt --in-place ./kubernetes/apps/default/troddit/app/troddit.sops.yaml
-## sops --decrypt ./kubernetes/apps/default/lldap/app/lldap.sops.yaml | kubectl apply -f -
 stringData:
     CLIENT_ID: ENC[AES256_GCM,data:ID8Xh4bMWPKgOlU2aHOgJUZtFWc1hg==,iv:tDc31ZuezrOQ9Pf/eDklDfSPwFIJtUjvSqy36lOdrRQ=,tag:Zf5QTkTJ4PIDUj/BAoz+NQ==,type:str]
     CLIENT_SECRET: ENC[AES256_GCM,data:F1pw73IaWc5Ki8c5lXuW41ybB4p4XQ+YWW9d6UCA,iv:CDwaJ14rztCEImYrN7Zrd7X1QTkpLPmLz88N2Vau6lA=,tag:NFEMLPxl1wR8mlVKGO+/lA==,type:str]
@@ -27,8 +25,8 @@ sops:
             LzltNW1EM2ROZHJwaWdEeTRKQlBuZm8KsD846fytuxIiMey6Jj2zSDWW5BYR9aHe
             NbT+VPruCswQG4eqvBSzio7aWGSoldPx6nzfe1m9o6zErMyRz7uGxw==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2023-12-02T05:24:05Z"
-    mac: ENC[AES256_GCM,data:96as34hsOZPI2ptDJo85wdRdJgoKQ+0h3DN10jn+Vf0p4G5kQ+R9s1Qv8OFv8J6DAX1Aoqnoh7UjFkqY5ej5FHoJwyN0zAqFQRqeYYwa0qtRECya1lv5Ms4Bkjr/1ahtMRjGuinGoT7J+isrQ9P8hmRfKIds35i4weL38m8KF3w=,iv:ewDum5zmy4ueJ2E0dNKuQFclJvQQm2+PHQcdVmlUPlQ=,tag:uh9Gp/Dh630WlDf3OtxldQ==,type:str]
+    lastmodified: "2023-12-02T05:33:09Z"
+    mac: ENC[AES256_GCM,data:OYETVHTunWZt9nTl9YcD63o1PhLeb83Yk3aiG3frU6vY8xkQJu5guNk1TpqL01c+bX6OKbHbSUJhcg3b4pB95sJ/MfyuzTXyfNjcXkxD443z/+hD/95Oc94UOAMcTIYu6CyOM9aORb8Xxq3Uqh3TF+4moIVu32+9tqj2uO+5gQQ=,iv:RfbKo9R4XxTYFThH7ZHTYCJWaP4hx1/Bmki0UgYV9R0=,tag:j6N9CLEdNJ328dw8wQO5Ow==,type:str]
     pgp: []
     encrypted_regex: ^(data|stringData)$
     version: 3.8.1
