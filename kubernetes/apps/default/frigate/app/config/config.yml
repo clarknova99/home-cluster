@@ -44,9 +44,9 @@ go2rtc:
     #   - ffmpeg:rtsp://${SECRET_BACKYARDCAM_USERNAME}:${SECRET_BACKYARDCAM_PASSWORD}@192.168.1.206:554/ch0_1.264
     #   - "ffmpeg:backyard#video=h264"
     wificam_hq:
-      - ffmpeg:rtsp://${SECRET_BACKYARDCAM_USERNAME}:${SECRET_WIFICAM_PASSWORD}@192.168.1.201:10554/udp/av0_0
+      - ffmpeg:rtsp://${SECRET_BACKYARDCAM_USERNAME}:${SECRET_WIFICAM_PASSWORD}@192.168.1.201:10554/tcp/av0_0
     wificam_lq:
-      - ffmpeg:rtsp://${SECRET_BACKYARDCAM_USERNAME}:${SECRET_WIFICAM_PASSWORD}@192.168.1.201:10554/udp/av0_1
+      - ffmpeg:rtsp://${SECRET_BACKYARDCAM_USERNAME}:${SECRET_WIFICAM_PASSWORD}@192.168.1.201:10554/tcp/av0_1
   webrtc:
     listen: ":8555"
     candidates:
