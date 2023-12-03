@@ -4,8 +4,8 @@ logger:
   default: info
   logs:
     frigate.record: debug
-    ffmpeg.frontyard_hq: error
-    ffmpeg.backyard_hq: error
+    # ffmpeg.frontyard_hq: error
+    # ffmpeg.backyard_hq: error
     #frigate.ptz.onvif: debug
 
 mqtt:
@@ -37,10 +37,10 @@ go2rtc:
       - "ffmpeg:backyard#video=h264"
     # frontyard_lq:
     #   - ffmpeg:rtsp://${SECRET_CAM_USERNAME}:${SECRET_CAM_PASSWORD}@192.168.1.101:554/1
-    # backyard_hq:
+    # basement_hq:
     #   - ffmpeg:rtsp://${SECRET_BACKYARDCAM_USERNAME}:${SECRET_BACKYARDCAM_PASSWORD}@192.168.1.206:554/ch0_0.264
     #   - "ffmpeg:backyard#video=h264"
-    # backyard_lq:
+    # basement_lq:
     #   - ffmpeg:rtsp://${SECRET_BACKYARDCAM_USERNAME}:${SECRET_BACKYARDCAM_PASSWORD}@192.168.1.206:554/ch0_1.264
     #   - "ffmpeg:backyard#video=h264"
     backyard_hq:
@@ -106,8 +106,8 @@ cameras:
         #     - detect
     detect:
       enabled: true # <---- disable detection until you have a working camera feed
-      width: 2880 # <---- update for your camera's resolution
-      height: 1616 # <---- update for your camera's resolution
+      width: 2304 # <---- update for your camera's resolution
+      height: 1296 # <---- update for your camera's resolution
   # backyard:
   #   ffmpeg:
   #     inputs:
