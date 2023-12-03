@@ -33,7 +33,7 @@ birdseye:
 go2rtc:
   streams:
     frontyard_hq:
-      - ffmpeg:rtsp://${SECRET_CAM_USERNAME}:${SECRET_CAM_PASSWORD}@192.168.1.101:554/0
+      - ffmpeg:rtsp://${SECRET_CAM_USERNAME}:${SECRET_CAM_PASSWORD}@192.168.1.101:554/stream1
       - "ffmpeg:backyard#video=h264"
     # frontyard_lq:
     #   - ffmpeg:rtsp://${SECRET_CAM_USERNAME}:${SECRET_CAM_PASSWORD}@192.168.1.101:554/1
@@ -106,8 +106,8 @@ cameras:
         #     - detect
     detect:
       enabled: true # <---- disable detection until you have a working camera feed
-      width: 1920 # <---- update for your camera's resolution
-      height: 1080 # <---- update for your camera's resolution
+      width: 2880 # <---- update for your camera's resolution
+      height: 1616 # <---- update for your camera's resolution
   # backyard:
   #   ffmpeg:
   #     inputs:
