@@ -37,15 +37,15 @@ go2rtc:
       - "ffmpeg:backyard#video=h264"
     # frontyard_lq:
     #   - ffmpeg:rtsp://${SECRET_CAM_USERNAME}:${SECRET_CAM_PASSWORD}@192.168.1.101:554/1
-    backyard_hq:
-      - ffmpeg:rtsp://${SECRET_BACKYARDCAM_USERNAME}:${SECRET_BACKYARDCAM_PASSWORD}@192.168.1.206:554/ch0_0.264
-      - "ffmpeg:backyard#video=h264"
+    # backyard_hq:
+    #   - ffmpeg:rtsp://${SECRET_BACKYARDCAM_USERNAME}:${SECRET_BACKYARDCAM_PASSWORD}@192.168.1.206:554/ch0_0.264
+    #   - "ffmpeg:backyard#video=h264"
     # backyard_lq:
     #   - ffmpeg:rtsp://${SECRET_BACKYARDCAM_USERNAME}:${SECRET_BACKYARDCAM_PASSWORD}@192.168.1.206:554/ch0_1.264
     #   - "ffmpeg:backyard#video=h264"
-    wificam_hq:
+    backyard_hq:
       - ffmpeg:rtsp://${SECRET_BACKYARDCAM_USERNAME}:${SECRET_WIFICAM_PASSWORD}@192.168.1.201:10554/tcp/av0_0
-    wificam_lq:
+    backyard_lq:
       - ffmpeg:rtsp://${SECRET_BACKYARDCAM_USERNAME}:${SECRET_WIFICAM_PASSWORD}@192.168.1.201:10554/tcp/av0_1
   webrtc:
     listen: ":8555"
@@ -108,35 +108,35 @@ cameras:
       enabled: true # <---- disable detection until you have a working camera feed
       width: 1920 # <---- update for your camera's resolution
       height: 1080 # <---- update for your camera's resolution
+  # backyard:
+  #   ffmpeg:
+  #     inputs:
+  #       - path: rtsp://127.0.0.1:8554/backyard_hq
+  #         input_args: preset-rtsp-restream
+  #         roles:
+  #           - detect
+  #           - record
+  #       # - path: rtsp://127.0.0.1:8554/backyard_lq
+  #       #   input_args: preset-rtsp-restream
+  #       #   roles:
+  #       #     - detect
+  #   onvif:
+  #     host: 192.168.1.206
+  #     port: 8888
+  #     user: ${SECRET_BACKYARDCAM_USERNAME}
+  #     password: ${SECRET_BACKYARDCAM_PASSWORD}
+  #   detect:
+  #     enabled: true # <---- disable detection until you have a working camera feed
+  #     width: 1920 # <---- update for your camera's resolution
+  #     height: 1080 # <---- update for your camera's resolution
   backyard:
     ffmpeg:
       inputs:
         - path: rtsp://127.0.0.1:8554/backyard_hq
           input_args: preset-rtsp-restream
           roles:
-            - detect
             - record
-        # - path: rtsp://127.0.0.1:8554/backyard_lq
-        #   input_args: preset-rtsp-restream
-        #   roles:
-        #     - detect
-    onvif:
-      host: 192.168.1.206
-      port: 8888
-      user: ${SECRET_BACKYARDCAM_USERNAME}
-      password: ${SECRET_BACKYARDCAM_PASSWORD}
-    detect:
-      enabled: true # <---- disable detection until you have a working camera feed
-      width: 1920 # <---- update for your camera's resolution
-      height: 1080 # <---- update for your camera's resolution
-  wificam:
-    ffmpeg:
-      inputs:
-        - path: rtsp://127.0.0.1:8554/wificam_hq
-          input_args: preset-rtsp-restream
-          roles:
-            - record
-        - path: rtsp://127.0.0.1:8554/wificam_lq
+        - path: rtsp://127.0.0.1:8554/backyard_lq
           input_args: preset-rtsp-restream
           roles:
             - detect
