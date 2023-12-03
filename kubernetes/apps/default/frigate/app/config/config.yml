@@ -28,8 +28,6 @@ birdseye:
   mode: continuous
 
 
-
-
 # Optional: Restream configuratio
 # Uses https://github.com/AlexxIT/go2rtc (v1.2.0)
 go2rtc:
@@ -45,6 +43,10 @@ go2rtc:
     # backyard_lq:
     #   - ffmpeg:rtsp://${SECRET_BACKYARDCAM_USERNAME}:${SECRET_BACKYARDCAM_PASSWORD}@192.168.1.206:554/ch0_1.264
     #   - "ffmpeg:backyard#video=h264"
+    wificam_hq:
+      - ffmpeg:rtsp://${SECRET_BACKYARDCAM_USERNAME}:${SECRET_WIFICAM_PASSWORD}@192.168.1.201:10554/udp/av0_0
+    wificam_lq:
+      - ffmpeg:rtsp://${SECRET_BACKYARDCAM_USERNAME}:${SECRET_WIFICAM_PASSWORD}@192.168.1.201:10554/udp/av0_1
   webrtc:
     listen: ":8555"
     candidates:
@@ -128,6 +130,26 @@ cameras:
       enabled: true # <---- disable detection until you have a working camera feed
       width: 1920 # <---- update for your camera's resolution
       height: 1080 # <---- update for your camera's resolution
+  wificam:
+    ffmpeg:
+      inputs:
+        - path: rtsp://127.0.0.1:8554/wificam_hq
+          input_args: preset-rtsp-restream
+          roles:
+            - record
+        - path: rtsp://127.0.0.1:8554/wificam_lq
+          input_args: preset-rtsp-restream
+          roles:
+            - detect
+    onvif:
+      host: 192.168.1.201
+      port: 10080
+      user: ${SECRET_BACKYARDCAM_USERNAME}
+      password: ${SECRET_WIFICAM_PASSWORD}
+    detect:
+      enabled: true # <---- disable detection until you have a working camera feed
+      width: 640 # <---- update for your camera's resolution
+      height: 360 # <---- update for your camera's resolution
 
 
 # Optional: Telemetry configuration
