@@ -91,7 +91,6 @@ objects:
   #     min_area: 5000
   #     max_area: 100000
   #     threshold: 0.7
-
 cameras:
   frontyard:
     ffmpeg:
