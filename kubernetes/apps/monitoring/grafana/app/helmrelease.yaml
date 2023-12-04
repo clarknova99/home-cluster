@@ -172,6 +172,8 @@ spec:
             uid: influxdb
             access: proxy
             url: http://influxdb.monitoring.svc.cluster.local:8086
+            jsonData:
+              dbName: brad
     dashboards:
       default:
         cloudflared:
