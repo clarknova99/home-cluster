@@ -171,7 +171,7 @@ spec:
             type: influxdb
             uid: influxdb
             access: proxy
-            url: influxdb.monitoring.svc.cluster.local
+            url: http://influxdb.monitoring.svc.cluster.local:8086
     dashboards:
       default:
         cloudflared:
