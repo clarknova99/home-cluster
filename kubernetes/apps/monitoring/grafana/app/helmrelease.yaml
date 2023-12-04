@@ -167,6 +167,11 @@ spec:
             url: http://alertmanager.monitoring.svc.cluster.local:9093
             jsonData:
               implementation: prometheus
+          - name: influxdb
+            type: influxdb
+            uid: influxdb
+            access: proxy
+            url: influxdb.monitoring.svc.cluster.local
     dashboards:
       default:
         cloudflared:
