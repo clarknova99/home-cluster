@@ -4,6 +4,7 @@ logger:
   default: info
   logs:
     frigate.record: debug
+    rigate.record.maintainer: debug
     # ffmpeg.frontyard_hq: error
     # ffmpeg.backyard_hq: error
     #frigate.ptz.onvif: debug
@@ -72,7 +73,7 @@ record:
   enabled: true
   retain:
     days: 30
-    mode: all
+    mode: active_objects
   events:
     retain:
       default: 2
