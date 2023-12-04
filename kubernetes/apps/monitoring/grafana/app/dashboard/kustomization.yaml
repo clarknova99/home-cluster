@@ -16,6 +16,9 @@ configMapGenerator:
   - name: machine-temps-dashboard
     files:
       - temperatures.json
+  - name: brad-dashboard
+    files:
+      - brad.json
 generatorOptions:
   disableNameSuffixHash: true
   annotations:
