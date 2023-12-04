@@ -16,9 +16,9 @@ configMapGenerator:
   - name: machine-temps-dashboard
     files:
       - temperatures.json
-  - name: brad-dashboard
+  - name: iotawatt-dashboard
     files:
-      - brad.json
+      - iotawatt.json
 generatorOptions:
   disableNameSuffixHash: true
   annotations:
