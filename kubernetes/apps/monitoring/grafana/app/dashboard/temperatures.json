@@ -18,7 +18,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 71,
   "links": [],
   "liveNow": true,
   "panels": [
@@ -34,6 +33,7 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "temperature",
@@ -244,6 +244,7 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "temperature",
@@ -462,6 +463,7 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "temperature",
@@ -680,6 +682,7 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "temperature",
@@ -898,6 +901,7 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "temperature",
@@ -1116,6 +1120,7 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "temperature",
@@ -1334,6 +1339,7 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "temperature",
@@ -1552,6 +1558,7 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "temperature",
@@ -1712,7 +1719,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "avg_over_time(node_hwmon_temp_crit_celsius{instance=\"192.168.2.18:9100\"} [$__interval])",
+          "expr": "avg_over_time(node_hwmon_temp_crit_celsius{instance=\"192.168.2.14:9100\"} [$__interval])",
           "format": "time_series",
           "instant": false,
           "interval": "",
@@ -1761,7 +1768,6 @@
   ],
   "refresh": "",
   "schemaVersion": 38,
-  "style": "dark",
   "tags": [],
   "templating": {
     "list": []
@@ -1774,6 +1780,6 @@
   "timezone": "",
   "title": "Temperatures",
   "uid": "b607101b-35b5-4d69-ad12-d7770bf06f05",
-  "version": 19,
+  "version": 26,
   "weekStart": ""
 }
