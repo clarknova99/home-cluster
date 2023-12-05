@@ -113,7 +113,7 @@ cameras:
     ffmpeg:
       inputs:
         - path: rtsp://127.0.0.1:8554/basement_hq
-          # input_args: preset-rtsp-restream
+          input_args: preset-rtsp-restream
           # roles:
           #   - detect
     onvif:
