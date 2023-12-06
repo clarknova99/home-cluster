@@ -1,8 +1,11 @@
 ---
+#area/ansible:
+  # - "ansible/**/*"
+  # - "bootstrap/templates/ansible/**/*"
+  # - "bootstrap/tasks/ansible/**/*"
 area/ansible:
-  - "ansible/**/*"
-  - "bootstrap/templates/ansible/**/*"
-  - "bootstrap/tasks/ansible/**/*"
+  - changed-files:
+      - any-glob-to-any-file: ansible/**/*
 area/github:
   - ".github/**/*"
 area/kubernetes:
