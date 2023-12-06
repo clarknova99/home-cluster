@@ -1,9 +1,7 @@
 ---
 # Area
 - name: area/ansible
-  color: "72ccf3"
-  description: >-
-    Changes made in the ansible directory
+  color: "0e8a16"
 - name: area/github
   color: "72ccf3"
   description: >-
