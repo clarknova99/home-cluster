@@ -85,8 +85,6 @@ spec:
 
       ingress:
         # # -- Enable ingress record generation for the frontend
-        annotations:
-          hajimari.io/icon: mdi:microsoft-excel
         enabled: true
         # # -- IngressClass that will be be used to implement the Ingress
         className: "internal"
@@ -96,6 +94,8 @@ spec:
         #   # kubernetes.io/ingress.class: nginx
         #   # kubernetes.io/tls-acme: "true"
         # # -- The publicly reachable hostname for the frontend
+        annotations:
+          hajimari.io/icon: mdi:microsoft-excel
         hostname: baserow.${SECRET_DOMAIN}
         # # -- The path under witch the frontend should be reached
         path: "/"
