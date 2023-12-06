@@ -59,6 +59,8 @@ spec:
             - name: Renovate
               #url: https://app.renovatebot.com/dashboard#github/clarknova99/
               url: https://developer.mend.io/github/clarknova99/home-cluster
+            - name: MDI icons
+              url: https://pictogrammers.com/library/mdi/
     ingress:
       main:
         enabled: true

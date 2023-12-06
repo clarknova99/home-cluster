@@ -85,7 +85,8 @@ spec:
 
       ingress:
         # # -- Enable ingress record generation for the frontend
-
+        annotations:
+          hajimari.io/icon: mdi:microsoft-excel
         enabled: true
         # # -- IngressClass that will be be used to implement the Ingress
         className: "internal"
