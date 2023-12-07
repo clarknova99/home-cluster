@@ -11,7 +11,7 @@ resources:
   - ./frigate/ks.yaml
   - ./hajimari/ks.yaml
   - ./home-assistant/ks.yaml
-  - ./jupyterhub/ks.yaml
+ # - ./jupyterhub/ks.yaml
   - ./kubernetes-schemas/ks.yaml
   - ./lldap/ks.yaml
   - ./mosquitto/ks.yaml
