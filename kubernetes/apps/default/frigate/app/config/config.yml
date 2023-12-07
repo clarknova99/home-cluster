@@ -46,8 +46,8 @@ go2rtc:
     #   - "ffmpeg:backyard#video=h264"
     backyard_hq:
       - ffmpeg:rtsp://${SECRET_BACKYARDCAM_USERNAME}:${SECRET_WIFICAM_PASSWORD}@192.168.1.201:10554/tcp/av0_0
-    backyard_lq:
-      - ffmpeg:rtsp://${SECRET_BACKYARDCAM_USERNAME}:${SECRET_WIFICAM_PASSWORD}@192.168.1.201:10554/tcp/av0_1
+    # backyard_lq:
+    #   - ffmpeg:rtsp://${SECRET_BACKYARDCAM_USERNAME}:${SECRET_WIFICAM_PASSWORD}@192.168.1.201:10554/tcp/av0_1
   webrtc:
     listen: ":8555"
     candidates:
@@ -123,7 +123,7 @@ cameras:
       user: ${SECRET_BACKYARDCAM_USERNAME}
       password: ${SECRET_BACKYARDCAM_PASSWORD}
     detect:
-      enabled: false # <---- disable detection until you have a working camera feed
+      enabled: true # <---- disable detection until you have a working camera feed
       width: 1920 # <---- update for your camera's resolution
       height: 1080 # <---- update for your camera's resolution
   backyard:
@@ -133,10 +133,11 @@ cameras:
           input_args: preset-rtsp-restream
           roles:
             - record
-        - path: rtsp://127.0.0.1:8554/backyard_lq
-          input_args: preset-rtsp-restream
-          roles:
             - detect
+        # - path: rtsp://127.0.0.1:8554/backyard_lq
+        #   input_args: preset-rtsp-restream
+        #   roles:
+        #     - detect
     onvif:
       host: 192.168.1.201
       port: 10080
@@ -144,8 +145,8 @@ cameras:
       password: ${SECRET_WIFICAM_PASSWORD}
     detect:
       enabled: true # <---- disable detection until you have a working camera feed
-      width: 640 # <---- update for your camera's resolution
-      height: 360 # <---- update for your camera's resolution
+      width: 2304 # <---- update for your camera's resolution
+      height: 1296 # <---- update for your camera's resolution
 
 
 # Optional: Telemetry configuration
