@@ -30,6 +30,10 @@ spec:
     debug:
       enabled: true
     hub:
+      networkPolicy:
+        egress:
+          - ports:
+              - port: 6443
       db:
         pvc:
           #storageClassName: local-path
