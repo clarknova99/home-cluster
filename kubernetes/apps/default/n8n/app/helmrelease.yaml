@@ -24,7 +24,7 @@ spec:
           main:
             image:
               repository: docker.io/n8nio/n8n
-              tag: 1.19.5
+              tag: 1.20.0
 
             env:
               GENERIC_TIMEZONE: ${TIMEZONE}
