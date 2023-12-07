@@ -41,8 +41,8 @@ go2rtc:
     basement_hq:
       - ffmpeg:rtsp://${SECRET_BACKYARDCAM_USERNAME}:${SECRET_BACKYARDCAM_PASSWORD}@192.168.1.206:554/ch0_0.264
       #- "ffmpeg:backyard#video=h264"
-    # basement_lq:
-    #   - ffmpeg:rtsp://${SECRET_BACKYARDCAM_USERNAME}:${SECRET_BACKYARDCAM_PASSWORD}@192.168.1.206:554/ch0_1.264
+    basement_lq:
+      - ffmpeg:rtsp://${SECRET_BACKYARDCAM_USERNAME}:${SECRET_BACKYARDCAM_PASSWORD}@192.168.1.206:554/ch0_1.264
     #   - "ffmpeg:backyard#video=h264"
     backyard_hq:
       - ffmpeg:rtsp://${SECRET_BACKYARDCAM_USERNAME}:${SECRET_WIFICAM_PASSWORD}@192.168.1.201:10554/tcp/av0_0
@@ -114,8 +114,9 @@ cameras:
       inputs:
         - path: rtsp://127.0.0.1:8554/basement_hq
           input_args: preset-rtsp-restream
-          # roles:
-          #   - detect
+          roles:
+            - detect
+            - record
     onvif:
       host: 192.168.1.206
       port: 8888
