@@ -32,6 +32,7 @@ spec:
     hub:
       #https://github.com/jupyterhub/zero-to-jupyterhub-k8s/issues/3202
       #https://discourse.jupyter.org/t/jupyterhub-helm-chart-3-1-0-k8s-1-27-6-user-pods-not-spawning-got-timeouterror/21956/5
+      # default username is "jovyan" and the password is "jupyter"
       networkPolicy:
         egress:
           - ports:
