@@ -4,13 +4,13 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - ./namespace.yaml
-  - ./bazarr/ks.yaml
-  - ./hydra/ks.yaml
-  - ./prowlarr/ks.yaml
+ # - ./bazarr/ks.yaml
+ # - ./hydra/ks.yaml
+ # - ./prowlarr/ks.yaml
   #- ./qbittorrent/ks.yaml
-  - ./plex/ks.yaml
-  - ./radarr/ks.yaml
-  - ./sabnzbd/ks.yaml
-  - ./sonarr/ks.yaml
-  - ./tautulli/ks.yaml
-  - ./youtubedl/ks.yaml
+ # - ./plex/ks.yaml
+ # - ./radarr/ks.yaml
+ # - ./sabnzbd/ks.yaml
+ # - ./sonarr/ks.yaml
+ # - ./tautulli/ks.yaml
+ # - ./youtubedl/ks.yaml
