@@ -1,7 +1,7 @@
 ---
 
 logger:
-  default: info
+  default: debug
   logs:
     frigate.record: debug
     rigate.record.maintainer: debug
@@ -34,20 +34,20 @@ birdseye:
 go2rtc:
   streams:
     frontyard_hq:
-      - ffmpeg:rtsp://${SECRET_CAM_USERNAME}:${SECRET_CAM_PASSWORD}@192.168.1.101:554/stream1
-      - "ffmpeg:backyard#video=h264"
+      - rtsp://${SECRET_CAM_USERNAME}:${SECRET_CAM_PASSWORD}@192.168.1.101:554/stream1
+      #- "ffmpeg:backyard#video=h264"
     frontyard_lq:
-      - ffmpeg:rtsp://${SECRET_CAM_USERNAME}:${SECRET_CAM_PASSWORD}@192.168.1.101:554/1
+      - rtsp://${SECRET_CAM_USERNAME}:${SECRET_CAM_PASSWORD}@192.168.1.101:554/stream2
     basement_hq:
-      - ffmpeg:rtsp://${SECRET_BACKYARDCAM_USERNAME}:${SECRET_BACKYARDCAM_PASSWORD}@192.168.1.206:554/ch0_0.264
+      - rtsp://${SECRET_BACKYARDCAM_USERNAME}:${SECRET_BACKYARDCAM_PASSWORD}@192.168.1.206:554/ch0_0.264
       #- "ffmpeg:backyard#video=h264"
     basement_lq:
-      - ffmpeg:rtsp://${SECRET_BACKYARDCAM_USERNAME}:${SECRET_BACKYARDCAM_PASSWORD}@192.168.1.206:554/ch0_1.264
+      - rtsp://${SECRET_BACKYARDCAM_USERNAME}:${SECRET_BACKYARDCAM_PASSWORD}@192.168.1.206:554/ch0_1.264
       #- "ffmpeg:backyard#video=h264"
     backyard_hq:
-      - ffmpeg:rtsp://${SECRET_BACKYARDCAM_USERNAME}:${SECRET_WIFICAM_PASSWORD}@192.168.1.201:10554/tcp/av0_0
+      - rtsp://${SECRET_BACKYARDCAM_USERNAME}:${SECRET_WIFICAM_PASSWORD}@192.168.1.201:10554/tcp/av0_0
     backyard_lq:
-      - ffmpeg:rtsp://${SECRET_BACKYARDCAM_USERNAME}:${SECRET_WIFICAM_PASSWORD}@192.168.1.201:10554/tcp/av0_1
+      - rtsp://${SECRET_BACKYARDCAM_USERNAME}:${SECRET_WIFICAM_PASSWORD}@192.168.1.201:10554/tcp/av0_1
   webrtc:
     listen: ":8555"
     candidates:
