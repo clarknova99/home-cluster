@@ -107,8 +107,8 @@ cameras:
         #     - detect
     detect:
       enabled: true # <---- disable detection until you have a working camera feed
-      width: 1920 # <---- update for your camera's resolution
-      height: 1080 # <---- update for your camera's resolution
+      width: 1280 # <---- update for your camera's resolution
+      height: 720 # <---- update for your camera's resolution
   basement:
     ffmpeg:
       inputs:
@@ -124,8 +124,8 @@ cameras:
       password: ${SECRET_BACKYARDCAM_PASSWORD}
     detect:
       enabled: true # <---- disable detection until you have a working camera feed
-      width: 1920 # <---- update for your camera's resolution
-      height: 1080 # <---- update for your camera's resolution
+      width: 1280 # <---- update for your camera's resolution
+      height: 720 # <---- update for your camera's resolution
   backyard:
     ffmpeg:
       inputs:
@@ -145,8 +145,8 @@ cameras:
       password: ${SECRET_WIFICAM_PASSWORD}
     detect:
       enabled: true # <---- disable detection until you have a working camera feed
-      width: 2304 # <---- update for your camera's resolution
-      height: 1296 # <---- update for your camera's resolution
+      width: 1280 # <---- update for your camera's resolution
+      height: 720 # <---- update for your camera's resolution
 
 
 # Optional: Telemetry configuration
