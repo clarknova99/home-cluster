@@ -9,7 +9,7 @@ resources:
  # - ./prowlarr/ks.yaml
   #- ./qbittorrent/ks.yaml
   - ./plex/ks.yaml
-  - ./radarr/ks.yaml
+  #- ./radarr/ks.yaml
  # - ./sabnzbd/ks.yaml
   #- ./sonarr/ks.yaml
   - ./tautulli/ks.yaml
