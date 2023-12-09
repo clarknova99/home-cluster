@@ -123,7 +123,7 @@ cameras:
       user: ${SECRET_BACKYARDCAM_USERNAME}
       password: ${SECRET_BACKYARDCAM_PASSWORD}
     detect:
-      enabled: false # <---- disable detection until you have a working camera feed
+      enabled: true # <---- disable detection until you have a working camera feed
       width: 1920 # <---- update for your camera's resolution
       height: 1080 # <---- update for your camera's resolution
   backyard:
