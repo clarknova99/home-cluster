@@ -35,19 +35,20 @@ go2rtc:
   streams:
     frontyard_hq:
       - rtsp://${SECRET_CAM_USERNAME}:${SECRET_CAM_PASSWORD}@192.168.1.101:554/stream1
-      #- "ffmpeg:backyard#video=h264"
-    frontyard_lq:
-      - rtsp://${SECRET_CAM_USERNAME}:${SECRET_CAM_PASSWORD}@192.168.1.101:554/stream2
+      - "ffmpeg:backyard#video=h264"
+    # frontyard_lq:
+    #   - rtsp://${SECRET_CAM_USERNAME}:${SECRET_CAM_PASSWORD}@192.168.1.101:554/stream2
     basement_hq:
       - rtsp://${SECRET_BACKYARDCAM_USERNAME}:${SECRET_BACKYARDCAM_PASSWORD}@192.168.1.206:554/ch0_0.264
-      #- "ffmpeg:backyard#video=h264"
-    basement_lq:
-      - rtsp://${SECRET_BACKYARDCAM_USERNAME}:${SECRET_BACKYARDCAM_PASSWORD}@192.168.1.206:554/ch0_1.264
-      #- "ffmpeg:backyard#video=h264"
+      - "ffmpeg:backyard#video=h264"
+    # basement_lq:
+    #   - rtsp://${SECRET_BACKYARDCAM_USERNAME}:${SECRET_BACKYARDCAM_PASSWORD}@192.168.1.206:554/ch0_1.264
+    #   - "ffmpeg:backyard#video=h264"
     backyard_hq:
       - rtsp://${SECRET_BACKYARDCAM_USERNAME}:${SECRET_WIFICAM_PASSWORD}@192.168.1.201:10554/tcp/av0_0
-    backyard_lq:
-      - rtsp://${SECRET_BACKYARDCAM_USERNAME}:${SECRET_WIFICAM_PASSWORD}@192.168.1.201:10554/tcp/av0_1
+      - "ffmpeg:backyard#video=h264"
+    # backyard_lq:
+    #   - rtsp://${SECRET_BACKYARDCAM_USERNAME}:${SECRET_WIFICAM_PASSWORD}@192.168.1.201:10554/tcp/av0_1
   webrtc:
     listen: ":8555"
     candidates:
@@ -99,15 +100,16 @@ cameras:
         - path: rtsp://127.0.0.1:8554/frontyard_hq
           input_args: preset-rtsp-restream
           roles:
-            - record
-        - path: rtsp://127.0.0.1:8554/frontyard_lq
-          input_args: preset-rtsp-restream
-          roles:
             - detect
+            - record
+        # - path: rtsp://127.0.0.1:8554/frontyard_lq
+        #   input_args: preset-rtsp-restream
+        #   roles:
+        #     - detect
     detect:
       enabled: true # <---- disable detection until you have a working camera feed
-      width: 800 # <---- update for your camera's resolution
-      height: 448 # <---- update for your camera's resolution
+      width: 1280 # <---- update for your camera's resolution
+      height: 720 # <---- update for your camera's resolution
   basement:
     ffmpeg:
       inputs:
@@ -144,8 +146,8 @@ cameras:
       password: ${SECRET_WIFICAM_PASSWORD}
     detect:
       enabled: true # <---- disable detection until you have a working camera feed
-      width: 640 # <---- update for your camera's resolution
-      height: 360 # <---- update for your camera's resolution
+      width: 1280 # <---- update for your camera's resolution
+      height: 720 # <---- update for your camera's resolution
 
 
 # Optional: Telemetry configuration
