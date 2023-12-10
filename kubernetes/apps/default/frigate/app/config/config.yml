@@ -1,10 +1,12 @@
 ---
 
 logger:
-  default: debug
+  default: info
   logs:
     frigate.record: debug
-    rigate.record.maintainer: debug
+    frigate.record.maintainer: debug
+    frigate.video: debug
+
     # ffmpeg.frontyard_hq: error
     # ffmpeg.backyard_hq: error
     #frigate.ptz.onvif: debug
