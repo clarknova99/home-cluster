@@ -5,6 +5,7 @@ kind: Kustomization
 namespace: monitoring
 resources:
   - ./helmrelease.yaml
+  - ./scrapeconfigs
 # configMapGenerator:
 #   - name: alertmanager-config-tpl
 #     files:
