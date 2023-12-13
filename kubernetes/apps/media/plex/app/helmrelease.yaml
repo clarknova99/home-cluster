@@ -46,6 +46,7 @@ spec:
               TZ: America/New_York
               ADVERTISE_IP: "https://plex.${SECRET_DOMAIN},http://192.168.2.200:32400"
               ALLOWED_NETWORKS: "192.168.0.0/16,10.42.0.0/16,10.43.0.0/16"
+              HOSTNAME: plex.${SECRET_DOMAIN}
             resources:
               requests:
                 gpu.intel.com/i915: 1
