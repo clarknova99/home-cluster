@@ -58,12 +58,14 @@ spec:
           nodeSelector:
             intel.feature.node.kubernetes.io/gpu: "true"
             kubernetes.io/hostname: "nuc11"
+          # securityContext:
+          #   runAsUser: 568
+          #   runAsGroup: 568
+          #   fsGroup: 568
+          #   fsGroupChangePolicy: OnRootMismatch
+          #   supplementalGroups: [44, 105, 1000, 10000]
           securityContext:
-            runAsUser: 568
-            runAsGroup: 568
-            fsGroup: 568
-            fsGroupChangePolicy: OnRootMismatch
-            supplementalGroups: [44, 105, 1000, 10000]
+            privileged: true
         statefulset:
           volumeClaimTemplates:
             - name: config
