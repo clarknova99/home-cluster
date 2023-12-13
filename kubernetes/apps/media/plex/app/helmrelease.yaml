@@ -10,7 +10,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 2.3.0
+      version: 2.4.0
       sourceRef:
         kind: HelmRepository
         name: bjw-s
@@ -39,10 +39,13 @@ spec:
             image:
               repository: ghcr.io/onedr0p/plex
               tag: 1.32.8.7639-fb6452ebf@sha256:637fe10cef736f249d96cb004c12f81646c81ca17ddce22374ea8782aa6646c2
+              # repository: docker.io/plexinc/pms-docker
+              # tag: plexpass
             env:
               # See https://support.plex.tv/articles/201105343-advanced-hidden-server-settings/
               TZ: America/New_York
               ADVERTISE_IP: "https://plex.${SECRET_DOMAIN},http://192.168.2.200:32400"
+              ALLOWED_NETWORKS: "192.168.0.0/16,10.42.0.0/16,10.43.0.0/16"
             resources:
               requests:
                 gpu.intel.com/i915: 1
@@ -60,7 +63,7 @@ spec:
             runAsGroup: 568
             fsGroup: 568
             fsGroupChangePolicy: OnRootMismatch
-            supplementalGroups: [44, 105, 10000]
+            supplementalGroups: [44, 105, 1000, 10000]
         statefulset:
           volumeClaimTemplates:
             - name: config
@@ -78,6 +81,24 @@ spec:
         ports:
           http:
             port: 32400
+          # GDM Network discovery
+          # https://support.plex.tv/articles/200430283-network/
+          gdm-1-udp:
+            enabled: true
+            port: 32410
+            protocol: UDP
+          gdm-2-udp:
+            enabled: true
+            port: 32412
+            protocol: UDP
+          gdm-3-udp:
+            enabled: true
+            port: 32413
+            protocol: UDP
+          gdm-4-udp:
+            enabled: true
+            port: 32414
+            protocol: UDP
     ingress:
       main:
         enabled: true
