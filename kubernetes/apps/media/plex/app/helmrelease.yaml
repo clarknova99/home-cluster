@@ -40,7 +40,9 @@ spec:
               repository: ghcr.io/onedr0p/plex
               tag: 1.32.8.7639-fb6452ebf@sha256:637fe10cef736f249d96cb004c12f81646c81ca17ddce22374ea8782aa6646c2
             env:
+              # See https://support.plex.tv/articles/201105343-advanced-hidden-server-settings/
               TZ: America/New_York
+              ADVERTISE_IP: "https://plex.${SECRET_DOMAIN},http://192.168.2.200:32400"
             resources:
               requests:
                 gpu.intel.com/i915: 1
