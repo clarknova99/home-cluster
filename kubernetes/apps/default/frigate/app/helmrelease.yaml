@@ -88,6 +88,10 @@ spec:
             port: *port
           rtsp:
             port: 8554
+            protocol: TCP
+          rtsp-udp:
+            port: 8554
+            protocol: UDP
           webrtc:
             enabled: true
             port: 8555
