@@ -5,4 +5,5 @@ kind: Kustomization
 namespace: monitoring
 resources:
   - ./helmrelease.yaml
+  - ./ingress.yaml
   - ./parseable.sops.yaml

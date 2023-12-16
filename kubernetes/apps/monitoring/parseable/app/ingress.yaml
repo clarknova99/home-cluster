@@ -1,0 +1,26 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: parseable
+  namespace: monitoring
+  annotations:
+    hajimari.io/enable: "true"
+    hajimari.io/icon: mdi:poll
+spec:
+  ingressClassName: internal
+  rules:
+    - host: "parseable.${SECRET_DOMAIN}"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: parseable
+                port:
+                  number: 80
+  tls:
+    - hosts:
+        - "parseable.${SECRET_DOMAIN}"
+
