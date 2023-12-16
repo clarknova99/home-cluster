@@ -120,11 +120,11 @@ sinks:
     uri: 'http://parseable.monitoring.svc.cluster.local/api/v1/ingest'
     auth:
       strategy: basic
-      user: admin
-      password: admin
+      user: "${SECRET_PARSEABLE_USERNAME}"
+      password: "${SECRET_PARSEABLE_PASSWORD}"
     request:
       headers:
-        X-P-Stream: vectordemo
+        X-P-Stream: kubernetes
     healthcheck:
       enabled: true
       path: 'http://parseable.monitoring.svc.cluster.local/api/v1/liveness'
