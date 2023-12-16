@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Secret
 metadata:
-    name: parseable-secrets
+    name: parseable-env-secret
     namespace: monitoring
 stringData:
     username: ENC[AES256_GCM,data:QGWo6m6uxbc=,iv:G8WmYR2kDWG0Fl7G4FYk0/BtAXXAjynPPyhoh1l4ddo=,tag:1+W5QXOwTKHUF21JxrcKQw==,type:str]
@@ -29,8 +29,8 @@ sops:
             WTUvSHJMRSsvbW50b3p4cFVkSkFLajAKVyVPQhAtYE/qFnieg1lzfRI4hRfJOJPy
             eg+fonGWlgpUPAqss1OqGRnYT7xquKgn/bSfH/z/g2b0Wv+RxnvNlg==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2023-12-16T17:33:43Z"
-    mac: ENC[AES256_GCM,data:tbr5wvFrq/2mAoPNa1q4pBMUmgvQXrHFQMt7U1lfno8bl6irAoLT4ea55eTbqT24xXlmB7LVS1nZPjx6NeNzoY7w4N6EGdFX9yg6JFkTQ8MFlKeNpGv+xADxG/ucNYTWYG4A8b5iBX20PRxfSxAHgUKcVCMntJsxbCjQooJwCYI=,iv:RERB2OVWsG5fuk1l6u0CIWY+ogJ4cldtcmKS1rN1eQc=,tag:mAL1Js+EgTnQGAYi+gHLEQ==,type:str]
+    lastmodified: "2023-12-16T21:13:14Z"
+    mac: ENC[AES256_GCM,data:Uay69B//X0dKbzpyNSGom67UFY48kzkIcJw3kae6r8vLOHITLQkpuwQCUpx9OyeMvLYDgG59SWidYR1aXPjy7dE/nSUGsI18zhuudelHbdBDoOZo59D3I248ooGrI6MuNVRRSmAPyYSvpTuVlLBVL6mf6XlUMu/pWduYDz6ratI=,iv:+XH0fk9oV7oOo6NuREh4jMQakpbQJIAJ3LdMZDd4+ls=,tag:v7B5UwVeBCsSlLp4BkyVVw==,type:str]
     pgp: []
     encrypted_regex: ^(data|stringData)$
     version: 3.8.1
