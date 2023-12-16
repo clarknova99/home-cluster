@@ -27,7 +27,6 @@ spec:
     controllers:
       main:
         replicas: 1
-
         containers:
           main:
             image:
@@ -57,6 +56,17 @@ spec:
         pod:
           securityContext:
             allowPrivilegeEscalation: false
+    persistence:
+      staging:
+        enabled: false
+        storageClass: ""
+        accessMode: ReadWriteOnce
+        size: 1Gi
+      data:
+        enabled: false
+        storageClass: ""
+        accessMode: ReadWriteOnce
+        size: 1Gi
 
     service:
       main:
