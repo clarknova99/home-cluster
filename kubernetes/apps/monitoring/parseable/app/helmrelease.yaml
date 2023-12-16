@@ -139,19 +139,15 @@ spec:
         # honorLabels: false
         # additionalLabels: {}
         # podTargetLabels: []
+
     ingress:
-      annotations:
-        external-dns.alpha.kubernetes.io/target: "appsmith.${SECRET_DOMAIN}"
-        hajimari.io/enable: "true"
-        hajimari.io/icon: mdi:poll
       enabled: true
-      ingressClassName: internal
-      hosts:
-        - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
-          paths:
-            - path: /
-              service:
-                port: http
+      className: "internal"
+      annotations:
+        hajimari.io/icon: mdi:microsoft-poll
+      hostname: parseable.${SECRET_DOMAIN}
+      path: "/"
+      pathType: "Prefix"
       tls:
         - hosts:
-            - *host
+            - "parseable.${SECRET_DOMAIN}"
