@@ -34,6 +34,7 @@ spec:
             image:
               repository: docker.io/parseable/parseable
               tag: v0.7.1
+            local: false
         pod:
           securityContext:
             allowPrivilegeEscalation: false
