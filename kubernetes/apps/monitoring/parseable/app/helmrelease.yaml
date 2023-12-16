@@ -55,7 +55,6 @@ spec:
             localModeSecret:
               - type: env
                 name: parseable-secrets
-                prefix: P_
                 keys:
                 - addr
                 - username
