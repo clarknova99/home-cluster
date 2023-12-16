@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: parseable-secrets
+    namespace: monitoring
+stringData:
+    username: ENC[AES256_GCM,data:QGWo6m6uxbc=,iv:G8WmYR2kDWG0Fl7G4FYk0/BtAXXAjynPPyhoh1l4ddo=,tag:1+W5QXOwTKHUF21JxrcKQw==,type:str]
+    password: ENC[AES256_GCM,data:QkKIqD4ULP5p,iv:9EX7U/H/ZWKxqfLHq6uFqChBEqBdwF9kgoibKyttJpk=,tag:2ziKMKS1ZMPmbPcglcq1LA==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age14q9x9ftcpqfw2kmhmlfzpx5g2wmn7tdnq34uhh4x0r2h6qfmm5dqk07z2e
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSArNEdTbEFWVjZtSlRQS0ly
+            dXFWYytzVXZmNGtFL1N4T3YzVmZ2aU03YkEwCmFWU0lIMmJuSVk0SWFZRnp5L0lI
+            UXJTYkttbkExalpON0taZUIxNHBKdHcKLS0tIHlxbDYwUFZ4MnZLQzJhaUxzcitO
+            WTUvSHJMRSsvbW50b3p4cFVkSkFLajAKVyVPQhAtYE/qFnieg1lzfRI4hRfJOJPy
+            eg+fonGWlgpUPAqss1OqGRnYT7xquKgn/bSfH/z/g2b0Wv+RxnvNlg==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2023-12-16T17:16:49Z"
+    mac: ENC[AES256_GCM,data:uadKKDxPVhbfdANjFL4iPgTBgvzxahVPfRNNATe97TGUYTVEVZs0UQvBTpg7DXgVENiDiLUT7vTu0NtHtY/3PVHhSk9tt2WXdvFvv4XM1r7dGqTERhwVnJ9mzHNg75cApsexF19xxipF98et2MK9VJGYYRVO9uZTl9Vzk5/8id4=,iv:Naf3Hwsryr/nnmxufeTKgFskzfshuCKICQm85mn7Xnw=,tag:ckJV4DVRsGBfow8nOELBdg==,type:str]
+    pgp: []
+    encrypted_regex: ^(data|stringData)$
+    version: 3.8.1
