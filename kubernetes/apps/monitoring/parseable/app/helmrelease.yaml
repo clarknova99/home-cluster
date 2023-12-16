@@ -142,7 +142,7 @@ spec:
 
     ingress:
       enabled: true
-      className: "internal"
+      ingressClassName: internal
       annotations:
         hajimari.io/icon: mdi:microsoft-poll
       hostname: parseable.${SECRET_DOMAIN}
