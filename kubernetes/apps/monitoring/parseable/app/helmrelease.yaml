@@ -28,15 +28,15 @@ spec:
     image:
       repository: parseable/parseable
       tag: v0.7.1
-      pullPolicy: Always
+      pullPolicy: IfNotPresent
     replicaCount: 1
     ## Set to true if you want to deploy Parseable in local mode (store logs
     ## on local mount point instead of S3 bucket)
     local: false
     ## Add environment variables to the Parseable Deployment
-    # envFrom:
-    #   - secretRef:
-    #     name: parseable-secrets
+    envFrom:
+      - secretRef:
+        name: parseable-env-secret
     env:
       RUST_LOG: warn
     ## Enable to create a log stream and then add retention configuration
