@@ -33,9 +33,7 @@ spec:
               repository: docker.io/parseable/parseable
               tag: v0.7.1
               pullPolicy: Always
-              command:
-                - "parseable"
-                - "s3-store"
+              command: ["parseable","s3-store"]
             local: false
             envFrom:
               - secretRef:
