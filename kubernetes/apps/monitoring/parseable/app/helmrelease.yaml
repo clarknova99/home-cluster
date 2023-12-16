@@ -34,8 +34,8 @@ spec:
               tag: v0.7.1
             local: false
             envFrom:
-            - secretRef:
-                name: parseable-secrets
+              - secretRef:
+                  name: parseable-secrets
             env:
               RUST_LOG: debug
             s3ModeSecret:
