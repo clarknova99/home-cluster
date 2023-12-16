@@ -1,0 +1,115 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2beta1.json
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: parseable
+  namespace: monitoring
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: 2.4.0
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+      interval: 15m
+  maxHistory: 3
+  install:
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
+  values:
+    defaultPodOptions:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: "Always"
+    controllers:
+      main:
+        annotations:
+          prometheus.io/scrape: "true"
+          prometheus.io/port: "80"
+          prometheus.io/path: "/api/v1/metrics"
+        replicas: 1
+        local: true
+        containers:
+          main:
+            image:
+              repository: docker.io/parseable/parseable
+              tag: v0.7.1
+              pullPolicy: Always
+              # command: [ "/bin/sh", "-c", "sleep 1000000" ]
+              # args: ["parseable","s3-store"]
+            local: true
+            envFrom:
+              - secretRef:
+                  name: parseable-secrets
+            env:
+              RUST_LOG: debug
+            localModeSecret:
+              - type: env
+                name: parseable-secrets
+                keys:
+                - addr
+                - username
+                - password
+                - staging.dir
+                - fs.dir
+            s3ModeSecret:
+            - type: env
+              name: parseable-secrets
+              keys:
+              - addr
+              - username
+              - password
+              - staging.dir
+              - fs.dir
+              - s3.url
+              - s3.access.key
+              - s3.secret.key
+              - s3.bucket
+              - s3.region
+        pod:
+          securityContext:
+            allowPrivilegeEscalation: false
+    persistence:
+      staging:
+        enabled: true
+        storageClass: ""
+        accessMode: ReadWriteOnce
+        size: 1Gi
+      data:
+        enabled: true
+        storageClass: ""
+        accessMode: ReadWriteOnce
+        size: 1Gi
+
+    service:
+      main:
+        type: ClusterIP
+        ports:
+          http:
+            port: 80
+            targetPort: 8000
+    ingress:
+      main:
+        enabled: true
+        className: internal
+        annotations:
+          hajimari.io/icon: mdi:poll
+        hosts:
+          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                service:
+                  name: main
+                  port: http
+        tls:
+          - hosts:
+              - *host

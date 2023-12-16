@@ -9,94 +9,132 @@ spec:
   interval: 15m
   chart:
     spec:
-      chart: app-template
-      version: 2.4.0
+      chart: parseable
+      version: 0.7.1
       sourceRef:
         kind: HelmRepository
-        name: bjw-s
+        name: parseable
         namespace: flux-system
       interval: 15m
   maxHistory: 3
   install:
     remediation:
-      retries: 5
+      retries: 3
   upgrade:
+    cleanupOnFail: true
     remediation:
-      retries: 5
+      retries: 3
   values:
-    defaultPodOptions:
-      securityContext:
-        runAsUser: 1000
-        runAsGroup: 1000
-        fsGroup: 1000
-        fsGroupChangePolicy: "Always"
-    controllers:
-      main:
-        annotations:
-          prometheus.io/scrape: "true"
-          prometheus.io/port: "80"
-          prometheus.io/path: "/api/v1/metrics"
-        replicas: 1
-        local: true
-        containers:
-          main:
-            image:
-              repository: docker.io/parseable/parseable
-              tag: v0.7.1
-              pullPolicy: Always
-              # command: [ "/bin/sh", "-c", "sleep 1000000" ]
-              # args: ["parseable","s3-store"]
-            local: true
-            envFrom:
-              - secretRef:
-                  name: parseable-secrets
-            env:
-              RUST_LOG: debug
-            localModeSecret:
-              - type: env
-                name: parseable-secrets
-                keys:
-                - addr
-                - username
-                - password
-                - staging.dir
-                - fs.dir
-            s3ModeSecret:
-            - type: env
-              name: parseable-secrets
-              keys:
-              - addr
-              - username
-              - password
-              - staging.dir
-              - fs.dir
-              - s3.url
-              - s3.access.key
-              - s3.secret.key
-              - s3.bucket
-              - s3.region
-        pod:
-          securityContext:
-            allowPrivilegeEscalation: false
+    image:
+      repository: parseable/parseable
+      tag: v0.7.1
+      pullPolicy: Always
+    replicaCount: 1
+    ## Set to true if you want to deploy Parseable in local mode (store logs
+    ## on local mount point instead of S3 bucket)
+    local: false
+    ## Add environment variables to the Parseable Deployment
+    env:
+      RUST_LOG: warn
+    ## Enable to create a log stream and then add retention configuration
+    ## for that log stream
+    # logstream:
+    #   - name: "vectordemo"
+    #     retention:
+    #       action: "delete"
+    #       duration: "30d"
+    #   - name: "fluentbitdemo"
+    #     retention:
+    #       action: "delete"
+    #       duration: "30d"
+    ## enable persistence using PVC for the Data and Staging directories
+    ## Note that Data directory is needed only for local mode
     persistence:
       staging:
-        enabled: true
+        enabled: false
         storageClass: ""
         accessMode: ReadWriteOnce
         size: 1Gi
       data:
-        enabled: true
+        enabled: false
         storageClass: ""
         accessMode: ReadWriteOnce
         size: 1Gi
-
+    localModeSecret:
+      - type: env
+        name: parseable-secrets
+        prefix: P_
+        keys:
+        - addr
+        - username
+        - password
+        - staging.dir
+        - fs.dir
+    s3ModeSecret:
+      - type: env
+        name: parseable-secrets
+        prefix: P_
+        keys:
+        ## Comment / uncomment the following lines as required
+        # - tls.cert.path
+        # - tls.key.path
+        # - storage.upload.interval
+        - addr
+        - username
+        - password
+        - staging.dir
+        - fs.dir
+        - s3.url
+        - s3.access.key
+        - s3.secret.key
+        - s3.bucket
+        - s3.region
+    serviceAccount:
+      create: true
+      name: "parseable"
+      annotations: {}
     service:
-      main:
-        type: ClusterIP
-        ports:
-          http:
-            port: 80
-            targetPort: 8000
+      type: ClusterIP
+      port: 80
+    resources:
+      limits:
+        cpu: 500m
+        memory: 4Gi
+      requests:
+        cpu: 250m
+        memory: 1Gi
+    securityContext:
+      allowPrivilegeEscalation: false
+    podAnnotations:
+      prometheus.io/scrape: "true"
+      prometheus.io/port: "80"
+      prometheus.io/path: "/api/v1/metrics"
+    podSecurityContext:
+      runAsUser: 1000
+      runAsGroup: 1000
+      fsGroup: 1000
+      fsGroupChangePolicy: "Always"
+    # nameOverride: ""
+    # fullnameOverride: ""
+    # nodeSelector: {}
+    # affinity: {}
+    # tolerations: []
+    ## Use this section to create ServiceMonitor object for
+    ## this Parseable deployment. Read more on ServiceMonitor
+    ## here: https://prometheus-operator.dev/docs/operator/design/#servicemonitor
+    metrics:
+      serviceMonitor:
+        enabled: false
+        defaults:
+          labels:
+            release: prometheus
+        interval: 30s
+        scrapeTimeout: 30s
+        # relabellings: []
+        # metricRelabelings: []
+        # honorLabels: false
+        # additionalLabels: {}
+        # podTargetLabels: []
     ingress:
       main:
         enabled: true
