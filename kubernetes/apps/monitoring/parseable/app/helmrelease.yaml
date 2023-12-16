@@ -26,6 +26,9 @@ spec:
     controllers:
       main:
         replicas: 1
+        envFrom:
+          - secretRef:
+              name: parseable-secrets
         containers:
           main:
             image:
