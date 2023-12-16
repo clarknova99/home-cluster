@@ -141,13 +141,14 @@ spec:
         # podTargetLabels: []
 
     ingress:
-      enabled: true
-      ingressClassName: internal
-      annotations:
-        hajimari.io/icon: mdi:microsoft-poll
-      hostname: parseable.${SECRET_DOMAIN}
-      path: "/"
-      pathType: "Prefix"
-      tls:
-        - hosts:
-            - "parseable.${SECRET_DOMAIN}"
+      main:
+        enabled: true
+        ingressClassName: internal
+        annotations:
+          hajimari.io/icon: mdi:microsoft-poll
+        hostname: parseable.${SECRET_DOMAIN}
+        path: "/"
+        pathType: "Prefix"
+        tls:
+          - hosts:
+              - "parseable.${SECRET_DOMAIN}"
