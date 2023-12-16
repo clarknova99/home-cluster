@@ -69,7 +69,6 @@ spec:
         enabled: true
         className: internal
         annotations:
-          nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
           hajimari.io/icon: mdi:poll
         hosts:
           - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
