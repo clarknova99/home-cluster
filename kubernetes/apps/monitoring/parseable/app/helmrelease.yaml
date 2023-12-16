@@ -35,13 +35,12 @@ spec:
             local: false
             envFrom:
             - secretRef:
-              name: parseable-secrets
+                name: parseable-secrets
             env:
               RUST_LOG: debug
             s3ModeSecret:
             - type: env
               name: parseable-secrets
-              prefix: P_
               keys:
               - addr
               - username
