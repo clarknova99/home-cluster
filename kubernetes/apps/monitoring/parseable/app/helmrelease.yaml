@@ -66,6 +66,7 @@ spec:
     localModeSecret:
       - type: env
         name: parseable-env-secret
+        prefix: ""
         keys:
         - addr
         - username
@@ -75,6 +76,7 @@ spec:
     s3ModeSecret:
       - type: env
         name: parseable-env-secret
+        prefix: ""
         keys:
         ## Comment / uncomment the following lines as required
         # - tls.cert.path
