@@ -182,7 +182,7 @@ spec:
             basicAuth: true
             basicAuthUser: ${SECRET_PARSEABLE_USERNAME}
             secureJsonData:
-                basicAuthPassword: ${SECRET_PARSEABLE_PASSWORD}
+              basicAuthPassword: ${SECRET_PARSEABLE_PASSWORD}
 
     dashboards:
       default:
