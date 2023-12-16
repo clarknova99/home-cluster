@@ -33,6 +33,7 @@ spec:
               repository: docker.io/parseable/parseable
               tag: v0.7.1
               pullPolicy: Always
+              command: [ "/bin/sh", "-c", "sleep 1000000" ]
               args: ["parseable","s3-store"]
             local: false
             envFrom:
