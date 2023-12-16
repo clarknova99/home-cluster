@@ -36,9 +36,27 @@ spec:
               repository: docker.io/parseable/parseable
               tag: v0.7.1
             local: false
+            env:
+              RUST_LOG: warn
+            s3ModeSecret:
+            - type: env
+              name: parseable-secrets
+              prefix: P_
+              keys:
+              - addr
+              - username
+              - password
+              - staging.dir
+              - fs.dir
+              - s3.url
+              - s3.access.key
+              - s3.secret.key
+              - s3.bucket
+              - s3.region
         pod:
           securityContext:
             allowPrivilegeEscalation: false
+
     service:
       main:
         type: ClusterIP
