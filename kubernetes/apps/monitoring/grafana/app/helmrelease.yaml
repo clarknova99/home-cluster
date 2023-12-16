@@ -178,7 +178,6 @@ spec:
             type: parseable-parseable-datasource
             url: http://parseable.monitoring.svc.cluster.local
             access: proxy
-            isDefault: true
             basicAuth: true
             basicAuthUser: ${SECRET_PARSEABLE_USERNAME}
             secureJsonData:
