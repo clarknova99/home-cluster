@@ -27,15 +27,16 @@ spec:
     controllers:
       main:
         replicas: 1
-        envFrom:
-          - secretRef:
-              name: parseable-secrets
+
         containers:
           main:
             image:
               repository: docker.io/parseable/parseable
               tag: v0.7.1
             local: false
+            envFrom:
+            - secretRef:
+              name: parseable-secrets
             env:
               RUST_LOG: debug
             s3ModeSecret:
