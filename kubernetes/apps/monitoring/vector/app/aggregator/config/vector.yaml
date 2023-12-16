@@ -105,3 +105,27 @@ sinks:
     remove_timestamp: true
     labels:
       hostname: '{{ host }}'
+
+  parseable:
+    inputs: ["kubernetes_remap"]
+    type: http
+    method: post
+    batch:
+      max_bytes: 10485760
+      max_events: 1000
+      timeout_secs: 10
+    compression: gzip
+    encoding:
+      codec: json
+    uri: 'http://parseable.monitoring.svc.cluster.local/api/v1/ingest'
+    auth:
+      strategy: basic
+      user: admin
+      password: admin
+    request:
+      headers:
+        X-P-Stream: vectordemo
+    healthcheck:
+      enabled: true
+      path: 'http://parseable.monitoring.svc.cluster.local/api/v1/liveness'
+      port: 80
