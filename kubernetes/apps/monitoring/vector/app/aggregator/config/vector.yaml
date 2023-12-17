@@ -39,7 +39,7 @@ transforms:
     inputs: ["kubernetes_source"]
     source: |
       # Standardize 'app' index
-      .custom_app_name = .pod_labels."app.kubernetes.io/name" || .pod_labels.app || .pod_labels."k8s-app" || "unknown"
+      .custom_app_name = kubernetes.pod_labels."app.kubernetes.io/name" || .pod_labels.app || .pod_labels."k8s-app" || "unknown"
       .custom_instance_name = .pod_labels."app.kubernetes.io/instance"
       # Drop pod_labels
       del(.pod_labels)
@@ -107,7 +107,7 @@ sinks:
       hostname: '{{ host }}'
 
   parseable:
-    inputs: ["kubernetes_remap"]
+    inputs: ["kubernetes_source"]
     type: http
     method: post
     batch:
