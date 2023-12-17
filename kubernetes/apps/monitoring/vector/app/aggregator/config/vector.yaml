@@ -93,7 +93,7 @@ sinks:
   kubernetes:
     inputs:
       - kubernetes_remap
-      - kubernetes_remap_nginx
+    #  - kubernetes_remap_nginx
     type: loki
     endpoint: http://loki-gateway.monitoring.svc.cluster.local
     encoding: { codec: json }
@@ -121,7 +121,7 @@ sinks:
   parseable:
     inputs:
       - kubernetes_remap
-      - kubernetes_remap_nginx
+     # - kubernetes_remap_nginx
     type: http
     method: post
     batch:
