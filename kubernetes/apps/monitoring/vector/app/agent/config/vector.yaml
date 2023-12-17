@@ -20,9 +20,9 @@ sources:
     # node_annotation_fields:
     #   node_labels: ""
 
-  kubernetes_nginx:
-    type: kubernetes_logs
-    extra_label_selector: app.kubernetes.io/instance=nginx-external
+  # kubernetes_nginx:
+  #   type: kubernetes_logs
+  #   extra_label_selector: app.kubernetes.io/instance=nginx-external
 
 
 sinks:
