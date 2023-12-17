@@ -120,10 +120,9 @@ sinks:
     labels:
       hostname: '{{ host }}'
 
-  parseable:
+  parseable-kubernetes:
     inputs:
       - kubernetes_remap
-      - kubernetes_remap_nginx
     type: http
     method: post
     batch:
@@ -141,6 +140,31 @@ sinks:
     request:
       headers:
         X-P-Stream: kubernetes
+    healthcheck:
+      enabled: true
+      path: 'http://parseable.monitoring.svc.cluster.local/api/v1/liveness'
+      port: 80
+
+  parseable-nginx:
+    inputs:
+      - kubernetes_remap_nginx
+    type: http
+    method: post
+    batch:
+      max_bytes: 10485760
+      max_events: 1000
+      timeout_secs: 10
+    compression: gzip
+    encoding:
+      codec: json
+    uri: 'http://parseable.monitoring.svc.cluster.local/api/v1/ingest'
+    auth:
+      strategy: basic
+      user: "${SECRET_PARSEABLE_USERNAME}"
+      password: "${SECRET_PARSEABLE_PASSWORD}"
+    request:
+      headers:
+        X-P-Stream: nginx
     healthcheck:
       enabled: true
       path: 'http://parseable.monitoring.svc.cluster.local/api/v1/liveness'
