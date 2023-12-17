@@ -43,7 +43,8 @@ transforms:
   kubernetes_route_nginx:
     type: route
     inputs: kubernetes_remap
-    route: .ingress-nginx = .custom_app_name == "ingress-nginx"
+    route:
+      ingress-nginx: .custom_app_name == "ingress-nginx"
   kubernetes_remap_nginx:
     type: remap
     inputs: kubernetes_route_nginx.ingress-nginx
