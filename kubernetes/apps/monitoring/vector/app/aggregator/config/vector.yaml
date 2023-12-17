@@ -12,7 +12,6 @@ enrichment_tables:
 #
 # Sources
 #
-
 sources:
   journald_source:
     type: vector
@@ -28,11 +27,9 @@ sources:
     type: syslog
     address: 0.0.0.0:1514
     mode: tcp
-
 #
 # Transforms
 #
-
 transforms:
   kubernetes_remap:
     type: remap
@@ -42,7 +39,18 @@ transforms:
       .custom_app_name = .pod_labels."app.kubernetes.io/name" || .pod_labels.app || .pod_labels."k8s-app" || "unknown"
       .custom_instance_name = .pod_labels."app.kubernetes.io/instance"
       # Drop pod_labels
-      del(.pod_labels)
+      #del(.pod_labels)
+  kubernetes_route_nginx:
+    type: route
+    inputs: kubernetes_remap
+    route: .ingress-nginx = .custom_app_name == "ingress-nginx"
+  kubernetes_remap_nginx:
+    type: remap
+    inputs: kubernetes_route_nginx.ingress-nginx
+    source: |
+      .message = parse_json!(.message)
+
+
 
   # syslog_remap:
   #   type: remap
@@ -81,18 +89,20 @@ sinks:
       hostname: '{{ host }}'
 
   kubernetes:
-    inputs: ["kubernetes_remap"]
+    inputs:
+      - kubernetes_remap
+      - kubernetes_remap_nginx
     type: loki
     endpoint: http://loki-gateway.monitoring.svc.cluster.local
     encoding: { codec: json }
-    out_of_order_action: accept
-    #remove_label_fields: true
+    out_of_order_action: rewrite_timestamp
+    remove_label_fields: true
     remove_timestamp: true
     labels:
-      app: '{{ custom_app_name }}'
-      namespace: '{{ kubernetes.pod_namespace }}'
-      node: '{{ kubernetes.pod_node_name }}'
-      instance: '{{ custom_instance_name }}'
+      k8_app: '{{ custom_app_name }}'
+      k8_namespace: '{{ kubernetes.pod_namespace }}'
+      k8_node: '{{ kubernetes.pod_node_name }}'
+      k8_instance: '{{ custom_instance_name }}'
 
   syslog:
     inputs: ["syslog_source"]
@@ -107,7 +117,9 @@ sinks:
       hostname: '{{ host }}'
 
   parseable:
-    inputs: ["kubernetes_source"]
+    inputs:
+      - kubernetes_remap
+      - kubernetes_remap_nginx
     type: http
     method: post
     batch:
