@@ -46,11 +46,11 @@ transforms:
       - kubernetes_remap
     route:
       nginx: .pod_labels."app.kubernetes.io/name" == "ingress-nginx"
-  kubernetes_remap_nginx:
-    type: remap
-    inputs: kubernetes_route_nginx.nginx
-    source: |
-      .message = parse_json!(.message)
+  # kubernetes_remap_nginx:
+  #   type: remap
+  #   inputs: kubernetes_route_nginx.nginx
+  #   source: |
+  #     .message = parse_json!(.message)
 
 
 
