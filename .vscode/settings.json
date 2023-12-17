@@ -8,8 +8,10 @@
     },
     "yaml.schemaStore.enable": true,
     "yaml.schemas": {
+      "file:///Users/mfeldbly/.vscode/extensions/atlassian.atlascode-2.10.12/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml",
       "ansible": "ansible/**/*.yaml",
-      "kubernetes": "kubernetes/**/*.yaml"
+      "kubernetes": "kubernetes/**/*.yaml",
+      "https://json.schemastore.org/venvironment-basic-schema.json": "file:///Users/mfeldbly/code/home-cluster/kubernetes/apps/monitoring/vector/app/agent/config/vector.yaml"
     },
     "editor.fontFamily": "FiraCode Nerd Font",
     "editor.fontLigatures": true,
