@@ -18,4 +18,4 @@ resources:
   - ./parseable/ks.yaml
   - ./smartctl-exporter/ks.yaml
   - ./thanos/ks.yaml
- # - ./vector/ks.yaml
+  - ./vector/ks.yaml
