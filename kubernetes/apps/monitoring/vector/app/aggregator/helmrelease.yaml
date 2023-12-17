@@ -50,7 +50,7 @@ spec:
             image:
               repository: docker.io/timberio/vector
               tag: 0.34.1-debian
-            args: ["--config", "/etc/vector/vector.yaml"]
+            args: ["--config", "/etc/vector/vector.yaml", "-v","debug"]
 
 
         pod:

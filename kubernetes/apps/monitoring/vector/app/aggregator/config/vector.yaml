@@ -42,9 +42,10 @@ transforms:
       #del(.pod_labels)
   kubernetes_route_nginx:
     type: route
-    inputs: kubernetes_remap
+    inputs:
+      - kubernetes_remap
     route:
-      nginx: .custom_app_name == "ingress-nginx"
+      nginx: .pod_labels."app.kubernetes.io/name" == "ingress-nginx"
   kubernetes_remap_nginx:
     type: remap
     inputs: kubernetes_route_nginx.nginx
