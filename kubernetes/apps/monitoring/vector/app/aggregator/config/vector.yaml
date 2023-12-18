@@ -41,24 +41,26 @@ transforms:
       .custom_instance_name = .pod_labels."app.kubernetes.io/instance"
       # Drop pod_labels
       # del(.pod_labels)
+  kubernetes_drop_empty_messages:
+    type: filter
+    inputs:
+      - kubernetes_remap
+    condition: |
+      length(.message) > 1
   kubernetes_route_nginx:
     type: route
     inputs:
-      - kubernetes_remap
+      - kubernetes_drop_empty_messages
     route:
       nginx: .custom_app_name == "ingress-nginx"
-  kubernetes_filter_nginx:
-    type: filter
-    inputs:
-      - kubernetes_route_nginx.nginx
-    condition: |
-      length(.message) > 1
   kubernetes_remap_nginx:
     type: remap
     inputs:
-      - kubernetes_filter_nginx
+      - kubernetes_route_nginx.nginx
     source: |
       .message = parse_json!(.message)
+
+
 
   # kubernetes_remap_nginx:
   #   type: remap
