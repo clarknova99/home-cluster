@@ -46,7 +46,7 @@ transforms:
     inputs:
       - kubernetes_remap
     condition: |
-      length(.message) > 1
+      length!(.message) > 1
   kubernetes_route_nginx:
     type: route
     inputs:
