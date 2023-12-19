@@ -18,7 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 55,
+  "id": 82,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -142,7 +142,7 @@
           "zoom": 2.79
         }
       },
-      "pluginVersion": "10.1.5",
+      "pluginVersion": "10.2.2",
       "targets": [
         {
           "datasource": {
@@ -279,7 +279,7 @@
             "uid": "loki"
           },
           "editorMode": "code",
-          "expr": "{app=\"ingress-nginx\", instance=\"nginx-external\"} | json | x_forwarded_for !~ `.*192.168.*` | x_forwarded_for !~ `.*10.42.*` | \n  line_format `{{.time}} - {{.status}} - {{.vhost}} - {{.x_forwarded_for}} - {{.http_user_agent}} - {{.geoip_city}}, {{.geoip_region_name}} {{.geoip_country_code}} - {{.path}} - {{.http_referrer}}` |\n __error__=``",
+          "expr": "{k8_instance=\"nginx-external\"} | json \n| message_x_forwarded_for !~ `.*192.168.1.*` \n| message_x_forwarded_for !~ `.*10.42.*`\n| message != `\\t`\n| line_format `{{.message_time}} - {{.message_status}} - {{.message_vhost}} - {{.message_x_forwarded_for}} - {{.message_http_user_agent}} - {{.message_geoip_city}}, {{.message_geoip_region_name}} {{.message_geoip_country_code}} - {{.message_path}} - {{.message_http_referrer}}` \n| __error__=``",
           "queryType": "range",
           "refId": "A"
         }
@@ -375,6 +375,7 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
@@ -410,7 +411,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -526,7 +528,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -631,6 +634,18 @@
                 "value": 259
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "message_http_user_agent"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 221
+              }
+            ]
           }
         ]
       },
@@ -654,7 +669,7 @@
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "10.1.2",
+      "pluginVersion": "10.2.2",
       "targets": [
         {
           "datasource": {
@@ -662,7 +677,7 @@
             "uid": "loki"
           },
           "editorMode": "code",
-          "expr": "{app=\"ingress-nginx\", instance=\"nginx-external\"} | json | x_forwarded_for !~ `.*192.168.*` | vhost !~ \"influxdb-brad.bigwang.org\" |\n __error__=``",
+          "expr": "{k8_instance=\"nginx-external\"} | json | x_forwarded_for !~ `.*192.168.*` | message_vhost !~ \"influxdb-brad.bigwang.org\" |\n __error__=``",
           "queryType": "range",
           "refId": "A"
         }
@@ -797,19 +812,18 @@
   ],
   "refresh": "",
   "schemaVersion": 38,
-  "style": "dark",
   "tags": [],
   "templating": {
     "list": []
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-1h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Ingress Logs",
   "uid": "b0c235a4-d758-4aa7-8f09-7137af01edfd",
-  "version": 14,
+  "version": 33,
   "weekStart": ""
 }
