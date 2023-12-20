@@ -16,7 +16,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: proxmox
+  name: diskstation
   namespace: networking
   annotations:
     hajimari.io/icon: simple-icons:proxmox
