@@ -4,5 +4,6 @@ kind: Kustomization
 namespace: networking
 resources:
   - ./helmrelease.yaml
+  - ./diskstation.yaml
   # - ./plex.yaml
   #- ./proxmox.yaml
