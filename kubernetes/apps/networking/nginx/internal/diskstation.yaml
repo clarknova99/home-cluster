@@ -1,17 +1,29 @@
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   namespace: networking
+#   name: diskstation
+# spec:
+#   externalName: diskstation.local
+#   ports:
+#   - name: https
+#     port: 5000
+#     protocol: TCP
+#     targetPort: 5000
+#   sessionAffinity: None
+#   type: ExternalName
+---
 apiVersion: v1
 kind: Service
 metadata:
-  namespace: networking
   name: diskstation
+  namespace: networking
 spec:
-  externalName: diskstation.local
   ports:
-  - name: https
-    port: 5000
-    protocol: TCP
-    targetPort: 5000
-  sessionAffinity: None
-  type: ExternalName
+    - name: http
+      port: 5000
+  type: ClusterIP
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -36,3 +48,16 @@ spec:
   tls:
     - hosts:
       - "ds.${SECRET_DOMAIN}"
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: diskstation
+  namespace: networking
+subsets:
+  - addresses:
+      - ip: 192.168.1.2
+    ports:
+      - name: http
+        port: 5000
+        protocol: TCP
