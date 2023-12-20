@@ -77,10 +77,23 @@ transforms:
       new_event |= { "geoip_region": .geoip_region }
       new_event |= { "geoip_region_name": .geoip_region_name }
       . = new_event
+  kubernetes_nginx_drop_local:
+    type: remap
+    inputs:
+      - kubernetes_remap_nginx
+    source: |
+      # Define local LAN IP ranges
+      is_local_ip = starts_with(.ip_address, "192.168.") || starts_with(.ip_address, "10.") ||
+                    (starts_with(.ip_address, "172.") && .ip_address >= "172.16." && .ip_address <= "172.31.") ||
+                    starts_with(.ip_address, "127.")
+      # Drop the event if it's from a local IP
+      if is_local_ip {
+        drop()
+      }
   geo_enriched:
     type: "remap"
     inputs:
-      - kubernetes_remap_nginx
+      - kubernetes_nginx_drop_local
     source: |
       .geoip = get_enrichment_table_record!(
         "geoip_table", {
