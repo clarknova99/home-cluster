@@ -53,13 +53,40 @@ transforms:
       - kubernetes_drop_empty_messages
     route:
       nginx: .custom_app_name == "ingress-nginx"
+  # .message = parse_json!(.message)
   kubernetes_remap_nginx:
     type: remap
     inputs:
       - kubernetes_route_nginx.nginx
     source: |
-      .message = parse_json!(.message)
-
+      . = parse_json!(string!(.message))
+      ip_csv = parse_csv!(.x_forwarded_for)
+      .ip_address = ip_csv[0]
+      new_event = { "time:": .time }
+      new_event |= { "ip_address": ip_csv[0] }
+      new_event |= { "user_agent": .http_user_agent }
+      new_event |= { "status": .status }
+      new_event |= { "vhost": .vhost }
+      new_event |= { "path": .path }
+      new_event |= { "query": .request_query }
+      new_event |= { "geoip_country_code": .geoip_country_code }
+      new_event |= { "geoip_country_name": .geoip_country_name }
+      new_event |= { "geoip_city": .geoip_city }
+      new_event |= { "geoip_latitude": .geoip_latitude }
+      new_event |= { "geoip_longitude": .geoip_longitude }
+      new_event |= { "geoip_region": .geoip_region }
+      new_event |= { "geoip_region_name": .geoip_region_name }
+      . = new_event
+  geo_enriched:
+    type: "remap"
+    inputs:
+      - kubernetes_remap_nginx
+    source: |
+      .geoip = get_enrichment_table_record!(
+        "geoip_table", {
+          "ip": .ip_address
+        }
+      )
 
 
   # kubernetes_remap_nginx:
@@ -162,7 +189,7 @@ sinks:
 
   parseable-nginx:
     inputs:
-      - kubernetes_remap_nginx
+      - geo_enriched
     type: http
     method: post
     batch:
