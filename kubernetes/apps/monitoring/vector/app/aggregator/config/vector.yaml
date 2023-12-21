@@ -83,12 +83,11 @@ transforms:
       - kubernetes_remap_nginx
     source: |
       # Define local LAN IP ranges
-      is_local_ip = starts_with(.ip_address, "192.168.") || starts_with(.ip_address, "10.") ||
-                    (starts_with(.ip_address, "172.") && .ip_address >= "172.16." && .ip_address <= "172.31.") ||
-                    starts_with(.ip_address, "127.")
-      # Drop the event if it's from a local IP
+      is_local_ip = starts_with!(.ip_address, "192.168.") || starts_with!(.ip_address, "10.") || starts_with!(.ip_address, "127.")
+
+      # Drop local IPs by only allowing non-local IPs to pass
       if is_local_ip {
-        drop()
+        abort
       }
   geo_enriched:
     type: "remap"
