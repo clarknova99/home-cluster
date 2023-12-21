@@ -62,7 +62,7 @@ transforms:
       . = parse_json!(string!(.message))
       ip_csv = parse_csv!(.x_forwarded_for)
       .ip_address = ip_csv[0]
-      new_event = { "time:": .time }
+      new_event = { "timestamp:": .time }
       new_event |= { "ip_address": ip_csv[0] }
       new_event |= { "user_agent": .http_user_agent }
       new_event |= { "status": .status }
