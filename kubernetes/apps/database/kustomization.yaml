@@ -6,7 +6,7 @@ resources:
   - ./namespace.yaml
   - ./cloudnative-pg/ks.yaml
   - ./couchdb/ks.yaml
-  - ./mongodb/ks.yaml
+  #- ./mongodb/ks.yaml
   - ./pgadmin/ks.yaml
   - ./redis/ks.yaml
   - ./redisinsight/ks.yaml
