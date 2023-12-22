@@ -22,6 +22,7 @@
 The repo is home for the code to automate the provisioning and management of my Kubernetes cluster.
 * [ansible](https://www.ansible.com) for provisioning & bootstrapping debian servers with [K3s](https://k3s.io).
 * [flux](https://toolkit.fluxcd.io)  watches this git repo and applies changes to Kubernetes when they are pushed to the repo.
+* [flux schemas](https://github.com/fluxcd-community/flux2-schemas/) flux schemas used for yaml validation
 * [renovate](https://github.com/renovatebot/renovate) monitors the repo, creating pull requests when it finds updates to dependencies.
 
 ## :gear: Core Components

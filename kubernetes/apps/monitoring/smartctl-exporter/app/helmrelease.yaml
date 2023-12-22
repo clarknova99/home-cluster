@@ -1,5 +1,5 @@
 ---
-# yaml-language-server: $schema=https://kubernetes-schemas.devbu.io/helm.toolkit.fluxcd.io/helmrelease_v2beta1.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2beta1.json
 # https://github.com/jr0dd/home-ops/blob/main/cluster/apps/monitoring/grafana/helm-release.yaml
       #  smart-summary:
       #     url: https://raw.githubusercontent.com/jr0dd/grafana-dashboards/main/smart-summary.json
