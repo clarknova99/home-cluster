@@ -16,6 +16,7 @@ resources:
   - ./coredns.yaml
   - ./couchdb.yaml
   - ./csi-driver-nfs.yaml
+  - ./democratic-csi.yaml
   - ./external-dns.yaml
   - ./grafana.yaml
   - ./hajimari.yaml
@@ -38,5 +39,5 @@ resources:
   - ./superset.yaml
   - ./tooljet.yaml
   - ./tyzbit.yaml
-  #- ./vector.yaml
+  - ./vector.yaml
   - ./weave-gitops.yaml
