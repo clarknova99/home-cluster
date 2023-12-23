@@ -50,14 +50,14 @@ spec:
           http:
             port: 5076
     persistence:
-      data:
+      config:
         enabled: true
         existingClaim: pvc-hydra-config
-        subPath:
-          - path: config
-            mountPath: /config
-          - path: download
-            mountPath: /download
+        mountPath: /config
+      downloads:
+        enabled: true
+        existingClaim: pvc-downloads
+        mountPath: /downloads
 
   # values:
   #   image:
