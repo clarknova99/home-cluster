@@ -6,18 +6,17 @@ metadata:
   name: bazarr
   namespace: media
 spec:
-  interval: 15m
+  interval: 30m
   chart:
     spec:
       chart: app-template
-      version: 1.5.1
+      version: 2.4.0
       sourceRef:
         kind: HelmRepository
         name: bjw-s
         namespace: flux-system
-  maxHistory: 3
+  maxHistory: 2
   install:
-    createNamespace: true
     remediation:
       retries: 3
   upgrade:
@@ -27,62 +26,131 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    controller:
-      type: statefulset
-    image:
-      repository: ghcr.io/onedr0p/bazarr
-      tag: 1.4.0@sha256:c81c4d9cbec093d5a999cfa3cd1af01d3f00d6292d6f5c33608510cef0ed83c7
-    env:
-      TZ: America/New_York
-    service:
-      main:
-        ports:
-          http:
-            port: 6767
-    podSecurityContext:
-      runAsUser: 568
-      runAsGroup: 568
-      fsGroup: 568
-      fsGroupChangePolicy: "OnRootMismatch"
-      supplementalGroups: [10000]
-    persistence:
-      config:
-        enabled: true
-        existingClaim: pvc-bazarr-config
-        mountPath: /config
-      downloads:
-        enabled: true
-        existingClaim: pvc-downloads
-        mountPath: /downloads
-      movies:
-        enabled: true
-        existingClaim: pvc-movies
-        mountPath: /movies
-      tv:
-        enabled: true
-        existingClaim: pvc-tv
-        mountPath: /tv
-      incomplete:
-        enabled: true
-        type: emptyDir
-      add-ons:
-        enabled: true
-        type: emptyDir
-        mountPath: /add-ons
-    resources:
-      requests:
-        cpu: 15m
-        memory: 381Mi
-      limits:
-        memory: 816Mi
-    sidecars:
-        subcleaner:
-          image: registry.k8s.io/git-sync/git-sync:v4.1.0
-          imagePullPolicy: IfNotPresent
-          args:
-            - --repo=https://github.com/KBlixt/subcleaner
-            - --branch=master
-            - --wait=86400 # 1 day
-            - --root=/add-ons
-          volumeMounts:
-            - { name: add-ons, mountPath: /add-ons }
+      controllers:
+        main:
+          annotations:
+            reloader.stakater.com/auto: "true"
+          containers:
+            main:
+              image:
+                repository: ghcr.io/onedr0p/bazarr
+                tag: 1.4.0@sha256:c81c4d9cbec093d5a999cfa3cd1af01d3f00d6292d6f5c33608510cef0ed83c7
+              env:
+                TZ: ${TIMEZONE}
+              resources:
+                requests:
+                  cpu: 10m
+                  memory: 256M
+                limits:
+                  memory: 1024M
+            subcleaner:
+              image:
+                repository: registry.k8s.io/git-sync/git-sync
+                tag: v4.1.0
+              args:
+                - --repo=https://github.com/KBlixt/subcleaner
+                - --branch=master
+                - --wait=86400 # 1 day
+                - --root=/add-ons
+              resources:
+                requests:
+                  cpu: 10m
+                  memory: 10M
+                limits:
+                  memory: 128M
+          pod:
+            securityContext:
+              runAsUser: 568
+              runAsGroup: 568
+              fsGroup: 568
+              fsGroupChangePolicy: OnRootMismatch
+      service:
+        main:
+          ports:
+            http:
+              port: 6767
+      persistence:
+        config:
+          enabled: true
+          existingClaim: pvc-bazarr-config
+          mountPath: /config
+        downloads:
+          enabled: true
+          existingClaim: pvc-downloads
+          mountPath: /downloads
+        movies:
+          enabled: true
+          existingClaim: pvc-movies
+          mountPath: /movies
+        tv:
+          enabled: true
+          existingClaim: pvc-tv
+          mountPath: /tv
+        incomplete:
+          enabled: true
+          type: emptyDir
+        add-ons:
+          enabled: true
+          type: emptyDir
+          mountPath: /add-ons
+
+  # values:
+  #   controller:
+  #     type: statefulset
+  #   image:
+  #     repository: ghcr.io/onedr0p/bazarr
+  #     tag: 1.4.0@sha256:c81c4d9cbec093d5a999cfa3cd1af01d3f00d6292d6f5c33608510cef0ed83c7
+  #   env:
+  #     TZ: America/New_York
+  #   service:
+  #     main:
+  #       ports:
+  #         http:
+  #           port: 6767
+  #   podSecurityContext:
+  #     runAsUser: 568
+  #     runAsGroup: 568
+  #     fsGroup: 568
+  #     fsGroupChangePolicy: "OnRootMismatch"
+  #     supplementalGroups: [10000]
+  #   persistence:
+  #     config:
+  #       enabled: true
+  #       existingClaim: pvc-bazarr-config
+  #       mountPath: /config
+  #     downloads:
+  #       enabled: true
+  #       existingClaim: pvc-downloads
+  #       mountPath: /downloads
+  #     movies:
+  #       enabled: true
+  #       existingClaim: pvc-movies
+  #       mountPath: /movies
+  #     tv:
+  #       enabled: true
+  #       existingClaim: pvc-tv
+  #       mountPath: /tv
+  #     incomplete:
+  #       enabled: true
+  #       type: emptyDir
+  #     add-ons:
+  #       enabled: true
+  #       type: emptyDir
+  #       mountPath: /add-ons
+  #   resources:
+  #     requests:
+  #       cpu: 15m
+  #       memory: 381Mi
+  #     limits:
+  #       memory: 816Mi
+  #   sidecars:
+  #       subcleaner:
+  #         image: registry.k8s.io/git-sync/git-sync:v4.1.0
+  #         imagePullPolicy: IfNotPresent
+  #         args:
+  #           - --repo=https://github.com/KBlixt/subcleaner
+  #           - --branch=master
+  #           - --wait=86400 # 1 day
+  #           - --root=/add-ons
+  #         volumeMounts:
+  #           - { name: add-ons, mountPath: /add-ons }

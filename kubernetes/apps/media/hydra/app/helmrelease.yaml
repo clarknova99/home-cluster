@@ -58,31 +58,3 @@ spec:
         enabled: true
         existingClaim: pvc-downloads
         mountPath: /downloads
-
-  # values:
-  #   image:
-  #     #repository: docker.io/linuxserver/nzbhydra2
-  #     repository: ghcr.io/hotio/nzbhydra2
-  #     tag: release-91bc68a
-  #   env:
-  #     TZ: "${TIMEZONE}"
-  #   persistence:
-  #     data:
-  #       enabled: true
-  #       existingClaim: pvc-hydra-config
-  #       subPath:
-  #         - path: config
-  #           mountPath: /config
-  #         - path: download
-  #           mountPath: /download
-  #   service:
-  #     main:
-  #       ports:
-  #         http:
-  #           port: 5076
-  #   resources:
-  #     requests:
-  #       cpu: 10m
-  #       memory: 555Mi
-  #     limits:
-  #       memory: 800Mi
