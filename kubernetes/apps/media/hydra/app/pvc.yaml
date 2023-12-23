@@ -13,7 +13,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   nfs:
     server: 192.168.1.2
-    path: "/volume1/network-storage/nzbhydra"
+    path: "/volume1/network-storage/nzbhydra/config"
     readOnly: false
 ---
 apiVersion: v1
