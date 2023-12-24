@@ -6,130 +6,132 @@ metadata:
   name: &app minio
   namespace: kube-system
 spec:
-  interval: 15m
+  interval: 30m
   chart:
     spec:
       chart: app-template
-      version: 1.5.1
+      version: 2.4.0
       sourceRef:
         kind: HelmRepository
         name: bjw-s
         namespace: flux-system
   install:
-    createNamespace: true
     remediation:
-      retries: 5
+      retries: 3
   upgrade:
+    cleanupOnFail: true
     remediation:
-      retries: 5
+      retries: 3
+  uninstall:
+    keepHistory: false
   values:
-    image:
-      repository: quay.io/minio/minio
-      #tag: RELEASE.2023-08-23T10-07-06Z
-      tag: RELEASE.2023-11-01T01-57-10Z
-    env:
-      TZ: "${TIMEZONE}"
-      MINIO_UPDATE: "off"
-      MINIO_API_CORS_ALLOW_ORIGIN: https://minio.${SECRET_DOMAIN},https://s3.${SECRET_DOMAIN}
-      MINIO_BROWSER_REDIRECT_URL: "https://minio.${SECRET_DOMAIN}"
-      MINIO_SERVER_URL: "https://s3.${SECRET_DOMAIN}"
-      MINIO_PROMETHEUS_URL: http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090
-      #MINIO_PROMETHEUS_URL: http://thanos-query.monitoring.svc.cluster.local:9090
-      MINIO_PROMETHEUS_JOB_ID: minio
-      MINIO_PROMETHEUS_AUTH_TYPE: public
-      MINIO_IDENTITY_OPENID_CONFIG_URL: https://auth.${SECRET_DOMAIN}/.well-known/openid-configuration
-      MINIO_IDENTITY_OPENID_CLIENT_ID: minio
-      MINIO_IDENTITY_OPENID_CLIENT_SECRET: "${SECRET_MINIO_OAUTH_CLIENT_SECRET}"
-      MINIO_IDENTITY_OPENID_CLAIM_NAME: policy
-      MINIO_IDENTITY_OPENID_CLAIM_PREFIX: authelia
-      MINIO_IDENTITY_OPENID_SCOPES: openid,profile,email
-      MINIO_IDENTITY_OPENID_REDIRECT_URI: https://minio.${SECRET_DOMAIN}/oauth_callback
-      MINIO_IDENTITY_OPENID_CLAIM_USERINFO: "on"
-    # envFrom:
-    # ## sops --encrypt --in-place ./kubernetes/apps/kube-system/minio/app/minio.sops.yaml
-    # ## sops --decrypt ./kubernetes/apps/kube-system/minio/app/minio.sops.yaml | kubectl apply -f -
-    #   - secretRef:
-    #       name: *app
-    args: ["server", "/data", "--console-address", ":9001"]
+    controllers:
+      main:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          main:
+            image:
+              repository: quay.io/minio/minio
+              #tag: RELEASE.2023-11-01T01-57-10Z
+              tag: RELEASE.2023-12-23T07-19-11Z@sha256:47d5b01cc3020efa39aac112a7cbc919af5fb18f9ebc63bda31683590715c42b
+            env:
+              TZ: "${TIMEZONE}"
+              MINIO_UPDATE: "off"
+              MINIO_API_CORS_ALLOW_ORIGIN: https://minio.${SECRET_DOMAIN},https://s3.${SECRET_DOMAIN}
+              MINIO_BROWSER_REDIRECT_URL: "https://minio.${SECRET_DOMAIN}"
+              MINIO_SERVER_URL: "https://s3.${SECRET_DOMAIN}"
+              MINIO_PROMETHEUS_URL: http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090
+              #MINIO_PROMETHEUS_URL: http://thanos-query.monitoring.svc.cluster.local:9090
+              MINIO_PROMETHEUS_JOB_ID: minio
+              MINIO_PROMETHEUS_AUTH_TYPE: public
+              MINIO_IDENTITY_OPENID_CONFIG_URL: https://auth.${SECRET_DOMAIN}/.well-known/openid-configuration
+              MINIO_IDENTITY_OPENID_CLIENT_ID: minio
+              MINIO_IDENTITY_OPENID_CLIENT_SECRET: "${SECRET_MINIO_OAUTH_CLIENT_SECRET}"
+              MINIO_IDENTITY_OPENID_CLAIM_NAME: policy
+              MINIO_IDENTITY_OPENID_CLAIM_PREFIX: authelia
+              MINIO_IDENTITY_OPENID_SCOPES: openid,profile,email
+              MINIO_IDENTITY_OPENID_REDIRECT_URI: https://minio.${SECRET_DOMAIN}/oauth_callback
+              MINIO_IDENTITY_OPENID_CLAIM_USERINFO: "on"
+            envFrom:
+              - secretRef:
+                  name: minio-secret
+            args:
+              - server
+              - /data
+              - --console-address
+              - :9001
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /minio/health/live
+                    port: 9000
+                  initialDelaySeconds: 30
+                  periodSeconds: 30
+                  timeoutSeconds: 10
+                  failureThreshold: 6
+              readiness: *probes
+              startup:
+                enabled: false
+            # securityContext:
+            #   runAsUser: 1000
+            #   runAsGroup: 1000
+            #   fsGroup: 1000
+            #   fsGroupChangePolicy: OnRootMismatch
+            #   supplementalGroups: [100,568,1000]
+        pod:
+          nodeSelector:
+            kubernetes.io/arch: "amd64"
     service:
       main:
-        enabled: true
         ports:
           http:
-            port: &console-port 9001
-          api:
-            enabled: true
-            port: &api-port 9000
+            port: 9001
+          s3:
+            port: 9000
     serviceMonitor:
       main:
         enabled: true
         endpoints:
-          - port: api
+          - port: s3
             scheme: http
             path: /minio/v2/metrics/cluster
             interval: 1m
             scrapeTimeout: 10s
             bearerTokenSecret:
-              name: minio-secret
+              name: minio
               key: MINIO_PROMETHEUS_TOKEN
     ingress:
       main:
         enabled: true
-        ingressClassName: internal
+        className: internal
         annotations:
           hajimari.io/icon: mdi:pail
         hosts:
-          - host: &console-host "minio.${SECRET_DOMAIN}"
+          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:
               - path: /
-                pathType: Prefix
                 service:
-                  port: *console-port
-        tls:
-          - hosts:
-              - *console-host
-      s3:
-        enabled: true
-        ingressClassName: internal
-        annotations:
-          hajimari.io/enable: "false"
-          nginx.ingress.kubernetes.io/proxy-connect-timeout: "180"
-          nginx.ingress.kubernetes.io/proxy-body-size: 1024m
-          nginx.ingress.kubernetes.io/proxy-request-buffering: "off"
-          nginx.ingress.kubernetes.io/configuration-snippet: |
-            chunked_transfer_encoding off;
-        hosts:
-          - host: &api-host "s3.${SECRET_DOMAIN}"
+                  name: main
+                  port: http
+          - host: &s3Host s3.${SECRET_DOMAIN}
             paths:
               - path: /
-                pathType: Prefix
                 service:
-                  port: *api-port
+                  name: main
+                  port: s3
         tls:
           - hosts:
-              - *api-host
+              - *host
+              - *s3Host
     persistence:
       config:
         enabled: true
         type: nfs
         server: 192.168.1.2
         path: /volume1/network-storage/s3
-        readOnly: false
-        mountPath: /data
-    podAnnotations:
-      secret.reloader.stakater.com/reload: minio
-    resources:
-      requests:
-        memory: 100Mi
-        cpu: 100m
-      limits:
-        memory: 750Mi
-    affinity:
-      nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-            - matchExpressions:
-                - key: kubernetes.io/arch
-                  operator: In
-                  values:
-                    - amd64
+        globalMounts:
+          - path: /data
