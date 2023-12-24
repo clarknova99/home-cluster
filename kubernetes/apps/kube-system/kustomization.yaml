@@ -1,4 +1,5 @@
 ---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/kustomization-kustomize-v1beta1.json
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
@@ -9,7 +10,7 @@ resources:
   - ./intel-device-plugin/ks.yaml
   - ./local-path-provisioner/ks.yaml
   - ./metrics-server/ks.yaml
-  - ./minio/ks.yaml
+  #- ./minio/ks.yaml
   - ./node-feature-discovery/ks.yaml
   - ./reloader/ks.yaml
 
