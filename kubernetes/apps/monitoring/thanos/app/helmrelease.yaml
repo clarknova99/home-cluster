@@ -74,14 +74,14 @@ spec:
       retentionResolution1h: 90d
       persistence:
         enabled: true
-        storageClass: local-path
+        storageClass: local-hostpath
         size: 10Gi
     storegateway:
       enabled: true
       replicaCount: 2
       persistence:
         enabled: true
-        storageClass: local-path
+        storageClass: local-hostpath
         size: 10Gi
     ruler:
       enabled: true
