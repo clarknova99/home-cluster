@@ -7,7 +7,7 @@ resources:
   - ./alertmanager/ks.yaml
   - ./blackbox-exporter/ks.yaml
   - ./gatus/ks.yaml
-  #- ./grafana/ks.yaml
+  - ./grafana/ks.yaml
   - ./influxdb/ks.yaml
   - ./karma/ks.yaml
   - ./kube-prometheus-stack/ks.yaml
@@ -17,5 +17,5 @@ resources:
   - ./promlens/ks.yaml
   - ./parseable/ks.yaml
   - ./smartctl-exporter/ks.yaml
- # - ./thanos/ks.yaml
+  - ./thanos/ks.yaml
   - ./vector/ks.yaml
