@@ -28,8 +28,6 @@ spec:
   dependsOn:
     - name: cloudnative-pg
       namespace: database
-    - name: longhorn
-      namespace: storage
   values:
     controllers:
       main:

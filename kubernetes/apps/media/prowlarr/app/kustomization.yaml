@@ -6,4 +6,5 @@ namespace: media
 resources:
   - ./helmrelease.yaml
   - ./ingress.yaml
+  - ./prowlarr.sops.yaml
   - ./pvc.yaml
