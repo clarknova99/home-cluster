@@ -48,21 +48,3 @@ spec:
         ports:
           http:
             port: 8191
-  # values:
-  #   image:
-  #     repository: ghcr.io/flaresolverr/flaresolverr
-  #     tag: v3.3.12
-  #   env:
-  #     TZ: "${TIMEZONE}"
-  #     LOG_LEVEL: info
-  #   service:
-  #     main:
-  #       ports:
-  #         http:
-  #           port: 8191
-  #   resources:
-  #     requests:
-  #       memory: 100Mi
-  #       cpu: 100m
-  #     limits:
-  #       memory: 1024Mi

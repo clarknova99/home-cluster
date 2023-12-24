@@ -73,7 +73,10 @@ spec:
       config:
         enabled: true
         existingClaim: pvc-prowlarr
-
+      downloads:
+        enabled: true
+        existingClaim: pvc-downloads
+        mountPath: /downloads
 
   # values:
   #   initContainers:
