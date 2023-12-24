@@ -99,7 +99,7 @@ spec:
         type: dynamic
         capacity: 5Gi
         dynamic:
-          storageClass: local-path
+          storageClass: local-hostpath
       # storage:
       #   type: static
       #   extraVolumes:
