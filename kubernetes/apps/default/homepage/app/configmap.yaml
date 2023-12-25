@@ -14,14 +14,13 @@ data:
   kubernetes.yaml: |
     ---
     mode: cluster
-
   services.yaml: |
     ---
     - Media:
         - Plex:
             icon: plex.png
             href: https://plex.${SECRET_DOMAIN}
-            description: Data Viz
+            description: Media Player
             widget:
               type: plex
               url: http://192.168.2.200:32400
@@ -74,7 +73,7 @@ data:
             description: Data Viz
             widget:
               type: grafana
-              url: http://grafana.monitoring.svc.cluster.local
+              url: http://grafana.monitoring.svc.cluster.local:3000
               username: {{HOMEPAGE_VAR_GRAFANA_USERNAME}}
               password: {{HOMEPAGE_VAR_GRAFANA_PASSWORD}}
     - Favorites:
@@ -119,6 +118,9 @@ data:
       searchDescription: true
       hideInternetSearch: true
       hideVisitURL: true
+    providers:
+      longhorn:
+        url: http://longhorn-frontend.longhorn-system.svc.cluster.local
 
   widgets.yaml: |
     ---
@@ -141,3 +143,10 @@ data:
           label: home-cluster
         nodes:
           show: false
+    - longhorn:
+        # Show the expanded view
+        expanded: true
+        # Shows a node representing the aggregate values
+        total: true
+        # Shows the node names as labels
+        labels: true
