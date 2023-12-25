@@ -13,7 +13,7 @@ metadata:
     gethomepage.dev/group: Apps
     gethomepage.dev/icon: mdi-water-flow
     gethomepage.dev/name: n8n
-    gethomepage.dev/widget.type: ""
+    gethomepage.dev/widget.type: n8n
     gethomepage.dev/widget.url: "https://n8n.${SECRET_DOMAIN}"
     gethomepage.dev/pod-selector: ""
 spec:

@@ -106,25 +106,28 @@ data:
             icon: si-github
             href: https://github.com/bjw-s/helm-charts/tree/main/charts/library/common#values
             description: app-template Helm Chart Values
-
+        - Renovate:
+            href: https://developer.mend.io/github/clarknova99/home-cluster
   settings.yaml: |
     ---
     title: Home Network
     theme: dark
     color: slate
-    headerStyle: boxedWidgets
+    headerStyle: clean
     target: _blank
     layout:
+      Monitoring:
+        style: row
+
+      Network:
+        style: row
       Media:
         style: row
         columns: 4
-      Network:
-        style: row
       Favorites:
         style: row
         columns: 3
-      Monitoring:
-        style: row
+
 
 
     quicklaunch:
