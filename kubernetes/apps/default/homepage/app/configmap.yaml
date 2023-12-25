@@ -1,0 +1,108 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.26.1-standalone-strict/configmap-v1.json
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: homepage-config
+  labels:
+    app.kubernetes.io/name: homepage
+data:
+  bookmarks.yaml: |
+    ---
+  docker.yaml: |
+    ---
+  kubernetes.yaml: |
+    ---
+    mode: cluster
+
+  services.yaml: |
+    ---
+    - Media:
+        - Radarr:
+            icon: radarr.png
+            href: https://radarr.${SECRET_DOMAIN}
+            description: Movies Management
+            widget:
+              type: radarr
+              url: http://radarr.media.svc.cluster.local:80
+              key: {{HOMEPAGE_VAR_RADARR_KEY}}
+        - Sonarr:
+            icon: sonarr.png
+            href: https://sonarr.${SECRET_DOMAIN}
+            description: TV Shows Management
+            widget:
+              type: sonarr
+              url: http://sonarr.media.svc.cluster.local:80
+              key: {{HOMEPAGE_VAR_SONARR_KEY}}
+        - Bazarr:
+            icon: bazarr.png
+            href: https://bazarr.${SECRET_DOMAIN}
+            description: Subtitles Management
+            widget:
+              type: bazarr
+              url: http://bazarr.media.svc.cluster.local:6767
+              key: {{HOMEPAGE_VAR_BAZARR_KEY}}
+    - Favorites:
+        - My GitHub Repo:
+            icon: si-github
+            href: https://github.com/clarknova99/home-cluster
+            description: My Code Repository
+        - Grafana Dashboard:
+            icon: si-grafana
+            href: https://grafana.${SECRET_DOMAIN}
+            description: My Cluster Metrics Visualization
+        - kubesearch:
+            icon: si-kubernetes
+            href: https://kubesearch.dev/
+            description: Search KAH HelmReleases
+        - onedr0p home-ops:
+            icon: si-github
+            href: https://github.com/onedr0p/home-ops
+            description: onedr0p HomeOps Repository
+        - bjw-s Chart Values:
+            icon: si-github
+            href: https://github.com/bjw-s/helm-charts/tree/main/charts/library/common#values
+            description: app-template Helm Chart Values
+
+  settings.yaml: |
+    ---
+    title: My Personal Home Dashboard
+    theme: dark
+    color: slate
+    headerStyle: clean
+    target: _blank
+    layout:
+      Media:
+        style: row
+        columns: 4
+      Network:
+        style: row
+      Favorites:
+        style: row
+        columns: 3
+    quicklaunch:
+      searchDescription: true
+      hideInternetSearch: true
+      hideVisitURL: true
+
+  widgets.yaml: |
+    ---
+    - search:
+        provider:
+          - google
+          - duckduckgo
+    - openmeteo:
+        label: Home
+        latitude: {{HOMEPAGE_VAR_HOME_LATITUDE}}
+        longitude: {{HOMEPAGE_VAR_HOME_LONGITUDE}}
+        units: metric
+        cache: 5
+    - kubernetes:
+        cluster:
+          show: true
+          cpu: true
+          memory: true
+          showLabel: true
+          label: home-cluster
+        nodes:
+          show: false

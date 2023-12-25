@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: homepage-secret
+    namespace: default
+## sops --encrypt --in-place ./kubernetes/apps/default/homepage/app/homepage.sops.yaml
+## sops --decrypt ./kubernetes/apps/default/lldap/app/lldap.sops.yaml | kubectl apply -f -
+stringData:
+    HOMEPAGE_VAR_HOME_LATITUDE: ENC[AES256_GCM,data:NyuhDTdmPKU2Zd2x2JDfHg1M,iv:ezBmq97IyskuI3EMroQd4a1Pfm1p7jR63Nef0oWhAoE=,tag:SSmzc2W/C1BbU1BJMAXMBA==,type:str]
+    HOMEPAGE_VAR_HOME_LONGITUDE: ENC[AES256_GCM,data:Rz0coWZj+3s0ilMQPbjCaaBK,iv:z/ADtRgw/KI6l+rSZkKHH/O0nVW7Ib/y6IiFmB/35jo=,tag:S7YZGMZ/3W2lLHKMQi51hw==,type:str]
+    HOMEPAGE_VAR_RADARR_KEY: ENC[AES256_GCM,data:5uVh58meo+Hvnj+OuIboiXjIUcJDWEn+Xt13O4UPQAY=,iv:c8EqFu5UAj8GZb7ibvSeYf5LxMwKb/AZmc0oC2aK4YM=,tag:7Cp4pu9e49PuHEPUcDNymg==,type:str]
+    HOMEPAGE_VAR_SONARR_KEY: ENC[AES256_GCM,data:5Ec8ZJfoj11xm3riT4UbpVEdk0prAobBS0PDT3Mjh0g=,iv:NUKVtQDtEWZd7tlHO5O17eERcBaSZVH8Dm6zeQ0TEAo=,tag:ySevNVfqbZjODUdbQl9Prw==,type:str]
+    HOMEPAGE_VAR_BAZARR_KEY: ENC[AES256_GCM,data:j57dA5YlCckUTHiBbaCb0hIN7GYO5CN3yJvqFyDD/XI=,iv:c0C0B4Sde/PNZO9Xby4KDzv2u+mvwf1mNVIVm1knJNI=,tag:ZcsxCroKt6KApfoqwF8vYg==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age14q9x9ftcpqfw2kmhmlfzpx5g2wmn7tdnq34uhh4x0r2h6qfmm5dqk07z2e
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA1MEx0NXNWU24xbUNCdHBy
+            b0pNckhQeTc0VlJLU3N6UFZnNGJMTDBaVEVFCkZHcGY2ZWhMR1oweWZHcmYwb1Ur
+            cXdRS09qVGpMS2tyc09pdUlUS0p1ODQKLS0tIGpBM09qSysyRFlob3Ftb2FSL3pF
+            aHJXaDM2R0xLRzVYNWx4RFc2LzA4bnMKHPRodQ4ha4CfcwnWcuomwSTmo4HMKZvu
+            9y+nWZY9Lu1t85zZpj8NhfkXilgzCWyiTLNUEd+h9l+Qt97zIwTxDQ==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2023-12-25T16:28:53Z"
+    mac: ENC[AES256_GCM,data:VPNrfm+/LxFJXakdb2HL8R2whQXzjLqB8+kAyE0mlPDDIAhCEx+XWlyqekOsngY2uryyGPAox4TxFRCYN0CPl/nz5DdSaJJxBr2Nn8ziSX8zBMt7mx6IKMxWpLPDFRqO8OltXr8FKKn2hMdiQlymXaDS5uzFu6pKoqP0VJ316i8=,iv:jttXSE01jF9G4H4CtztgEmSTCCyxNnD/SpkLpaam2J8=,tag:nbULsDuuNGhWFlVKPrnYCw==,type:str]
+    pgp: []
+    encrypted_regex: ^(data|stringData)$
+    version: 3.8.1
