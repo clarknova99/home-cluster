@@ -39,6 +39,7 @@ transforms:
       # Standardize 'app' index
       .custom_app_name = .pod_labels."app.kubernetes.io/name" || .pod_labels.app || .pod_labels."k8s-app" || "unknown"
       .custom_instance_name = .pod_labels."app.kubernetes.io/instance"
+      .pmessage = parse_json!(.message)
       # Drop pod_labels
       # del(.pod_labels)
   kubernetes_drop_empty_messages:
