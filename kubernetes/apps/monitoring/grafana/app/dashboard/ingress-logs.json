@@ -61,7 +61,7 @@
       },
       "gridPos": {
         "h": 11,
-        "w": 13,
+        "w": 24,
         "x": 0,
         "y": 0
       },
@@ -200,11 +200,11 @@
       },
       "gridPos": {
         "h": 11,
-        "w": 11,
-        "x": 13,
-        "y": 0
+        "w": 12,
+        "x": 0,
+        "y": 11
       },
-      "id": 9,
+      "id": 14,
       "options": {
         "displayLabels": [],
         "legend": {
@@ -245,6 +245,79 @@
         }
       ],
       "title": " ",
+      "transformations": [],
+      "type": "piechart"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "loki"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": [],
+          "unit": "locale"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 11,
+        "w": 12,
+        "x": 12,
+        "y": 11
+      },
+      "id": 9,
+      "options": {
+        "displayLabels": [],
+        "legend": {
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true,
+          "values": [
+            "value",
+            "percent"
+          ]
+        },
+        "pieType": "donut",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.1.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "loki"
+          },
+          "editorMode": "code",
+          "expr": "sum by(vhost) (count_over_time({k8_app=\"nginx-parsed\"} | json \n| __error__=`` [$__interval]))",
+          "legendFormat": "{{vhost}}",
+          "queryType": "range",
+          "refId": "A",
+          "step": ""
+        }
+      ],
+      "title": " Requests By vHost",
       "transformations": [],
       "type": "piechart"
     },
@@ -396,7 +469,7 @@
         "h": 12,
         "w": 24,
         "x": 0,
-        "y": 11
+        "y": 22
       },
       "id": 13,
       "options": {
@@ -523,83 +596,6 @@
     },
     {
       "datasource": {
-        "type": "loki",
-        "uid": "loki"
-      },
-      "description": "",
-      "gridPos": {
-        "h": 12,
-        "w": 24,
-        "x": 0,
-        "y": 23
-      },
-      "id": 12,
-      "options": {
-        "dedupStrategy": "none",
-        "enableLogDetails": true,
-        "prettifyLogMessage": true,
-        "showCommonLabels": false,
-        "showLabels": false,
-        "showTime": false,
-        "sortOrder": "Descending",
-        "wrapLogMessage": false
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "loki",
-            "uid": "loki"
-          },
-          "editorMode": "builder",
-          "expr": "{k8_app=\"nginx-parsed\"} |= `` | json | line_format `{{.timestamp_}} - {{.status}} - {{.vhost}} - {{.ip_address}} - {{.user_agent}} - {{.geoip_city}}, {{.geoip_region_name}} {{.geoip_country_code}} - {{.path}}`",
-          "queryType": "range",
-          "refId": "A"
-        }
-      ],
-      "title": "Ingress External Logs",
-      "transformations": [],
-      "type": "logs"
-    },
-    {
-      "datasource": {
-        "type": "loki",
-        "uid": "loki"
-      },
-      "description": "",
-      "gridPos": {
-        "h": 7,
-        "w": 24,
-        "x": 0,
-        "y": 35
-      },
-      "id": 10,
-      "options": {
-        "dedupStrategy": "none",
-        "enableLogDetails": true,
-        "prettifyLogMessage": true,
-        "showCommonLabels": false,
-        "showLabels": false,
-        "showTime": false,
-        "sortOrder": "Descending",
-        "wrapLogMessage": false
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "loki",
-            "uid": "loki"
-          },
-          "editorMode": "code",
-          "expr": "{k8_instance=\"nginx-external\"} | json \n| pmessage_x_forwarded_for !~ `.*192.168.1.*` \n| pmessage_x_forwarded_for !~ `.*10.42.*`\n| message != `\\t`\n| line_format `{{.pmessage_time}} - {{.pmessage_status}} - {{.pmessage_vhost}} - {{.pmessage_x_forwarded_for}} - {{.pmessage_http_user_agent}} - {{.pmessage_geoip_city}}, {{.pmessage_geoip_region_name}} {{.pmessage_geoip_country_code}} - {{.pmessage_path}} - {{.pmessage_http_referrer}}` \n| pmessage_status != \"200\" | pmessage_status != \"204\" \n| __error__=``",
-          "queryType": "range",
-          "refId": "A"
-        }
-      ],
-      "title": "Errors",
-      "type": "logs"
-    },
-    {
-      "datasource": {
         "type": "prometheus",
         "uid": "prometheus"
       },
@@ -660,16 +656,18 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 14,
-        "w": 24,
+        "h": 13,
+        "w": 11,
         "x": 0,
-        "y": 42
+        "y": 34
       },
-      "id": 1,
+      "id": 15,
+      "maxDataPoints": 1256,
       "options": {
         "legend": {
           "calcs": [
-            "sum"
+            "sum",
+            "mean"
           ],
           "displayMode": "table",
           "placement": "right",
@@ -688,19 +686,209 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "editorMode": "code",
+          "disableTextWrap": false,
+          "editorMode": "builder",
           "exemplar": false,
-          "expr": "sum(nginx_ingress_controller_requests{ingress!~\"\"}) by (ingress)",
+          "expr": "sum by(ingress) (rate(nginx_ingress_controller_requests{service=\"nginx-external-controller-metrics\", ingress!~\"\"}[$__rate_interval])) > 0",
           "format": "time_series",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
           "instant": false,
           "interval": "",
           "legendFormat": "{{ingress}}",
           "range": true,
+          "refId": "A",
+          "useBackend": false
+        }
+      ],
+      "title": "External Requests",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "fieldMinMax": false,
+          "mappings": [],
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "locale"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 13,
+        "w": 13,
+        "x": 11,
+        "y": 34
+      },
+      "id": 16,
+      "options": {
+        "legend": {
+          "calcs": [
+            "sum",
+            "mean"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "disableTextWrap": false,
+          "editorMode": "builder",
+          "exemplar": false,
+          "expr": "sum by(ingress) (rate(nginx_ingress_controller_requests{service=\"nginx-internal-controller-metrics\", ingress!~\"\"}[$__rate_interval])) > 0",
+          "format": "time_series",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
+          "instant": false,
+          "interval": "",
+          "legendFormat": "{{ingress}}",
+          "range": true,
+          "refId": "A",
+          "useBackend": false
+        }
+      ],
+      "title": "Internal Requests",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "loki"
+      },
+      "description": "",
+      "gridPos": {
+        "h": 12,
+        "w": 24,
+        "x": 0,
+        "y": 47
+      },
+      "id": 12,
+      "options": {
+        "dedupStrategy": "none",
+        "enableLogDetails": true,
+        "prettifyLogMessage": true,
+        "showCommonLabels": false,
+        "showLabels": false,
+        "showTime": false,
+        "sortOrder": "Descending",
+        "wrapLogMessage": false
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "loki"
+          },
+          "editorMode": "builder",
+          "expr": "{k8_app=\"nginx-parsed\"} |= `` | json | line_format `{{.timestamp_}} - {{.status}} - {{.vhost}} - {{.ip_address}} - {{.user_agent}} - {{.geoip_city}}, {{.geoip_region_name}} {{.geoip_country_code}} - {{.path}}`",
+          "queryType": "range",
           "refId": "A"
         }
       ],
-      "title": "Requests",
-      "type": "timeseries"
+      "title": "Ingress External Logs",
+      "transformations": [],
+      "type": "logs"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "loki"
+      },
+      "description": "",
+      "gridPos": {
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 59
+      },
+      "id": 10,
+      "options": {
+        "dedupStrategy": "none",
+        "enableLogDetails": true,
+        "prettifyLogMessage": true,
+        "showCommonLabels": false,
+        "showLabels": false,
+        "showTime": false,
+        "sortOrder": "Descending",
+        "wrapLogMessage": false
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "loki"
+          },
+          "editorMode": "code",
+          "expr": "{k8_instance=\"nginx-external\"} | json \n| pmessage_x_forwarded_for !~ `.*192.168.1.*` \n| pmessage_x_forwarded_for !~ `.*10.42.*`\n| message != `\\t`\n| line_format `{{.pmessage_time}} - {{.pmessage_status}} - {{.pmessage_vhost}} - {{.pmessage_x_forwarded_for}} - {{.pmessage_http_user_agent}} - {{.pmessage_geoip_city}}, {{.pmessage_geoip_region_name}} {{.pmessage_geoip_country_code}} - {{.pmessage_path}} - {{.pmessage_http_referrer}}` \n| pmessage_status != \"200\" | pmessage_status != \"204\" \n| __error__=``",
+          "queryType": "range",
+          "refId": "A"
+        }
+      ],
+      "title": "Errors",
+      "type": "logs"
     },
     {
       "datasource": {
@@ -712,7 +900,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 56
+        "y": 66
       },
       "id": 5,
       "options": {
@@ -748,13 +936,13 @@
     "list": []
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-24h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Ingress Logs",
   "uid": "b0c235a4-d758-4aa7-8f09-7137af01edfd",
-  "version": 39,
+  "version": 40,
   "weekStart": ""
 }
