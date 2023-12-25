@@ -51,7 +51,7 @@ spec:
         enabled: true
         className: internal
         annotations:
-          hajimari.io/icon: mdi:cctv
+          hajimari.io/icon: mdi:home-circle
         hosts:
           - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:

@@ -18,6 +18,14 @@ data:
   services.yaml: |
     ---
     - Media:
+        - Sabnzbd:
+            icon: sabnzbd.png
+            href: https://sabnzbd.${SECRET_DOMAIN}
+            description: Downloader
+            widget:
+              type: sabnzbd
+              url: http://sabnzbd.media.svc.cluster.local:8085
+              key: {{HOMEPAGE_VAR_SABNZBD_KEY}}
         - Radarr:
             icon: radarr.png
             href: https://radarr.${SECRET_DOMAIN}
@@ -42,6 +50,16 @@ data:
               type: bazarr
               url: http://bazarr.media.svc.cluster.local:6767
               key: {{HOMEPAGE_VAR_BAZARR_KEY}}
+        - Diskstation:
+            icon: diskstation.png
+            href: http://192.168.1.2:5000
+            description: Synology DSM
+            widget:
+              type: diskstation
+              url: http://192.168.1.2:5000
+              username: {{HOMEPAGE_VAR_SYNOLOGY_USERNAME}}
+              password: {{HOMEPAGE_VAR_SYNOLOGY_PASSWORD}}
+              #volume: volume_N # optional
     - Favorites:
         - My GitHub Repo:
             icon: si-github
