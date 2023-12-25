@@ -8,6 +8,14 @@ metadata:
     external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
     hajimari.io/enable: "true"
     hajimari.io/icon: mdi:water-flow
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/description: Software Automation
+    gethomepage.dev/group: Apps
+    gethomepage.dev/icon: mdi:water-flow
+    gethomepage.dev/name: n8n
+    #gethomepage.dev/widget.type: "emby"
+    gethomepage.dev/widget.url: "https://n8n.${SECRET_DOMAIN}"
+    gethomepage.dev/pod-selector: ""
 spec:
   ingressClassName: internal
   rules:
