@@ -149,8 +149,8 @@
             "uid": "loki"
           },
           "editorMode": "code",
-          "expr": "sum by (geoip_latitude, geoip_longitude, geoip_city, geoip_country_code, vhost) (count_over_time({k8_app=\"nginx-parsed\"} \n| json \n|__error__=``[$__range]))",
-          "legendFormat": "",
+          "expr": "sum by (geoip_latitude, geoip_longitude, geoip_city, geoip_country_code, ip_address, vhost) (count_over_time({k8_app=\"nginx-parsed\"} \n| json \n|__error__=``[$__range]))",
+          "legendFormat": "{{ip_address}}",
           "queryType": "instant",
           "refId": "A"
         }
@@ -642,8 +642,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -754,8 +753,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -936,13 +934,13 @@
     "list": []
   },
   "time": {
-    "from": "now-24h",
+    "from": "now-1h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Ingress Logs",
   "uid": "b0c235a4-d758-4aa7-8f09-7137af01edfd",
-  "version": 40,
+  "version": 42,
   "weekStart": ""
 }

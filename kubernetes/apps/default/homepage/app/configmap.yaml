@@ -72,7 +72,7 @@ data:
     - Monitoring:
         - Requests:
             icon: grafana.png
-            href: http://192.168.1.2:5000
+            href: https://grafana.feldblyum.com/public-dashboards/807e9d3f774c48b49e4bae9d38869356
             description: External HTTP Requests
             widget:
               type: iframe
