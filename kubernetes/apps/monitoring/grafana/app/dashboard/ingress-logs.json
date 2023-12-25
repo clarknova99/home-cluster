@@ -122,8 +122,8 @@
               }
             },
             "location": {
-              "latitude": "message_geoip_latitude",
-              "longitude": "message_geoip_longitude",
+              "latitude": "pmessage_geoip_latitude",
+              "longitude": "pmessage_geoip_longitude",
               "mode": "coords"
             },
             "name": "Requests",
@@ -150,7 +150,7 @@
             "uid": "loki"
           },
           "editorMode": "code",
-          "expr": "sum by (message_geoip_latitude, message_geoip_longitude, message_geoip_city, message_geoip_country_code, message_vhost) (count_over_time({k8_instance=\"nginx-external\"} \n| json  \n| message_x_forwarded_for !~ `.*192.168.*` \n| message_x_forwarded_for !~ `.*10.42.*`\n| message_x_forwarded_for !~ `.*10.43.*`\n| message_geoip_country_code !=\"\" |__error__=``[$__range]))",
+          "expr": "sum by (pmessage_geoip_latitude, pmessage_geoip_longitude, pmessage_geoip_city, pmessage_geoip_country_code, pmessage_vhost) (count_over_time({k8_instance=\"nginx-external\"} \n| json  \n| pmessage_x_forwarded_for !~ `.*192.168.*` \n| pmessage_x_forwarded_for !~ `.*10.42.*`\n| pmessage_x_forwarded_for !~ `.*10.43.*`\n| pmessage_geoip_country_code !=\"\" \n|__error__=``[$__range]))",
           "legendFormat": "",
           "queryType": "instant",
           "refId": "A"
@@ -163,11 +163,11 @@
             "conversions": [
               {
                 "destinationType": "number",
-                "targetField": "message_geoip_latitude"
+                "targetField": "pmessage_geoip_latitude"
               },
               {
                 "destinationType": "number",
-                "targetField": "message_geoip_longitude"
+                "targetField": "pmessage_geoip_longitude"
               }
             ],
             "fields": {}
@@ -238,8 +238,8 @@
             "uid": "loki"
           },
           "editorMode": "code",
-          "expr": "sum by(message_geoip_city, message_geoip_region_name, message_geoip_country_name) (count_over_time({k8_instance=\"nginx-external\"} | json | message_x_forwarded_for !~ `.*192.168.*` | message_geoip_country_code != \"\"| __error__=`` [$__interval]))",
-          "legendFormat": "{{message_geoip_city}} {{message_geoip_region_name}} {{message_geoip_country_name}}",
+          "expr": "sum by(pmessage_geoip_city, pmessage_geoip_region_name, pmessage_geoip_country_name) (count_over_time({k8_instance=\"nginx-external\"} | json | pmessage_x_forwarded_for !~ `.*192.168.*` | pmessage_geoip_country_code != \"\"| __error__=`` [$__interval]))",
+          "legendFormat": "{{pmessage_geoip_city}} {{pmessage_geoip_region_name}} {{pmessage_geoip_country_name}}",
           "queryType": "range",
           "refId": "A",
           "step": ""
@@ -279,7 +279,7 @@
             "uid": "loki"
           },
           "editorMode": "code",
-          "expr": "{k8_instance=\"nginx-external\"} | json \n| message_x_forwarded_for !~ `.*192.168.1.*` \n| message_x_forwarded_for !~ `.*10.42.*`\n| message != `\\t`\n| line_format `{{.message_time}} - {{.message_status}} - {{.message_vhost}} - {{.message_x_forwarded_for}} - {{.message_http_user_agent}} - {{.message_geoip_city}}, {{.message_geoip_region_name}} {{.message_geoip_country_code}} - {{.message_path}} - {{.message_http_referrer}}` \n| __error__=``",
+          "expr": "{k8_instance=\"nginx-external\"} | json \n| pmessage_x_forwarded_for !~ `.*192.168.1.*` \n| pmessage_x_forwarded_for !~ `.*10.42.*`\n| message != `\\t`\n| line_format `{{.pmessage_time}} - {{.pmessage_status}} - {{.pmessage_vhost}} - {{.pmessage_x_forwarded_for}} - {{.pmessage_http_user_agent}} - {{.pmessage_geoip_city}}, {{.pmessage_geoip_region_name}} {{.pmessage_geoip_country_code}} - {{.pmessage_path}} - {{.pmessage_http_referrer}}` \n| __error__=``",
           "queryType": "range",
           "refId": "A"
         }
@@ -317,7 +317,7 @@
             "uid": "loki"
           },
           "editorMode": "code",
-          "expr": "{k8_instance=\"nginx-external\"} | json | message_x_forwarded_for !~ `.*192.168.*` \n| line_format `{{.message_time}} - {{.message_node_name}} - {{.message_instance}} - {{.message_status}} - {{.message_vhost}} - {{.message_x_forwarded_for}} - {{.message_geoip_city}}, {{.message_geoip_region_name}} {{.message_geoip_country_code}} - {{.message_path}} - {{.message_http_referrer}}` \n| status != \"200\" | status != \"204\" \n| __error__=``",
+          "expr": "{k8_instance=\"nginx-external\"} | json \n| pmessage_x_forwarded_for !~ `.*192.168.1.*` \n| pmessage_x_forwarded_for !~ `.*10.42.*`\n| message != `\\t`\n| line_format `{{.pmessage_time}} - {{.pmessage_status}} - {{.pmessage_vhost}} - {{.pmessage_x_forwarded_for}} - {{.pmessage_http_user_agent}} - {{.pmessage_geoip_city}}, {{.pmessage_geoip_region_name}} {{.pmessage_geoip_country_code}} - {{.pmessage_path}} - {{.pmessage_http_referrer}}` \n| pmessage_status != \"200\" | pmessage_status != \"204\" \n| __error__=``",
           "queryType": "range",
           "refId": "A"
         }
@@ -497,7 +497,7 @@
             "uid": "loki"
           },
           "editorMode": "code",
-          "expr": "{app=\"ingress-nginx\", instance=\"nginx-external\"} | json | x_forwarded_for !~ `.*192.168.*` | vhost !~ \"influxdb-brad.bigwang.org\" |\n __error__=``",
+          "expr": "{k8_instance=\"nginx-external\"} | json \n| pmessage_x_forwarded_for !~ `.*192.168.*` \n| pmessage_x_forwarded_for !~ `.*10.42.*`\n| __error__=``",
           "queryType": "range",
           "refId": "A"
         }
@@ -817,13 +817,13 @@
     "list": []
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-3h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Ingress Logs",
   "uid": "b0c235a4-d758-4aa7-8f09-7137af01edfd",
-  "version": 33,
+  "version": 37,
   "weekStart": ""
 }
