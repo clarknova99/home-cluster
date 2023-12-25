@@ -254,11 +254,284 @@
         "uid": "loki"
       },
       "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "vhost"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 247
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "query"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 256
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "timestamp"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 183
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "user_agent"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 219
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "ip_address"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 146
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "country"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 109
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "region"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 172
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "status"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 96
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "city"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 243
+              }
+            ]
+          }
+        ]
+      },
       "gridPos": {
         "h": 12,
         "w": 24,
         "x": 0,
         "y": 11
+      },
+      "id": 13,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "10.2.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "loki"
+          },
+          "editorMode": "builder",
+          "expr": "{k8_app=\"nginx-parsed\"} |= `` | json",
+          "queryType": "range",
+          "refId": "A"
+        }
+      ],
+      "title": "Ingress External Logs",
+      "transformations": [
+        {
+          "id": "extractFields",
+          "options": {
+            "format": "json",
+            "replace": true,
+            "source": "labels"
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "geoip_city_name": true,
+              "geoip_continent_code": true,
+              "geoip_country_name": true,
+              "geoip_latitude": true,
+              "geoip_longitude": true,
+              "geoip_metro_code": true,
+              "geoip_postal_code": true,
+              "geoip_region": true,
+              "geoip_region_code": true,
+              "geoip_timezone": true,
+              "k8_app": true
+            },
+            "indexByName": {
+              "geoip_city": 3,
+              "geoip_city_name": 17,
+              "geoip_continent_code": 10,
+              "geoip_country_code": 5,
+              "geoip_country_name": 11,
+              "geoip_latitude": 12,
+              "geoip_longitude": 13,
+              "geoip_metro_code": 19,
+              "geoip_postal_code": 18,
+              "geoip_region": 14,
+              "geoip_region_code": 20,
+              "geoip_region_name": 4,
+              "geoip_timezone": 15,
+              "ip_address": 1,
+              "k8_app": 16,
+              "path": 8,
+              "query": 9,
+              "status": 6,
+              "timestamp_": 0,
+              "user_agent": 2,
+              "vhost": 7
+            },
+            "renameByName": {
+              "geoip_city": "city",
+              "geoip_country_code": "country",
+              "geoip_region_name": "region",
+              "ip_address": "",
+              "timestamp_": "timestamp",
+              "vhost": "vhost"
+            }
+          }
+        },
+        {
+          "id": "convertFieldType",
+          "options": {
+            "conversions": [
+              {
+                "dateFormat": "",
+                "destinationType": "time",
+                "targetField": "timestamp"
+              }
+            ],
+            "fields": {}
+          }
+        },
+        {
+          "id": "formatTime",
+          "options": {
+            "outputFormat": "",
+            "timeField": "timestamp",
+            "timezone": "America/New_York",
+            "useTimezone": true
+          }
+        },
+        {
+          "id": "sortBy",
+          "options": {
+            "fields": {},
+            "sort": [
+              {
+                "desc": true,
+                "field": "timestamp"
+              }
+            ]
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "loki"
+      },
+      "description": "",
+      "gridPos": {
+        "h": 12,
+        "w": 24,
+        "x": 0,
+        "y": 23
       },
       "id": 12,
       "options": {
@@ -297,7 +570,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 23
+        "y": 35
       },
       "id": 10,
       "options": {
@@ -323,44 +596,6 @@
         }
       ],
       "title": "Errors",
-      "type": "logs"
-    },
-    {
-      "datasource": {
-        "type": "loki",
-        "uid": "loki"
-      },
-      "description": "",
-      "gridPos": {
-        "h": 12,
-        "w": 24,
-        "x": 0,
-        "y": 30
-      },
-      "id": 3,
-      "options": {
-        "dedupStrategy": "none",
-        "enableLogDetails": true,
-        "prettifyLogMessage": true,
-        "showCommonLabels": false,
-        "showLabels": false,
-        "showTime": false,
-        "sortOrder": "Descending",
-        "wrapLogMessage": false
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "loki",
-            "uid": "loki"
-          },
-          "editorMode": "code",
-          "expr": "{app=\"ingress-nginx\", instance=\"nginx-external\"} | json | x_forwarded_for !~ `.*192.168.*` | vhost !~ \"influxdb-brad.bigwang.org\" |\n  line_format `{{.time}} - {{.status}} - {{.vhost}} - {{.x_forwarded_for}} - {{.http_user_agent}} - {{.geoip_city}}, {{.geoip_region_name}} {{.geoip_country_code}} - {{.path}} - {{.http_referrer}}` |\n __error__=``",
-          "queryType": "range",
-          "refId": "A"
-        }
-      ],
-      "title": "Ingress External Logs",
       "type": "logs"
     },
     {
@@ -504,310 +739,6 @@
       ],
       "title": "Fulll Log",
       "type": "logs"
-    },
-    {
-      "datasource": {
-        "type": "loki",
-        "uid": "loki"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "custom": {
-            "align": "auto",
-            "cellOptions": {
-              "type": "auto"
-            },
-            "inspect": false
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Time"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 209
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "status"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 90
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "node"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 86
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "vhost"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 226
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "city"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 110
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "country"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 102
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "path"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 598
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "http_user_agent"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 259
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "message_http_user_agent"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 221
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 24,
-        "x": 0,
-        "y": 64
-      },
-      "id": 11,
-      "options": {
-        "cellHeight": "sm",
-        "footer": {
-          "countRows": false,
-          "fields": "",
-          "reducer": [
-            "sum"
-          ],
-          "show": false
-        },
-        "showHeader": true,
-        "sortBy": []
-      },
-      "pluginVersion": "10.2.2",
-      "targets": [
-        {
-          "datasource": {
-            "type": "loki",
-            "uid": "loki"
-          },
-          "editorMode": "code",
-          "expr": "{k8_instance=\"nginx-external\"} | json | x_forwarded_for !~ `.*192.168.*` | message_vhost !~ \"influxdb-brad.bigwang.org\" |\n __error__=``",
-          "queryType": "range",
-          "refId": "A"
-        }
-      ],
-      "title": "Fulll Log",
-      "transformations": [
-        {
-          "id": "extractFields",
-          "options": {
-            "format": "json",
-            "keepTime": true,
-            "replace": true,
-            "source": "labels"
-          }
-        },
-        {
-          "id": "organize",
-          "options": {
-            "excludeByName": {
-              "app": true,
-              "bytes_sent": false,
-              "component": true,
-              "container": true,
-              "filename": true,
-              "geoip_country_name": true,
-              "geoip_latitude": true,
-              "geoip_longitude": true,
-              "geoip_region": true,
-              "instance": true,
-              "job": true,
-              "method": true,
-              "namespace": true,
-              "pod": true,
-              "remote_addr": true,
-              "remote_user": true,
-              "request_id": true,
-              "request_length": true,
-              "request_proto": true,
-              "request_query": true,
-              "request_time": true,
-              "stream": true,
-              "time": true
-            },
-            "indexByName": {
-              "Time": 0,
-              "app": 9,
-              "bytes_sent": 13,
-              "component": 14,
-              "container": 15,
-              "duration": 12,
-              "filename": 16,
-              "geoip_city": 5,
-              "geoip_country_code": 7,
-              "geoip_country_name": 17,
-              "geoip_latitude": 18,
-              "geoip_longitude": 19,
-              "geoip_region": 20,
-              "geoip_region_name": 6,
-              "http_referrer": 11,
-              "http_user_agent": 10,
-              "instance": 21,
-              "job": 22,
-              "method": 23,
-              "namespace": 24,
-              "node_name": 2,
-              "path": 8,
-              "pod": 25,
-              "remote_addr": 26,
-              "remote_user": 27,
-              "request_id": 28,
-              "request_length": 29,
-              "request_proto": 30,
-              "request_query": 31,
-              "request_time": 32,
-              "status": 1,
-              "stream": 33,
-              "time": 34,
-              "vhost": 3,
-              "x_forwarded_for": 4
-            },
-            "renameByName": {
-              "geoip_city": "city",
-              "geoip_country_code": "country",
-              "geoip_region_name": "region",
-              "node_name": "node",
-              "path": "",
-              "x_forwarded_for": "ip"
-            }
-          }
-        }
-      ],
-      "type": "table"
-    },
-    {
-      "datasource": {
-        "type": "loki",
-        "uid": "loki"
-      },
-      "description": "",
-      "gridPos": {
-        "h": 7,
-        "w": 24,
-        "x": 0,
-        "y": 72
-      },
-      "id": 2,
-      "options": {
-        "dedupStrategy": "none",
-        "enableLogDetails": true,
-        "prettifyLogMessage": true,
-        "showCommonLabels": false,
-        "showLabels": false,
-        "showTime": false,
-        "sortOrder": "Descending",
-        "wrapLogMessage": false
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "loki",
-            "uid": "loki"
-          },
-          "editorMode": "code",
-          "expr": "{app=\"ingress-nginx\", instance=\"nginx-external\"} | json | x_forwarded_for !~ `.*192.168.*` |\n  line_format `{{.time}} - {{.status}} - {{.vhost}} - {{.x_forwarded_for}} - {{.geoip_city}}, {{.geoip_region_name}} {{.geoip_country_code}} - {{.path}} - {{.http_referrer}}` |\n __error__=``",
-          "queryType": "range",
-          "refId": "A"
-        }
-      ],
-      "title": "Ingress External Logs",
-      "type": "logs"
     }
   ],
   "refresh": "",
@@ -817,13 +748,13 @@
     "list": []
   },
   "time": {
-    "from": "now-3h",
+    "from": "now-1h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Ingress Logs",
   "uid": "b0c235a4-d758-4aa7-8f09-7137af01edfd",
-  "version": 38,
+  "version": 39,
   "weekStart": ""
 }
