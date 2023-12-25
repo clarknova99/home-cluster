@@ -41,7 +41,7 @@ transforms:
       .custom_instance_name = .pod_labels."app.kubernetes.io/instance"
       .pmessage = parse_json!(.message)
       # Drop pod_labels
-      # del(.pod_labels)
+      del(.pod_labels)
   kubernetes_drop_empty_messages:
     type: filter
     inputs:
