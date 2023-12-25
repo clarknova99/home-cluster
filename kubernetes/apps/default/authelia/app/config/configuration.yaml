@@ -65,6 +65,6 @@ identity_providers:
         public: false
         authorization_policy: one_factor
         pre_configured_consent_duration: 1y
-        redirect_uris: ["https://minio.${SECRET_DOMAIN}/apps/oidc_login/oidc"]
+        redirect_uris: ["https://minio.${SECRET_DOMAIN}/oauth_callback"]
         scopes: ["openid", "profile", "groups", "email"]
         userinfo_signing_algorithm: none
