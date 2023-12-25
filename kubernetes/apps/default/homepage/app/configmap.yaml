@@ -83,7 +83,7 @@ data:
               allowPolicy: autoplay; fullscreen; gamepad # optional, no default
               allowFullscreen: true # optional, default: true
               #loadingStrategy: eager # optional, default: eager
-              refreshInterval: 2000 # optional, no default
+              #refreshInterval: 2000 # optional, no default
 
     - Favorites:
         - My GitHub Repo:
