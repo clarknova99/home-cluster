@@ -18,7 +18,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 82,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -122,8 +121,8 @@
               }
             },
             "location": {
-              "latitude": "pmessage_geoip_latitude",
-              "longitude": "pmessage_geoip_longitude",
+              "latitude": "geoip_latitude",
+              "longitude": "geoip_longitude",
               "mode": "coords"
             },
             "name": "Requests",
@@ -150,7 +149,7 @@
             "uid": "loki"
           },
           "editorMode": "code",
-          "expr": "sum by (pmessage_geoip_latitude, pmessage_geoip_longitude, pmessage_geoip_city, pmessage_geoip_country_code, pmessage_vhost) (count_over_time({k8_instance=\"nginx-external\"} \n| json  \n| pmessage_x_forwarded_for !~ `.*192.168.*` \n| pmessage_x_forwarded_for !~ `.*10.42.*`\n| pmessage_x_forwarded_for !~ `.*10.43.*`\n| pmessage_geoip_country_code !=\"\" \n|__error__=``[$__range]))",
+          "expr": "sum by (geoip_latitude, geoip_longitude, geoip_city, geoip_country_code, vhost) (count_over_time({k8_app=\"nginx-parsed\"} \n| json \n|__error__=``[$__range]))",
           "legendFormat": "",
           "queryType": "instant",
           "refId": "A"
@@ -163,11 +162,11 @@
             "conversions": [
               {
                 "destinationType": "number",
-                "targetField": "pmessage_geoip_latitude"
+                "targetField": "geoip_latitude"
               },
               {
                 "destinationType": "number",
-                "targetField": "pmessage_geoip_longitude"
+                "targetField": "geoip_longitude"
               }
             ],
             "fields": {}
@@ -238,8 +237,8 @@
             "uid": "loki"
           },
           "editorMode": "code",
-          "expr": "sum by(pmessage_geoip_city, pmessage_geoip_region_name, pmessage_geoip_country_name) (count_over_time({k8_instance=\"nginx-external\"} | json | pmessage_x_forwarded_for !~ `.*192.168.*` | pmessage_geoip_country_code != \"\"| __error__=`` [$__interval]))",
-          "legendFormat": "{{pmessage_geoip_city}} {{pmessage_geoip_region_name}} {{pmessage_geoip_country_name}}",
+          "expr": "sum by(geoip_city, geoip_region_name, geoip_country_name) (count_over_time({k8_app=\"nginx-parsed\"} | json \n| __error__=`` [$__interval]))",
+          "legendFormat": "{{geoip_city}} {{geoip_region_name}} {{geoip_country_name}}",
           "queryType": "range",
           "refId": "A",
           "step": ""
@@ -278,13 +277,14 @@
             "type": "loki",
             "uid": "loki"
           },
-          "editorMode": "code",
-          "expr": "{k8_instance=\"nginx-external\"} | json \n| pmessage_x_forwarded_for !~ `.*192.168.1.*` \n| pmessage_x_forwarded_for !~ `.*10.42.*`\n| message != `\\t`\n| line_format `{{.pmessage_time}} - {{.pmessage_status}} - {{.pmessage_vhost}} - {{.pmessage_x_forwarded_for}} - {{.pmessage_http_user_agent}} - {{.pmessage_geoip_city}}, {{.pmessage_geoip_region_name}} {{.pmessage_geoip_country_code}} - {{.pmessage_path}} - {{.pmessage_http_referrer}}` \n| __error__=``",
+          "editorMode": "builder",
+          "expr": "{k8_app=\"nginx-parsed\"} |= `` | json | line_format `{{.timestamp_}} - {{.status}} - {{.vhost}} - {{.ip_address}} - {{.user_agent}} - {{.geoip_city}}, {{.geoip_region_name}} {{.geoip_country_code}} - {{.path}}`",
           "queryType": "range",
           "refId": "A"
         }
       ],
       "title": "Ingress External Logs",
+      "transformations": [],
       "type": "logs"
     },
     {
@@ -824,6 +824,6 @@
   "timezone": "",
   "title": "Ingress Logs",
   "uid": "b0c235a4-d758-4aa7-8f09-7137af01edfd",
-  "version": 37,
+  "version": 38,
   "weekStart": ""
 }
