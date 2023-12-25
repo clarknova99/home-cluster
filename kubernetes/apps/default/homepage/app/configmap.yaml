@@ -69,16 +69,22 @@ data:
               username: {{HOMEPAGE_VAR_SYNOLOGY_USERNAME}}
               password: {{HOMEPAGE_VAR_SYNOLOGY_PASSWORD}}
               #volume: volume_N # optional
-        - Grafana:
+    - Monitoring:
+        - Requests:
             icon: grafana.png
-            href: https://grafana.${SECRET_DOMAIN}
-            description: Data Viz
+            href: http://192.168.1.2:5000
+            description: External HTTP Requests
             widget:
-              type: grafana
-              url: http://grafana.monitoring.svc.cluster.local:80
-              username: {{HOMEPAGE_VAR_GRAFANA_USERNAME}}
-              password: {{HOMEPAGE_VAR_GRAFANA_PASSWORD}}
-
+              type: iframe
+              name: Requests
+              src: http://grafana.monitoring.svc.cluster.local/d-solo/b0c235a4-d758-4aa7-8f09-7137af01edfd/ingress-logs?orgId=1&from=1703442917567&to=1703529317567&panelId=7
+              #classes: h-60 sm:h-60 md:h-60 lg:h-60 xl:h-60 2xl:h-72 # optional, use tailwind height classes, see https://tailwindcss.com/docs/height
+              #referrerPolicy: same-origin # optional, no default
+              #allowPolicy: autoplay; fullscreen; gamepad # optional, no default
+              #allowFullscreen: false # optional, default: true
+              #loadingStrategy: eager # optional, default: eager
+              #allowScrolling: no # optional, default: yes
+              #refreshInterval: 2000 # optional, no default
 
     - Favorites:
         - My GitHub Repo:
