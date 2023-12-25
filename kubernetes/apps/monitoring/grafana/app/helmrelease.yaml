@@ -93,6 +93,8 @@ spec:
         org_name: public
         org_role: Viewer
         hide_version: true
+      security:
+        allow_embedding: true
     dashboardProviders:
       dashboardproviders.yaml:
         apiVersion: 1
