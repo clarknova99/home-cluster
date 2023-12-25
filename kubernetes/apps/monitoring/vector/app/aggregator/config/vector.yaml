@@ -173,9 +173,6 @@ sinks:
     remove_timestamp: true
     labels:
       k8_app: nginx-parsed
-      k8_namespace: '{{ kubernetes.pod_namespace }}'
-      k8_node: '{{ kubernetes.pod_node_name }}'
-      k8_instance: '{{ custom_instance_name }}'
 
 
   syslog:
