@@ -71,11 +71,11 @@ data:
               #volume: volume_N # optional
         - Grafana:
             icon: grafana.png
-            href: http://192.168.1.2:5000
+            href: https://grafana.${SECRET_DOMAIN}
             description: Data Viz
             widget:
               type: grafana
-              url: http://grafana.monitoring.svc.cluster.local:3000
+              url: http://grafana.monitoring.svc.cluster.local:80
               username: {{HOMEPAGE_VAR_GRAFANA_USERNAME}}
               password: {{HOMEPAGE_VAR_GRAFANA_PASSWORD}}
 
