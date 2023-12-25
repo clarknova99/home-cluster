@@ -33,7 +33,6 @@ spec:
           main:
             image:
               repository: quay.io/minio/minio
-              #tag: RELEASE.2023-11-01T01-57-10Z
               tag: RELEASE.2023-12-23T07-19-11Z@sha256:47d5b01cc3020efa39aac112a7cbc919af5fb18f9ebc63bda31683590715c42b
             env:
               TZ: "${TIMEZONE}"
@@ -48,8 +47,7 @@ spec:
               MINIO_IDENTITY_OPENID_CONFIG_URL: https://auth.${SECRET_DOMAIN}/.well-known/openid-configuration
               MINIO_IDENTITY_OPENID_CLIENT_ID: minio
               MINIO_IDENTITY_OPENID_CLIENT_SECRET: "${SECRET_MINIO_OAUTH_CLIENT_SECRET}"
-              MINIO_IDENTITY_OPENID_CLAIM_NAME: groups
-              #MINIO_IDENTITY_OPENID_CLAIM_PREFIX: authelia
+              MINIO_IDENTITY_OPENID_CLAIM_NAME: groups ## enables mapping lldap group name to minio policy name
               MINIO_IDENTITY_OPENID_SCOPES: openid,profile,groups,email
               MINIO_IDENTITY_OPENID_REDIRECT_URI: https://minio.${SECRET_DOMAIN}/oauth_callback
               MINIO_IDENTITY_OPENID_CLAIM_USERINFO: "on"
