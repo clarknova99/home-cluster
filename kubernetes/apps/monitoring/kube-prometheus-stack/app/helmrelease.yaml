@@ -181,6 +181,13 @@ spec:
         annotations:
           hajimari.io/appName: Prometheus
           hajimari.io/icon: simple-icons:prometheus
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/group: Monitoring
+          gethomepage.dev/icon: si-prometheus
+          gethomepage.dev/name: prometheus
+          gethomepage.dev/widget.type: prometheus
+          gethomepage.dev/widget.url: https://prometheus.${SECRET_DOMAIN}
+          gethomepage.dev/siteMonitor: https://prometheus.${SECRET_DOMAIN}
         pathType: Prefix
         hosts:
           - &host "prometheus.${SECRET_DOMAIN}"
