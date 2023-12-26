@@ -108,6 +108,14 @@ spec:
         className: internal
         annotations:
           hajimari.io/icon: mdi:pail
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/description: Object Storage
+          gethomepage.dev/group: Storage
+          gethomepage.dev/icon: mdi-pail
+          gethomepage.dev/name: minio
+          gethomepage.dev/widget.type: minio
+          gethomepage.dev/siteMonitor: https://s3.${SECRET_DOMAIN}
+          gethomepage.dev/pod-selector: ""
         hosts:
           - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:
