@@ -82,6 +82,7 @@ data:
         style: row
       Monitoring:
         style: row
+        columns: 4
       Network:
         style: row
       Media:

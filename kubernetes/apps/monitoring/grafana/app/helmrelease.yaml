@@ -332,6 +332,15 @@ spec:
       annotations:
         external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
         hajimari.io/icon: simple-icons:grafana
+        gethomepage.dev/enabled: "true"
+        gethomepage.dev/group: Monitoring
+        gethomepage.dev/icon: si-grafana
+        gethomepage.dev/name: grafana
+        gethomepage.dev/widget.type: grafana
+        gethomepage.dev/widget.username: ${HOMEPAGE_VAR_GRAFANA_USERNAME}
+        gethomepage.dev/widget.password: ${HOMEPAGE_VAR_GRAFANA_PASSWORD}
+        gethomepage.dev/widget.url: http://grafana.monitoring.svc.cluster.local:3000
+        gethomepage.dev/siteMonitor: https://grafana.${SECRET_DOMAIN}
       hosts:
         - &host "grafana.${SECRET_DOMAIN}"
       tls:
