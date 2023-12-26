@@ -107,6 +107,12 @@ spec:
         annotations:
           hajimari.io/icon: material-symbols:detector-status
           external-dns.alpha.kubernetes.io/target: external.${SECRET_DOMAIN}
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/group: Monitoring
+          gethomepage.dev/icon: mdi-detector-status
+          gethomepage.dev/name: gatus
+          gethomepage.dev/widget.url: https://gatus.${SECRET_DOMAIN}
+          gethomepage.dev/siteMonitor: https://gatus.${SECRET_DOMAIN}
         hosts:
           - host: &host1 status.${SECRET_DOMAIN}
             paths:

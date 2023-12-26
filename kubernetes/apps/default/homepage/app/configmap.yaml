@@ -27,7 +27,7 @@ data:
               username: {{HOMEPAGE_VAR_SYNOLOGY_USERNAME}}
               password: {{HOMEPAGE_VAR_SYNOLOGY_PASSWORD}}
               #volume: volume_N # optional
-    - Monitoring:
+    - Dashboards:
         - Requests:
             icon: grafana.png
             href: https://grafana.feldblyum.com/public-dashboards/807e9d3f774c48b49e4bae9d38869356
@@ -68,6 +68,9 @@ data:
             href: https://developer.mend.io/github/clarknova99/home-cluster
   settings.yaml: |
     ---
+    # https://raw.githubusercontent.com/walkxcode/dashboard-icons/main/ICONS.md
+    # https://pictogrammers.com/library/mdi/
+    # https://simpleicons.org/
     title: Home Network
     theme: dark
     color: slate
@@ -75,9 +78,10 @@ data:
     target: _blank
     hideErrors: true
     layout:
+      Dashboards:
+        style: row
       Monitoring:
         style: row
-
       Network:
         style: row
       Media:
