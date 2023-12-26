@@ -109,7 +109,7 @@ spec:
           external-dns.alpha.kubernetes.io/target: external.${SECRET_DOMAIN}
           gethomepage.dev/enabled: "true"
           gethomepage.dev/group: Monitoring
-          gethomepage.dev/icon: mdi-detector-status
+          gethomepage.dev/icon: gatus.svg
           gethomepage.dev/name: gatus
           gethomepage.dev/widget.url: https://gatus.${SECRET_DOMAIN}
           gethomepage.dev/siteMonitor: https://gatus.${SECRET_DOMAIN}
