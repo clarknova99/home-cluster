@@ -17,48 +17,48 @@ data:
   services.yaml: |
     ---
     - Media:
-        - Plex:
-            icon: plex.png
-            href: https://plex.${SECRET_DOMAIN}
-            description: Media Player
-            widget:
-              type: plex
-              url: http://192.168.2.200:32400
-              key: {{HOMEPAGE_VAR_PLEX_TOKEN}}
-        - Sabnzbd:
-            icon: sabnzbd.png
-            href: https://sabnzbd.${SECRET_DOMAIN}
-            description: Downloader
-            widget:
-              type: sabnzbd
-              url: http://sabnzbd.media.svc.cluster.local:8085
-              key: {{HOMEPAGE_VAR_SABNZBD_KEY}}
-        - Radarr:
-            icon: radarr.png
-            href: https://radarr.${SECRET_DOMAIN}
-            description: Movies Management
-            widget:
-              type: radarr
-              url: http://radarr.media.svc.cluster.local:80
-              key: {{HOMEPAGE_VAR_RADARR_KEY}}
-        - Sonarr:
-            icon: sonarr.png
-            href: https://sonarr.${SECRET_DOMAIN}
-            description: TV Shows Management
-            widget:
-              type: sonarr
-              url: http://sonarr.media.svc.cluster.local:80
-              key: {{HOMEPAGE_VAR_SONARR_KEY}}
-        - Bazarr:
-            icon: bazarr.png
-            href: https://bazarr.${SECRET_DOMAIN}
-            description: Subtitles Management
-            widget:
-              type: bazarr
-              url: http://bazarr.media.svc.cluster.local:6767
-              key: {{HOMEPAGE_VAR_BAZARR_KEY}}
+        # - Plex:
+        #     icon: plex.png
+        #     href: https://plex.${SECRET_DOMAIN}
+        #     description: Media Player
+        #     widget:
+        #       type: plex
+        #       url: http://192.168.2.200:32400
+        #       key: {{HOMEPAGE_VAR_PLEX_TOKEN}}
+        # - Sabnzbd:
+        #     icon: sabnzbd.png
+        #     href: https://sabnzbd.${SECRET_DOMAIN}
+        #     description: Downloader
+        #     widget:
+        #       type: sabnzbd
+        #       url: http://sabnzbd.media.svc.cluster.local:8085
+        #       key: {{HOMEPAGE_VAR_SABNZBD_KEY}}
+        # - Radarr:
+        #     icon: radarr.png
+        #     href: https://radarr.${SECRET_DOMAIN}
+        #     description: Movies Management
+        #     widget:
+        #       type: radarr
+        #       url: http://radarr.media.svc.cluster.local:80
+        #       key: {{HOMEPAGE_VAR_RADARR_KEY}}
+        # - Sonarr:
+        #     icon: sonarr.png
+        #     href: https://sonarr.${SECRET_DOMAIN}
+        #     description: TV Shows Management
+        #     widget:
+        #       type: sonarr
+        #       url: http://sonarr.media.svc.cluster.local:80
+        #       key: {{HOMEPAGE_VAR_SONARR_KEY}}
+        # - Bazarr:
+        #     icon: bazarr.png
+        #     href: https://bazarr.${SECRET_DOMAIN}
+        #     description: Subtitles Management
+        #     widget:
+        #       type: bazarr
+        #       url: http://bazarr.media.svc.cluster.local:6767
+        #       key: {{HOMEPAGE_VAR_BAZARR_KEY}}
 
-    - Services:
+    - NAS:
         - Diskstation:
             icon: synology-dsm.svg
             href: http://192.168.1.2:5000

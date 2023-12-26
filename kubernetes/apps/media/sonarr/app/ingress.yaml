@@ -8,6 +8,15 @@ metadata:
     external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
     hajimari.io/enable: "true"
     hajimari.io/icon: mdi:television-classic
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/description: TV Show Management
+    gethomepage.dev/group: Media
+    gethomepage.dev/icon: mdi-television-classic
+    gethomepage.dev/name: sonarr
+    gethomepage.dev/widget.type: sonarr
+    gethomepage.dev/widget.key: "${HOMEPAGE_VAR_SONARR_KEY}"
+    gethomepage.dev/widget.url: http://sonarr.media.svc.cluster.local:80
+    gethomepage.dev/pod-selector: ""
 spec:
   ingressClassName: internal
   rules:

@@ -8,6 +8,15 @@ metadata:
     external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
     hajimari.io/enable: "true"
     hajimari.io/icon: mdi:download
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/description: Downloader
+    gethomepage.dev/group: Media
+    gethomepage.dev/icon: mdi-download
+    gethomepage.dev/name: sabnzbd
+    gethomepage.dev/widget.type: sabnzbd
+    gethomepage.dev/widget.key: "${HOMEPAGE_VAR_SABNZBD_KEY}"
+    gethomepage.dev/widget.url: http://sabnzbd.media.svc.cluster.local:8085
+    gethomepage.dev/pod-selector: ""
 spec:
   ingressClassName: internal
   rules:

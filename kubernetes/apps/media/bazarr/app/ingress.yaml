@@ -8,6 +8,15 @@ metadata:
     external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
     hajimari.io/enable: "true"
     hajimari.io/icon: mdi:subtitles-outline
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/description: Subtitle Management
+    gethomepage.dev/group: Media
+    gethomepage.dev/icon: mdi-subtitles-outline
+    gethomepage.dev/name: bazarr
+    gethomepage.dev/widget.type: bazarr
+    gethomepage.dev/widget.key: "${HOMEPAGE_VAR_BAZARR_KEY}"
+    gethomepage.dev/widget.url: http://bazarr.media.svc.cluster.local:6767
+    gethomepage.dev/pod-selector: ""
 spec:
   ingressClassName: internal
   rules:

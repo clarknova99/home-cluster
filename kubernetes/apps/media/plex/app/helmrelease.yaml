@@ -111,8 +111,8 @@ spec:
           nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
           hajimari.io/icon: mdi:plex
           gethomepage.dev/enabled: "true"
-          gethomepage.dev/description: CCTV
-          gethomepage.dev/group: Apps
+          gethomepage.dev/description: Media Player
+          gethomepage.dev/group: Media
           gethomepage.dev/icon: mdi-plex
           gethomepage.dev/name: plex
           gethomepage.dev/widget.type: plex
