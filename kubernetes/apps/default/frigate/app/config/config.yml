@@ -36,7 +36,7 @@ birdseye:
 go2rtc:
   streams:
     frontyard_hq:
-      - ffmpeg:rtsp://${SECRET_CAM_USERNAME}:${SECRET_CAM_PASSWORD}@192.168.1.101:554/stream1#timeout=10
+      - ffmpeg:rtsp://${SECRET_CAM_USERNAME}:${SECRET_CAM_PASSWORD}@192.168.1.101:554/stream1#timeout=20
       # - "ffmpeg:backyard#video=h264"
     # frontyard_lq:
     #   - rtsp://${SECRET_CAM_USERNAME}:${SECRET_CAM_PASSWORD}@192.168.1.101:554/stream2
