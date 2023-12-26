@@ -116,7 +116,7 @@ spec:
           gethomepage.dev/icon: mdi-plex
           gethomepage.dev/name: plex
           gethomepage.dev/widget.type: plex
-          gethomepage.dev/widget.key: ${HOMEPAGE_VAR_PLEX_TOKEN}
+          gethomepage.dev/widget.key: "${HOMEPAGE_VAR_PLEX_TOKEN}"
           gethomepage.dev/widget.url: "https://plex.${SECRET_DOMAIN}"
           gethomepage.dev/pod-selector: ""
         hosts:
