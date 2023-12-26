@@ -7,6 +7,12 @@ metadata:
   annotations:
     hajimari.io/enable: "true"
     hajimari.io/icon: mdi:poll
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/group: Monitoring
+    gethomepage.dev/icon: mdi-poll
+    gethomepage.dev/name: parseable
+    gethomepage.dev/widget.url: https://parseable.${SECRET_DOMAIN}
+    gethomepage.dev/siteMonitor: https://parseable.${SECRET_DOMAIN}
 spec:
   ingressClassName: internal
   rules:
