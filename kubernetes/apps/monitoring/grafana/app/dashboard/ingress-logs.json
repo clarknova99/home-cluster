@@ -184,152 +184,6 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            }
-          },
-          "mappings": [],
-          "unit": "locale"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 11,
-        "w": 12,
-        "x": 0,
-        "y": 11
-      },
-      "id": 14,
-      "options": {
-        "displayLabels": [],
-        "legend": {
-          "displayMode": "table",
-          "placement": "right",
-          "showLegend": true,
-          "values": [
-            "value",
-            "percent"
-          ]
-        },
-        "pieType": "donut",
-        "reduceOptions": {
-          "calcs": [
-            "sum"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "10.1.0",
-      "targets": [
-        {
-          "datasource": {
-            "type": "loki",
-            "uid": "loki"
-          },
-          "editorMode": "code",
-          "expr": "sum by(geoip_city, geoip_region_name, geoip_country_name) (count_over_time({k8_app=\"nginx-parsed\"} | json \n| __error__=`` [$__interval]))",
-          "legendFormat": "{{geoip_city}} {{geoip_region_name}} {{geoip_country_name}}",
-          "queryType": "range",
-          "refId": "A",
-          "step": ""
-        }
-      ],
-      "title": " ",
-      "transformations": [],
-      "type": "piechart"
-    },
-    {
-      "datasource": {
-        "type": "loki",
-        "uid": "loki"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            }
-          },
-          "mappings": [],
-          "unit": "locale"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 11,
-        "w": 12,
-        "x": 12,
-        "y": 11
-      },
-      "id": 9,
-      "options": {
-        "displayLabels": [],
-        "legend": {
-          "displayMode": "table",
-          "placement": "right",
-          "showLegend": true,
-          "values": [
-            "value",
-            "percent"
-          ]
-        },
-        "pieType": "donut",
-        "reduceOptions": {
-          "calcs": [
-            "sum"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "10.1.0",
-      "targets": [
-        {
-          "datasource": {
-            "type": "loki",
-            "uid": "loki"
-          },
-          "editorMode": "code",
-          "expr": "sum by(vhost) (count_over_time({k8_app=\"nginx-parsed\"} | json \n| __error__=`` [$__interval]))",
-          "legendFormat": "{{vhost}}",
-          "queryType": "range",
-          "refId": "A",
-          "step": ""
-        }
-      ],
-      "title": " Requests By vHost",
-      "transformations": [],
-      "type": "piechart"
-    },
-    {
-      "datasource": {
-        "type": "loki",
-        "uid": "loki"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
             "mode": "thresholds"
           },
           "custom": {
@@ -337,7 +191,7 @@
             "cellOptions": {
               "type": "auto"
             },
-            "inspect": true
+            "inspect": false
           },
           "fieldMinMax": false,
           "mappings": [],
@@ -360,7 +214,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Value"
+              "options": "requests"
             },
             "properties": [
               {
@@ -387,7 +241,7 @@
         "h": 13,
         "w": 12,
         "x": 0,
-        "y": 22
+        "y": 11
       },
       "id": 19,
       "maxDataPoints": 1,
@@ -395,17 +249,21 @@
         "cellHeight": "sm",
         "footer": {
           "countRows": false,
-          "fields": "",
+          "enablePagination": true,
+          "fields": [
+            "Value #A"
+          ],
           "reducer": [
             "sum"
           ],
           "show": true
         },
+        "frameIndex": 21,
         "showHeader": true,
         "sortBy": [
           {
             "desc": true,
-            "displayName": "Requests"
+            "displayName": "requests"
           }
         ]
       },
@@ -417,13 +275,13 @@
             "uid": "loki"
           },
           "editorMode": "code",
-          "expr": "sum by(pmessage_geoip_city, pmessage_geoip_region, pmessage_geoip_country_code) (count_over_time({k8_instance=\"nginx-external\"}  \n| json \n| pmessage_geoip_country_name != \"\"\n| __error__=`` [$__interval]))",
+          "expr": "sum by (pmessage_geoip_city, pmessage_geoip_region, pmessage_geoip_country_code) (count_over_time({k8_instance=\"nginx-external\"} \n| json \n| pmessage_geoip_country_name != \"\"\n| __error__=\"\" [$__interval]))",
           "legendFormat": "{{pmessage_geoip_city}} {{pmessage_geoip_region}} {{pmessage_geoip_country_code}}",
-          "queryType": "range",
+          "queryType": "instant",
           "refId": "A"
         }
       ],
-      "title": "Top 10 User Agents",
+      "title": "Request Locations",
       "transformations": [
         {
           "id": "seriesToRows",
@@ -435,11 +293,20 @@
             "excludeByName": {
               "Time": true
             },
-            "indexByName": {},
+            "indexByName": {
+              "Time": 0,
+              "Value #A": 4,
+              "pmessage_geoip_city": 1,
+              "pmessage_geoip_country_code": 3,
+              "pmessage_geoip_region": 2
+            },
             "renameByName": {
-              "Metric": "Locations",
-              "Time": "",
-              "Value": "Requests"
+              "Metric": "Location",
+              "Value": "Requests",
+              "Value #A": "requests",
+              "pmessage_geoip_city": "city",
+              "pmessage_geoip_country_code": "country",
+              "pmessage_geoip_region": "region"
             }
           }
         }
@@ -485,7 +352,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Value"
+              "options": "requests"
             },
             "properties": [
               {
@@ -512,7 +379,7 @@
         "h": 13,
         "w": 12,
         "x": 12,
-        "y": 22
+        "y": 11
       },
       "id": 18,
       "maxDataPoints": 1,
@@ -520,7 +387,10 @@
         "cellHeight": "sm",
         "footer": {
           "countRows": false,
-          "fields": "",
+          "enablePagination": true,
+          "fields": [
+            "Value #A"
+          ],
           "reducer": [
             "sum"
           ],
@@ -530,7 +400,7 @@
         "sortBy": [
           {
             "desc": true,
-            "displayName": "Requests"
+            "displayName": "requests"
           }
         ]
       },
@@ -542,13 +412,12 @@
             "uid": "loki"
           },
           "editorMode": "code",
-          "expr": "topk(10, sum by (pmessage_vhost) (count_over_time({k8_instance=\"nginx-external\"} \n| json \n| pmessage_http_user_agent != \"\"\n| __error__=\"\" [$__interval])))",
+          "expr": "sum by (pmessage_vhost) (count_over_time({k8_instance=\"nginx-external\"} \n| json \n| pmessage_http_user_agent != \"\"\n| __error__=\"\" [$__interval]))",
           "legendFormat": "{{pmessage_vhost}}",
-          "queryType": "range",
+          "queryType": "instant",
           "refId": "A"
         }
       ],
-      "timeFrom": "24h",
       "title": "Top 10 vHosts",
       "transformations": [
         {
@@ -565,7 +434,9 @@
             "renameByName": {
               "Metric": "vHost",
               "Time": "",
-              "Value": "Requests"
+              "Value": "Requests",
+              "Value #A": "requests",
+              "pmessage_vhost": "vhost"
             }
           }
         }
@@ -611,7 +482,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Value"
+              "options": "requests"
             },
             "properties": [
               {
@@ -638,7 +509,7 @@
         "h": 13,
         "w": 12,
         "x": 0,
-        "y": 35
+        "y": 24
       },
       "id": 17,
       "maxDataPoints": 1,
@@ -646,7 +517,10 @@
         "cellHeight": "sm",
         "footer": {
           "countRows": false,
-          "fields": "",
+          "enablePagination": true,
+          "fields": [
+            "Value #A"
+          ],
           "reducer": [
             "sum"
           ],
@@ -656,7 +530,7 @@
         "sortBy": [
           {
             "desc": true,
-            "displayName": "Requests"
+            "displayName": "requests"
           }
         ]
       },
@@ -668,14 +542,13 @@
             "uid": "loki"
           },
           "editorMode": "code",
-          "expr": "topk(10, sum by (pmessage_http_user_agent) (count_over_time({k8_instance=\"nginx-external\"} \n| json \n| pmessage_http_user_agent != \"\"\n| __error__=\"\" [$__interval])))",
+          "expr": "sum by (pmessage_http_user_agent) (count_over_time({k8_instance=\"nginx-external\"} \n| json \n| pmessage_http_user_agent != \"\"\n| __error__=\"\" [$__interval]))",
           "legendFormat": "{{pmessage_http_user_agent}}",
-          "queryType": "range",
+          "queryType": "instant",
           "refId": "A"
         }
       ],
-      "timeFrom": "24h",
-      "title": "Top 10 User Agents",
+      "title": "User Agents",
       "transformations": [
         {
           "id": "seriesToRows",
@@ -691,7 +564,146 @@
             "renameByName": {
               "Metric": "User Agent",
               "Time": "",
-              "Value": "Requests"
+              "Value": "Requests",
+              "Value #A": "requests",
+              "pmessage_http_user_agent": "user agent"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "loki"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": true
+          },
+          "fieldMinMax": false,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "locale"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "requests"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "gauge"
+                }
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "continuous-BlPu"
+                }
+              },
+              {
+                "id": "custom.width",
+                "value": 300
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 13,
+        "w": 12,
+        "x": 12,
+        "y": 24
+      },
+      "id": 20,
+      "maxDataPoints": 1,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "enablePagination": true,
+          "fields": [
+            "Value #A"
+          ],
+          "reducer": [
+            "sum"
+          ],
+          "show": true
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "requests"
+          }
+        ]
+      },
+      "pluginVersion": "10.2.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "loki"
+          },
+          "editorMode": "code",
+          "expr": "sum by (pmessage_vhost,pmessage_path) (count_over_time({k8_instance=\"nginx-external\"} \n| json \n| __error__=\"\" [$__interval]))",
+          "legendFormat": "{{pmessage_vhost,pmessage_path}}",
+          "queryType": "instant",
+          "refId": "A"
+        }
+      ],
+      "title": "Request Paths",
+      "transformations": [
+        {
+          "id": "seriesToRows",
+          "options": {}
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true
+            },
+            "indexByName": {
+              "Time": 0,
+              "Value #A": 3,
+              "pmessage_path": 2,
+              "pmessage_vhost": 1
+            },
+            "renameByName": {
+              "Metric": "User Agent",
+              "Time": "",
+              "Value": "Requests",
+              "Value #A": "requests",
+              "pmessage_http_user_agent": "user agent",
+              "pmessage_path": "path",
+              "pmessage_vhost": "vhost"
             }
           }
         }
@@ -846,13 +858,14 @@
         "h": 12,
         "w": 24,
         "x": 0,
-        "y": 48
+        "y": 37
       },
       "id": 13,
       "options": {
         "cellHeight": "sm",
         "footer": {
           "countRows": false,
+          "enablePagination": true,
           "fields": "",
           "reducer": [
             "sum"
@@ -1036,7 +1049,7 @@
         "h": 13,
         "w": 11,
         "x": 0,
-        "y": 60
+        "y": 49
       },
       "id": 15,
       "maxDataPoints": 1256,
@@ -1148,7 +1161,7 @@
         "h": 13,
         "w": 13,
         "x": 11,
-        "y": 60
+        "y": 49
       },
       "id": 16,
       "options": {
@@ -1200,7 +1213,7 @@
         "h": 12,
         "w": 24,
         "x": 0,
-        "y": 73
+        "y": 62
       },
       "id": 12,
       "options": {
@@ -1239,7 +1252,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 85
+        "y": 74
       },
       "id": 10,
       "options": {
@@ -1277,7 +1290,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 92
+        "y": 81
       },
       "id": 5,
       "options": {
