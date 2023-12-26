@@ -28,10 +28,10 @@ data:
               password: {{HOMEPAGE_VAR_SYNOLOGY_PASSWORD}}
               #volume: volume_N # optional
     - Dashboards:
-        - Requests (24hrs):
+        - Requests:
             icon: grafana.png
             href: https://grafana.feldblyum.com/public-dashboards/807e9d3f774c48b49e4bae9d38869356
-            description: External HTTP Requests
+            description: External HTTP Requests in the last 24 hours
             widget:
               type: iframe
               name: Requests
