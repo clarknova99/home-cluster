@@ -110,6 +110,14 @@ spec:
         annotations:
           nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
           hajimari.io/icon: mdi:plex
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/description: CCTV
+          gethomepage.dev/group: Apps
+          gethomepage.dev/icon: mdi-plex
+          gethomepage.dev/name: plex
+          gethomepage.dev/widget.type: plex
+          gethomepage.dev/widget.url: "https://plex.${SECRET_DOMAIN}"
+          gethomepage.dev/pod-selector: ""
         hosts:
           - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:
