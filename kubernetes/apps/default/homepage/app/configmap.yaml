@@ -17,14 +17,14 @@ data:
   services.yaml: |
     ---
     - Media:
-        # - Plex:
-        #     icon: plex.png
-        #     href: https://plex.${SECRET_DOMAIN}
-        #     description: Media Player
-        #     widget:
-        #       type: plex
-        #       url: http://192.168.2.200:32400
-        #       key: {{HOMEPAGE_VAR_PLEX_TOKEN}}
+        - Plex:
+            icon: plex.png
+            href: https://plex.${SECRET_DOMAIN}
+            description: Media Player
+            widget:
+              type: plex
+              url: http://192.168.2.200:32400
+              key: {{HOMEPAGE_VAR_PLEX_TOKEN}}
         # - Sabnzbd:
         #     icon: sabnzbd.png
         #     href: https://sabnzbd.${SECRET_DOMAIN}
