@@ -105,11 +105,11 @@ spec:
         enabled: true
         className: external
         annotations:
-          hajimari.io/icon: material-symbols:detector-status
+          hajimari.io/icon: mdi:cog-outline
           external-dns.alpha.kubernetes.io/target: external.${SECRET_DOMAIN}
           gethomepage.dev/enabled: "true"
           gethomepage.dev/group: Monitoring
-          gethomepage.dev/icon: gatus.svg
+          gethomepage.dev/icon: mdi-cog-outline
           gethomepage.dev/name: gatus
           gethomepage.dev/widget.url: https://gatus.${SECRET_DOMAIN}
           gethomepage.dev/siteMonitor: https://gatus.${SECRET_DOMAIN}
