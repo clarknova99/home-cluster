@@ -73,6 +73,7 @@ data:
     color: slate
     headerStyle: clean
     target: _blank
+    hideErrors: true
     layout:
       Monitoring:
         style: row
@@ -85,9 +86,6 @@ data:
       Favorites:
         style: row
         columns: 3
-
-
-
     quicklaunch:
       searchDescription: true
       hideInternetSearch: true
