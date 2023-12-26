@@ -17,7 +17,6 @@ metadata:
     gethomepage.dev/widget.key: "${HOMEPAGE_VAR_SABNZBD_KEY}"
     gethomepage.dev/widget.url: http://sabnzbd.media.svc.cluster.local:8085
     gethomepage.dev/siteMonitor: https://sabnzbd.${SECRET_DOMAIN}
-    gethomepage.dev/pod-selector: ""
 spec:
   ingressClassName: internal
   rules:

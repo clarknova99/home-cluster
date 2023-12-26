@@ -118,7 +118,7 @@ spec:
           gethomepage.dev/widget.type: plex
           gethomepage.dev/widget.key: "${HOMEPAGE_VAR_PLEX_TOKEN}"
           gethomepage.dev/widget.url: "https://plex.${SECRET_DOMAIN}"
-          gethomepage.dev/pod-selector: ""
+          gethomepage.dev/siteMonitor: https://plex.${SECRET_DOMAIN}
         hosts:
           - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:

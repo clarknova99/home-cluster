@@ -16,7 +16,7 @@ metadata:
     gethomepage.dev/widget.type: radarr
     gethomepage.dev/widget.key: "${HOMEPAGE_VAR_RADARR_KEY}"
     gethomepage.dev/widget.url: http://radarr.media.svc.cluster.local:80
-    gethomepage.dev/pod-selector: ""
+    gethomepage.dev/siteMonitor: https://radarr.${SECRET_DOMAIN}
 spec:
   ingressClassName: internal
   rules:
