@@ -109,7 +109,6 @@ spec:
         annotations:
           hajimari.io/icon: mdi:pail
           gethomepage.dev/enabled: "true"
-          gethomepage.dev/description: Object Storage
           gethomepage.dev/group: Storage
           gethomepage.dev/icon: mdi-pail
           gethomepage.dev/name: minio
