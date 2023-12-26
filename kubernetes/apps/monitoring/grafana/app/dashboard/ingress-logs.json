@@ -986,6 +986,107 @@
     },
     {
       "datasource": {
+        "type": "loki",
+        "uid": "loki"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "decbytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 49
+      },
+      "id": 21,
+      "options": {
+        "legend": {
+          "calcs": [
+            "lastNotNull",
+            "mean",
+            "max",
+            "sum"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.2.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "loki"
+          },
+          "editorMode": "code",
+          "expr": "sum by (k8s_instance) (sum_over_time({k8_instance=\"nginx-external\"} \n| json \n| unwrap pmessage_bytes_sent\n| __error__=\"\" [$__interval]))",
+          "legendFormat": "Bytes Sent",
+          "queryType": "range",
+          "refId": "A"
+        }
+      ],
+      "title": "Panel Title",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
         "type": "prometheus",
         "uid": "prometheus"
       },
@@ -1049,7 +1150,7 @@
         "h": 13,
         "w": 11,
         "x": 0,
-        "y": 49
+        "y": 57
       },
       "id": 15,
       "maxDataPoints": 1256,
@@ -1161,7 +1262,7 @@
         "h": 13,
         "w": 13,
         "x": 11,
-        "y": 49
+        "y": 57
       },
       "id": 16,
       "options": {
@@ -1213,7 +1314,7 @@
         "h": 12,
         "w": 24,
         "x": 0,
-        "y": 62
+        "y": 70
       },
       "id": 12,
       "options": {
@@ -1252,7 +1353,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 74
+        "y": 82
       },
       "id": 10,
       "options": {
@@ -1290,7 +1391,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 81
+        "y": 89
       },
       "id": 5,
       "options": {
@@ -1326,13 +1427,13 @@
     "list": []
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-12h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Ingress Logs",
   "uid": "b0c235a4-d758-4aa7-8f09-7137af01edfd",
-  "version": 43,
+  "version": 45,
   "weekStart": ""
 }

@@ -72,6 +72,8 @@ spec:
           # Set to < 0 to enable on all queries.
           # CLI flag: -frontend.log-queries-longer-than
           log_queries_longer_than: 20s
+        query_scheduler:
+          max_outstanding_requests_per_tenant: 2048
         common:
           path_prefix: /var/loki
           replication_factor: 3
