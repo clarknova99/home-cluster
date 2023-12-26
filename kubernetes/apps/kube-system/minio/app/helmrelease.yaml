@@ -114,8 +114,8 @@ spec:
           gethomepage.dev/icon: mdi-pail
           gethomepage.dev/name: minio
           gethomepage.dev/widget.type: minio
+          gethomepage.dev/widget.hideErrors: true
           gethomepage.dev/siteMonitor: https://s3.${SECRET_DOMAIN}
-          gethomepage.dev/pod-selector: ""
         hosts:
           - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:

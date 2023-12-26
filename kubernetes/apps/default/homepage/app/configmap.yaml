@@ -16,7 +16,7 @@ data:
     mode: cluster
   services.yaml: |
     ---
-    - NAS:
+    - Storage:
         - Diskstation:
             icon: synology-dsm.svg
             href: http://192.168.1.2:5000
