@@ -989,6 +989,7 @@
         "type": "loki",
         "uid": "loki"
       },
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1045,8 +1046,8 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
-        "w": 24,
+        "h": 9,
+        "w": 12,
         "x": 0,
         "y": 49
       },
@@ -1082,7 +1083,108 @@
           "refId": "A"
         }
       ],
-      "title": "Panel Title",
+      "title": "Bytes Sent",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "Bps"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 49
+      },
+      "id": 22,
+      "options": {
+        "legend": {
+          "calcs": [
+            "last",
+            "mean"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "sum by(ingress) (irate (nginx_ingress_controller_response_size_sum{controller_class=\"k8s.io/external\", ingress!~\"\"}[2m]))",
+          "instant": false,
+          "interval": "10s",
+          "legendFormat": "{{ingress}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "External Bytes Sent",
       "type": "timeseries"
     },
     {
@@ -1128,6 +1230,7 @@
               "mode": "off"
             }
           },
+          "decimals": 2,
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -1142,15 +1245,15 @@
               }
             ]
           },
-          "unit": "locale"
+          "unit": "reqps"
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 13,
-        "w": 11,
+        "h": 11,
+        "w": 24,
         "x": 0,
-        "y": 57
+        "y": 58
       },
       "id": 15,
       "maxDataPoints": 1256,
@@ -1167,7 +1270,7 @@
           "sortDesc": true
         },
         "tooltip": {
-          "mode": "single",
+          "mode": "multi",
           "sort": "none"
         }
       },
@@ -1178,7 +1281,7 @@
             "uid": "prometheus"
           },
           "disableTextWrap": false,
-          "editorMode": "builder",
+          "editorMode": "code",
           "exemplar": false,
           "expr": "sum by(ingress) (rate(nginx_ingress_controller_requests{service=\"nginx-external-controller-metrics\", ingress!~\"\"}[$__rate_interval])) > 0",
           "format": "time_series",
@@ -1259,10 +1362,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 13,
-        "w": 13,
-        "x": 11,
-        "y": 57
+        "h": 12,
+        "w": 24,
+        "x": 0,
+        "y": 69
       },
       "id": 16,
       "options": {
@@ -1273,10 +1376,12 @@
           ],
           "displayMode": "table",
           "placement": "right",
-          "showLegend": true
+          "showLegend": true,
+          "sortBy": "Total",
+          "sortDesc": true
         },
         "tooltip": {
-          "mode": "single",
+          "mode": "multi",
           "sort": "none"
         }
       },
@@ -1314,7 +1419,7 @@
         "h": 12,
         "w": 24,
         "x": 0,
-        "y": 70
+        "y": 81
       },
       "id": 12,
       "options": {
@@ -1353,7 +1458,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 82
+        "y": 93
       },
       "id": 10,
       "options": {
@@ -1391,7 +1496,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 89
+        "y": 100
       },
       "id": 5,
       "options": {
@@ -1427,13 +1532,13 @@
     "list": []
   },
   "time": {
-    "from": "now-12h",
+    "from": "now-24h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Ingress Logs",
   "uid": "b0c235a4-d758-4aa7-8f09-7137af01edfd",
-  "version": 45,
+  "version": 46,
   "weekStart": ""
 }
