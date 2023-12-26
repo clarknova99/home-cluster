@@ -158,7 +158,14 @@ data:
           showLabel: true
           label: home-cluster
         nodes:
-          show: false
+          # Shows node-specific statistics
+          show: true
+          # Shows the CPU for each node
+          cpu: true
+          # Shows the memory for each node
+          memory: true
+          # Shows the label, which is always the node name
+          showLabel: true
     - longhorn:
         # Show the expanded view
         expanded: true
