@@ -76,7 +76,7 @@
           "mouseWheelZoom": true,
           "showAttribution": true,
           "showDebug": false,
-          "showMeasure": true,
+          "showMeasure": false,
           "showScale": false,
           "showZoom": true
         },
@@ -149,7 +149,7 @@
             "uid": "loki"
           },
           "editorMode": "code",
-          "expr": "sum by (geoip_latitude, geoip_longitude, geoip_city, geoip_country_code, ip_address, vhost) (count_over_time({k8_app=\"nginx-parsed\"} \n| json \n|__error__=``[$__range]))",
+          "expr": "sum by (geoip_latitude, geoip_longitude, geoip_city, geoip_country_code, ip_address, vhost) (count_over_time({k8_app=\"nginx-parsed\"} \n| json \n| geoip_latitude != \"\"\n|__error__=``[$__range]))",
           "legendFormat": "{{ip_address}}",
           "queryType": "instant",
           "refId": "A"
@@ -170,6 +170,175 @@
               }
             ],
             "fields": {}
+          }
+        }
+      ],
+      "type": "geomap"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "loki"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 50
+              },
+              {
+                "color": "red",
+                "value": 75
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 11,
+        "w": 24,
+        "x": 0,
+        "y": 11
+      },
+      "id": 23,
+      "options": {
+        "basemap": {
+          "config": {},
+          "name": "Layer 0",
+          "type": "default"
+        },
+        "controls": {
+          "mouseWheelZoom": true,
+          "showAttribution": true,
+          "showDebug": false,
+          "showMeasure": false,
+          "showScale": false,
+          "showZoom": true
+        },
+        "layers": [
+          {
+            "config": {
+              "showLegend": true,
+              "style": {
+                "color": {
+                  "field": "Value #A",
+                  "fixed": "dark-green"
+                },
+                "opacity": 0.4,
+                "rotation": {
+                  "fixed": 0,
+                  "max": 360,
+                  "min": -360,
+                  "mode": "mod"
+                },
+                "size": {
+                  "field": "Value #A",
+                  "fixed": 5,
+                  "max": 7,
+                  "min": 5
+                },
+                "symbol": {
+                  "fixed": "img/icons/marker/circle.svg",
+                  "mode": "fixed"
+                },
+                "text": {
+                  "field": "Value #A",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "textConfig": {
+                  "fontSize": 12,
+                  "offsetX": 0,
+                  "offsetY": -10,
+                  "textAlign": "center",
+                  "textBaseline": "middle"
+                }
+              }
+            },
+            "location": {
+              "latitude": "pmessage_geoip_latitude",
+              "longitude": "pmessage_geoip_longitude",
+              "mode": "coords"
+            },
+            "name": "Requests",
+            "tooltip": true,
+            "type": "markers"
+          }
+        ],
+        "tooltip": {
+          "mode": "details"
+        },
+        "view": {
+          "allLayers": true,
+          "id": "coords",
+          "lat": 35.125409,
+          "lon": -98.712318,
+          "zoom": 2.79
+        }
+      },
+      "pluginVersion": "10.2.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "loki"
+          },
+          "editorMode": "code",
+          "expr": "sum by (pmessage_geoip_latitude, pmessage_geoip_longitude, pmessage_geoip_city, pmessage_geoip_country_code, pmessage_ip_address, pmessage_vhost) (count_over_time({k8_instance=\"nginx-external\"} \n| json \n| pmessage_geoip_latitude != \"\"\n|__error__=``[$__range]))",
+          "legendFormat": "{{ip_address}}",
+          "queryType": "instant",
+          "refId": "A"
+        }
+      ],
+      "transformations": [
+        {
+          "id": "convertFieldType",
+          "options": {
+            "conversions": [
+              {
+                "destinationType": "number",
+                "targetField": "pmessage_geoip_latitude"
+              },
+              {
+                "destinationType": "number",
+                "targetField": "pmessage_geoip_longitude"
+              }
+            ],
+            "fields": {}
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "indexByName": {},
+            "renameByName": {
+              "Value #A": "requests",
+              "pmessage_geoip_city": "city",
+              "pmessage_geoip_country_code": "country",
+              "pmessage_geoip_latitude": "latitude",
+              "pmessage_geoip_longitude": "longitude",
+              "pmessage_vhost": "vhost"
+            }
           }
         }
       ],
@@ -241,7 +410,7 @@
         "h": 13,
         "w": 12,
         "x": 0,
-        "y": 11
+        "y": 22
       },
       "id": 19,
       "maxDataPoints": 1,
@@ -379,7 +548,7 @@
         "h": 13,
         "w": 12,
         "x": 12,
-        "y": 11
+        "y": 22
       },
       "id": 18,
       "maxDataPoints": 1,
@@ -509,7 +678,7 @@
         "h": 13,
         "w": 12,
         "x": 0,
-        "y": 24
+        "y": 35
       },
       "id": 17,
       "maxDataPoints": 1,
@@ -639,7 +808,7 @@
         "h": 13,
         "w": 12,
         "x": 12,
-        "y": 24
+        "y": 35
       },
       "id": 20,
       "maxDataPoints": 1,
@@ -671,7 +840,7 @@
             "type": "loki",
             "uid": "loki"
           },
-          "editorMode": "code",
+          "editorMode": "builder",
           "expr": "sum by (pmessage_vhost,pmessage_path) (count_over_time({k8_instance=\"nginx-external\"} \n| json \n| __error__=\"\" [$__interval]))",
           "legendFormat": "{{pmessage_vhost,pmessage_path}}",
           "queryType": "instant",
@@ -858,7 +1027,7 @@
         "h": 12,
         "w": 24,
         "x": 0,
-        "y": 37
+        "y": 48
       },
       "id": 13,
       "options": {
@@ -1049,7 +1218,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 49
+        "y": 60
       },
       "id": 21,
       "options": {
@@ -1151,7 +1320,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 49
+        "y": 60
       },
       "id": 22,
       "options": {
@@ -1253,7 +1422,7 @@
         "h": 11,
         "w": 24,
         "x": 0,
-        "y": 58
+        "y": 69
       },
       "id": 15,
       "maxDataPoints": 1256,
@@ -1365,7 +1534,7 @@
         "h": 12,
         "w": 24,
         "x": 0,
-        "y": 69
+        "y": 80
       },
       "id": 16,
       "options": {
@@ -1419,7 +1588,7 @@
         "h": 12,
         "w": 24,
         "x": 0,
-        "y": 81
+        "y": 92
       },
       "id": 12,
       "options": {
@@ -1458,7 +1627,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 93
+        "y": 104
       },
       "id": 10,
       "options": {
@@ -1478,7 +1647,7 @@
             "uid": "loki"
           },
           "editorMode": "code",
-          "expr": "{k8_instance=\"nginx-external\"} | json \n| pmessage_x_forwarded_for !~ `.*192.168.1.*` \n| pmessage_x_forwarded_for !~ `.*10.42.*`\n| message != `\\t`\n| line_format `{{.pmessage_time}} - {{.pmessage_status}} - {{.pmessage_vhost}} - {{.pmessage_x_forwarded_for}} - {{.pmessage_http_user_agent}} - {{.pmessage_geoip_city}}, {{.pmessage_geoip_region_name}} {{.pmessage_geoip_country_code}} - {{.pmessage_path}} - {{.pmessage_http_referrer}}` \n| pmessage_status != \"200\" | pmessage_status != \"204\" \n| __error__=``",
+          "expr": "{k8_instance=\"nginx-external\"} | json \n| pmessage_x_forwarded_for !~ `.*192.168.1.*` \n| pmessage_x_forwarded_for !~ `.*10.42.*`\n| message != `\\t`\n| line_format `{{.pmessage_time}} - {{.pmessage_status}} - {{.pmessage_vhost}} - {{.pmessage_x_forwarded_for}} - {{.pmessage_geoip_city}}, {{.pmessage_geoip_region_name}} {{.pmessage_geoip_country_code}} - {{.pmessage_http_user_agent}} - {{.pmessage_path}} - {{.pmessage_http_referrer}}` \n| pmessage_status != \"200\" | pmessage_status != \"204\" \n| __error__=``",
           "queryType": "range",
           "refId": "A"
         }
@@ -1496,7 +1665,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 100
+        "y": 111
       },
       "id": 5,
       "options": {
@@ -1532,13 +1701,13 @@
     "list": []
   },
   "time": {
-    "from": "now-24h",
+    "from": "now-6h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Ingress Logs",
   "uid": "b0c235a4-d758-4aa7-8f09-7137af01edfd",
-  "version": 46,
+  "version": 47,
   "weekStart": ""
 }

@@ -69,6 +69,7 @@ spec:
         ssl-protocols: TLSv1.3 TLSv1.2
       controller.maxmindLicenseKey: ${SECRET_MAXMIND_LICENSE_KEY}
       use-geoip2: true
+      use-forwarded-headers: "true"
 
       metrics:
         enabled: true
