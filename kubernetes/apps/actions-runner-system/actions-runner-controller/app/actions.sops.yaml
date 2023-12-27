@@ -4,7 +4,8 @@ metadata:
     name: actions-runner-controller-secrets
     namespace: actions-runner-system
 stringData:
-    github_token: ENC[AES256_GCM,data:gsXqRsal8HaGbm0p2b4XHf9YVo09kS5IQLigXDIm3gxJHm1RtiGOpz2X5gZlDdia+y61/vjwoKj62qWtlhnkwaoGcIWC6XOyaOpYdNIsdwg2m7sbd3DdqoYTdvBQ,iv:NLdHqL+9tLUXpWLxoFkITn9d/4LcC764dZGbbRmVsgU=,tag:7ZrYEX02dAa2eNKryXzVaQ==,type:str]
+    github_token_old: ENC[AES256_GCM,data:0zLk2BL5eeGnK2gdkCQvbLOYKlpGsBmO8lnXY36ViRgw9B+c6B77shvoI2JBFcx5Gs9VVeiJejNQTrmyEhQGttSvVsb5xOWrGcmcpfJMZb9OvRE1IIKcCbZoiYcy,iv:h+iLyi+kJ2Pn0ro0gvE5ChVW7QY2Aa0ju6qVfhKo6BE=,tag:eKX9W9YEecf93m5LaYbdPQ==,type:str]
+    github_token: ENC[AES256_GCM,data:0hItqhjXKrhtTBRqwWMmnS+2VE5WElHkb9BKQH07Y78vTvphoo4J5w==,iv:nKq1gNbBwjc1S9OXk3VNltUvgBqdPCH0DqiGmBA2i24=,tag:Y6XoyRsMIF+1cUxfYU/LKg==,type:str]
 sops:
     kms: []
     gcp_kms: []
@@ -20,8 +21,8 @@ sops:
             clFnQ2RlK1Q3d1hhcFhJTUxPSHZ1OGcKvzwnHvYGq2c9xgdvwuQtywNFcB6N+3+/
             kR+mzAWJ3ZOZ4whkpuJHjoZfSwCbqjj+rDs3NFrrIVhr7K849lwCzw==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2023-10-13T04:26:58Z"
-    mac: ENC[AES256_GCM,data:WLlHGMu9fKWE12EdiUJh0TGs9uXUtQYFWWv8tOpC05O5HCZ83trJA6Cz8QnmEFiMOSg7IxVywM2xrqJnWtpFmrI35ZyChuqeaARL20UJhYfR6FI3AIPf7CVXruQDcpPGKY/Xr980xaiZ7VU0ZxD+4yNUFeG+YHpgaSzLWZ9UMXQ=,iv:Szzc6N9tDZ4hoaB0O97dGi03RrbKTaAZ/VV+FRK+rMk=,tag:aOMeuwaO2J4k3lrII57GGQ==,type:str]
+    lastmodified: "2023-12-27T21:53:58Z"
+    mac: ENC[AES256_GCM,data:NfMFwbbC8LdD+wG27fk6CxgNiZQkLrUCmiBfrzqA4zCF/eOeL/2vmJH+zIaWWRzlwQJpw7N4xztH9QUb+nDyWIczt2mbY40WCIONGEBTsp0+UQBUCe8wB0SNeYsTD2aldT5n3V2CKPwAeADjUgcH55E9ixLhrRuH1vsGm6l7HBw=,iv:SrMe4HQqj0P1bPfEOA6enQ9S3z09yh3zXButySDlR+c=,tag:NCsHcYnP0uG0q6xirGu9/Q==,type:str]
     pgp: []
     encrypted_regex: ^(data|stringData)$
-    version: 3.8.0
+    version: 3.8.1
