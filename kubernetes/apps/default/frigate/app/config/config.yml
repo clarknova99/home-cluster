@@ -115,6 +115,11 @@ cameras:
       enabled: true # <---- disable detection until you have a working camera feed
       width: 1280 # <---- update for your camera's resolution
       height: 720 # <---- update for your camera's resolution
+    objects:
+      filters:
+        person:
+          mask:
+            - 1058,248,1057,230,1063,211,1063,196,1060,181
   basement:
     ffmpeg:
       inputs:
