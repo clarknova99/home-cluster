@@ -30,9 +30,6 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  WORKFLOW_DRY_RUN: false
-  WORKFLOW_LOG_LEVEL: debug
-  WORKFLOW_VERSION: latest # 37.59.8
   RENOVATE_PLATFORM: github
   RENOVATE_PLATFORM_COMMIT: true
   RENOVATE_ONBOARDING_CONFIG_FILE_NAME: .github/renovate.json5
@@ -40,6 +37,9 @@ env:
   RENOVATE_AUTODISCOVER_FILTER: "${{ github.repository }}"
   RENOVATE_USERNAME: "${{ secrets.BOT_USERNAME }}[bot]"
   RENOVATE_GIT_AUTHOR: "${{ secrets.BOT_USERNAME }} <${{ secrets.BOT_USER_ID }}+${{ secrets.BOT_USERNAME }}[bot]@users.noreply.github.com>"
+  WORKFLOW_DRY_RUN: false
+  WORKFLOW_LOG_LEVEL: debug
+  WORKFLOW_VERSION: latest # 37.59.8
 
 jobs:
   renovate:

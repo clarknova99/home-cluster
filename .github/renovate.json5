@@ -8,6 +8,7 @@
     ":semanticCommits",
     ":automergeDigest",
     ":automergeBranch",
+    ":timezone(America/New_York)",
     "github>clarknova99/home-cluster//.github/renovate/autoMerge.json5",
     "github>clarknova99/home-cluster//.github/renovate/commitMessage.json5",
     "github>clarknova99/home-cluster//.github/renovate/customDatasources.json5",
@@ -16,6 +17,7 @@
     "github>clarknova99/home-cluster//.github/renovate/semanticCommits.json5",
     "helpers:pinGitHubActionDigests"
   ],
+  "onboarding": false,
   "dependencyDashboard": true,
   "dependencyDashboardTitle": "Renovate Dashboard 🤖",
   "suppressNotifications": ["prIgnoreNotification"],
