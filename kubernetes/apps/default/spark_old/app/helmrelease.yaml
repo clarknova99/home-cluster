@@ -1,0 +1,121 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2beta2.json
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: spark
+  namespace: default
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: 2.4.0
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+      interval: 15m
+  maxHistory: 3
+  install:
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
+  values:
+    controllers:
+      main:
+        type: Deployment
+        containers:
+          main:
+            image:
+              repository: docker.io/bitnami/spark
+              tag: 3.5.0-debian-11-r17
+            env:
+              SPARK_MODE: master
+              SPARK_MASTER_HOST: spark-master
+              SPARK_RPC_AUTHENTICATION_ENABLED: no
+              SPARK_RPC_ENCRYPTION_ENABLED: no
+              SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED: no
+              SPARK_SSL_ENABLED: no
+              SPARK_USER: spark
+        pod:
+          nodeSelector:
+            kubernetes.io/arch: amd64
+      worker:
+        type: DaemonSet
+        containers:
+          worker:
+            image:
+              repository: docker.io/bitnami/spark
+              tag: 3.5.0-debian-11-r17
+            env:
+              SPARK_MODE: worker
+              SPARK_MASTER_URL: spark://spark-master:7077
+              SPARK_WORKER_MEMORY: 1G
+              SPARK_WORKER_CORES: "1"
+              SPARK_RPC_AUTHENTICATION_ENABLED: no
+              SPARK_RPC_ENCRYPTION_ENABLED: no
+              SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED: no
+              SPARK_SSL_ENABLED: no
+              SPARK_USER: spark
+        pod:
+          nodeSelector:
+            kubernetes.io/arch: amd64
+    service:
+      main:
+        # -- Override the name suffix that is used for this service
+        nameOverride: spark-master
+        # -- Provide additional labels which may be required.
+        labels:
+          app: spark-master
+        ports:
+          http:
+            port: 8080
+          main:
+            protocol: TCP
+            port: 7077
+            targetPort: 7077
+          main-rest:
+            protocol: TCP
+            port: 6066
+            targetPort: 6066
+      worker:
+        # -- Override the name suffix that is used for this service
+        nameOverride: spark-worker
+        # -- Provide additional labels which may be required.
+        labels:
+          app: spark-worker
+        ports:
+          http:
+            port: 8081
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: internal
+        hosts:
+          - host: &host "spark-master.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  name: master
+                  port: http
+        tls:
+          - hosts:
+              - *host
+      worker:
+        enabled: true
+        ingressClassName: internal
+        hosts:
+          - host: &host-worker "spark-worker.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  name: worker
+                  port: http
+        tls:
+          - hosts:
+              - *host-worker

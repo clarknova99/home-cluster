@@ -3,10 +3,10 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: cluster-apps-bitnami-spark
+  name: cluster-apps-spark
   namespace: flux-system
 spec:
-  path: ./kubernetes/apps/default/bitnami-spark/app
+  path: ./kubernetes/apps/default/spark/app
   prune: true
   sourceRef:
     kind: GitRepository

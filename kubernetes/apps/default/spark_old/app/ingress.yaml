@@ -5,6 +5,7 @@ metadata:
   name: spark
   namespace: default
   annotations:
+    external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
     hajimari.io/enable: "true"
     hajimari.io/icon: mdi:ip-network
 spec:
@@ -17,9 +18,9 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: spark
+                name: spark-webui
                 port:
-                  number: 80
+                  number: 8080
   tls:
     - hosts:
         - "spark.${SECRET_DOMAIN}"

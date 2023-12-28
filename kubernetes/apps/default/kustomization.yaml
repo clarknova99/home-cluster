@@ -5,7 +5,6 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./appsmith/ks.yaml
-  #- ./bitnami-spark/ks.yaml
   - ./authelia/ks.yaml
   - ./baserow/ks.yaml
   - ./frigate/ks.yaml
@@ -17,7 +16,7 @@ resources:
   - ./lldap/ks.yaml
   - ./mosquitto/ks.yaml
   - ./n8n/ks.yaml
-  #- ./spark/ks.yaml
+  - ./spark/ks.yaml
   #- ./superset/ks.yaml
   - ./troddit/ks.yaml
   - ./website/ks.yaml
