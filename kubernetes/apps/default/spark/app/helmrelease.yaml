@@ -26,16 +26,76 @@ spec:
   values:
     controllers:
       main:
-        replicas: 1
+        type: statefulset
+        annotations:
+          reloader.stakater.com/auto: "true"
         containers:
           main:
             image:
-              repository: ghcr.io/clarknova99/spark
-              tag: 3.5.0-scala2.12-java17-ubuntu
+              repository: docker.io/bitnami/spark
+              tag: 3.5.0-debian-11-r17
+            env:
+            - SPARK_MODE=master
+            - SPARK_RPC_AUTHENTICATION_ENABLED=no
+            - SPARK_RPC_ENCRYPTION_ENABLED=no
+            - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
+            - SPARK_SSL_ENABLED=no
+            - SPARK_USER=spark
+          worker:
+            image:
+              repository: docker.io/bitnami/spark
+              tag: 3.5.0-debian-11-r17
+            env:
+            - SPARK_MODE=worker
+            - SPARK_MASTER_URL=spark://spark:7077
+            - SPARK_WORKER_MEMORY=1G
+            - SPARK_WORKER_CORES=1
+            - SPARK_RPC_AUTHENTICATION_ENABLED=no
+            - SPARK_RPC_ENCRYPTION_ENABLED=no
+            - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
+            - SPARK_SSL_ENABLED=no
+            - SPARK_USER=spark
+        pod:
+          nodeSelector:
+            kubernetes.io/hostname: amd64
     service:
       main:
+        type: ClusterIP
         ports:
-          spark:
-            port: 7077
           http:
             port: 8080
+      worker:
+        type: ClusterIP
+        controller: main
+        ports:
+          http:
+            port: 4040
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: internal
+        hosts:
+          - host: &host "spark.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  name: main
+                  port: http
+        tls:
+          - hosts:
+              - *host
+      worker:
+        enabled: true
+        ingressClassName: internal
+        hosts:
+          - host: &host-worker "spark-worker.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  name: worker
+                  port: http
+        tls:
+          - hosts:
+              - *host-worker
