@@ -9,7 +9,7 @@ metadata:
     hajimari.io/enable: "true"
     hajimari.io/icon: mdi:ip-network
 spec:
-  ingressClassName: external
+  ingressClassName: internal
   rules:
     - host: "spark.${SECRET_DOMAIN}"
       http:

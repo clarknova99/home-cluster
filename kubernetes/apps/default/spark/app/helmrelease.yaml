@@ -37,5 +37,5 @@ spec:
         ports:
           spark:
             port: 7077
-          spark-webui:
+          http:
             port: 8080
