@@ -25,10 +25,10 @@ spec:
       retries: 5
   values:
     controllers:
-      master:
+      main:
         type: Deployment
         containers:
-          master:
+          main:
             image:
               repository: docker.io/bitnami/spark
               tag: 3.5.0-debian-11-r17
@@ -64,7 +64,7 @@ spec:
           nodeSelector:
             kubernetes.io/arch: amd64
     service:
-      master:
+      main:
         # -- Override the name suffix that is used for this service
         nameOverride: spark-master
         # -- Provide additional labels which may be required.
@@ -73,11 +73,11 @@ spec:
         ports:
           http:
             port: 8080
-          master:
+          main:
             protocol: TCP
             port: 7077
             targetPort: 7077
-          master-rest:
+          main-rest:
             protocol: TCP
             port: 6066
             targetPort: 6066
