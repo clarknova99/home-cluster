@@ -5,7 +5,7 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./appsmith/ks.yaml
-  - ./bitnami-spark/ks.yaml
+  #- ./bitnami-spark/ks.yaml
   - ./authelia/ks.yaml
   - ./baserow/ks.yaml
   - ./frigate/ks.yaml
