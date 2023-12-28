@@ -967,18 +967,17 @@ spec:
       ##
       #extraRules: []
       extraRules:
-        hosts:
-          - host: spark.${SECRET_DOMAIN}
-            paths:
-              - path: /
-                pathType: Prefix
-                backend:
-                  service:
-                    name: master
-                    port: http
-        tls:
-          - hosts:
-              - spark.${SECRET_DOMAIN}
+        - host: spark.${SECRET_DOMAIN}
+          http:
+            path: /
+            backend:
+              service:
+                name: spark-svc
+                port:
+                  name: http
+          tls:
+            - hosts:
+                - spark.${SECRET_DOMAIN}
 
 
     ## @section Other parameters
