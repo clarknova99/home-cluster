@@ -9,7 +9,7 @@ spec:
   interval: 30m
   chart:
     spec:
-      chart: appsmith
+      chart: spark
       version: 8.1.6
       sourceRef:
         kind: HelmRepository
