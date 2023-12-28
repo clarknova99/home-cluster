@@ -972,9 +972,10 @@ spec:
             paths:
               - path: /
                 pathType: Prefix
-                service:
-                  name: master
-                  port: http
+                backend:
+                  service:
+                    name: master
+                    port: http
         tls:
           - hosts:
               - spark.${SECRET_DOMAIN}
