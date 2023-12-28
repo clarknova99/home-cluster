@@ -48,7 +48,7 @@ spec:
               tag: 3.5.0-debian-11-r17
             env:
               SPARK_MODE: worker
-              SPARK_MASTER_URL: spark://spark:7077
+              SPARK_MASTER_URL: spark://spark-master:7077
               SPARK_WORKER_MEMORY: 1G
               SPARK_WORKER_CORES: "1"
               SPARK_RPC_AUTHENTICATION_ENABLED: no
@@ -61,16 +61,22 @@ spec:
             kubernetes.io/arch: amd64
     service:
       main:
-        type: ClusterIP
         ports:
           http:
             port: 8080
+          master:
+            protocol: TCP
+            port: 7077
+            targetPort: 7077
+          master-rest:
+            protocol: TCP
+            port: 6066
+            targetPort: 6066
       worker:
-        type: ClusterIP
         controller: main
         ports:
           http:
-            port: 4040
+            port: 8081
     ingress:
       main:
         enabled: true
