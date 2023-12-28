@@ -16,7 +16,7 @@ resources:
   - ./lldap/ks.yaml
   - ./mosquitto/ks.yaml
   - ./n8n/ks.yaml
-  - ./spark/ks.yaml
+  #- ./spark/ks.yaml
   #- ./superset/ks.yaml
   - ./troddit/ks.yaml
   - ./website/ks.yaml

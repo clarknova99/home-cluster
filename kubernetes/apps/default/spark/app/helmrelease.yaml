@@ -57,7 +57,7 @@ spec:
               SPARK_USER: spark
         pod:
           nodeSelector:
-            kubernetes.io/hostname: amd64
+            kubernetes.io/arch: amd64
     service:
       main:
         type: ClusterIP
