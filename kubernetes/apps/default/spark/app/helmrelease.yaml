@@ -30,7 +30,7 @@ spec:
         containers:
           main:
             image:
-              repository: ghcr.io/clarknova99/ghcr.io/clarknova99/spark
+              repository: ghcr.io/clarknova99/spark
               tag: 3.5.0-scala2.12-java17-ubuntu
     service:
       main:
