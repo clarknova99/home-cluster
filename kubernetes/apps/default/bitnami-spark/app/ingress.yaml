@@ -1,0 +1,27 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: spark
+  namespace: default
+  annotations:
+    external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+    hajimari.io/enable: "true"
+    hajimari.io/icon: mdi:ip-network
+spec:
+  ingressClassName: internal
+  rules:
+    - host: "spark.${SECRET_DOMAIN}"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: spark-webui
+                port:
+                  number: 8080
+  tls:
+    - hosts:
+        - "spark.${SECRET_DOMAIN}"
+
