@@ -34,8 +34,6 @@ spec:
               tag: 3.5.0-delta
             imagePullPolicy: Always
             command: ["/opt/spark/bin/spark-class","org.apache.spark.deploy.master.Master"]
-            # command: ["/bin/sh", "-c"]
-            # args: ["/opt/spark/bin/spark-class org.apache.spark.deploy.master.Master"]
             env:
               SPARK_MODE: master
               SPARK_MASTER_PORT: "7077"
