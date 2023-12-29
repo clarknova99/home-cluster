@@ -34,6 +34,7 @@ spec:
         SCALA_VERSION=2.13
 
         echo 'downloading delta lake files'
+        apt install -y wget
         wget https://repo1.maven.org/maven2/io/delta/delta-core_$SCALA_VERSION/$DELTA_CORE/delta-core_$SCALA_VERSION-$DELTA_CORE.jar -P /opt/spark/jars
         wget https://repo1.maven.org/maven2/io/delta/delta-storage/$DELTA_VERSION/delta-storage-$DELTA_VERSION.jar -P $SPARK_DIR/jars/
 
