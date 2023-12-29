@@ -26,7 +26,7 @@ spec:
   values:
     controllers:
       main:
-        type: StatefulSet
+        type: statefulset
         containers:
           main:
             image:
@@ -45,7 +45,7 @@ spec:
           nodeSelector:
             kubernetes.io/arch: amd64
       spark-worker:
-        type: StatefulSet
+        type: statefulset
         containers:
           spark-worker:
             image:
