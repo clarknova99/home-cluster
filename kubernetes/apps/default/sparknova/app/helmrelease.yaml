@@ -49,7 +49,7 @@ spec:
         containers:
           spark-worker:
             image:
-              repository: docker.io/bitnami/spark
+              repository: docker.io/spark
               tag: 3.5.0-scala2.12-java17-python3-ubuntu
             ports:
               - name: http
