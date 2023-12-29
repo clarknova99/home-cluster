@@ -2,7 +2,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: spark
+  name: sparknova
   namespace: default
   annotations:
     external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
@@ -11,7 +11,7 @@ metadata:
 spec:
   ingressClassName: internal
   rules:
-    - host: "spark.${SECRET_DOMAIN}"
+    - host: "sparknova.${SECRET_DOMAIN}"
       http:
         paths:
           - path: /
@@ -23,5 +23,5 @@ spec:
                   number: 8080
   tls:
     - hosts:
-        - "spark.${SECRET_DOMAIN}"
+        - "sparknova.${SECRET_DOMAIN}"
 

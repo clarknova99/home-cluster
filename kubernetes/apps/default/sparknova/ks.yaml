@@ -3,10 +3,10 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: cluster-apps-spark
+  name: cluster-apps-sparknova
   namespace: flux-system
 spec:
-  path: ./kubernetes/apps/default/spark/app
+  path: ./kubernetes/apps/default/sparknova/app
   prune: true
   sourceRef:
     kind: GitRepository

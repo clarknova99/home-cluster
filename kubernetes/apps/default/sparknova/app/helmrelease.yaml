@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
-  name: spark
+  name: sparknova
   namespace: default
 spec:
   interval: 15m
@@ -26,62 +26,65 @@ spec:
   values:
     controllers:
       main:
-        type: Deployment
+        type: StatefulSet
         containers:
           main:
             image:
-              repository: docker.io/bitnami/spark
-              tag: 3.5.0-debian-11-r17
+              repository: docker.io/spark
+              tag: 3.5.0-scala2.12-java17-python3-ubuntu
             env:
               SPARK_MODE: master
-              SPARK_MASTER_HOST: spark-master
-              SPARK_RPC_AUTHENTICATION_ENABLED: no
-              SPARK_RPC_ENCRYPTION_ENABLED: no
-              SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED: no
+              SPARK_MASTER_PORT: "7077"
+              SPARK_MASTER_WEBUI_PORT: "8080"
+              SPARK_MASTER_OPTS: |
+                -Dspark.ui.reverseProxy=true
+                -Dspark.ui.reverseProxyUrl=https://spark.${SECRET_DOMAIN}
               SPARK_SSL_ENABLED: no
               SPARK_USER: spark
         pod:
           nodeSelector:
             kubernetes.io/arch: amd64
-      worker:
-        type: DaemonSet
+      spark-worker:
+        type: StatefulSet
         containers:
-          worker:
+          spark-worker:
             image:
               repository: docker.io/bitnami/spark
-              tag: 3.5.0-debian-11-r17
+              tag: 3.5.0-scala2.12-java17-python3-ubuntu
+            ports:
+              - name: http
+                containerPort: 8080
+                protocol: TCP
             env:
               SPARK_MODE: worker
-              SPARK_MASTER_URL: spark://spark-master:7077
+              SPARK_MASTER_URL: spark://spark-master-svc:7077
               SPARK_WORKER_MEMORY: 1G
               SPARK_WORKER_CORES: "1"
-              SPARK_RPC_AUTHENTICATION_ENABLED: no
-              SPARK_RPC_ENCRYPTION_ENABLED: no
-              SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED: no
-              SPARK_SSL_ENABLED: no
               SPARK_USER: spark
+              SPARK_WORKER_WEBUI_PORT: "8080"
+              SPARK_WORKER_OPTS: |
+                -Dspark.ui.reverseProxy=true
+                -Dspark.ui.reverseProxyUrl=https://spark.${SECRET_DOMAIN}
         pod:
           nodeSelector:
             kubernetes.io/arch: amd64
     service:
       main:
+        type: ClusterIP
         # -- Override the name suffix that is used for this service
-        nameOverride: spark-master
+        nameOverride: spark-master-svc
         # -- Provide additional labels which may be required.
         labels:
-          app: spark-master
+          app: spark-master-svc
         ports:
           http:
-            port: 8080
-          main:
+            port: 80
+          cluster:
             protocol: TCP
             port: 7077
             targetPort: 7077
-          main-rest:
-            protocol: TCP
-            port: 6066
-            targetPort: 6066
-      worker:
+      spark-worker:
+        type: ClusterIP
         # -- Override the name suffix that is used for this service
         nameOverride: spark-worker
         # -- Provide additional labels which may be required.
@@ -89,33 +92,19 @@ spec:
           app: spark-worker
         ports:
           http:
-            port: 8081
+            port: 8080
     ingress:
       main:
         enabled: true
         ingressClassName: internal
         hosts:
-          - host: &host "spark-master.${SECRET_DOMAIN}"
+          - host: &host "spark.${SECRET_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
                 service:
-                  name: master
+                  name: main
                   port: http
         tls:
           - hosts:
               - *host
-      worker:
-        enabled: true
-        ingressClassName: internal
-        hosts:
-          - host: &host-worker "spark-worker.${SECRET_DOMAIN}"
-            paths:
-              - path: /
-                pathType: Prefix
-                service:
-                  name: worker
-                  port: http
-        tls:
-          - hosts:
-              - *host-worker

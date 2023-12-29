@@ -35,18 +35,7 @@ spec:
         http: 8080
         https: 8480
         cluster: 7077
-      ## @param master.hostAliases Deployment pod host aliases
-      ## https://kubernetes.io/docs/concepts/services-networking/add-entries-to-pod-etc-hosts-with-host-aliases/
-      ##
-      hostAliases: []
-      ## @param master.extraContainerPorts Specify the port where the running jobs inside the masters listens
-      ## ref: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.20/#containerport-v1-core
-      ## e.g:
-      ## - name: myapp
-      ##   containerPort: 8000
-      ##   protocol: TCP
-      ##
-      extraContainerPorts: []
+
       ## @param master.daemonMemoryLimit Set the memory limit for the master daemon
       ##
       daemonMemoryLimit: ""
@@ -68,31 +57,12 @@ spec:
       ## @param master.extraEnvVarsSecret Name of existing Secret containing extra env vars for master nodes
       ##
       extraEnvVarsSecret: ""
-      ## Kubernetes Pods Security Context
-      ## https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
-      ## @param master.podSecurityContext.enabled Enable security context
-      ## @param master.podSecurityContext.fsGroup Set master pod's Security Context Group ID
-      ## @param master.podSecurityContext.runAsUser Set master pod's Security Context User ID
-      ## @param master.podSecurityContext.runAsGroup Set master pod's Security Context Group ID
-      ## @param master.podSecurityContext.seLinuxOptions Set master pod's Security Context SELinux options
-      ##
       podSecurityContext:
         enabled: true
         fsGroup: 1001
         runAsUser: 1001
         runAsGroup: 0
         seLinuxOptions: {}
-      ## Configure Container Security Context
-      ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-container
-      ## @param master.containerSecurityContext.enabled Enabled containers' Security Context
-      ## @param master.containerSecurityContext.runAsUser Set containers' Security Context runAsUser
-      ## @param master.containerSecurityContext.runAsNonRoot Set container's Security Context runAsNonRoot
-      ## @param master.containerSecurityContext.privileged Set container's Security Context privileged
-      ## @param master.containerSecurityContext.readOnlyRootFilesystem Set container's Security Context readOnlyRootFilesystem
-      ## @param master.containerSecurityContext.allowPrivilegeEscalation Set container's Security Context allowPrivilegeEscalation
-      ## @param master.containerSecurityContext.capabilities.drop List of capabilities to be dropped
-      ## @param master.containerSecurityContext.seccompProfile.type Set container's Security Context seccomp profile
-      ##
       containerSecurityContext:
         enabled: true
         runAsUser: 1001
@@ -104,49 +74,6 @@ spec:
           drop: ["ALL"]
         seccompProfile:
           type: "RuntimeDefault"
-      ## @param master.command Override default container command (useful when using custom images)
-      ##
-      command: []
-      ## @param master.args Override default container args (useful when using custom images)
-      ##
-      args: []
-      ## @param master.podAnnotations Annotations for pods in StatefulSet
-      ##
-      podAnnotations: {}
-      ## @param master.podLabels Extra labels for pods in StatefulSet
-      ##
-      podLabels: {}
-      ## @param master.podAffinityPreset Spark master pod affinity preset. Ignored if `master.affinity` is set. Allowed values: `soft` or `hard`
-      ## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity
-      ##
-      podAffinityPreset: ""
-      ## @param master.podAntiAffinityPreset Spark master pod anti-affinity preset. Ignored if `master.affinity` is set. Allowed values: `soft` or `hard`
-      ## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity
-      ##
-      podAntiAffinityPreset: soft
-      ## Spark master node affinity preset
-      ## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#node-affinity
-      ##
-      nodeAffinityPreset:
-        ## @param master.nodeAffinityPreset.type Spark master node affinity preset type. Ignored if `master.affinity` is set. Allowed values: `soft` or `hard`
-        ##
-        type: ""
-        ## @param master.nodeAffinityPreset.key Spark master node label key to match Ignored if `master.affinity` is set.
-        ## E.g.
-        ## key: "kubernetes.io/e2e-az-name"
-        ##
-        key: ""
-        ## @param master.nodeAffinityPreset.values Spark master node label values to match. Ignored if `master.affinity` is set.
-        ## E.g.
-        ## values:
-        ##   - e2e-az1
-        ##   - e2e-az2
-        ##
-        values: []
-      ## @param master.affinity Spark master affinity for pod assignment
-      ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
-      ## Note: master.podAffinityPreset, master.podAntiAffinityPreset, and master.nodeAffinityPreset will be ignored when it's set
-      ##
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -156,43 +83,9 @@ spec:
                     operator: In
                     values:
                       - amd64
-      ## @param master.nodeSelector Spark master node labels for pod assignment
-      ## ref: https://kubernetes.io/docs/user-guide/node-selection/
-      ##
-      nodeSelector: {}
-      ## @param master.tolerations Spark master tolerations for pod assignment
-      ## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
-      ##
-      tolerations: []
-      ## @param master.updateStrategy.type Master statefulset strategy type.
-      ## ref: https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy
-      ## e.g:
-      ## updateStrategy:
-      ##  type: RollingUpdate
-      ##  rollingUpdate:
-      ##    maxSurge: 25%
-      ##    maxUnavailable: 25%
-      ##
       updateStrategy:
         type: RollingUpdate
-      ## @param master.priorityClassName master pods' priorityClassName
-      ##
-      priorityClassName: ""
-      ## @param master.topologySpreadConstraints Topology Spread Constraints for pod assignment spread across your cluster among failure-domains. Evaluated as a template
-      ## Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/#spread-constraints-for-pods
-      ##
-      topologySpreadConstraints: []
-      ## @param master.schedulerName Name of the k8s scheduler (other than default) for master pods
-      ## ref: https://kubernetes.io/docs/tasks/administer-cluster/configure-multiple-schedulers/
-      ##
-      schedulerName: ""
-      ## @param master.terminationGracePeriodSeconds Seconds Redmine pod needs to terminate gracefully
-      ## ref: https://kubernetes.io/docs/concepts/workloads/pods/pod/#termination-of-pods
-      ##
-      terminationGracePeriodSeconds: ""
-      ## @param master.lifecycleHooks for the master container(s) to automate configuration before or after startup
-      ##
-      lifecycleHooks: {}
+
       ## @param master.extraVolumes Optionally specify extra list of additional volumes for the master pod(s)
       ##
       extraVolumes: []
@@ -224,15 +117,6 @@ spec:
         ##    memory: 256Mi
         ##
         requests: {}
-      ## Configure extra options for liveness probe
-      ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#configure-probes
-      ## @param master.livenessProbe.enabled Enable livenessProbe
-      ## @param master.livenessProbe.initialDelaySeconds Initial delay seconds for livenessProbe
-      ## @param master.livenessProbe.periodSeconds Period seconds for livenessProbe
-      ## @param master.livenessProbe.timeoutSeconds Timeout seconds for livenessProbe
-      ## @param master.livenessProbe.failureThreshold Failure threshold for livenessProbe
-      ## @param master.livenessProbe.successThreshold Success threshold for livenessProbe
-      ##
       livenessProbe:
         enabled: true
         initialDelaySeconds: 180
@@ -240,15 +124,6 @@ spec:
         timeoutSeconds: 5
         failureThreshold: 6
         successThreshold: 1
-      ## Configure extra options for readiness probe
-      ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#configure-probes
-      ## @param master.readinessProbe.enabled Enable readinessProbe
-      ## @param master.readinessProbe.initialDelaySeconds Initial delay seconds for readinessProbe
-      ## @param master.readinessProbe.periodSeconds Period seconds for readinessProbe
-      ## @param master.readinessProbe.timeoutSeconds Timeout seconds for readinessProbe
-      ## @param master.readinessProbe.failureThreshold Failure threshold for readinessProbe
-      ## @param master.readinessProbe.successThreshold Success threshold for readinessProbe
-      ##
       readinessProbe:
         enabled: true
         initialDelaySeconds: 30
@@ -256,14 +131,6 @@ spec:
         timeoutSeconds: 5
         failureThreshold: 6
         successThreshold: 1
-      ## Configure extra options for startup probe
-      ## @param master.startupProbe.enabled Enable startupProbe
-      ## @param master.startupProbe.initialDelaySeconds Initial delay seconds for startupProbe
-      ## @param master.startupProbe.periodSeconds Period seconds for startupProbe
-      ## @param master.startupProbe.timeoutSeconds Timeout seconds for startupProbe
-      ## @param master.startupProbe.failureThreshold Failure threshold for startupProbe
-      ## @param master.startupProbe.successThreshold Success threshold for startupProbe
-      ##
       startupProbe:
         enabled: false
         initialDelaySeconds: 30
