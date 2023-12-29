@@ -5,4 +5,6 @@ kind: Kustomization
 namespace: default
 resources:
   - ./helmrelease.yaml
+  - ./configs
   - ./ingress.yaml
+

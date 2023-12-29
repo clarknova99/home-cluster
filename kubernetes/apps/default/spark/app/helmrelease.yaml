@@ -16,6 +16,26 @@ spec:
         name: bitnami
         namespace: flux-system
   values:
+    extraDeploy: []
+    ## @param initScripts Dictionary of init scripts. Evaluated as a template.
+    ## Specify dictionary of scripts to be run at first boot
+    ## Alternatively, you can put your scripts under the files/docker-entrypoint-initdb.d directory
+    ## For example:
+    ## initScripts:
+    ##   my_init_script.sh: |
+    ##      #!/bin/sh
+    ##      echo "Do something."
+    ##
+    initScripts: {}
+    ## @param initScriptsCM ConfigMap with the init scripts. Evaluated as a template.
+    ## Note: This will override initScripts
+    ##
+    initScriptsCM: spark-delta
+    ## @param initScriptsSecret Secret containing `/docker-entrypoint-initdb.d` scripts to be executed at initialization time that contain sensitive data. Evaluated as a template.
+    ##
+    initScriptsSecret: ""
+    ## Enable diagnostic mode in the deployment
+    ##
     image:
       registry: docker.io
       repository: bitnami/spark
