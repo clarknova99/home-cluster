@@ -30,7 +30,7 @@ spec:
       delta.sh: |
         #!/bin/bash
         DELTA_CORE=2.4.0
-        DELTA_VERSION3.0.0
+        DELTA_VERSION=3.0.0
         SCALA_VERSION=2.13
 
         echo 'downloading delta lake files'
