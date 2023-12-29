@@ -31,7 +31,7 @@ spec:
           main:
             image:
               repository: docker.io/clarknova9/spark
-              tag: spark:3.5.0-delta
+              tag: 3.5.0-delta
             env:
               SPARK_MODE: master
               SPARK_MASTER_PORT: "7077"
@@ -49,8 +49,8 @@ spec:
       #   containers:
       #     spark-worker:
       #       image:
-      #         repository: docker.io/spark
-      #         tag: 3.5.0-scala2.12-java17-python3-ubuntu
+      #         repository: docker.io/clarknova9/spark
+      #         tag: 3.5.0-delta
       #       ports:
       #         - name: http
       #           containerPort: 8080
