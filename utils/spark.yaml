@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spark-deployment
+  namespace: default
+# kubectl apply -f spark.yaml
+# kubectl delete deployment spark-deployment -n default
+# kubectl delete service spark-master-svc -n networking
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spark
+      role: master
+  template:
+    metadata:
+      labels:
+        app: spark
+        role: master
+    spec:
+      containers:
+      - name: spark-master
+        image: docker.io/clarknova9/spark:3.5.0-delta
+        imagePullPolicy: Always
+        env:
+          - name: SPARK_MODE
+            value: master
+          - name: SPARK_MASTER_PORT
+            value: "7077"
+          - name: SPARK_MASTER_WEBUI_PORT
+            value: "8080"
+        command: ["/opt/spark/bin/spark-class","org.apache.spark.deploy.master.Master"]
+        ports:
+        - containerPort: 7077
+        - containerPort: 8080
+        resources:
+          requests:
+            memory: "2Gi"
+            cpu: "1"
+          limits:
+            memory: "4Gi"
+            cpu: "2"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: spark-master-svc
+  namespace: default
+spec:
+  type: ClusterIP
+  ports:
+  - port: 7077
+    targetPort: 7077
+    name: spark
+  - port: 8080
+    targetPort: 8080
+    name: webui
+  selector:
+    app: spark
+    role: master

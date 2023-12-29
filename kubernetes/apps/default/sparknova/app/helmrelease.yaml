@@ -32,7 +32,8 @@ spec:
             image:
               repository: docker.io/clarknova9/spark
               tag: 3.5.0-delta
-            command: ["/opt/spark/bin/spark-class org.apache.spark.deploy.master.Master"]
+            imagePullPolicy: Always
+            command: ["/opt/spark/bin/spark-class","org.apache.spark.deploy.master.Master"]
             # command: ["/bin/sh", "-c"]
             # args: ["/opt/spark/bin/spark-class org.apache.spark.deploy.master.Master"]
             env:
@@ -42,8 +43,6 @@ spec:
               SPARK_MASTER_OPTS: |
                 -Dspark.ui.reverseProxy=true
                 -Dspark.ui.reverseProxyUrl=https://spark.${SECRET_DOMAIN}
-              SPARK_SSL_ENABLED: no
-              SPARK_USER: spark
         pod:
           nodeSelector:
             kubernetes.io/arch: amd64
