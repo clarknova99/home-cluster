@@ -26,11 +26,24 @@ spec:
     ##      #!/bin/sh
     ##      echo "Do something."
     ##
-    initScripts: {}
+    initScripts:
+      delta.sh: |
+        #!/bin/bash
+        DELTA_CORE 2.4.0
+        DELTA_VERSION 3.0.0
+        SCALA_VERSION 2.13
+
+        echo 'downloading delta lake files'
+        wget https://repo1.maven.org/maven2/io/delta/delta-core_$SCALA_VERSION/$DELTA_CORE/delta-core_$SCALA_VERSION-$DELTA_CORE.jar -P /opt/spark/jars
+        wget https://repo1.maven.org/maven2/io/delta/delta-storage/$DELTA_VERSION/delta-storage-$DELTA_VERSION.jar -P $SPARK_DIR/jars/
+
+        echo 'download complete'
+        exit 0
+
     ## @param initScriptsCM ConfigMap with the init scripts. Evaluated as a template.
     ## Note: This will override initScripts
     ##
-    initScriptsCM: spark-delta
+    initScriptsCM: ""
     ## @param initScriptsSecret Secret containing `/docker-entrypoint-initdb.d` scripts to be executed at initialization time that contain sensitive data. Evaluated as a template.
     ##
     initScriptsSecret: ""
