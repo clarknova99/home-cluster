@@ -6,9 +6,9 @@ metadata:
 data:
   delta.sh: |
     #!/bin/bash
-    DELTA_CORE 2.4.0
-    DELTA_VERSION 3.0.0
-    SCALA_VERSION 2.13
+    DELTA_CORE=2.4.0
+    DELTA_VERSION=3.0.0
+    SCALA_VERSION=2.13
 
     echo 'downloading delta lake files'
     wget https://repo1.maven.org/maven2/io/delta/delta-core_$SCALA_VERSION/$DELTA_CORE/delta-core_$SCALA_VERSION-$DELTA_CORE.jar -P /opt/spark/jars
