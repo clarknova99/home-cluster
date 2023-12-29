@@ -83,7 +83,9 @@ spec:
             protocol: TCP
             port: 7077
             targetPort: 7077
+
       spark-worker:
+        controller: spark-worker
         type: ClusterIP
         # -- Override the name suffix that is used for this service
         nameOverride: spark-worker
