@@ -18,9 +18,9 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: spark-webui
+                name: spark-master-svc
                 port:
-                  number: 8080
+                  number: 80
   tls:
     - hosts:
         - "sparknova.${SECRET_DOMAIN}"
