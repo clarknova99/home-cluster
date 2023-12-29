@@ -45,30 +45,32 @@ spec:
           nodeSelector:
             #kubernetes.io/arch: amd64
             kubernetes.io/hostname: nuc11
-      # spark-worker:
-      #   type: statefulset
-      #   containers:
-      #     spark-worker:
-      #       image:
-      #         repository: docker.io/clarknova9/spark
-      #         tag: 3.5.0-delta
-      #       ports:
-      #         - name: http
-      #           containerPort: 8080
-      #           protocol: TCP
-      #       env:
-      #         SPARK_MODE: worker
-      #         SPARK_MASTER_URL: spark://spark-master-svc:7077
-      #         SPARK_WORKER_MEMORY: 1G
-      #         SPARK_WORKER_CORES: "1"
-      #         SPARK_USER: spark
-      #         SPARK_WORKER_WEBUI_PORT: "8080"
-      #         SPARK_WORKER_OPTS: |
-      #           -Dspark.ui.reverseProxy=true
-      #           -Dspark.ui.reverseProxyUrl=https://spark.${SECRET_DOMAIN}
-      #   pod:
-      #     nodeSelector:
-      #       kubernetes.io/arch: amd64
+      spark-worker:
+        type: statefulset
+        replicas: 2
+        containers:
+          spark-worker:
+            image:
+              repository: docker.io/clarknova9/spark
+              tag: 3.5.0-delta
+            imagePullPolicy: Always
+            command: ["/opt/spark/bin/spark-class","org.apache.spark.deploy.worker.Worker", "spark://spark-master-svc:7077"]
+            ports:
+              - name: http
+                containerPort: 8080
+                protocol: TCP
+            env:
+              SPARK_MODE: worker
+              SPARK_MASTER_URL: spark://spark-master-svc:7077
+              SPARK_WORKER_MEMORY: 1G
+              SPARK_WORKER_CORES: "1"
+              SPARK_WORKER_WEBUI_PORT: "8080"
+              SPARK_WORKER_OPTS: |
+                -Dspark.ui.reverseProxy=true
+                -Dspark.ui.reverseProxyUrl=https://spark.${SECRET_DOMAIN}
+        pod:
+          nodeSelector:
+            kubernetes.io/arch: amd64
     service:
       main:
         type: ClusterIP
