@@ -70,7 +70,8 @@ spec:
                 -Dspark.ui.reverseProxyUrl=https://spark.${SECRET_DOMAIN}
         pod:
           nodeSelector:
-            kubernetes.io/arch: amd64
+            #kubernetes.io/arch: amd64
+            kubernetes.io/hostname: aurora
     service:
       main:
         type: ClusterIP
