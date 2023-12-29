@@ -32,7 +32,8 @@ spec:
             image:
               repository: docker.io/clarknova9/spark
               tag: 3.5.0-delta
-            command: ["$SPARK_HOME/sbin/start-master.sh"]
+            command: ["/bin/sh", "-c"]
+            args: ["/opt/spark/bin/spark-class org.apache.spark.deploy.master.Master"]
             env:
               SPARK_MODE: master
               SPARK_MASTER_PORT: "7077"
