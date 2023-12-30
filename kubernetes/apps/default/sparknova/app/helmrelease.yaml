@@ -41,6 +41,16 @@ spec:
               SPARK_MASTER_OPTS: |
                 -Dspark.ui.reverseProxy=true
                 -Dspark.ui.reverseProxyUrl=https://spark.${SECRET_DOMAIN}
+          kyuubi:
+            image:
+              repository: docker.io/clarknova9/spark
+              tag: 3.5.0-delta
+            imagePullPolicy: Always
+            command: ["/opt/kyuubi/bin/kyuubi", "start"]
+            ports:
+              - name: http
+                containerPort: 10009
+                protocol: TCP
         pod:
           nodeSelector:
             #kubernetes.io/arch: amd64
@@ -72,23 +82,23 @@ spec:
           nodeSelector:
             #kubernetes.io/arch: amd64
             kubernetes.io/hostname: aurora
-      kyuubi:
-        type: statefulset
-        containers:
-          kyuubi:
-            image:
-              repository: docker.io/clarknova9/spark
-              tag: 3.5.0-delta
-            imagePullPolicy: Always
-            command: ["/opt/kyuubi/bin/kyuubi start"]
-            ports:
-              - name: http
-                containerPort: 10009
-                protocol: TCP
-        pod:
-          nodeSelector:
-            #kubernetes.io/arch: amd64
-            kubernetes.io/hostname: k8s-01
+      # kyuubi:
+      #   type: statefulset
+      #   containers:
+      #     kyuubi:
+      #       image:
+      #         repository: docker.io/clarknova9/spark
+      #         tag: 3.5.0-delta
+      #       imagePullPolicy: Always
+      #       command: ["/opt/kyuubi/bin/kyuubi start"]
+      #       ports:
+      #         - name: http
+      #           containerPort: 10009
+      #           protocol: TCP
+      #   pod:
+      #     nodeSelector:
+      #       #kubernetes.io/arch: amd64
+      #       kubernetes.io/hostname: k8s-01
     service:
       main:
         annotations:
