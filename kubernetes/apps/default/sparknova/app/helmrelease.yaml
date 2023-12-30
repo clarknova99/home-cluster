@@ -27,6 +27,8 @@ spec:
     controllers:
       main:
         type: statefulset
+        annotations:
+          reloader.stakater.com/auto: "true"
         containers:
           main:
             image:
@@ -34,6 +36,13 @@ spec:
               tag: 3.5.0-delta
             imagePullPolicy: Always
             command: ["/opt/spark/bin/spark-class","org.apache.spark.deploy.master.Master"]
+            ports:
+              - name: http
+                containerPort: 8080
+                protocol: TCP
+              - name: cluster
+                containerPort: 7077
+                protocol: TCP
             env:
               SPARK_MODE: master
               SPARK_MASTER_PORT: "7077"
