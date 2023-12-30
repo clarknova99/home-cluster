@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: spark-config
+data:
+  spark-defaults.conf: |
+    spark.sql.extensions                            io.delta.sql.DeltaSparkSessionExtension
+    spark.sql.catalog.warehouse                     org.apache.spark.sql.delta.catalog.DeltaCatalog

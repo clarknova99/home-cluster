@@ -72,6 +72,23 @@ spec:
           nodeSelector:
             #kubernetes.io/arch: amd64
             kubernetes.io/hostname: aurora
+      kyuubi:
+        type: statefulset
+        containers:
+          kyuubi:
+            image:
+              repository: docker.io/clarknova9/spark
+              tag: 3.5.0-delta
+            imagePullPolicy: Always
+            command: ["/opt/kyuubi/bin/kyuubi start"]
+            ports:
+              - name: http
+                containerPort: 10009
+                protocol: TCP
+        pod:
+          nodeSelector:
+            #kubernetes.io/arch: amd64
+            kubernetes.io/hostname: k8s-01
     service:
       main:
         annotations:
@@ -91,18 +108,20 @@ spec:
             protocol: TCP
             port: 7077
             targetPort: 7077
-
-      # spark-worker:
-      #   controller: spark-worker
-      #   type: ClusterIP
-      #   # -- Override the name suffix that is used for this service
-      #   nameOverride: spark-worker
-      #   # -- Provide additional labels which may be required.
-      #   labels:
-      #     app: spark-worker
-      #   ports:
-      #     http:
-      #       port: 8080
+      kyuubi:
+        annotations:
+          io.cilium/lb-ipam-ips: "192.168.2.101"
+        externalTrafficPolicy: Cluster
+        type: LoadBalancer
+        controller: kyuubi
+        # -- Override the name suffix that is used for this service
+        nameOverride: kyuubi-svc
+        # -- Provide additional labels which may be required.
+        labels:
+          app: kyuubi-svc
+        ports:
+          http:
+            port: 10009
     ingress:
       main:
         enabled: true
@@ -118,3 +137,11 @@ spec:
         tls:
           - hosts:
               - *host
+    persistence:
+      config-file:
+        type: configMap
+        name: spark-configmap
+        globalMounts:
+          - path: /opt/spark/spark-defaults.conf
+            subPath: spark-defaults.conf
+            readOnly: true
