@@ -33,7 +33,7 @@ spec:
           main:
             image:
               repository: docker.io/clarknova9/spark
-              tag: 3.5.0-delta
+              tag: 3.5.0-delta-v2
             imagePullPolicy: Always
             command: ["/opt/spark/bin/spark-class","org.apache.spark.deploy.master.Master"]
             ports:
@@ -53,7 +53,7 @@ spec:
           jupyter:
             image:
               repository: docker.io/clarknova9/spark
-              tag: 3.5.0-delta
+              tag: 3.5.0-delta-v2
             imagePullPolicy: Always
             command: ["jupyter", "lab", "--allow-root", "--ip=0.0.0.0", "--NotebookApp.token=", "--no-browser", "--ServerApp.root_dir=/opt/"]
             ports:
@@ -72,8 +72,8 @@ spec:
           #       protocol: TCP
         pod:
           nodeSelector:
-            #kubernetes.io/arch: amd64
-            kubernetes.io/hostname: nuc11
+            kubernetes.io/arch: amd64
+            #kubernetes.io/hostname: nuc11
       spark-worker:
         type: statefulset
         replicas: 2
@@ -81,7 +81,7 @@ spec:
           spark-worker:
             image:
               repository: docker.io/clarknova9/spark
-              tag: 3.5.0-delta
+              tag: 3.5.0-delta-v2
             imagePullPolicy: Always
             command: ["/opt/spark/bin/spark-class","org.apache.spark.deploy.worker.Worker", "spark://sparknova-spark-master-svc:7077"]
             ports:
@@ -99,8 +99,8 @@ spec:
                 -Dspark.ui.reverseProxyUrl=https://spark.${SECRET_DOMAIN}
         pod:
           nodeSelector:
-            #kubernetes.io/arch: amd64
-            kubernetes.io/hostname: aurora
+            kubernetes.io/arch: amd64
+            #kubernetes.io/hostname: aurora
       # kyuubi:
       #   type: statefulset
       #   containers:
