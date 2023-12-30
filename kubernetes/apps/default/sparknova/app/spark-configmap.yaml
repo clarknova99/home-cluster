@@ -6,3 +6,11 @@ data:
   spark-defaults.conf: |
     spark.sql.extensions                            io.delta.sql.DeltaSparkSessionExtension
     spark.sql.catalog.warehouse                     org.apache.spark.sql.delta.catalog.DeltaCatalog
+    spark.sql.warehouse.dir                         s3a://spark/warehouse
+    spark.hadoop.fs.s3a.endpoint                    http://minio.kube-system.svc.cluster.local:9000
+    spark.hadoop.fs.s3a.endpoint.region             us-east-1
+    spark.hadoop.fs.s3a.access.key                  ${SECRET_SPARKMINIO_ACCESS_KEY}
+    spark.hadoop.fs.s3a.secret.key                  ${SECRET_SPARKMINIO_SECRET_KEY}
+    spark.hadoop.fs.s3a.path.style.access           true
+    spark.hadoop.fs.s3a.connection.ssl.enabled      false
+    spark.hadoop.fs.s3a.impl                        org.apache.hadoop.fs.s3a.S3AFileSystem

@@ -50,16 +50,26 @@ spec:
               SPARK_MASTER_OPTS: |
                 -Dspark.ui.reverseProxy=true
                 -Dspark.ui.reverseProxyUrl=https://spark.${SECRET_DOMAIN}
-          kyuubi:
+          jupyter:
             image:
               repository: docker.io/clarknova9/spark
               tag: 3.5.0-delta
             imagePullPolicy: Always
-            command: ["/opt/kyuubi/bin/kyuubi", "start"]
+            command: ["jupyter", "lab", "--allow-root", "--ip=0.0.0.0", "--NotebookApp.token=", "--no-browser", "--ServerApp.root_dir=/opt/"]
             ports:
               - name: http
-                containerPort: 10009
+                containerPort: 8888
                 protocol: TCP
+          # kyuubi:
+          #   image:
+          #     repository: docker.io/clarknova9/spark
+          #     tag: 3.5.0-delta
+          #   imagePullPolicy: Always
+          #   command: ["/opt/kyuubi/bin/kyuubi", "start"]
+          #   ports:
+          #     - name: http
+          #       containerPort: 10009
+          #       protocol: TCP
         pod:
           nodeSelector:
             #kubernetes.io/arch: amd64
@@ -127,26 +137,40 @@ spec:
             protocol: TCP
             port: 7077
             targetPort: 7077
-      kyuubi:
+      jupyter:
         annotations:
           io.cilium/lb-ipam-ips: "192.168.2.101"
         externalTrafficPolicy: Cluster
         type: LoadBalancer
-        controller: kyuubi
+        controller: jupyter
         # -- Override the name suffix that is used for this service
-        nameOverride: kyuubi-svc
+        nameOverride: jupyter-svc
         # -- Provide additional labels which may be required.
         labels:
-          app: kyuubi-svc
+          app: jupyter-svc
         ports:
           http:
-            port: 10009
+            port: 8888
+      # kyuubi:
+      #   annotations:
+      #     io.cilium/lb-ipam-ips: "192.168.2.102"
+      #   externalTrafficPolicy: Cluster
+      #   type: LoadBalancer
+      #   controller: kyuubi
+      #   # -- Override the name suffix that is used for this service
+      #   nameOverride: kyuubi-svc
+      #   # -- Provide additional labels which may be required.
+      #   labels:
+      #     app: kyuubi-svc
+      #   ports:
+      #     http:
+      #       port: 10009
     ingress:
       main:
         enabled: true
         ingressClassName: internal
         hosts:
-          - host: &host "spark.${SECRET_DOMAIN}"
+          - host: spark.${SECRET_DOMAIN}
             paths:
               - path: /
                 pathType: Prefix
@@ -155,7 +179,21 @@ spec:
                   port: http
         tls:
           - hosts:
-              - *host
+              - spark.${SECRET_DOMAIN}
+      jupyter:
+        enabled: true
+        ingressClassName: internal
+        hosts:
+          - host: jupyter.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  name: main
+                  port: http
+        tls:
+          - hosts:
+              - jupyter.${SECRET_DOMAIN}
     persistence:
       config-file:
         type: configMap
