@@ -189,8 +189,8 @@ spec:
               - path: /
                 pathType: Prefix
                 service:
-                  name: main
-                  port: http
+                  name: jupyter
+                  port: 8888
         tls:
           - hosts:
               - jupyter.${SECRET_DOMAIN}
