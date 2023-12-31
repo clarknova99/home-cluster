@@ -33,7 +33,7 @@ spec:
           main:
             image:
               repository: docker.io/clarknova9/spark
-              tag: 3.5.0-v0.0.1
+              tag: 3.5.0-v0.0.2
             imagePullPolicy: Always
             command: ["/opt/spark/bin/spark-class","org.apache.spark.deploy.master.Master"]
             ports:
@@ -53,23 +53,23 @@ spec:
           jupyter:
             image:
               repository: docker.io/clarknova9/spark
-              tag: 3.5.0-v0.0.1
+              tag: 3.5.0-v0.0.2
             imagePullPolicy: Always
             command: ["jupyter", "lab", "--allow-root", "--ip=0.0.0.0", "--NotebookApp.token=", "--no-browser", "--ServerApp.root_dir=/opt/"]
             ports:
               - name: jupyter
                 containerPort: 8888
                 protocol: TCP
-          # kyuubi:
-          #   image:
-          #     repository: docker.io/clarknova9/spark
-          #     tag: 3.5.0-delta
-          #   imagePullPolicy: Always
-          #   command: ["/opt/kyuubi/bin/kyuubi", "start"]
-          #   ports:
-          #     - name: http
-          #       containerPort: 10009
-          #       protocol: TCP
+          kyuubi:
+            image:
+              repository: docker.io/clarknova9/spark
+              tag: 3.5.0-v0.0.2
+            imagePullPolicy: Always
+            command: ["/opt/kyuubi/bin/kyuubi", "run"]
+            ports:
+              - name: http
+                containerPort: 10009
+                protocol: TCP
         pod:
           nodeSelector:
             kubernetes.io/arch: amd64
@@ -81,7 +81,7 @@ spec:
           spark-worker:
             image:
               repository: docker.io/clarknova9/spark
-              tag: 3.5.0-v0.0.1
+              tag: 3.5.0-v0.0.2
             imagePullPolicy: Always
             command: ["/opt/spark/bin/spark-class","org.apache.spark.deploy.worker.Worker", "spark://sparknova-spark-master-svc:7077"]
             ports:
@@ -149,20 +149,22 @@ spec:
             protocol: TCP
             port: 8888
             targetPort: 8888
-      # kyuubi:
-      #   annotations:
-      #     io.cilium/lb-ipam-ips: "192.168.2.102"
-      #   externalTrafficPolicy: Cluster
-      #   type: LoadBalancer
-      #   controller: kyuubi
-      #   # -- Override the name suffix that is used for this service
-      #   nameOverride: kyuubi-svc
-      #   # -- Provide additional labels which may be required.
-      #   labels:
-      #     app: kyuubi-svc
-      #   ports:
-      #     http:
-      #       port: 10009
+      kyuubi:
+        annotations:
+          io.cilium/lb-ipam-ips: "192.168.2.101"
+        externalTrafficPolicy: Cluster
+        type: LoadBalancer
+        controller: main
+        # -- Override the name suffix that is used for this service
+        nameOverride: kyuubi-svc
+        # -- Provide additional labels which may be required.
+        labels:
+          app: kyuubi-svc
+        ports:
+          kyuubi:
+            protocol: TCP
+            port: 10009
+            targetPort: 10009
     ingress:
       main:
         enabled: true
@@ -202,9 +204,16 @@ spec:
             readOnly: true
       warehouse:
         enabled: true
-        existingClaim: pvc-sparknova-warehouse
-        mountPath: /opt/spark/warehouse
+        type: nfs
+        server: 192.168.1.2
+        path: /volume1/network-storage/sparknova/warehouse
+        globalMounts:
+          - path: /opt/spark/warehouse
       workspace:
         enabled: true
-        existingClaim: pvc-sparknova-workspace
-        mountPath: /opt/spark/workspace
+        type: nfs
+        server: 192.168.1.2
+        path: /volume1/network-storage/sparknova/workspace
+        globalMounts:
+          - path: /opt/spark/workspace
+
