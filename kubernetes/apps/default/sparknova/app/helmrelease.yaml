@@ -138,16 +138,16 @@ spec:
             port: 7077
             targetPort: 7077
       jupyter:
-        annotations:
-          io.cilium/lb-ipam-ips: "192.168.2.101"
-        externalTrafficPolicy: Cluster
-        type: LoadBalancer
-        controller: jupyter
+        # annotations:
+        #   io.cilium/lb-ipam-ips: "192.168.2.101"
+        # externalTrafficPolicy: Cluster
+        # type: LoadBalancer
+        controller: main
         # -- Override the name suffix that is used for this service
         nameOverride: jupyter-svc
         # -- Provide additional labels which may be required.
         labels:
-          app: jupyter-svc
+          app: jupyter
         ports:
           jupyter:
             protocol: TCP
@@ -191,7 +191,7 @@ spec:
               - path: /
                 pathType: Prefix
                 service:
-                  name: jupyter
+                  name: sparknova-jupyter-svc
                   port: 8888
         tls:
           - hosts:
