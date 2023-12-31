@@ -138,10 +138,6 @@ spec:
             port: 7077
             targetPort: 7077
       jupyter:
-        # annotations:
-        #   io.cilium/lb-ipam-ips: "192.168.2.101"
-        # externalTrafficPolicy: Cluster
-        # type: LoadBalancer
         controller: main
         # -- Override the name suffix that is used for this service
         nameOverride: jupyter-svc
@@ -201,6 +197,6 @@ spec:
         type: configMap
         name: spark-config
         globalMounts:
-          - path: /opt/spark/spark-defaults.conf
+          - path: /opt/spark/conf/spark-defaults.conf
             subPath: spark-defaults.conf
             readOnly: true
