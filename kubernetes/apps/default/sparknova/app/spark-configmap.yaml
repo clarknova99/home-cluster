@@ -17,11 +17,11 @@ data:
     # spark.sql.catalog.warehouse.io-impl             org.apache.iceberg.aws.s3.S3FileIO
     # spark.sql.catalog.warehouse.warehouse           s3a://warehouse
     # spark.sql.catalog.warehouse.s3.endpoint         http://minio:9000
+    # spark.sql.warehouse.dir                               s3a://spark/warehouse
 
     spark.master                                          spark://sparknova-spark-master-svc:7077
     spark.sql.extensions                                  io.delta.sql.DeltaSparkSessionExtension
     spark.sql.catalog.spark_catalog                       org.apache.spark.sql.delta.catalog.DeltaCatalog
-    #spark.sql.warehouse.dir                               s3a://spark/warehouse
     spark.sql.warehouse.dir                               /opt/spark/workspace/
     spark.sql.spark_catalog.dir                           /opt/spark/workspace/
     spark.hadoop.fs.s3a.endpoint                          http://minio.kube-system.svc.cluster.local:9000
@@ -35,3 +35,7 @@ data:
     spark.hadoop.javax.jdo.option.ConnectionURL           jdbc:postgresql://cloudnative-pg-cluster.database.svc.cluster.local:5432/metastore
     spark.hadoop.javax.jdo.option.ConnectionUserName      ${SECRET_POSTGRES_USERNAME}
     spark.hadoop.javax.jdo.option.ConnectionPassword      ${SECRET_POSTGRES_PASSWORD}
+
+    spark.eventLog.enabled                                true
+    spark.eventLog.dir                                    file:///opt/spark/workspace/logs/events
+    spark.history.fs.logDirectory                         file:///opt/spark/workspace/logs/history
