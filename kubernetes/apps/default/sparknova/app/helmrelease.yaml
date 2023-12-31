@@ -71,10 +71,10 @@ spec:
                 containerPort: 10009
                 protocol: TCP
             env:
-              kyuubi.engineEnv.SPARK_DRIVER_MEMORY: 6g
+              kyuubi.engineEnv.SPARK_DRIVER_MEMORY: 4g
               kyuubi.engineEnv.SPARK_DRIVER_CORES: "2"
-              kyuubi.engineEnv.SPARK_EXECUTOR_MEMORY: 4g
-              kyuubi.engineEnv.SPARK_EXECUTOR_CORES: "1"
+              kyuubi.engineEnv.SPARK_EXECUTOR_MEMORY: 2g
+              kyuubi.engineEnv.SPARK_EXECUTOR_CORES: "2"
         pod:
           nodeSelector:
             kubernetes.io/arch: amd64
