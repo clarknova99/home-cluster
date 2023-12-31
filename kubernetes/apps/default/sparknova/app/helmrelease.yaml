@@ -200,3 +200,11 @@ spec:
           - path: /opt/spark/conf/spark-defaults.conf
             subPath: spark-defaults.conf
             readOnly: true
+      warehouse:
+        enabled: true
+        existingClaim: pvc-sparknova-warehouse
+        mountPath: /opt/spark/warehouse
+      workspace:
+        enabled: true
+        existingClaim: pvc-sparknova-workspace
+        mountPath: /opt/spark/workspace
