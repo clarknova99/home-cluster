@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kyuubi-config
+data:
+  kyuubi-defaults.conf: |
+    kyuubi.engineEnv.SPARK_DRIVER_MEMORY            4g
+    kyuubi.engineEnv.SPARK_DRIVER_CORES             2
+    kyuubi.engineEnv.SPARK_EXECUTOR_MEMORY          4g
+    kyuubi.engineEnv.SPARK_EXECUTOR_CORES           2

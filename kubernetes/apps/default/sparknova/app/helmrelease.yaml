@@ -207,6 +207,13 @@ spec:
           - path: /opt/spark/conf/spark-defaults.conf
             subPath: spark-defaults.conf
             readOnly: true
+      kyuubi-config:
+        type: configMap
+        name: kyuubi-config
+        globalMounts:
+          - path: /opt/kyuubi/conf/kyuubi-defaults.conf
+            subPath: kyuubi-defaults.conf
+            readOnly: true
       warehouse:
         enabled: true
         type: nfs
@@ -221,4 +228,11 @@ spec:
         path: /volume1/network-storage/sparknova/workspace
         globalMounts:
           - path: /opt/spark/workspace
+      kyuubi-work:
+        enabled: true
+        type: nfs
+        server: 192.168.1.2
+        path: /volume1/network-storage/sparknova/kyuubi/work
+        globalMounts:
+          - path: /opt/kyuubi/work
 

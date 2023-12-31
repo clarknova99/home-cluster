@@ -6,4 +6,5 @@ namespace: default
 resources:
   - ./helmrelease.yaml
   - ./spark-configmap.yaml
+  - ./kyuubi-configmap.yaml
   #- ./ingress.yaml
