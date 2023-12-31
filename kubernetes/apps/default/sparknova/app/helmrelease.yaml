@@ -57,7 +57,7 @@ spec:
             imagePullPolicy: Always
             command: ["jupyter", "lab", "--allow-root", "--ip=0.0.0.0", "--NotebookApp.token=", "--no-browser", "--ServerApp.root_dir=/opt/"]
             ports:
-              - name: http
+              - name: jupyter
                 containerPort: 8888
                 protocol: TCP
           # kyuubi:
@@ -149,7 +149,7 @@ spec:
         labels:
           app: jupyter-svc
         ports:
-          http:
+          jupyter:
             port: 8888
       # kyuubi:
       #   annotations:
