@@ -22,7 +22,7 @@ data:
     spark.master                                          spark://sparknova-spark-master-svc:7077
     spark.sql.extensions                                  io.delta.sql.DeltaSparkSessionExtension
     spark.sql.catalog.spark_catalog                       org.apache.spark.sql.delta.catalog.DeltaCatalog
-    spark.sql.warehouse.dir                               /opt/spark/workspace/
+    spark.sql.warehouse.dir                               /opt/spark/warehouse/
     spark.sql.spark_catalog.dir                           /opt/spark/workspace/
     spark.hadoop.fs.s3a.endpoint                          http://minio.kube-system.svc.cluster.local:9000
     spark.hadoop.fs.s3a.endpoint.region                   us-east-1
@@ -37,5 +37,5 @@ data:
     spark.hadoop.javax.jdo.option.ConnectionPassword      ${SECRET_POSTGRES_PASSWORD}
 
     spark.eventLog.enabled                                true
-    spark.eventLog.dir                                    file:///opt/spark/workspace/logs/events
-    spark.history.fs.logDirectory                         file:///opt/spark/workspace/logs/history
+    spark.eventLog.dir                                    file:///opt/spark/logs/events
+    spark.history.fs.logDirectory                         file:///opt/spark/logs/history
