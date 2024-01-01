@@ -8,3 +8,7 @@ data:
     kyuubi.engineEnv.SPARK_DRIVER_CORES             2
     kyuubi.engineEnv.SPARK_EXECUTOR_MEMORY          4g
     kyuubi.engineEnv.SPARK_EXECUTOR_CORES           2
+    kyuubi.authentication                           NONE
+    kyuubi.frontend.bind.host                       0.0.0.0
+    kyuubi.frontend.bind.port                       10009
+    kyuubi.frontend.thrift.http.bind.host           0.0.0.0
