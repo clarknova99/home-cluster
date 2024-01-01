@@ -70,6 +70,9 @@ spec:
               - name: http
                 containerPort: 10009
                 protocol: TCP
+              - name: thrift
+                containerPort: 10000
+                protocol: TCP
             env:
               kyuubi.engineEnv.SPARK_DRIVER_MEMORY: 4g
               kyuubi.engineEnv.SPARK_DRIVER_CORES: "2"
@@ -170,6 +173,22 @@ spec:
             protocol: TCP
             port: 10009
             targetPort: 10009
+      thrift:
+        annotations:
+          io.cilium/lb-ipam-ips: "192.168.2.102"
+        externalTrafficPolicy: Cluster
+        type: LoadBalancer
+        controller: main
+        # -- Override the name suffix that is used for this service
+        nameOverride: thrift-svc
+        # -- Provide additional labels which may be required.
+        labels:
+          app: thrift-svc
+        ports:
+          thrift:
+            protocol: TCP
+            port: 10000
+            targetPort: 10000
     ingress:
       main:
         enabled: true
