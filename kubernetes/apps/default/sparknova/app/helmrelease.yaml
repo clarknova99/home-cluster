@@ -218,10 +218,10 @@ spec:
         enabled: true
         type: nfs
         server: 192.168.1.2
-        path: /volume1/network-storage/sparknova/warehouse
+        path: /volume1/network-storage/sparknova/spark-warehouse
         globalMounts:
           - path: /opt/spark-warehouse
-      spark_catalog:
+      sparkcatalog:
         enabled: true
         type: nfs
         server: 192.168.1.2
