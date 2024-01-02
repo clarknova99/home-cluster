@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: spark-config
+data:
+  core-site.xml: |
+    <property>
+        <name>hadoop.proxyuser.spark.hosts</name>
+        <value>*</value>
+    </property>
+    <property>
+        <name>hadoop.proxyuser.spark.groups</name>
+        <value>*</value>
+    </property>
