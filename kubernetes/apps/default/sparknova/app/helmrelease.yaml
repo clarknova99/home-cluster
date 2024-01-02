@@ -101,7 +101,7 @@ spec:
               SPARK_MASTER_URL: spark://sparknova-spark-master-svc:7077
               SPARK_WORKER_MEMORY: 8G
               SPARK_WORKER_CORES: "4"
-              SPARK_WORKER_WEBUI_PORT: "8080"
+              SPARK_WORKER_WEBUI_PORT: "8081"
               SPARK_WORKER_OPTS: |
                 -Dspark.ui.reverseProxy=true
                 -Dspark.ui.reverseProxyUrl=https://spark.${SECRET_DOMAIN}
