@@ -108,7 +108,7 @@ spec:
         pod:
           nodeSelector:
             kubernetes.io/arch: amd64
-            kubernetes.io/hostname: aurora
+            kubernetes.io/hostname: k8s-01
       # kyuubi:
       #   type: statefulset
       #   containers:
