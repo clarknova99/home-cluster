@@ -94,7 +94,7 @@ spec:
             command: ["/opt/spark/bin/spark-class","org.apache.spark.deploy.worker.Worker", "spark://sparknova-spark-master-svc:7077"]
             ports:
               - name: http
-                containerPort: 8080
+                containerPort: 8081
                 protocol: TCP
             env:
               SPARK_MODE: worker
