@@ -42,6 +42,7 @@ data:
 
     spark.master                                            spark://sparknova-spark-master-svc:7077
     spark.sql.extensions                                    io.delta.sql.DeltaSparkSessionExtension
+    spark.sql.catalog.spark_catalog                         org.apache.spark.sql.delta.catalog.DeltaCatalog
     spark.sql.defaultCatalog                                warehouse
     spark.sql.catalog.warehouse                             org.apache.spark.sql.delta.catalog.DeltaCatalog
     spark.sql.catalog.warehouse.warehouse                   s3a://spark/warehouse
