@@ -11,14 +11,12 @@ resources:
   - ./hajimari/ks.yaml
   - ./home-assistant/ks.yaml
   - ./homepage/ks.yaml
-  #- ./jupyterhub/ks.yaml
   - ./kubernetes-schemas/ks.yaml
   - ./lldap/ks.yaml
   - ./mosquitto/ks.yaml
   - ./n8n/ks.yaml
   #- ./spark/ks.yaml
-#  - ./sparknova/ks.yaml
-  #- ./superset/ks.yaml
+  - ./sparknova/ks.yaml
   - ./troddit/ks.yaml
   - ./website/ks.yaml
   - ./whoami/ks.yaml

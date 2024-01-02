@@ -40,16 +40,26 @@ data:
     # spark.eventLog.dir                                    file:///opt/spark/logs/events
     # spark.history.fs.logDirectory                         file:///opt/spark/logs/history
 
+
+    # spark.sql.defaultCatalog                                spark_catalog
+    # spark.sql.catalog.spark_catalog.warehouse               s3a://spark/spark_catalog
+    # spark.sql.catalog.spark_catalog.s3.endpoint             http://minio.kube-system.svc.cluster.local:9000
+    # spark.sql.catalog.spark_catalog.uri                     jdbc:postgresql://cloudnative-pg-cluster.database.svc.cluster.local:5432/metastore?user=${SECRET_POSTGRES_USERNAME}&password=${SECRET_POSTGRES_PASSWORD}
+    # spark.sql.catalog.spark_catalog.jdbc.useSSL             false
+    # spark.sql.catalog.spark_catalog.jdbc.user               ${SECRET_POSTGRES_USERNAME}
+    # spark.sql.catalog.spark_catalog.jdbc.password           ${SECRET_POSTGRES_PASSWORD}
+
     spark.master                                            spark://sparknova-spark-master-svc:7077
     spark.sql.extensions                                    io.delta.sql.DeltaSparkSessionExtension
     spark.sql.catalog.spark_catalog                         org.apache.spark.sql.delta.catalog.DeltaCatalog
-    spark.sql.defaultCatalog                                spark_catalog
-    spark.sql.catalog.spark_catalog.warehouse               s3a://spark/spark_catalog
-    spark.sql.catalog.spark_catalog.s3.endpoint             http://minio.kube-system.svc.cluster.local:9000
-    spark.sql.catalog.spark_catalog.uri                     jdbc:postgresql://cloudnative-pg-cluster.database.svc.cluster.local:5432/metastore?user=${SECRET_POSTGRES_USERNAME}&password=${SECRET_POSTGRES_PASSWORD}
-    spark.sql.catalog.spark_catalog.jdbc.useSSL             false
-    spark.sql.catalog.spark_catalog.jdbc.user               ${SECRET_POSTGRES_USERNAME}
-    spark.sql.catalog.spark_catalog.jdbc.password           ${SECRET_POSTGRES_PASSWORD}
+    spark.hadoop.fs.s3a.endpoint                            http://minio.kube-system.svc.cluster.local:9000
+    spark.hadoop.fs.s3a.endpoint.region                     us-east-1
+    spark.hadoop.fs.s3a.access.key                          ${SECRET_SPARKMINIO_ACCESS_KEY}
+    spark.hadoop.fs.s3a.secret.key                          ${SECRET_SPARKMINIO_SECRET_KEY}
+    spark.hadoop.fs.s3a.path.style.access                   true
+    spark.hadoop.fs.s3a.connection.ssl.enabled              false
+    spark.hadoop.fs.s3a.impl                                org.apache.hadoop.fs.s3a.S3AFileSystem
+    spark.sql.warehouse.dir                                 s3a://spark/warehouse
     spark.eventLog.enabled                                  true
     spark.eventLog.dir                                      file:///opt/spark/logs/events
     spark.history.fs.logDirectory                           file:///opt/spark/logs/history

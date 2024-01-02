@@ -55,7 +55,7 @@ spec:
               repository: docker.io/clarknova9/spark
               tag: 3.5.0-scala2.12-v0.0.3
             imagePullPolicy: Always
-            command: ["jupyter", "lab", "--allow-root", "--ip=0.0.0.0", "--NotebookApp.token=", "--no-browser", "--ServerApp.root_dir=/opt/"]
+            command: ["jupyter", "lab", "--allow-root", "--ip=0.0.0.0", "--NotebookApp.token=", "--no-browser", "--ServerApp.root_dir=/opt/workspace"]
             ports:
               - name: jupyter
                 containerPort: 8888
