@@ -23,6 +23,7 @@ spec:
   upgrade:
     remediation:
       retries: 5
+  ## If you're reading this, please know I have no idea what I'm doing and learning as I go along. Highly likely this is not the preferred method for deploying Spark on Kubernetes
   values:
     controllers:
       main:
@@ -47,9 +48,6 @@ spec:
               SPARK_MODE: master
               SPARK_MASTER_PORT: "7077"
               SPARK_MASTER_WEBUI_PORT: "8080"
-              # SPARK_MASTER_OPTS: |
-              #   -Dspark.ui.reverseProxy=true
-              #   -Dspark.ui.reverseProxyUrl=https://spark.${SECRET_DOMAIN}
           jupyter:
             image:
               repository: docker.io/clarknova9/spark
@@ -102,9 +100,6 @@ spec:
               SPARK_WORKER_MEMORY: 4G
               SPARK_WORKER_CORES: "2"
               SPARK_WORKER_WEBUI_PORT: "8081"
-        #       SPARK_WORKER_OPTS: |
-        #         -Dspark.ui.reverseProxy=true
-        #         -Dspark.ui.reverseProxyUrl=https://spark.${SECRET_DOMAIN}
         pod:
           nodeSelector:
             kubernetes.io/arch: amd64
