@@ -51,16 +51,16 @@ spec:
         pod:
           nodeSelector:
             kubernetes.io/arch: amd64
-            kubernetes.io/hostname: aurora
+            #kubernetes.io/hostname: aurora
       spark-worker:
         type: deployment
-        replicas: 3
+        replicas: 1
         containers:
           spark-worker:
             image:
               repository: docker.io/clarknova9/spark
               tag: 3.5.0-scala2.12-v1.0.0@sha256:08a59b28852f32ed29bd3821383c860cb715e318b6c0d40a83157652cfd2fc2c
-            imagePullPolicy: Always
+            imagePullPolicy: IfNotPresent
             command: ["/opt/spark/bin/spark-class","org.apache.spark.deploy.worker.Worker", "spark://sparknova-spark-master-svc:7077"]
             ports:
               - name: http
@@ -83,7 +83,7 @@ spec:
             image:
               repository: docker.io/clarknova9/spark
               tag: 3.5.0-scala2.12-v1.0.0@sha256:08a59b28852f32ed29bd3821383c860cb715e318b6c0d40a83157652cfd2fc2c
-            imagePullPolicy: Always
+            imagePullPolicy: IfNotPresent
             command: ["jupyter", "lab", "--allow-root", "--ip=0.0.0.0", "--NotebookApp.token=", "--no-browser", "--ServerApp.root_dir=/opt/workspace"]
             ports:
               - name: http
@@ -100,7 +100,7 @@ spec:
             image:
               repository: docker.io/clarknova9/spark
               tag: 3.5.0-scala2.12-v1.0.0@sha256:08a59b28852f32ed29bd3821383c860cb715e318b6c0d40a83157652cfd2fc2c
-            imagePullPolicy: Always
+            imagePullPolicy: IfNotPresent
             command: ["/opt/kyuubi/bin/kyuubi", "run"]
             ports:
               - name: http
