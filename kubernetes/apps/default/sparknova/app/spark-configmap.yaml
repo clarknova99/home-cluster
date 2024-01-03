@@ -71,3 +71,5 @@ data:
     spark.deploy.defaultCores                               2
     spark.ui.reverseProxy                                   true
     spark.ui.reverseProxyUrl                                https://spark.${SECRET_DOMAIN}
+
+    spark.appStatusStore.diskStoreDir                       file:///opt/spark/logs/diskStoreDir

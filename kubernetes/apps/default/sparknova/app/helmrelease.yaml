@@ -84,7 +84,7 @@ spec:
             kubernetes.io/hostname: nuc11
       spark-worker:
         type: statefulset
-        replicas: 2
+        replicas: 3
         containers:
           spark-worker:
             image:
