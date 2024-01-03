@@ -105,7 +105,7 @@ spec:
         #       SPARK_WORKER_OPTS: |
         #         -Dspark.ui.reverseProxy=true
         #         -Dspark.ui.reverseProxyUrl=https://spark.${SECRET_DOMAIN}
-        # pod:
+        pod:
           nodeSelector:
             kubernetes.io/arch: amd64
             kubernetes.io/hostname: k8s-01
