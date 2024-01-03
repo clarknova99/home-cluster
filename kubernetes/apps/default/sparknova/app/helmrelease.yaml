@@ -99,8 +99,8 @@ spec:
             env:
               SPARK_MODE: worker
               SPARK_MASTER_URL: spark://sparknova-spark-master-svc:7077
-              SPARK_WORKER_MEMORY: 8G
-              SPARK_WORKER_CORES: "4"
+              # SPARK_WORKER_MEMORY: 8G
+              # SPARK_WORKER_CORES: "4"
               SPARK_WORKER_WEBUI_PORT: "8081"
               SPARK_WORKER_OPTS: |
                 -Dspark.ui.reverseProxy=true
