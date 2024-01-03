@@ -193,6 +193,8 @@ spec:
       main:
         enabled: true
         ingressClassName: internal
+        annotations:
+          hajimari.io/icon: mdi:creation
         hosts:
           - host: spark.${SECRET_DOMAIN}
             paths:
