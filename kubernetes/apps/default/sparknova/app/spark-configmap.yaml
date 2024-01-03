@@ -50,6 +50,7 @@ data:
     # spark.sql.catalog.spark_catalog.jdbc.password           ${SECRET_POSTGRES_PASSWORD}
 
     spark.master                                            spark://sparknova-spark-master-svc:7077
+
     spark.sql.extensions                                    io.delta.sql.DeltaSparkSessionExtension
     spark.sql.catalog.spark_catalog                         org.apache.spark.sql.delta.catalog.DeltaCatalog
     spark.sql.catalogImplementation                         hive
@@ -68,4 +69,5 @@ data:
     spark.eventLog.enabled                                  true
     spark.eventLog.dir                                      file:///opt/spark/logs/events
     spark.history.fs.logDirectory                           file:///opt/spark/logs/history
-
+    spark.deploy.defaultCores                               2
+    spark.ui.reverseProxy                                   https://spark.${SECRET_DOMAIN}
