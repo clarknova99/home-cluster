@@ -13,7 +13,7 @@ resources:
   - ./homepage/ks.yaml
   - ./kubernetes-schemas/ks.yaml
   - ./lldap/ks.yaml
-  #- ./mosquitto/ks.yaml
+  - ./mosquitto/ks.yaml
   - ./n8n/ks.yaml
   #- ./spark/ks.yaml
   #- ./sparknova/ks.yaml
