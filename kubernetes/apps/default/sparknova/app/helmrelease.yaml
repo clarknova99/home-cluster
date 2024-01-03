@@ -99,7 +99,7 @@ spec:
             env:
               SPARK_MODE: worker
               SPARK_MASTER_URL: spark://sparknova-spark-master-svc:7077
-              SPARK_WORKER_MEMORY: 8G
+              SPARK_WORKER_MEMORY: 4G
               SPARK_WORKER_CORES: "2"
               SPARK_WORKER_WEBUI_PORT: "8081"
         #       SPARK_WORKER_OPTS: |
@@ -108,7 +108,7 @@ spec:
         pod:
           nodeSelector:
             kubernetes.io/arch: amd64
-            kubernetes.io/hostname: k8s-01
+            #kubernetes.io/hostname: aurora
       # kyuubi:
       #   type: statefulset
       #   containers:
