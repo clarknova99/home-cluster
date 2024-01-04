@@ -44,10 +44,10 @@ spec:
               - name: cluster
                 containerPort: 7077
                 protocol: TCP
-            env:
-              SPARK_MODE: master
-              SPARK_MASTER_PORT: "7077"
-              SPARK_MASTER_WEBUI_PORT: "8080"
+            # env:
+            #   SPARK_MODE: master
+            #   SPARK_MASTER_PORT: "7077"
+            #   SPARK_MASTER_WEBUI_PORT: "8080"
         pod:
           nodeSelector:
             kubernetes.io/arch: amd64
@@ -66,12 +66,12 @@ spec:
               - name: http
                 containerPort: 8081
                 protocol: TCP
-            env:
-              SPARK_MODE: worker
-              SPARK_MASTER_URL: spark://sparknova-spark-master-svc:7077
-              SPARK_WORKER_MEMORY: 4G
-              SPARK_WORKER_CORES: "2"
-              SPARK_WORKER_WEBUI_PORT: "8081"
+            # env:
+            #   SPARK_MODE: worker
+            #   SPARK_MASTER_URL: spark://sparknova-spark-master-svc:7077
+            #   SPARK_WORKER_MEMORY: 4G
+            #   SPARK_WORKER_CORES: "2"
+            #   SPARK_WORKER_WEBUI_PORT: "8081"
         pod:
           nodeSelector:
             kubernetes.io/arch: amd64
