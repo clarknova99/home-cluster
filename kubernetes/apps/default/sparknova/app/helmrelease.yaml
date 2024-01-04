@@ -254,7 +254,7 @@ spec:
             port: 8081
             targetPort: 8081
       jupyter:
-        controller: jupyter
+        controller: main
         # -- Override the name suffix that is used for this service
         nameOverride: jupyter-svc
         # -- Provide additional labels which may be required.
@@ -270,7 +270,7 @@ spec:
           io.cilium/lb-ipam-ips: "192.168.2.101"
         externalTrafficPolicy: Cluster
         type: LoadBalancer
-        controller: kyuubi
+        controller: main
         # -- Override the name suffix that is used for this service
         nameOverride: kyuubi-svc
         # -- Provide additional labels which may be required.
@@ -286,7 +286,7 @@ spec:
           io.cilium/lb-ipam-ips: "192.168.2.102"
         externalTrafficPolicy: Cluster
         type: LoadBalancer
-        controller: kyuubi
+        controller: main
         # -- Override the name suffix that is used for this service
         nameOverride: thrift-svc
         # -- Provide additional labels which may be required.
