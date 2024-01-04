@@ -35,6 +35,7 @@ resources:
   - ./prometheus-community.yaml
   - ./rook-ceph.yaml
   - ./runix.yaml
+  - ./spark-operator.yaml
   - ./stakater.yaml
   - ./superset.yaml
   - ./tooljet.yaml

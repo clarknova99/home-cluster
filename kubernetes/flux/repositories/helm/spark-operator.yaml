@@ -1,0 +1,9 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: spark-operator
+  namespace: flux-system
+spec:
+  interval: 1h
+  url: https://googlecloudplatform.github.io/spark-on-k8s-operator
