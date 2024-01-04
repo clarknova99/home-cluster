@@ -341,6 +341,12 @@ spec:
           - hosts:
               - jupyter.${SECRET_DOMAIN}
     persistence:
+      tmp:
+        enabled: true
+        storageClass: local-hostpath
+        globalMounts:
+          - path: /tmp
+            readOnly: false
       config-file:
         type: configMap
         name: spark-config
