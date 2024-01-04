@@ -54,7 +54,7 @@ spec:
             #kubernetes.io/hostname: aurora
       spark-worker:
         type: deployment
-        replicas: 1
+        replicas: 3
         containers:
           spark-worker:
             image:
