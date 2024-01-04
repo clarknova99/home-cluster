@@ -344,6 +344,8 @@ spec:
       tmp:
         enabled: true
         storageClass: local-hostpath
+        accessMode: ReadWriteOnce
+        retain: false
         globalMounts:
           - path: /tmp
             readOnly: false
