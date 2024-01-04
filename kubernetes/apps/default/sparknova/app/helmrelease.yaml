@@ -51,6 +51,34 @@ spec:
               SPARK_MODE: master
               SPARK_MASTER_PORT: "7077"
               SPARK_MASTER_WEBUI_PORT: "8080"
+          jupyter:
+            image:
+              repository: docker.io/clarknova9/spark
+              tag: 3.5.0-scala2.12-v1.0.1@sha256:dc0a6f3ff1a44961f43e655d51394619e8908869f59db51b92765a6cc68d7a07
+            imagePullPolicy: Always
+            command: ["jupyter", "lab", "--allow-root", "--ip=0.0.0.0", "--NotebookApp.token=", "--no-browser", "--ServerApp.root_dir=/opt/workspace"]
+            ports:
+              - name: jupyter
+                containerPort: 8888
+                protocol: TCP
+          kyuubi:
+            image:
+              repository: docker.io/clarknova9/spark
+              tag: 3.5.0-scala2.12-v1.0.1@sha256:dc0a6f3ff1a44961f43e655d51394619e8908869f59db51b92765a6cc68d7a07
+            imagePullPolicy: Always
+            command: ["/opt/kyuubi/bin/kyuubi", "run"]
+            ports:
+              - name: http
+                containerPort: 10009
+                protocol: TCP
+              - name: thrift
+                containerPort: 10000
+                protocol: TCP
+            env:
+              kyuubi.engineEnv.SPARK_DRIVER_MEMORY: 4g
+              kyuubi.engineEnv.SPARK_DRIVER_CORES: "2"
+              kyuubi.engineEnv.SPARK_EXECUTOR_MEMORY: 2g
+              kyuubi.engineEnv.SPARK_EXECUTOR_CORES: "2"
         pod:
           nodeSelector:
             kubernetes.io/arch: amd64
@@ -124,48 +152,48 @@ spec:
         pod:
           nodeSelector:
             kubernetes.io/arch: amd64
-      jupyter:
-        type: deployment
-        replicas: 1
-        containers:
-          jupyter:
-            image:
-              repository: docker.io/clarknova9/spark
-              tag: 3.5.0-scala2.12-v1.0.1@sha256:dc0a6f3ff1a44961f43e655d51394619e8908869f59db51b92765a6cc68d7a07
-            imagePullPolicy: IfNotPresent
-            command: ["jupyter", "lab", "--allow-root", "--ip=0.0.0.0", "--NotebookApp.token=", "--no-browser", "--ServerApp.root_dir=/opt/workspace"]
-            ports:
-              - name: http
-                containerPort: 8888
-                protocol: TCP
-        pod:
-          nodeSelector:
-            kubernetes.io/arch: amd64
-      kyuubi:
-        type: deployment
-        replicas: 1
-        containers:
-          kyuubi:
-            image:
-              repository: docker.io/clarknova9/spark
-              tag: 3.5.0-scala2.12-v1.0.1@sha256:dc0a6f3ff1a44961f43e655d51394619e8908869f59db51b92765a6cc68d7a07
-            imagePullPolicy: IfNotPresent
-            command: ["/opt/kyuubi/bin/kyuubi", "run"]
-            ports:
-              - name: http
-                containerPort: 10009
-                protocol: TCP
-              - name: thrift
-                containerPort: 10000
-                protocol: TCP
-            env:
-              kyuubi.engineEnv.SPARK_DRIVER_MEMORY: 4g
-              kyuubi.engineEnv.SPARK_DRIVER_CORES: "2"
-              kyuubi.engineEnv.SPARK_EXECUTOR_MEMORY: 2g
-              kyuubi.engineEnv.SPARK_EXECUTOR_CORES: "2"
-        pod:
-          nodeSelector:
-            kubernetes.io/arch: amd64
+      # jupyter:
+      #   type: deployment
+      #   replicas: 1
+      #   containers:
+      #     jupyter:
+      #       image:
+      #         repository: docker.io/clarknova9/spark
+      #         tag: 3.5.0-scala2.12-v1.0.1@sha256:dc0a6f3ff1a44961f43e655d51394619e8908869f59db51b92765a6cc68d7a07
+      #       imagePullPolicy: IfNotPresent
+      #       command: ["jupyter", "lab", "--allow-root", "--ip=0.0.0.0", "--NotebookApp.token=", "--no-browser", "--ServerApp.root_dir=/opt/workspace"]
+      #       ports:
+      #         - name: http
+      #           containerPort: 8888
+      #           protocol: TCP
+      #   pod:
+      #     nodeSelector:
+      #       kubernetes.io/arch: amd64
+      # kyuubi:
+      #   type: deployment
+      #   replicas: 1
+      #   containers:
+      #     kyuubi:
+      #       image:
+      #         repository: docker.io/clarknova9/spark
+      #         tag: 3.5.0-scala2.12-v1.0.1@sha256:dc0a6f3ff1a44961f43e655d51394619e8908869f59db51b92765a6cc68d7a07
+      #       imagePullPolicy: IfNotPresent
+      #       command: ["/opt/kyuubi/bin/kyuubi", "run"]
+      #       ports:
+      #         - name: http
+      #           containerPort: 10009
+      #           protocol: TCP
+      #         - name: thrift
+      #           containerPort: 10000
+      #           protocol: TCP
+      #       env:
+      #         kyuubi.engineEnv.SPARK_DRIVER_MEMORY: 4g
+      #         kyuubi.engineEnv.SPARK_DRIVER_CORES: "2"
+      #         kyuubi.engineEnv.SPARK_EXECUTOR_MEMORY: 2g
+      #         kyuubi.engineEnv.SPARK_EXECUTOR_CORES: "2"
+      #   pod:
+      #     nodeSelector:
+      #       kubernetes.io/arch: amd64
     service:
       main:
         annotations:
