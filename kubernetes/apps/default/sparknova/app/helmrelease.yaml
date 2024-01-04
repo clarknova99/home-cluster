@@ -55,11 +55,57 @@ spec:
           nodeSelector:
             kubernetes.io/arch: amd64
             #kubernetes.io/hostname: aurora
-      spark-worker:
+      spark-worker-1:
         type: deployment
-        replicas: 3
+        replicas: 1
         containers:
-          spark-worker:
+          spark-worker-1:
+            image:
+              repository: docker.io/clarknova9/spark
+              tag: 3.5.0-scala2.12-v1.0.1@sha256:dc0a6f3ff1a44961f43e655d51394619e8908869f59db51b92765a6cc68d7a07
+            imagePullPolicy: IfNotPresent
+            command: ["/opt/spark/bin/spark-class","org.apache.spark.deploy.worker.Worker", "spark://sparknova-spark-master-svc:7077"]
+            ports:
+              - name: http
+                containerPort: 8081
+                protocol: TCP
+            env:
+              SPARK_MODE: worker
+              SPARK_MASTER_URL: spark://sparknova-spark-master-svc:7077
+              SPARK_WORKER_MEMORY: 4G
+              SPARK_WORKER_CORES: "2"
+              SPARK_WORKER_WEBUI_PORT: "8081"
+        pod:
+          nodeSelector:
+            kubernetes.io/arch: amd64
+      spark-worker-2:
+        type: deployment
+        replicas: 1
+        containers:
+          spark-worker-1:
+            image:
+              repository: docker.io/clarknova9/spark
+              tag: 3.5.0-scala2.12-v1.0.1@sha256:dc0a6f3ff1a44961f43e655d51394619e8908869f59db51b92765a6cc68d7a07
+            imagePullPolicy: IfNotPresent
+            command: ["/opt/spark/bin/spark-class","org.apache.spark.deploy.worker.Worker", "spark://sparknova-spark-master-svc:7077"]
+            ports:
+              - name: http
+                containerPort: 8081
+                protocol: TCP
+            env:
+              SPARK_MODE: worker
+              SPARK_MASTER_URL: spark://sparknova-spark-master-svc:7077
+              SPARK_WORKER_MEMORY: 4G
+              SPARK_WORKER_CORES: "2"
+              SPARK_WORKER_WEBUI_PORT: "8081"
+        pod:
+          nodeSelector:
+            kubernetes.io/arch: amd64
+      spark-worker-3:
+        type: deployment
+        replicas: 1
+        containers:
+          spark-worker-3:
             image:
               repository: docker.io/clarknova9/spark
               tag: 3.5.0-scala2.12-v1.0.1@sha256:dc0a6f3ff1a44961f43e655d51394619e8908869f59db51b92765a6cc68d7a07
@@ -131,7 +177,7 @@ spec:
         nameOverride: spark-master-svc
         # -- Provide additional labels which may be required.
         labels:
-          app: spark-master-svc
+          app: sparknova
         ports:
           http:
             port: 8080
@@ -143,13 +189,49 @@ spec:
             protocol: TCP
             port: 6066
             targetPort: 6066
+      spark-worker-1:
+        controller: spark-worker-1
+        # -- Override the name suffix that is used for this service
+        nameOverride: spark-worker-1-svc
+        # -- Provide additional labels which may be required.
+        labels:
+          app: sparknova
+        ports:
+          spark-worker-1:
+            protocol: TCP
+            port: 8081
+            targetPort: 8081
+      spark-worker-2:
+        controller: spark-worker-2
+        # -- Override the name suffix that is used for this service
+        nameOverride: spark-worker-2-svc
+        # -- Provide additional labels which may be required.
+        labels:
+          app: sparknova
+        ports:
+          spark-worker-2:
+            protocol: TCP
+            port: 8081
+            targetPort: 8081
+      spark-worker-3:
+        controller: spark-worker-3
+        # -- Override the name suffix that is used for this service
+        nameOverride: spark-worker-3-svc
+        # -- Provide additional labels which may be required.
+        labels:
+          app: sparknova
+        ports:
+          spark-worker-2:
+            protocol: TCP
+            port: 8081
+            targetPort: 8081
       jupyter:
         controller: jupyter
         # -- Override the name suffix that is used for this service
         nameOverride: jupyter-svc
         # -- Provide additional labels which may be required.
         labels:
-          app: jupyter
+          app: sparknova
         ports:
           jupyter:
             protocol: TCP
@@ -165,7 +247,7 @@ spec:
         nameOverride: kyuubi-svc
         # -- Provide additional labels which may be required.
         labels:
-          app: kyuubi-svc
+          app: sparknova
         ports:
           kyuubi:
             protocol: TCP
@@ -181,7 +263,7 @@ spec:
         nameOverride: thrift-svc
         # -- Provide additional labels which may be required.
         labels:
-          app: thrift-svc
+          app: sparknova
         ports:
           thrift:
             protocol: TCP
