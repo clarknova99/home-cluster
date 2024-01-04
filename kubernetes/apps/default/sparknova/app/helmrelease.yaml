@@ -346,6 +346,7 @@ spec:
         storageClass: local-hostpath
         accessMode: ReadWriteOnce
         retain: false
+        size: 5Gi
         globalMounts:
           - path: /tmp
             readOnly: false
