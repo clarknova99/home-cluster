@@ -1,0 +1,81 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2beta1.json
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: spark-operator
+  namespace: default
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: cloudnative-pg
+      version: 1.1.27
+      sourceRef:
+        kind: HelmRepository
+        name: spark-operator
+        namespace: flux-system
+  maxHistory: 2
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    image:
+      tag: v1beta2-1.3.8-3.1.1
+      pullPolicy: Always
+    webhook:
+      enable: true
+      namespaceSelector: "name=default"
+    sparkJobNamespace: default
+    resyncInterval: 10
+    metrics:
+      # -- Enable prometheus metric scraping
+      enable: true
+      # -- Metrics port
+      port: 10254
+      # -- Metrics port name
+      portName: metrics
+      # -- Metrics serving endpoint
+      endpoint: /metrics
+      # -- Metric prefix, will be added to all exported metrics
+      prefix: ""
+
+    # -- Prometheus pod monitor for operator's pod.
+    podMonitor:
+      # -- If enabled, a pod monitor for operator's pod will be submitted. Note that prometheus metrics should be enabled as well.
+      enable: true
+      # -- Pod monitor labels
+      labels: {}
+      # -- The label to use to retrieve the job name from
+      jobLabel: spark-operator-podmonitor
+      # -- Prometheus metrics endpoint properties. `metrics.portName` will be used as a port
+      podMetricsEndpoint:
+        scheme: http
+        interval: 5s
+
+    controllerThreads: 1
+    batchScheduler:
+      enable: true
+    resourceQuotaEnforcement:
+      enable: true
+    rbac:
+      createClusterRole: true
+      createRole: true
+    uiService:
+      # -- Enable UI service creation for Spark application
+      enable: true
+    resources:
+      requests:
+        memory: 250Mi
+        cpu: 100m
+      limits:
+        memory: 250Mi
+        cpu: 500m
+
