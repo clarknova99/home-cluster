@@ -1,9 +1,10 @@
 ---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2beta2.json
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
   name: influxdb
-  namespace: monitoring
+  namespace: database
 spec:
   interval: 60m
   chart:
@@ -44,4 +45,5 @@ spec:
       #useExisting: true
       existingClaim: pvc-influxdb
       name: pvc-influxdb
-
+    nodeSelector:
+      kubernetes.io/arch: amd64

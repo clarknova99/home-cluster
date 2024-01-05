@@ -3,7 +3,7 @@ apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: pv-influxdb
-  namespace: monitoring
+  namespace: database
 spec:
   storageClassName: "network-storage"
   capacity:
@@ -20,7 +20,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: pvc-influxdb
-  namespace: monitoring
+  namespace: database
 spec:
   accessModes:
     - ReadWriteMany

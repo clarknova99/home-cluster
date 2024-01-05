@@ -3,7 +3,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: influxdb
-  namespace: monitoring
+  namespace: database
   annotations:
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
     ingress.kubernetes.io/proxy-ssl-verify: "off"
