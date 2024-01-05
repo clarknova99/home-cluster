@@ -14,12 +14,12 @@ spec:
     spark.sql.extensions: io.delta.sql.DeltaSparkSessionExtension
     spark.sql.catalog.spark_catalog: org.apache.spark.sql.delta.catalog.DeltaCatalog
     spark.sql.catalogImplementation: hive
-    spark.sql.warehouse.dir: s3a://spark/warehouse
+    spark.sql.warehouse.dir: "s3a://spark/warehouse"
     spark.hadoop.javax.jdo.option.ConnectionURL: jdbc:postgresql://cloudnative-pg-cluster.database.svc.cluster.local:5432/metastore
     spark.hadoop.javax.jdo.option.ConnectionDriverName: org.postgresql.Driver
     spark.hadoop.javax.jdo.option.ConnectionUserName: ${SECRET_POSTGRES_USERNAME}
     spark.hadoop.javax.jdo.option.ConnectionPassword: ${SECRET_POSTGRES_PASSWORD}
-    spark.hadoop.fs.s3a.endpoint: http://minio.kube-system.svc.cluster.local:9000
+    spark.hadoop.fs.s3a.endpoint: "http://minio.kube-system.svc.cluster.local:9000"
     spark.hadoop.fs.s3a.endpoint.region: us-east-1
     spark.hadoop.fs.s3a.access.key: ${SECRET_SPARKMINIO_ACCESS_KEY}
     spark.hadoop.fs.s3a.secret.key: ${SECRET_SPARKMINIO_SECRET_KEY}
