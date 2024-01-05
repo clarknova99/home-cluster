@@ -18,7 +18,7 @@ resources:
   #- ./spark/ks.yaml
   #- ./sparknova/ks.yaml
   #- ./spark-operator/ks.yaml
-  - ./stackable/ks.yaml
+ # - ./stackable/ks.yaml
   - ./troddit/ks.yaml
   - ./website/ks.yaml
   - ./whoami/ks.yaml
