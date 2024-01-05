@@ -23,8 +23,8 @@ spec:
     spark.hadoop.fs.s3a.endpoint.region: us-east-1
     spark.hadoop.fs.s3a.access.key: ${SECRET_SPARKMINIO_ACCESS_KEY}
     spark.hadoop.fs.s3a.secret.key: ${SECRET_SPARKMINIO_SECRET_KEY}
-    spark.hadoop.fs.s3a.path.style.access: true
-    spark.hadoop.fs.s3a.connection.ssl.enabled: false
+    spark.hadoop.fs.s3a.path.style.access: "true"
+    spark.hadoop.fs.s3a.connection.ssl.enabled: "false"
     spark.hadoop.fs.s3a.impl: org.apache.hadoop.fs.s3a.S3AFileSystem
     spark.hadoop.fs.s3a.committer.name: magic
     #spark.eventLog.enabled: true
