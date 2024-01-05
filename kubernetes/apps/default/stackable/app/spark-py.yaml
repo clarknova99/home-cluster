@@ -41,9 +41,6 @@ spec:
     onFailureRetryInterval: 10
     onSubmissionFailureRetries: 5
     onSubmissionFailureRetryInterval: 20
-  sparkUIOptions:
-    ingressAnnotations:
-      kubernetes.io/ingress.class: internal
   driver:
     config:
       resources:
