@@ -7,5 +7,6 @@ resources:
   - ./helmrelease.yaml
   - ./pi-configmap.yaml
   - ./spark-py.yaml
+  - ./rbac.yaml
 
 
