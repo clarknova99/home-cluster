@@ -27,7 +27,7 @@ spec:
     spark.hadoop.fs.s3a.connection.ssl.enabled: false
     spark.hadoop.fs.s3a.impl: org.apache.hadoop.fs.s3a.S3AFileSystem
     spark.hadoop.fs.s3a.committer.name: magic
-    spark.eventLog.enabled: true
+    #spark.eventLog.enabled: true
     # spark.eventLog.dir: file:///opt/spark/logs/events
     # spark.history.fs.logDirectory: file:///opt/spark/logs/history
     spark.ui.reverseProxy: true
