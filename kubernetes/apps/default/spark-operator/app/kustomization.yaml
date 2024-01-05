@@ -5,6 +5,7 @@ kind: Kustomization
 namespace: default
 resources:
   - ./helmrelease.yaml
+  - ./pi-configmap.py
   - ./spark-py.yaml
 
 

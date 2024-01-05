@@ -7,10 +7,32 @@ spec:
   type: Python
   pythonVersion: "3"
   mode: cluster
-  image: "gcr.io/spark-operator/spark-py:v3.1.1"
+  image: "clarknova9/spark:3.5.0-scala2.12-v0.0.4"
   imagePullPolicy: Always
-  mainApplicationFile: local:///opt/spark/examples/src/main/python/pi.py
-  sparkVersion: "3.1.1"
+  mainApplicationFile: local:////mnt/config-maps/pi.py
+  sparkConf:
+    spark.sql.extensions: io.delta.sql.DeltaSparkSessionExtension
+    spark.sql.catalog.spark_catalog: org.apache.spark.sql.delta.catalog.DeltaCatalog
+    spark.sql.catalogImplementation: hive
+    spark.sql.warehouse.dir: s3a://spark/warehouse
+    spark.hadoop.javax.jdo.option.ConnectionURL: jdbc:postgresql://cloudnative-pg-cluster.database.svc.cluster.local:5432/metastore
+    spark.hadoop.javax.jdo.option.ConnectionDriverName: org.postgresql.Driver
+    spark.hadoop.javax.jdo.option.ConnectionUserName: ${SECRET_POSTGRES_USERNAME}
+    spark.hadoop.javax.jdo.option.ConnectionPassword: ${SECRET_POSTGRES_PASSWORD}
+    spark.hadoop.fs.s3a.endpoint: http://minio.kube-system.svc.cluster.local:9000
+    spark.hadoop.fs.s3a.endpoint.region: us-east-1
+    spark.hadoop.fs.s3a.access.key: ${SECRET_SPARKMINIO_ACCESS_KEY}
+    spark.hadoop.fs.s3a.secret.key: ${SECRET_SPARKMINIO_SECRET_KEY}
+    spark.hadoop.fs.s3a.path.style.access: true
+    spark.hadoop.fs.s3a.connection.ssl.enabled: false
+    spark.hadoop.fs.s3a.impl: org.apache.hadoop.fs.s3a.S3AFileSystem
+    spark.hadoop.fs.s3a.committer.name: magic
+    spark.eventLog.enabled: true
+    spark.eventLog.dir: file:///opt/spark/logs/events
+    spark.history.fs.logDirectory: file:///opt/spark/logs/history
+    spark.ui.reverseProxy: true
+    spark.ui.reverseProxyUrl: https://spark.${SECRET_DOMAIN}
+  sparkVersion: "3.5.0"
   restartPolicy:
     type: OnFailure
     onFailureRetries: 3
@@ -22,11 +44,14 @@ spec:
     coreLimit: "1200m"
     memory: "512m"
     labels:
-      version: 3.1.1
+      version: 3.5.0
     serviceAccount: spark
+    configMaps:
+      - name: spark-pi-config
+        path: /mnt/config-maps
   executor:
     cores: 1
     instances: 1
     memory: "512m"
     labels:
-      version: 3.1.1
+      version: 3.5.0
