@@ -9,7 +9,7 @@ spec:
   sparkImage:
     productVersion: 3.5.0
   mode: cluster
-  mainApplicationFile: local:////mnt/config-maps/pi.py
+  mainApplicationFile: "s3a://spark/pi.py"
   sparkConf:
     spark.sql.extensions: io.delta.sql.DeltaSparkSessionExtension
     spark.sql.catalog.spark_catalog: org.apache.spark.sql.delta.catalog.DeltaCatalog
@@ -52,9 +52,6 @@ spec:
           max: "2"
         memory:
           limit: "1Gi"
-    configMaps:
-      - name: spark-pi-config
-        path: /mnt/config-maps
   executor:
     replicas: 1
     config:
