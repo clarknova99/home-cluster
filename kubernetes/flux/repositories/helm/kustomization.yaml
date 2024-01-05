@@ -36,6 +36,7 @@ resources:
   - ./rook-ceph.yaml
   - ./runix.yaml
   - ./spark-operator.yaml
+  - ./stackable.yaml
   - ./stakater.yaml
   - ./superset.yaml
   - ./tooljet.yaml
