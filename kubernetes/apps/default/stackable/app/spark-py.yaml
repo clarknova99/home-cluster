@@ -35,12 +35,6 @@ spec:
     # spark.history.fs.logDirectory: file:///opt/spark/logs/history
     spark.ui.reverseProxy: "true"
     spark.ui.reverseProxyUrl: "https://spark.${SECRET_DOMAIN}"
-  restartPolicy:
-    type: OnFailure
-    onFailureRetries: 3
-    onFailureRetryInterval: 10
-    onSubmissionFailureRetries: 5
-    onSubmissionFailureRetryInterval: 20
   driver:
     config:
       resources:
