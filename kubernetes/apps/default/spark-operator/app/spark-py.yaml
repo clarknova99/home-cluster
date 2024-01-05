@@ -1,14 +1,14 @@
 apiVersion: "sparkoperator.k8s.io/v1beta2"
 kind: SparkApplication
 metadata:
-  name: pyspark-pi
+  name: sparkapp-pyspark-test
   namespace: default
 spec:
   type: Python
   pythonVersion: "3"
   mode: cluster
-  image: "clarknova9/spark:3.5.0-scala2.12-v0.0.4"
-  imagePullPolicy: Always
+  image: "spark:python3-java17"
+  imagePullPolicy: IfNotPresent
   mainApplicationFile: local:////mnt/config-maps/pi.py
   sparkConf:
     spark.sql.extensions: io.delta.sql.DeltaSparkSessionExtension
@@ -30,7 +30,7 @@ spec:
     spark.pyspark.python: "/usr/bin/python3"
     spark.pyspark.driver.python:  "/usr/bin/python3"
 
-    #spark.eventLog.enabled: true
+    # spark.eventLog.enabled: true
     # spark.eventLog.dir: file:///opt/spark/logs/events
     # spark.history.fs.logDirectory: file:///opt/spark/logs/history
     spark.ui.reverseProxy: "true"
@@ -51,7 +51,7 @@ spec:
     memory: "512m"
     labels:
       version: 3.5.0
-    serviceAccount: spark-operator
+    serviceAccount: spark
     configMaps:
       - name: spark-pi-config
         path: /mnt/config-maps
