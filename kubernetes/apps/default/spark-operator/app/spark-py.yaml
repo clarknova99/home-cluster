@@ -30,7 +30,7 @@ spec:
     #spark.eventLog.enabled: true
     # spark.eventLog.dir: file:///opt/spark/logs/events
     # spark.history.fs.logDirectory: file:///opt/spark/logs/history
-    spark.ui.reverseProxy: true
+    spark.ui.reverseProxy: "true"
     spark.ui.reverseProxyUrl: "https://spark.${SECRET_DOMAIN}"
   sparkVersion: "3.5.0"
   restartPolicy:
