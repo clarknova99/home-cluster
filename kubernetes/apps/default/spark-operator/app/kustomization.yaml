@@ -6,7 +6,7 @@ namespace: default
 resources:
   - ./helmrelease.yaml
   - ./pi-configmap.yaml
-  - ./spark-py.yaml
+  #- ./spark-py.yaml
   - ./rbac.yaml
 
 
