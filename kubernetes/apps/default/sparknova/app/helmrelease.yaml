@@ -54,7 +54,7 @@ spec:
           jupyter:
             image:
               repository: docker.io/clarknova9/sparknova
-              tag: 0.0.00.0.0@sha256:f85378768c13d35613ff94909e6f73044a53f6ec56384c2c3c6d2bc4870d902e
+              tag: 0.0.0@sha256:f85378768c13d35613ff94909e6f73044a53f6ec56384c2c3c6d2bc4870d902e
             imagePullPolicy: Always
             command: ["jupyter", "lab", "--allow-root", "--ip=0.0.0.0", "--NotebookApp.token=", "--no-browser", "--ServerApp.root_dir=/opt/workspace"]
             ports:
@@ -114,7 +114,7 @@ spec:
           spark-worker-3:
             image:
               repository: docker.io/clarknova9/sparknova
-              tag: 0.0.0sha256:f85378768c13d35613ff94909e6f73044a53f6ec56384c2c3c6d2bc4870d902e
+              tag: 0.0.0@sha256:f85378768c13d35613ff94909e6f73044a53f6ec56384c2c3c6d2bc4870d902e
             imagePullPolicy: IfNotPresent
             command: ["/opt/spark/bin/spark-class","org.apache.spark.deploy.worker.Worker", "spark://sparknova-spark-master-svc:7077"]
             ports:
