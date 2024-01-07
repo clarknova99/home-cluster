@@ -34,7 +34,7 @@ spec:
           main:
             image:
               repository: docker.io/clarknova9/sparknova
-              tag: 0.0.0
+              tag: 0.0.0@sha256:563b6783235cf99a57a700517b2d7c6068705bbcb1c496f4f46e53f4149e8f2b
             imagePullPolicy: Always
             command: ["/opt/spark/bin/spark-class","org.apache.spark.deploy.master.Master"]
             ports:
@@ -82,7 +82,7 @@ spec:
           spark-worker-1:
             image:
               repository: docker.io/clarknova9/sparknova
-              tag: 0.0.0
+              tag: 0.0.0@sha256:563b6783235cf99a57a700517b2d7c6068705bbcb1c496f4f46e53f4149e8f2b
             imagePullPolicy: Always
             command: ["/opt/spark/bin/spark-class","org.apache.spark.deploy.worker.Worker", "spark://sparknova-spark-master-svc:7077"]
             ports:
@@ -98,7 +98,7 @@ spec:
           spark-worker-2:
             image:
               repository: docker.io/clarknova9/sparknova
-              tag: 0.0.0
+              tag: 0.0.0@sha256:563b6783235cf99a57a700517b2d7c6068705bbcb1c496f4f46e53f4149e8f2b
             imagePullPolicy: Always
             command: ["/opt/spark/bin/spark-class","org.apache.spark.deploy.worker.Worker", "spark://sparknova-spark-master-svc:7077"]
             ports:
@@ -114,7 +114,7 @@ spec:
           spark-worker-3:
             image:
               repository: docker.io/clarknova9/sparknova
-              tag: 0.0.0
+              tag: 0.0.0@sha256:563b6783235cf99a57a700517b2d7c6068705bbcb1c496f4f46e53f4149e8f2b
             imagePullPolicy: IfNotPresent
             command: ["/opt/spark/bin/spark-class","org.apache.spark.deploy.worker.Worker", "spark://sparknova-spark-master-svc:7077"]
             ports:
