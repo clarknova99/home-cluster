@@ -40,7 +40,6 @@ data:
     # spark.eventLog.dir                                    file:///opt/spark/logs/events
     # spark.history.fs.logDirectory                         file:///opt/spark/logs/history
 
-
     # spark.sql.defaultCatalog                                spark_catalog
     # spark.sql.catalog.spark_catalog.warehouse               s3a://spark/spark_catalog
     # spark.sql.catalog.spark_catalog.s3.endpoint             http://minio.kube-system.svc.cluster.local:9000
@@ -48,6 +47,8 @@ data:
     # spark.sql.catalog.spark_catalog.jdbc.useSSL             false
     # spark.sql.catalog.spark_catalog.jdbc.user               ${SECRET_POSTGRES_USERNAME}
     # spark.sql.catalog.spark_catalog.jdbc.password           ${SECRET_POSTGRES_PASSWORD}
+
+    #spark.hadoop.fs.s3a.committer.name                      magic
 
     spark.master                                            spark://sparknova-spark-master-svc:7077
     spark.sql.extensions                                    io.delta.sql.DeltaSparkSessionExtension
@@ -65,7 +66,6 @@ data:
     spark.hadoop.fs.s3a.path.style.access                   true
     spark.hadoop.fs.s3a.connection.ssl.enabled              false
     spark.hadoop.fs.s3a.impl                                org.apache.hadoop.fs.s3a.S3AFileSystem
-    #spark.hadoop.fs.s3a.committer.name                      magic
     spark.eventLog.enabled                                  true
     spark.eventLog.dir                                      file:///opt/spark/logs/events
     spark.history.fs.logDirectory                           file:///opt/spark/logs/history
