@@ -83,7 +83,7 @@ spec:
             image:
               repository: docker.io/clarknova9/sparknova
               tag: 0.0.0
-            imagePullPolicy: IfNotPresent
+            imagePullPolicy: Always
             command: ["/opt/spark/bin/spark-class","org.apache.spark.deploy.worker.Worker", "spark://sparknova-spark-master-svc:7077"]
             ports:
               - name: http
@@ -99,7 +99,7 @@ spec:
             image:
               repository: docker.io/clarknova9/sparknova
               tag: 0.0.0
-            imagePullPolicy: IfNotPresent
+            imagePullPolicy: Always
             command: ["/opt/spark/bin/spark-class","org.apache.spark.deploy.worker.Worker", "spark://sparknova-spark-master-svc:7077"]
             ports:
               - name: http
