@@ -131,11 +131,11 @@ spec:
           nodeSelector:
             kubernetes.io/arch: amd64
             #kubernetes.io/hostname: aurora
-          securityContext:
-            runAsUser: 185
-            runAsGroup: 185
-            fsGroup: 185
-            fsGroupChangePolicy: OnRootMismatch
+          # securityContext:
+          #   runAsUser: 185
+          #   runAsGroup: 185
+          #   fsGroup: 185
+          #   fsGroupChangePolicy: OnRootMismatch
       # spark-worker-1:
       #   type: deployment
       #   replicas: 1
