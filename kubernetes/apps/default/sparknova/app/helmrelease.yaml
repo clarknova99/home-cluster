@@ -54,7 +54,7 @@ spec:
           jupyter:
             image:
               repository: docker.io/clarknova9/sparknova
-              tag: 0.0.0
+              tag: 0.0.00.0.0@sha256:563b6783235cf99a57a700517b2d7c6068705bbcb1c496f4f46e53f4149e8f2b
             imagePullPolicy: Always
             command: ["jupyter", "lab", "--allow-root", "--ip=0.0.0.0", "--NotebookApp.token=", "--no-browser", "--ServerApp.root_dir=/opt/workspace"]
             ports:
@@ -64,7 +64,7 @@ spec:
           kyuubi:
             image:
               repository: docker.io/clarknova9/sparknova
-              tag: 0.0.0
+              tag: 0.0.0@sha256:563b6783235cf99a57a700517b2d7c6068705bbcb1c496f4f46e53f4149e8f2b
             imagePullPolicy: Always
             command: ["/opt/kyuubi/bin/kyuubi", "run"]
             ports:
