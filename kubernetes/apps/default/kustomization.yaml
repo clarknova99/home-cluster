@@ -16,7 +16,7 @@ resources:
   - ./mosquitto/ks.yaml
   - ./n8n/ks.yaml
   #- ./spark/ks.yaml
-  #$- ./sparknova/ks.yaml
+  - ./sparknova/ks.yaml
   #- ./spark-operator/ks.yaml
  # - ./stackable/ks.yaml
   - ./troddit/ks.yaml
