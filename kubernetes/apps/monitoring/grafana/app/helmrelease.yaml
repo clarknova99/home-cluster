@@ -173,7 +173,7 @@ spec:
             type: influxdb
             uid: influxdb
             access: proxy
-            url: http://influxdb.monitoring.svc.cluster.local:8086
+            url: http://influxdb.database.svc.cluster.local:8086
             jsonData:
               dbName: brad
           - name: Parseable
