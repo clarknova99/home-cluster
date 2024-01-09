@@ -70,6 +70,22 @@ spec:
               SPARK_MODE: master
               SPARK_MASTER_PORT: "7077"
               SPARK_MASTER_WEBUI_PORT: "8080"
+        pod:
+          topologySpreadConstraints:
+            - maxSkew: 1
+              topologyKey: kubernetes.io/hostname
+              whenUnsatisfiable: ScheduleAnyway
+              labelSelector:
+                matchLabels:
+                  app.kubernetes.io/name: sparknova
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+                - matchExpressions:
+                    - key: kubernetes.io/arch
+                      operator: In
+                      values:
+                        - amd64
       spark-worker:
         type: deployment
         replicas: 3
