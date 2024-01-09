@@ -30,6 +30,14 @@ spec:
         - maxSkew: 1
           topologyKey: kubernetes.io/hostname
           whenUnsatisfiable: ScheduleAnyway
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: kubernetes.io/arch
+                  operator: In
+                  values:
+                    - amd64
     controllers:
       main:
         type: statefulset
@@ -56,10 +64,10 @@ spec:
               SPARK_MODE: master
               SPARK_MASTER_PORT: "7077"
               SPARK_MASTER_WEBUI_PORT: "8080"
-        pod:
-          nodeSelector:
-            kubernetes.io/arch: amd64
-            kubernetes.io/hostname: nuc8
+        # pod:
+        #   nodeSelector:
+        #     kubernetes.io/arch: amd64
+        #     kubernetes.io/hostname: nuc8
       spark-worker:
         type: deployment
         replicas: 3
@@ -80,13 +88,13 @@ spec:
               SPARK_WORKER_MEMORY: 4G
               SPARK_WORKER_CORES: "2"
               SPARK_WORKER_WEBUI_PORT: "8081"
-        pod:
-          topologySpreadConstraints:
-          - maxSkew: 1
-            topologyKey: kubernetes.io/hostname
-            whenUnsatisfiable: ScheduleAnyway
-          nodeSelector:
-            kubernetes.io/arch: amd64
+        # pod:
+        #   topologySpreadConstraints:
+        #   - maxSkew: 1
+        #     topologyKey: kubernetes.io/hostname
+        #     whenUnsatisfiable: ScheduleAnyway
+        #   nodeSelector:
+        #     kubernetes.io/arch: amd64
       jupyter:
         type: deployment
         replicas: 1
@@ -101,9 +109,9 @@ spec:
               - name: http
                 containerPort: 8888
                 protocol: TCP
-        pod:
-          nodeSelector:
-            kubernetes.io/arch: amd64
+        # pod:
+        #   nodeSelector:
+        #     kubernetes.io/arch: amd64
       kyuubi:
         type: deployment
         replicas: 1
@@ -126,9 +134,9 @@ spec:
               kyuubi.engineEnv.SPARK_DRIVER_CORES: "2"
               kyuubi.engineEnv.SPARK_EXECUTOR_MEMORY: 2g
               kyuubi.engineEnv.SPARK_EXECUTOR_CORES: "2"
-        pod:
-          nodeSelector:
-            kubernetes.io/arch: amd64
+        # pod:
+        #   nodeSelector:
+        #     kubernetes.io/arch: amd64
     serviceAccount:
       create: false
       name: sparknova
