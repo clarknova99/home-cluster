@@ -2,26 +2,26 @@
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: spark
+  name: sparknova
   namespace: default
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: spark-role
+  name: sparknova-role
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
   name: edit
 subjects:
   - kind: ServiceAccount
-    name: spark
+    name: sparknova
     namespace: default
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: spark-secret
-  annotations:
-    kubernetes.io/service-account.name: spark
-type: kubernetes.io/service-account-token
+# ---
+# apiVersion: v1
+# kind: Secret
+# metadata:
+#   name: sparknova-secret
+#   annotations:
+#     kubernetes.io/service-account.name: spark
+# type: kubernetes.io/service-account-token

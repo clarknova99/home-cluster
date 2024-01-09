@@ -5,6 +5,6 @@ kind: Kustomization
 namespace: default
 resources:
   - ./helmrelease.yaml
+  - ./rbac.yaml
   - ./spark-configmap.yaml
   - ./kyuubi-configmap.yaml
-  #- ./ingress.yaml
