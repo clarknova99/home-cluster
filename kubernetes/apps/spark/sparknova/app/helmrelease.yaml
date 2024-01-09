@@ -271,9 +271,36 @@ spec:
         accessMode: ReadWriteOnce
         retain: false
         size: 5Gi
-        globalMounts:
-          - path: /tmp
-            readOnly: false
+        advancedMounts:
+          main:
+            main:
+              - path: /tmp
+                readOnly: false
+          spark-worker:
+            spark-worker:
+              - path: /tmp
+                readOnly: false
+          kyuubi:
+            kyuubi:
+              - path: /tmp
+                readOnly: false
+          jupyter:
+            jupyter:
+              - path: /tmp
+                readOnly: false
+      # tmp:
+      #   enabled: true
+      #   storageClass: local-hostpath
+      #   accessMode: ReadWriteOnce
+      #   retain: false
+      #   size: 5Gi
+      #   globalMounts:
+      #     - path: /tmp
+      #       readOnly: false
+
+
+
+
       config-file:
         type: configMap
         name: spark-config
