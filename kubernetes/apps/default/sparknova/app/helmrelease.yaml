@@ -79,54 +79,6 @@ spec:
               kyuubi.engineEnv.SPARK_DRIVER_CORES: "2"
               kyuubi.engineEnv.SPARK_EXECUTOR_MEMORY: 2g
               kyuubi.engineEnv.SPARK_EXECUTOR_CORES: "2"
-          spark-worker-1:
-            image:
-              repository: docker.io/clarknova9/sparknova
-              tag: 0.0.0@sha256:f85378768c13d35613ff94909e6f73044a53f6ec56384c2c3c6d2bc4870d902e
-            imagePullPolicy: Always
-            command: ["/opt/spark/bin/spark-class","org.apache.spark.deploy.worker.Worker", "spark://sparknova-spark-master-svc:7077"]
-            ports:
-              - name: http
-                containerPort: 8081
-                protocol: TCP
-            env:
-              SPARK_MODE: worker
-              SPARK_MASTER_URL: spark://sparknova-spark-master-svc:7077
-              SPARK_WORKER_MEMORY: 4G
-              SPARK_WORKER_CORES: "2"
-              SPARK_WORKER_WEBUI_PORT: "8081"
-          spark-worker-2:
-            image:
-              repository: docker.io/clarknova9/sparknova
-              tag: 0.0.0@sha256:f85378768c13d35613ff94909e6f73044a53f6ec56384c2c3c6d2bc4870d902e
-            imagePullPolicy: Always
-            command: ["/opt/spark/bin/spark-class","org.apache.spark.deploy.worker.Worker", "spark://sparknova-spark-master-svc:7077"]
-            ports:
-              - name: http
-                containerPort: 8081
-                protocol: TCP
-            env:
-              SPARK_MODE: worker
-              SPARK_MASTER_URL: spark://sparknova-spark-master-svc:7077
-              SPARK_WORKER_MEMORY: 4G
-              SPARK_WORKER_CORES: "2"
-              SPARK_WORKER_WEBUI_PORT: "8081"
-          # spark-worker-3:
-          #   image:
-          #     repository: docker.io/clarknova9/sparknova
-          #     tag: 0.0.0@sha256:f85378768c13d35613ff94909e6f73044a53f6ec56384c2c3c6d2bc4870d902e
-          #   imagePullPolicy: IfNotPresent
-          #   command: ["/opt/spark/bin/spark-class","org.apache.spark.deploy.worker.Worker", "spark://sparknova-spark-master-svc:7077"]
-          #   ports:
-          #     - name: http
-          #       containerPort: 8081
-          #       protocol: TCP
-          #   env:
-          #     SPARK_MODE: worker
-          #     SPARK_MASTER_URL: spark://sparknova-spark-master-svc:7077
-          #     SPARK_WORKER_MEMORY: 4G
-          #     SPARK_WORKER_CORES: "2"
-          #     SPARK_WORKER_WEBUI_PORT: "8081"
         pod:
           nodeSelector:
             kubernetes.io/arch: amd64
@@ -136,11 +88,11 @@ spec:
           #   runAsGroup: 185
           #   fsGroup: 185
           #   fsGroupChangePolicy: OnRootMismatch
-      spark-worker-3:
+      spark-worker:
         type: deployment
-        replicas: 1
+        replicas: 3
         containers:
-          spark-worker-3:
+          spark-worker:
             image:
               repository: docker.io/clarknova9/sparknova
               tag: 0.0.0@sha256:f85378768c13d35613ff94909e6f73044a53f6ec56384c2c3c6d2bc4870d902e
@@ -152,7 +104,7 @@ spec:
                 protocol: TCP
             env:
               SPARK_MODE: worker
-              SPARK_MASTER_URL: spark://sparknova-spark-master-svc:7077
+              SPARK_MASTER_URL: spark://sparknova-spark-master-svc.default.svc.cluster.local:7077
               SPARK_WORKER_MEMORY: 4G
               SPARK_WORKER_CORES: "2"
               SPARK_WORKER_WEBUI_PORT: "8081"

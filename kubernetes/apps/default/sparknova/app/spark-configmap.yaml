@@ -48,7 +48,7 @@ data:
     # spark.sql.catalog.spark_catalog.jdbc.user               ${SECRET_POSTGRES_USERNAME}
     # spark.sql.catalog.spark_catalog.jdbc.password           ${SECRET_POSTGRES_PASSWORD}
 
-    spark.master                                            spark://sparknova-spark-master-svc:7077
+    spark.master                                            spark://sparknova-spark-master-svc.default.svc.cluster.local:7077
     spark.sql.extensions                                    io.delta.sql.DeltaSparkSessionExtension
     spark.sql.catalog.spark_catalog                         org.apache.spark.sql.delta.catalog.DeltaCatalog
     spark.sql.catalogImplementation                         hive
