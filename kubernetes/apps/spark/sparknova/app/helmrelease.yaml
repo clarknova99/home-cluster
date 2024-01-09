@@ -40,7 +40,7 @@ spec:
                     - amd64
     controllers:
       main:
-        type: statefulset
+        type: deployment
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
@@ -76,7 +76,7 @@ spec:
             image:
               repository: docker.io/clarknova9/sparknova
               tag: 0.0.0@sha256:f85378768c13d35613ff94909e6f73044a53f6ec56384c2c3c6d2bc4870d902e
-            imagePullPolicy: IfNotPresent
+            imagePullPolicy: Always
             command: ["/opt/spark/bin/spark-class","org.apache.spark.deploy.worker.Worker", "spark://sparknova-spark-master-svc.spark.svc.cluster.local:7077"]
             ports:
               - name: http
@@ -103,7 +103,7 @@ spec:
             image:
               repository: docker.io/clarknova9/sparknova
               tag: 0.0.0@sha256:f85378768c13d35613ff94909e6f73044a53f6ec56384c2c3c6d2bc4870d902e
-            imagePullPolicy: IfNotPresent
+            imagePullPolicy: Always
             command: ["jupyter", "lab", "--allow-root", "--ip=0.0.0.0", "--NotebookApp.token=", "--no-browser", "--ServerApp.root_dir=/opt/workspace"]
             ports:
               - name: http
@@ -120,7 +120,7 @@ spec:
             image:
               repository: docker.io/clarknova9/sparknova
               tag: 0.0.0@sha256:f85378768c13d35613ff94909e6f73044a53f6ec56384c2c3c6d2bc4870d902e
-            imagePullPolicy: IfNotPresent
+            imagePullPolicy: Always
             command: ["/opt/kyuubi/bin/kyuubi", "run"]
             ports:
               - name: http
