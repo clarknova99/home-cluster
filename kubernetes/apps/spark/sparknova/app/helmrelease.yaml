@@ -64,10 +64,18 @@ spec:
               SPARK_MODE: master
               SPARK_MASTER_PORT: "7077"
               SPARK_MASTER_WEBUI_PORT: "8080"
-        # pod:
-        #   nodeSelector:
-        #     kubernetes.io/arch: amd64
-        #     kubernetes.io/hostname: nuc8
+        pod:
+          podAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+                - matchExpressions:
+                    - key: kubernetes.io/arch
+                      operator: In
+                      values:
+                        - amd64
+          # nodeSelector:
+          #   kubernetes.io/arch: amd64
+          #   kubernetes.io/hostname: nuc8
       spark-worker:
         type: deployment
         replicas: 3
@@ -109,9 +117,15 @@ spec:
               - name: http
                 containerPort: 8888
                 protocol: TCP
-        # pod:
-        #   nodeSelector:
-        #     kubernetes.io/arch: amd64
+        pod:
+          podAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+                - matchExpressions:
+                    - key: kubernetes.io/arch
+                      operator: In
+                      values:
+                        - amd64
       kyuubi:
         type: deployment
         replicas: 1
