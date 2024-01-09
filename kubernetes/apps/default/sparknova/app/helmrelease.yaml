@@ -25,6 +25,11 @@ spec:
       retries: 5
   ## If you're reading this, please know I have no idea what I'm doing and learning as I go along. Highly likely this is not the preferred method for deploying Spark on Kubernetes
   values:
+    defaultPodOptions:
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: ScheduleAnyway
     controllers:
       main:
         type: statefulset
