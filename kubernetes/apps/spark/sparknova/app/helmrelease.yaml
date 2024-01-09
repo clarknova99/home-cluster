@@ -25,24 +25,24 @@ spec:
       retries: 5
   ## If you're reading this, please know I have no idea what I'm doing and learning as I go along. Highly likely this is not the preferred method for deploying Spark on Kubernetes
   values:
-    # defaultPodOptions:
-    #   labels:
-    #     app: sparknova
-    #   topologySpreadConstraints:
-    #     - maxSkew: 1
-    #       topologyKey: kubernetes.io/hostname
-    #       whenUnsatisfiable: ScheduleAnyway
-    #       labelSelector:
-    #         matchLabels:
-    #           app.kubernetes.io/name: sparknova
-    #   nodeAffinity:
-    #     requiredDuringSchedulingIgnoredDuringExecution:
-    #       nodeSelectorTerms:
-    #         - matchExpressions:
-    #             - key: kubernetes.io/arch
-    #               operator: In
-    #               values:
-    #                 - amd64
+    defaultPodOptions:
+      labels:
+        app: sparknova
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: ScheduleAnyway
+          labelSelector:
+            matchLabels:
+              app.kubernetes.io/name: sparknova
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: kubernetes.io/arch
+                  operator: In
+                  values:
+                    - amd64
     controllers:
       main:
         type: deployment
@@ -70,18 +70,6 @@ spec:
               SPARK_MODE: master
               SPARK_MASTER_PORT: "7077"
               SPARK_MASTER_WEBUI_PORT: "8080"
-        # pod:
-        #   podAffinity:
-        #     requiredDuringSchedulingIgnoredDuringExecution:
-        #       nodeSelectorTerms:
-        #         - matchExpressions:
-        #             - key: kubernetes.io/arch
-        #               operator: In
-        #               values:
-        #                 - amd64
-          # nodeSelector:
-          #   kubernetes.io/arch: amd64
-          #   kubernetes.io/hostname: nuc8
       spark-worker:
         type: deployment
         replicas: 3
@@ -109,13 +97,6 @@ spec:
               limits:
                 cpu: 2000m
                 memory: 8G
-        # pod:
-        #   topologySpreadConstraints:
-        #   - maxSkew: 1
-        #     topologyKey: kubernetes.io/hostname
-        #     whenUnsatisfiable: ScheduleAnyway
-        #   nodeSelector:
-        #     kubernetes.io/arch: amd64
       jupyter:
         type: deployment
         replicas: 1
@@ -130,14 +111,6 @@ spec:
               - name: http
                 containerPort: 8888
                 protocol: TCP
-        pod:
-          topologySpreadConstraints:
-            - maxSkew: 1
-              topologyKey: kubernetes.io/hostname
-              whenUnsatisfiable: DoNotSchedule
-              labelSelector:
-                matchLabels:
-                  app.kubernetes.io/name: sparknova
       kyuubi:
         type: deployment
         replicas: 1
@@ -160,9 +133,6 @@ spec:
               kyuubi.engineEnv.SPARK_DRIVER_CORES: "2"
               kyuubi.engineEnv.SPARK_EXECUTOR_MEMORY: 2g
               kyuubi.engineEnv.SPARK_EXECUTOR_CORES: "2"
-        # pod:
-        #   nodeSelector:
-        #     kubernetes.io/arch: amd64
     serviceAccount:
       create: false
       name: sparknova
@@ -265,42 +235,6 @@ spec:
           - hosts:
               - jupyter.${SECRET_DOMAIN}
     persistence:
-      # tmp:
-      #   enabled: true
-      #   storageClass: local-hostpath
-      #   accessMode: ReadWriteOnce
-      #   retain: false
-      #   size: 5Gi
-      #   advancedMounts:
-      #     main:
-      #       main:
-      #         - path: /tmp
-      #           readOnly: false
-      #     spark-worker:
-      #       spark-worker:
-      #         - path: /tmp
-      #           readOnly: false
-      #     kyuubi:
-      #       kyuubi:
-      #         - path: /tmp
-      #           readOnly: false
-      #     jupyter:
-      #       jupyter:
-      #         - path: /tmp
-      #           readOnly: false
-      # tmp:
-      #   enabled: true
-      #   storageClass: local-hostpath
-      #   accessMode: ReadWriteOnce
-      #   retain: false
-      #   size: 5Gi
-      #   globalMounts:
-      #     - path: /tmp
-      #       readOnly: false
-
-
-
-
       config-file:
         type: configMap
         name: spark-config
