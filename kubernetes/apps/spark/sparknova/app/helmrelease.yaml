@@ -25,24 +25,24 @@ spec:
       retries: 5
   ## If you're reading this, please know I have no idea what I'm doing and learning as I go along. Highly likely this is not the preferred method for deploying Spark on Kubernetes
   values:
-    defaultPodOptions:
-      labels:
-        app: sparknova
-      topologySpreadConstraints:
-        - maxSkew: 1
-          topologyKey: kubernetes.io/hostname
-          whenUnsatisfiable: ScheduleAnyway
-          labelSelector:
-            matchLabels:
-              app.kubernetes.io/name: sparknova
-      nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-            - matchExpressions:
-                - key: kubernetes.io/arch
-                  operator: In
-                  values:
-                    - amd64
+    # defaultPodOptions:
+    #   labels:
+    #     app: sparknova
+    #   topologySpreadConstraints:
+    #     - maxSkew: 1
+    #       topologyKey: kubernetes.io/hostname
+    #       whenUnsatisfiable: ScheduleAnyway
+    #       labelSelector:
+    #         matchLabels:
+    #           app.kubernetes.io/name: sparknova
+    #   nodeAffinity:
+    #     requiredDuringSchedulingIgnoredDuringExecution:
+    #       nodeSelectorTerms:
+    #         - matchExpressions:
+    #             - key: kubernetes.io/arch
+    #               operator: In
+    #               values:
+    #                 - amd64
     controllers:
       main:
         type: deployment
@@ -70,15 +70,15 @@ spec:
               SPARK_MODE: master
               SPARK_MASTER_PORT: "7077"
               SPARK_MASTER_WEBUI_PORT: "8080"
-        pod:
-          podAffinity:
-            requiredDuringSchedulingIgnoredDuringExecution:
-              nodeSelectorTerms:
-                - matchExpressions:
-                    - key: kubernetes.io/arch
-                      operator: In
-                      values:
-                        - amd64
+        # pod:
+        #   podAffinity:
+        #     requiredDuringSchedulingIgnoredDuringExecution:
+        #       nodeSelectorTerms:
+        #         - matchExpressions:
+        #             - key: kubernetes.io/arch
+        #               operator: In
+        #               values:
+        #                 - amd64
           # nodeSelector:
           #   kubernetes.io/arch: amd64
           #   kubernetes.io/hostname: nuc8
@@ -131,14 +131,13 @@ spec:
                 containerPort: 8888
                 protocol: TCP
         pod:
-          podAffinity:
-            requiredDuringSchedulingIgnoredDuringExecution:
-              nodeSelectorTerms:
-                - matchExpressions:
-                    - key: kubernetes.io/arch
-                      operator: In
-                      values:
-                        - amd64
+          topologySpreadConstraints:
+            - maxSkew: 1
+              topologyKey: kubernetes.io/hostname
+              whenUnsatisfiable: DoNotSchedule
+              labelSelector:
+                matchLabels:
+                  app.kubernetes.io/name: sparknova
       kyuubi:
         type: deployment
         replicas: 1
