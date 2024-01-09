@@ -80,6 +80,10 @@ spec:
               SPARK_WORKER_CORES: "2"
               SPARK_WORKER_WEBUI_PORT: "8081"
         pod:
+          topologySpreadConstraints:
+          - maxSkew: 1
+            topologyKey: kubernetes.io/hostname
+            whenUnsatisfiable: ScheduleAnyway
           nodeSelector:
             kubernetes.io/arch: amd64
       jupyter:
