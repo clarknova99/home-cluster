@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: spark-config
+  name: hive-postgres-config
 data:
   hive-postgres.sql: |
     -- Licensed to the Apache Software Foundation (ASF) under one or more

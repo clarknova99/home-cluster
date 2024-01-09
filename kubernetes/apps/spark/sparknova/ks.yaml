@@ -6,7 +6,7 @@ metadata:
   name: cluster-apps-sparknova
   namespace: flux-system
 spec:
-  path: ./kubernetes/apps/default/sparknova/app
+  path: ./kubernetes/apps/spark/sparknova/app
   prune: true
   sourceRef:
     kind: GitRepository

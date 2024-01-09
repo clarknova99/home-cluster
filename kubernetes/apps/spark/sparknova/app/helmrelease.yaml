@@ -4,7 +4,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
   name: sparknova
-  namespace: default
+  namespace: spark
 spec:
   interval: 15m
   chart:
@@ -59,6 +59,7 @@ spec:
         pod:
           nodeSelector:
             kubernetes.io/arch: amd64
+            kubernetes.io/hostname: k8s-01
       spark-worker:
         type: deployment
         replicas: 3
@@ -68,14 +69,14 @@ spec:
               repository: docker.io/clarknova9/sparknova
               tag: 0.0.0@sha256:f85378768c13d35613ff94909e6f73044a53f6ec56384c2c3c6d2bc4870d902e
             imagePullPolicy: IfNotPresent
-            command: ["/opt/spark/bin/spark-class","org.apache.spark.deploy.worker.Worker", "spark://sparknova-spark-master-svc.default.svc.cluster.local:7077"]
+            command: ["/opt/spark/bin/spark-class","org.apache.spark.deploy.worker.Worker", "spark://sparknova-spark-master-svc.spark.svc.cluster.local:7077"]
             ports:
               - name: http
                 containerPort: 8081
                 protocol: TCP
             env:
               SPARK_MODE: worker
-              SPARK_MASTER_URL: spark://sparknova-spark-master-svc.default.svc.cluster.local:7077
+              SPARK_MASTER_URL: spark://sparknova-spark-master-svc.spark.svc.cluster.local:7077
               SPARK_WORKER_MEMORY: 4G
               SPARK_WORKER_CORES: "2"
               SPARK_WORKER_WEBUI_PORT: "8081"
