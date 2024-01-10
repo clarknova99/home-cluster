@@ -82,7 +82,7 @@ spec:
             kubernetes.io/arch: amd64
       spark-worker:
         type: deployment
-        replicas: 3
+        replicas: 4
         containers:
           spark-worker:
             image:
