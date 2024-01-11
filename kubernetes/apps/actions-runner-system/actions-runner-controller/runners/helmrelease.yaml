@@ -41,6 +41,8 @@ spec:
     controllerServiceAccount:
       name: actions-runner-controller-gha-rs-controller
       namespace: actions-runner-system
+    nodeSelector:
+      kubernetes.io/arch: amd64
     affinity:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:

@@ -27,6 +27,8 @@ spec:
   uninstall:
     keepHistory: false
   values:
+    nodeSelector:
+      kubernetes.io/arch: amd64
     affinity:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
