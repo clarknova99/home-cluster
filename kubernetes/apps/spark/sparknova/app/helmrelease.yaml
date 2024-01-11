@@ -207,6 +207,10 @@ spec:
             port: 6066
             targetPort: 6066
       jupyter:
+        annotations:
+          io.cilium/lb-ipam-ips: "192.168.2.102"
+        externalTrafficPolicy: Cluster
+        type: LoadBalancer
         controller: jupyter
         # -- Override the name suffix that is used for this service
         nameOverride: jupyter-svc
@@ -218,6 +222,10 @@ spec:
             protocol: TCP
             port: 8888
             targetPort: 8888
+          ssh:
+            protocol: TCP
+            port: 22
+            targetPort: 22
       kyuubi:
         annotations:
           io.cilium/lb-ipam-ips: "192.168.2.101"
@@ -236,7 +244,7 @@ spec:
             targetPort: 10009
       thrift:
         annotations:
-          io.cilium/lb-ipam-ips: "192.168.2.102"
+          io.cilium/lb-ipam-ips: "192.168.2.103"
         externalTrafficPolicy: Cluster
         type: LoadBalancer
         controller: main
