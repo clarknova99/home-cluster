@@ -48,12 +48,11 @@ spec:
         type: deployment
         annotations:
           reloader.stakater.com/auto: "true"
-
         containers:
           main:
             image:
               repository: docker.io/clarknova9/sparknova
-              tag: 0.0.1
+              tag: 0.0.1@sha256:c1e7e7d47a36034b28ea90c93b5d1138d01d9d05462924ca2925bcb1814e2a2c
             imagePullPolicy: Always
             command: ["/opt/spark/bin/spark-class","org.apache.spark.deploy.master.Master"]
             ports:
@@ -87,7 +86,7 @@ spec:
           spark-worker:
             image:
               repository: docker.io/clarknova9/sparknova
-              tag: 0.0.1
+              tag: 0.0.1@sha256:c1e7e7d47a36034b28ea90c93b5d1138d01d9d05462924ca2925bcb1814e2a2c
             imagePullPolicy: Always
             command: ["/opt/spark/bin/spark-class","org.apache.spark.deploy.worker.Worker", "spark://sparknova-spark-master-svc.spark.svc.cluster.local:7077"]
             ports:
@@ -124,7 +123,7 @@ spec:
           jupyter:
             image:
               repository: docker.io/clarknova9/sparknova
-              tag: 0.0.1
+              tag: 0.0.1@sha256:c1e7e7d47a36034b28ea90c93b5d1138d01d9d05462924ca2925bcb1814e2a2c
             imagePullPolicy: Always
             command: ["jupyter", "lab", "--allow-root", "--ip=0.0.0.0", "--NotebookApp.token=", "--no-browser", "--ServerApp.root_dir=/opt/workspace"]
             ports:
@@ -148,7 +147,7 @@ spec:
           kyuubi:
             image:
               repository: docker.io/clarknova9/sparknova
-              tag: 0.0.1
+              tag: 0.0.1@sha256:c1e7e7d47a36034b28ea90c93b5d1138d01d9d05462924ca2925bcb1814e2a2c
             imagePullPolicy: Always
             command: ["/opt/kyuubi/bin/kyuubi", "run"]
             ports:
