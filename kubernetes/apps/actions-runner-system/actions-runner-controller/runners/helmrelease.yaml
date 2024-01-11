@@ -38,9 +38,9 @@ spec:
             image: ghcr.io/actions/actions-runner:2.311.0
             command: ["/home/runner/run.sh"]
         tolerations:
-        - key: kubernetes.io/arch
-          operator: Equal
-          values: arm64
+        - key: "kubernetes.io/arch"
+          operator: "Equal"
+          values: "arm64"
           effect: "NoSchedule"
     githubConfigSecret: actions-runner-controller-secrets
     controllerServiceAccount:
