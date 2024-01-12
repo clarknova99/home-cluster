@@ -59,11 +59,6 @@ spec:
                   operator: In
                   values:
                   - amd64
-        # tolerations:
-        # - key: "kubernetes.io/arch"
-        #   operator: "Equal"
-        #   values: "arm64"
-        #   effect: "NoSchedule"
     githubConfigSecret: actions-runner-controller-secrets
     controllerServiceAccount:
       name: actions-runner-controller-gha-rs-controller
