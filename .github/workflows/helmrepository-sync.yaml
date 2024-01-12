@@ -15,11 +15,6 @@ on:
     branches: ["main"]
     paths: ["kubernetes/**/helmrelease.yaml"]
 
-env:
-  DEBCONF_NONINTERACTIVE_SEEN: "true"
-  DEBIAN_FRONTEND: noninteractive
-  APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE: DontWarn
-
 jobs:
   sync:
     name: Flux HelmRepository Sync
@@ -36,13 +31,20 @@ jobs:
           sudo apt-get -qq update
           sudo apt-get -qq install --no-install-recommends -y curl git
 
-      - name: Setup Kube Tools
-        uses: yokawasa/action-setup-kube-tools@af4ebb1af1efd30c5bd84a2e9773355ad6362a33 # v0.9.3
-        with:
-          setup-tools: yq
+      - name: Setup Homebrew
+        uses: Homebrew/actions/setup-homebrew@master
 
-      - name: Setup Flux
-        uses: fluxcd/flux2/action@5c5c15ea212b8f029a110f9975851d25c8272695 # v2.2.2
+      - name: Setup Workflow Tools
+        shell: bash
+        run: brew install fluxcd/tap/flux yq
+
+      # - name: Setup Kube Tools
+      #   uses: yokawasa/action-setup-kube-tools@af4ebb1af1efd30c5bd84a2e9773355ad6362a33 # v0.9.3
+      #   with:
+      #     setup-tools: yq
+
+      # - name: Setup Flux
+      #   uses: fluxcd/flux2/action@5c5c15ea212b8f029a110f9975851d25c8272695 # v2.2.2
 
       - name: Write kubeconfig
         id: kubeconfig
