@@ -24,19 +24,19 @@ spec:
       retries: 3
   uninstall:
     keepHistory: false
-  # valuesFrom:
-  #   - targetPath: githubConfigSecret.github_app_id
-  #     kind: Secret
-  #     name: actions-runner-controller-secrets
-  #     valuesKey: ACTION_RUNNER_CONTROLLER_GITHUB_APP_ID
-  #   - targetPath: githubConfigSecret.github_app_installation_id
-  #     kind: Secret
-  #     name: actions-runner-controller-secrets
-  #     valuesKey: ACTION_RUNNER_CONTROLLER_GITHUB_INSTALLATION_ID
-  #   - targetPath: githubConfigSecret.github_app_private_key
-  #     kind: Secret
-  #     name: actions-runner-controller-secrets
-  #     valuesKey: ACTION_RUNNER_CONTROLLER_GITHUB_PRIVATE_KEY
+  valuesFrom:
+    - targetPath: githubConfigSecret.github_app_id
+      kind: Secret
+      name: actions-runner-controller-secrets
+      valuesKey: github_app_id
+    - targetPath: githubConfigSecret.github_app_installation_id
+      kind: Secret
+      name: actions-runner-controller-secrets
+      valuesKey: github_app_installation_id
+    - targetPath: githubConfigSecret.github_app_private_key
+      kind: Secret
+      name: actions-runner-controller-secrets
+      valuesKey: github_app_private_key
   values:
     githubConfigSecret: actions-runner-controller-secrets
     runnerScaleSetName: arc-runner-set-home-cluster
