@@ -38,7 +38,7 @@ spec:
       name: actions-runner-controller-secrets
       valuesKey: github_app_private_key
   values:
-    githubConfigSecret: actions-runner-controller-secrets
+    #githubConfigSecret: actions-runner-controller-secrets
     runnerScaleSetName: arc-runner-set-home-cluster
     githubConfigUrl: https://github.com/clarknova99/home-cluster
     minRunners: 1
