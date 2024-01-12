@@ -60,7 +60,6 @@ spec:
                   operator: In
                   values:
                   - amd64
-    githubConfigSecret: actions-runner-controller-secrets
     controllerServiceAccount:
       name: actions-runner-controller-gha-rs-controller
       namespace: actions-runner-system
