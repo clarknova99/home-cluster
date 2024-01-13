@@ -31,7 +31,6 @@ spec:
   values:
     controllers:
       main:
-        type: statefulset
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
@@ -41,7 +40,6 @@ spec:
               # tag: 1.32.8.7639-fb6452ebf
               repository: ghcr.io/onedr0p/plex-beta
               tag: 1.40.0.7775-456fbaf97@sha256:cd6bafd8cf9f75c2d5b6517de312a82a986049f89f089da74b6bdb23928b8b37
-
               #tag: plexpass
             env:
               # See https://support.plex.tv/articles/201105343-advanced-hidden-server-settings/
@@ -69,14 +67,14 @@ spec:
             supplementalGroups: [44, 105, 1000, 10000]
           # securityContext:
           #   privileged: true
-        statefulset:
-          volumeClaimTemplates:
-            - name: config
-              accessMode: ReadWriteOnce
-              size: 100Gi
-              storageClass: longhorn
-              globalMounts:
-                - path: /config
+        # statefulset:
+        #   volumeClaimTemplates:
+        #     - name: config
+        #       accessMode: ReadWriteOnce
+        #       size: 100Gi
+        #       storageClass: longhorn
+        #       globalMounts:
+        #         - path: /config
     service:
       main:
         type: LoadBalancer
@@ -131,9 +129,21 @@ spec:
           - hosts:
               - *host
     persistence:
+      config:
+        enabled: true
+        existingClaim: plex
+      # Separate PVC for cache to avoid backing up cache files
+      plex-cache:
+        existingClaim: pvc-plex
+        globalMounts:
+          - path: /config
+      tmp:
+        type: emptyDir
       transcode:
         type: emptyDir
       media:
-        existingClaim: pvc-videos
+        type: nfs
+        server: 192.168.1.2
+        path: /volume1/Video
         globalMounts:
           - path: /media
