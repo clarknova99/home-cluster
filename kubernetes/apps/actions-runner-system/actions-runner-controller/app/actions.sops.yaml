@@ -2,7 +2,6 @@ apiVersion: v1
 kind: Secret
 metadata:
     name: actions-runner-controller-secrets
-    namespace: actions-runner-system
 stringData:
     github_token_old: ENC[AES256_GCM,data:6Ksg25R2jSybaFH3soecMmMSNA03yyJ4eItcDit/+dFgCP16iCet42oSOPRl/x574OkjwvEMvr5Z4oCgjwpfls7CL4DZhqJz0EayJoUBdfb524uUJdNmfR7GKwbz,iv:tsOWLQjJFBYnSokwKkzfBiabxbqI/nJJA1bXbNlV2wI=,tag:ec36zHvr8VARpqRr129/DA==,type:str]
     github_token: ENC[AES256_GCM,data:jVnbjgWeki6RBBeAWxOZAr19EGf44t0HiliU0upR47gVCd4TxeJoIA==,iv:55T52hwTQYihsw0DqsUsGFasHENu2oBjIBPjzJ12Bfs=,tag:vOrbJl8XIY9L4i6j9ZcxEw==,type:str]
@@ -25,8 +24,8 @@ sops:
             clFnQ2RlK1Q3d1hhcFhJTUxPSHZ1OGcKvzwnHvYGq2c9xgdvwuQtywNFcB6N+3+/
             kR+mzAWJ3ZOZ4whkpuJHjoZfSwCbqjj+rDs3NFrrIVhr7K849lwCzw==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2024-01-13T00:10:47Z"
-    mac: ENC[AES256_GCM,data:gT3Z8H/ot9y/MORVdO80lbgOtDKHuk4RKTa3tJOuA5U6rjYYuqU/iH7rw5DSkWynH7JnqUci07Wrh3GsPiJZK2QWhj0jJla4LDAF0dq0H5IYo+oI0zFOWAOwXp5TIc9DA/j0G6w/hbVrJiERTNFGZcMnNsnzrA5nQCDeylJnSnw=,iv:5m/B8TEAfxTs6LWiC2JlCgxkW4002Y8vnAv0IU9IBYM=,tag:NEVRdCgBU+HwT270LSNp4A==,type:str]
+    lastmodified: "2024-01-13T00:40:53Z"
+    mac: ENC[AES256_GCM,data:RY2hDlFey+6YzBmfTqW/0vu8E1gCPCfdd+oeh2GbT4fXzBR4s9hLG68uWU1s1QWgS50YmZDeiUpyN8Pks32jM8LdKgD17CNj9LQoovIgmqZm7TeJTv1iOxmCMSsLoQtnNYGYwXZAb2066p7XC/HGRy9ylVRXg0DPHESG+jd5YyM=,iv:FAElWKE77q1cFgxp/6t8d4OlwqYH3swRYn6kTHwfbWg=,tag:JEBSwTHf+I6eClKjFy3Rug==,type:str]
     pgp: []
     encrypted_regex: ^(data|stringData)$
     version: 3.8.1
