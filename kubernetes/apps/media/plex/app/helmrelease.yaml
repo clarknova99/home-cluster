@@ -131,9 +131,6 @@ spec:
     persistence:
       config:
         enabled: true
-        existingClaim: plex
-      # Separate PVC for cache to avoid backing up cache files
-      plex-cache:
         existingClaim: pvc-plex
         globalMounts:
           - path: /config
