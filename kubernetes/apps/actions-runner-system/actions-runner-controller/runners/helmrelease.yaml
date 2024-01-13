@@ -52,14 +52,14 @@ spec:
       githubConfigSecret: actions-runner-controller-secrets
   valuesFrom:
     - kind: Secret
-      name: actions-runner-controller-secrets
-      valuesKey: github_app_id
+      name: cluster-secrets
+      valuesKey: SECRET_GITHUB_APP_ID
       targetPath: githubConfigSecret.github_app_id
     - kind: Secret
-      name: actions-runner-controller-secrets
-      valuesKey: github_app_installation_id
+      name: cluster-secrets
+      valuesKey: SECRET_GITHUB_APP_INSTALLATION_ID
       targetPath: githubConfigSecret.github_app_installation_id
     - kind: Secret
-      name: actions-runner-controller-secrets
-      valuesKey: github_app_private_key
+      name: cluster-secrets
+      valuesKey: SECRET_GITHUB_PRIVATE_KEY
       targetPath: githubConfigSecret.github_app_private_key
