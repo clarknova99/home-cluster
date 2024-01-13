@@ -24,19 +24,6 @@ spec:
       retries: 3
   uninstall:
     keepHistory: false
-  valuesFrom:
-    - kind: Secret
-      name: actions-runner-controller-secrets
-      valuesKey: github_app_id
-      targetPath: githubConfigSecret.github_app_id
-    - kind: Secret
-      name: actions-runner-controller-secrets
-      valuesKey: github_app_installation_id
-      targetPath: githubConfigSecret.github_app_installation_id
-    - kind: Secret
-      name: actions-runner-controller-secrets
-      valuesKey: github_app_private_key
-      targetPath: githubConfigSecret.github_app_private_key
   values:
     runnerScaleSetName: arc-runner-set-home-cluster
     githubConfigUrl: https://github.com/clarknova99/home-cluster
@@ -63,3 +50,16 @@ spec:
       name: actions-runner-controller-gha-rs-controller
       namespace: actions-runner-system
       githubConfigSecret: actions-runner-controller-secrets
+  valuesFrom:
+    - kind: Secret
+      name: actions-runner-controller-secrets
+      valuesKey: github_app_id
+      targetPath: githubConfigSecret.github_app_id
+    - kind: Secret
+      name: actions-runner-controller-secrets
+      valuesKey: github_app_installation_id
+      targetPath: githubConfigSecret.github_app_installation_id
+    - kind: Secret
+      name: actions-runner-controller-secrets
+      valuesKey: github_app_private_key
+      targetPath: githubConfigSecret.github_app_private_key
