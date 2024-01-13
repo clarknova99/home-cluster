@@ -34,7 +34,7 @@ spec:
           main:
             image:
               repository: docker.io/clarknova9/sparknova
-              tag: 0.0.0@sha256:f85378768c13d35613ff94909e6f73044a53f6ec56384c2c3c6d2bc4870d902e
+              tag: 0.0.2@sha256:cb2a4880b615d020a1c8af972f13e158fd407c2ee0dce97056d2cc75ba24c1ee
             imagePullPolicy: Always
             command: [
               "/opt/bin/spark-submit",
