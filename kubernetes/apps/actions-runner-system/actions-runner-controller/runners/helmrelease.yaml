@@ -28,17 +28,16 @@ spec:
     - targetPath: githubConfigSecret.github_app_id
       kind: Secret
       name: actions-runner-controller-secrets
-      valuesKey: github_app_id
+      valuesKey: ACTION_RUNNER_CONTROLLER_GITHUB_APP_ID
     - targetPath: githubConfigSecret.github_app_installation_id
       kind: Secret
       name: actions-runner-controller-secrets
-      valuesKey: github_app_installation_id
+      valuesKey: ACTION_RUNNER_CONTROLLER_GITHUB_INSTALLATION_ID
     - targetPath: githubConfigSecret.github_app_private_key
       kind: Secret
       name: actions-runner-controller-secrets
-      valuesKey: github_app_private_key
+      valuesKey: ACTION_RUNNER_CONTROLLER_GITHUB_PRIVATE_KEY
   values:
-    #githubConfigSecret: actions-runner-controller-secrets
     runnerScaleSetName: arc-runner-set-home-cluster
     githubConfigUrl: https://github.com/clarknova99/home-cluster
     minRunners: 1
@@ -60,6 +59,7 @@ spec:
                   operator: In
                   values:
                   - amd64
+    githubConfigSecret: actions-runner-controller-secrets
     controllerServiceAccount:
       name: actions-runner-controller-gha-rs-controller
       namespace: actions-runner-system
