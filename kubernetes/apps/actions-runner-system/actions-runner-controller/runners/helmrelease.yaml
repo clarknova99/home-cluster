@@ -62,5 +62,5 @@ spec:
       targetPath: githubConfigSecret.github_app_installation_id
     - kind: Secret
       name: actions-runner-controller-secrets
-      valuesKey: SECRET_GITHUB_PRIVATE_KEY
+      valuesKey: SECRET_GITHUB_APP_PRIVATE_KEY
       targetPath: githubConfigSecret.github_app_private_key
