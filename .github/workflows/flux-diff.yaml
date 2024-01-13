@@ -77,6 +77,14 @@ jobs:
           ref: "${{ github.event.repository.default_branch }}"
           path: default
 
+      - name: Install Flux
+        uses: fluxcd/flux2/action@main
+        with:
+          version: "latest"
+
+      - name: Setup yq
+        uses: frenck/action-setup-yq@v1
+
       - name: Diff Resources
         uses: allenporter/flux-local/action/diff@4.2.2
         id: diff
