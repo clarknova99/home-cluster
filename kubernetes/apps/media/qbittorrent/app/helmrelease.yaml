@@ -1,42 +1,123 @@
 ---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2beta2.json
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
   name: qbittorrent
   namespace: media
 spec:
-  interval: 5m
+  interval: 30m
   chart:
     spec:
       chart: app-template
-      version: 1.5.1
+      version: 2.4.0
       sourceRef:
         kind: HelmRepository
         name: bjw-s
         namespace: flux-system
-      interval: 5m
   install:
-    createNamespace: true
     remediation:
       retries: 3
   upgrade:
+    cleanupOnFail: true
     remediation:
       retries: 3
+  uninstall:
+    keepHistory: false
   values:
-    image:
-      repository: ghcr.io/onedr0p/qbittorrent
-      tag: 4.6.2@sha256:fedb62126c82ae0c7192e9052633411294a27e9c233613c03b0a8d168d160040
-    env:
-      TZ: "${TIMEZONE}"
-      UMASK: "022"
-      QBITTORRENT__PORT: &port 8080
-      QBITTORRENT__BT_PORT: &port-bt 50413
-    podSecurityContext:
-      runAsUser: 568
-      runAsGroup: 568
-      fsGroup: 568
-      fsGroupChangePolicy: OnRootMismatch
-      supplementalGroups: [10000]
+    controllers:
+      main:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        affinity:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+              - matchExpressions:
+                - key: kubernetes.io/arch
+                  operator: In
+                  values:
+                  - amd64
+        containers:
+          main:
+            image:
+              repository: ghcr.io/onedr0p/qbittorrent
+              tag: 4.6.2@sha256:fedb62126c82ae0c7192e9052633411294a27e9c233613c03b0a8d168d160040
+            env:
+              TZ: America/New_York
+              QBITTORRENT__PORT: &port 80
+              QBITTORRENT__BT_PORT: &bittorrentPort 50413
+              QBT_Preferences__WebUI__AlternativeUIEnabled: false
+              QBT_Preferences__WebUI__AuthSubnetWhitelistEnabled: true
+              QBT_Preferences__WebUI__AuthSubnetWhitelist: |-
+                10.42.0.0/16, 192.168.1.0/24
+              QBT_Preferences__WebUI__LocalHostAuth: false
+              QBT_BitTorrent__Session__Interface: eth0
+              QBT_BitTorrent__Session__InterfaceAddress:
+                valueFrom:
+                  fieldRef:
+                    fieldPath: status.podIP
+              QBT_BitTorrent__Session__InterfaceName: eth0
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /api/v2/app/version
+                    port: *port
+                  initialDelaySeconds: 0
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+                  failureThreshold: 3
+              readiness: *probes
+              startup:
+                enabled: false
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
+            resources:
+              requests:
+                cpu: 100m
+              limits:
+                memory: 16Gi
+        pod:
+          securityContext:
+            runAsUser: 568
+            runAsGroup: 568
+            fsGroup: 568
+            fsGroupChangePolicy: OnRootMismatch
+            supplementalGroups: [10000]
+    service:
+      main:
+        ports:
+          http:
+            port: *port
+      bittorrent:
+        controller: main
+        type: LoadBalancer
+        annotations:
+          io.cilium/lb-ipam-ips: 192.168.2.48
+        ports:
+          bittorrent:
+            enabled: true
+            port: *bittorrentPort
+            protocol: TCP
+    ingress:
+      main:
+        enabled: true
+        className: internal
+        hosts:
+          - host: &host qb.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                service:
+                  name: main
+                  port: http
+        tls:
+          - hosts:
+              - *host
     persistence:
       downloads:
         enabled: true
@@ -46,26 +127,74 @@ spec:
         enabled: true
         existingClaim: pvc-qbittorrent
         mountPath: /config
-    service:
-      main:
-        ports:
-          http:
-            port: *port
-      bittorrent:
-        enabled: true
-        type: LoadBalancer
-        annotations:
-          io.cilium/lb-ipam-ips: 192.168.2.48
-        ports:
-          bittorrent:
-            enabled: true
-            port: *port-bt
-            protocol: TCP
-            targetPort: *port-bt
-        externalTrafficPolicy: Cluster
-    # resources:
-    #   requests:
-    #     cpu: 10m
-    #     memory: 555Mi
-    #   limits:
-    #     memory: 800Mi
+# ---
+# apiVersion: helm.toolkit.fluxcd.io/v2beta2
+# kind: HelmRelease
+# metadata:
+#   name: qbittorrent
+#   namespace: media
+# spec:
+#   interval: 5m
+#   chart:
+#     spec:
+#       chart: app-template
+#       version: 1.5.1
+#       sourceRef:
+#         kind: HelmRepository
+#         name: bjw-s
+#         namespace: flux-system
+#       interval: 5m
+#   install:
+#     createNamespace: true
+#     remediation:
+#       retries: 3
+#   upgrade:
+#     remediation:
+#       retries: 3
+#   values:
+#     image:
+#       repository: ghcr.io/onedr0p/qbittorrent
+#       tag: 4.6.2@sha256:fedb62126c82ae0c7192e9052633411294a27e9c233613c03b0a8d168d160040
+#     env:
+#       TZ: "${TIMEZONE}"
+#       UMASK: "022"
+#       QBITTORRENT__PORT: &port 8080
+#       QBITTORRENT__BT_PORT: &port-bt 50413
+#     podSecurityContext:
+#       runAsUser: 568
+#       runAsGroup: 568
+#       fsGroup: 568
+#       fsGroupChangePolicy: OnRootMismatch
+#       supplementalGroups: [10000]
+#     persistence:
+#       downloads:
+#         enabled: true
+#         existingClaim: pvc-downloads
+#         mountPath: /downloads
+#       config:
+#         enabled: true
+#         existingClaim: pvc-qbittorrent
+#         mountPath: /config
+#     service:
+#       main:
+#         ports:
+#           http:
+#             port: *port
+#       bittorrent:
+#         enabled: true
+#         type: LoadBalancer
+#         annotations:
+#           io.cilium/lb-ipam-ips: 192.168.2.48
+#         ports:
+#           bittorrent:
+#             enabled: true
+#             port: *port-bt
+#             protocol: TCP
+#             targetPort: *port-bt
+#         externalTrafficPolicy: Cluster
+#     # resources:
+#     #   requests:
+#     #     cpu: 10m
+#     #     memory: 555Mi
+#     #   limits:
+#     #     memory: 800Mi
