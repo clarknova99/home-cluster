@@ -109,6 +109,7 @@ spec:
         enabled: true
         className: internal
         annotations:
+          hajimari.io/enable: "true"
           hajimari.io/icon: material-symbols:cloud-download
         hosts:
           - host: &host qb.${SECRET_DOMAIN}
