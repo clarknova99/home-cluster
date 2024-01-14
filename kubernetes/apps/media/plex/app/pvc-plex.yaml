@@ -22,7 +22,7 @@ metadata:
   name: pvc-plex
 spec:
   accessModes: ["ReadWriteOnce"]
-  volumeName: plex-volume
+  volumeName: pv-plex
   resources:
     requests:
       storage: 50Gi
