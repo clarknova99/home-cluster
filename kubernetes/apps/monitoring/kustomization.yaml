@@ -13,7 +13,7 @@ resources:
   - ./kube-state-metrics/ks.yaml
   - ./kubernetes-dashboard/ks.yaml
   - ./loki/ks.yaml
-  - ./promlens/ks.yaml
+  #- ./promlens/ks.yaml
   - ./parseable/ks.yaml
   - ./smartctl-exporter/ks.yaml
   - ./thanos/ks.yaml
