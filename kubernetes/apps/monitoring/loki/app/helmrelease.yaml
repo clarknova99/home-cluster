@@ -14,8 +14,6 @@ spec:
         kind: HelmRepository
         name: grafana
         namespace: flux-system
-      interval: 30m
-  maxHistory: 2
   install:
     remediation:
       retries: 3
@@ -25,6 +23,9 @@ spec:
       retries: 3
   uninstall:
     keepHistory: false
+  dependsOn:
+    - name: longhorn
+      namespace: longhorn-system
   values:
     loki:
       structuredConfig:
