@@ -34,7 +34,6 @@ resources:
   - ./prometheus-community.yaml
   - ./runix.yaml
   - ./spark-operator.yaml
-  - ./stackable.yaml
   - ./stakater.yaml
   - ./superset.yaml
   - ./tyzbit.yaml
