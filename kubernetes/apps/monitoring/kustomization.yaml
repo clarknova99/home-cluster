@@ -4,17 +4,17 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - ./namespace.yaml
-  - ./alertmanager/ks.yaml
-  - ./blackbox-exporter/ks.yaml
+  #- ./alertmanager/ks.yaml
+  #- ./blackbox-exporter/ks.yaml
   - ./gatus/ks.yaml
   - ./grafana/ks.yaml
-  - ./karma/ks.yaml
-  - ./kube-prometheus-stack/ks.yaml
-  - ./kube-state-metrics/ks.yaml
+  #- ./karma/ks.yaml
+  #- ./kube-prometheus-stack/ks.yaml
+  #- ./kube-state-metrics/ks.yaml
   - ./kubernetes-dashboard/ks.yaml
   - ./loki/ks.yaml
   - ./promlens/ks.yaml
   - ./parseable/ks.yaml
   - ./smartctl-exporter/ks.yaml
-  - ./thanos/ks.yaml
+  #- ./thanos/ks.yaml
   - ./vector/ks.yaml
