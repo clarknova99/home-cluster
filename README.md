@@ -3,6 +3,10 @@
 </div>
 
 <div align="center">
+<br/>
+</div>
+
+<div align="center">
 
   [![k3s](https://img.shields.io/badge/k3s-v1.28-brightgreen?logo=kubernetes&logoColor=white)](https://k3s.io/)
   [![renovate](https://img.shields.io/badge/renovate-enabled-brightgreen?logo=renovatebot&logoColor=white)](https://github.com/renovatebot/renovate)
