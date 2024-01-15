@@ -68,7 +68,7 @@ spec:
         annotations:
           hajimari.io/icon: mdi:alert
         hosts:
-          - host: &host kromgo.${SECRET_DOMAIN}
+          - host: &host kromgo.${SECRET_DOMAIN2}
             paths:
               - path: /
                 service:
