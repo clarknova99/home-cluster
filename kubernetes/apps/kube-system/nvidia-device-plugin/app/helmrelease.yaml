@@ -39,13 +39,7 @@ spec:
           version: v1
           flags:
             migStrategy: none
-          sharing:
-            timeSlicing:
-              renameByDefault: false
-              failRequestsGreaterThanOne: false
-              resources:
-                - name: nvidia.com/gpu
-                  replicas: 6
+
 
 
 
@@ -74,3 +68,12 @@ spec:
     # nfd: {}
     # gfd:
     #   enabled: false
+
+
+      #  sharing:
+      #       timeSlicing:
+      #         renameByDefault: false
+      #         failRequestsGreaterThanOne: false
+      #         resources:
+      #           - name: nvidia.com/gpu
+      #             replicas: 6
