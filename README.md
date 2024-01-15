@@ -1,15 +1,15 @@
 <div align="center">
-
-<img src="https://camo.githubusercontent.com/eec89a711423634860ccdce3337ba8f922c424d921650684c69fc12d051e2a39/68747470733a2f2f692e696d6775722e636f6d2f676476426b4e452e706e67" align="center" width="144px" height="144px"/>
+  <img src="https://camo.githubusercontent.com/eec89a711423634860ccdce3337ba8f922c424d921650684c69fc12d051e2a39/68747470733a2f2f692e696d6775722e636f6d2f676476426b4e452e706e67" align="center" width="144px" height="144px"/>
 </div>
-
-<br/>
 
 <div align="center">
 
-[![k3s](https://img.shields.io/badge/k3s-v1.28-brightgreen?logo=kubernetes&logoColor=white)](https://k3s.io/)
-[![renovate](https://img.shields.io/badge/renovate-enabled-brightgreen?logo=renovatebot&logoColor=white)](https://github.com/renovatebot/renovate)
-[![repo size](https://img.shields.io/github/repo-size/clarknova99/home-cluster)](https://github.com/clarknova99/home-cluster)
+  [![k3s](https://img.shields.io/badge/k3s-v1.28-brightgreen?logo=kubernetes&logoColor=white)](https://k3s.io/)
+  [![renovate](https://img.shields.io/badge/renovate-enabled-brightgreen?logo=renovatebot&logoColor=white)](https://github.com/renovatebot/renovate)
+  [![repo size](https://img.shields.io/github/repo-size/clarknova99/home-cluster)](https://github.com/clarknova99/home-cluster)
+</div>
+
+<div align="center">
 [![Age-Days](https://img.shields.io/endpoint?url=https%3A%2F%2Fkromgo.bigwang.org%2Fquery%3Fformat%3Dendpoint%26metric%3Dcluster_age_days&style=flat-square&label=Age)](https://github.com/kashalls/kromgo/)&nbsp;
 [![Node-Count](https://img.shields.io/endpoint?url=https%3A%2F%2Fkromgo.bigwang.org%2Fquery%3Fformat%3Dendpoint%26metric%3Dcluster_node_count&style=flat-square&label=Nodes)](https://github.com/kashalls/kromgo/)&nbsp;
 [![Pod-Count](https://img.shields.io/endpoint?url=https%3A%2F%2Fkromgo.bigwang.org%2Fquery%3Fformat%3Dendpoint%26metric%3Dcluster_pod_count&style=flat-square&label=Pods)](https://github.com/kashalls/kromgo/)&nbsp;
