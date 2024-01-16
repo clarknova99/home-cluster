@@ -31,7 +31,8 @@ spec:
       runtimeClassName: nvidia
     controllers:
       main:
-        type: statefulset
+        type: deployment
+        updateStrategy: Recreate
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
