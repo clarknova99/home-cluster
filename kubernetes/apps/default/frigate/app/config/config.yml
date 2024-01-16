@@ -145,17 +145,11 @@ cameras:
       inputs:
         - path: rtsp://127.0.0.1:8554/basement_hq
           input_args: preset-rtsp-restream
-          roles:
-            - detect
     onvif:
       host: 192.168.1.206
       port: 8888
       user: ${SECRET_BACKYARDCAM_USERNAME}
       password: ${SECRET_BACKYARDCAM_PASSWORD}
-    detect:
-      enabled: true # <---- disable detection until you have a working camera feed
-      width: 1280 # <---- update for your camera's resolution
-      height: 720 # <---- update for your camera's resolution
   backyard:
     ffmpeg:
       inputs:
