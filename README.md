@@ -8,7 +8,7 @@
 
 <div align="center">
 
-  [![k3s](https://img.shields.io/badge/k3s-v1.28-brightgreen?logo=kubernetes&logoColor=white)](https://k3s.io/)
+  [![k3s](https://img.shields.io/badge/k3s-v1.29-brightgreen?logo=kubernetes&logoColor=white)](https://k3s.io/)
   [![renovate](https://img.shields.io/badge/renovate-enabled-brightgreen?logo=renovatebot&logoColor=white)](https://github.com/renovatebot/renovate)
   [![repo size](https://img.shields.io/github/repo-size/clarknova99/home-cluster)](https://github.com/clarknova99/home-cluster)
 </div>
