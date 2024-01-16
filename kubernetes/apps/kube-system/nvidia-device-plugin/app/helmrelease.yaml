@@ -26,6 +26,7 @@ spec:
       retries: 3
   uninstall:
     keepHistory: false
+  #https://www.declarativesystems.com/2023/11/04/kubernetes-nvidia.html
   values:
     image:
       repository: nvcr.io/nvidia/k8s-device-plugin
