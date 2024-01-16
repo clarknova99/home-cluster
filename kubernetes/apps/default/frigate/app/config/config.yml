@@ -145,6 +145,8 @@ cameras:
       inputs:
         - path: rtsp://127.0.0.1:8554/basement_hq
           input_args: preset-rtsp-restream
+          roles:
+            - rtmp
     onvif:
       host: 192.168.1.206
       port: 8888
