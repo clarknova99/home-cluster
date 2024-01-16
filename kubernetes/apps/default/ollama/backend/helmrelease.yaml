@@ -53,7 +53,7 @@ spec:
                 memory: 1Gi
                 nvidia.com/gpu: 1
               limits:
-                memory: 16Gi
+                memory: 8Gi
                 nvidia.com/gpu: 1
               startup:
                 enabled: false
