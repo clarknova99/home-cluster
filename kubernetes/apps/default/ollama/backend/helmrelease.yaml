@@ -27,8 +27,8 @@ spec:
     keepHistory: false
 
   values:
-    defaultPodOptions:
-      runtimeClassName: nvidia
+    # defaultPodOptions:
+    #   runtimeClassName: nvidia
     controllers:
       main:
         type: deployment
@@ -42,8 +42,8 @@ spec:
               tag: 0.1.20
             env:
               TZ: ${TIMEZONE}
-              NVIDIA_VISIBLE_DEVICES: all
-              NVIDIA_DRIVER_CAPABILITIES: all
+              # NVIDIA_VISIBLE_DEVICES: all
+              # NVIDIA_DRIVER_CAPABILITIES: all
               OLLAMA_HOST: 0.0.0.0
               OLLAMA_ORIGINS: "*"
                 # Force nvidia runtime instead of default
@@ -51,12 +51,15 @@ spec:
               requests:
                 cpu: 200m
                 memory: 1Gi
-                nvidia.com/gpu: 1
+                #nvidia.com/gpu: 1
               limits:
                 memory: 8Gi
-                nvidia.com/gpu: 1
+                #nvidia.com/gpu: 1
               startup:
                 enabled: false
+        pod:
+          nodeSelector:
+            kubernetes.io/arch: amd64
     service:
       main:
         ports:
