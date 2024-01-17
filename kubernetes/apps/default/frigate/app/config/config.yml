@@ -147,6 +147,8 @@ cameras:
           input_args: preset-rtsp-restream
           roles:
             - rtmp
+    detect:
+      enabled: false
     onvif:
       host: 192.168.1.206
       port: 8888
