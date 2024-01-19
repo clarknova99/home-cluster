@@ -49,11 +49,11 @@ spec:
                 # Force nvidia runtime instead of default
             resources:
               requests:
-                cpu: 200m
+                cpu: 2000m
                 memory: 1Gi
                 nvidia.com/gpu: 1
               limits:
-                memory: 8Gi
+                memory: 12Gi
                 nvidia.com/gpu: 1
               startup:
                 enabled: false
