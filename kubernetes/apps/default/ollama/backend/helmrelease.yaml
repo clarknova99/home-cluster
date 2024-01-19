@@ -51,10 +51,10 @@ spec:
               requests:
                 cpu: 200m
                 memory: 1Gi
-                #nvidia.com/gpu: 1
+                nvidia.com/gpu: 1
               limits:
                 memory: 8Gi
-                #nvidia.com/gpu: 1
+                nvidia.com/gpu: 1
               startup:
                 enabled: false
         pod:
