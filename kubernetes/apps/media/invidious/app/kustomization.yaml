@@ -4,6 +4,6 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: media
 resources:
-  - ./invidious.sops.yaml
+  - ./inv.sops.yaml
   - ./helmrelease.yaml
 
