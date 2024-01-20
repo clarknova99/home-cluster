@@ -49,6 +49,9 @@ spec:
               requests:
                 cpu: 50m
                 memory: 256Mi
+        pod:
+          nodeSelector:
+            kubernetes.io/arch: amd64
     service:
       main:
         ports:
