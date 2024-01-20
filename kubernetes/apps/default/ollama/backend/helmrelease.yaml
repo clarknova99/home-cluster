@@ -80,3 +80,8 @@ spec:
         tls:
           - hosts:
               - *host
+    persistence:
+      config:
+        enabled: true
+        existingClaim: pvc-ollama
+        mountPath: /root/.ollama
