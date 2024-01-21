@@ -26,12 +26,18 @@ spec:
   uninstall:
     keepHistory: false
   values:
+    env:
+      TZ: "${TIMEZONE}"
     api:
       containers:
+      # https://github.com/kubernetes/dashboard/blob/master/docs/common/arguments.md
         args:
-          - --enable-insecure-login=true
-          - --enable-skip-login=true
+          # When enabled, the skip button on the login page will be shown.
+          - --enable-skip-login
+          # When enabled, Dashboard settings page will not require user to be logged in and authorized to access settings page.
           - --disable-settings-authorizer
+          # When enabled, Dashboard login view will also be shown when Dashboard is not served over HTTPS.
+          - --enable-insecure-login
           - --token-ttl=43200
     app:
       ingress:
@@ -39,6 +45,8 @@ spec:
         className: internal
         annotations:
           hajimari.io/icon: mdi:kubernetes
+        issuer:
+          scope: disabled
         hosts:
           - &host "kd.${SECRET_DOMAIN}"
         tls:
@@ -47,11 +55,14 @@ spec:
             secretName: kubernetes-dashboard-tls
     metricsScraper:
       enabled: true
-    serviceMonitor:
-      enabled: false
+    # serviceMonitor:
+    #   enabled: false
+    # disables cert-manager subchart installation
     cert-manager:
       enabled: false
+    # disables nginx-ingress-controller subchart installation
     nginx:
       enabled: false
+    # disables metrics-server subchart installation
     metrics-server:
       enabled: false
