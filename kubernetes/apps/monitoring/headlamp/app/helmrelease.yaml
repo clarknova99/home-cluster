@@ -23,7 +23,15 @@ spec:
       retries: 3
   uninstall:
     keepHistory: false
+  # https://github.com/headlamp-k8s/headlamp/blob/main/charts/headlamp/values.yaml
   values:
+    serviceAccount:
+      # -- Specifies whether a service account should be created
+      create: false
+      # -- Annotations to add to the service account
+      annotations: {}
+      # -- The name of the service account to use.(If not set and create is true, a name is generated using the fullname template)
+      name: "headlamp"
     config:
       oidc:
         clientID: headlamp
