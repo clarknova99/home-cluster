@@ -42,7 +42,8 @@ spec:
     app:
       ingress:
         enabled: true
-        className: internal
+        ingressClassName: "internal"
+        #className: internal
         annotations:
           hajimari.io/icon: mdi:kubernetes
         issuer:
