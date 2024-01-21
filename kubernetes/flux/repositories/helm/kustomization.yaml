@@ -23,7 +23,7 @@ resources:
   - ./ingress-nginx.yaml
   - ./intel.yaml
   - ./jetstack.yaml
-  - ./jupyterhub.yaml
+  #- ./jupyterhub.yaml
   - ./k8s-gateway.yaml
   #- ./kubernetes-dashboard.yaml
   - ./longhorn.yaml
@@ -34,7 +34,7 @@ resources:
   - ./piraeus.yaml
   - ./prometheus-community.yaml
   - ./runix.yaml
-  - ./spark-operator.yaml
+  #- ./spark-operator.yaml
   - ./stakater.yaml
   - ./superset.yaml
   - ./tyzbit.yaml
