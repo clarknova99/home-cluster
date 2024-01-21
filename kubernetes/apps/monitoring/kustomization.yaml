@@ -16,7 +16,7 @@ resources:
   - ./kubernetes-dashboard/ks.yaml
   - ./loki/ks.yaml
   - ./parseable/ks.yaml
-  - ./skooner/ks.yaml
+ #- ./skooner/ks.yaml
   - ./smartctl-exporter/ks.yaml
   - ./thanos/ks.yaml
   - ./vector/ks.yaml
