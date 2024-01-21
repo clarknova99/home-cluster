@@ -47,7 +47,7 @@ spec:
             kubernetes.io/arch: amd64
     # serviceAccount:
     #   create: true
-    #   name: kube-ops-view
+    #   name: skooner
     service:
       main:
         ports:
