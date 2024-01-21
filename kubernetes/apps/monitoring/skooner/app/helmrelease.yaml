@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
-  name: kube-ops-view
+  name: skooner
   namespace: monitoring
 spec:
   interval: 30m
@@ -31,7 +31,7 @@ spec:
 
   uninstall:
     keepHistory: false
-  #https://codeberg.org/hjacobs/kube-ops-view
+  #https://github.com/skooner-k8s/skooner
   values:
     controllers:
       main:
@@ -40,21 +40,21 @@ spec:
         containers:
           main:
             image:
-              repository: hjacobs/kube-ops-view
-              tag: 23.5.0@sha256:a4fae38f93d7e0475b2bcef28c72a65d39d824daed22b26c4cef0a6da89aac7e
+              repository: ghcr.io/skooner-k8s/skooner:stable
+              tag: stable@sha256:60c1562e4d51bb3bb1b6e0a9bee786c9a473d9ccb1432e93a14908a81b882433
 
             env:
               TZ: "${TIMEZONE}"
 
-    serviceAccount:
-      create: true
-      name: kube-ops-view
+    # serviceAccount:
+    #   create: true
+    #   name: kube-ops-view
 
     service:
       main:
         ports:
           http:
-            port: 8080
+            port: 80
 
     ingress:
       main:
@@ -62,10 +62,10 @@ spec:
         className: internal
         annotations:
           hajimari.io/enable: "true"
-          hajimari.io/appName: "KubeOps View"
+          hajimari.io/appName: "skooner"
           hajimari.io/icon: "list-status"
         hosts:
-          - host: &host kubeops.${SECRET_DOMAIN}
+          - host: &host skooner.${SECRET_DOMAIN}
             paths:
               - path: /
                 service:
