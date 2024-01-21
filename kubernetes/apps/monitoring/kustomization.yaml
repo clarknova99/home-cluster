@@ -10,7 +10,7 @@ resources:
   - ./grafana/ks.yaml
   - ./karma/ks.yaml
   - ./kromgo/ks.yaml
-  - ./kube-ops-view/ks.yaml
+#  - ./kube-ops-view/ks.yaml
   - ./kube-prometheus-stack/ks.yaml
   - ./kube-state-metrics/ks.yaml
   - ./kubernetes-dashboard/ks.yaml
