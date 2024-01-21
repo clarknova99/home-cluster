@@ -27,7 +27,7 @@ spec:
     config:
       oidc:
         clientID: headlamp
-        clientSecret: ${HEADLAMP_OAUTH_CLIENT_SECRET}
+        clientSecret: ${SECRET_HEADLAMP_OAUTH_CLIENT_SECRET}
         issuerURL: https://auth.${SECRET_DOMAIN}
         scopes: openid,profile,email,groups
     ingress:
