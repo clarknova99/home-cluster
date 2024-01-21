@@ -35,8 +35,6 @@ spec:
   values:
     controllers:
       main:
-        type: statefulset
-
         containers:
           main:
             image:
@@ -44,18 +42,18 @@ spec:
               tag: stable@sha256:60c1562e4d51bb3bb1b6e0a9bee786c9a473d9ccb1432e93a14908a81b882433
             env:
               TZ: "${TIMEZONE}"
-
+        pod:
+          nodeSelector:
+            kubernetes.io/arch: amd64
     # serviceAccount:
     #   create: true
     #   name: kube-ops-view
-
     service:
       main:
         ports:
           http:
             port: 80
             targetPort: 4654
-
     ingress:
       main:
         enabled: true
