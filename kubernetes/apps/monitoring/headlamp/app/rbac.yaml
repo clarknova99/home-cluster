@@ -24,6 +24,9 @@ subjects:
 - kind: ServiceAccount
   name: headlamp
   namespace: monitoring
+- kind: User
+  name: ${SECRET_AUTHELIA_EMAIL}
+  apiGroup: rbac.authorization.k8s.io
 ---
 apiVersion: v1
 kind: Secret

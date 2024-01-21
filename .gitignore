@@ -12,3 +12,4 @@ kubeconfig
 # Ansible
 .venv*
 *.sql
+test
