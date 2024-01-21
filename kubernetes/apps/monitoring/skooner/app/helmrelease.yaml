@@ -42,7 +42,6 @@ spec:
             image:
               repository: ghcr.io/skooner-k8s/skooner
               tag: stable@sha256:60c1562e4d51bb3bb1b6e0a9bee786c9a473d9ccb1432e93a14908a81b882433
-
             env:
               TZ: "${TIMEZONE}"
 
@@ -55,6 +54,7 @@ spec:
         ports:
           http:
             port: 80
+            targetPort: 4654
 
     ingress:
       main:
