@@ -50,15 +50,6 @@ identity_providers:
         scopes: ["openid", "profile", "groups", "email"]
         redirect_uris: ["https://grafana.${SECRET_DOMAIN}/login/generic_oauth"]
         userinfo_signing_algorithm: none
-      - id: jupyterhub
-        description: jupyterhub
-        secret: "${SECRET_JUPYTERHUB_OAUTH_CLIENT_SECRET}"
-        public: false
-        authorization_policy: one_factor
-        pre_configured_consent_duration: 1y
-        scopes: ["openid", "profile", "groups", "email"]
-        redirect_uris: ["https://jupyterhub.${SECRET_DOMAIN}/hub/oauth_callback"]
-        userinfo_signing_algorithm: none
       - id: minio
         description: Minio
         secret: "${SECRET_MINIO_OAUTH_CLIENT_SECRET}"  # The digest of 'insecure_secret'.
@@ -67,4 +58,13 @@ identity_providers:
         pre_configured_consent_duration: 1y
         redirect_uris: ["https://minio.${SECRET_DOMAIN}/oauth_callback"]
         scopes: ["openid", "profile", "groups", "email"]
+        userinfo_signing_algorithm: none
+      - id: headlamp
+        description: Headlamp
+        secret: "${HEADLAMP_OAUTH_CLIENT_SECRET}"
+        public: false
+        authorization_policy: one_factor
+        pre_configured_consent_duration: 1y
+        scopes: ["openid", "profile", "groups", "email"]
+        redirect_uris: ["https://headlamp.${SECRET_DOMAIN}/oidc-callback"]
         userinfo_signing_algorithm: none

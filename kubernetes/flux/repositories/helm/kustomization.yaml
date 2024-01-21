@@ -19,6 +19,7 @@ resources:
   - ./external-dns.yaml
   - ./grafana.yaml
   - ./hajimari.yaml
+  - ./headlamp.yaml
   - ./influxdata.yaml
   - ./ingress-nginx.yaml
   - ./intel.yaml
