@@ -8,9 +8,9 @@ storage:
 metrics: true
 debug: false
 ui:
-  title: feldblyum cloud status
-  header: feldblyum cloud status
-  logo: "https://www.feldblyum.com/content/video3/images/ev.jpg"
+  title: status
+  header: status
+  logo: "https://www.bigwang.org/content/video3/images/ev.jpg"
 alerting:
   pushover:
     application-token: ${SECRET_PUSHOVER_TOKEN}
