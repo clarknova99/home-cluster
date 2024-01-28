@@ -31,7 +31,6 @@ spec:
         annotations:
           io.cilium/lb-ipam-ips: "192.168.2.46"
         externalTrafficPolicy: Cluster
-        # clusterIP: "192.168.2.49"
         type: LoadBalancer
     sentinal:
       enabled: true
