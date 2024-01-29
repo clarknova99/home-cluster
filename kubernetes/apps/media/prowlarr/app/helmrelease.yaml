@@ -64,6 +64,8 @@ spec:
             runAsGroup: 568
             fsGroup: 568
             fsGroupChangePolicy: OnRootMismatch
+          nodeSelector:
+            kubernetes.io/arch: amd64
     service:
       main:
         ports:
