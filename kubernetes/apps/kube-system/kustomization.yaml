@@ -13,6 +13,6 @@ resources:
   - ./nvidia-device-plugin/ks.yaml
   - ./minio/ks.yaml
   - ./node-feature-discovery/ks.yaml
-  - ./reloader/ks.yaml
+ # - ./reloader/ks.yaml
 
 
