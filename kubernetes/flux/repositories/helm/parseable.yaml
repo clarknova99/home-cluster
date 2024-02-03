@@ -6,4 +6,4 @@ metadata:
   namespace: flux-system
 spec:
   interval: 2h
-  url: https://charts.parseable.io
+  url: https://charts.parseable.com
