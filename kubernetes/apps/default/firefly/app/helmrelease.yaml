@@ -1,0 +1,108 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2beta2.json
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: &app actual
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: 2.5.0
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    controllers:
+      main:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        initContainers:
+          init-db:
+            image:
+              repository: ghcr.io/onedr0p/postgres-init
+              tag: 16.1
+            env:
+              TZ: ${TIMEZONE}
+              APP_URL: https://firefly.${SECRET_DOMAIN}
+              APP_ENV: "production"
+              DB_CONNECTION: "pgsql"
+              DB_HOST: cloudnative-pg-cluster.database.svc.cluster.local
+              DB_PORT: 5432
+              DB_DATABASE: firefly
+              DB_USERNAME: ${SECRET_POSTGRES_USERNAME}
+              DB_PASSWORD: ${SECRET_POSTGRES_PASSWORD}
+
+        containers:
+          main:
+            image:
+              repository: registry.samipsolutions.fi/docker/fireflyiii/core
+              tag: version-6.0.30
+            env:
+              TZ: ${TIMEZONE}
+              APP_URL: https://firefly.${SECRET_DOMAIN}
+              APP_ENV: "production"
+              DB_CONNECTION: "pgsql"
+              DB_HOST: cloudnative-pg-cluster.database.svc.cluster.local
+              DB_PORT: 5432
+              DB_DATABASE:
+              DB_USERNAME: ${SECRET_POSTGRES_USERNAME}
+              DB_PASSWORD: ${SECRET_POSTGRES_PASSWORD}
+              MAIL_MAILER: log
+              TRUSTED_PROXIES: "**" # TODO: This should be changed..
+              SEND_REGISTRATION_MAIL: false
+              SEND_ERROR_MESSAGE: false
+              SEND_LOGIN_NEW_IP_WARNING: false
+            resources:
+              requests:
+                cpu: 100m
+                memory: 256Mi
+
+    service:
+      main:
+        ports:
+          http:
+            port: 8080
+
+    ingress:
+      main:
+        enabled: true
+        className: internal
+        annotations:
+          hajimari.io/icon: mdi:cash
+        hosts:
+          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                service:
+                  name: main
+                  port: http
+        tls:
+          - hosts:
+              - *host
+    persistence:
+      upload:
+        enabled: true
+        existingClaim: pvc-firefly
+        advancedMounts:
+          main:
+            main:
+              - path: /var/www/html/storage/upload
+      logs:
+        enabled: true
+        type: emptyDir
+        advancedMounts:
+          main:
+            main:
+              - path: /var/www/html/storage/logs
