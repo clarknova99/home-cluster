@@ -1,0 +1,31 @@
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-actual-data
+  namespace: default
+spec:
+  storageClassName: "network-storage"
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  nfs:
+    server: 192.168.1.2
+    path: /volume1/network-storage/actual
+    readOnly: false
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-actual-data
+  namespace: default
+spec:
+  accessModes:
+    - ReadWriteMany
+  volumeName: pv-actual-data
+  storageClassName: "network-storage"
+  resources:
+    requests:
+      storage: 1Gi
