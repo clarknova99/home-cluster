@@ -28,27 +28,23 @@ spec:
       main:
         annotations:
           reloader.stakater.com/auto: "true"
-        initContainers:
-          init-db:
-            image:
-              repository: ghcr.io/onedr0p/postgres-init
-              tag: 16.1
-            env:
-              TZ: ${TIMEZONE}
-              APP_URL: https://firefly.${SECRET_DOMAIN}
-              APP_ENV: "production"
-              DB_CONNECTION: "pgsql"
-              DB_HOST: cloudnative-pg-cluster.database.svc.cluster.local
-              DB_PORT: 5432
-              DB_DATABASE: firefly
-              DB_USERNAME: ${SECRET_POSTGRES_USERNAME}
-              DB_PASSWORD: ${SECRET_POSTGRES_PASSWORD}
+        # initContainers:
+        #   init-db:
+        #     image:
+        #       repository: ghcr.io/onedr0p/postgres-init
+        #       tag: 16.1
+        #     env:
+        #       INIT_POSTGRES_HOST: cloudnative-pg-cluster.database.svc.cluster.local
+        #       INIT_POSTGRES_SUPER_PASS: ${SECRET_POSTGRES_PASSWORD}
+        #       INIT_POSTGRES_USER: ${SECRET_POSTGRES_USERNAME}
+        #       INIT_POSTGRES_PASS: ${SECRET_POSTGRES_PASSWORD}
+        #       INIT_POSTGRES_DBNAME: firefly
 
         containers:
           main:
             image:
-              repository: registry.samipsolutions.fi/docker/fireflyiii/core
-              tag: version-6.0.30
+              repository: fireflyiii/core
+              tag: version-6.1.6
             env:
               TZ: ${TIMEZONE}
               APP_URL: https://firefly.${SECRET_DOMAIN}
