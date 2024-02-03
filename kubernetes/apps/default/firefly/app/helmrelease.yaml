@@ -49,10 +49,11 @@ spec:
               TZ: ${TIMEZONE}
               APP_URL: https://firefly.${SECRET_DOMAIN}
               APP_ENV: "production"
+              APP_KEY: ${SECRET_FIREFLY_APP_KEY}
               DB_CONNECTION: "pgsql"
               DB_HOST: cloudnative-pg-cluster.database.svc.cluster.local
               DB_PORT: 5432
-              DB_DATABASE:
+              DB_DATABASE: firefly
               DB_USERNAME: ${SECRET_POSTGRES_USERNAME}
               DB_PASSWORD: ${SECRET_POSTGRES_PASSWORD}
               MAIL_MAILER: log
