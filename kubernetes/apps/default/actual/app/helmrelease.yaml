@@ -63,5 +63,5 @@ spec:
     persistence:
       data:
         enabled: true
-        existingClaim: pvc-actual-data
+        existingClaim: actual
 
