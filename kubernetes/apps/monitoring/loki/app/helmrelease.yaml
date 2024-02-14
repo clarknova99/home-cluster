@@ -154,7 +154,7 @@ spec:
         storageClass: longhorn
 
     backend:
-      replicas: 2
+      replicas: 3
       extraVolumeMounts:
         - name: rules
           mountPath: /rules/fake

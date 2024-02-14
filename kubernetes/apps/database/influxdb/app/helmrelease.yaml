@@ -17,6 +17,7 @@ spec:
         namespace: flux-system
       interval: 60m
   # Values link: https://github.com/influxdata/helm-charts/blob/master/charts/influxdb/values.yaml
+  # delete _internal if panics occur
   values:
     image:
       repository: influxdb
