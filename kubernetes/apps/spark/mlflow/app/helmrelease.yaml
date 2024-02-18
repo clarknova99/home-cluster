@@ -1,61 +1,87 @@
 ---
-# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2beta1.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2beta2.json
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
-  name: redis
-  namespace: database
+  name: &app mlflow
 spec:
-  interval: 5m
+  interval: 15m
   chart:
     spec:
-      # renovate: registryUrl=https://charts.bitnami.com/bitnami
-      chart: redis
-      version: 18.7.1
+      chart: app-template
+      version: 2.6.0
       sourceRef:
         kind: HelmRepository
-        name: bitnami
+        name: bjw-s
         namespace: flux-system
-      interval: 5m
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
   values:
-    architecture: standalone
-    auth:
-      enabled: false
-      sentinal: true
-      #password: "${SECRET_REDIS_PASSWORD}"
-    master:
-      persistence:
-        size: 5Gi
-        existingClaim: pvc-longhorn-redis
-      service:
+    controllers:
+      main:
         annotations:
-          io.cilium/lb-ipam-ips: "192.168.2.46"
-        externalTrafficPolicy: Cluster
-        type: LoadBalancer
-    sentinal:
-      enabled: true
-      masterSet: redis-master
+          reloader.stakater.com/auto: "true"
+        containers:
+          main:
+            image:
+              repository: ghcr.io/mlflow/mlflow
+              tag: v2.10.2
+            # resources:
+            #   requests:
+            #     cpu: 15m
+            #     memory: 80Mi
+            env:
+              MLFLOW_S3_ENDPOINT_URL: http://minio.kube-system.svc.cluster.local:9000
+              AWS_ACCESS_KEY_ID: ${SECRET_MINIO_ACCESS_KEY}
+              AWS_SECRET_ACCESS_KEY: ${SECRET_MINIO_SECRET_KEY}
+              AWS_DEFAULT_REGION: us-east-1
+              ENTRYPOINT_MLFLOW_HOST: 0.0.0.0
+              # postgresql+psycopg2://postgres:${SECRET_POSTGRES_PASSWORD}@cloudnative-pg-cluster.database.svc.cluster.local:5432/mlflow
+              ENTRYPOINT_POSTGRES_URI: postgresql://postgres:${SECRET_POSTGRES_PASSWORD}@cloudnative-pg-cluster.database.svc.cluster.local:5432/mlflow
+              ENTRYPOINT_MINIO_URI: s3://mlflow
+            command: [
+              "mlflow",
+              "server",
+              "--backend-store-uri",
+              "postgresql://postgres:${SECRET_POSTGRES_PASSWORD}@cloudnative-pg-cluster.database.svc.cluster.local:5432/mlflow",
+              "--default-artifact-root",
+              "s3://mlflow/",
+              "--host",
+              "0.0.0.0"
+              ]
     service:
-      annotations:
-        io.cilium/lb-ipam-ips: "192.168.2.46"
-      externalTrafficPolicy: Cluster
-      # clusterIP: "192.168.2.49"
-      type: LoadBalancer
-    # Bitnami hasn't added ARM support yet
-    affinity: |
-      nodeAffinity:
-        preferredDuringSchedulingIgnoredDuringExecution:
-          - weight: 60
-            preference:
-              matchExpressions:
-                - key: kubernetes.io/arch
-                  operator: In
-                  values:
-                    - amd64
-                    - i386
-                    - i686
-                    - x86
-    metrics:
-      enabled: true
-      serviceMonitor:
+      main:
+        ports:
+          http:
+            port: 5000
+    ingress:
+      main:
         enabled: true
+        className: internal
+        annotations:
+          hajimari.io/icon: mdi:brain
+        hosts:
+          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                service:
+                  name: main
+                  port: http
+        tls:
+          - hosts:
+              - *host
+    persistence:
+      data:
+        enabled: true
+        existingClaim: pvc-mlflow
+    pod:
+      nodeSelector:
+        kubernetes.io/arch: amd64
+

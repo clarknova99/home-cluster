@@ -6,9 +6,8 @@ metadata:
   name: cluster-apps-mlflow-app
   namespace: flux-system
 spec:
-  # dependsOn:
-  #   - name: cluster-apps-cloudnative-pg
-  #   - name: cluster-apps-mlflow-db
+  dependsOn:
+    - name: cluster-apps-cloudnative-pg
   path: ./kubernetes/apps/spark/mlflow/app
   prune: true
   sourceRef:
