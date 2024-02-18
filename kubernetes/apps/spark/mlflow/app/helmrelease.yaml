@@ -31,8 +31,10 @@ spec:
         containers:
           main:
             image:
-              repository: ghcr.io/mlflow/mlflow
-              tag: v2.10.2
+              # repository: ghcr.io/mlflow/mlflow
+              # tag: v2.10.2
+              repository: docker.io/clarknova9/mlflow
+              tag: 0.0.0
             # resources:
             #   requests:
             #     cpu: 15m
