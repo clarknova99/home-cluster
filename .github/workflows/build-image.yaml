@@ -21,6 +21,6 @@ jobs:
 
       - name: Build the hello-docker Docker image
         run: |
-            docker build -f kubernetes/apps/spark/mlflow/app/Dockerfile --tag ghcr.io/clarknova99/mlflow:latest
+            docker build --tag ghcr.io/clarknova99/mlflow:latest -f kubernetes/apps/spark/mlflow/app/Dockerfile .
             docker run ghcr.io/clarknova99/mlflow:latest
             docker push ghcr.io/clarknova99/mlflow:latest
