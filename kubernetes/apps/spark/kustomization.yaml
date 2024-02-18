@@ -5,4 +5,4 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./sparknova/ks.yaml
- # - ./mlflow/ks.yaml
+  - ./mlflow/ks.yaml
