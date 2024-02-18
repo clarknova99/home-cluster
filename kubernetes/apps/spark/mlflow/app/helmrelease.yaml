@@ -44,10 +44,10 @@ spec:
               AWS_ACCESS_KEY_ID: ${SECRET_MINIO_ACCESS_KEY}
               AWS_SECRET_ACCESS_KEY: ${SECRET_MINIO_SECRET_KEY}
               AWS_DEFAULT_REGION: us-east-1
-              ENTRYPOINT_MLFLOW_HOST: 0.0.0.0
+              #ENTRYPOINT_MLFLOW_HOST: 0.0.0.0
               # postgresql+psycopg2://postgres:${SECRET_POSTGRES_PASSWORD}@cloudnative-pg-cluster.database.svc.cluster.local:5432/mlflow
-              ENTRYPOINT_POSTGRES_URI: postgresql://postgres:${SECRET_POSTGRES_PASSWORD}@cloudnative-pg-cluster.database.svc.cluster.local:5432/mlflow
-              ENTRYPOINT_MINIO_URI: s3://mlflow
+              #ENTRYPOINT_POSTGRES_URI: postgresql://postgres:${SECRET_POSTGRES_PASSWORD}@cloudnative-pg-cluster.database.svc.cluster.local:5432/mlflow
+              #ENTRYPOINT_MINIO_URI: s3://mlflow
             command: [
               "mlflow",
               "server",
