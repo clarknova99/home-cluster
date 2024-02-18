@@ -1,3 +1,4 @@
+#docker buildx build --push --platform linux/arm64,linux/amd64 --tag clarknova9/mlflow:0.0.1 .
 FROM ghcr.io/mlflow/mlflow:v2.10.2
 
 RUN apt-get -y update && \
