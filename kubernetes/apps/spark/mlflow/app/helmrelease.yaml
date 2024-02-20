@@ -62,7 +62,8 @@ spec:
               "5000",
               "--serve-artifacts",
               "--artifacts-destination",
-              "s3://mlflow/"
+              "s3://mlflow/",
+              "--dev"
               # "--log-level",
               # "debug"
 
