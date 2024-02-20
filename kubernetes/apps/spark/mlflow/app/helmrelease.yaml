@@ -65,7 +65,7 @@ spec:
               "s3://mlflow/",
               "--gunicorn-opts",
               "--log-level",
-              " debug"
+              "debug"
 
               ]
     service:
