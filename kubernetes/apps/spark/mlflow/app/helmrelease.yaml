@@ -50,13 +50,14 @@ spec:
               # postgresql+psycopg2://postgres:${SECRET_POSTGRES_PASSWORD}@cloudnative-pg-cluster.database.svc.cluster.local:5432/mlflow
               #ENTRYPOINT_POSTGRES_URI: postgresql://postgres:${SECRET_POSTGRES_PASSWORD}@cloudnative-pg-cluster.database.svc.cluster.local:5432/mlflow
               #ENTRYPOINT_MINIO_URI: s3://mlflow
+              #"--default-artifact-root",
+              #"s3://mlflow/",
             command: [
               "mlflow",
               "server",
               "--backend-store-uri",
               "postgresql://postgres:${SECRET_POSTGRES_PASSWORD}@cloudnative-pg-cluster.database.svc.cluster.local:5432/mlflow",
-              "--default-artifact-root",
-              "s3://mlflow/",
+
               "--host",
               "0.0.0.0",
               "--port",
