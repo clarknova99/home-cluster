@@ -40,7 +40,8 @@ spec:
             #     cpu: 15m
             #     memory: 80Mi
             env:
-              MLFLOW_S3_ENDPOINT_URL: http://minio.kube-system.svc.cluster.local:9000
+              #MLFLOW_S3_ENDPOINT_URL: http://minio.kube-system.svc.cluster.local:9000
+              MLFLOW_S3_ENDPOINT_URL: http://192.168.2.105:9000
               AWS_ACCESS_KEY_ID: ${SECRET_MINIO_ACCESS_KEY}
               AWS_SECRET_ACCESS_KEY: ${SECRET_MINIO_SECRET_KEY}
               AWS_DEFAULT_REGION: us-east-1
