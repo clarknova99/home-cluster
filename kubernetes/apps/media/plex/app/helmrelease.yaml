@@ -38,8 +38,8 @@ spec:
             image:
               # repository: docker.io/plexinc/pms-docker
               # tag: 1.32.8.7639-fb6452ebf
-              repository: ghcr.io/onedr0p/plex-beta
-              tag: 1.40.0.7996-4956e330f@sha256:9cc048f610a94534a9697b31d55b5ccfb3528fdc9ff84903c3cd1fd3cf76eaad
+              repository: ghcr.io/onedr0p/plex
+              tag: 1.40.0.7998-c29d4c0c8@sha256:6aee52b3ad59747bd8d794820be9771ab11d8ee60168c77ea2871f69301bdc35
               #tag: plexpass
             env:
               # See https://support.plex.tv/articles/201105343-advanced-hidden-server-settings/
