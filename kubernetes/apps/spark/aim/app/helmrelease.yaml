@@ -50,6 +50,7 @@ spec:
         externalTrafficPolicy: Cluster
         type: LoadBalancer
         ports:
+          http:
           - protocol: TCP
             port: 80
             targetPort: 43800
