@@ -6,4 +6,4 @@ resources:
   - ./namespace.yaml
   - ./sparknova/ks.yaml
   - ./mlflow/ks.yaml
-  - ./mlflow/aim.yaml
+  - ./mlflow/ks.yaml
