@@ -51,9 +51,7 @@ spec:
         type: LoadBalancer
         ports:
           http:
-          - protocol: TCP
-            port: 80
-            targetPort: 43800
+            port: 43800
     ingress:
       main:
         enabled: true
