@@ -50,8 +50,9 @@ spec:
         externalTrafficPolicy: Cluster
         type: LoadBalancer
         ports:
-          http:
-            port: 43800
+          - protocol: TCP
+            port: 80
+            targetPort: 43800
     ingress:
       main:
         enabled: true
@@ -69,9 +70,11 @@ spec:
           - hosts:
               - *host
     persistence:
-      data:
+      aim:
         enabled: true
         existingClaim: pvc-aim
+        globalMounts:
+          - path: /aim
     pod:
       nodeSelector:
         kubernetes.io/arch: amd64
