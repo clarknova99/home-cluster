@@ -1,6 +1,6 @@
 #docker buildx build --push --platform linux/arm64,linux/amd64 --tag clarknova9/aim:0.0.0 kubernetes/apps/spark/aim/app/.
 # python3.7 should be sufficient to run Aim
-FROM python:3.11.5
+FROM python:3.12.2
 
 # install the `aim` package on the latest version
 RUN pip install --upgrade aim
