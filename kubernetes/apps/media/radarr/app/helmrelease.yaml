@@ -74,6 +74,8 @@ spec:
               limits:
                 memory: 1Gi
         pod:
+          nodeSelector:
+            kubernetes.io/arch: amd64
           securityContext:
             runAsUser: 568
             runAsGroup: 568
