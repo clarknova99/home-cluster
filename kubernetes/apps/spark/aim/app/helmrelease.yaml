@@ -50,6 +50,9 @@ spec:
               requests:
                 cpu: 100m
                 memory: 1Gi
+    pod:
+      nodeSelector:
+        kubernetes.io/arch: amd64
     service:
       main:
         annotations:
@@ -84,7 +87,5 @@ spec:
         existingClaim: pvc-aim
         globalMounts:
           - path: /aim
-    pod:
-      nodeSelector:
-        kubernetes.io/arch: amd64
+
 
