@@ -35,7 +35,7 @@ spec:
             image:
               #repository: docker.io/linuxserver/nzbhydra2
               repository: ghcr.io/hotio/nzbhydra2
-              tag: release-91bc68a
+              tag: release-5.3.8
             env:
               TZ: "${TIMEZONE}"
             resources:
