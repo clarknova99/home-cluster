@@ -32,7 +32,7 @@ spec:
           main:
             image:
               repository: docker.io/clarknova9/aim
-              tag: 0.0.0
+              tag: 0.0.1
             ports:
               - name: http
                 containerPort: 43800
