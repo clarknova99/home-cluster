@@ -66,7 +66,8 @@ spec:
             targetport: 4380
           grpc:
             port: 53800
-            targetport: 5380
+            targetport: 30007
+            nodeport: 30007
     ingress:
       main:
         enabled: true
