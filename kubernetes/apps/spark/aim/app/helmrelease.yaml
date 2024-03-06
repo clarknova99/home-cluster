@@ -26,23 +26,20 @@ spec:
   values:
     controllers:
       main:
+        pod:
+          nodeSelector:
+            kubernetes.io/arch: amd64
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
           main:
             image:
-              repository: docker.io/clarknova9/aim
+              repository: docker.io/clarknova9/aim-ui
               tag: 0.0.3
             ports:
               - name: http
                 containerPort: 43800
                 protocol: TCP
-              - name: grpc
-                containerPort: 53800
-                protocol: TCP
-            # ports:
-            #   - containerPort: 43800
-            #     protocol: TCP
             resources:
               limits:
                 cpu: "1"
@@ -50,9 +47,21 @@ spec:
               requests:
                 cpu: 100m
                 memory: 1Gi
-    pod:
-      nodeSelector:
-        kubernetes.io/arch: amd64
+          server:
+            image:
+              repository: docker.io/clarknova9/aim-server
+              tag: 0.0.0
+            ports:
+              - name: grpc
+                containerPort: 53800
+                protocol: TCP
+            resources:
+              limits:
+                cpu: "1"
+                memory: 2Gi
+              requests:
+                cpu: 100m
+                memory: 1Gi
     service:
       main:
         annotations:
@@ -62,7 +71,7 @@ spec:
         ports:
           http:
             port: 43800
-            targetport: 4380
+            targetport: 43800
           grpc:
             port: 53800
             targetport: 53800
