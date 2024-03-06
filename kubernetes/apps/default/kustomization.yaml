@@ -5,9 +5,9 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./actual/ks.yaml
-  - ./appsmith/ks.yaml
+  #- ./appsmith/ks.yaml
   - ./authelia/ks.yaml
-  - ./baserow/ks.yaml
+  #- ./baserow/ks.yaml
   #- ./firefly/ks.yaml
   - ./frigate/ks.yaml
   - ./hajimari/ks.yaml
@@ -16,7 +16,7 @@ resources:
   - ./kubernetes-schemas/ks.yaml
   - ./lldap/ks.yaml
   - ./mosquitto/ks.yaml
-  - ./n8n/ks.yaml
+  #- ./n8n/ks.yaml
  # - ./ollama/ks.yaml
   - ./troddit/ks.yaml
   - ./website/ks.yaml
