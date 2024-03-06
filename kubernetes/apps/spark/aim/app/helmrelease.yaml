@@ -38,7 +38,7 @@ spec:
                 containerPort: 43800
                 protocol: TCP
               - name: grpc
-                containerPort: 5001
+                containerPort: 53800
                 protocol: TCP
             # ports:
             #   - containerPort: 43800
@@ -64,7 +64,7 @@ spec:
           http:
             port: 43800
           grpc:
-            port: 5001
+            port: 53800
     ingress:
       main:
         enabled: true
