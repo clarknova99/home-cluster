@@ -32,7 +32,7 @@ spec:
           main:
             image:
               repository: docker.io/clarknova9/aim
-              tag: 0.0.1
+              tag: 0.0.2
             ports:
               - name: http
                 containerPort: 43800
@@ -59,7 +59,6 @@ spec:
           io.cilium/lb-ipam-ips: "192.168.2.43"
         externalTrafficPolicy: Cluster
         type: LoadBalancer
-
         ports:
           http:
             port: 43800

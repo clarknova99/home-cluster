@@ -3,6 +3,10 @@
 # python3.7 should be sufficient to run Aim
 FROM python:3.10.12
 
+
+# Install basic utilitiesc
+RUN apt update && apt install -y curl net-tools inetutils-ping lsof
+
 # install the `aim` package on the latest version
 RUN pip install --upgrade aim
 
