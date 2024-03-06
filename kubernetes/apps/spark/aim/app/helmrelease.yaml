@@ -63,8 +63,10 @@ spec:
         ports:
           http:
             port: 43800
+            targetport: 4380
           grpc:
             port: 53800
+            targetport: 5380
     ingress:
       main:
         enabled: true
