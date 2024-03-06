@@ -1,11 +1,5 @@
-#docker buildx build --push --platform linux/arm64,linux/amd64 --tag clarknova9/aim:0.0.0 kubernetes/apps/spark/aim/app/.
-#docker buildx build --push --platform linux/arm64,linux/amd64 --tag clarknova9/aim-ui:0.0.0 .
-# python3.7 should be sufficient to run Aim
+#docker buildx build --push --platform linux/arm64,linux/amd64 --tag clarknova9/aim-server:0.0.0  -f Dockerfile_server .
 FROM python:3.10.12
-
-
-# Install basic utilitiesc
-#RUN apt update && apt install -y curl net-tools inetutils-ping lsof
 
 # install the `aim` package on the latest version
 RUN pip install --upgrade aim
@@ -21,4 +15,4 @@ ENTRYPOINT ["/bin/sh", "-c"]
 # using `--dev` to print verbose logs. Port 43800 is the default port of
 # `aim up` but explicit is better than implicit.
 #CMD ["echo \"N\" | aim init --repo /aim && aim up --dev --host 0.0.0.0 --port 43800 --workers 2 --repo /aim"]
-CMD ["echo \"N\" | aim init --repo /aim && aim up --dev --host 0.0.0.0 --port 43800 --workers 2 --repo /aim"]
+CMD ["echo \"N\" | aim init --repo /aim && aim server --dev --repo /aim]
