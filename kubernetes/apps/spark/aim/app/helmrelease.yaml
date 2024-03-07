@@ -73,7 +73,7 @@ spec:
             port: 43800
             targetport: 43800
           grpc:
-            port: 53800
+            port: 80
             targetport: 53800
     ingress:
       main:
