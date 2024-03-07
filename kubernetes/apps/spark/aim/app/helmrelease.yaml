@@ -41,8 +41,8 @@ spec:
               - name: http
                 containerPort: 43800
                 protocol: TCP
-            command: ["aim", "init"]
-            args: ["--repo", "/aim"]
+            command: ["aim", "up"]
+            args: [--dev --host 0.0.0.0 --port 43800 --workers 2 --repo /aim"]
             #args: ["init", "--repo /aim && aim up --dev --host 0.0.0.0 --port 43800 --workers 2 --repo /aim"]
             resources:
               limits:
