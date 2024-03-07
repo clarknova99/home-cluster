@@ -15,4 +15,4 @@ ENTRYPOINT ["/bin/sh", "-c"]
 # using `--dev` to print verbose logs. Port 43800 is the default port of
 # `aim up` but explicit is better than implicit.
 #CMD ["echo \"N\" | aim init --repo /aim && aim up --dev --host 0.0.0.0 --port 43800 --workers 2 --repo /aim"]
-CMD ["echo \"N\" | aim server --repo /aim]
+CMD ["echo \"N\" | aim server --repo /aim" ]
