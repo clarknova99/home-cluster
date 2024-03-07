@@ -56,7 +56,8 @@ spec:
               - name: grpc
                 containerPort: 53800
                 protocol: TCP
-            command: ["server --repo /aim"]
+            command: >
+              server --repo /aim
             resources:
               limits:
                 cpu: "1"
