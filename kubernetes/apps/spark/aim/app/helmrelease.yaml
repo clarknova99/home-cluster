@@ -50,23 +50,23 @@ spec:
               requests:
                 cpu: 100m
                 memory: 1Gi
-          server:
-            image:
-              repository: docker.io/aimstack/aim
-              tag: 0.0.4
-            ports:
-              - name: grpc
-                containerPort: 53800
-                protocol: TCP
-            command: >
-              server --repo /aim
-            resources:
-              limits:
-                cpu: "1"
-                memory: 2Gi
-              requests:
-                cpu: 100m
-                memory: 1Gi
+          # server:
+          #   image:
+          #     repository: docker.io/aimstack/aim
+          #     tag: 0.0.4
+          #   ports:
+          #     - name: grpc
+          #       containerPort: 53800
+          #       protocol: TCP
+          #   command: >
+          #     server --repo /aim
+          #   resources:
+          #     limits:
+          #       cpu: "1"
+          #       memory: 2Gi
+          #     requests:
+          #       cpu: 100m
+          #       memory: 1Gi
     service:
       main:
         annotations:
