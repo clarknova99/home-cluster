@@ -34,12 +34,14 @@ spec:
         containers:
           main:
             image:
-              repository: docker.io/clarknova9/aim-ui
-              tag: 0.0.0
+              #repository: docker.io/clarknova9/aim-ui
+              repository: docker.io/aimstack/aim
+              tag: 3.18.1
             ports:
               - name: http
                 containerPort: 43800
                 protocol: TCP
+            command: ["server"]
             resources:
               limits:
                 cpu: "1"
@@ -49,8 +51,8 @@ spec:
                 memory: 1Gi
           server:
             image:
-              repository: docker.io/clarknova9/aim-server
-              tag: 0.0.2
+              repository: docker.io/aimstack/aim
+              tag: 3.18.1
             ports:
               - name: grpc
                 containerPort: 53800
