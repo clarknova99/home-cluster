@@ -50,7 +50,7 @@ spec:
           server:
             image:
               repository: docker.io/clarknova9/aim-server
-              tag: 0.0.0
+              tag: 0.0.1
             ports:
               - name: grpc
                 containerPort: 53800
