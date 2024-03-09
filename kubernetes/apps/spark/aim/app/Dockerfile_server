@@ -1,5 +1,5 @@
 #docker buildx build --push --platform linux/arm64,linux/amd64 --tag clarknova9/aim-server:0.0.0  -f Dockerfile_server .
-FROM python:3.10.12
+FROM python:3.12.2
 
 # install the `aim` package on the latest version
 RUN pip install --upgrade aim
