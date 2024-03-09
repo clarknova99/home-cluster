@@ -15,7 +15,7 @@ resources:
   - ./kube-prometheus-stack/ks.yaml
   - ./kube-state-metrics/ks.yaml
   - ./kubernetes-dashboard/ks.yaml
-  #- ./loki/ks.yaml
+  - ./loki/ks.yaml
   - ./parseable/ks.yaml
  # - ./skooner/ks.yaml
   - ./smartctl-exporter/ks.yaml
