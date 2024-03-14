@@ -39,6 +39,9 @@ spec:
                 memory: 80Mi
             env:
               GENERIC_TIMEZONE: ${TIMEZONE}
+        pod:
+          nodeSelector:
+            kubernetes.io/arch: amd64
     service:
       main:
         ports:
