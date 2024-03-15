@@ -80,10 +80,17 @@ spec:
           http:
             port: *port
     persistence:
+      # config:
+      #   enabled: true
+      #   existingClaim: pvc-sabnzbd-config
+      #   #mountPath: /config
+      #   globalMounts:
+      #     - path: /config
       config:
         enabled: true
-        existingClaim: pvc-sabnzbd-config
-        #mountPath: /config
+        type: nfs
+        server: 192.168.1.2
+        path: /volume1/network-storage/sabnzbd
         globalMounts:
           - path: /config
       downloads:
