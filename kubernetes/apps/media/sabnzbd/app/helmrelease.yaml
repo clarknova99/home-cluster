@@ -80,12 +80,6 @@ spec:
           http:
             port: *port
     persistence:
-      # config:
-      #   enabled: true
-      #   existingClaim: pvc-sabnzbd-config
-      #   #mountPath: /config
-      #   globalMounts:
-      #     - path: /config
       config:
         enabled: true
         type: nfs
@@ -95,22 +89,49 @@ spec:
           - path: /config
       downloads:
         enabled: true
-        existingClaim: pvc-downloads
-        #mountPath: /downloads
+        type: nfs
+        server: 192.168.1.2
+        path: /volume1/Downloads
         globalMounts:
           - path: /downloads
       movies:
         enabled: true
-        existingClaim: pvc-movies
-        #mountPath: /movies
+        type: nfs
+        server: 192.168.1.2
+        path: /volume1/Video/Movies
         globalMounts:
           - path: /movies
       tv:
         enabled: true
-        existingClaim: pvc-tv
-        #mountPath: /tv
+        type: nfs
+        server: 192.168.1.2
+        path: /volume1/Video/TV
         globalMounts:
           - path: /tv
+      # config:
+      #   enabled: true
+      #   existingClaim: pvc-sabnzbd-config
+      #   #mountPath: /config
+      #   globalMounts:
+      #     - path: /config
+      # downloads:
+      #   enabled: true
+      #   existingClaim: pvc-downloads
+      #   #mountPath: /downloads
+      #   globalMounts:
+      #     - path: /downloads
+      # movies:
+      #   enabled: true
+      #   existingClaim: pvc-movies
+      #   #mountPath: /movies
+      #   globalMounts:
+      #     - path: /movies
+      # tv:
+      #   enabled: true
+      #   existingClaim: pvc-tv
+      #   #mountPath: /tv
+      #   globalMounts:
+      #     - path: /tv
       incomplete:
         enabled: true
         type: emptyDir
