@@ -10,7 +10,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 2.6.0
+      version: 3.0.4
       sourceRef:
         kind: HelmRepository
         name: bjw-s
@@ -27,11 +27,11 @@ spec:
     keepHistory: false
   values:
       controllers:
-        main:
+        bazarr:
           annotations:
             reloader.stakater.com/auto: "true"
           containers:
-            main:
+            app:
               image:
                 repository: ghcr.io/onedr0p/bazarr
                 tag: 1.4.2@sha256:07af48c360098a2aa4b4d971fa14a93761459fbf8a8f1901e572826106a74bcd
@@ -65,31 +65,69 @@ spec:
               fsGroup: 568
               fsGroupChangePolicy: OnRootMismatch
       service:
-        main:
+        app:
+          controller: bazarr
           ports:
             http:
               port: 6767
       persistence:
         config:
           enabled: true
-          existingClaim: pvc-bazarr-config
-          mountPath: /config
+          type: nfs
+          server: 192.168.1.2
+          path: /volume1/network-storage/bazarr
+          globalMounts:
+            - path: /config
         downloads:
           enabled: true
-          existingClaim: pvc-downloads
-          mountPath: /downloads
+          type: nfs
+          server: 192.168.1.2
+          path: /volume1/Downloads
+          globalMounts:
+            - path: /downloads
         movies:
           enabled: true
-          existingClaim: pvc-movies
-          mountPath: /movies
+          type: nfs
+          server: 192.168.1.2
+          path: /volume1/Video/Movies
+          globalMounts:
+            - path: /movies
         tv:
           enabled: true
-          existingClaim: pvc-tv
-          mountPath: /tv
+          type: nfs
+          server: 192.168.1.2
+          path: /volume1/Video/TV
+          globalMounts:
+            - path: /tv
         incomplete:
           enabled: true
           type: emptyDir
         add-ons:
           enabled: true
           type: emptyDir
-          mountPath: /add-ons
+          globalMounts:
+            - path: /add-ons
+      # persistence:
+      #   config:
+      #     enabled: true
+      #     existingClaim: pvc-bazarr-config
+      #     mountPath: /config
+      #   downloads:
+      #     enabled: true
+      #     existingClaim: pvc-downloads
+      #     mountPath: /downloads
+      #   movies:
+      #     enabled: true
+      #     existingClaim: pvc-movies
+      #     mountPath: /movies
+      #   tv:
+      #     enabled: true
+      #     existingClaim: pvc-tv
+      #     mountPath: /tv
+      #   incomplete:
+      #     enabled: true
+      #     type: emptyDir
+      #   add-ons:
+      #     enabled: true
+      #     type: emptyDir
+      #     mountPath: /add-ons
