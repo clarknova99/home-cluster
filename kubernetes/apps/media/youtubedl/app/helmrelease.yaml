@@ -11,7 +11,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 2.6.0
+      version: 3.0.4
       sourceRef:
         kind: HelmRepository
         name: bjw-s
@@ -28,11 +28,11 @@ spec:
     keepHistory: false
   values:
     controllers:
-      main:
+      youtubedl:
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
-          main:
+          app:
             image:
               repository: docker.io/tzahi12345/youtubedl-material
               tag: 4.3.2
@@ -40,20 +40,40 @@ spec:
               TZ: America/New_York
               write_ytdl_config: true
     service:
-      main:
+      app:
+        controller: youtubedl
         ports:
           http:
             port: 17442
+    ingress:
+      app:
+        annotations:
+          hajimari.io/enable: "true"
+          hajimari.io/icon: youtube
+        className: internal
+        hosts:
+          - host: ytd.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: 17442
+        tls:
+          - hosts:
+              - ytd.${SECRET_DOMAIN}
     persistence:
-      data:
+      config:
         enabled: true
-        existingClaim: pvc-youtubedl
-        mountPath: /app/appdata
-        #subPath: youtubedl
+        type: nfs
+        server: 192.168.1.2
+        path: /volume1/network-storage/youtubedl
+        globalMounts:
+          - path: /app/appdata
       media:
         enabled: true
-        existingClaim: pvc-youtube
-        subPath:
-          - path: video
-            mountPath: /app/video
+        type: nfs
+        server: 192.168.1.2
+        path: /volume1/Video/youtube
+        globalMounts:
+          - path: /app/video
 
