@@ -1,5 +1,5 @@
 ---
-# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2beta1.json
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
@@ -83,19 +83,27 @@ spec:
       config:
         enabled: true
         existingClaim: pvc-sabnzbd-config
-        mountPath: /config
+        #mountPath: /config
+        globalMounts:
+          - path: /config
       downloads:
         enabled: true
         existingClaim: pvc-downloads
-        mountPath: /downloads
+        #mountPath: /downloads
+        globalMounts:
+          - path: /downloads
       movies:
         enabled: true
         existingClaim: pvc-movies
-        mountPath: /movies
+        #mountPath: /movies
+        globalMounts:
+          - path: /movies
       tv:
         enabled: true
         existingClaim: pvc-tv
-        mountPath: /tv
+        #mountPath: /tv
+        globalMounts:
+          - path: /tv
       incomplete:
         enabled: true
         type: emptyDir
