@@ -10,7 +10,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 2.6.0
+      version: 3.0.4
       sourceRef:
         kind: HelmRepository
         name: bjw-s
@@ -30,7 +30,7 @@ spec:
       namespace: database
   values:
     controllers:
-      main:
+      prowlarr:
         annotations:
           reloader.stakater.com/auto: "true"
         initContainers:
@@ -43,7 +43,7 @@ spec:
               - secretRef:
                   name: prowlarr-secret
         containers:
-          main:
+          app:
             image:
               repository: ghcr.io/onedr0p/prowlarr-develop
               tag: 1.14.1.4316@sha256:882daa1e28f989bc6d76ea7ab7e729da3d9a7a67714e6db606a8ef45a6e6c14b
@@ -67,15 +67,40 @@ spec:
           nodeSelector:
             kubernetes.io/arch: amd64
     service:
-      main:
+      app:
+        controller: prowlarr
         ports:
           http:
             port: *port
+    ingress:
+      app:
+        annotations:
+          hajimari.io/enable: "true"
+          hajimari.io/icon: download-box
+        className: internal
+        hosts:
+          - host: prowlarr.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: *port
+        tls:
+          - hosts:
+              - prowlarr.${SECRET_DOMAIN}
     persistence:
       config:
         enabled: true
-        existingClaim: pvc-prowlarr
+        type: nfs
+        server: 192.168.1.2
+        path: /volume1/network-storage/prowlarr
+        globalMounts:
+          - path: /config
       downloads:
         enabled: true
-        existingClaim: pvc-downloads
-        mountPath: /downloads
+        type: nfs
+        server: 192.168.1.2
+        path: /volume1/Downloads
+        globalMounts:
+          - path: /downloads
+
