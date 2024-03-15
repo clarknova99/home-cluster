@@ -77,7 +77,7 @@ spec:
         #         - path: /config
     service:
       app:
-        controller: prowlarr
+        controller: plex
         type: LoadBalancer
         externalTrafficPolicy: Cluster
         annotations:
