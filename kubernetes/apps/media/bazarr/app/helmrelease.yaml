@@ -91,7 +91,7 @@ spec:
                 - path: /
                   service:
                     identifier: app
-                    port: 5076
+                    port: 6767
           tls:
             - hosts:
                 - bazarr.${SECRET_DOMAIN}
