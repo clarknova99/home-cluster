@@ -39,11 +39,11 @@ spec:
             env:
               TZ: "${TIMEZONE}"
             resources:
-            requests:
-              cpu: 10m
-              memory: 256M
-            limits:
-              memory: 1Gi
+              requests:
+                cpu: 10m
+                memory: 256M
+              limits:
+                memory: 1Gi
     service:
       app:
         controller: hydra
