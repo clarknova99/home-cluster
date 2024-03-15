@@ -50,22 +50,22 @@ spec:
         ports:
           http:
             port: 5076
-    # ingress:
-    #   app:
-    #     annotations:
-    #       hajimari.io/enable: "true"
-    #       hajimari.io/icon: download-box
-    #     className: internal
-    #     hosts:
-    #       - host: hydra.${SECRET_DOMAIN}
-    #         paths:
-    #           - path: /
-    #             service:
-    #               identifier: app
-    #               port: 5076
-    #     tls:
-    #       - hosts:
-    #           - hydra.${SECRET_DOMAIN}
+    ingress:
+      app:
+        annotations:
+          hajimari.io/enable: "true"
+          hajimari.io/icon: download-box
+        className: internal
+        hosts:
+          - host: hydra.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: 5076
+        tls:
+          - hosts:
+              - hydra.${SECRET_DOMAIN}
     persistence:
       config:
         enabled: true
