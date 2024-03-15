@@ -10,7 +10,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 2.6.0
+      version: 3.0.4
       sourceRef:
         kind: HelmRepository
         name: bjw-s
@@ -27,7 +27,7 @@ spec:
     keepHistory: false
   values:
     controllers:
-      main:
+      sonarr:
         annotations:
           reloader.stakater.com/auto: "true"
         initContainers:
@@ -40,7 +40,7 @@ spec:
               - secretRef:
                   name: sonarr-secrets
         containers:
-          main:
+          app:
             image:
               repository: ghcr.io/onedr0p/sonarr-develop
               tag: 4.0.2.1341@sha256:e7e1a75fa1586559f91d5e26caac72f96f1e18ae01ccb2d7c7ce589a3bedaca4
@@ -51,7 +51,7 @@ spec:
               SONARR__INSTANCE_NAME: Sonarr
               SONARR__PORT: &port 80
               SONARR__LOG_LEVEL: info
-              #SONARR__THEME: dark
+              SONARR__THEME: dark
             envFrom: *envFrom
             probes:
               liveness: &probes
@@ -82,27 +82,66 @@ spec:
             fsGroupChangePolicy: OnRootMismatch
             supplementalGroups: [10000]
     service:
-      main:
+      app:
+        controller: sonarr
         ports:
           http:
             port: *port
+    ingress:
+      app:
+        annotations:
+          hajimari.io/enable: "true"
+          hajimari.io/icon: mdi:television-classic
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/description: TV Show Management
+          gethomepage.dev/group: Media
+          gethomepage.dev/icon: mdi-television-classic
+          gethomepage.dev/name: sonarr
+          gethomepage.dev/widget.type: sonarr
+          gethomepage.dev/widget.key: "${HOMEPAGE_VAR_SONARR_KEY}"
+          gethomepage.dev/widget.url: http://sonarr.media.svc.cluster.local:80
+          gethomepage.dev/siteMonitor: https://sonarr.${SECRET_DOMAIN}
+        className: internal
+        hosts:
+          - host: sonarr.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: 80
+        tls:
+          - hosts:
+              - sonarr.${SECRET_DOMAIN}
     persistence:
       config:
         enabled: true
-        existingClaim: pvc-sonarr-config
-        mountPath: /config
+        type: nfs
+        server: 192.168.1.2
+        path: /volume1/network-storage/sonarr
+        globalMounts:
+          - path: /config
       downloads:
         enabled: true
-        existingClaim: pvc-downloads
-        mountPath: /downloads
+        type: nfs
+        server: 192.168.1.2
+        path: /volume1/Downloads
+        globalMounts:
+          - path: /downloads
       movies:
         enabled: true
-        existingClaim: pvc-movies
-        mountPath: /movies
+        type: nfs
+        server: 192.168.1.2
+        path: /volume1/Video/Movies
+        globalMounts:
+          - path: /movies
       tv:
         enabled: true
-        existingClaim: pvc-tv
-        mountPath: /tv
+        type: nfs
+        server: 192.168.1.2
+        path: /volume1/Video/TV
+        globalMounts:
+          - path: /tv
       incomplete:
         enabled: true
         type: emptyDir
+
