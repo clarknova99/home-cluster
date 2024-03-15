@@ -52,8 +52,8 @@ spec:
             port: 5076
     ingress:
       annotations:
-      hajimari.io/enable: "true"
-      hajimari.io/icon: download-box
+        hajimari.io/enable: "true"
+        hajimari.io/icon: download-box
       app:
         className: internal
         hosts:
