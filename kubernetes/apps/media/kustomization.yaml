@@ -14,4 +14,4 @@ resources:
   - ./sabnzbd/ks.yaml
   - ./sonarr/ks.yaml
   - ./tautulli/ks.yaml
-  #- ./youtubedl/ks.yaml
+  - ./youtubedl/ks.yaml
