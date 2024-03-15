@@ -10,7 +10,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 2.6.0
+      version: 3.0.4
       sourceRef:
         kind: HelmRepository
         name: bjw-s
@@ -30,11 +30,11 @@ spec:
       namespace: kube-system
   values:
     controllers:
-      main:
+      plex:
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
-          main:
+          app:
             image:
               # repository: docker.io/plexinc/pms-docker
               # tag: 1.32.8.7639-fb6452ebf
@@ -76,7 +76,8 @@ spec:
         #       globalMounts:
         #         - path: /config
     service:
-      main:
+      app:
+        controller: prowlarr
         type: LoadBalancer
         externalTrafficPolicy: Cluster
         annotations:
@@ -103,7 +104,7 @@ spec:
             port: 32414
             protocol: UDP
     ingress:
-      main:
+      app:
         enabled: true
         className: external
         annotations:
@@ -123,7 +124,7 @@ spec:
             paths:
               - path: /
                 service:
-                  name: main
+                  identifier: app
                   port: http
         tls:
           - hosts:
