@@ -51,10 +51,10 @@ spec:
           http:
             port: 5076
     ingress:
-      annotations:
-        hajimari.io/enable: "true"
-        hajimari.io/icon: download-box
       app:
+        annotations:
+          hajimari.io/enable: "true"
+          hajimari.io/icon: download-box
         className: internal
         hosts:
           - host: hydra.${SECRET_DOMAIN}
