@@ -41,8 +41,8 @@ spec:
               REDIS_HOST: redis-master.database.svc.cluster.local
               REDIS_PORT: 6379
               # REDIS_PROTOCOL:
-              # REDIS_USER:
-              # REDIS_PASSWORD:
+              REDIS_USER: ""
+              REDIS_PASSWORD: ""
         pod:
           nodeSelector:
             kubernetes.io/arch: amd64
