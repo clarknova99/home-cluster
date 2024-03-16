@@ -20,13 +20,13 @@ spec:
   values:
     controllers:
       n8n:
-        initContainers:
-          init-dir:
-            image:
-              repository: busybox
-              tag: latest
-              pullPolicy: IfNotPresent
-            command: ['sh', '-c', 'chown -R 1000:1000 /home/node/.n8n']
+        # initContainers:
+        #   init-dir:
+        #     image:
+        #       repository: busybox
+        #       tag: latest
+        #       pullPolicy: IfNotPresent
+        #     command: ['sh', '-c', 'chown -R 1000:1000 /home/node/.n8n']
         containers:
           app:
             image:
