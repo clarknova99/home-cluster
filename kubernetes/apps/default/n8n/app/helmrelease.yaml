@@ -48,6 +48,14 @@ spec:
               DB_POSTGRESDB_USER: ${SECRET_POSTGRES_USERNAME}
               DB_POSTGRESDB_PASSWORD: ${SECRET_POSTGRES_PASSWORD}
               DB_POSTGRESDB_PORT: 5432
+        pod:
+          nodeSelector:
+            kubernetes.io/arch: amd64
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            fsGroup: 1000
+            fsGroupChangePolicy: "OnRootMismatch"
     service:
       app:
         controller: n8n
