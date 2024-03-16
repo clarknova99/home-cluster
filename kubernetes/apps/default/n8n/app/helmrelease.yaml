@@ -47,7 +47,7 @@ spec:
               N8N_USER_MANAGEMENT_DISABLED: true
               N8N_TEMPLATES_ENABLED: false
               N8N_METRICS: true
-              N8N_USER_FOLDER: /config
+              #N8N_USER_FOLDER: /config
               NODE_FUNCTION_ALLOW_EXTERNAL: databricks/sql
               DB_TYPE: postgresdb
               DB_POSTGRESDB_DATABASE: n8n
