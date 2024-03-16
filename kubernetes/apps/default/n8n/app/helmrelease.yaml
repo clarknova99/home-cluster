@@ -41,7 +41,7 @@ spec:
               N8N_TEMPLATES_ENABLED: false
               N8N_METRICS: true
               N8N_USER_FOLDER: /config
-              NODE_FUNCTION_ALLOW_EXTERNAL: databricks/sql
+              #NODE_FUNCTION_ALLOW_EXTERNAL: databricks/sql
               DB_TYPE: postgresdb
               DB_POSTGRESDB_DATABASE: n8n
               DB_POSTGRESDB_HOST: cloudnative-pg-cluster.database.svc.cluster.local
