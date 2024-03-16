@@ -85,7 +85,7 @@ spec:
         server: 192.168.1.2
         path: /volume1/network-storage/n8n
         globalMounts:
-          - path: /home/node/.n8n
+          - path: /home/node
     # persistence:
     #   config:
     #     enabled: true
