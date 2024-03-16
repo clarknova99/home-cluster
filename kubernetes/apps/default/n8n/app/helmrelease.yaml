@@ -79,13 +79,20 @@ spec:
           - hosts:
               - n8n.${SECRET_DOMAIN}
     persistence:
+      config:
+        enabled: true
+        type: nfs
+        server: 192.168.1.2
+        path: /volume1/network-storage/n8n/app
+        globalMounts:
+          - path: /home/node/.n8n
       data:
         enabled: true
         type: nfs
         server: 192.168.1.2
-        path: /volume1/network-storage/n8n
+        path: /volume1/network-storage/n8n/files
         globalMounts:
-          - path: /home/node
+          - path: /files
     # persistence:
     #   config:
     #     enabled: true
