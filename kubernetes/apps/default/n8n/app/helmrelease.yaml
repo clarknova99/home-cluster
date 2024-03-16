@@ -21,7 +21,7 @@ spec:
     controllers:
       n8n:
         initContainers:
-          init-db:
+          init-dir:
             image:
               repository: busybox
               tag: latest
