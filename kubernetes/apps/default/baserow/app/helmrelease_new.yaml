@@ -27,24 +27,31 @@ spec:
     controllers:
       baserow:
         containers:
-          app:
+          frontend:
             image:
-              repository: docker.io/baserow/baserow
+              repository: docker.io/baserow/web-frontend
               tag: 1.23.2
             env:
-              BASEROW_PUBLIC_URL: https://baserow.${SECRET_DOMAIN}
+              BASEROW_PUBLIC_URL: baserow.${SECRET_DOMAIN}
               DATABASE_HOST: cloudnative-pg-cluster.database.svc.cluster.local
               DATABASE_NAME: baserow
               DATABASE_USER: ${SECRET_POSTGRES_USERNAME}
               DATABASE_PASSWORD: ${SECRET_POSTGRES_PASSWORD}
               DATABASE_PORT: 5432
               REDIS_URL: redis://redis-master.database.svc.cluster.local:6379
-              # REDIS_HOST: redis-master.database.svc.cluster.local
-              # REDIS_PORT: 6379
-              # REDIS_PROTOCOL: redis
-              # REDIS_USER: ""
-              # REDIS_PASSWORD: ""
-              #REDIS_PASSWORD: ${SECRET_REDIS_PASSWORD}
+          backend:
+            image:
+              repository: docker.io/baserow/backend
+              tag: 1.23.2
+            env:
+              BASEROW_PUBLIC_URL: baserow.${SECRET_DOMAIN}
+              DATABASE_HOST: cloudnative-pg-cluster.database.svc.cluster.local
+              DATABASE_NAME: baserow
+              DATABASE_USER: ${SECRET_POSTGRES_USERNAME}
+              DATABASE_PASSWORD: ${SECRET_POSTGRES_PASSWORD}
+              DATABASE_PORT: 5432
+              REDIS_URL: redis://redis-master.database.svc.cluster.local:6379
+              PRIVATE_BACKEND_URL: baserow-backend.${SECRET_DOMAIN}
         pod:
           nodeSelector:
             kubernetes.io/arch: amd64
@@ -65,7 +72,13 @@ spec:
             paths:
               - path: /
                 service:
-                  identifier: app
+                  identifier: frontend
+                  port: 80
+          - host: baserow-backend.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                service:
+                  identifier: backend
                   port: 80
         tls:
           - hosts:
