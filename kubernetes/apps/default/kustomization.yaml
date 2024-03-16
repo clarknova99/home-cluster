@@ -7,7 +7,7 @@ resources:
   - ./actual/ks.yaml
   #- ./appsmith/ks.yaml
   - ./authelia/ks.yaml
-  - ./baserow/ks.yaml
+  #- ./baserow/ks.yaml
   #- ./firefly/ks.yaml
   - ./frigate/ks.yaml
   - ./hajimari/ks.yaml
