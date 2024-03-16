@@ -35,7 +35,7 @@ spec:
               BASEROW_PUBLIC_URL: baserow.${SECRET_DOMAIN}
               DATABASE_HOST: cloudnative-pg-cluster.database.svc.cluster.local
               DATABASE_NAME: baserow
-              DATABASE_USER: postgres
+              DATABASE_USER: ${SECRET_POSTGRES_USERNAME}
               DATABASE_PASSWORD: ${SECRET_POSTGRES_PASSWORD}
               DATABASE_PORT: 5432
               REDIS_HOST: redis-master.database.svc.cluster.local
