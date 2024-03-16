@@ -29,7 +29,7 @@ spec:
         containers:
           app:
             image:
-              repository: docker.io/baserow/baserow:1.23.2
+              repository: docker.io/baserow/baserow
               tag: 1.23.2
             env:
               BASEROW_PUBLIC_URL: baserow.${SECRET_DOMAIN}
