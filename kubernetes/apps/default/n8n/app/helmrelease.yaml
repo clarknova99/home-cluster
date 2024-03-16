@@ -86,7 +86,7 @@ spec:
         path: /volume1/network-storage/n8n/app
         globalMounts:
           - path: /home/node/.n8n
-      data:
+      files:
         enabled: true
         type: nfs
         server: 192.168.1.2
