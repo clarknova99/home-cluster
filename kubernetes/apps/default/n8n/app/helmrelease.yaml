@@ -59,7 +59,7 @@ spec:
           nodeSelector:
             kubernetes.io/arch: amd64
           securityContext:
-            runAsUser: 1000
+            runAsUser: 0
             runAsGroup: 1000
             fsGroup: 1000
             fsGroupChangePolicy: "OnRootMismatch"
