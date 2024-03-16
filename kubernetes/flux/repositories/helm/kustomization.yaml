@@ -7,7 +7,6 @@ resources:
   - ./appsmith.yaml
   - ./authelia.yaml
   - ./backube.yaml
-  - ./baserow.yaml
   - ./bitnami.yaml
   - ./bjw-s.yaml
   - ./cilium.yaml

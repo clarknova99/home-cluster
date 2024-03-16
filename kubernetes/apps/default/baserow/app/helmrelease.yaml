@@ -39,6 +39,7 @@ spec:
               DATABASE_PASSWORD: ${SECRET_POSTGRES_PASSWORD}
               DATABASE_PORT: 5432
               REDIS_URL: redis://redis-master.database.svc.cluster.local:6379
+        pod:
           nodeSelector:
             kubernetes.io/arch: amd64
     service:
