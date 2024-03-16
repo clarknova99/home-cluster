@@ -67,5 +67,13 @@ spec:
     persistence:
       data:
         enabled: true
-        existingClaim: actual
+        type: nfs
+        server: 192.168.1.2
+        path: /volume1/network-storage/actual
+        globalMounts:
+          - path: /data
+    # persistence:
+    #   data:
+    #     enabled: true
+    #     existingClaim: actual
 
