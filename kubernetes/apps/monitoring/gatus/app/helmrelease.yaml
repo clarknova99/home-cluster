@@ -124,13 +124,13 @@ spec:
             paths:
               - path: /
                 service:
-                  name: app
+                  identifier: app
                   port: http
           - host: &host2 status.${SECRET_DOMAIN2}
             paths:
               - path: /
                 service:
-                  name: app
+                  identifier: app
                   port: http
         tls:
           - hosts:
