@@ -36,13 +36,29 @@ spec:
           app:
             image:
               repository: ghcr.io/home-assistant/home-assistant
-              tag: 2024.3.0
+              tag: 2024.3.1
     service:
       app:
         controller: hass
         ports:
           http:
             port: 8123
+      ingress:
+        app:
+          annotations:
+            hajimari.io/enable: "true"
+            hajimari.io/icon: mdi:home-assistant
+          className: internal
+          hosts:
+            - host: hass.${SECRET_DOMAIN}
+              paths:
+                - path: /
+                  service:
+                    identifier: app
+                    port: 6767
+          tls:
+            - hosts:
+                - hass.${SECRET_DOMAIN}
     persistence:
       config:
         enabled: true
