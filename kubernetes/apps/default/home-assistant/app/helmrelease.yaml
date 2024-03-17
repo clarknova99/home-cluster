@@ -43,22 +43,22 @@ spec:
         ports:
           http:
             port: 8123
-      ingress:
-        app:
-          annotations:
-            hajimari.io/enable: "true"
-            hajimari.io/icon: mdi:home-assistant
-          className: internal
-          hosts:
-            - host: hass.${SECRET_DOMAIN}
-              paths:
-                - path: /
-                  service:
-                    identifier: app
-                    port: 6767
-          tls:
-            - hosts:
-                - hass.${SECRET_DOMAIN}
+    ingress:
+      app:
+        annotations:
+          hajimari.io/enable: "true"
+          hajimari.io/icon: mdi:home-assistant
+        className: internal
+        hosts:
+          - host: hass.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: 6767
+        tls:
+          - hosts:
+              - hass.${SECRET_DOMAIN}
     persistence:
       config:
         enabled: true
