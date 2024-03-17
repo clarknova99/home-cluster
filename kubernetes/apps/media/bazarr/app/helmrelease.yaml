@@ -131,3 +131,4 @@ spec:
           enabled: true
           type: emptyDir
           globalMounts:
+            - path: /add-ons
