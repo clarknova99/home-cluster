@@ -131,28 +131,3 @@ spec:
           enabled: true
           type: emptyDir
           globalMounts:
-            - path: /add-ons
-      # persistence:
-      #   config:
-      #     enabled: true
-      #     existingClaim: pvc-bazarr-config
-      #     mountPath: /config
-      #   downloads:
-      #     enabled: true
-      #     existingClaim: pvc-downloads
-      #     mountPath: /downloads
-      #   movies:
-      #     enabled: true
-      #     existingClaim: pvc-movies
-      #     mountPath: /movies
-      #   tv:
-      #     enabled: true
-      #     existingClaim: pvc-tv
-      #     mountPath: /tv
-      #   incomplete:
-      #     enabled: true
-      #     type: emptyDir
-      #   add-ons:
-      #     enabled: true
-      #     type: emptyDir
-      #     mountPath: /add-ons
