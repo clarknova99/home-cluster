@@ -77,7 +77,7 @@ spec:
           max_outstanding_requests_per_tenant: 4096
         common:
           path_prefix: /var/loki
-          replication_factor: 3
+          replication_factor: 2
           storage:
             s3:
               s3: null
@@ -146,12 +146,16 @@ spec:
       persistence:
         size: 10Gi
         storageClass: longhorn
+      nodeSelector:
+        kubernetes.io/arch: amd64
 
     read:
       replicas: 2
       persistence:
         size: 10Gi
         storageClass: longhorn
+      nodeSelector:
+        kubernetes.io/arch: amd64
 
     backend:
       replicas: 3
@@ -169,6 +173,8 @@ spec:
       persistence:
         size: 10Gi
         storageClass: longhorn
+      nodeSelector:
+        kubernetes.io/arch: amd64
 
     monitoring:
       dashboards:
