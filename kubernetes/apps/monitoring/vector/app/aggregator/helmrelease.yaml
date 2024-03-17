@@ -11,7 +11,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 2.6.0
+      version: 3.0.4
       sourceRef:
         kind: HelmRepository
         name: bjw-s
@@ -29,7 +29,7 @@ spec:
     keepHistory: false
   values:
     controllers:
-      main:
+      vector-aggregator:
         replicas: 2
         strategy: RollingUpdate
         annotations:
@@ -39,7 +39,7 @@ spec:
             image:
               repository: ghcr.io/maxmind/geoipupdate
               tag: v6.1.0
-              pullPolicy: IfNotPresent
+              pullPolicy: Always
             env:
               GEOIPUPDATE_EDITION_IDS: GeoLite2-City
               GEOIPUPDATE_FREQUENCY: "0"
@@ -50,10 +50,8 @@ spec:
           main:
             image:
               repository: docker.io/timberio/vector
-              tag: 0.36.0-debian
+              tag: 0.36.1-debian
             args: ["--config", "/etc/vector/vector.yaml"]
-
-
         pod:
           topologySpreadConstraints:
             - maxSkew: 1
@@ -63,14 +61,15 @@ spec:
                 matchLabels:
                   app.kubernetes.io/name: *app
     service:
-      main:
-        controller: main
+      app:
+        controller: vector-aggregator
         type: LoadBalancer
         annotations:
           external-dns.alpha.kubernetes.io/hostname: vector.${SECRET_DOMAIN}
           io.cilium/lb-ipam-ips: 192.168.2.65
         ports:
           http:
+            primary: true
             port: 8686
           journald:
             port: 6000
