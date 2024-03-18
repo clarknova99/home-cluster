@@ -139,6 +139,14 @@ spec:
             editable: true
             options:
               path: /var/lib/grafana/dashboards/thanos
+          - name: loki-dashboards
+            orgId: 1
+            folder: loki-dashboards
+            type: file
+            disableDeletion: false
+            editable: true
+            options:
+              path: /var/lib/grafana/dashboards/loki-dashboards
     datasources:
       datasources.yaml:
         apiVersion: 1
@@ -267,7 +275,7 @@ spec:
           gnetId: 11454
           revision: 14
           datasource: Prometheus
-      loki:
+      loki-dashboards:
         loki-metrics:
           gnetId: 13407
           revision: 1
