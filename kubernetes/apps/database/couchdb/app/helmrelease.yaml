@@ -10,7 +10,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 2.6.0
+      version: 3.0.4
       sourceRef:
         kind: HelmRepository
         name: bjw-s
@@ -25,9 +25,9 @@ spec:
       retries: 5
   values:
     controllers:
-      main:
+      couchdb:
         containers:
-          main:
+          app:
             image:
               repository: public.ecr.aws/docker/library/couchdb
               tag: 3.3.3
@@ -66,12 +66,13 @@ spec:
         fsGroup: 568
         fsGroupChangePolicy: OnRootMismatch
     service:
-      main:
+      app:
+        controller: couchdb
         ports:
           http:
             port: 5984
     ingress:
-      main:
+      app:
         enabled: true
         ingressClassName: internal
         annotations:
@@ -83,8 +84,8 @@ spec:
               - path: /
                 pathType: Prefix
                 service:
-                  name: main
-                  port: http
+                  identifier: app
+                  port: 5984
         tls:
           - hosts:
               - *host
@@ -100,6 +101,8 @@ spec:
           - path: /opt/couchdb/etc/default.d
       data:
         enabled: true
-        existingClaim: pvc-couchdb
+        type: nfs
+        server: 192.168.1.2
+        path: /volume1/network-storage/couchdb
         globalMounts:
           - path: /opt/couchdb/data
