@@ -54,11 +54,11 @@ spec:
               - "sh"
               - "-c"
               - "cp /config/*.ini /opt/couchdb/etc/default.d/; ls -lrt /opt/couchdb/etc/default.d;"
-            volumeMounts:
-              - name: config
-                mountPath: /config
-              - name: config-storage
-                mountPath: /opt/couchdb/etc/default.d
+            # volumeMounts:
+            #   - name: config
+            #     mountPath: /config
+            #   - name: config-storage
+            #     mountPath: /opt/couchdb/etc/default.d
     defaultPodOptions:
       securityContext:
         runAsUser: 568
