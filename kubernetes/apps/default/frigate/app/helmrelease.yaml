@@ -77,7 +77,8 @@ spec:
             google.feature.node.kubernetes.io/coral: "true"
             kubernetes.io/hostname: "nuc11"
     service:
-      main:
+      app:
+        controller: frigate
         annotations:
           io.cilium/lb-ipam-ips: ${SVC_FRIGATE_ADDR}
         type: LoadBalancer
@@ -101,7 +102,7 @@ spec:
             port: 8555
             protocol: UDP
     ingress:
-      main:
+      app:
         enabled: true
         className: internal
         annotations:
@@ -118,7 +119,7 @@ spec:
             paths:
               - path: /
                 service:
-                  name: main
+                  identifier: app
                   port: http
         tls:
           - hosts:
@@ -126,9 +127,23 @@ spec:
     persistence:
       config:
         enabled: true
-        existingClaim: pvc-frigate-data
+        type: nfs
+        server: 192.168.1.2
+        path: /volume1/network-storage/frigate/data
         globalMounts:
           - path: /data
+      media:
+        enabled: true
+        type: nfs
+        server: 192.168.1.2
+        path: /volume1/network-storage/frigate/media
+      # config:
+      #   enabled: true
+      #   existingClaim: pvc-frigate-data
+      #   globalMounts:
+      #     - path: /data
+      # media:
+      #   existingClaim: pvc-frigate-media
       config-file:
         type: configMap
         name: frigate-configmap
@@ -150,5 +165,3 @@ spec:
         hostPathType: Directory
         globalMounts:
           - path: /dev/bus/usb
-      media:
-        existingClaim: pvc-frigate-media
