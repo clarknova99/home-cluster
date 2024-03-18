@@ -55,7 +55,7 @@ spec:
               - path: /
                 service:
                   identifier: app
-                  port: 6767
+                  port: 8123
         tls:
           - hosts:
               - hass.${SECRET_DOMAIN}
