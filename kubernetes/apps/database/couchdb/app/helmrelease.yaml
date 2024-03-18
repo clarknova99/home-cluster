@@ -74,7 +74,7 @@ spec:
     ingress:
       app:
         enabled: true
-        ingressClassName: internal
+        className: internal
         annotations:
           hajimari.io/enable: "false"
         # https://couchdb.domain.com/_utils/
