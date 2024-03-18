@@ -267,6 +267,14 @@ spec:
           gnetId: 11454
           revision: 14
           datasource: Prometheus
+      loki:
+        loki-metrics:
+          gnetId: 13407
+          revision: 1
+        loki-metrics-dashboard:
+          gnetId: 17781
+          revision: 1
+          datasource: Prometheus
       nginx:
         nginx:
           url: https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/grafana/dashboards/nginx.json
