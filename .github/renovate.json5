@@ -24,7 +24,8 @@
   "rebaseWhen": "conflicted",
   "schedule": ["on saturday"],
   "ignorePaths": [
-    "**/_archive/**"
+    "**/_archive/**",
+    "**/bootstrap/**"
   ],
   "flux": {
     "fileMatch": [
