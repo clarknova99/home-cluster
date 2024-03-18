@@ -10,4 +10,3 @@ resources:
   - ./mongodb/ks.yaml
   - ./pgadmin/ks.yaml
   - ./redis/ks.yaml
-  - ./redisinsight/ks.yaml
