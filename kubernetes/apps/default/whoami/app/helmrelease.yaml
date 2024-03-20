@@ -10,7 +10,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 2.6.0
+      version: 3.0.4
       sourceRef:
         kind: HelmRepository
         name: bjw-s
@@ -25,15 +25,33 @@ spec:
       retries: 5
   values:
     controllers:
-      main:
+      whoami:
         replicas: 1
         containers:
-          main:
+          app:
             image:
               repository: docker.io/traefik/whoami
               tag: latest
     service:
-      main:
+      app:
+        controller: whoami
         ports:
           http:
             port: 80
+    ingress:
+      app:
+        annotations:
+          hajimari.io/enable: "true"
+          hajimari.io/icon: mdi:ip-network
+        className: internal
+        hosts:
+          - host: whoami.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: 80
+        tls:
+          - hosts:
+              - whoami.${SECRET_DOMAIN}
+
