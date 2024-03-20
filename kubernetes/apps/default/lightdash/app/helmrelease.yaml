@@ -65,12 +65,12 @@ spec:
         tls:
           - hosts:
               - lightdash.${SECRET_DOMAIN}
-      persistence:
-        data:
-          enabled: true
-          type: nfs
-          server: 192.168.1.2
-          path: /volume1/network-storage/lightdash
-          globalMounts:
-            - path: /usr/app/dbt
+    persistence:
+      data:
+        enabled: true
+        type: nfs
+        server: 192.168.1.2
+        path: /volume1/network-storage/lightdash
+        globalMounts:
+          - path: /usr/app/dbt
 
