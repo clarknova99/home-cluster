@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
-  name: whoami
+  name: lightdash
   namespace: default
 spec:
   interval: 15m
@@ -25,19 +25,30 @@ spec:
       retries: 5
   values:
     controllers:
-      whoami:
+      lightdash:
         replicas: 1
         containers:
           app:
             image:
-              repository: docker.io/traefik/whoami
-              tag: latest
+              repository: docker.io/lightdash/lightdash
+              tag: 0.1038.1
+            env:
+              PGHOST: cloudnative-pg-cluster.database.svc.cluster.local
+              PGPORT: 5432
+              PGUSER: ${SECRET_POSTGRES_USERNAME}
+              PGPASSWORD: ${SECRET_POSTGRES_PASSWORD}
+              PGDATABASE: lightdash
+              PORT: 8080
+              LIGHTDASH_SECRET: secret
+        pod:
+          nodeSelector:
+            kubernetes.io/arch: amd64
     service:
       app:
-        controller: whoami
+        controller: lightdash
         ports:
           http:
-            port: 80
+            port: 8080
     ingress:
       app:
         annotations:
@@ -45,13 +56,21 @@ spec:
           hajimari.io/icon: mdi:ip-network
         className: internal
         hosts:
-          - host: whoami.${SECRET_DOMAIN}
+          - host: lightdash.${SECRET_DOMAIN}
             paths:
               - path: /
                 service:
                   identifier: app
-                  port: 80
+                  port: 8080
         tls:
           - hosts:
-              - whoami.${SECRET_DOMAIN}
+              - lightdash.${SECRET_DOMAIN}
+      persistence:
+        data:
+          enabled: true
+          type: nfs
+          server: 192.168.1.2
+          path: /volume1/network-storage/lightdash
+          globalMounts:
+            - path: /usr/app/dbt
 
