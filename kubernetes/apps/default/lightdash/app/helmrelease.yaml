@@ -38,6 +38,7 @@ spec:
               PGUSER: ${SECRET_POSTGRES_USERNAME}
               PGPASSWORD: ${SECRET_POSTGRES_PASSWORD}
               PGDATABASE: lightdash
+              PGSSLMODE: disable
               PORT: 8080
               LIGHTDASH_SECRET: secret
               SITE_URL: https://lightdash.${SECRET_DOMAIN}
