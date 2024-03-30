@@ -10,7 +10,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 2.6.0
+      version: 3.0.4
       interval: 30m
       sourceRef:
         kind: HelmRepository
@@ -19,15 +19,15 @@ spec:
 
   values:
     controllers:
-      main:
+      echo-server:
         annotations:
           reloader.stakater.com/auto: "true"
 
         containers:
-          main:
+          app:
             image:
               repository: ghcr.io/mendhak/http-https-echo
-              tag: 31
+              tag: 32
             env:
               HTTP_PORT: &port 8080
               LOG_WITHOUT_NEWLINE: "true"
@@ -39,15 +39,16 @@ spec:
               limits:
                 memory: 30M
     service:
-      main:
+      app:
+        controller: echo-server
         ports:
           http:
             port: *port
 
     ingress:
-      main:
+      app:
         enabled: true
-        ingressClassName: external
+        className: external
         annotations:
           external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
           nginx.ingress.kubernetes.io/auth-method: GET
@@ -62,14 +63,14 @@ spec:
               - path: /
                 pathType: Prefix
                 service:
-                  name: main
+                  identifier: app
                   port: http
           - host: &host2 "{{ .Release.Name }}.${SECRET_DOMAIN2}"
             paths:
               - path: /
                 pathType: Prefix
                 service:
-                  name: main
+                  identifier: app
                   port: http
 
         tls:
