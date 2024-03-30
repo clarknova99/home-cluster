@@ -22,9 +22,8 @@ spec:
   upgrade:
     cleanupOnFail: true
     remediation:
+      strategy: rollback
       retries: 3
-  uninstall:
-    keepHistory: false
   values:
     controllers:
       sonarr:
@@ -34,8 +33,7 @@ spec:
           init-db:
             image:
               repository: ghcr.io/onedr0p/postgres-init
-              tag: 16.2
-              pullPolicy: IfNotPresent
+              tag: 16
             envFrom: &envFrom
               - secretRef:
                   name: sonarr-secrets
@@ -66,12 +64,11 @@ spec:
                   timeoutSeconds: 1
                   failureThreshold: 3
               readiness: *probes
-              startup:
-                enabled: false
+              # startup:
+              #   enabled: false
             resources:
               requests:
                 cpu: 10m
-                memory: 256M
               limits:
                 memory: 1Gi
         pod:
