@@ -90,16 +90,16 @@ transforms:
       if is_local_ip {
         abort
       }
-  geo_enriched:
-    type: "remap"
-    inputs:
-      - kubernetes_nginx_drop_local
-    source: |
-      .geoip = get_enrichment_table_record!(
-        "geoip_table", {
-          "ip": .ip_address
-        }
-      )
+  # geo_enriched:
+  #   type: "remap"
+  #   inputs:
+  #     - kubernetes_nginx_drop_local
+  #   source: |
+  #     .geoip = get_enrichment_table_record!(
+  #       "geoip_table", {
+  #         "ip": .ip_address
+  #       }
+  #     )
 
 
   # kubernetes_remap_nginx:
@@ -164,7 +164,8 @@ sinks:
 
   kubernetes_nginx_parsed:
     inputs:
-      - geo_enriched
+      #- geo_enriched
+      - kubernetes_remap_nginx
     type: loki
     endpoint: http://loki-gateway.monitoring.svc.cluster.local
     encoding: { codec: json }
@@ -214,7 +215,8 @@ sinks:
 
   parseable-nginx:
     inputs:
-      - geo_enriched
+#      - geo_enriched
+      - kubernetes_remap_nginx
     type: http
     method: post
     batch:
