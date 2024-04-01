@@ -17,7 +17,6 @@
     "github>clarknova99/home-cluster//.github/renovate/semanticCommits.json5",
     "helpers:pinGitHubActionDigests"
   ],
-  "onboarding": false,
   "dependencyDashboard": true,
   "dependencyDashboardTitle": "Renovate Dashboard 🤖",
   "suppressNotifications": ["prIgnoreNotification"],
@@ -25,7 +24,8 @@
   "schedule": ["on saturday"],
   "ignorePaths": [
     "**/_archive/**",
-    "**/bootstrap/**"
+    "**/bootstrap/**",
+    "**/*.sops.*"
   ],
   "flux": {
     "fileMatch": [
