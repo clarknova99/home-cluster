@@ -41,15 +41,15 @@ spec:
     affinity:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-              - matchExpressions:
-                  - key: kubernetes.io/arch
-                    operator: In
-                    values:
-                      - amd64
-          # nodeSelectorTerms:
-          #   - matchExpressions:
-          #       - key: kubernetes.io/hostname
-          #         operator: In
-          #         values:
-          #           - k8s-01
+            # nodeSelectorTerms:
+            #   - matchExpressions:
+            #       - key: kubernetes.io/arch
+            #         operator: In
+            #         values:
+            #           - amd64
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: kubernetes.io/hostname
+                  operator: In
+                  values:
+                    - k8s-01
