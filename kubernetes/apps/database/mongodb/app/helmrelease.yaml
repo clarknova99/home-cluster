@@ -10,7 +10,7 @@ spec:
   chart:
     spec:
       chart: mongodb
-      version: 14.13.0
+      version: 15.1.1
       sourceRef:
         kind: HelmRepository
         name: bitnami
@@ -41,9 +41,15 @@ spec:
     affinity:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-            - matchExpressions:
-                - key: kubernetes.io/hostname
-                  operator: In
-                  values:
-                    - k8s-01
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/arch
+                    operator: In
+                    values:
+                      - amd64
+          # nodeSelectorTerms:
+          #   - matchExpressions:
+          #       - key: kubernetes.io/hostname
+          #         operator: In
+          #         values:
+          #           - k8s-01
