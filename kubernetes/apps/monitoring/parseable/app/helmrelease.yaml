@@ -38,7 +38,8 @@ spec:
       - secretRef:
         name: parseable-env-secret
     env:
-      RUST_LOG: warn
+      RUST_LOG: debug
+      RUST_BACKTRACE: 1
     persistence:
       staging:
         enabled: false
