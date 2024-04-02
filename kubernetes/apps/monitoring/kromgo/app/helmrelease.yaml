@@ -10,7 +10,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 2.6.0
+      version: 3.0.4
       interval: 30m
       sourceRef:
         kind: HelmRepository
@@ -18,7 +18,7 @@ spec:
         namespace: flux-system
   values:
     controllers:
-      main:
+      kromgo:
         replicas: 2
         strategy: RollingUpdate
 
@@ -39,7 +39,7 @@ spec:
                   app.kubernetes.io/name: kromgo
 
         containers:
-          main:
+          app:
             image:
               repository: ghcr.io/kashalls/kromgo
               tag: 0.3.0
@@ -57,12 +57,13 @@ spec:
                 memory: 64M
 
     service:
-      main:
+      app:
+        controller: kromgo
         ports:
           http:
             port: 8080
     ingress:
-      main:
+      app:
         annotations:
           external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
         enabled: true
@@ -72,7 +73,7 @@ spec:
             paths:
               - path: /
                 service:
-                  name: main
+                  identifier: app
                   port: http
         tls:
           - hosts:
