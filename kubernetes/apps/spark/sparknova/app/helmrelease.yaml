@@ -262,7 +262,7 @@ spec:
     ingress:
       spark-master:
         enabled: true
-        ingressClassName: internal
+        className: internal
         annotations:
           hajimari.io/icon: mdi:creation
         hosts:
@@ -278,7 +278,7 @@ spec:
               - spark.${SECRET_DOMAIN}
       jupyter:
         enabled: true
-        ingressClassName: internal
+        className: internal
         hosts:
           - host: jupyter.${SECRET_DOMAIN}
             paths:
