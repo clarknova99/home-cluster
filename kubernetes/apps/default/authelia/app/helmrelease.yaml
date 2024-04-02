@@ -132,7 +132,8 @@ spec:
           metrics:
             port: 8080
     serviceMonitor:
-      main:
+      app:
+        serviceName: authelia
         enabled: true
         endpoints:
           - port: metrics
