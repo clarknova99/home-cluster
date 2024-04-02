@@ -10,7 +10,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 2.6.0
+      version: 3.0.4
       sourceRef:
         kind: HelmRepository
         name: bjw-s
@@ -23,11 +23,8 @@ spec:
   upgrade:
     remediation:
       retries: 5
-  ## If you're reading this, please know I have no idea what I'm doing and learning as I go along. Highly likely this is not the preferred method for deploying Spark on Kubernetes
   values:
     defaultPodOptions:
-      # labels:
-      #   app: sparknova
       topologySpreadConstraints:
         - maxSkew: 1
           topologyKey: kubernetes.io/hostname
@@ -44,12 +41,12 @@ spec:
                   values:
                     - amd64
     controllers:
-      main:
+      spark-master:
         type: deployment
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
-          main:
+          spark-master:
             image:
               repository: docker.io/clarknova9/sparknova
               tag: 0.0.2
@@ -88,14 +85,16 @@ spec:
               repository: docker.io/clarknova9/sparknova
               tag: 0.0.2
             imagePullPolicy: Always
-            command: ["/opt/spark/bin/spark-class","org.apache.spark.deploy.worker.Worker", "spark://sparknova-spark-master-svc.spark.svc.cluster.local:7077"]
+            #command: ["/opt/spark/bin/spark-class","org.apache.spark.deploy.worker.Worker", "spark://sparknova-spark-master-svc.spark.svc.cluster.local:7077"]
+            command: ["/opt/spark/bin/spark-class","org.apache.spark.deploy.worker.Worker", "spark://sparknova-spark-master.spark.svc.cluster.local:7077"]
             ports:
               - name: http
                 containerPort: 8081
                 protocol: TCP
             env:
               SPARK_MODE: worker
-              SPARK_MASTER_URL: spark://sparknova-spark-master-svc.spark.svc.cluster.local:7077
+              #SPARK_MASTER_URL: spark://sparknova-spark-master-svc.spark.svc.cluster.local:7077
+              SPARK_MASTER_URL: spark://sparknova-spark-master.spark.svc.cluster.local:7077
               # SPARK_WORKER_MEMORY: 4G
               # SPARK_WORKER_CORES: "2"
               SPARK_WORKER_WEBUI_PORT: "8081"
@@ -183,14 +182,15 @@ spec:
       create: false
       name: sparknova
     service:
-      main:
+      spark-master:
+        controller: spark-master
         annotations:
           io.cilium/lb-ipam-ips: "192.168.2.100"
         externalTrafficPolicy: Cluster
         type: LoadBalancer
         #type: ClusterIP
         # -- Override the name suffix that is used for this service
-        nameOverride: spark-master-svc
+        #nameOverride: spark-master-svc
         # -- Provide additional labels which may be required.
         labels:
           app: sparknova
@@ -206,13 +206,13 @@ spec:
             port: 6066
             targetPort: 6066
       jupyter:
+        controller: jupyter
         annotations:
           io.cilium/lb-ipam-ips: "192.168.2.102"
         externalTrafficPolicy: Cluster
         type: LoadBalancer
-        controller: jupyter
         # -- Override the name suffix that is used for this service
-        nameOverride: jupyter-svc
+        #nameOverride: jupyter-svc
         # -- Provide additional labels which may be required.
         labels:
           app: sparknova
@@ -226,11 +226,12 @@ spec:
             port: 22
             targetPort: 22
       kyuubi:
+        controller: kyuubi
         annotations:
           io.cilium/lb-ipam-ips: "192.168.2.101"
         externalTrafficPolicy: Cluster
         type: LoadBalancer
-        controller: kyuubi
+
         # -- Override the name suffix that is used for this service
         nameOverride: kyuubi-svc
         # -- Provide additional labels which may be required.
@@ -242,11 +243,12 @@ spec:
             port: 10009
             targetPort: 10009
       thrift:
+        controller: spark-master
         annotations:
           io.cilium/lb-ipam-ips: "192.168.2.103"
         externalTrafficPolicy: Cluster
         type: LoadBalancer
-        controller: main
+
         # -- Override the name suffix that is used for this service
         nameOverride: thrift-svc
         # -- Provide additional labels which may be required.
@@ -258,7 +260,7 @@ spec:
             port: 10000
             targetPort: 10000
     ingress:
-      main:
+      spark-master:
         enabled: true
         ingressClassName: internal
         annotations:
@@ -269,7 +271,7 @@ spec:
               - path: /
                 pathType: Prefix
                 service:
-                  name: main
+                  identifier: spark-master
                   port: http
         tls:
           - hosts:
@@ -283,7 +285,7 @@ spec:
               - path: /
                 pathType: Prefix
                 service:
-                  name: sparknova-jupyter-svc
+                  identifier: jupyter
                   port: 8888
         tls:
           - hosts:
