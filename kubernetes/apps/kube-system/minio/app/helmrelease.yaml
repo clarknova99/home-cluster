@@ -10,7 +10,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 2.6.0
+      version: 3.0.4
       sourceRef:
         kind: HelmRepository
         name: bjw-s
@@ -26,11 +26,11 @@ spec:
     keepHistory: false
   values:
     controllers:
-      main:
+      minio:
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
-          main:
+          app:
             image:
               repository: quay.io/minio/minio
               tag: RELEASE.2023-12-23T07-19-11Z@sha256:47d5b01cc3020efa39aac112a7cbc919af5fb18f9ebc63bda31683590715c42b
@@ -84,7 +84,8 @@ spec:
           nodeSelector:
             kubernetes.io/arch: "amd64"
     service:
-      main:
+      app:
+        controller: minio
         annotations:
           io.cilium/lb-ipam-ips: "192.168.2.105"
         externalTrafficPolicy: Cluster
@@ -95,7 +96,8 @@ spec:
           s3:
             port: 9000
     serviceMonitor:
-      main:
+      app:
+        serviceName: minio
         enabled: true
         endpoints:
           - port: s3
@@ -107,30 +109,23 @@ spec:
             #   name: minio
             #   key: MINIO_PROMETHEUS_TOKEN
     ingress:
-      main:
+      app:
         enabled: true
         className: internal
         annotations:
           hajimari.io/icon: mdi:pail
-          # gethomepage.dev/enabled: "true"
-          # gethomepage.dev/group: Storage
-          # gethomepage.dev/icon: mdi-pail
-          # gethomepage.dev/name: minio
-          # gethomepage.dev/widget.type: minio
-          # gethomepage.dev/widget.hideErrors: true
-          # gethomepage.dev/siteMonitor: https://s3.${SECRET_DOMAIN}
         hosts:
           - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:
               - path: /
                 service:
-                  name: main
+                  identifier: app
                   port: http
           - host: &s3Host s3.${SECRET_DOMAIN}
             paths:
               - path: /
                 service:
-                  name: main
+                  identifier: app
                   port: s3
         tls:
           - hosts:

@@ -6,4 +6,4 @@ namespace: kube-system
 resources:
   - ./secret.sops.yaml
   - ./helmrelease.yaml
-  - ./pvc.yaml
+  #- ./pvc.yaml
