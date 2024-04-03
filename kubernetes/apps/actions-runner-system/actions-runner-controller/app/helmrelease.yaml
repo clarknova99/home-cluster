@@ -27,7 +27,7 @@ spec:
       strategy: rollback
       retries: 3
   values:
-    fullnameOverride: gha-runner-scale-set-controller
+    #fullnameOverride: gha-runner-scale-set-controller
     nodeSelector:
       kubernetes.io/arch: amd64
     affinity:
