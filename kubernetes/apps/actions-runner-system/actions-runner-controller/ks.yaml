@@ -6,12 +6,16 @@ metadata:
   name: cluster-apps-actions-runner-controller
   namespace: flux-system
 spec:
+  targetNamespace: actions-runner-system
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: cluster-apps-actions-runner-controller
   path: ./kubernetes/apps/actions-runner-system/actions-runner-controller/app
   prune: true
   sourceRef:
     kind: GitRepository
     name: home-kubernetes
-  wait: true
+  wait: false
   interval: 30m
   retryInterval: 1m
   timeout: 5m
@@ -23,6 +27,10 @@ metadata:
   name: cluster-apps-actions-runner-controller-runners
   namespace: flux-system
 spec:
+  targetNamespace: actions-runner-system
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: cluster-apps-actions-runner-controller-runners
   dependsOn:
     - name: cluster-apps-actions-runner-controller
   path: ./kubernetes/apps/actions-runner-system/actions-runner-controller/runners
