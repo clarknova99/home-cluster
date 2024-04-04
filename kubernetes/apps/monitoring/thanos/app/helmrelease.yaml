@@ -52,6 +52,9 @@ spec:
       value:
         type: s3
         config:
+          bucket: thanos
+          endpoint: minio.kube-system.svc.cluster.local:9000
+          region: us-east-1
           insecure: true
     additionalEndpoints:
       - dnssrv+_grpc._tcp.kube-prometheus-stack-thanos-discovery.monitoring.svc.cluster.local
