@@ -36,7 +36,8 @@ resources:
   - ./runix.yaml
   #- ./spark-operator.yaml
   - ./stakater.yaml
-  - ./superset.yaml
+  - ./stevehipwell.yaml
+  #- ./superset.yaml
   - ./tyzbit.yaml
   - ./vector.yaml
   - ./weave-gitops.yaml
