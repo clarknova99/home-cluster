@@ -4,8 +4,11 @@ metadata:
     name: thanos-secrets
     namespace: monitoring
 stringData:
-    access_key: ENC[AES256_GCM,data:vXLD333ZHlt27c3pgl+jodF5imU=,iv:eUKesD500VBtDV4k8A1e61mr42lAf/jVP0CLNGiuSnk=,tag:pFLufwqfXBzn2+HYxubHzA==,type:str]
-    secret_key: ENC[AES256_GCM,data:33UlagWB33/18HLyf8jutfDDuZbxme3KDv0gZK1NyVol9qh45xjJnA==,iv:5mK4CyES8UCs4WlKeRUb4wCXz+N8YS9B5ABQbcHILzY=,tag:RPbd6DGq6WkPcDnUiPoW2w==,type:str]
+    BUCKET_NAME: ENC[AES256_GCM,data:RV5w2SYW,iv:tUcYc5xGDL0jkLb70htvvO/vpVJYfiQkyv9UJwg7ZQ8=,tag:oWmVVA8yBWP2rb+BAOyotA==,type:str]
+    BUCKET_HOST: ENC[AES256_GCM,data:fN5qICI4XZFWGSJl/dyF/xTBHkBsnTxoDFI+vBWUExmLURAckjWtLw==,iv:0EJsShZRunC+p9178k1eNG0dcb1LnKL10TDPRZgFndo=,tag:0WOyqKyAEv1B5bP2Ml1nCw==,type:str]
+    BUCKET_REGION: ENC[AES256_GCM,data:a0J89sbhikHc,iv:BhHGMlxZV/UiORmppn2Xuj7rT6rtojxjAOc0Meyb+ac=,tag:HCyYlzzEqGX9Z3zTzde2MA==,type:str]
+    AWS_ACCESS_KEY_ID: ENC[AES256_GCM,data:HNi0VY5YXLWdYenQuKowDrWLXFI=,iv:PxkxuHNXPBY9854lkqgmd9YEUkf16cMAlvOhn249GY8=,tag:sajhS2tqeuuEFU6RxZPlHg==,type:str]
+    AWS_SECRET_ACCESS_KEY: ENC[AES256_GCM,data:F4MeYKBQMHsMAy06CpsBs00DBqc5zZsn2OIxLVwnC6v/GgHCu8+9tA==,iv:w/BaXXAPMrI8dnQiuf61B4+WI5D4gE/dieeYwHE6YqQ=,tag:bAymZFRSxS5s1f2hz1vIag==,type:str]
 sops:
     kms: []
     gcp_kms: []
@@ -21,8 +24,8 @@ sops:
             QWoxWFQxYVFPTGwvaWFNbFk5YWV3cmsK3sIsfUa27RXNffnMirefUqNhBWZfvVcj
             JEQa+WxUQWgAVvYAKkxvPyI+jHwmXnd04NRg55DrOWgJFAy0F3fqfg==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2023-11-12T17:02:44Z"
-    mac: ENC[AES256_GCM,data:6IAAl6ZswTjmb9n6gD4io3ZineNloc6qh6ju8+TrFM8nM4Jqlp3pZifZYW9uTHWwB3Ub0oq1/NphkBXiMVA4QZHBWWZwIdnD+UBwmI/R+rOBPy07lRzX4nRaG1SmcZJUSya9OkmsOK9SqwjrIjAeBwicRwmvD+AI2NJM3kXGygI=,iv:STNzleAeaMzA+bL0QyPHr/6RsR4K9xGYCOaOxYqbPhw=,tag:swiUfk8X3aaZaQbAIMeNpA==,type:str]
+    lastmodified: "2024-04-04T14:03:54Z"
+    mac: ENC[AES256_GCM,data:p77OWm87WYmOxr2AqpM0sd4ra+045kJ+wnFlCpHRqAHd+1oEk7TanbJVtt8Am1t8Hwg+qvOx93QSDZVRwUcPa8vTc6F4avNbTwCZ5FwRAf7Fvbl5B1455FukOwAdGcz6/nKNUGsnPN2gTH2uKZMm5G+VfRoI+BwDziMezJk6Itc=,iv:lF1mQhCmhxoGS0DORdhFyzRa+hck9ENINVycgcBMaiE=,tag:6eHIcaFkjalYl8skMi9RXA==,type:str]
     pgp: []
     encrypted_regex: ^(data|stringData)$
     version: 3.8.1
