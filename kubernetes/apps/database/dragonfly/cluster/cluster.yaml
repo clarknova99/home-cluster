@@ -8,7 +8,7 @@ spec:
   nodeSelector:
     kubernetes.io/arch: amd64
   image: ghcr.io/dragonflydb/dragonfly:v1.16.0
-  replicas: 6 # set to the number of nodes in the cluster
+  replicas: 3 # set to the number of nodes in the cluster
   env:
     - name: MAX_MEMORY
       valueFrom:
