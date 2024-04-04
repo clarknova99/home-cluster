@@ -41,11 +41,11 @@ spec:
       valuesKey: BUCKET_REGION
     - targetPath: objstoreConfig.value.config.access_key
       kind: Secret
-      name: thanos-bucket
+      name: thanos-secrets
       valuesKey: AWS_ACCESS_KEY_ID
     - targetPath: objstoreConfig.value.config.secret_key
       kind: Secret
-      name: thanos-bucket
+      name: thanos-secrets
       valuesKey: AWS_SECRET_ACCESS_KEY
   values:
     objstoreConfig:
