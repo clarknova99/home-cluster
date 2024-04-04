@@ -49,6 +49,9 @@ spec:
       valuesKey: AWS_SECRET_ACCESS_KEY
   values:
     objstoreConfig:
+      create: true
+      name: thanos-objstore-secret
+      key: objstore.yml
       value:
         type: s3
         config:
