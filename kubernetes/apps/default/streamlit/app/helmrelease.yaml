@@ -31,7 +31,7 @@ spec:
           app:
             image:
               repository: docker.io/clarknova9/streamlit
-              tag: 0.0.1
+              tag: 0.0.2
     service:
       app:
         controller: streamlit
@@ -41,6 +41,7 @@ spec:
     ingress:
       app:
         annotations:
+          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
           hajimari.io/enable: "true"
           hajimari.io/icon: mdi:ip-network
         className: external
