@@ -39,7 +39,7 @@ spec:
           app:
             image:
               repository: docker.io/timberio/vector
-              tag: 0.37.0-debian
+              tag: 0.37.1-debian
             env:
               PROCFS_ROOT: /host/proc
               SYSFS_ROOT: /host/sys
