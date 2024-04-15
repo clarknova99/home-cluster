@@ -61,11 +61,11 @@ spec:
           - hosts:
               - streamlit.${SECRET_DOMAIN}
 
-    persistence:
-      config:
-        enabled: true
-        type: nfs
-        server: 192.168.1.2
-        path: /volume1/network-storage/streamlit/data
-        globalMounts:
-          - path: /app/data
+    # persistence:
+    #   config:
+    #     enabled: true
+    #     type: nfs
+    #     server: 192.168.1.2
+    #     path: /volume1/network-storage/streamlit/data
+    #     globalMounts:
+    #       - path: /app/data
