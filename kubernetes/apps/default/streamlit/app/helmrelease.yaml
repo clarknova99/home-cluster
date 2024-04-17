@@ -31,7 +31,7 @@ spec:
           app:
             image:
               repository: docker.io/clarknova9/streamlit
-              tag: 0.0.7
+              tag: 0.0.8
     service:
       app:
         controller: streamlit
