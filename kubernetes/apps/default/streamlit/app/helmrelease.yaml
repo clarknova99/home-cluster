@@ -31,7 +31,7 @@ spec:
           app:
             image:
               repository: docker.io/clarknova9/streamlit
-              tag: 0.0.11
+              tag: 0.0.12
     service:
       app:
         controller: streamlit
@@ -51,7 +51,7 @@ spec:
           hajimari.io/icon: mdi:ip-network
         className: external
         hosts:
-          - host: streamlit.${SECRET_DOMAIN}
+          - host: delphi.${SECRET_DOMAIN}
             paths:
               - path: /
                 service:
@@ -59,7 +59,7 @@ spec:
                   port: 8501
         tls:
           - hosts:
-              - streamlit.${SECRET_DOMAIN}
+              - delphi.${SECRET_DOMAIN}
 
     # persistence:
     #   config:
