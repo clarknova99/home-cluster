@@ -31,7 +31,9 @@ spec:
           app:
             image:
               repository: docker.io/clarknova9/streamlit
-              tag: 0.0.21
+              tag: 0.0.22
+        nodeSelector:
+          kubernetes.io/hostname: "nuc11"
     service:
       app:
         controller: streamlit
