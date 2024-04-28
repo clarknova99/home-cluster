@@ -42,8 +42,8 @@ go2rtc:
     #   - rtsp://${SECRET_CAM_USERNAME}:${SECRET_CAM_PASSWORD}@192.168.1.101:554/stream2
     frontdoor_hq:
       - rtsp://${SECRET_BACKYARDCAM_USERNAME}:${SECRET_BACKYARDCAM_PASSWORD}@192.168.1.146:554/ch0_0.264#timeout=20
-    basement_hq:
-      - ffmpeg:rtsp://${SECRET_BACKYARDCAM_USERNAME}:${SECRET_BACKYARDCAM_PASSWORD}@192.168.1.206:554/ch0_0.264#timeout=20
+    # basement_hq:
+    #   - ffmpeg:rtsp://${SECRET_BACKYARDCAM_USERNAME}:${SECRET_BACKYARDCAM_PASSWORD}@192.168.1.206:554/ch0_0.264#timeout=20
       # - "ffmpeg:backyard#video=h264"
     # basement_lq:
     #   - rtsp://${SECRET_BACKYARDCAM_USERNAME}:${SECRET_BACKYARDCAM_PASSWORD}@192.168.1.206:554/ch0_1.264
@@ -140,20 +140,20 @@ cameras:
       enabled: true # <---- disable detection until you have a working camera feed
       width: 1280 # <---- update for your camera's resolution
       height: 720 # <---- update for your camera's resolution
-  basement:
-    ffmpeg:
-      inputs:
-        - path: rtsp://127.0.0.1:8554/basement_hq
-          input_args: preset-rtsp-restream
-          roles:
-            - rtmp
-    detect:
-      enabled: false
-    onvif:
-      host: 192.168.1.206
-      port: 8888
-      user: ${SECRET_BACKYARDCAM_USERNAME}
-      password: ${SECRET_BACKYARDCAM_PASSWORD}
+  # basement:
+  #   ffmpeg:
+  #     inputs:
+  #       - path: rtsp://127.0.0.1:8554/basement_hq
+  #         input_args: preset-rtsp-restream
+  #         roles:
+  #           - rtmp
+  #   detect:
+  #     enabled: false
+  #   onvif:
+  #     host: 192.168.1.206
+  #     port: 8888
+  #     user: ${SECRET_BACKYARDCAM_USERNAME}
+  #     password: ${SECRET_BACKYARDCAM_PASSWORD}
   backyard:
     ffmpeg:
       inputs:
