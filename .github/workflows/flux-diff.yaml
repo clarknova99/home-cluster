@@ -38,6 +38,7 @@ jobs:
         uses: docker://ghcr.io/allenporter/flux-local:main
         with:
           args: >-
+            --log-level=DEBUG
             diff ${{ matrix.resources }}
             --unified 6
             --path /github/workspace/pull/${{ matrix.paths }}/flux
