@@ -25,6 +25,7 @@
   "ignorePaths": [
     "**/_archive/**",
     "**/bootstrap/**",
+    "**/.github/**",
     "**/*.sops.*"
   ],
   "flux": {
