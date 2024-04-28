@@ -23,6 +23,13 @@ jobs:
         paths: ["kubernetes"]
         resources: ["helmrelease", "kustomization"]
     steps:
+      - name: Generate Token
+        uses: actions/create-github-app-token@v1
+        id: app-token
+        with:
+          app-id: "${{ secrets.BOT_APP_ID }}"
+          private-key: "${{ secrets.BOT_APP_PRIVATE_KEY }}"
+
       - name: Checkout
         uses: actions/checkout@v4 # v4
         with:
@@ -49,17 +56,24 @@ jobs:
             --sources "home-kubernetes"
             --output-file diff.patch
 
+          # cat diff.patch
+          # echo "diff<<EOF" >> $GITHUB_OUTPUT
+          # cat diff.patch >> $GITHUB_OUTPUT
+          # echo "EOF" >> $GITHUB_OUTPUT
       - name: Generate Diff
         id: diff
         run: |
-          cat diff.patch
+
           echo "diff<<EOF" >> $GITHUB_OUTPUT
           cat diff.patch >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
-
+          echo "### Diff" >> $GITHUB_STEP_SUMMARY
+          echo '```diff' >> $GITHUB_STEP_SUMMARY
+          cat diff.patch >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
       - if: ${{ steps.diff.outputs.diff != '' }}
         name: Add comment
-        uses: mshick/add-pr-comment@b8f338c590a895d50bcbfa6c5859251edc8952fc # v2
+        uses: mshick/add-pr-comment@v2 # v2
         with:
           message-id: "${{ github.event.pull_request.number }}/${{ matrix.paths }}/${{ matrix.resources }}"
           message-failure: Diff was not successful
