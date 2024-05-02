@@ -17,7 +17,7 @@ resources:
   - ./mosquitto/ks.yaml
   - ./n8n/ks.yaml
  # - ./ollama/ks.yaml
-  - ./streamlit/ks.yaml
+#- ./streamlit/ks.yaml
   - ./troddit/ks.yaml
   - ./website/ks.yaml
   - ./whoami/ks.yaml
