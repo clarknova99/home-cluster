@@ -32,7 +32,7 @@ spec:
             image:
               #docker buildx build --push --platform linux/arm64,linux/amd64 --tag clarknova9/streamlit:0.1.1 .
               repository: docker.io/clarknova9/streamlit
-              tag: 0.1.2
+              tag: 0.1.3
         # nodeSelector:
         #   kubernetes.io/hostname: "nuc11"
     service:
