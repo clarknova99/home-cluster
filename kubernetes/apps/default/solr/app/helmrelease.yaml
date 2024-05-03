@@ -1,0 +1,73 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2beta2.json
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: solr
+  namespace: default
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.1.0
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+      interval: 15m
+  maxHistory: 3
+  install:
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
+  values:
+    controllers:
+      solr:
+        replicas: 1
+        containers:
+          app:
+            image:
+              repository: docker.io/solr
+              tag: 9.6.0
+            command: ["solr-precreate", "mycore"]
+
+    service:
+      app:
+        controller: solr
+        ports:
+          http:
+            port: 8501
+    ingress:
+      app:
+        annotations:
+          hajimari.io/enable: "true"
+          hajimari.io/icon: mdi:ip-network
+        className: internal
+        hosts:
+          - host: solr.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: 8983
+        tls:
+          - hosts:
+              - solr.${SECRET_DOMAIN}
+    persistence:
+      config:
+        enabled: true
+        type: nfs
+        server: 192.168.1.2
+        path: /volume1/network-storage/solr/config
+        globalMounts:
+          - path: /config
+      data:
+        enabled: true
+        type: nfs
+        server: 192.168.1.2
+        path: /volume1/network-storage/solr/data
+        globalMounts:
+          - path: /var/solr
