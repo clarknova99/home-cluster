@@ -34,7 +34,7 @@ spec:
               tag: 9.6.0
             env:
               SOLR_HEAP: 1024m
-            command: ["solr-precreate", "gettingstarted"]
+            command: ["solr-precreate", "mycore"]
 
     service:
       app:
@@ -70,7 +70,7 @@ spec:
         enabled: true
         type: nfs
         server: 192.168.1.2
-        path: /volume1/network-storage/solr/data
+        path: /volume1/network-storage/solr/
         globalMounts:
           - path: /var/solr/
       documents:
