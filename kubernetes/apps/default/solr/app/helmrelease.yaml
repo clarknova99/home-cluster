@@ -77,6 +77,6 @@ spec:
         enabled: true
         type: nfs
         server: 192.168.1.2
-        path: /volume1/network-storage/Documents
+        path: /volume1/Documents
         globalMounts:
           - path: /diskstation/Documents
