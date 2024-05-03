@@ -32,7 +32,7 @@ spec:
             image:
               repository: docker.io/solr
               tag: 9.6.0
-            command: ["solr-demo"]
+            command: ["ls -la /var"]
 
     service:
       app:
@@ -70,4 +70,4 @@ spec:
         server: 192.168.1.2
         path: /volume1/network-storage/solr/data
         globalMounts:
-          - path: /var/solr/data
+          - path: /var/solr/
