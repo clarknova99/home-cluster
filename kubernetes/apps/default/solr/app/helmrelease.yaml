@@ -34,7 +34,7 @@ spec:
               tag: 9.6.0
             env:
               SOLR_HEAP: 1024m
-            command: ["solr-precreate", "mycore"]
+            command: ["solr-precreate", "gettingstarted"]
 
     service:
       app:
