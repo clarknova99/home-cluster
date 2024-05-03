@@ -39,7 +39,7 @@ spec:
         controller: solr
         ports:
           http:
-            port: 8501
+            port: 8983
     ingress:
       app:
         annotations:
