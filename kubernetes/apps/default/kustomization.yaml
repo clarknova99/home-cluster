@@ -8,6 +8,7 @@ resources:
   #- ./appsmith/ks.yaml
   - ./authelia/ks.yaml
   - ./baserow/ks.yaml
+  - ./delphi/ks.yaml
   - ./frigate/ks.yaml
   - ./hajimari/ks.yaml
   - ./home-assistant/ks.yaml
@@ -17,7 +18,7 @@ resources:
   - ./mosquitto/ks.yaml
   - ./n8n/ks.yaml
  # - ./ollama/ks.yaml
-  - ./solr/ks.yaml
+  #- ./solr/ks.yaml
   - ./streamlit/ks.yaml
   - ./troddit/ks.yaml
   - ./website/ks.yaml
