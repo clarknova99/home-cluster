@@ -3,14 +3,13 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
-  name: gha-runner
-  namespace: actions-runner-system
+  name: gha-runner-scale-set
 spec:
   interval: 30m
   chart:
     spec:
       chart: gha-runner-scale-set
-      version: 0.9.0
+      version: 0.9.1
       sourceRef:
         kind: HelmRepository
         name: actions-runner-controller
@@ -24,7 +23,11 @@ spec:
       strategy: rollback
       retries: 3
   values:
-    runnerScaleSetName: arc-runner-set-home-cluster
+    dependsOn:
+      - name: gha-runner-scale-set-controller
+        namespace: actions-runner-system
+    nameOverride: gha-runner-scale-set
+    runnerScaleSetName: gha-runner-scale-set
     githubConfigUrl: https://github.com/clarknova99/home-cluster
     minRunners: 1
     maxRunners: 6
@@ -34,7 +37,7 @@ spec:
       spec:
         containers:
           - name: runner
-            image: ghcr.io/onedr0p/actions-runner:2.316.0@sha256:8610cd6909b7679dfb5e150ee74164ca8f9b627916a767ba055e00d16887d22a
+            image: ghcr.io/onedr0p/actions-runner:2.316.1@sha256:32f392f2db95247bccb45782528b29d028f9b7c617729fff309e4c5de83b9b7d
             command: ["/home/runner/run.sh"]
         affinity:
           nodeAffinity:
@@ -46,7 +49,7 @@ spec:
                   values:
                   - amd64
     controllerServiceAccount:
-      name: actions-runner-controller-gha-rs-controller
+      name: gha-runner-scale-set-controller
       namespace: actions-runner-system
       githubConfigSecret: actions-runner-controller-secrets
   valuesFrom:
