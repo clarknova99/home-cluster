@@ -41,11 +41,6 @@ spec:
         ports:
           http:
             port: 8501
-      flask:
-        controller: delphi
-        ports:
-          http:
-            port: 8011
     ingress:
       app:
         annotations:
@@ -65,15 +60,9 @@ spec:
                 service:
                   identifier: app
                   port: 8501
-          - host: delphi3.${SECRET_DOMAIN}
-            paths:
-              - path: /
-                service:
-                  identifier: flask
-                  port: 8011
         tls:
           - hosts:
-              - delphi3.${SECRET_DOMAIN}
+              - delphi2.${SECRET_DOMAIN}
 
     # persistence:
     #   config:
