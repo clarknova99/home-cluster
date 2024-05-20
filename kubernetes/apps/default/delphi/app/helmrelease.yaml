@@ -73,6 +73,7 @@ spec:
                   port: 8011
         tls:
           - hosts:
+              - delphi2.${SECRET_DOMAIN}
               - delphi3.${SECRET_DOMAIN}
 
     # persistence:
