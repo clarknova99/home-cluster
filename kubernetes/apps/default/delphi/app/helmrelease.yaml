@@ -59,6 +59,12 @@ spec:
           hajimari.io/icon: mdi:ip-network
         className: external
         hosts:
+          - host: delphi.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: 8501
           - host: delphi2.${SECRET_DOMAIN}
             paths:
               - path: /
@@ -73,6 +79,7 @@ spec:
                   port: 8011
         tls:
           - hosts:
+              - delphi.${SECRET_DOMAIN}
               - delphi2.${SECRET_DOMAIN}
               - delphi3.${SECRET_DOMAIN}
 
