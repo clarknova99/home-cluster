@@ -83,7 +83,7 @@ spec:
 
               # AUTH 0 CONFIG
               AUTH0_BASE_URL: 'http://localhost:3000' # admin-console url
-              AUTH0_SECRET: # use [openssl rand -hex 32] to generate a 32 bytes value
+              AUTH0_SECRET: 5a4ec2d0384ddc793cceed1504f46734847ae11885ba45b2e473831ede1e6597  # use [openssl rand -hex 32] to generate a 32 bytes value
               AUTH0_ISSUER_BASE_URL: # your auth0 issuer url, i.e.: https://auth.dataherald.com/
               AUTH0_API_AUDIENCE: # your auth0 API audience, i.e.: https://dataherald.us.auth0.com/api/v2/
               AUTH0_CLIENT_ID: # your auth0 application client ID
