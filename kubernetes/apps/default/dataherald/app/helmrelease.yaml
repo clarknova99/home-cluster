@@ -25,63 +25,164 @@ spec:
       retries: 5
   values:
     controllers:
-      delphi:
+      engine:
         replicas: 1
         containers:
           app:
             image:
-              #docker buildx build --push --platform linux/arm64,linux/amd64 --tag clarknova9/streamlit:0.1.1 .
-              repository: docker.io/clarknova9/delphi
-              tag: 1.1.4
-        # nodeSelector:
-        #   kubernetes.io/hostname: "nuc11"
+              repository: ghcr.io/clarknova99/engine
+              #tag: 1.1.4
+            env:
+              OPENAI_API_KEY: ${SECRET_OPENAPI_OPENAI_API_KEY}
+              # All of our SQL generation agents are using different tools to generate SQL queries, in order to limit the number of times that agents can
+              # use different tools you can set the "AGENT_MAX_ITERATIONS" env variable. By default it is set to 20 iterations.
+              AGENT_MAX_ITERATIONS: 15
+              #timeout in seconds for the engine to return a response. Defaults to 150 seconds
+              DH_ENGINE_TIMEOUT: 150
+              #tmeout for SQL execution, our agents exceute the SQL query to recover from errors, this is the timeout for that execution. Defaults to 30 seconds
+              SQL_EXECUTION_TIMEOUT:
+              #The upper limit on number of rows returned from the query engine (equivalent to using LIMIT N in PostgreSQL/MySQL/SQlite). Defauls to 50
+              UPPER_LIMIT_QUERY_RETURN_ROWS: 50
+              #Encryption key for storing DB connection data in Mongo
+              ENCRYPT_KEY:
+
+              GOLDEN_SQL_COLLECTION: my-golden-records
+
+              # Module implementations to be used names for each required component. You can use the default ones or create your own
+              API_SERVER: "dataherald.api.fastapi.FastAPI"
+              EVALUATOR: "dataherald.eval.simple_evaluator.SimpleEvaluator"
+              DB: "dataherald.db.mongo.MongoDB"
+              VECTOR_STORE: 'dataherald.vector_store.chroma.Chroma'
+              CONTEXT_STORE: 'dataherald.context_store.default.DefaultContextStore' # Set a context store class, the default one is DefaultContextStore
+              DB_SCANNER: 'dataherald.db_scanner.sqlalchemy.SqlAlchemyScanner'
+
+
+              # mongo database information
+              MONGODB_URI: "mongodb://${SECRET_DATAHERALD_MONGO_USERNAME}:${SECRET_DATAHERALD_MONGO_PASSWORD}@mongodb.database.svc.cluster.local:27017"
+              MONGODB_DB_NAME: dataherald
+              MONGODB_DB_USERNAME: ${SECRET_DATAHERALD_MONGO_USERNAME}
+              MONGODB_DB_PASSWORD: ${SECRET_DATAHERALD_MONGO_PASSWORD}
+
+              # Used to store credential files for database connections
+              S3_AWS_ACCESS_KEY_ID:
+              S3_AWS_SECRET_ACCESS_KEY:
+              ONLY_STORE_CSV_FILES_LOCALLY: False # Set to True if only want to save generated CSV files locally instead of S3. Note that if stored locally they should be treated as ephemeral, i.e., they will disappear when the engine is restarted.
+
+              CORE_PORT: 80 # This env var defines the port that will be exposed by the container. It serves as the configuration for both the internal and external container ports.
+      admin-console:
+        replicas: 1
+        containers:
+          app:
+            image:
+              repository: ghcr.io/clarknova99/admin-console
+              #tag: 1.1.4
+            env:
+              NODE_ENV: "development" # development | production
+
+              # API URL
+              NEXT_PUBLIC_API_URL: 'http://localhost:3001' # enterprise API service url
+
+              # AUTH 0 CONFIG
+              AUTH0_BASE_URL: 'http://localhost:3000' # admin-console url
+              AUTH0_SECRET: # use [openssl rand -hex 32] to generate a 32 bytes value
+              AUTH0_ISSUER_BASE_URL: # your auth0 issuer url, i.e.: https://auth.dataherald.com/
+              AUTH0_API_AUDIENCE: # your auth0 API audience, i.e.: https://dataherald.us.auth0.com/api/v2/
+              AUTH0_CLIENT_ID: # your auth0 application client ID
+              AUTH0_CLIENT_SECRET: # your auth0 application client secret
+
+              # (OPTIONAL) Posthog Analytics
+              NEXT_PUBLIC_POSTHOG_DISABLED: True
+              NEXT_PUBLIC_POSTHOG_KEY:
+              NEXT_PUBLIC_POSTHOG_HOST: https://app.posthog.com
+
+              # (OPTIONAL) STRIPE
+              NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY:
+      enterprise:
+        replicas: 1
+        containers:
+          app:
+            image:
+              repository: ghcr.io/clarknova99/enterprise
+              #tag: 1.1.4
+            env:
+              ENGINE_URL: # http://{DOCKER_CONTAINER_NAME:PORT}/api/v1 -- example: http://engine/api/v1 (port 80 by default)
+              MONGODB_DB_NAME: dataherald
+              MONGODB_URI: mongodb://admin:admin@mongodb:27017
+
+              #The encryption key should be the same as the one used in engine
+              ENCRYPT_KEY:
+
+              AUTH0_DOMAIN: # your auth0 domain, i.e.: auth.dataherald.com
+              AUTH0_ISSUER_BASE_URL: # your auth0 issuer url, i.e.: https://auth.dataherald.com/
+              AUTH0_API_AUDIENCE: # your auth0 API audience, i.e.: https://dataherald.us.auth0.com/api/v2/
+              # AUTH0_DISABLED creates a mock authentication token type for testing purposes
+              # you can provide an email as the bearer token, note that the admin console will not be able to authenticate
+              AUTH0_DISABED: False
+
+              # The salt is used to hash the API key, use the string from ENCRYPT_KEY or create a different one
+              API_KEY_SALT:
+
+              DEFAULT_ENGINE_TIMEOUT: 120
+
+              # Used to store credential files for database connections
+              # should be the same as the ones in engine
+              S3_AWS_ACCESS_KEY_ID:
+              S3_AWS_SECRET_ACCESS_KEY:
+
+              # Optional posthog analytics if disabled
+              POSTHOG_DISABLED: True
+              POSTHOG_API_KEY:
+              POSTHOG_HOST:
+
+              # Optional ssh credentials if connecting to a remote database using ssh tunnel
+              SSH_PRIVATE_KEY_PASSWORD:
+              SSH_PATH_TO_CREDENTIAL_FILE:
+
+              # Optional stripe env vars if organizations are not on ENTERPRISE plan
+              STRIPE_API_KEY:
+              STRIPE_WEBHOOK_SECRET:
+              SQL_GENERATION_PRICE_ID:
+              FINETUNING_GPT_35_PRICE_ID:
+              FINETUNING_GPT_4_PRICE_ID:
+              DEFAULT_SPENDING_LIMIT:
+              SINGUP_CREDITS:
+              SQL_GENERATION_COST:
+              FINETUNING_GPT_35_COST:
+              FINETUNING_GPT_4_COST:
+
     service:
-      app:
-        controller: delphi
+      engine:
+        controller: engine
         ports:
           http:
-            port: 8501
-      flask:
-        controller: delphi
+            port: 80
+      admin-console:
+        controller: admin-console
         ports:
           http:
-            port: 8011
+            port: 3000
+      enterprise:
+        controller: admin-console
+        ports:
+          http:
+            port: 3000
     ingress:
-      app:
+      admin-console:
         annotations:
-          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
-          nginx.ingress.kubernetes.io/auth-method: GET
-          nginx.ingress.kubernetes.io/auth-url: http://authelia.default.svc.cluster.local/api/verify
-          nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}?rm=$request_method
-          nginx.ingress.kubernetes.io/auth-response-headers: Remote-User,Remote-Name,Remote-Groups,Remote-Email
-          nginx.ingress.kubernetes.io/auth-snippet: proxy_set_header X-Forwarded-Method $request_method;
           hajimari.io/enable: "true"
           hajimari.io/icon: mdi:ip-network
-        className: external
+        className: internal
         hosts:
-          - host: delphi.${SECRET_DOMAIN}
+          - host: dataherald.${SECRET_DOMAIN}
             paths:
               - path: /
                 service:
-                  identifier: app
-                  port: 8501
-          - host: delphi2.${SECRET_DOMAIN}
-            paths:
-              - path: /
-                service:
-                  identifier: app
-                  port: 8501
-          - host: delphi3.${SECRET_DOMAIN}
-            paths:
-              - path: /
-                service:
-                  identifier: flask
-                  port: 8011
+                  identifier: admin-console
+                  port: 3000
         tls:
           - hosts:
-              - delphi.${SECRET_DOMAIN}
-              - delphi2.${SECRET_DOMAIN}
-              - delphi3.${SECRET_DOMAIN}
+              - dataherald.${SECRET_DOMAIN}
+
 
     # persistence:
     #   config:
