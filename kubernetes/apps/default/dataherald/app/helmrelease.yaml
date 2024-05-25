@@ -31,7 +31,7 @@ spec:
           app:
             image:
               repository: ghcr.io/clarknova99/engine
-              #tag: 1.1.4
+              tag: latest
             env:
               OPENAI_API_KEY: ${SECRET_OPENAPI_OPENAI_API_KEY}
               # All of our SQL generation agents are using different tools to generate SQL queries, in order to limit the number of times that agents can
@@ -74,7 +74,7 @@ spec:
           app:
             image:
               repository: ghcr.io/clarknova99/admin-console
-              #tag: 1.1.4
+              tag: latest
             env:
               NODE_ENV: "development" # development | production
 
