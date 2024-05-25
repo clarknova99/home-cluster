@@ -30,8 +30,8 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/clarknova99/engine
-              tag: latest
+              repository: ghcr.io/clarknova99/dataherald-engine
+              tag: v0.0.1
             env:
               OPENAI_API_KEY: ${SECRET_OPENAPI_OPENAI_API_KEY}
               # All of our SQL generation agents are using different tools to generate SQL queries, in order to limit the number of times that agents can
@@ -73,8 +73,8 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/clarknova99/admin-console
-              tag: latest
+              repository: ghcr.io/clarknova99/dataherald-admin-console
+              tag: v0.0.1
             env:
               NODE_ENV: "development" # development | production
 
