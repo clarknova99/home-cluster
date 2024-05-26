@@ -68,6 +68,58 @@ spec:
               ONLY_STORE_CSV_FILES_LOCALLY: False # Set to True if only want to save generated CSV files locally instead of S3. Note that if stored locally they should be treated as ephemeral, i.e., they will disappear when the engine is restarted.
 
               CORE_PORT: 80 # This env var defines the port that will be exposed by the container. It serves as the configuration for both the internal and external container ports.
+      enterprise:
+        replicas: 1
+        containers:
+          app:
+            image:
+              repository: ghcr.io/clarknova99/enterprise
+              tag: v0.0.1
+            env:
+              ENGINE_URL: # http://{DOCKER_CONTAINER_NAME:PORT}/api/v1 -- example: http://engine/api/v1 (port 80 by default)
+              MONGODB_DB_NAME: dataherald
+              MONGODB_URI: mongodb://admin:admin@mongodb:27017
+
+              #The encryption key should be the same as the one used in engine
+              ENCRYPT_KEY: ${SECRET_DATAHERALD_ENCRYPT_KEY}
+
+              AUTH0_DOMAIN: dauth.${SECRET_DOMAIN} # your auth0 domain, i.e.: auth.dataherald.com
+              AUTH0_ISSUER_BASE_URL: https://dauth.${SECRET_DOMAIN} # your auth0 issuer url, i.e.: https://auth.dataherald.com/
+              AUTH0_API_AUDIENCE: https://${SECRET_DATAHERALD_AUTH0_API_AUDIENCE}/api/v2/ # your auth0 API audience, i.e.: https://dataherald.us.auth0.com/api/v2/
+              # AUTH0_DISABLED creates a mock authentication token type for testing purposes
+              # you can provide an email as the bearer token, note that the admin console will not be able to authenticate
+              AUTH0_DISABED: False
+
+              # The salt is used to hash the API key, use the string from ENCRYPT_KEY or create a different one
+              API_KEY_SALT: ${SECRET_DATAHERALD_ENCRYPT_KEY}
+
+              DEFAULT_ENGINE_TIMEOUT: 120
+
+              # Used to store credential files for database connections
+              # should be the same as the ones in engine
+              S3_AWS_ACCESS_KEY_ID:
+              S3_AWS_SECRET_ACCESS_KEY:
+
+              # Optional posthog analytics if disabled
+              POSTHOG_DISABLED: True
+              POSTHOG_API_KEY:
+              POSTHOG_HOST:
+
+              # Optional ssh credentials if connecting to a remote database using ssh tunnel
+              SSH_PRIVATE_KEY_PASSWORD:
+              SSH_PATH_TO_CREDENTIAL_FILE:
+
+              # Optional stripe env vars if organizations are not on ENTERPRISE plan
+              STRIPE_API_KEY:
+              STRIPE_WEBHOOK_SECRET:
+              SQL_GENERATION_PRICE_ID:
+              FINETUNING_GPT_35_PRICE_ID:
+              FINETUNING_GPT_4_PRICE_ID:
+              DEFAULT_SPENDING_LIMIT:
+              SINGUP_CREDITS:
+              SQL_GENERATION_COST:
+              FINETUNING_GPT_35_COST:
+              FINETUNING_GPT_4_COST:
       admin-console:
         replicas: 1
         containers:
@@ -83,11 +135,11 @@ spec:
 
               # AUTH 0 CONFIG
               AUTH0_BASE_URL: 'http://localhost:3000' # admin-console url
-              AUTH0_SECRET: # use [openssl rand -hex 32] to generate a 32 bytes value
-              AUTH0_ISSUER_BASE_URL: # your auth0 issuer url, i.e.: https://auth.dataherald.com/
-              AUTH0_API_AUDIENCE: # your auth0 API audience, i.e.: https://dataherald.us.auth0.com/api/v2/
-              AUTH0_CLIENT_ID: # your auth0 application client ID
-              AUTH0_CLIENT_SECRET: # your auth0 application client secret
+              AUTH0_SECRET: ${SECRET_DATAHERALD_AUTH0_SECRET} # use [openssl rand -hex 32] to generate a 32 bytes value
+              AUTH0_ISSUER_BASE_URL: https://dauth.${SECRET_DOMAIN} # your auth0 issuer url, i.e.: https://auth.dataherald.com/
+              AUTH0_API_AUDIENCE: https://${SECRET_DATAHERALD_AUTH0_API_AUDIENCE}/api/v2/ # your auth0 API audience, i.e.: https://dataherald.us.auth0.com/api/v2/
+              AUTH0_CLIENT_ID: ${SECRET_DATAHERALD_AUTH0_CLIENT_ID} # your auth0 application client ID
+              AUTH0_CLIENT_SECRET: ${SECRET_DATAHERALD_AUTH0_CLIENT_SECRET} # your auth0 application client secret
 
               # (OPTIONAL) Posthog Analytics
               NEXT_PUBLIC_POSTHOG_DISABLED: True
@@ -96,58 +148,7 @@ spec:
 
               # (OPTIONAL) STRIPE
               NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY:
-      # enterprise:
-      #   replicas: 1
-      #   containers:
-      #     app:
-      #       image:
-      #         repository: ghcr.io/clarknova99/enterprise
-      #         #tag: 1.1.4
-      #       env:
-      #         ENGINE_URL: # http://{DOCKER_CONTAINER_NAME:PORT}/api/v1 -- example: http://engine/api/v1 (port 80 by default)
-      #         MONGODB_DB_NAME: dataherald
-      #         MONGODB_URI: mongodb://admin:admin@mongodb:27017
 
-      #         #The encryption key should be the same as the one used in engine
-      #         ENCRYPT_KEY:
-
-      #         AUTH0_DOMAIN: # your auth0 domain, i.e.: auth.dataherald.com
-      #         AUTH0_ISSUER_BASE_URL: # your auth0 issuer url, i.e.: https://auth.dataherald.com/
-      #         AUTH0_API_AUDIENCE: # your auth0 API audience, i.e.: https://dataherald.us.auth0.com/api/v2/
-      #         # AUTH0_DISABLED creates a mock authentication token type for testing purposes
-      #         # you can provide an email as the bearer token, note that the admin console will not be able to authenticate
-      #         AUTH0_DISABED: False
-
-      #         # The salt is used to hash the API key, use the string from ENCRYPT_KEY or create a different one
-      #         API_KEY_SALT:
-
-      #         DEFAULT_ENGINE_TIMEOUT: 120
-
-      #         # Used to store credential files for database connections
-      #         # should be the same as the ones in engine
-      #         S3_AWS_ACCESS_KEY_ID:
-      #         S3_AWS_SECRET_ACCESS_KEY:
-
-      #         # Optional posthog analytics if disabled
-      #         POSTHOG_DISABLED: True
-      #         POSTHOG_API_KEY:
-      #         POSTHOG_HOST:
-
-      #         # Optional ssh credentials if connecting to a remote database using ssh tunnel
-      #         SSH_PRIVATE_KEY_PASSWORD:
-      #         SSH_PATH_TO_CREDENTIAL_FILE:
-
-      #         # Optional stripe env vars if organizations are not on ENTERPRISE plan
-      #         STRIPE_API_KEY:
-      #         STRIPE_WEBHOOK_SECRET:
-      #         SQL_GENERATION_PRICE_ID:
-      #         FINETUNING_GPT_35_PRICE_ID:
-      #         FINETUNING_GPT_4_PRICE_ID:
-      #         DEFAULT_SPENDING_LIMIT:
-      #         SINGUP_CREDITS:
-      #         SQL_GENERATION_COST:
-      #         FINETUNING_GPT_35_COST:
-      #         FINETUNING_GPT_4_COST:
 
     service:
       engine:
