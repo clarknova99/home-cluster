@@ -153,16 +153,24 @@ spec:
         ports:
           http:
             port: 80
-      admin-console:
-        controller: admin-console
-        ports:
-          http:
-            port: 3000
       enterprise:
+        type: LoadBalancer
+        externalTrafficPolicy: Cluster
+        annotations:
+          io.cilium/lb-ipam-ips: 192.168.2.30
         controller: enterprise
         ports:
           http:
             port: 3001
+      admin-console:
+        type: LoadBalancer
+        externalTrafficPolicy: Cluster
+        annotations:
+          io.cilium/lb-ipam-ips: 192.168.2.31
+        controller: admin-console
+        ports:
+          http:
+            port: 3000
     ingress:
       admin-console:
         annotations:
@@ -183,7 +191,7 @@ spec:
         annotations:
           hajimari.io/enable: "true"
           hajimari.io/icon: mdi:ip-network
-        className: internal
+        className: external
         hosts:
           - host: dauth.${SECRET_DOMAIN}
             paths:
