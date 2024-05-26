@@ -168,7 +168,7 @@ spec:
         annotations:
           hajimari.io/enable: "true"
           hajimari.io/icon: mdi:ip-network
-        className: internal
+        className: external
         hosts:
           - host: dataherald.${SECRET_DOMAIN}
             paths:
