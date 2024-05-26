@@ -83,8 +83,8 @@ spec:
               #The encryption key should be the same as the one used in engine
               ENCRYPT_KEY: ${SECRET_DATAHERALD_ENCRYPT_KEY}
 
-              AUTH0_DOMAIN: dauth.${SECRET_DOMAIN} # your auth0 domain, i.e.: auth.dataherald.com
-              AUTH0_ISSUER_BASE_URL: https://dauth.${SECRET_DOMAIN} # your auth0 issuer url, i.e.: https://auth.dataherald.com/
+              AUTH0_DOMAIN: dataherald.${SECRET_DOMAIN} # your auth0 domain, i.e.: auth.dataherald.com
+              AUTH0_ISSUER_BASE_URL: https://${SECRET_DATAHERALD_AUTH0_API_AUDIENCE} # your auth0 issuer url, i.e.: https://auth.dataherald.com/
               AUTH0_API_AUDIENCE: https://${SECRET_DATAHERALD_AUTH0_API_AUDIENCE}/api/v2/ # your auth0 API audience, i.e.: https://dataherald.us.auth0.com/api/v2/
               # AUTH0_DISABLED creates a mock authentication token type for testing purposes
               # you can provide an email as the bearer token, note that the admin console will not be able to authenticate
