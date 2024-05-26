@@ -76,7 +76,7 @@ spec:
               repository: ghcr.io/clarknova99/enterprise
               tag: v0.0.1
             env:
-              ENGINE_URL: # http://{DOCKER_CONTAINER_NAME:PORT}/api/v1 -- example: http://engine/api/v1 (port 80 by default)
+              ENGINE_URL: http://dataherald-engine.default.svc.cluster.local/api/v1 # http://{DOCKER_CONTAINER_NAME:PORT}/api/v1 -- example: http://engine/api/v1 (port 80 by default)
               MONGODB_DB_NAME: dataherald
               MONGODB_URI: mongodb://admin:admin@mongodb:27017
 
