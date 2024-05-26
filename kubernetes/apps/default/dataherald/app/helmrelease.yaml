@@ -73,7 +73,7 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/clarknova99/enterprise
+              repository: ghcr.io/clarknova99/dataherald-enterprise
               tag: v0.0.1
             env:
               ENGINE_URL: http://dataherald-engine.default.svc.cluster.local/api/v1 # http://{DOCKER_CONTAINER_NAME:PORT}/api/v1 -- example: http://engine/api/v1 (port 80 by default)
@@ -148,8 +148,6 @@ spec:
 
               # (OPTIONAL) STRIPE
               NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY:
-
-
     service:
       engine:
         controller: engine
@@ -161,6 +159,11 @@ spec:
         ports:
           http:
             port: 3000
+      enterprise:
+        controller: enterprise
+        ports:
+          http:
+            port: 3001
     ingress:
       admin-console:
         annotations:
@@ -177,6 +180,21 @@ spec:
         tls:
           - hosts:
               - dataherald.${SECRET_DOMAIN}
+      enterprise:
+        annotations:
+          hajimari.io/enable: "true"
+          hajimari.io/icon: mdi:ip-network
+        className: internal
+        hosts:
+          - host: dauth.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                service:
+                  identifier: enterprise
+                  port: 3001
+        tls:
+          - hosts:
+              - dauth.${SECRET_DOMAIN}
 
 
     # persistence:
