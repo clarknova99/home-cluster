@@ -100,7 +100,7 @@ jobs:
             --path ./pull/kubernetes/${{ matrix.paths }}/flux
             --path-orig ./default/kubernetes/${{ matrix.paths }}/flux
             --strip-attrs "helm.sh/chart,checksum/config,app.kubernetes.io/version,chart"
-            --log-level=DEBUG
+            --log-level DEBUG
             --limit-bytes 10000
             --all-namespaces
             --sources "home-kubernetes"
