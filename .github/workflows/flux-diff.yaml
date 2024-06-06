@@ -96,8 +96,8 @@ jobs:
           args: >-
             diff ${{ matrix.resources }}
             --unified 6
-            --path /home/runner/work/home-cluster/home-cluster/pull/kubernetes/${{ matrix.paths }}/flux
-            --path-orig /home/runner/work/home-cluster/home-cluster/default/kubernetes/${{ matrix.paths }}/flux
+            --path /home/runner/work/home-cluster/home-cluster/pull/kubernetes/flux
+            --path-orig /home/runner/work/home-cluster/home-cluster/default/kubernetes/flux
             --strip-attrs "helm.sh/chart,checksum/config,app.kubernetes.io/version,chart"
             --limit-bytes 10000
             --all-namespaces
