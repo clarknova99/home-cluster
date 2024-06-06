@@ -93,6 +93,7 @@ jobs:
         uses: docker://ghcr.io/allenporter/flux-local:v5.3.1
         with:
           args: >-
+            --log-level DEBUG
             diff ${{ matrix.resources }}
             --unified 6
             --path /github/workspace/pull/kubernetes/flux
