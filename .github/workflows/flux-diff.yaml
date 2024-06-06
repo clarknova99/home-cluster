@@ -95,12 +95,12 @@ jobs:
         uses: docker://ghcr.io/allenporter/flux-local:v5.3.1
         with:
           args: >-
+            --log-level DEBUG
             diff ${{ matrix.resources }}
             --unified 6
             --path ./pull/kubernetes/${{ matrix.paths }}/flux
             --path-orig ./default/kubernetes/${{ matrix.paths }}/flux
             --strip-attrs "helm.sh/chart,checksum/config,app.kubernetes.io/version,chart"
-            --log-level DEBUG
             --limit-bytes 10000
             --all-namespaces
             --sources "home-kubernetes"
