@@ -87,9 +87,9 @@ jobs:
           pwd
           ls -la
           echo "Listing pull directory:"
-          ls -R /home/runner/work/home-cluster/home-cluster/pull
+          ls /home/runner/work/home-cluster/home-cluster/pull
           echo "Listing default directory:"
-          ls -R /home/runner/work/home-cluster/home-cluster/default
+          ls /home/runner/work/home-cluster/home-cluster/default
 
       - name: Diff Resources
         uses: docker://ghcr.io/allenporter/flux-local:v5.3.1
