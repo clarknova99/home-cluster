@@ -31,7 +31,7 @@ spec:
           app:
             image:
               repository: docker.io/lightdash/lightdash
-              tag: 0.1068.0
+              tag: 0.1124.0
             env:
               PGHOST: cloudnative-pg-cluster.database.svc.cluster.local
               PGPORT: 5432

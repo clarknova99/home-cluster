@@ -10,7 +10,7 @@ spec:
   chart:
     spec:
       chart: parseable
-      version: 1.0.0
+      version: 1.1.0
       sourceRef:
         kind: HelmRepository
         name: parseable
@@ -27,7 +27,7 @@ spec:
   values:
     image:
       repository: parseable/parseable
-      tag: v1.0.0
+      tag: v1.1.0
       pullPolicy: IfNotPresent
     replicaCount: 1
     ## Set to true if you want to deploy Parseable in local mode (store logs

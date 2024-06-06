@@ -30,7 +30,7 @@ spec:
           app:
             image:
               repository: docker.io/baserow/baserow
-              tag: 1.24.2
+              tag: 1.25.1
             env:
               BASEROW_PUBLIC_URL: https://baserow.${SECRET_DOMAIN}
               DATABASE_HOST: cloudnative-pg-cluster.database.svc.cluster.local
