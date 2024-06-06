@@ -85,6 +85,7 @@ jobs:
       - name: List Directory Structure
         run: |
           pwd
+          ls -la
           echo "Listing pull directory:"
           ls -R /home/runner/work/home-cluster/home-cluster/pull
           echo "Listing default directory:"
@@ -96,8 +97,8 @@ jobs:
           args: >-
             diff ${{ matrix.resources }}
             --unified 6
-            --path /home/runner/work/home-cluster/pull/kubernetes/flux
-            --path-orig /home/runner/work/home-cluster/default/kubernetes/flux
+            --path /github/workspace/pull/kubernetes/${{ matrix.paths }}/flux
+            --path-orig /github/workspace/default/kubernetes/${{ matrix.paths }}/flux
             --strip-attrs "helm.sh/chart,checksum/config,app.kubernetes.io/version,chart"
             --limit-bytes 10000
             --all-namespaces
