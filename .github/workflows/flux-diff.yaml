@@ -82,18 +82,10 @@ jobs:
           ref: ${{ github.event.pull_request.base.ref }}
           path: default
 
-      # - name: List Directory Structure
-      #   run: |
-      #     echo "Listing pull directory:"
-      #     ls -R /github/workspace/pull
-      #     echo "Listing default directory:"
-      #     ls -R /github/workspace/default
-
       - name: Diff Resources
         uses: docker://ghcr.io/allenporter/flux-local:v5.3.1
         with:
           args: >-
-            --log-level DEBUG
             diff ${{ matrix.resources }}
             --unified 6
             --path /github/workspace/pull/kubernetes/flux
