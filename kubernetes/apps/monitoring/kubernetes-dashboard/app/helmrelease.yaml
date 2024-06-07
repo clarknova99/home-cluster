@@ -9,17 +9,35 @@ spec:
     spec:
       # renovate: registryUrl=https://kubernetes.github.io/dashboard
       chart: kubernetes-dashboard
-      version: 7.4.0
+      version: 7.5.0
       sourceRef:
         kind: HelmRepository
         name: kubernetes-dashboard
         namespace: flux-system
-      interval: 5m
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
   values:
+    # https://github.com/kubernetes/dashboard/blob/master/docs/common/arguments.md
+    # When enabled, Dashboard login view will also be shown when Dashboard is not served over HTTPS.
+    #- --enable-insecure-login
+    # When enabled, the skip button on the login page will be shown.
+    #- --enable-skip-login
+    # When enabled, Dashboard settings page will not require user to be logged in and authorized to access settings page.
+    # - --disable-settings-authorizer
+    extraArgs:
+      - --enable-insecure-login
+      - --enable-skip-login
+      - --disable-settings-authorizer
     app:
       image:
         pullPolicy: IfNotPresent
-
       ingress:
         enabled: true
         ingressClassName: internal
@@ -27,28 +45,11 @@ spec:
           hajimari.io/enable: "true"
           hajimari.io/icon: logos:kubernetes
           hajimari.io/info: Kubernetes dashboard
-          hajimari.io/group: admin
-          nginx.ingress.kubernetes.io/proxy-body-size: "100m"
-          nginx.ingress.kubernetes.io/configuration-snippet: |
-            auth_request_set $required_groups 'kubernetes_dashboard';
         hosts:
-          - dashboard.${SECRET_DOMAIN}
+          - kd.${SECRET_DOMAIN}
         tls:
-          secretName: null
           hosts:
-          - dashboard.${SECRET_DOMAIN}
-
-      # protocolHttp: true
-    # api:
-    #   containers:
-    #   # https://github.com/kubernetes/dashboard/blob/master/docs/common/arguments.md
-    #     args:
-    #       # When enabled, the skip button on the login page will be shown.
-    #       - --enable-skip-login
-    #       # When enabled, Dashboard settings page will not require user to be logged in and authorized to access settings page.
-    #       - --disable-settings-authorizer
-    #       # When enabled, Dashboard login view will also be shown when Dashboard is not served over HTTPS.
-    #       - --enable-insecure-login
+          - kd.${SECRET_DOMAIN}
     metricsScraper:
       enabled: true
     nginx:
