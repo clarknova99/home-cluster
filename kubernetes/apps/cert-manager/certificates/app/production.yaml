@@ -2,9 +2,9 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: "${SECRET_DOMAIN/./-}-production"
+  name: "${SECRET_DOMAIN_NAME_ONE}-com-production"
 spec:
-  secretName: "${SECRET_DOMAIN/./-}-production-tls"
+  secretName: "${SECRET_DOMAIN_NAME_ONE}-com-production-tls"
   issuerRef:
     name: letsencrypt-production
     kind: ClusterIssuer
@@ -16,9 +16,9 @@ spec:
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: "${SECRET_DOMAIN2/./-}-production"
+  name: "${SECRET_DOMAIN_NAME_TWO}-org-production"
 spec:
-  secretName: "${SECRET_DOMAIN2/./-}-production-tls"
+  secretName: "${SECRET_DOMAIN_NAME_TWO}-org-production-tls"
   issuerRef:
     name: letsencrypt-production
     kind: ClusterIssuer
