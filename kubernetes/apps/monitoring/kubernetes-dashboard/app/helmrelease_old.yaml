@@ -1,0 +1,69 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2beta2.json
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: kubernetes-dashboard
+  namespace: monitoring
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: kubernetes-dashboard
+      version: 7.0.0-alpha1
+      sourceRef:
+        kind: HelmRepository
+        name: kubernetes-dashboard
+        namespace: flux-system
+  maxHistory: 2
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    env:
+      TZ: "${TIMEZONE}"
+    api:
+      containers:
+      # https://github.com/kubernetes/dashboard/blob/master/docs/common/arguments.md
+        args:
+          # When enabled, the skip button on the login page will be shown.
+          - --enable-skip-login
+          # When enabled, Dashboard settings page will not require user to be logged in and authorized to access settings page.
+          - --disable-settings-authorizer
+          # When enabled, Dashboard login view will also be shown when Dashboard is not served over HTTPS.
+          - --enable-insecure-login
+          - --token-ttl=43200
+    app:
+      ingress:
+        enabled: true
+        ingressClassName: "internal"
+        #className: internal
+        annotations:
+          hajimari.io/icon: mdi:kubernetes
+        issuer:
+          scope: disabled
+        hosts:
+          - &host "kd.${SECRET_DOMAIN}"
+        tls:
+          - hosts:
+              - *host
+            secretName: kubernetes-dashboard-tls
+    metricsScraper:
+      enabled: true
+    # serviceMonitor:
+    #   enabled: false
+    # disables cert-manager subchart installation
+    cert-manager:
+      enabled: false
+    # disables nginx-ingress-controller subchart installation
+    nginx:
+      enabled: false
+    # disables metrics-server subchart installation
+    metrics-server:
+      enabled: false
