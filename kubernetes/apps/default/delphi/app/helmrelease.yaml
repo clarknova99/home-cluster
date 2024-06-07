@@ -35,6 +35,9 @@ spec:
               tag: 1.2.2
         # nodeSelector:
         #   kubernetes.io/hostname: "nuc11"
+        pod:
+          nodeSelector:
+            kubernetes.io/arch: amd64
     service:
       app:
         controller: delphi
