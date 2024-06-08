@@ -46,10 +46,10 @@ The repo is home for the code to automate the provisioning and management of my 
 ## 🔧 Hardware
 | Device | Count | Ram | Operating System | Purpose |
 | --- | --- | --- | --- | --- |
-| Intel NUC11PAHi7 | 1   | 64GB | debian | Kubernetes Masters |
-| Intel NUC8i5BEH | 1   | 32GB | debian | Kubernetes Workers |
+| Intel NUC11PAHi7 | 1   | 64GB | debian | Control Plane / Worker |
+| Intel NUC8i5BEH | 1   | 32GB | debian | Control Plane / Worker |
 | Alienware Aurora | 1   | 24GB | debian | Kubernetes Workers |
-| Alienware X51  | 1   | 16GB | debian | Kubernetes Workers |
+| Alienware X51  | 1   | 16GB | debian | Control Plane / Worker |
 | Raspberry Pi 4 | 4   | 8GB | debian | Kubernetes Workers |
 | Synology 1513+ | 1   | 8GB | - | NAS |
 | Firewalla Gold | 1   | - | Ubuntu | Router |
