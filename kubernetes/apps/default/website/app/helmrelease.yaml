@@ -1,83 +1,93 @@
 ---
-# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2beta1.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2beta2.json
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
   name: website
   namespace: default
 spec:
-  interval: 5m
+  interval: 15m
   chart:
     spec:
-      chart: nginx
-      #version: 14.2.1
-      version: 15.4.0
+      chart: app-template
+      version: 3.2.1
       sourceRef:
         kind: HelmRepository
-        name: bitnami
+        name: bjw-s
         namespace: flux-system
-      interval: 5m
+      interval: 15m
+  maxHistory: 3
   install:
-    createNamespace: true
     remediation:
-      retries: 3
+      retries: 5
   upgrade:
     remediation:
-      retries: 3
-      remediateLastFailure: true
-    cleanupOnFail: true
+      retries: 5
   values:
-    image:
-      registry: docker.io
-      repository: bitnami/nginx
-      tag: latest
-    pullPolicy: IfNotPresent
-    debug: false
-    replicaCount: 2
-    updateStrategy:
-      type: RollingUpdate
-      rollingUpdate: {}
-    serverBlock: |-
-      server {
-        listen 80;
-        server_name www.${SECRET_DOMAIN};
-      }
-    extraVolumes:
-      - name: nginx-www
-        persistentVolumeClaim:
-          claimName: pvc-website
-
-    extraVolumeMounts:
-      - mountPath: /app
-        name: nginx-www
-
-    persistence:
-      data:
-        enabled: true
-        existingClaim: pvc-website
-
-    affinity:
-      nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-            - matchExpressions:
-                - key: kubernetes.io/arch
-                  operator: In
-                  values:
-                    - amd64
+    controllers:
+      web:
+        replicas: 2
+        containers:
+          app:
+            image:
+              repository: docker.io/bitnami/nginx
+              tag: 1.27.0
     service:
-      ports:
-        http: &port 80
-      type: ClusterIP
-      main:
+      app:
+        controller: web
         ports:
           http:
-            port: *port
-
-    resources:
-      requests:
-        cpu: 15m
-        memory: 79M
-      limits:
-        cpu: 15m
-        memory: 79M
+            port: 80
+    ingress:
+      app:
+        annotations:
+          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+          hajimari.io/enable: "true"
+          hajimari.io/icon: mdi:web
+        className: external
+        hosts:
+          - host: www.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: 80
+          - host: www.${SECRET_DOMAIN2}
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: 80
+          - host: ${SECRET_DOMAIN}
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: 80
+          - host: ${SECRET_DOMAIN2}
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: 80
+        tls:
+          - hosts:
+              - ${SECRET_DOMAIN}
+              - ${SECRET_DOMAIN2}
+              - www.${SECRET_DOMAIN}
+              - www.${SECRET_DOMAIN2}
+    persistence:
+      config:
+        enabled: true
+        type: nfs
+        server: 192.168.1.2
+        path: /volume1/network-storage/nginx/conf
+        globalMounts:
+          - path: /opt/bitnami/nginx/conf/server_blocks
+      www:
+        enabled: true
+        type: nfs
+        server: 192.168.1.2
+        path: /volume1/network-storage/nginx/www
+        globalMounts:
+          - path: /opt/bitnami/nginx/html

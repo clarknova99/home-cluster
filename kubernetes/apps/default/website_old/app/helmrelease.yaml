@@ -1,0 +1,83 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2beta1.json
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: website
+  namespace: default
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: nginx
+      #version: 14.2.1
+      version: 15.4.0
+      sourceRef:
+        kind: HelmRepository
+        name: bitnami
+        namespace: flux-system
+      interval: 5m
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+      remediateLastFailure: true
+    cleanupOnFail: true
+  values:
+    image:
+      registry: docker.io
+      repository: bitnami/nginx
+      tag: latest
+    pullPolicy: IfNotPresent
+    debug: false
+    replicaCount: 2
+    updateStrategy:
+      type: RollingUpdate
+      rollingUpdate: {}
+    serverBlock: |-
+      server {
+        listen 80;
+        server_name www.${SECRET_DOMAIN};
+      }
+    extraVolumes:
+      - name: nginx-www
+        persistentVolumeClaim:
+          claimName: pvc-website
+
+    extraVolumeMounts:
+      - mountPath: /app
+        name: nginx-www
+
+    persistence:
+      data:
+        enabled: true
+        existingClaim: pvc-website
+
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: kubernetes.io/arch
+                  operator: In
+                  values:
+                    - amd64
+    service:
+      ports:
+        http: &port 80
+      type: ClusterIP
+      main:
+        ports:
+          http:
+            port: *port
+
+    resources:
+      requests:
+        cpu: 15m
+        memory: 79M
+      limits:
+        cpu: 15m
+        memory: 79M
