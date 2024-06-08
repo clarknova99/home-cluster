@@ -1,7 +1,7 @@
 #docker buildx build --push --platform linux/arm64,linux/amd64 --tag clarknova9/aim:0.0.4 .
 #docker buildx build --push --platform linux/arm64,linux/amd64 --tag clarknova9/aim-ui:0.0.0 .
 # python3.7 should be sufficient to run Aim
-FROM python:3.10.12
+FROM python:3.12.4
 
 
 # Install basic utilitiesc
