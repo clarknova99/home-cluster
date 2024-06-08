@@ -22,5 +22,5 @@ resources:
   #- ./solr/ks.yaml
   - ./troddit/ks.yaml
   - ./website/ks.yaml
-  - ./web/ks.yml
+  - ./web/ks.yaml
   - ./whoami/ks.yaml
