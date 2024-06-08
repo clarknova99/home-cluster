@@ -58,4 +58,4 @@ The repo is home for the code to automate the provisioning and management of my 
 
 ---
 
-Thanks goes out to [onedr0p](https://github.com/onedr0p) and his awesome [flux template](https://github.com/onedr0p)
+Thanks to [onedr0p](https://github.com/onedr0p) and his awesome [flux template](https://github.com/onedr0p)
