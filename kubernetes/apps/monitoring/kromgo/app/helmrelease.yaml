@@ -44,7 +44,7 @@ spec:
               repository: ghcr.io/kashalls/kromgo
               tag: 0.3.1
             env:
-              PROMETHEUS_URL: http://thanos-query-frontend.monitoring.svc.cluster.local:9090
+              PROMETHEUS_URL: http://thanos-query-frontend.monitoring.svc.cluster.local:10902
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
@@ -65,7 +65,7 @@ spec:
     ingress:
       app:
         annotations:
-          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN2}"
         enabled: true
         className: external
         hosts:
