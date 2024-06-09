@@ -76,7 +76,7 @@ spec:
         tls:
           - hosts:
               - *host
-    serviceMonitor:
-      app:
-        serviceName: karma
-        enabled: true
+    # serviceMonitor:
+    #   app:
+    #     serviceName: karma
+    #     enabled: true
