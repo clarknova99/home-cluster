@@ -10,7 +10,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 2.6.0
+      version: 3.2.1
       sourceRef:
         kind: HelmRepository
         name: bjw-s
@@ -27,11 +27,11 @@ spec:
     keepHistory: false
   values:
     controllers:
-      main:
+      karma:
         replicas: 2
         strategy: RollingUpdate
         containers:
-          main:
+          app:
             image:
               repository: ghcr.io/prymitive/karma
               tag: v0.120
@@ -54,8 +54,14 @@ spec:
               labelSelector:
                 matchLabels:
                   app.kubernetes.io/name: *app
+    service:
+      app:
+        controller: karma
+        ports:
+          http:
+            port: 8080
     ingress:
-      main:
+      app:
         enabled: true
         className: internal
         annotations:
@@ -65,16 +71,12 @@ spec:
             paths:
               - path: /
                 service:
-                  name: main
+                  identifier: app
                   port: http
         tls:
           - hosts:
               - *host
-    service:
-      main:
-        ports:
-          http:
-            port: 8080
+
     serviceMonitor:
-      main:
+      app:
         enabled: true
