@@ -69,6 +69,10 @@ spec:
               # "debug"
 
               ]
+
+        pod:
+          nodeSelector:
+            kubernetes.io/arch: amd64
     service:
       app:
         controller: mlflow
@@ -99,7 +103,5 @@ spec:
       data:
         enabled: true
         existingClaim: pvc-mlflow
-    pod:
-      nodeSelector:
-        kubernetes.io/arch: amd64
+
 
