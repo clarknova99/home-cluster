@@ -52,19 +52,7 @@ spec:
                 service:
                   identifier: app
                   port: 80
-          - host: www.${SECRET_DOMAIN2}
-            paths:
-              - path: /
-                service:
-                  identifier: app
-                  port: 80
           - host: ${SECRET_DOMAIN}
-            paths:
-              - path: /
-                service:
-                  identifier: app
-                  port: 80
-          - host: ${SECRET_DOMAIN2}
             paths:
               - path: /
                 service:
@@ -73,9 +61,7 @@ spec:
         tls:
           - hosts:
               - ${SECRET_DOMAIN}
-              - ${SECRET_DOMAIN2}
               - www.${SECRET_DOMAIN}
-              - www.${SECRET_DOMAIN2}
     persistence:
       config:
         enabled: true
