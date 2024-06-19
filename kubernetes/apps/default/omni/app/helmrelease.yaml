@@ -1,0 +1,115 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2beta2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: omni
+  namespace: default
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.2.1
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+      interval: 15m
+  maxHistory: 3
+  install:
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
+  values:
+    controllers:
+      omni:
+        replicas: 1
+        containers:
+          app:
+            image:
+              repository: ghcr.io/siderolabs/omni
+              tag: v0.37.5
+            command: >
+              --account-id=538BEBF8-105F-40E8-8E4C-0DFA1ACEE326
+              --name=omni
+              --cert=/tls.crt
+              --key=/tls.key
+              --machine-api-cert=/tls.crt
+              --machine-api-key=/tls.key
+              --private-key-source='file:///omni.asc'
+              --event-sink-port=8091
+              --bind-addr=0.0.0.0:443
+              --machine-api-bind-addr=0.0.0.0:8090
+              --k8s-proxy-bind-addr=0.0.0.0:8100
+              --advertised-api-url=https://omni.${SECRET_DOMAIN}
+              --advertised-kubernetes-proxy-url=https://omni.${SECRET_DOMAIN}:8100/
+              --siderolink-api-advertised-url=https://omni.${SECRET_DOMAIN}:8090/
+              --siderolink-wireguard-advertised-addr=192.168.2.39:50180
+              --auth-auth0-enabled=true
+              --auth-auth0-domain=${SECRET_OMNI_AUTH0_DOMAIN}
+              --auth-auth0-client-id=${SECRET_OMNI_AUTH0_CLIENT_ID}
+              --initial-users=${SECRET_OMNI_INITIAL_USERS}
+              --debug
+        pod:
+          nodeSelector:
+            kubernetes.io/arch: amd64
+    service:
+      app:
+        controller: delphi
+        type: LoadBalancer
+        externalTrafficPolicy: Cluster
+        annotations:
+          io.cilium/lb-ipam-ips: 192.168.2.39
+        ports:
+          http:
+            port: 443
+
+    ingress:
+      app:
+        annotations:
+          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+          hajimari.io/enable: "true"
+          hajimari.io/icon: mdi:math-compass
+        className: internal
+        hosts:
+          - host: omni.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: 443
+        tls:
+          - hosts:
+              - omni.${SECRET_DOMAIN}
+    persistence:
+      etcd:
+        enabled: true
+        type: nfs
+        server: 192.168.1.2
+        path: /volume1/network-storage/omni/etcd
+        globalMounts:
+          - path: /_out/etcd
+      tls.crt:
+        enabled: true
+        type: nfs
+        server: 192.168.1.2
+        path: /volume1/network-storage/omni/chain.crt
+        globalMounts:
+          - path: /tls.crt
+      tls.key:
+        enabled: true
+        type: nfs
+        server: 192.168.1.2
+        path: /volume1/network-storage/omni/tls.key
+        globalMounts:
+          - path: /tls.key
+      omni.asc:
+        enabled: true
+        type: nfs
+        server: 192.168.1.2
+        path: /volume1/network-storage/omni/omni.asc
+        globalMounts:
+          - path: /omni.asc
