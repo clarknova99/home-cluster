@@ -92,21 +92,21 @@ spec:
         path: /volume1/network-storage/omni/etcd
         globalMounts:
           - path: /_out/etcd
-      tls_crt:
+      tls-crt:
         enabled: true
         type: nfs
         server: 192.168.1.2
         path: /volume1/network-storage/omni/chain.crt
         globalMounts:
           - path: /tls.crt
-      tls_key:
+      tls-key:
         enabled: true
         type: nfs
         server: 192.168.1.2
         path: /volume1/network-storage/omni/tls.key
         globalMounts:
           - path: /tls.key
-      omni_asc:
+      omni-asc:
         enabled: true
         type: nfs
         server: 192.168.1.2
