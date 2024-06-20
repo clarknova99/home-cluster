@@ -54,7 +54,7 @@ spec:
               - --initial-users=${SECRET_OMNI_INITIAL_USERS}
               - --debug
             securityContext:
-              allowPrivilegeEscalation: false
+              allowPrivilegeEscalation: true
               capabilities:
                 add:
                   - NET_ADMIN
