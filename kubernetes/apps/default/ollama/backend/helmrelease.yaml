@@ -39,9 +39,29 @@ spec:
               OLLAMA_HOST: 0.0.0.0
               OLLAMA_ORIGINS: "*"
               OLLAMA_MODELS: /models
+            resources:
+              requests:
+                cpu: 2000m
+                memory: 4Gi
+                gpu.intel.com/i915: "1"
+              limits:
+                memory: 16Gi
+                gpu.intel.com/i915: "1"
         pod:
+          affinity:
+            nodeAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                nodeSelectorTerms:
+                  - matchExpressions:
+                      - key: intel.feature.node.kubernetes.io/gpu
+                        operator: In
+                        values:
+                          - "true"
           nodeSelector:
-            kubernetes.io/arch: amd64
+            intel.feature.node.kubernetes.io/gpu: "true"
+        # pod:
+        #   nodeSelector:
+        #     kubernetes.io/arch: amd64
     service:
       app:
         controller: ollama
