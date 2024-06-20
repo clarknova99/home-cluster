@@ -26,33 +26,39 @@ spec:
   values:
     controllers:
       omni:
-        replicas: 1
+        deployment: 1
         containers:
           app:
             image:
               repository: ghcr.io/siderolabs/omni
               tag: v0.37.5
-            command: >
-              --account-id=538BEBF8-105F-40E8-8E4C-0DFA1ACEE326
-              --name=omni
-              --cert=/tls.crt
-              --key=/tls.key
-              --machine-api-cert=/tls.crt
-              --machine-api-key=/tls.key
-              --private-key-source='file:///omni.asc'
-              --event-sink-port=8091
-              --bind-addr=0.0.0.0:443
-              --machine-api-bind-addr=0.0.0.0:8090
-              --k8s-proxy-bind-addr=0.0.0.0:8100
-              --advertised-api-url=https://omni.${SECRET_DOMAIN}
-              --advertised-kubernetes-proxy-url=https://omni.${SECRET_DOMAIN}:8100/
-              --siderolink-api-advertised-url=https://omni.${SECRET_DOMAIN}:8090/
-              --siderolink-wireguard-advertised-addr=192.168.2.39:50180
-              --auth-auth0-enabled=true
-              --auth-auth0-domain=${SECRET_OMNI_AUTH0_DOMAIN}
-              --auth-auth0-client-id=${SECRET_OMNI_AUTH0_CLIENT_ID}
-              --initial-users=${SECRET_OMNI_INITIAL_USERS}
-              --debug
+            args:
+              - --account-id=538BEBF8-105F-40E8-8E4C-0DFA1ACEE326
+              - --name=omni
+              - --cert=/tls.crt
+              - --key=/tls.key
+              - --machine-api-cert=/tls.crt
+              - --machine-api-key=/tls.key
+              - --private-key-source='file:///secrets/omni.asc'
+              - --event-sink-port=8091
+              - --bind-addr=0.0.0.0:443
+              - --machine-api-bind-addr=0.0.0.0:8090
+              - --k8s-proxy-bind-addr=0.0.0.0:8100
+              - --advertised-api-url=https://omni.${SECRET_DOMAIN}
+              - --advertised-kubernetes-proxy-url=https://omni.${SECRET_DOMAIN}:8100/
+              - --siderolink-api-advertised-url=https://omni.${SECRET_DOMAIN}:8090/
+              - --siderolink-wireguard-advertised-addr=192.168.2.39:50180
+              - --auth-auth0-enabled=true
+              - --auth-auth0-domain=${SECRET_OMNI_AUTH0_DOMAIN}
+              - --auth-auth0-client-id=${SECRET_OMNI_AUTH0_CLIENT_ID}
+              - --initial-users=${SECRET_OMNI_INITIAL_USERS}
+              - --debug
+            securityContext:
+              allowPrivilegeEscalation: false
+              capabilities:
+                add:
+                  - NET_ADMIN
+              readOnlyRootFilesystem: true
         pod:
           nodeSelector:
             kubernetes.io/arch: amd64
@@ -65,7 +71,17 @@ spec:
           io.cilium/lb-ipam-ips: 192.168.2.39
         ports:
           http:
+            port: 80
+          https:
             port: 443
+          event-sink:
+            port: 8091
+          siderolink-api:
+            port: 8090
+          k8s-proxy:
+            port: 8100
+          wireguard:
+            port: 50180
 
     ingress:
       app:
@@ -85,6 +101,9 @@ spec:
           - hosts:
               - omni.${SECRET_DOMAIN}
     persistence:
+      dev-net-tun:
+        type: hostPath
+        hostPath: /dev/net/tun
       etcd:
         enabled: true
         type: nfs
@@ -99,6 +118,9 @@ spec:
         path: /volume1/network-storage/omni
         globalMounts:
           - path: /
+      secrets:
+        type: secret
+        name: omni-secrets
       # tls-key:
       #   enabled: true
       #   type: nfs
