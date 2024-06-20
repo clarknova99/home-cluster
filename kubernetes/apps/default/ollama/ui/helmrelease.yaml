@@ -34,7 +34,7 @@ spec:
               tag: main
             env:
               OLLAMA_API_BASE_URL: http://ollama.default.svc:11434/api
-              WEBUI_AUTH: False
+              ENABLE_IMAGE_GENERATION: True
               DATA_DIR: /data
         pod:
           nodeSelector:
