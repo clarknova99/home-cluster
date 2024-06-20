@@ -12,17 +12,17 @@ spec:
   dnsNames:
     - "${SECRET_DOMAIN}"
     - "*.${SECRET_DOMAIN}"
----
-apiVersion: cert-manager.io/v1
-kind: Certificate
-metadata:
-  name: "${SECRET_DOMAIN_NAME_TWO}-org-production"
-spec:
-  secretName: "${SECRET_DOMAIN_NAME_TWO}-org-production-tls"
-  issuerRef:
-    name: letsencrypt-production
-    kind: ClusterIssuer
-  commonName: "${SECRET_DOMAIN2}"
-  dnsNames:
-    - "${SECRET_DOMAIN2}"
-    - "*.${SECRET_DOMAIN2}"
+# ---
+# apiVersion: cert-manager.io/v1
+# kind: Certificate
+# metadata:
+#   name: "${SECRET_DOMAIN_NAME_TWO}-org-production"
+# spec:
+#   secretName: "${SECRET_DOMAIN_NAME_TWO}-org-production-tls"
+#   issuerRef:
+#     name: letsencrypt-production
+#     kind: ClusterIssuer
+#   commonName: "${SECRET_DOMAIN2}"
+#   dnsNames:
+#     - "${SECRET_DOMAIN2}"
+#     - "*.${SECRET_DOMAIN2}"
