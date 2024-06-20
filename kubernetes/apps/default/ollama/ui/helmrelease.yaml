@@ -6,61 +6,62 @@ metadata:
   name: &app ollama-ui
   namespace: default
 spec:
-  interval: 30m
+  interval: 15m
   chart:
     spec:
       chart: app-template
-      version: 2.6.0
+      version: 3.2.1
       sourceRef:
         kind: HelmRepository
         name: bjw-s
         namespace: flux-system
-  maxHistory: 2
+      interval: 15m
+  maxHistory: 3
   install:
     remediation:
-      retries: 3
+      retries: 5
   upgrade:
-    cleanupOnFail: true
     remediation:
-      retries: 3
-  uninstall:
-    keepHistory: false
+      retries: 5
   values:
     controllers:
-      main:
-        type: deployment
-        annotations:
-          reloader.stakater.com/auto: "true"
+      ollama-ui:
+        replicas: 1
         containers:
-          main:
+          app:
             image:
               repository: ghcr.io/ollama-webui/ollama-webui
               tag: main
             env:
               OLLAMA_API_BASE_URL: http://ollama.default.svc:11434/api
-            resources:
-              requests:
-                cpu: 200m
-              limits:
-                memory: 2Gi
-              startup:
-                enabled: false
+        pod:
+          nodeSelector:
+            kubernetes.io/arch: amd64
     service:
-      main:
+      app:
+        controller: ollama-ui
         ports:
           http:
             port: 8080
     ingress:
-      main:
-        enabled: true
-        className: internal
+      app:
+        annotations:
+          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+          nginx.ingress.kubernetes.io/auth-method: GET
+          nginx.ingress.kubernetes.io/auth-url: http://authelia.default.svc.cluster.local/api/verify
+          nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}?rm=$request_method
+          nginx.ingress.kubernetes.io/auth-response-headers: Remote-User,Remote-Name,Remote-Groups,Remote-Email
+          nginx.ingress.kubernetes.io/auth-snippet: proxy_set_header X-Forwarded-Method $request_method;
+          hajimari.io/enable: "true"
+          hajimari.io/icon: mdi:math-compass
+        className: external
         hosts:
-          - host: &host chat.${SECRET_DOMAIN}
+          - host: chat.${SECRET_DOMAIN}
             paths:
               - path: /
                 service:
-                  name: main
-                  port: http
+                  identifier: app
+                  port: 8080
         tls:
           - hosts:
-              - *host
+              - chat.${SECRET_DOMAIN}
