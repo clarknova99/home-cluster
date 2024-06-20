@@ -26,7 +26,7 @@ spec:
   values:
     controllers:
       omni:
-        type: deployment
+        #type: deployment
         containers:
           app:
             image:
