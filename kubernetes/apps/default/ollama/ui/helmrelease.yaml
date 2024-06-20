@@ -35,6 +35,7 @@ spec:
             env:
               OLLAMA_API_BASE_URL: http://ollama.default.svc:11434/api
               WEBUI_AUTH: False
+              DATA_DIR: /data
         pod:
           nodeSelector:
             kubernetes.io/arch: amd64
@@ -66,3 +67,11 @@ spec:
         tls:
           - hosts:
               - chat.${SECRET_DOMAIN}
+    persistence:
+      config:
+        enabled: true
+        type: nfs
+        server: 192.168.1.2
+        path: /volume1/network-storage/ollama/data
+        globalMounts:
+          - path: /data

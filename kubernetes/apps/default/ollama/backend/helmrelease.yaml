@@ -31,13 +31,14 @@ spec:
           app:
             image:
               repository: docker.io/ollama/ollama
-              tag: 0.1.42
+              tag: 0.1.44
             env:
               TZ: ${TIMEZONE}
               # NVIDIA_VISIBLE_DEVICES: all
               # NVIDIA_DRIVER_CAPABILITIES: all
               OLLAMA_HOST: 0.0.0.0
               OLLAMA_ORIGINS: "*"
+              OLLAMA_MODELS: /models
         pod:
           nodeSelector:
             kubernetes.io/arch: amd64
@@ -69,6 +70,13 @@ spec:
         enabled: true
         type: nfs
         server: 192.168.1.2
-        path: /volume1/network-storage/ollama
+        path: /volume1/network-storage/ollama/backend
         globalMounts:
           - path: /root/.ollama
+      models:
+        enabled: true
+        type: nfs
+        server: 192.168.1.2
+        path: /volume1/network-storage/ollama/models
+        globalMounts:
+          - path: /models
