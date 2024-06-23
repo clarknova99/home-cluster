@@ -9,6 +9,7 @@ resources:
   - ./authelia/ks.yaml
   - ./baserow/ks.yaml
   #- ./dataherald/ks.yaml
+  - ./crew/ks.yaml
   - ./delphi/ks.yaml
   - ./frigate/ks.yaml
   - ./hajimari/ks.yaml

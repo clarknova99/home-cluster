@@ -1,0 +1,77 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2beta2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: crew
+  namespace: default
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.2.1
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+      interval: 15m
+  maxHistory: 3
+  install:
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
+  values:
+    controllers:
+      crew:
+        replicas: 1
+        containers:
+          app:
+            image:
+              #docker buildx build --push --platform linux/arm64,linux/amd64 --tag clarknova9/streamlit:0.1.1 .
+              repository: docker.io/clarknova9/crew
+              tag: 0.0.1
+        # nodeSelector:
+        #   kubernetes.io/hostname: "nuc11"
+        pod:
+          nodeSelector:
+            kubernetes.io/arch: amd64
+    service:
+      app:
+        controller: crew
+        ports:
+          http:
+            port: 8501
+    ingress:
+      app:
+        annotations:
+          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+          nginx.ingress.kubernetes.io/auth-method: GET
+          nginx.ingress.kubernetes.io/auth-url: http://authelia.default.svc.cluster.local/api/verify
+          nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}?rm=$request_method
+          nginx.ingress.kubernetes.io/auth-response-headers: Remote-User,Remote-Name,Remote-Groups,Remote-Email
+          nginx.ingress.kubernetes.io/auth-snippet: proxy_set_header X-Forwarded-Method $request_method;
+          hajimari.io/enable: "true"
+          hajimari.io/icon: mdi:math-compass
+        className: external
+        hosts:
+          - host: crew.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: 8501
+        tls:
+          - hosts:
+              - crew.${SECRET_DOMAIN}
+
+    # persistence:
+    #   config:
+    #     enabled: true
+    #     type: nfs
+    #     server: 192.168.1.2
+    #     path: /volume1/network-storage/streamlit/data
+    #     globalMounts:
+    #       - path: /app/data
