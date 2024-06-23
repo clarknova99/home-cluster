@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: lightllm-secrets
+## sops --encrypt --in-place ./kubernetes/apps/default/ollama/lightllm/lightllm.sops.yaml
+## sops --decrypt ./kubernetes/apps/default/ollama/lightllm/lightllm.sops.yaml | kubectl apply -f -
+stringData:
+    LITELLM_MASTER_KEY: ENC[AES256_GCM,data:CNSYVF1mgw==,iv:3528EOrt+quPrVr+Cq/WXyv7Gv9c7NCP/81QOIZh4hk=,tag:+x2XFAKhUrQoTnwu2HELdA==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age14q9x9ftcpqfw2kmhmlfzpx5g2wmn7tdnq34uhh4x0r2h6qfmm5dqk07z2e
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBFYUxGQlNvNmswemx3OFI1
+            dnlKZnRRS1pybFZUbE9zVDNHMS9FU044K2xJClppR1l3eEhZZk5VWVRsd0JkL09m
+            ZmFPK25Bd0dma2hKL0xCZEFoTkJVK00KLS0tIDM1Z2QwZ2pmdk9NVit6alBubXFJ
+            bmw3bThxR21YZDJrRkVOTFNUWlp6TDQKCSY9WOcHJFtkBg6BDpA31pa7xtvatHbJ
+            d7biJwowYC6zh3qaIpSKf9hmLA64MZKAZwEpf4e7GFAfEepGZ/u5GQ==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2024-06-23T00:03:31Z"
+    mac: ENC[AES256_GCM,data:ei06YlXLt/zKyAtTvW0XtZlCNJPItlv6QbDsIfUT1Ije9hGeqP3qnpC0FwnaOndyG5CbLXX4JV0nwcUZZVGMsWuG4ZQ7q1KfwXoJ0cat7RLWur5rFqISD5QPHWylVMMdFCIb81Xua7zYVNDa8zLwMjALrmy+dEo0tsE+3zjmsbM=,iv:IMMp4K3WUg/JXZ6V86amlZZp1mm4M3Oj4AhfGiIiRLQ=,tag:S222coXuztBECMpvvw4tTg==,type:str]
+    pgp: []
+    encrypted_regex: ^(data|stringData)$
+    version: 3.8.1

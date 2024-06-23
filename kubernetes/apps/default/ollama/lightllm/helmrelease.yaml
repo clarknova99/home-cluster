@@ -1,0 +1,80 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2beta2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app lightllm
+  namespace: default
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.2.1
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+      interval: 15m
+  maxHistory: 3
+  install:
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
+  values:
+    controllers:
+      lightllm:
+        replicas: 1
+        containers:
+          app:
+            image:
+              repository: ghcr.io/berriai/litellm
+              tag: main-v1.40.22
+            env:
+            envFrom: &envFrom
+              - secretRef:
+                  name: lightllm-secrets
+          args:
+            - "--config"
+            - "/app/proxy_config.yaml"
+        pod:
+          nodeSelector:
+            kubernetes.io/arch: amd64
+    service:
+      app:
+        controller: lightllm
+        ports:
+          http:
+            port: 4000
+    ingress:
+      app:
+        annotations:
+          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+          nginx.ingress.kubernetes.io/auth-method: GET
+          nginx.ingress.kubernetes.io/auth-url: http://authelia.default.svc.cluster.local/api/verify
+          nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}?rm=$request_method
+          nginx.ingress.kubernetes.io/auth-response-headers: Remote-User,Remote-Name,Remote-Groups,Remote-Email
+          nginx.ingress.kubernetes.io/auth-snippet: proxy_set_header X-Forwarded-Method $request_method;
+          hajimari.io/enable: "true"
+          hajimari.io/icon: mdi:math-compass
+        className: external
+        hosts:
+          - host: lightllm.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: 4000
+        tls:
+          - hosts:
+              - chat.${SECRET_DOMAIN}
+    persistence:
+      config:
+        enabled: true
+        type: nfs
+        server: 192.168.1.2
+        path: /volume1/network-storage/ollama/lightllm
+        globalMounts:
+          - path: /app
