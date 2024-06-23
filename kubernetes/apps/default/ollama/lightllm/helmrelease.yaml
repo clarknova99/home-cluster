@@ -46,6 +46,9 @@ spec:
     service:
       app:
         controller: lightllm
+        type: LoadBalancer
+        annotations:
+          io.cilium/lb-ipam-ips: 192.168.2.86
         ports:
           http:
             port: 4000
