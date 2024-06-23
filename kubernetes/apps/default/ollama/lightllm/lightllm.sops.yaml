@@ -6,6 +6,7 @@ metadata:
 ## sops --decrypt ./kubernetes/apps/default/ollama/lightllm/lightllm.sops.yaml | kubectl apply -f -
 stringData:
     LITELLM_MASTER_KEY: ENC[AES256_GCM,data:CNSYVF1mgw==,iv:3528EOrt+quPrVr+Cq/WXyv7Gv9c7NCP/81QOIZh4hk=,tag:+x2XFAKhUrQoTnwu2HELdA==,type:str]
+    GROQ_API_KEY: ENC[AES256_GCM,data:ej7HQsCjRu8sgvd/kFaa7EhHOVnFNxK4gQb8RdximWAmrinX7zvtNfOMM1kYxey/HeAllVsePUc=,iv:ghbTRvZbmiRMi1rE+9LkO6xTyNHn2CHShl9EdkIHAbk=,tag:t/6Z5L88jyKhc0d7T9Iz2w==,type:str]
 sops:
     kms: []
     gcp_kms: []
@@ -21,8 +22,8 @@ sops:
             bmw3bThxR21YZDJrRkVOTFNUWlp6TDQKCSY9WOcHJFtkBg6BDpA31pa7xtvatHbJ
             d7biJwowYC6zh3qaIpSKf9hmLA64MZKAZwEpf4e7GFAfEepGZ/u5GQ==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2024-06-23T00:03:31Z"
-    mac: ENC[AES256_GCM,data:ei06YlXLt/zKyAtTvW0XtZlCNJPItlv6QbDsIfUT1Ije9hGeqP3qnpC0FwnaOndyG5CbLXX4JV0nwcUZZVGMsWuG4ZQ7q1KfwXoJ0cat7RLWur5rFqISD5QPHWylVMMdFCIb81Xua7zYVNDa8zLwMjALrmy+dEo0tsE+3zjmsbM=,iv:IMMp4K3WUg/JXZ6V86amlZZp1mm4M3Oj4AhfGiIiRLQ=,tag:S222coXuztBECMpvvw4tTg==,type:str]
+    lastmodified: "2024-06-23T00:33:40Z"
+    mac: ENC[AES256_GCM,data:YQQtCtY+JQ1UqfWP8ikvWoz2UwZSdH2cO/xYYJqivHeuDww5OIpIna4ulJzqkLppVkjSwKI4V7ewgL5kgwVZ5AtrEq+h3dcbEfBrAVW0zjGxGRlL5gIMC+uIHccgyn+GVakN9S1DKO6stZ+7gGl8Ja4W995IS+u1gdz8+PhegGE=,iv:BYD39rLiCpz0f3pegoFyhbS8BnefV17z/IT6GDH+hos=,tag:aUcyCx+287O8SbYqqofgfQ==,type:str]
     pgp: []
     encrypted_regex: ^(data|stringData)$
     version: 3.8.1
