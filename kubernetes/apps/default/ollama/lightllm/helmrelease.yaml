@@ -35,9 +35,9 @@ spec:
             envFrom: &envFrom
               - secretRef:
                   name: lightllm-secrets
-          args:
-            - "--config"
-            - "/app/proxy_config.yaml"
+            args:
+              - "--config"
+              - "/app/proxy_config.yaml"
         pod:
           nodeSelector:
             kubernetes.io/arch: amd64
