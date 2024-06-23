@@ -39,7 +39,7 @@ spec:
                   name: lightllm-secrets
             args:
               - "--config"
-              - "/app/proxy_config.yaml"
+              - "/app/config.yaml"
         pod:
           nodeSelector:
             kubernetes.io/arch: amd64
