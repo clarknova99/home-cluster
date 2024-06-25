@@ -35,10 +35,11 @@ spec:
             env:
               TZ: ${TIMEZONE}
               NVIDIA_VISIBLE_DEVICES: all
-              NVIDIA_DRIVER_CAPABILITIES: all
+              NVIDIA_DRIVER_CAPABILITIES: compute,utility #all
               OLLAMA_HOST: 0.0.0.0
               OLLAMA_ORIGINS: "*"
               OLLAMA_MODELS: /models
+              OLLAMA_DEBUG: 1
             resources:
               requests:
                 cpu: 2000m
