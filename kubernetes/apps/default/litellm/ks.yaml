@@ -11,7 +11,7 @@ spec:
     labels:
       app.kubernetes.io/name: *appname
   interval: 10m
-  path: "./kubernetes/apps/default/lightllm/app"
+  path: "./kubernetes/apps/default/litellm/app"
   prune: true
   sourceRef:
     kind: GitRepository
