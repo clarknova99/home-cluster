@@ -49,6 +49,7 @@ spec:
                 memory: 16Gi
                 nvidia.com/gpu: 1
                 #gpu.intel.com/i915: "1"
+
         pod:
           # affinity:
           #   nodeAffinity:
@@ -63,6 +64,7 @@ spec:
             #intel.feature.node.kubernetes.io/gpu: "true"
             kubernetes.io/arch: amd64
             kubernetes.io/hostname: "k8s-01"
+            nvidia.feature.node.kubernetes.io/gpu: "true"
         # pod:
         #   nodeSelector:
         #     kubernetes.io/arch: amd64
