@@ -52,6 +52,7 @@ spec:
                 #gpu.intel.com/i915: "1"
 
         pod:
+          runtimeClassName: nvidia
           # affinity:
           #   nodeAffinity:
           #     requiredDuringSchedulingIgnoredDuringExecution:
