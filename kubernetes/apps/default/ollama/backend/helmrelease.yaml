@@ -34,8 +34,8 @@ spec:
               tag: 0.1.44
             env:
               TZ: ${TIMEZONE}
-              # NVIDIA_VISIBLE_DEVICES: all
-              # NVIDIA_DRIVER_CAPABILITIES: all
+              NVIDIA_VISIBLE_DEVICES: all
+              NVIDIA_DRIVER_CAPABILITIES: all
               OLLAMA_HOST: 0.0.0.0
               OLLAMA_ORIGINS: "*"
               OLLAMA_MODELS: /models
@@ -43,22 +43,26 @@ spec:
               requests:
                 cpu: 2000m
                 memory: 4Gi
-                gpu.intel.com/i915: "1"
+                #gpu.intel.com/i915: "1"
+                nvidia.com/gpu: 1
               limits:
                 memory: 16Gi
-                gpu.intel.com/i915: "1"
+                nvidia.com/gpu: 1
+                #gpu.intel.com/i915: "1"
         pod:
-          affinity:
-            nodeAffinity:
-              requiredDuringSchedulingIgnoredDuringExecution:
-                nodeSelectorTerms:
-                  - matchExpressions:
-                      - key: intel.feature.node.kubernetes.io/gpu
-                        operator: In
-                        values:
-                          - "true"
+          # affinity:
+          #   nodeAffinity:
+          #     requiredDuringSchedulingIgnoredDuringExecution:
+          #       nodeSelectorTerms:
+          #         - matchExpressions:
+          #             - key: intel.feature.node.kubernetes.io/gpu
+          #               operator: In
+          #               values:
+          #                 - "true"
           nodeSelector:
-            intel.feature.node.kubernetes.io/gpu: "true"
+            #intel.feature.node.kubernetes.io/gpu: "true"
+            kubernetes.io/arch: amd64
+            kubernetes.io/hostname: "k8s-01"
         # pod:
         #   nodeSelector:
         #     kubernetes.io/arch: amd64
