@@ -21,7 +21,7 @@ resources:
   - ./mosquitto/ks.yaml
   #- ./omni/ks.yaml
   - ./n8n/ks.yaml
-  #- ./ollama/ks.yaml
+  - ./ollama/ks.yaml
   #- ./solr/ks.yaml
   - ./troddit/ks.yaml
   - ./website/ks.yaml
