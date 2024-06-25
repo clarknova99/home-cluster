@@ -15,13 +15,13 @@ resources:
   - ./hajimari/ks.yaml
   - ./home-assistant/ks.yaml
   - ./homepage/ks.yaml
-  - ./litellm/ks.yaml
+  #- ./litellm/ks.yaml
   - ./lightdash/ks.yaml
   - ./lldap/ks.yaml
   - ./mosquitto/ks.yaml
   #- ./omni/ks.yaml
   - ./n8n/ks.yaml
-  - ./ollama/ks.yaml
+  #- ./ollama/ks.yaml
   #- ./solr/ks.yaml
   - ./troddit/ks.yaml
   - ./website/ks.yaml
