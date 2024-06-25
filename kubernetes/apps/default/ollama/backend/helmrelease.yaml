@@ -46,7 +46,7 @@ spec:
                 #gpu.intel.com/i915: "1"
                 nvidia.com/gpu: 1
               limits:
-                memory: 16Gi
+                memory: 12Gi
                 nvidia.com/gpu: 1
                 #gpu.intel.com/i915: "1"
 
@@ -63,7 +63,7 @@ spec:
           nodeSelector:
             #intel.feature.node.kubernetes.io/gpu: "true"
             kubernetes.io/arch: amd64
-            kubernetes.io/hostname: "k8s-01"
+            kubernetes.io/hostname: k8s-01
             nvidia.feature.node.kubernetes.io/gpu: "true"
         # pod:
         #   nodeSelector:
