@@ -126,16 +126,16 @@ spec:
                 service:
                   identifier: app
                   port: http
-          - host: &host2 status.${SECRET_DOMAIN2}
-            paths:
-              - path: /
-                service:
-                  identifier: app
-                  port: http
+          # - host: &host2 status.${SECRET_DOMAIN2}
+          #   paths:
+          #     - path: /
+          #       service:
+          #         identifier: app
+          #         port: http
         tls:
           - hosts:
               - *host1
-              - *host2
+              # - *host2
     serviceAccount:
       create: true
       name: gatus
