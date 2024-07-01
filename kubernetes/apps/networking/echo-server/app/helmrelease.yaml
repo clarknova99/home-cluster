@@ -85,13 +85,13 @@ spec:
                 service:
                   identifier: app
                   port: http
-          - host: &host2 "{{ .Release.Name }}.${SECRET_DOMAIN2}"
-            paths:
-              - path: /
-                service:
-                  identifier: app
-                  port: http
+          # - host: &host2 "{{ .Release.Name }}.${SECRET_DOMAIN2}"
+          #   paths:
+          #     - path: /
+          #       service:
+          #         identifier: app
+          #         port: http
         tls:
           - hosts:
               - *host
-              - *host2
+              # - *host2
