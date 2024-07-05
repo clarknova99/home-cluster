@@ -3,10 +3,11 @@ kind: Secret
 metadata:
     name: sensei-secret
     namespace: default
+type: kubernetes.io/dockerconfigjson
 ## sops --encrypt --in-place ./kubernetes/apps/default/sensei/app/sensei.sops.yaml
 ## sops --decrypt ./kubernetes/apps/default/sensei/app/sensei.sops.yaml | kubectl apply -f -
-stringData:
-    .dockerconfigjson: ENC[AES256_GCM,data:nJSYiMhhTWh9yFqAQbHUDASby9rxhOBIoyixDUbzV5b0h4Ln6lJU3RnANXeu3uhAvcXFiNwymoH2xPsSa2c2HVNOE2M0Ga6xIRKmKKmzsf07/rBdq/kDLzVfCWHUaErhbuMIntXZ/Bxo5H2B25ffMiFc4E24tUgz4blbXwfwjDSEWXhbJvjuosA7riaiJU6ybExaNZey1uE9ZgN9YzmdLD+nZ1/vft34n0NaHlkDn7Zc0nW1VVR3NVlsxHtrmwsU6GTR5ju+9OwkxckLTQisfEryJZw=,iv:4oTyUAMhXqMMsEBsDo7OPVsAB8p8Aq9z2IiQ6/t4IoE=,tag:uR04v+Qc/ShflRaPHY/dUA==,type:str]
+data:
+    .dockerconfigjson: ENC[AES256_GCM,data:PJfH8BElVmTgKeTz9hJM4WwRkAgmINhb5FbG7lmmBHwRlqSRp7YMdBT6QmRPquqMUOnsvN7V91jXu44SZrKbppgkCOkzCI3CQZ1MKTWTL2nFYofvSSZ5RATQFJqWZbO9wk8/tXLDE1u0Ttq5Ep1rnpFU6XHPPW6y06v++S07K/GFFsXzpKXaGRwLPfCOhXVyVWvtkoHby0pzMppAodHCxl5dm2ef49u5LuRaFhh2mH8Ri6lqjl4NA5JHy2IUpgI6UJ/ahYjF4l9vWmG4yHu23tLnvFg=,iv:ktTdaz7RICWaVfA4etxjnYb8H2NgctLV8JeTeZjbPEo=,tag:i0IdLlvJyscthb8/KY8qAQ==,type:str]
 sops:
     kms: []
     gcp_kms: []
@@ -22,8 +23,8 @@ sops:
             SEIwMzN6Q0UxRHkybHZQOWluMjRkb1EKDBCaL6bbPCzeArThPNzNc+07LkKQGDyI
             jMGbrAvdxw00m5J50oiJsX0ito9ueP8KDjfoCUPwn2R+eDv5kqvJ4Q==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2024-07-05T21:04:35Z"
-    mac: ENC[AES256_GCM,data:t4j/HT8YFir99h1uDStjhNGSBissHu3v7VcyaouadedHuVOCCLumWnSJqNqQNFltnrRJOATfMjFg6n4IIfvsopDA+GgsHJPL0wcUGuc6/e0bxDb3Vmj3LEBJu6fYJ0yl2mMpOMqmZZQyrfXxZakw2ZsHhlAlcxOy98lp+6/w6P0=,iv:khXIxgOzKMKVSMQAnANPILD0b+xxsUUQvg0R0doJrAA=,tag:1CBY7LB0/TNFZ/CP6uJ8mg==,type:str]
+    lastmodified: "2024-07-05T21:08:17Z"
+    mac: ENC[AES256_GCM,data:ej709pQy32MIqkO+CGbIMlOyLXftottiqqfYy4gzONZqJrd3JzOgNahn82MwgKNjlOjdH+dwO5p28hK8YB+z1wrrBEkFfP9EWfjH/fjeJq4NHjKfN53db9ksDjNai04XMvdaZXI+HG+kTRI2EK4S0RFKlLzzynXCYahRbkJT6ik=,iv:KXWDzmgDIzdHQ8DdtzPHMSno2kChMltf3el18xp8aiQ=,tag:/geodgCJ0mKD9wy5ypQWPA==,type:str]
     pgp: []
     encrypted_regex: ^(data|stringData)$
     version: 3.9.0
