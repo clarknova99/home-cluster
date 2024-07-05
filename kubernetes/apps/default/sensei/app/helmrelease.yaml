@@ -25,8 +25,8 @@ spec:
       retries: 5
   values:
     controllers:
-      imagePullSecrets: sensei-secret
       sensei:
+        imagePullSecrets: sensei-secret
         replicas: 1
         containers:
           app:
