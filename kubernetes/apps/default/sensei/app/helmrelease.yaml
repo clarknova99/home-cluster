@@ -26,7 +26,6 @@ spec:
   values:
     controllers:
       sensei:
-        imagePullSecrets: sensei-secret
         replicas: 1
         containers:
           app:
@@ -37,6 +36,7 @@ spec:
         # nodeSelector:
         #   kubernetes.io/hostname: "nuc11"
         pod:
+          imagePullSecrets: sensei-secret
           nodeSelector:
             kubernetes.io/arch: amd64
     service:
