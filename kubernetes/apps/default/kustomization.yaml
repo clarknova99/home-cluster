@@ -22,7 +22,7 @@ resources:
   #- ./omni/ks.yaml
   - ./n8n/ks.yaml
   - ./ollama/ks.yaml
-  - ./sensei/ks.yaml
+  #- ./sensei/ks.yaml
   #- ./solr/ks.yaml
   - ./troddit/ks.yaml
   - ./website/ks.yaml

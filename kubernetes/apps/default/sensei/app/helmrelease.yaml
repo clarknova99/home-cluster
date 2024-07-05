@@ -36,7 +36,8 @@ spec:
         # nodeSelector:
         #   kubernetes.io/hostname: "nuc11"
         pod:
-          imagePullSecrets: sensei-secret
+          imagePullSecrets:
+            - name: sensei-secret
           nodeSelector:
             kubernetes.io/arch: amd64
     service:
