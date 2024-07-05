@@ -6,9 +6,7 @@ metadata:
 ## sops --encrypt --in-place ./kubernetes/apps/default/sensei/app/sensei.sops.yaml
 ## sops --decrypt ./kubernetes/apps/default/sensei/app/sensei.sops.yaml | kubectl apply -f -
 stringData:
-    docker-username: ENC[AES256_GCM,data:3ASjWlEF41KOqQ==,iv:/r5Pz/tvSIrhQy4+xtWZB0Q6rHyC5zQx2SnUiUZ4oqk=,tag:aTlidWx1SkmvDbmYnxn3vQ==,type:str]
-    docker-password: ENC[AES256_GCM,data:t+Ae1PDVFXKQ,iv:reoh4X07ylisrdyFhovFMxJyZvaRRLB701FWQ4jHB7E=,tag:AQOT3vycDigMBLN/WjGDjQ==,type:str]
-    docker-email: ENC[AES256_GCM,data:4YqyozVHw0aZ9TrlfcuEY2o0u1E=,iv:6mxy6MxqffQZdE55TvPHr6m8T8GR+s++SNEA+yfiG+U=,tag:O/XPmBd30QGpoaLewWoHfw==,type:str]
+    .dockerconfigjson: ENC[AES256_GCM,data:nJSYiMhhTWh9yFqAQbHUDASby9rxhOBIoyixDUbzV5b0h4Ln6lJU3RnANXeu3uhAvcXFiNwymoH2xPsSa2c2HVNOE2M0Ga6xIRKmKKmzsf07/rBdq/kDLzVfCWHUaErhbuMIntXZ/Bxo5H2B25ffMiFc4E24tUgz4blbXwfwjDSEWXhbJvjuosA7riaiJU6ybExaNZey1uE9ZgN9YzmdLD+nZ1/vft34n0NaHlkDn7Zc0nW1VVR3NVlsxHtrmwsU6GTR5ju+9OwkxckLTQisfEryJZw=,iv:4oTyUAMhXqMMsEBsDo7OPVsAB8p8Aq9z2IiQ6/t4IoE=,tag:uR04v+Qc/ShflRaPHY/dUA==,type:str]
 sops:
     kms: []
     gcp_kms: []
@@ -24,8 +22,8 @@ sops:
             SEIwMzN6Q0UxRHkybHZQOWluMjRkb1EKDBCaL6bbPCzeArThPNzNc+07LkKQGDyI
             jMGbrAvdxw00m5J50oiJsX0ito9ueP8KDjfoCUPwn2R+eDv5kqvJ4Q==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2024-07-05T20:30:57Z"
-    mac: ENC[AES256_GCM,data:p2fiOpt2FZrMcsD0VUqFP3MvRAUjls/DRfVV3GrGi5jxkVrnaYnitvku4a4qzqKuuJ0Gxs5IzkYYt+DQiiN+VCV2XPk5PXQnx4fju4imUuYnpbyO0sXdDhwA6CrVgV+7VIZyYhUHzZLQ7W3+zCJBAx8myvlyFbYjX1P1IIBkFfQ=,iv:+/aA2EEudKpA4qRWD7Tqz6+2kJs4czYTrRoh9YJSaOc=,tag:E+M+Bu72SaCskG5fsgoRMg==,type:str]
+    lastmodified: "2024-07-05T21:04:35Z"
+    mac: ENC[AES256_GCM,data:t4j/HT8YFir99h1uDStjhNGSBissHu3v7VcyaouadedHuVOCCLumWnSJqNqQNFltnrRJOATfMjFg6n4IIfvsopDA+GgsHJPL0wcUGuc6/e0bxDb3Vmj3LEBJu6fYJ0yl2mMpOMqmZZQyrfXxZakw2ZsHhlAlcxOy98lp+6/w6P0=,iv:khXIxgOzKMKVSMQAnANPILD0b+xxsUUQvg0R0doJrAA=,tag:1CBY7LB0/TNFZ/CP6uJ8mg==,type:str]
     pgp: []
     encrypted_regex: ^(data|stringData)$
     version: 3.9.0
