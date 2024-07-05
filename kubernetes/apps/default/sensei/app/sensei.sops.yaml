@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: sensei-secret
+    namespace: default
+## sops --encrypt --in-place ./kubernetes/apps/default/sensei/app/sensei.sops.yaml
+## sops --decrypt ./kubernetes/apps/default/sensei/app/sensei.sops.yaml | kubectl apply -f -
+stringData:
+    docker-username: ENC[AES256_GCM,data:3ASjWlEF41KOqQ==,iv:/r5Pz/tvSIrhQy4+xtWZB0Q6rHyC5zQx2SnUiUZ4oqk=,tag:aTlidWx1SkmvDbmYnxn3vQ==,type:str]
+    docker-password: ENC[AES256_GCM,data:t+Ae1PDVFXKQ,iv:reoh4X07ylisrdyFhovFMxJyZvaRRLB701FWQ4jHB7E=,tag:AQOT3vycDigMBLN/WjGDjQ==,type:str]
+    docker-email: ENC[AES256_GCM,data:4YqyozVHw0aZ9TrlfcuEY2o0u1E=,iv:6mxy6MxqffQZdE55TvPHr6m8T8GR+s++SNEA+yfiG+U=,tag:O/XPmBd30QGpoaLewWoHfw==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age14q9x9ftcpqfw2kmhmlfzpx5g2wmn7tdnq34uhh4x0r2h6qfmm5dqk07z2e
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA2WWJRTGt4NGtmMW9IRWdO
+            VHh6dC9QTUNvOVRZTXoxMlpheVJMWjVzMlM0CjEwcU52K21rWkp4MTdpdVlTdGoy
+            a1ZEaGs2SGk2YmtpWlE4YTV4a2QxQmcKLS0tIHhXMUl5K2ZRUythcUh1MStBYnhL
+            SEIwMzN6Q0UxRHkybHZQOWluMjRkb1EKDBCaL6bbPCzeArThPNzNc+07LkKQGDyI
+            jMGbrAvdxw00m5J50oiJsX0ito9ueP8KDjfoCUPwn2R+eDv5kqvJ4Q==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2024-07-05T20:30:57Z"
+    mac: ENC[AES256_GCM,data:p2fiOpt2FZrMcsD0VUqFP3MvRAUjls/DRfVV3GrGi5jxkVrnaYnitvku4a4qzqKuuJ0Gxs5IzkYYt+DQiiN+VCV2XPk5PXQnx4fju4imUuYnpbyO0sXdDhwA6CrVgV+7VIZyYhUHzZLQ7W3+zCJBAx8myvlyFbYjX1P1IIBkFfQ=,iv:+/aA2EEudKpA4qRWD7Tqz6+2kJs4czYTrRoh9YJSaOc=,tag:E+M+Bu72SaCskG5fsgoRMg==,type:str]
+    pgp: []
+    encrypted_regex: ^(data|stringData)$
+    version: 3.9.0

@@ -43,7 +43,7 @@ spec:
         annotations:
           hajimari.io/enable: "true"
           hajimari.io/icon: mdi:ip-network
-        className: internal
+        className: external
         hosts:
           - host: whoami.${SECRET_DOMAIN}
             paths:
