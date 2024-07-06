@@ -23,10 +23,8 @@ spec:
   upgrade:
     cleanupOnFail: true
     remediation:
+      strategy: rollback
       retries: 3
-      remediateLastFailure: true # remediate the last failure, when no retries remain
-  uninstall:
-    keepHistory: false
   values:
     controllers:
       vector-aggregator:
