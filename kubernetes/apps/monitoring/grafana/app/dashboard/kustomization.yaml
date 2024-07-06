@@ -13,9 +13,9 @@ configMapGenerator:
   - name: machine-temps-dashboard
     files:
       - temperatures.json
-  - name: iotawatt-dashboard
+  - name: sensei-dashboard
     files:
-      - iotawatt.json
+      - sensei.json
 generatorOptions:
   disableNameSuffixHash: true
   annotations:
