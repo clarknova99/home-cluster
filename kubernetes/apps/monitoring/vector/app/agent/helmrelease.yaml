@@ -82,15 +82,16 @@ spec:
         hostPath: /var/log
         hostPathType: Directory
         globalMounts:
-          - path: /var/log
-            readOnly: true
+          - readOnly: true
+          #- path: /var/log
       var-lib:
         type: hostPath
         hostPath: /var/lib
         hostPathType: Directory
         globalMounts:
-          - path: /var/lib
-            readOnly: true
+          - readOnly: true
+          # - path: /var/lib
+          #   readOnly: true
       procfs:
         type: hostPath
         hostPath: /proc
