@@ -6,7 +6,7 @@ resources:
   - ./namespace.yaml
   - ./bazarr/ks.yaml
   - ./hydra/ks.yaml
-  - ./invidious/ks.yaml
+  #- ./invidious/ks.yaml
   - ./prowlarr/ks.yaml
   - ./qbittorrent/ks.yaml
   - ./plex/ks.yaml
@@ -14,4 +14,4 @@ resources:
   - ./sabnzbd/ks.yaml
   - ./sonarr/ks.yaml
   - ./tautulli/ks.yaml
-  - ./youtubedl/ks.yaml
+  #- ./youtubedl/ks.yaml
