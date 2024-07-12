@@ -8,7 +8,7 @@ resources:
   #- ./hydra/ks.yaml
   #- ./invidious/ks.yaml
   #- ./prowlarr/ks.yaml
-  - ./qbittorrent/ks.yaml
+  #- ./qbittorrent/ks.yaml
   - ./plex/ks.yaml
   #- ./radarr/ks.yaml
   #- ./sabnzbd/ks.yaml
