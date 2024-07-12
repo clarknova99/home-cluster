@@ -25,9 +25,9 @@ spec:
       retries: 3
   uninstall:
     keepHistory: false
-  dependsOn:
-    - name: intel-device-plugin-gpu
-      namespace: kube-system
+  # dependsOn:
+  #   - name: intel-device-plugin-gpu
+  #     namespace: kube-system
   values:
     controllers:
       plex:
@@ -49,16 +49,16 @@ spec:
               HOSTNAME: plex.${SECRET_DOMAIN}
             resources:
               requests:
-                gpu.intel.com/i915: 1
+                #gpu.intel.com/i915: 1
                 cpu: 100m
                 memory: 2Gi
               limits:
-                gpu.intel.com/i915: 1
+                #gpu.intel.com/i915: 1
                 memory: 10Gi
         pod:
           nodeSelector:
-            intel.feature.node.kubernetes.io/gpu: "true"
-            kubernetes.io/hostname: "nuc11"
+            #intel.feature.node.kubernetes.io/gpu: "true"
+            kubernetes.io/hostname: "aurora"
           securityContext:
             runAsUser: 568
             runAsGroup: 568
@@ -111,15 +111,6 @@ spec:
           external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
           nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
           hajimari.io/icon: mdi:plex
-          gethomepage.dev/enabled: "true"
-          gethomepage.dev/description: Media Player
-          gethomepage.dev/group: Media
-          gethomepage.dev/icon: mdi-plex
-          gethomepage.dev/name: plex
-          gethomepage.dev/widget.type: plex
-          gethomepage.dev/widget.key: "${HOMEPAGE_VAR_PLEX_TOKEN}"
-          gethomepage.dev/widget.url: "https://plex.${SECRET_DOMAIN}"
-          gethomepage.dev/siteMonitor: https://plex.${SECRET_DOMAIN}
         hosts:
           - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:
