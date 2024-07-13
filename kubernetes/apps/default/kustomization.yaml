@@ -18,7 +18,7 @@ resources:
   #- ./litellm/ks.yaml
   #- ./lightdash/ks.yaml
   - ./lldap/ks.yaml
-  - ./mosquitto/ks.yaml
+  #- ./mosquitto/ks.yaml
   #- ./omni/ks.yaml
   #- ./n8n/ks.yaml
   #- ./ollama/ks.yaml
