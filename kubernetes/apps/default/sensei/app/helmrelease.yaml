@@ -32,7 +32,7 @@ spec:
             image:
               #docker buildx build --push --platform linux/arm64,linux/amd64 --tag clarknova9/streamlit:0.1.1 .
               repository: docker.io/clarknova9/sensei
-              tag: 0.0.1
+              tag: 0.0.9
             env:
               GROQ_API_KEY: ${SECRET_GROQ_API_KEY}
         # nodeSelector:
