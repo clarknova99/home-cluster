@@ -33,7 +33,7 @@ spec:
           app:
             image:
               repository: ghcr.io/onedr0p/qbittorrent
-              tag: 4.6.5@sha256:60bbc09640953f5c218b9a217b905f5f5b2f9b31cca9b6fdfed6409ceeb315af
+              tag: 5.0.0@sha256:b38ea0569100ba06639eb4d592846298f11bf9f9ce66be4e37a97382e022db71
             env:
               TZ: America/New_York
               QBITTORRENT__PORT: &port 80
