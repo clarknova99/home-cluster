@@ -30,7 +30,7 @@ spec:
           app:
             image:
               repository: public.ecr.aws/docker/library/couchdb
-              tag: 3.3.3
+              tag: 3.4.2
             # envFrom:
             # ## sops --encrypt --in-place ./kubernetes/apps/database/couchdb/app/couchdb.sops.yaml
             # ## sops --decrypt ./kubernetes/apps/database/couchdb/app/couchdb.sops.yaml | kubectl apply -f -
