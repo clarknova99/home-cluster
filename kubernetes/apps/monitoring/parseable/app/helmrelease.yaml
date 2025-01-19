@@ -27,7 +27,7 @@ spec:
   values:
     image:
       repository: parseable/parseable
-      tag: v1.2.0
+      tag: v1.7.3
       pullPolicy: IfNotPresent
     replicaCount: 1
     ## Set to true if you want to deploy Parseable in local mode (store logs
