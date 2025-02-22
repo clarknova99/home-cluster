@@ -50,7 +50,7 @@ jobs:
         uses: timheuer/base64-to-file@v1 # v1
         with:
           encodedString: "${{ secrets.KUBECONFIG }}"
-          fileName: kubeconfig
+          fileName: /home/runner/.kube/config
 
       - name: Debug Kubeconfig Path
         run: cat ${{ steps.kubeconfig.outputs.filePath }}
@@ -71,7 +71,7 @@ jobs:
       - if: ${{ github.event.inputs.clusterName == '' && github.event.inputs.helmRepoNamespace == '' && github.event.inputs.helmRepoName == '' }}
         name: Sync Helm Repository
         env:
-          KUBECONFIG: "${{ steps.kubeconfig.outputs.filePath }}"
+          KUBECONFIG: /home/runner/.kube/config
         shell: bash
         run: |
           declare -a repos=()
@@ -91,7 +91,7 @@ jobs:
       - if: ${{ github.event.inputs.clusterName != '' && github.event.inputs.helmRepoNamespace != '' && github.event.inputs.helmRepoName != '' }}
         name: Sync Helm Repository
         env:
-          KUBECONFIG: ${{ steps.kubeconfig.outputs.filePath }}
+          KUBECONFIG: /home/runner/.kube/config
         shell: bash
         run: |
           flux \
