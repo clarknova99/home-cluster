@@ -3,13 +3,13 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: gha-runner-scale-set
+  name: &name home-ops-runner
 spec:
   interval: 30m
   chart:
     spec:
       chart: gha-runner-scale-set
-      version: 0.9.1
+      version: 0.10.1
       sourceRef:
         kind: HelmRepository
         name: actions-runner-controller
@@ -22,24 +22,53 @@ spec:
     remediation:
       strategy: rollback
       retries: 3
+  dependsOn:
+    - name: actions-runner-controller
+      namespace: actions-runner-system
+  valuesFrom:
+    - targetPath: githubConfigSecret.github_app_id
+      kind: Secret
+      name: actions-runner-controller-secrets
+      valuesKey: SECRET_GITHUB_APP_ID
+    - targetPath: githubConfigSecret.github_app_installation_id
+      kind: Secret
+      name: actions-runner-controller-secrets
+      valuesKey: SECRET_GITHUB_APP_INSTALLATION_ID
+    - targetPath: githubConfigSecret.github_app_private_key
+      kind: Secret
+      name: actions-runner-controller-secrets
+      valuesKey: SECRET_GITHUB_APP_PRIVATE_KEY
   values:
-    dependsOn:
-      - name: gha-runner-scale-set-controller
-        namespace: actions-runner-system
-    nameOverride: gha-runner-scale-set
-    runnerScaleSetName: gha-runner-scale-set
     githubConfigUrl: https://github.com/clarknova99/home-cluster
     minRunners: 1
-    maxRunners: 6
+    maxRunners: 3
     containerMode:
-      type: dind
+      type: kubernetes
+      kubernetesModeWorkVolumeClaim:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: local-hostpath
+        resources:
+          requests:
+            storage: 25Gi
+    controllerServiceAccount:
+      name: actions-runner-controller
+      namespace: actions-runner-system
+      githubConfigSecret: actions-runner-controller-secrets
     template:
       spec:
         containers:
           - name: runner
             #image: ghcr.io/actions/actions-runner:2.322.0@sha256:c02e8e1b479ea39b196c3bb0a40a66a191302654a6ef5c042eafe11c13323137
-            image: ghcr.io/onedr0p/actions-runner:2.320.0@sha256:b3f9eb8fc31aada52e9fbccb567973ed70ed1c35d856e44a9a78caeb962dd8a4
+            image: ghcr.io/onedr0p/actions-runner:2.322.0@sha256:01162b8a1e1a562b5b29a5ee198b0bddb9eed85a6f22d6533e9cf08d42851b47
             command: ["/home/runner/run.sh"]
+            env:
+              - name: ACTIONS_RUNNER_REQUIRE_JOB_CONTAINER
+                value: "false"
+              - name: NODE
+                valueFrom:
+                  fieldRef:
+                    fieldPath: status.hostIP
+        serviceAccountName: *name
         affinity:
           nodeAffinity:
             requiredDuringSchedulingIgnoredDuringExecution:
@@ -49,20 +78,4 @@ spec:
                   operator: In
                   values:
                   - amd64
-    controllerServiceAccount:
-      name: gha-runner-scale-set-controller
-      namespace: actions-runner-system
-      githubConfigSecret: actions-runner-controller-secrets
-  valuesFrom:
-    - kind: Secret
-      name: actions-runner-controller-secrets
-      valuesKey: SECRET_GITHUB_APP_ID
-      targetPath: githubConfigSecret.github_app_id
-    - kind: Secret
-      name: actions-runner-controller-secrets
-      valuesKey: SECRET_GITHUB_APP_INSTALLATION_ID
-      targetPath: githubConfigSecret.github_app_installation_id
-    - kind: Secret
-      name: actions-runner-controller-secrets
-      valuesKey: SECRET_GITHUB_APP_PRIVATE_KEY
-      targetPath: githubConfigSecret.github_app_private_key
+
