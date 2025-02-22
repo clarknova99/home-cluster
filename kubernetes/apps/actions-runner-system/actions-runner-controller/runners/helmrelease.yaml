@@ -68,7 +68,15 @@ spec:
                 valueFrom:
                   fieldRef:
                     fieldPath: status.hostIP
+            volumeMounts:
+              - mountPath: /var/run/secrets/gha.dev
+                name: gha
+                readOnly: true
         serviceAccountName: *name
+        volumes:
+          - name: gha
+            secret:
+              secretName: actions-runner-controller-secrets
         affinity:
           nodeAffinity:
             requiredDuringSchedulingIgnoredDuringExecution:
