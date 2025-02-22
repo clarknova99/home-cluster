@@ -38,7 +38,7 @@ spec:
         containers:
           - name: runner
             #image: ghcr.io/actions/actions-runner:2.322.0@sha256:c02e8e1b479ea39b196c3bb0a40a66a191302654a6ef5c042eafe11c13323137
-            image: ghcr.io/onedr0p/actions-runner:2.320.0@sha256:b3f9eb8fc31aada52e9fbccb567973ed70ed1c35d856e44a9a78caeb962dd8a4
+            image: ghcr.io/onedr0p/actions-runner:2.322.0@sha256:01162b8a1e1a562b5b29a5ee198b0bddb9eed85a6f22d6533e9cf08d42851b47
             command: ["/home/runner/run.sh"]
         affinity:
           nodeAffinity:
