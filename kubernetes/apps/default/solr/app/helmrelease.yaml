@@ -31,7 +31,7 @@ spec:
           app:
             image:
               repository: docker.io/solr
-              tag: 9.6.0
+              tag: 9.8.0
             env:
               SOLR_HEAP: 1024m
             command: ["solr-precreate", "mycore"]
