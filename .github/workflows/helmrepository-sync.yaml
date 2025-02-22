@@ -45,9 +45,6 @@ jobs:
         shell: bash
         run: brew install fluxcd/tap/flux yq
 
-      - name: Fix Permissions  # Added this step
-        run: sudo chmod -R 777 /home/runner/_work
-
       - name: Write kubeconfig
         id: kubeconfig
         uses: timheuer/base64-to-file@v1 # v1
