@@ -53,7 +53,7 @@ jobs:
           fileName: kubeconfig
 
       - name: Debug Kubeconfig Path
-        run: cat kubeconfig
+        run: cat ${{ steps.kubeconfig.outputs.filePath }}
         shell: bash
 
       - if: ${{ github.event.inputs.clusterName == '' && github.event.inputs.helmRepoNamespace == '' && github.event.inputs.helmRepoName == '' }}
