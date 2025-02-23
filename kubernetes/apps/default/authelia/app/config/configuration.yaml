@@ -1,7 +1,8 @@
 ---
 session:
   redis:
-    host: dragonfly.database.svc.cluster.local
+    host: 192.168.2.60
+    #host: dragonfly.database.svc.cluster.local
 #    host: redis-master.database.svc.cluster.local
     port: 6379
     database_index: 2
