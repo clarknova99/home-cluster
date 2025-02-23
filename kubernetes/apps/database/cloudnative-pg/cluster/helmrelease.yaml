@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/postgresql.cnpg.io/cluster_v1.json
 ---
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
@@ -5,10 +6,10 @@ metadata:
   name: cloudnative-pg-cluster
   namespace: database
 spec:
-  affinity:
-    nodeSelector:
-      kubernetes.io/arch: amd64
-  instances: 1
+  # affinity:
+  #   nodeSelector:
+  #     kubernetes.io/arch: amd64
+  instances: 2
   imageName: ghcr.io/cloudnative-pg/postgresql:16.1-12
   primaryUpdateStrategy: unsupervised
   storage:
@@ -19,7 +20,7 @@ spec:
     name: cloudnative-pg-secrets
   bootstrap:
     recovery:
-      source: &previous-cluster postgres-v15 #This must match backup.barmanObjectStore.serverName from previous backup
+      source: &previous-cluster postgres-v16 #This must match backup.barmanObjectStore.serverName from previous backup
   postgresql:
     parameters:
       max_connections: "600"
@@ -34,7 +35,7 @@ spec:
         maxParallel: 8
       destinationPath: &dest-path s3://cloudnative-pg/
       endpointURL: &endpoint-url http://minio.kube-system.svc.cluster.local:9000
-      serverName: postgres-v16 #This must increment when bootstrapping. You cannot have this be the same as the bootstrap version
+      serverName: postgres-v17 #This must increment when bootstrapping. You cannot have this be the same as the bootstrap version
       s3Credentials: &s3-creds
         accessKeyId:
           name: cloudnative-pg-secrets
@@ -44,7 +45,7 @@ spec:
           key: AWS_SECRET_ACCESS_KEY
   # Note: externalClusters is needed when recovering from an existing cnpg cluster
   externalClusters:
-    - name: postgres-v15
+    - name: postgres-v16
       barmanObjectStore:
         wal:
           compression: bzip2
