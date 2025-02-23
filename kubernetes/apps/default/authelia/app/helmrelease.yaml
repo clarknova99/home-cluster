@@ -28,8 +28,6 @@ spec:
   dependsOn:
     - name: lldap
       namespace: default
-    - name: redis
-      namespace: database
   values:
     controllers:
       authelia:
