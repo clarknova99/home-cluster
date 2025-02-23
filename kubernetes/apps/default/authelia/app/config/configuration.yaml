@@ -4,9 +4,9 @@ session:
     host: dragonfly.database.svc.cluster.local
 #    host: redis-master.database.svc.cluster.local
     port: 6379
-    database_index: 15
-    maximum_active_connections: 8
-    minimum_idle_connections: 0
+    database_index: 2
+    # maximum_active_connections: 8
+    # minimum_idle_connections: 0
 
 notifier:
   smtp:

@@ -6,7 +6,7 @@ resources:
   - ./namespace.yaml
   - ./actual/ks.yaml
   #- ./appsmith/ks.yaml
-  #- ./authelia/ks.yaml
+  - ./authelia/ks.yaml
   #- ./baserow/ks.yaml
   #- ./dataherald/ks.yaml
   #- ./crew/ks.yaml
