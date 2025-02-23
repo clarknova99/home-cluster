@@ -1,8 +1,9 @@
 ---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/kustomization-kustomize-v1.json
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: cluster-apps-vector
+  name: vector
   namespace: flux-system
 spec:
   path: ./kubernetes/apps/monitoring/vector/app
@@ -13,4 +14,4 @@ spec:
   wait: false
   interval: 30m
   retryInterval: 1m
-  timeout: 5m
+  timeout: 15m
