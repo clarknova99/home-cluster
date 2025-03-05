@@ -31,7 +31,7 @@ spec:
           app:
             image:
               repository: ghcr.io/siderolabs/omni
-              tag: v0.37.5
+              tag: v0.47.1
             args:
               - --account-id=538BEBF8-105F-40E8-8E4C-0DFA1ACEE326
               - --name=omni
