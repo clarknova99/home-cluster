@@ -9,5 +9,5 @@ resources:
 #   - ./hajimari/ks.yaml
 # # #- ./omni/ks.yaml
 #   #- ./n8n/ks.yaml
-#   - ./website/ks.yaml
+  - ./website/ks.yaml
 #  # - ./whoami/ks.yaml
