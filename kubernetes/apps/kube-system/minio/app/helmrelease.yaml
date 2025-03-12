@@ -137,6 +137,6 @@ spec:
         enabled: true
         type: nfs
         server: 192.168.1.3
-        path: /volume1/network-storage/network-storage/s3
+        path: /volume1/network-storage/cluster/s3
         globalMounts:
           - path: /data
