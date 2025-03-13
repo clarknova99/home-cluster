@@ -24,6 +24,11 @@ spec:
     remediation:
       retries: 5
   values:
+    defaultPodOptions:
+      securityContext:
+        fsGroupChangePolicy: OnRootMismatch
+        supplementalGroups: [100, 1001, 1025]
+        seccompProfile: { type: RuntimeDefault }
     controllers:
       web:
         replicas: 2
