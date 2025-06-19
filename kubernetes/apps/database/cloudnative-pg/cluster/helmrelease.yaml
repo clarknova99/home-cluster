@@ -6,10 +6,7 @@ metadata:
   name: cloudnative-pg-cluster
   namespace: database
 spec:
-  # affinity:
-  #   nodeSelector:
-  #     kubernetes.io/arch: amd64
-  instances: 1
+  instances: 2
   imageName: ghcr.io/cloudnative-pg/postgresql:16.1-12
   primaryUpdateStrategy: unsupervised
   storage:
