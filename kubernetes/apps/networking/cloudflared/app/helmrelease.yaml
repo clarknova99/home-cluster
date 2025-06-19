@@ -1,16 +1,15 @@
 ---
-# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2beta1.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: &app cloudflared
-  namespace: networking
+  name: cloudflared
 spec:
   interval: 30m
   chart:
     spec:
       chart: app-template
-      version: 3.2.1
+      version: 3.7.3
       sourceRef:
         kind: HelmRepository
         name: bjw-s
@@ -21,12 +20,10 @@ spec:
   upgrade:
     cleanupOnFail: true
     remediation:
-      strategy: rollback
       retries: 3
   values:
     controllers:
       cloudflared:
-        replicas: 2
         strategy: RollingUpdate
         annotations:
           reloader.stakater.com/auto: "true"
@@ -34,9 +31,9 @@ spec:
           app:
             image:
               repository: docker.io/cloudflare/cloudflared
-              tag: 2025.2.0
+              tag: 2025.6.1
             env:
-              NO_AUTOUPDATE: "true"
+              NO_AUTOUPDATE: true
               TUNNEL_CRED_FILE: /etc/cloudflared/creds/credentials.json
               TUNNEL_METRICS: 0.0.0.0:8080
               TUNNEL_ORIGIN_ENABLE_HTTP2: true
@@ -66,22 +63,24 @@ spec:
                   timeoutSeconds: 1
                   failureThreshold: 3
               readiness: *probes
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities:
+                drop: ["ALL"]
+                add: ["NET_ADMIN"]  # Add this line to fix permission issues
             resources:
               requests:
-                cpu: 10m
+                cpu: 100m           # Increase from 10m to 100m
+                memory: 256Mi       # Add memory request
               limits:
-                memory: 256M
-        pod:
-          securityContext:
-            runAsUser: 568
-            runAsGroup: 568
-          topologySpreadConstraints:
-            - maxSkew: 1
-              topologyKey: kubernetes.io/hostname
-              whenUnsatisfiable: DoNotSchedule
-              labelSelector:
-                matchLabels:
-                  app.kubernetes.io/name: *app
+                memory: 512Mi       # Increase from 256Mi to 512Mi
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65534
+        runAsGroup: 65534
+        seccompProfile: { type: RuntimeDefault }
     service:
       app:
         controller: cloudflared
@@ -99,9 +98,8 @@ spec:
             scrapeTimeout: 10s
     persistence:
       config:
-        enabled: true
         type: configMap
-        name: cloudflared-configmap # overriden by kustomizeconfig
+        name: cloudflared-configmap
         globalMounts:
           - path: /etc/cloudflared/config/config.yaml
             subPath: config.yaml
