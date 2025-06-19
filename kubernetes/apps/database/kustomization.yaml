@@ -10,5 +10,5 @@ resources:
  #- ./influxdb/ks.yaml
 #  - ./mongodb/ks.yaml
   # - ./pgadmin/ks.yaml
-#  - ./redis/ks.yaml
+  - ./redis/ks.yaml
 
