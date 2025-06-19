@@ -1,0 +1,72 @@
+---
+session:
+  redis:
+    host: redis.database.svc.cluster.local
+    #host: dragonfly.database.svc.cluster.local
+#    host: redis-master.database.svc.cluster.local
+    port: 6379
+    database_index: 2
+    # maximum_active_connections: 8
+    # minimum_idle_connections: 0
+
+notifier:
+  smtp:
+    username: "${SECRET_MAIL_USERNAME}"
+    # Password can also be set using a secret: https://www.authelia.com/configuration/methods/secrets/
+    password: "${SECRET_MAIL_PASSWORD}"
+    sender: "${SECRET_MAIL_USERNAME}"
+    host: "${SECRET_MAIL_HOST}"
+    port: "${SECRET_MAIL_PORT}"
+
+access_control:
+  #default_policy: two_factor
+  default_policy: one_factor
+  rules:
+  - domain: "authelia.${SECRET_DOMAIN}"
+    policy: bypass
+  - domain: "*.${SECRET_DOMAIN}"
+    policy: one_factor
+    subject:
+      - "group:admins"
+  networks:
+    - name: internal
+      networks: ["10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16"]
+
+regulation:
+  max_retries: 3
+  find_time: 2m
+  ban_time: 5m
+
+identity_providers:
+  oidc:
+    cors:
+      endpoints: ["authorization", "token", "revocation", "introspection"]
+      allowed_origins_from_client_redirect_uris: true
+    clients:
+      - id: grafana
+        description: Grafana
+        secret: "${SECRET_GRAFANA_OAUTH_CLIENT_SECRET}"
+        public: false
+        authorization_policy: one_factor
+        pre_configured_consent_duration: 1y
+        scopes: ["openid", "profile", "groups", "email"]
+        redirect_uris: ["https://grafana.${SECRET_DOMAIN}/login/generic_oauth"]
+        userinfo_signing_algorithm: none
+      - id: minio
+        description: Minio
+        secret: "${SECRET_MINIO_OAUTH_CLIENT_SECRET}"  # The digest of 'insecure_secret'.
+        public: false
+        authorization_policy: one_factor
+        pre_configured_consent_duration: 1y
+        redirect_uris: ["https://minio.${SECRET_DOMAIN}/oauth_callback"]
+        scopes: ["openid", "profile", "groups", "email"]
+        userinfo_signing_algorithm: none
+      - id: headlamp
+        description: Headlamp
+        secret: "${SECRET_HEADLAMP_OAUTH_CLIENT_SECRET}"
+        public: false
+        authorization_policy: one_factor
+        pre_configured_consent_duration: 1y
+        scopes: ["openid", "profile", "groups", "email"]
+        redirect_uris: ["https://headlamp.${SECRET_DOMAIN}/oidc-callback"]
+        userinfo_signing_algorithm: none

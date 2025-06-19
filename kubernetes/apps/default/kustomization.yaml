@@ -5,7 +5,7 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
 #   - ./actual/ks.yaml
-  - ./authelia/ks.yaml
+  # - ./authelia/ks.yaml
   - ./hajimari/ks.yaml
   - ./lldap/ks.yaml
 # # #- ./omni/ks.yaml
