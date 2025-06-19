@@ -11,7 +11,10 @@
       "file:///Users/mfeldbly/.vscode/extensions/atlassian.atlascode-2.10.12/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml",
       "ansible": "ansible/**/*.yaml",
       "kubernetes": "kubernetes/**/*.yaml",
-      "https://json.schemastore.org/helmfile.json": "file:///Users/mfeldbly/code/home-cluster/kubernetes/apps/cert-manager/cert-manager/app/helmrelease.yaml"
+      "https://json.schemastore.org/helmfile.json": [
+        "file:///Users/mfeldbly/code/home-cluster/kubernetes/apps/cert-manager/cert-manager/app/helmrelease.yaml",
+        "file:///Users/mfeldbly/code/home-cluster/kubernetes/apps/database/dragonfly/app/helmrelease.yaml"
+      ]
     },
     "editor.fontFamily": "FiraCode Nerd Font",
     "editor.fontLigatures": true,
