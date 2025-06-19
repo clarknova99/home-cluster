@@ -9,7 +9,7 @@ spec:
   # affinity:
   #   nodeSelector:
   #     kubernetes.io/arch: amd64
-  instances: 2
+  instances: 1
   imageName: ghcr.io/cloudnative-pg/postgresql:16.1-12
   primaryUpdateStrategy: unsupervised
   storage:
