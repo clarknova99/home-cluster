@@ -5,9 +5,7 @@ kind: Dragonfly
 metadata:
   name: dragonfly
 spec:
-  # nodeSelector:
-  #   kubernetes.io/arch: amd64
-  image: ghcr.io/dragonflydb/dragonfly:v1.31.0
+  image: ghcr.io/dragonflydb/dragonfly:v1.31.0@sha256:e22650dc822f319c1513e55a5d351957af1d62b05dc60d962300fd2f90100cce
   replicas: 2 # set to the number of nodes in the cluster
   env:
     - name: MAX_MEMORY
