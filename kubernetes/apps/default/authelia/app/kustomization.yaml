@@ -2,14 +2,15 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/kustomization-kustomize-v1beta1.json
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-namespace: default
 resources:
+  - ./authelia.sops.yaml
   - ./helmrelease.yaml
 configMapGenerator:
   - name: authelia-configmap
     files:
-      - configuration.yaml=./config/configuration.yaml
+      - configuration.yaml=./resources/configuration.yaml
 generatorOptions:
+  annotations:
+    # Disable or env-sub no worky for authelia config
+    kustomize.toolkit.fluxcd.io/substitute: disabled
   disableNameSuffixHash: true
-  # annotations:
-  #   kustomize.toolkit.fluxcd.io/substitute: disabled

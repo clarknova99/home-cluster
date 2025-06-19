@@ -1,36 +1,74 @@
 ---
+  # To allow sign in both with username and email, one can use a filter like
+  #  users_filter: (&(|({username_attribute}={input})({mail_attribute}={input}))(objectClass=person))
+authentication_backend:
+  ldap:
+    address: ldap://lldap.default.svc.cluster.local:389
+    implementation: custom
+    timeout: 5s
+    start_tls: false
+    base_dn: dc=home,dc=arpa
+    additional_users_dn: ou=people
+    users_filter: (&({username_attribute}={input})(objectClass=person))
+    additional_groups_dn: ou=groups
+    groups_filter: (member={dn})
+    user: uid=admin,ou=people,dc=home,dc=arpa
+    attributes:
+      username: uid
+      display_name: displayName
+      group_name: cn
+      mail: mail
+      member_of: memberOf
+  password_reset:
+    disable: false
+  refresh_interval: 1m
+
+# server:
+#   headers:
+#     cache_control: no-store
+#     pragma: no-cache
+#     x-frame-options: SAMEORIGIN
+#     x-xss-protection: 1; mode=block
+
 session:
+  same_site: lax
+  inactivity: 5m
+  expiration: 1h
+  remember_me: 1M
+  cookies:
+    - name: '{{ env "SECRET_DOMAIN" }}_session'
+      domain: '{{ env "SECRET_DOMAIN" }}'
+      authelia_url: 'https://auth.{{ env "SECRET_DOMAIN" }}'
+      default_redirection_url: 'https://{{ env "SECRET_DOMAIN" }}'
   redis:
-    host: redis.database.svc.cluster.local
-    #host: dragonfly.database.svc.cluster.local
-#    host: redis-master.database.svc.cluster.local
-    port: 6379
     database_index: 2
-    # maximum_active_connections: 8
-    # minimum_idle_connections: 0
+    host: redis.database.svc.cluster.local
 
 notifier:
+  disable_startup_check: true
   smtp:
-    username: "${SECRET_MAIL_USERNAME}"
+    username: '{{ env "SECRET_MAIL_USERNAME" }}'
     # Password can also be set using a secret: https://www.authelia.com/configuration/methods/secrets/
-    password: "${SECRET_MAIL_PASSWORD}"
-    sender: "${SECRET_MAIL_USERNAME}"
-    host: "${SECRET_MAIL_HOST}"
-    port: "${SECRET_MAIL_PORT}"
+    password: '{{ env "SECRET_MAIL_PASSWORD" }}'
+    sender: '{{ env "SECRET_DOMAIN"}} auth <auth@{{ env "SECRET_DOMAIN" }}>'
+    address: '{{ env "SECRET_MAIL_HOST" }}:{{ env "SECRET_MAIL_PORT" }}'
+
+totp:
+  disable: false
+  issuer: authelia.com
+
+webauthn:
+  disable: true
+
+duo_api:
+  disable: true
 
 access_control:
-  #default_policy: two_factor
   default_policy: one_factor
-  rules:
-  - domain: "authelia.${SECRET_DOMAIN}"
-    policy: bypass
-  - domain: "*.${SECRET_DOMAIN}"
-    policy: one_factor
-    subject:
-      - "group:admins"
   networks:
     - name: internal
       networks: ["10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16"]
+  rules:
 
 regulation:
   max_retries: 3
@@ -42,31 +80,34 @@ identity_providers:
     cors:
       endpoints: ["authorization", "token", "revocation", "introspection"]
       allowed_origins_from_client_redirect_uris: true
+    jwks:
+      - key_id: default
+        key: {{ env "JWKS_KEY" | mindent 10 "|" | msquote }}
     clients:
-      - id: grafana
-        description: Grafana
-        secret: "${SECRET_GRAFANA_OAUTH_CLIENT_SECRET}"
+      - client_id: grafana
+        client_name: grafana
+        client_secret: '{{ env "SECRET_OAUTH_CLIENT_SECRET"}}'
         public: false
+        require_pkce: true
         authorization_policy: one_factor
         pre_configured_consent_duration: 1y
         scopes: ["openid", "profile", "groups", "email"]
-        redirect_uris: ["https://grafana.${SECRET_DOMAIN}/login/generic_oauth"]
-        userinfo_signing_algorithm: none
-      - id: minio
-        description: Minio
-        secret: "${SECRET_MINIO_OAUTH_CLIENT_SECRET}"  # The digest of 'insecure_secret'.
+        redirect_uris: ['https://grafana.{{ env "SECRET_DOMAIN" }}/login/generic_oauth']
+        userinfo_signed_response_alg: none
+      - client_id: minio
+        client_name: Minio
+        client_secret: '{{ env "SECRET_OAUTH_CLIENT_SECRET"}}'
         public: false
         authorization_policy: one_factor
         pre_configured_consent_duration: 1y
-        redirect_uris: ["https://minio.${SECRET_DOMAIN}/oauth_callback"]
+        redirect_uris: ['https://minio.{{ env "SECRET_DOMAIN" }}/oauth_callback']
         scopes: ["openid", "profile", "groups", "email"]
-        userinfo_signing_algorithm: none
-      - id: headlamp
-        description: Headlamp
-        secret: "${SECRET_HEADLAMP_OAUTH_CLIENT_SECRET}"
+        userinfo_signed_response_alg: none
+      - client_id: pgadmin
+        client_name: pgAdmin
+        client_secret: '{{ env "SECRET_OAUTH_CLIENT_SECRET"}}'
         public: false
         authorization_policy: one_factor
-        pre_configured_consent_duration: 1y
+        redirect_uris: https://pgadmin.{{ env "SECRET_DOMAIN" }}/oauth2/authorize
         scopes: ["openid", "profile", "groups", "email"]
-        redirect_uris: ["https://headlamp.${SECRET_DOMAIN}/oidc-callback"]
-        userinfo_signing_algorithm: none
+        userinfo_signed_response_alg: none
