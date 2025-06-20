@@ -81,9 +81,6 @@ spec:
             #   fsGroup: 1000
             #   fsGroupChangePolicy: OnRootMismatch
             #   supplementalGroups: [100,568,1000]
-        pod:
-          nodeSelector:
-            kubernetes.io/arch: "amd64"
     service:
       app:
         controller: minio
