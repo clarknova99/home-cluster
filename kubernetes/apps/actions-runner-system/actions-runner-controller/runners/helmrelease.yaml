@@ -60,10 +60,9 @@ spec:
           fsGroup: 1001
         containers:
           - name: runner
-            #image: ghcr.io/actions/actions-runner:2.322.0@sha256:c02e8e1b479ea39b196c3bb0a40a66a191302654a6ef5c042eafe11c13323137
-            #image: ghcr.io/home-operations/actions-runner:2.325.0@sha256:8345f634bbaaedbbdff1abb212649b1821baf295e5bcddf420f07847d7f35a87
-            image: ghcr.io/actions/actions-runner:2.325.0
-            #command: ["/home/runner/run.sh"]
+            #image: ghcr.io/actions/actions-runner:2.325.0
+            image: ghcr.io/home-operations/actions-runner:2.325@sha256:a177c3de7b19f4dc29a8741b2c5f97d1d8f3db2b307a8fd08f79cfbfe1b59b9
+            command: ["/home/runner/run.sh"]
             env:
               - name: ACTIONS_RUNNER_REQUIRE_JOB_CONTAINER
                 value: "false"
@@ -80,13 +79,3 @@ spec:
           - name: gha
             secret:
               secretName: actions-runner-controller-secrets
-        # affinity:
-        #   nodeAffinity:
-        #     requiredDuringSchedulingIgnoredDuringExecution:
-        #       nodeSelectorTerms:
-        #       - matchExpressions:
-        #         - key: kubernetes.io/arch
-        #           operator: In
-        #           values:
-        #           - amd64
-
