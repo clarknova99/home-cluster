@@ -49,7 +49,7 @@ spec:
           init-config:
             image:
               repository: busybox
-              tag: latest@sha256:498a000f370d8c37927118ed80afe8adc38d1edcbfc071627d17b25c88efcab0
+              tag: latest@sha256:f85340bf132ae937d2c2a763b8335c9bab35d6e8293f70f606b9c6178d84f42b
             command:
               - "sh"
               - "-c"
