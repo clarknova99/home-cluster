@@ -42,6 +42,7 @@ spec:
         enabled: true
         ingressClassName: internal
         annotations:
+          cert-manager.io/cluster-issuer: letsencrypt-production
           hajimari.io/enable: "true"
           hajimari.io/icon: logos:kubernetes
           hajimari.io/info: Kubernetes dashboard
