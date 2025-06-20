@@ -79,13 +79,13 @@ spec:
           - name: gha
             secret:
               secretName: actions-runner-controller-secrets
-        affinity:
-          nodeAffinity:
-            requiredDuringSchedulingIgnoredDuringExecution:
-              nodeSelectorTerms:
-              - matchExpressions:
-                - key: kubernetes.io/arch
-                  operator: In
-                  values:
-                  - amd64
+        # affinity:
+        #   nodeAffinity:
+        #     requiredDuringSchedulingIgnoredDuringExecution:
+        #       nodeSelectorTerms:
+        #       - matchExpressions:
+        #         - key: kubernetes.io/arch
+        #           operator: In
+        #           values:
+        #           - amd64
 
