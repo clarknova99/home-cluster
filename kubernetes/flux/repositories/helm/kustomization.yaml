@@ -4,7 +4,6 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - ./actions-runner-controller-charts.yaml
-  - ./appsmith.yaml
   - ./authelia.yaml
   - ./backube.yaml
   - ./bitnami.yaml
@@ -18,19 +17,15 @@ resources:
   - ./external-dns.yaml
   - ./grafana.yaml
   - ./hajimari.yaml
-  - ./headlamp.yaml
   - ./influxdata.yaml
   - ./ingress-nginx.yaml
-  - ./intel.yaml
   - ./jetstack.yaml
   #- ./jupyterhub.yaml
   - ./k8s-gateway.yaml
   - ./kubernetes-dashboard.yaml
-  - ./longhorn.yaml
+  # - ./longhorn.yaml
   - ./metrics-server.yaml
   - ./node-feature-discovery.yaml
-  - ./nvidia.yaml
-  - ./parseable.yaml
   - ./piraeus.yaml
   - ./prometheus-community.yaml
   - ./runix.yaml
