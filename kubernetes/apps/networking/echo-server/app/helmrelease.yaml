@@ -1,17 +1,15 @@
 ---
-# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2beta1.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: echo-server
-  namespace: networking
 spec:
   interval: 30m
   chart:
     spec:
       chart: app-template
-      version: 3.0.4
-      interval: 30m
+      version: 3.7.3
       sourceRef:
         kind: HelmRepository
         name: bjw-s
@@ -22,20 +20,16 @@ spec:
   upgrade:
     cleanupOnFail: true
     remediation:
-      strategy: rollback
       retries: 3
-
   values:
     controllers:
       echo-server:
-        annotations:
-          reloader.stakater.com/auto: "true"
-
+        strategy: RollingUpdate
         containers:
           app:
             image:
               repository: ghcr.io/mendhak/http-https-echo
-              tag: 33
+              tag: 37
             env:
               HTTP_PORT: &port 8080
               LOG_WITHOUT_NEWLINE: true
@@ -54,44 +48,45 @@ spec:
                   timeoutSeconds: 1
                   failureThreshold: 3
               readiness: *probes
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
             resources:
               requests:
-                cpu: 5m
+                cpu: 10m
               limits:
-                memory: 30M
+                memory: 64Mi
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65534
+        runAsGroup: 65534
+        seccompProfile: { type: RuntimeDefault }
     service:
       app:
         controller: echo-server
         ports:
           http:
             port: *port
-
+    serviceMonitor:
+      app:
+        serviceName: echo-server
+        endpoints:
+          - port: http
+            scheme: http
+            path: /metrics
+            interval: 1m
+            scrapeTimeout: 10s
     ingress:
       app:
-        enabled: true
         className: external
         annotations:
           external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
-          # nginx.ingress.kubernetes.io/auth-method: GET
-          # nginx.ingress.kubernetes.io/auth-url: http://authelia.networking.svc.cluster.local/api/verify
-          # nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}?rm=$request_method
-          # nginx.ingress.kubernetes.io/auth-response-headers: Remote-User,Remote-Name,Remote-Groups,Remote-Email
-          # nginx.ingress.kubernetes.io/auth-snippet: proxy_set_header X-Forwarded-Method $request_method;
-          hajimari.io/icon: video-input-antenna
         hosts:
-          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
+          - host: "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:
               - path: /
                 service:
                   identifier: app
                   port: http
-          # - host: &host2 "{{ .Release.Name }}.${SECRET_DOMAIN2}"
-          #   paths:
-          #     - path: /
-          #       service:
-          #         identifier: app
-          #         port: http
-        tls:
-          - hosts:
-              - *host
-              # - *host2
