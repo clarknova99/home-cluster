@@ -1,37 +1,33 @@
 ---
-# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/source.toolkit.fluxcd.io/ocirepository_v1.json
-apiVersion: source.toolkit.fluxcd.io/v1
-kind: OCIRepository
-metadata:
-  name: loki
-spec:
-  interval: 5m
-  layerSelector:
-    mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
-    operation: copy
-  ref:
-    tag: 6.30.1
-  url: oci://ghcr.io/grafana/helm-charts/loki
----
 # yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: loki
 spec:
-  interval: 1h
-  chartRef:
-    kind: OCIRepository
-    name: loki
+  interval: 30m
+  timeout: 15m
+  chart:
+    spec:
+      chart: loki
+      version: 6.30.1
+      sourceRef:
+        kind: HelmRepository
+        name: grafana
+        namespace: flux-system
   install:
     crds: Skip
     remediation:
-      retries: -1
+      retries: 3
   upgrade:
     cleanupOnFail: true
     crds: Skip
     remediation:
+      strategy: rollback
       retries: 3
+  dependsOn:
+    - name: openebs
+      namespace: openebs-system
   values:
     deploymentMode: SingleBinary
     loki:
@@ -42,14 +38,8 @@ spec:
         log_level: info
       commonConfig:
         replication_factor: 1
-      compactor:
-        working_directory: /var/loki/compactor/retention
-        delete_request_store: filesystem
-        retention_enabled: true
       ingester:
         chunk_encoding: snappy
-      limits_config:
-        retention_period: 14d
       storage:
         type: filesystem
       schemaConfig:
@@ -61,12 +51,14 @@ spec:
             index:
               prefix: loki_index_
               period: 24h
+      limits_config:
+        retention_period: 7d
     singleBinary:
       replicas: 1
       persistence:
         enabled: true
         storageClass: openebs-hostpath
-        size: 20Gi
+        size: 10Gi
     gateway:
       replicas: 0
     backend:
@@ -83,9 +75,3 @@ spec:
       enabled: false
     test:
       enabled: false
-    sidecar:
-      image:
-        repository: ghcr.io/home-operations/k8s-sidecar
-        tag: 1.30.3@sha256:39cca7abcad8f1621b9462d95f7d0e60301b92fcb0ff4de0ad4561859011cddf
-      rules:
-        searchNamespace: ALL
