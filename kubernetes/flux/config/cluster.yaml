@@ -14,8 +14,7 @@ spec:
     /*
     # include kubernetes directory
     !/kubernetes
-    # exclude components directory from flux-system processing
-    /kubernetes/components
+
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
