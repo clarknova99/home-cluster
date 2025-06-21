@@ -41,7 +41,7 @@ spec:
         matchNames:
           - default
           - database
-          - monitoring
+          - observability
           - networking
           - media
           - kube-system
