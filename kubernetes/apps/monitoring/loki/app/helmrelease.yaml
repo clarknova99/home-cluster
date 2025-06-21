@@ -3,6 +3,7 @@
 kind: HelmRelease
 metadata:
   name: loki
+  namespace: monitoring
 spec:
   interval: 30m
   timeout: 15m
@@ -24,9 +25,6 @@ spec:
     remediation:
       strategy: rollback
       retries: 3
-  dependsOn:
-    - name: local-hostpath
-      namespace: kube-system
   values:
     deploymentMode: SingleBinary
     loki:
