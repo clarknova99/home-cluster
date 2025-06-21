@@ -5,6 +5,6 @@ kind: Kustomization
 namespace: observability
 components:
   - ../../components/common
-resources:
-  - ./namespace.yaml
-  # - ./loki/ks.yaml
+# resources:
+#   - ./namespace.yaml
+#   # - ./loki/ks.yaml
