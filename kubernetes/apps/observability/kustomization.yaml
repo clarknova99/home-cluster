@@ -2,8 +2,9 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/kustomization-kustomize-v1beta1.json
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-namespace: monitoring
+namespace: observability
+components:
+  - ../../components/common
 resources:
-  - ./helmrelease.yaml
-  - ./loki.sops.yaml
-
+  - ./namespace.yaml
+  # - ./loki/ks.yaml
