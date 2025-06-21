@@ -1,0 +1,38 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/kustomization-kustomize-v1beta1.json
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+configMapGenerator:
+  - name: machine-temps-dashboard
+    files:
+      - temperatures.json
+  - name: iotawatt-dashboard
+    files:
+      - iotawatt.json
+  - name: ingress-logs
+    files:
+      - ingress-logs.json
+  - name: kube-dash
+    files:
+      - kube.json      
+  - name: smartctl-health
+    files:
+      - smartctl-exporter.json
+  # - name: sensei-logs
+  #   files:
+  #     - sensei.json
+  #   options:
+  #     annotations:
+  #       grafana_folder: "sensei"           
+  # - name: sensei-metrics
+  #   files:
+  #     - sensei-postgres-metrics.json
+  #   options:
+  #     annotations:
+  #       grafana_folder: "sensei"                            
+generatorOptions:
+  disableNameSuffixHash: true
+  annotations:
+    kustomize.toolkit.fluxcd.io/substitute: disabled
+  labels:
+    grafana_dashboard: "true"

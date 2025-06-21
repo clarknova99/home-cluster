@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: lgrafana-admin-secrets
+stringData:
+    admin-user: ENC[AES256_GCM,data:7DiGdxTgQjZBO11ekg==,iv:zNr/eDYvlnXlVqIkHJ0KPQbAoawi3B5fEh+tRKeswrU=,tag:mRLUldWYE62rUzrPn1pLKQ==,type:str]
+    admin-password: ENC[AES256_GCM,data:yyNwDtsRyNpp,iv:/EGeOJ0N4JxZKZ7ADSDKPLNfAJ+y7ZLO50M9R9w+Z9Q=,tag:ivkXgKJBiMxQqpKZE0nxhw==,type:str]
+sops:
+    age:
+        - recipient: age14q9x9ftcpqfw2kmhmlfzpx5g2wmn7tdnq34uhh4x0r2h6qfmm5dqk07z2e
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA3MWlQbFlGblhVV2NDY05R
+            NndtVjBlQUIxQ1lTc0R3dkJaZVVBMGVJeURRCnR5UTVEcmttWUxnbXM5d3lxMy9n
+            c1ZnYzVFNEZCWVFpWVFBeWRqblk1SzQKLS0tIE5mNGRwQmo5bGJmMk01QzhXczVK
+            QWoxWFQxYVFPTGwvaWFNbFk5YWV3cmsK3sIsfUa27RXNffnMirefUqNhBWZfvVcj
+            JEQa+WxUQWgAVvYAKkxvPyI+jHwmXnd04NRg55DrOWgJFAy0F3fqfg==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2025-06-21T20:52:44Z"
+    mac: ENC[AES256_GCM,data:bYlxlo5Xko80O6nLiXlFrCLFZq8Fyy6wH3r3++baGNch3uWvxnk804UfvS+PcPtR9/RG3s0b5u7kn+WmMZyMKGhehHCZ89j6+yQp4vWgI1zZIT7igo5M7h4UYjhV/DyhQ54aVs4puzuEhynthTk1fUwdshHdXB5ZM7eVeb3eMlk=,iv:VjIDaj848TxQcEPX7uVk2zoZwfUu03fkZx50s582E5Q=,tag:QUM/tATw2uDH9ctINNNe0Q==,type:str]
+    encrypted_regex: ^(data|stringData)$
+    version: 3.10.2
