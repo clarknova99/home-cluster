@@ -45,8 +45,6 @@ spec:
           - networking
           - media
           - kube-system
-          - longhorn-system
-          - spark
       globalBookmarks:
         - group: Daily
           bookmarks:
