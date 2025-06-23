@@ -29,15 +29,23 @@ spec:
     keepHistory: false
   values:
     controllers:
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1025
+        runAsGroup: 1025
+        fsGroup: 1025
+        fsGroupChangePolicy: OnRootMismatch
+        seccompProfile: { type: RuntimeDefault }
       pgadmin:
         annotations:
           reloader.stakater.com/auto: "true"
-        pod:
-          securityContext:
-            runAsUser: 1025 # ${APP_UID}
-            runAsGroup: 1025 # ${APP_GID}
-            fsGroup: 1025 # ${APP_GID}
-            fsGroupChangePolicy: OnRootMismatch
+        # pod:
+        #   securityContext:
+        #     runAsUser: 1025 # ${APP_UID}
+        #     runAsGroup: 1025 # ${APP_GID}
+        #     fsGroup: 1025 # ${APP_GID}
+        #     fsGroupChangePolicy: OnRootMismatch
         containers:
           app:
             image:
