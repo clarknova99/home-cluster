@@ -5,6 +5,6 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./cloudnative-pg/ks.yaml
-  - ./pgadmin/ks.yaml
+  # - ./pgadmin/ks.yaml
   - ./redis/ks.yaml
 
