@@ -1,47 +1,102 @@
 ---
-# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2beta1.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: pgadmin
+  name: &app pgadmin
   namespace: database
 spec:
   interval: 30m
   chart:
     spec:
-      chart: pgadmin4
-      #version: 1.14.4
-      version: 1.47.0
+      chart: app-template
+      version: 3.7.3
       sourceRef:
         kind: HelmRepository
-        name: runix
+        name: bjw-s
         namespace: flux-system
+  maxHistory: 2
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
+  uninstall:
+    keepHistory: false
   values:
-    image:
-      repository: dpage/pgadmin4
-      tag: "latest"
-    strategy:
-      type: RollingUpdate
-    env:
-      email: ${SECRET_POSTGRES_USERNAME}
-      password: ${SECRET_POSTGRES_PASSWORD}
-    persistentVolume:
-      enabled: true
-      existingClaim: pvc-pgadmin
-    resources:
-      requests:
-        cpu: 15m
-        memory: 164M
-      limits:
-        memory: 236M
-    serverDefinitions:
-      enabled: true
-      servers:
-        postgres:
-          Name: cnpg
-          Group: Servers
-          Port: 5432
-          Username: postgres
-          Host: cloudnative-pg-cluster-rw.database.svc.cluster.local
-          SSLMode: prefer
-          MaintenanceDB: app
+    controllers:
+      pgadmin:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        pod:
+          securityContext:
+            runAsUser: 5050 # ${APP_UID}
+            runAsGroup: 5050 # ${APP_GID}
+            fsGroup: 5050 # ${APP_GID}
+            fsGroupChangePolicy: OnRootMismatch
+        containers:
+          app:
+            image:
+              repository: dpage/pgadmin4
+              tag: 9.4@sha256:6b1c0db09695758c72abcd5160b7c4cc6d0847ab0c90a2403bdbf951f0defb5a
+            env:
+              PGADMIN_CONFIG_ENHANCED_COOKIE_PROTECTION: "False"
+              PGADMIN_DEFAULT_EMAIL: ${SECRET_PGADMIN_USERNAME}
+              PGADMIN_DEFAULT_PASSWORD: ${SECRET_PGADMIN_PASSWORD}
+              PGADMIN_CONFIG_CONSOLE_LOG_LEVEL: 10
+              PGADMIN_CONFIG_AUTHENTICATION_SOURCES: "['oauth2']"
+            resources:
+              requests:
+                cpu: 50m
+                memory: 100Mi
+              limits:
+                memory: 500Mi
+    service:
+      app:
+        controller: *app
+        ports:
+          http:
+            port: 80
+    ingress:
+      app:
+        enabled: true
+        className: internal
+        annotations:
+          hajimari.io/icon: simple-icons:postgresql
+          nginx.ingress.kubernetes.io/auth-method: GET
+          nginx.ingress.kubernetes.io/auth-url: http://authelia.default.svc.cluster.local/api/verify
+          nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}?rm=$request_method
+          nginx.ingress.kubernetes.io/auth-response-headers: Remote-User,Remote-Name,Remote-Groups,Remote-Email
+          nginx.ingress.kubernetes.io/auth-snippet: proxy_set_header X-Forwarded-Method $request_method;
+        hosts:
+          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: http
+        tls:
+          - hosts:
+              - *host
+    persistence:
+      config:
+        enabled: true
+        type: nfs
+        server: 192.168.1.3
+        path: /volume1/network-storage/cluster/pgadmin-k3s
+        globalMounts:
+          - path: /var/lib/pgadmin
+
+      oauth:
+        enabled: true
+        type: secret
+        name: pgadmin-secret-auth
+        advancedMounts:
+          pgadmin:
+            app:
+              - path: /pgadmin4/config_local.py
+                subPath: config_local.py
