@@ -36,7 +36,7 @@ spec:
           app:
             image:
               repository: docker.io/bitnami/nginx
-              tag: 1.28.0
+              tag: 1.29.0
     service:
       app:
         controller: web
