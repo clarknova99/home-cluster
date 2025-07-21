@@ -26,7 +26,7 @@ spec:
           app:
             image:
               repository: public.ecr.aws/docker/library/redis
-              tag: 8.0.2
+              tag: 8.0.3
               pullPolicy: IfNotPresent
             env:
               REDIS_REPLICATION_MODE: master
