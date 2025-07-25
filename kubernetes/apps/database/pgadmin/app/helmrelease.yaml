@@ -50,7 +50,7 @@ spec:
           app:
             image:
               repository: dpage/pgadmin4
-              tag: 9.4@sha256:6b1c0db09695758c72abcd5160b7c4cc6d0847ab0c90a2403bdbf951f0defb5a
+              tag: 9.6@sha256:2c7d73e13bd6c30b1d53e4c25d0d6d81adbd0799c4f4d6a09efc5d68fca5d16d
             env:
               PGADMIN_CONFIG_ENHANCED_COOKIE_PROTECTION: "False"
               PGADMIN_DEFAULT_EMAIL: ${SECRET_PGADMIN_USERNAME}
